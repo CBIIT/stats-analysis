@@ -11,6 +11,7 @@ import gov.nih.nci.caintegrator.query.Validatable;
  * which validator to call for itself depending on it's value.
  * 
  * Later we can build in a customizable
+ * 
  * @author BauerD
  *
  */
@@ -18,8 +19,9 @@ public enum QueryDTO implements Validatable{
 	CLINICAL_QUERY(),
 	GENE_EXPRESSION_QUERY(),
 	COPY_NUMBER_QUERY();
-	
+	//Contains all the parameters for the query type
 	private Map<String, ParameterDTO> parameterMap;
+	private String queryID;
 	
 	public boolean validate() throws QueryDTOValidateException{
 		/*
@@ -53,6 +55,20 @@ public enum QueryDTO implements Validatable{
 	
 	public Map<String,ParameterDTO> getParameterMap(){
 		return this.parameterMap;
+	}
+
+	/**
+	 * @return Returns the uniqueID.
+	 */
+	public String getQueryID() {
+		return queryID;
+	}
+
+	/**
+	 * @param uniqueID The uniqueID to set.
+	 */
+	public void setQueryID(String uniqueID) {
+		this.queryID = uniqueID;
 	}
 
 }
