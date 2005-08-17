@@ -1,5 +1,5 @@
 package gov.nih.nci.caintegrator.ui.dto;
 
-public abstract class ParameterDTO {
-
+public enum BooleanOperandDTO{
+	AND, OR;
 }

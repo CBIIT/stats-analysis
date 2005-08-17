@@ -1,37 +1,36 @@
 package gov.nih.nci.caintegrator.ui.dto;
 
-import java.util.Map;
-
-import gov.nih.nci.caintegrator.exceptions.QueryDTOValidateException;
+import gov.nih.nci.caintegrator.exceptions.DTOValidateException;
 import gov.nih.nci.caintegrator.query.Validatable;
 /**
- * This ENUM type will contain and describe the UI's definition of
+ * This ENUM will contain and describe the UI's definition of
  * the query to be performed. The parameterMap will contain the 
  * parameterDTOs for the query.  This ENUM is smart enough to know
  * which validator to call for itself depending on it's value.
  * 
- * Later we can build in a customizable
  * 
  * @author BauerD
  *
  */
 public enum QueryDTO implements Validatable{
+	//Set the ENUM types
 	CLINICAL_QUERY(),
 	GENE_EXPRESSION_QUERY(),
 	COPY_NUMBER_QUERY();
 	//Contains all the parameters for the query type
-	private Map<String, ParameterDTO> parameterMap;
+	private QueryParametersDTO parameters;
 	private String queryID;
+	private QueryDTO siblingQueryDTO;
+	private BooleanOperandDTO operand;
 	
-	public boolean validate() throws QueryDTOValidateException{
+	public boolean validate() throws DTOValidateException{
 		/*
 		 * I am thinking that a validator factory might be a good
 		 * idea.  We could replace the switch statement here with
-		 * a single call to the validator factory... in the
-		 * factory we could even allow for property defintions to 
-		 * allow us to change out the Validators as needed.
-		 * 
-		 * DB
+		 * a single call to the validator factory passing this... 
+		 * in the factory we could even allow for property defintions
+		 * to allow us to change out the Validators as needed.
+		 * -DB
 		 */
 		switch(this) {
 		case CLINICAL_QUERY:
@@ -44,17 +43,23 @@ public enum QueryDTO implements Validatable{
 			//call CopyNumberQueryValidator for the ParameterMap
 			break;
 		default:
-			throw new QueryDTOValidateException("Unknown QueryDTOType");
+			throw new DTOValidateException("Unknown QueryDTOType");
 		}
 		return true;
 	}
-	
-	public void setParameterMap(Map<String, ParameterDTO> newMap) {
-		this.parameterMap = newMap;
+	public void setSiblingQueryDTO(QueryDTO sibling) {
+		this.siblingQueryDTO = sibling;
+	}
+	public QueryDTO getSiblingQueryDTO() {
+		return this.siblingQueryDTO;
 	}
 	
-	public Map<String,ParameterDTO> getParameterMap(){
-		return this.parameterMap;
+	public void setQueryParameters(QueryParametersDTO queryParameters) {
+		this.parameters = queryParameters;
+	}
+	
+	public QueryParametersDTO getQueryParameters(){
+		return this.parameters;
 	}
 
 	/**
@@ -69,6 +74,18 @@ public enum QueryDTO implements Validatable{
 	 */
 	public void setQueryID(String uniqueID) {
 		this.queryID = uniqueID;
+	}
+	/**
+	 * @return Returns the operand.
+	 */
+	public BooleanOperandDTO getOperand() {
+		return operand;
+	}
+	/**
+	 * @param operand The operand to set.
+	 */
+	public void setOperand(BooleanOperandDTO operand) {
+		this.operand = operand;
 	}
 
 }
