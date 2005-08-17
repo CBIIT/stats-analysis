@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.findings;
 
-import gov.nih.nci.caintegrator.ui.dto.QueryDTO;
+import gov.nih.nci.caintegrator.ui.dtos.QueryDTO;
 
 /**
  * This interface will provide the method signatures of the
@@ -69,6 +69,23 @@ public interface FindingsFactory {
 	 * @return
 	 */
 	public GEIntensityFinding createGEIntensityFinding(QueryDTO query);
+	
+	/**
+	 * I added this because I was thinking of a framework that would allow
+	 * the creation at runtime of new strategies and queries without having
+	 * to overwrite the caIntegrator framework.  Custom strategies/queries and
+	 * associated parameterDTOs and validators that are considered more then
+	 * novel or trivial can be added to the framework in subsequent releases
+	 * but this will provide a mechanism whereby a person can write and use
+	 * effectively a new query at any time.
+	 * 
+	 * I imagine that this will use reflection to instantiate the property file
+	 * defined validators/findings/strategy.
+	 * 
+	 * @param query
+	 * @return
+	 */
+	public Object createCustomFinding(QueryDTO query);
 	
 	
 }

@@ -1,13 +1,10 @@
-package gov.nih.nci.caintegrator.ui.dto;
+package gov.nih.nci.caintegrator.ui.dtos;
 
-import gov.nih.nci.caintegrator.exceptions.DTOValidateException;
+import gov.nih.nci.caintegrator.exceptions.ValidationException;
 import gov.nih.nci.caintegrator.query.Validatable;
 /**
  * This ENUM will contain and describe the UI's definition of
- * the query to be performed. The parameterMap will contain the 
- * parameterDTOs for the query.  This ENUM is smart enough to know
- * which validator to call for itself depending on it's value.
- * 
+ * the query to be performed.
  * 
  * @author BauerD
  *
@@ -16,14 +13,16 @@ public enum QueryDTO implements Validatable{
 	//Set the ENUM types
 	CLINICAL_QUERY(),
 	GENE_EXPRESSION_QUERY(),
-	COPY_NUMBER_QUERY();
+	COPY_NUMBER_QUERY(),
+	CUSTOM_QUERY();
+	
 	//Contains all the parameters for the query type
 	private QueryParametersDTO parameters;
 	private String queryID;
 	private QueryDTO siblingQueryDTO;
 	private BooleanOperandDTO operand;
 	
-	public boolean validate() throws DTOValidateException{
+	public boolean validate() throws ValidationException{
 		/*
 		 * I am thinking that a validator factory might be a good
 		 * idea.  We could replace the switch statement here with
@@ -43,7 +42,7 @@ public enum QueryDTO implements Validatable{
 			//call CopyNumberQueryValidator for the ParameterMap
 			break;
 		default:
-			throw new DTOValidateException("Unknown QueryDTOType");
+			throw new ValidationException("Unknown QueryDTOType");
 		}
 		return true;
 	}

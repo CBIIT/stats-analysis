@@ -1,9 +1,9 @@
-package gov.nih.nci.caintegrator.findings.strategys;
+package gov.nih.nci.caintegrator.findings.strategies;
 
 import gov.nih.nci.caintegrator.exceptions.FindingsAnalysisException;
 import gov.nih.nci.caintegrator.exceptions.FindingsQueryException;
-import gov.nih.nci.caintegrator.exceptions.FindingsValidationException;
-import gov.nih.nci.caintegrator.ui.dto.QueryDTO;
+import gov.nih.nci.caintegrator.exceptions.ValidationException;
+import gov.nih.nci.caintegrator.ui.dtos.QueryDTO;
 /**
  * This interface defines the required methods for every type of
  * Finding that can be performed in caIntegrator.  
@@ -15,9 +15,9 @@ public interface FindingStrategy {
 	/**
 	 * This is used to 
 	 * @return
-	 * @throws FindingsValidationException
+	 * @throws ValidationException
 	 */
-	public boolean validate(QueryDTO query) throws FindingsValidationException;
+	public boolean validate(QueryDTO query) throws ValidationException;
 	public boolean createQuery()throws FindingsQueryException;
 	public boolean executeQuery() throws FindingsQueryException;
 	public boolean analyzeResultSet() throws FindingsAnalysisException;
