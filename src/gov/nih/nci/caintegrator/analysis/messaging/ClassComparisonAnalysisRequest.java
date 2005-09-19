@@ -16,7 +16,6 @@ public class ClassComparisonAnalysisRequest extends AnalysisRequest implements j
 	}
 	
 	
-	
 	public String toString() {
 	  return "ClassComparisonAnalysisRequest: sessionId=" + getSessionId() + " taskId=" + getTaskId();
 	}

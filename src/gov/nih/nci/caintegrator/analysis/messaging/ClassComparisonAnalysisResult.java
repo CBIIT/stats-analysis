@@ -42,15 +42,4 @@ public class ClassComparisonAnalysisResult extends AnalysisResult implements Ser
 	public String[] getColumnNames() {
 	  return columnNames;
 	}
-
-//	private void initArray(int numDoubles) {
-//		  resultArray = new double[numDoubles];
-//		  for (int i=0; i < numDoubles; i++) {
-//		    resultArray[i] = i * Math.random();
-//		  }
-//	}
-//	
-//	public double getValue(int index) {
-//	    return resultArray[index];
-//	}
 }

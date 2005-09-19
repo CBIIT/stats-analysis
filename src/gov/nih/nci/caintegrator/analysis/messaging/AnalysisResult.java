@@ -13,7 +13,6 @@ public abstract class AnalysisResult implements Serializable {
 	private int sessionId;
 	private int taskId;
 	
-	private long resultObjCreateTime = 0L;
 	private String processorHost = "";
 	
 	
@@ -30,14 +29,6 @@ public abstract class AnalysisResult implements Serializable {
 		return taskId;
 	}
 	
-	public long getResultObjCreateTime() {
-		return resultObjCreateTime;
-	}
-
-	public void setResultObjCreateTime(long resultObjCreateTime) {
-		this.resultObjCreateTime = resultObjCreateTime;
-	}
-
 	public String getProcessorHost() {
 		return processorHost;
 	}

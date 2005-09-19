@@ -8,9 +8,9 @@ public abstract class AnalysisRequest implements java.io.Serializable {
 
 	private int sessionId; 
 	private int taskId;
-	private long requestStartTime = 0L;
-	private long requestCompleteTime = 0L;
-	private int numDoubles = 1000000;
+	
+	private long requestStartTime = 0L;     //for perfomance metrics
+	private long requestCompleteTime = 0L;  //for performance metrics
 	
 	public AnalysisRequest(int sessionId, int taskId) {
 	  super();
@@ -46,15 +46,4 @@ public abstract class AnalysisRequest implements java.io.Serializable {
 	
 	public long getElapsedTime() { return requestCompleteTime - requestStartTime; }
 
-
-
-	public int getNumDoubles() {
-		return numDoubles;
-	}
-
-
-
-	public void setNumDoubles(int numDoubles) {
-		this.numDoubles = numDoubles;
-	}
 }
