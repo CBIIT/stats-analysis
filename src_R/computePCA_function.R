@@ -1,8 +1,8 @@
-########################
+##############################
 # File: computePCA_function.R
 # Author: Huaitian Liu
 # Date: September 2005
-########################
+###############################
 
 
 # Filtering option 1 - 95%Percentile / 5%Percentile >= 2 or 3
