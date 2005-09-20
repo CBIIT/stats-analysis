@@ -208,13 +208,16 @@ public class AnalysisProcessor implements MessageListener {
 	   * @param pcaRequest
 	   */
 	  public void processPrincipalComponentAnalysisRequest(PrincipalComponentAnalysisRequest pcaRequest) {
-		System.out.println("Processing principal component analysis request");
+		
 		//call Rserve with the correct commands
 		Rconnection c = (Rconnection) connectionPool.checkOut();    
 		
 		//submit the pca request and get back the object
 		try {
-			c.voidEval("pcaResult <- computePCA(dataMatrix)");
+			double varianceFilterValue = pcaRequest.getVarianceFilterValue();
+			System.out.println("Processing principal component analysis request varianceFilterVal=" + varianceFilterValue);
+			
+			c.voidEval("pcaResult <- computePCA(dataMatrix," + varianceFilterValue + " )");
 			double[] pca1 = c.eval("pcaMatrixX <- pcaResult$x[,1]").asDoubleArray();
 			double[] pca2 = c.eval("pcaMatrixY <- pcaResult$x[,2]").asDoubleArray();
 			double[] pca3 = c.eval("pcaMatrixZ <- pcaResult$x[,3]").asDoubleArray();
@@ -223,6 +226,7 @@ public class AnalysisProcessor implements MessageListener {
 			Vector labels = (Vector) exp.asVector();
 			Vector sampleIds = ((REXP)(labels.get(0))).asVector();
 			Vector pcaLabels =  ((REXP)(labels.get(1))).asVector();
+			
 			
 			//String patientId = null;
 			//REXP tmp;
