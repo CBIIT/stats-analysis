@@ -56,6 +56,13 @@ public class AnalysisSubmitter implements MessageListener {
 	private int pcaCounter = 1;
 	private QueueConnection queueConnection;
 
+	private JTextField varianceFilterTF = new JTextField(12);
+	private ImagePanel pcaImage1 = new ImagePanel();
+	private ImagePanel pcaImage2 = new ImagePanel();
+	private ImagePanel pcaImage3 = new ImagePanel();
+	  
+	  
+	
 	  /**
 	   * Topic session, hold on to this so you may close it.
 	   * Also used to create messages.
@@ -136,10 +143,10 @@ public class AnalysisSubmitter implements MessageListener {
 	      //String msg = ((TextMessage)m).getText();
 	      ObjectMessage msg = (ObjectMessage) m;
 	      AnalysisResult result = (AnalysisResult) msg.getObject();
-	      AnalysisRequest request = (AnalysisRequest) requestMap.get(new Integer(result.getTaskId()));
-	      request.setRequestCompleteTime(System.currentTimeMillis());
+	      //AnalysisRequest request = (AnalysisRequest) requestMap.get(new Integer(result.getTaskId()));
+	      //request.setRequestCompleteTime(System.currentTimeMillis());
 	      //long messageRTtime = request.getElapsedTime() - result.getResultObjCreateTime();
-	      System.out.println("AnalysisSubmitter got result: " + result + " totalElapsedTime=" + request.getElapsedTime());
+	      //System.out.println("AnalysisSubmitter got result: " + result + " totalElapsedTime=" + request.getElapsedTime());
 	      //System.out.println("\t\t>> result[5]=" + result.getValue(5) + " result[50000][9]=" + result.getValue(50000));
 	  
 	      if (result instanceof ClassComparisonAnalysisResult) {
@@ -174,31 +181,12 @@ public class AnalysisSubmitter implements MessageListener {
 		  Image img1 = Toolkit.getDefaultToolkit().createImage(img1Bytes);
 		  Image img2 = Toolkit.getDefaultToolkit().createImage(img2Bytes);
 		  Image img3 = Toolkit.getDefaultToolkit().createImage(img3Bytes);
-		  
-//		  Toolkit.getDefaultToolkit().prepareImage(img1, 200, 200, pcaImages);
-//		  Toolkit.getDefaultToolkit().prepareImage(img2, 200, 200, pcaImages);
-//		  Toolkit.getDefaultToolkit().prepareImage(img3, 200, 200, pcaImages);
-		  
-		  
-		  ImagePanel pcaImage1 = new ImagePanel();
-		  ImagePanel pcaImage2 = new ImagePanel();
-		  ImagePanel pcaImage3 = new ImagePanel();
-		  
-		  pcaImages.add(pcaImage1);
-		  pcaImages.add(pcaImage2);
-		  pcaImages.add(pcaImage3);
-		  
+		  		  
 		  pcaImage1.setImage(img1);
 		  pcaImage2.setImage(img2);
 		  pcaImage3.setImage(img3);
-		  
-//		 int width = pcaImage1.getWidth();
-//		 int height = pcaImage1.getHeight() + pcaImage2.getHeight() + pcaImage3.getHeight();
-//		 Dimension dim = new Dimension(width, height);
-//		 pcaImages.setPreferredSize(dim);
-//		 pcaImages.setSize(dim);
-		    
-		 pcaImages.repaint();
+		 		    
+		  pcaImages.repaint();
 	  }
 	  
 	  private void processHCAresult(HierarchicalClusteringAnalysisResult result) {
@@ -297,7 +285,6 @@ public class AnalysisSubmitter implements MessageListener {
           
           String[] platforms = {"Affy", "Cdna" };
           JComboBox pcaPlatform = new JComboBox(platforms);
-          JTextField varianceFilterTF = new JTextField(12);
           varianceFilterTF.setBorder(new TitledBorder("Variance Filter Value:"));
           varianceFilterTF.setText("0.9");
           pcaPlatform.setBorder(new TitledBorder("Platform"));
@@ -314,13 +301,16 @@ public class AnalysisSubmitter implements MessageListener {
           pcaRequestPanel.add(pcaButtonPanel, BorderLayout.SOUTH);
           pcaRequestPanel.add(pcaReqCenterPanel, BorderLayout.CENTER);
           
+          
+    	
           pcaSubmitButton.addActionListener(new ActionListener() {
         	  public void actionPerformed(ActionEvent event) {
         	     System.out.println("Sending PCA request.");
         	     PrincipalComponentAnalysisRequest req = new PrincipalComponentAnalysisRequest(1234,pcaCounter++);
         	     requestMap.put(new Integer(req.getTaskId()), req);
 			     req.setRequestStartTime(System.currentTimeMillis());
-			      
+			     double varianceFilterValue = Double.parseDouble(varianceFilterTF.getText());
+			     req.setVarianceFilterValue(varianceFilterValue);
 			      try {
 					sendResuest(req);
 			      }
@@ -338,6 +328,9 @@ public class AnalysisSubmitter implements MessageListener {
           pcaResponseSP.add(pcaResultTableSP, JSplitPane.TOP);
           
           pcaImages = new JPanel();
+          pcaImages.add(pcaImage1);
+    	  pcaImages.add(pcaImage2);
+    	  pcaImages.add(pcaImage3);
           BoxLayout bl2 = new BoxLayout(pcaImages, BoxLayout.Y_AXIS);
           pcaImages.setLayout(bl2);
           JScrollPane imageSP = new JScrollPane(pcaImages);
@@ -357,12 +350,10 @@ public class AnalysisSubmitter implements MessageListener {
           JTabbedPane tabbedPane = new JTabbedPane();
           frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
           
-          
-          
+        
           //PCA
           buildPCAGui(tabbedPane);
          
-          
           //HCA
           buildHCAGui(tabbedPane);
           
@@ -370,7 +361,7 @@ public class AnalysisSubmitter implements MessageListener {
           buildCCGui(tabbedPane);
             
           
-          frame.setPreferredSize(new Dimension(500,500));
+          frame.setPreferredSize(new Dimension(500,800));
           frame.pack();
           frame.setVisible(true); 
 		  
