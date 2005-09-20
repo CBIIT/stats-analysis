@@ -51,8 +51,8 @@ public class AnalysisSubmitter implements MessageListener {
 	private static Map requestMap = new HashMap();
 	
 	private PCAtableModel pcaTableModel = new PCAtableModel();
-	private ImagePanel pcaImagePanel = new ImagePanel();
-	 
+	//private ImagePanel pcaImagePanel = new ImagePanel();
+	private JPanel pcaImages = new JPanel();
 	private int pcaCounter = 1;
 	private QueueConnection queueConnection;
 
@@ -167,13 +167,38 @@ public class AnalysisSubmitter implements MessageListener {
 		  pcaTableModel.setPCAdata(result.getPCAarray());
 		  
 		  //create the image from the PCA data
-		  byte[] imgBytes = result.getImageBytes();
-		  Image img = Toolkit.getDefaultToolkit().createImage(imgBytes);
-		  pcaImagePanel.setImage(img);
-		  Dimension dim = new Dimension(img.getWidth(frame), img.getHeight(frame));
-		  pcaImagePanel.setSize(dim);
-		  pcaImagePanel.setPreferredSize(dim);
-		  pcaImagePanel.repaint();
+		  byte[] img1Bytes = result.getImage1Bytes();
+		  byte[] img2Bytes = result.getImage2Bytes();
+		  byte[] img3Bytes = result.getImage3Bytes();
+		  
+		  Image img1 = Toolkit.getDefaultToolkit().createImage(img1Bytes);
+		  Image img2 = Toolkit.getDefaultToolkit().createImage(img2Bytes);
+		  Image img3 = Toolkit.getDefaultToolkit().createImage(img3Bytes);
+		  
+//		  Toolkit.getDefaultToolkit().prepareImage(img1, 200, 200, pcaImages);
+//		  Toolkit.getDefaultToolkit().prepareImage(img2, 200, 200, pcaImages);
+//		  Toolkit.getDefaultToolkit().prepareImage(img3, 200, 200, pcaImages);
+		  
+		  
+		  ImagePanel pcaImage1 = new ImagePanel();
+		  ImagePanel pcaImage2 = new ImagePanel();
+		  ImagePanel pcaImage3 = new ImagePanel();
+		  
+		  pcaImages.add(pcaImage1);
+		  pcaImages.add(pcaImage2);
+		  pcaImages.add(pcaImage3);
+		  
+		  pcaImage1.setImage(img1);
+		  pcaImage2.setImage(img2);
+		  pcaImage3.setImage(img3);
+		  
+//		 int width = pcaImage1.getWidth();
+//		 int height = pcaImage1.getHeight() + pcaImage2.getHeight() + pcaImage3.getHeight();
+//		 Dimension dim = new Dimension(width, height);
+//		 pcaImages.setPreferredSize(dim);
+//		 pcaImages.setSize(dim);
+		    
+		 pcaImages.repaint();
 	  }
 	  
 	  private void processHCAresult(HierarchicalClusteringAnalysisResult result) {
@@ -312,9 +337,11 @@ public class AnalysisSubmitter implements MessageListener {
           JScrollPane pcaResultTableSP = new JScrollPane(pcaResultTable);
           pcaResponseSP.add(pcaResultTableSP, JSplitPane.TOP);
           
-          JScrollPane imageSP = new JScrollPane(pcaImagePanel);
+          pcaImages = new JPanel();
+          BoxLayout bl2 = new BoxLayout(pcaImages, BoxLayout.Y_AXIS);
+          pcaImages.setLayout(bl2);
+          JScrollPane imageSP = new JScrollPane(pcaImages);
           pcaResponseSP.add(imageSP, JSplitPane.BOTTOM);
-          
           pcaResponsePanel.add(pcaResponseSP);
 	  }
 	  
@@ -437,11 +464,14 @@ public class AnalysisSubmitter implements MessageListener {
 	  public class ImagePanel extends JPanel {
 	      private Image image;
 		  
+//	      public ImagePanel(Image image) {
+//	        setImage(image);
+//	      }
+	      
 	      public void paintComponent(Graphics g) {
-	    	  //super.paintComponent(g);
+	    	  super.paintComponent(g);
 	    	  Graphics2D g2d = (Graphics2D) g;
 	    	  g2d.drawImage(image,0,0, this);
-	    	
 	      }
 
 		  public Image getImage() {
@@ -450,6 +480,13 @@ public class AnalysisSubmitter implements MessageListener {
 
 		  public void setImage(Image image) {
 			this.image = image;
+			//this.prepareImage(image, 200, 200, this);
+			Dimension dim = new Dimension(450, 450);
+			System.out.println("Setting image size to dim=" + dim);
+			this.setPreferredSize(dim);
+			this.setSize(dim);
+			this.setMinimumSize(dim);
+			this.setMaximumSize(dim);
 		  }
 		  
 	  }
