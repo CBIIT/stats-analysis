@@ -13,7 +13,7 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	public static int CDNA_ARRAY_PLATFORM = 2;
 	
 	private double varianceFilterValue = 0.9;
-	private List differentiallyExpressedGenes = Collections.EMPTY_LIST;
+	private List differentiallyExpressedReporters = Collections.EMPTY_LIST;
 	private int platform = AFFY_ARRAY_PLATFORM;
 	
 	public PrincipalComponentAnalysisRequest(int sessionId, int taskId) {
@@ -21,15 +21,15 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	}
 	
 	public String toString() {
-	  return "PCArequest: sessionId=" + getSessionId() + " taskId=" + getTaskId() + " platform=" + platform + " varianceFilterValue=" + varianceFilterValue + " diffExprGeneList.size=" + differentiallyExpressedGenes.size();
+	  return "PCArequest: sessionId=" + getSessionId() + " taskId=" + getTaskId() + " platform=" + platform + " varianceFilterValue=" + varianceFilterValue + " diffExprGeneList.size=" + differentiallyExpressedReporters.size();
 	}
 
-	public List getDifferentiallyExpressedGenes() {
-		return differentiallyExpressedGenes;
+	public List getDifferentiallyExpressedReporters() {
+		return differentiallyExpressedReporters;
 	}
 
-	public void setDifferentiallyExpressedGenes(List differentiallyExpressedGenes) {
-		this.differentiallyExpressedGenes = differentiallyExpressedGenes;
+	public void setDifferentiallyExpressedReporters(List differentiallyExpressedReporters) {
+		this.differentiallyExpressedReporters = differentiallyExpressedReporters;
 	}
 
 	public double getVarianceFilterValue() {
