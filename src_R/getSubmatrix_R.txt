@@ -1,0 +1,9 @@
+getsubmatrix <- function(dataMatrix, grpids) {
+
+    allid <- dimnames(dataMatrix)[[2]]
+
+    dataMatrix2 <- dataMatrix[,allid%in%grpids]
+
+    return(dataMatrix2)
+
+}
