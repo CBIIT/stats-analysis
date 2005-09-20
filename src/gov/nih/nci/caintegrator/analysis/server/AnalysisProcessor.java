@@ -29,7 +29,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.jms.DeliveryMode;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 import java.util.*;
 
@@ -52,8 +52,7 @@ public class AnalysisProcessor implements MessageListener {
 //	}
 	
 	private RserveConnectionPool connectionPool;
-	private static String appLocationIp = "156.40.128.136:1099";  //my machine	
-	
+	private static String JBossMQ_locationIp = "156.40.128.136:1099";  //my machine	
 	private static int numRserveConnections = 1;
 	private static String RserverIp = "156.40.134.31"; //cbiodev501
 	private static String RdataFileName = "/h1/harrismic/Rembrandt/RdataFiles/dataAndFunctions.R";
@@ -95,10 +94,25 @@ public class AnalysisProcessor implements MessageListener {
 	    throws JMSException, NamingException
 	  {
 		  
+	    //load properties from a properties file
+		Properties analysisServerConfigProps = new Properties();
+		  
+		try {
+			analysisServerConfigProps.load(new FileInputStream("analysisServer.properties"));
+			JBossMQ_locationIp = analysisServerConfigProps.getProperty("jmsmq_location");
+			RserverIp = analysisServerConfigProps.getProperty("rserve_location");
+			numRserveConnections = Integer.parseInt(analysisServerConfigProps.getProperty("RserveConnectionPoolSize"));
+			RdataFileName = analysisServerConfigProps.getProperty("RdefinitionFile");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace(System.out);
+		} catch (IOException e) {
+			e.printStackTrace(System.out);
+		}
+		  
 	    Hashtable props = new Hashtable();
 		props.put(Context.INITIAL_CONTEXT_FACTORY,
 		    "org.jnp.interfaces.NamingContextFactory");
-		props.put(Context.PROVIDER_URL, appLocationIp);
+		props.put(Context.PROVIDER_URL, JBossMQ_locationIp);
 		props.put("java.naming.rmi.security.manager", "yes");
 		props.put(Context.URL_PKG_PREFIXES, "org.jboss.naming");
 
@@ -125,6 +139,7 @@ public class AnalysisProcessor implements MessageListener {
 		
 	    System.out.println("AnalysisProcessor: successfully started queue connection");
     
+	    
 	    //initialize Rserver connection
 	    connectionPool = new RserveConnectionPool(numRserveConnections, RserverIp, RdataFileName);
 
@@ -238,13 +253,25 @@ public class AnalysisProcessor implements MessageListener {
 			c.voidEval("maxComp2<-max(abs(pcaResult$x[,2]))");
 			c.voidEval("xrange<-c(-maxComp1,maxComp1)");
 			c.voidEval("yrange<-c(-maxComp1,maxComp1)");
+			String plot1Cmd =  "plot(pcaResult$x[,1],pcaResult$x[,2],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component2\",xlab=\"PC1\",ylab=\"PC2\",pch=20)";
+			byte[] img1Code = getImageCode(c, pcaRequest, plot1Cmd);
+			result.setImage1Bytes(img1Code);
 			
-			String plotCmd =  "plot(pcaResult$x[,1],pcaResult$x[,2],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component2\",xlab=\"PC1\",ylab=\"PC2\",pch=20)";
-
+			//generate the pca1 vs pca3 image
+			//  xrange<-c(-maxComp1,maxComp1)
+			//  yrange<-c(-maxComp1,maxComp1)
+			String plot2Cmd = "plot(pcaResult$x[,1],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component3\",xlab=\"PC1\",ylab=\"PC3\",pch=20)";
+			byte[] img2Code = getImageCode(c, pcaRequest, plot2Cmd); 
+			result.setImage2Bytes(img2Code); 
 			
-			byte[] imgCode = getImageCode(c, pcaRequest, plotCmd);
 			
-			result.setImageBytes(imgCode);
+			//generate the pca2 vs pca3 image
+			c.voidEval("xrange<-c(-maxComp2,maxComp2)");
+			c.voidEval("yrange<-c(-maxComp2,maxComp2)");	
+			String plot3Cmd =  "plot(pcaResult$x[,2],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component2 Vs Component3\",xlab=\"PC2\",ylab=\"PC3\",pch=20)";
+			byte[] img3Code = getImageCode(c, pcaRequest, plot3Cmd);
+			result.setImage3Bytes(img3Code);
+			
 			sendResult(result);
 			
 		} catch (RSrvException e) {
