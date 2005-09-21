@@ -10,22 +10,22 @@ import java.io.Serializable;
 
 public abstract class AnalysisResult implements Serializable {
 
-	private int sessionId;
-	private int taskId;
+	private String sessionId;
+	private String taskId;
 	
 	private String processorHost = "";
 	
 	
-	public AnalysisResult(int sessionId, int taskId) {
+	public AnalysisResult(String sessionId, String taskId) {
 	  this.sessionId = sessionId;
 	  this.taskId = taskId;
 	}
 	
-	public int getSessionId() {
+	public String getSessionId() {
 		return sessionId;
 	}
 
-	public int getTaskId() {
+	public String getTaskId() {
 		return taskId;
 	}
 	

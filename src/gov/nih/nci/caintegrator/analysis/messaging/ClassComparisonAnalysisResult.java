@@ -14,7 +14,7 @@ public class ClassComparisonAnalysisResult extends AnalysisResult implements Ser
 	private String[] columnNames;
 	private String[] rowNames;
 	
-	public ClassComparisonAnalysisResult(int sessionId, int taskId, int numDoubles) {
+	public ClassComparisonAnalysisResult(String sessionId, String taskId, int numDoubles) {
 		super(sessionId, taskId);
 		//initArray(numDoubles);
 	}

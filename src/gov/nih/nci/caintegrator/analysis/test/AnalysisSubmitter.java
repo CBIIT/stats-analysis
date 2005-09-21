@@ -29,6 +29,7 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
@@ -54,6 +55,7 @@ public class AnalysisSubmitter implements MessageListener {
 	//private ImagePanel pcaImagePanel = new ImagePanel();
 	private JPanel pcaImages = new JPanel();
 	private int pcaCounter = 1;
+	private int ccCounter = 1;
 	private QueueConnection queueConnection;
 
 	private JTextField pcaVarianceFilterTF = new JTextField(12);
@@ -61,7 +63,11 @@ public class AnalysisSubmitter implements MessageListener {
 	private ImagePanel pcaImage1 = new ImagePanel();
 	private ImagePanel pcaImage2 = new ImagePanel();
 	private ImagePanel pcaImage3 = new ImagePanel();
-	  
+
+	
+	//class comparison 
+	private JTextField ccSampleGroup1Ids = new JTextField(25);
+	private JTextField ccSampleGroup2Ids = new JTextField(25);
 	  
 	
 	  /**
@@ -206,7 +212,7 @@ public class AnalysisSubmitter implements MessageListener {
 	   */
 	  public void sendResuest(AnalysisRequest request) throws JMSException {
 
-		ClassComparisonAnalysisRequest ccRequest = new ClassComparisonAnalysisRequest(12345,1);
+		ClassComparisonAnalysisRequest ccRequest = new ClassComparisonAnalysisRequest(Integer.toString(12345),Integer.toString(1));
 		  
 	    // Create a message
 	    ObjectMessage msg = queueSession.createObjectMessage(request);
@@ -240,8 +246,31 @@ public class AnalysisSubmitter implements MessageListener {
 		  
           JPanel ccButtonPanel = new JPanel();
           JButton ccSubmitButton = new JButton("Submit");
+          
+          ccSubmitButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+			  System.out.println("Submitting class comparison request");
+			  ClassComparisonAnalysisRequest ccRequest = new ClassComparisonAnalysisRequest(Integer.toString(4567),Integer.toString(ccCounter++));
+				
+			}
+        	  
+          });
+          
           ccButtonPanel.add(ccSubmitButton);
           ccRequestPanel.add(ccButtonPanel, BorderLayout.SOUTH);
+          JPanel ccRequestCenterPanel = new JPanel();
+          BoxLayout bl = new BoxLayout(ccRequestCenterPanel, BoxLayout.Y_AXIS);
+          ccRequestCenterPanel.setLayout(bl);
+          ccRequestPanel.add(ccRequestCenterPanel, BorderLayout.CENTER);
+          
+          ccSampleGroup1Ids.setBorder(new TitledBorder("Group1 Samples"));
+          ccSampleGroup2Ids.setBorder(new TitledBorder("Group2 Samples"));
+          ccRequestCenterPanel.add(ccSampleGroup1Ids);
+          ccRequestCenterPanel.add(ccSampleGroup2Ids);
+          
+          
+          
 		
 	}
 
@@ -309,7 +338,7 @@ public class AnalysisSubmitter implements MessageListener {
           pcaSubmitButton.addActionListener(new ActionListener() {
         	  public void actionPerformed(ActionEvent event) {
         	     System.out.println("Sending PCA request.");
-        	     PrincipalComponentAnalysisRequest req = new PrincipalComponentAnalysisRequest(1234,pcaCounter++);
+        	     PrincipalComponentAnalysisRequest req = new PrincipalComponentAnalysisRequest(Integer.toString(1234),Integer.toString(pcaCounter++));
         	     requestMap.put(new Integer(req.getTaskId()), req);
 			     req.setRequestStartTime(System.currentTimeMillis());
 			     if (pcaVarianceFilterTF.getText().trim().length() > 0) {

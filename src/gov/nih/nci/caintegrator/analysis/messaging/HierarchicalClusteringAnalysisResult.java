@@ -7,7 +7,7 @@ package gov.nih.nci.caintegrator.analysis.messaging;
  */
 public class HierarchicalClusteringAnalysisResult extends AnalysisResult implements java.io.Serializable {
 
-	public HierarchicalClusteringAnalysisResult(int sessionId, int taskId) {
+	public HierarchicalClusteringAnalysisResult(String sessionId, String taskId) {
 		super(sessionId, taskId);
 		
 	}

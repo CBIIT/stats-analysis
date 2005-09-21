@@ -6,23 +6,23 @@ package gov.nih.nci.caintegrator.analysis.messaging;
  */
 public abstract class AnalysisRequest implements java.io.Serializable {
 
-	private int sessionId; 
-	private int taskId;
+	private String sessionId; 
+	private String taskId;
 	
 	private long requestStartTime = 0L;     //for perfomance metrics
 	private long requestCompleteTime = 0L;  //for performance metrics
 	
-	public AnalysisRequest(int sessionId, int taskId) {
+	public AnalysisRequest(String sessionId, String taskId) {
 	  super();
 	  this.sessionId = sessionId;
 	  this.taskId = taskId;
 	}
 	
-	public int getSessionId() {
+	public String getSessionId() {
 		return sessionId;
 	}
 
-	public int getTaskId() {
+	public String getTaskId() {
 	   return taskId;
 	}
 	

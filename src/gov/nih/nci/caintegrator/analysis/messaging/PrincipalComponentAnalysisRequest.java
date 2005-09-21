@@ -9,15 +9,15 @@ import java.util.*;
  */
 public class PrincipalComponentAnalysisRequest extends AnalysisRequest implements java.io.Serializable {
 
-	public static int AFFY_ARRAY_PLATFORM = 1;
-	public static int CDNA_ARRAY_PLATFORM = 2;
+	public enum ArrayPlatformType  {AFFYMETRICS, CDNA};
 	
 	private double varianceFilterValue = -1.0;
 	private double foldChangeFilterValue = -1.0;
-	private List differentiallyExpressedReporters = Collections.EMPTY_LIST;
-	private int platform = AFFY_ARRAY_PLATFORM;
+	private List<String> differentiallyExpressedReporters = new ArrayList<String>();
 	
-	public PrincipalComponentAnalysisRequest(int sessionId, int taskId) {
+	private ArrayPlatformType platform = ArrayPlatformType.AFFYMETRICS;
+	
+	public PrincipalComponentAnalysisRequest(String sessionId, String taskId) {
 		super(sessionId, taskId);
 	}
 	
@@ -25,11 +25,11 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	  return "PCArequest: sessionId=" + getSessionId() + " taskId=" + getTaskId() + " platform=" + platform + " varianceFilterValue=" + varianceFilterValue + " foldChangeFilterValue=" + foldChangeFilterValue + " diffExprGeneList.size=" + differentiallyExpressedReporters.size();
 	}
 
-	public List getDifferentiallyExpressedReporters() {
+	public List<String> getDifferentiallyExpressedReporters() {
 		return differentiallyExpressedReporters;
 	}
 
-	public void setDifferentiallyExpressedReporters(List differentiallyExpressedReporters) {
+	public void setDifferentiallyExpressedReporters(List<String> differentiallyExpressedReporters) {
 		this.differentiallyExpressedReporters = differentiallyExpressedReporters;
 	}
 
@@ -41,11 +41,11 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 		this.varianceFilterValue = varianceFilterValue;
 	}
 
-	public int getPlatform() {
+	public ArrayPlatformType getPlatform() {
 		return platform;
 	}
 
-	public void setPlatform(int platform) {
+	public void setPlatform(ArrayPlatformType platform) {
 		this.platform = platform;
 	}
 

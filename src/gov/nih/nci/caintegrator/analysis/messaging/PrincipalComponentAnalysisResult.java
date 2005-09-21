@@ -13,7 +13,7 @@ public class PrincipalComponentAnalysisResult extends AnalysisResult implements 
 	private byte[] image2Bytes = null;
 	private byte[] image3Bytes = null;
 	
-	public PrincipalComponentAnalysisResult(int sessionId, int taskId) {
+	public PrincipalComponentAnalysisResult(String sessionId, String taskId) {
 		super(sessionId, taskId);
 	}
 	
