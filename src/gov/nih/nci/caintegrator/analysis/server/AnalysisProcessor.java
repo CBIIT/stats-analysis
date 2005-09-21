@@ -214,19 +214,27 @@ public class AnalysisProcessor implements MessageListener {
 		
 		//submit the pca request and get back the object
 		try {
-			double varianceFilterValue = pcaRequest.getVarianceFilterValue();
-			System.out.println("Processing principal component analysis request varianceFilterVal=" + varianceFilterValue);
+			double[] pca1, pca2, pca3;
 			
-			c.voidEval("pcaResult <- computePCA(dataMatrix," + varianceFilterValue + " )");
-			double[] pca1 = c.eval("pcaMatrixX <- pcaResult$x[,1]").asDoubleArray();
-			double[] pca2 = c.eval("pcaMatrixY <- pcaResult$x[,2]").asDoubleArray();
-			double[] pca3 = c.eval("pcaMatrixZ <- pcaResult$x[,3]").asDoubleArray();
+			if (pcaRequest.doVarianceFiltering()) {
+				double varianceFilterValue = pcaRequest.getVarianceFilterValue();
+				System.out.println("Processing principal component analysis request varianceFilterVal=" + varianceFilterValue);				
+				c.voidEval("pcaResult <- computePCAwithVariance(dataMatrix," + varianceFilterValue + " )");
+			}
+			else if (pcaRequest.doFoldChangeFiltering()) {
+				double foldChangeFilterValue = pcaRequest.getFoldChangeFilterValue();
+				System.out.println("Processing principal component analysis request foldChangeFilterVal=" + foldChangeFilterValue);
+				c.voidEval("pcaResult <- computePCAwithFC(dataMatrix," + foldChangeFilterValue + " )");
+			}
+			
+			pca1 = c.eval("pcaMatrixX <- pcaResult$x[,1]").asDoubleArray();
+			pca2 = c.eval("pcaMatrixY <- pcaResult$x[,2]").asDoubleArray();
+			pca3 = c.eval("pcaMatrixZ <- pcaResult$x[,3]").asDoubleArray();
 			REXP exp =  c.eval("pcaLabels <- dimnames(pcaResult$x)");
 			//System.out.println("Got back xVals.len=" + xVals.length + " yVals.len=" + yVals.length + " zVals.len=" + zVals.length);
 			Vector labels = (Vector) exp.asVector();
 			Vector sampleIds = ((REXP)(labels.get(0))).asVector();
 			Vector pcaLabels =  ((REXP)(labels.get(1))).asVector();
-			
 			
 			//String patientId = null;
 			//REXP tmp;
@@ -250,7 +258,6 @@ public class AnalysisProcessor implements MessageListener {
 			
 			PrincipalComponentAnalysisResult result = new PrincipalComponentAnalysisResult(pcaRequest.getSessionId(), pcaRequest.getTaskId());
 			result.setPCAarray(pcaArray);
-			
 			
 			//generate the pca1 vs pca2 image
 			c.voidEval("maxComp1<-max(abs(pcaResult$x[,1]))");
@@ -285,9 +292,6 @@ public class AnalysisProcessor implements MessageListener {
 		finally {
 		   connectionPool.checkIn(c);
 		}
-		
-	
-		
 	  }
 	  
 	  public String getHostName() {
