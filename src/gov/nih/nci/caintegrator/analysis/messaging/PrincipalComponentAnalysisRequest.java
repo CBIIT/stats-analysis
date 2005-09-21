@@ -12,7 +12,8 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	public static int AFFY_ARRAY_PLATFORM = 1;
 	public static int CDNA_ARRAY_PLATFORM = 2;
 	
-	private double varianceFilterValue = 0.9;
+	private double varianceFilterValue = -1.0;
+	private double foldChangeFilterValue = -1.0;
 	private List differentiallyExpressedReporters = Collections.EMPTY_LIST;
 	private int platform = AFFY_ARRAY_PLATFORM;
 	
@@ -21,7 +22,7 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	}
 	
 	public String toString() {
-	  return "PCArequest: sessionId=" + getSessionId() + " taskId=" + getTaskId() + " platform=" + platform + " varianceFilterValue=" + varianceFilterValue + " diffExprGeneList.size=" + differentiallyExpressedReporters.size();
+	  return "PCArequest: sessionId=" + getSessionId() + " taskId=" + getTaskId() + " platform=" + platform + " varianceFilterValue=" + varianceFilterValue + " foldChangeFilterValue=" + foldChangeFilterValue + " diffExprGeneList.size=" + differentiallyExpressedReporters.size();
 	}
 
 	public List getDifferentiallyExpressedReporters() {
@@ -46,6 +47,22 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 
 	public void setPlatform(int platform) {
 		this.platform = platform;
+	}
+
+	public void setFoldChangeFilterValue(double foldChangeFilterValue) {
+	  this.foldChangeFilterValue = foldChangeFilterValue;
+	}
+	
+	public double getFoldChangeFilterValue() {
+	  return foldChangeFilterValue;
+	}
+	
+	public boolean doFoldChangeFiltering() {
+	  return foldChangeFilterValue > 0.0;	
+	}
+	
+	public boolean doVarianceFiltering() {
+	  return varianceFilterValue > 0.0;
 	}
 
 }
