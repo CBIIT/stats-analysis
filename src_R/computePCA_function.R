@@ -14,7 +14,7 @@
     return(filteredDataMatrix)
     }   
 
-    computePCAWithFC <- function(datmat, filterParam) {
+    computePCAwithFC <- function(datmat, filterParam) {
     filteredDataMatrix <- GeneFilterWithFC(datmat, filterParam)
     tmp <- apply(is.na(filteredDataMatrix),1,sum,na.rm=T)
     dpca <- prcomp(t(filteredDataMatrix[tmp==0,]))
@@ -31,7 +31,7 @@
     return(filteredDataMatrix)
     }
     
-    computePCAWithVariance <- function(datmat, filterParam) {
+    computePCAwithVariance <- function(datmat, filterParam) {
     filteredDataMatrix <- GeneFilterWithVariance(datmat, filterParam)
     tmp <- apply(is.na(filteredDataMatrix),1,sum,na.rm=T)
     dpca <- prcomp(t(filteredDataMatrix[tmp==0,]))
