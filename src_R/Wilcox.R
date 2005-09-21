@@ -12,17 +12,28 @@
 
 ### Wilcoxon rank sum test is the nonparametric analog to the independent two-sample t-test. 
 
- mywilcox <- function(datmat,index1,index2,
+ mywilcox <- function(datmat,m1=length(grp1ids), m2=length(grp21ids),
     datafilter=as.numeric){
   # datmat matrix of normalized expression values (reporters * arrays)
- 
+
+  m <- m1+m2
+  if(!is.matrix(datmat)) datmat <- matrix(datmat, nr=1)
+  if(ncol(datmat) != m) stop("m1 or m2 is not specified correctly")
+  if(any(is.infinite(m))) stop("Some of expressions are +(-) Inf")
+  pval <- rep(NA,nrow(datmat))
+  
+  median1 <- apply(datmat[,1:m1],1, median,na.rm=TRUE)
+  median2 <- apply(datmat[,(m1+1):m],1, median,na.rm=TRUE)
+
   f <- function(i) {
-      return(wilcox.test(datafilter(datmat[i,index1]),
-      datafilter(datmat[i,index2]))$p.value)
+      return(wilcox.test(datafilter(datmat[i,1:m1]),
+      datafilter(datmat[i,(m1+1):m]))$p.value)
       }
-    median1 <- apply(datmat[,index1],1, median)
-    median2 <- apply(datmat[,index2],1, median)
-    result<-return(data.frame(median1, median2, median.dif=median1-median2,fc=2^(abs(median1-median2)),pval=sapply(1:length(datmat[,1]),f)))
+  pval <- sapply(1:length(datmat[,1]),f)
+  
+  result<-return(data.frame(median1, median2, median.dif=median1-median2,fc=2^(abs(median1-median2)),pval))
    }
   
+# Call function 
+# result <- mywilcox(datmat, length(grp1ids), length(grp2ids))
  
