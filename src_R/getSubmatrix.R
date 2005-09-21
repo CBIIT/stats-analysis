@@ -11,7 +11,7 @@ getSubmatrix <- function(datmat, grp1ids, grp2ids) {
     return(Submatrix)
 }
 
-Submatrix <- getSubmatrix(datmat, grp1ids, grp2ids)  
+# Submatrix <- getSubmatrix(datmat, grp1ids, grp2ids)  
   
 # Generate submatrix based on reporters
 getSubmatrix.rep <- function(datmat, rep.ids) {
@@ -19,4 +19,4 @@ getSubmatrix.rep <- function(datmat, rep.ids) {
     return(datmat.rep)
 }
 
-datmat.rep <- getSubmatrix.rep(datmat, rep.ids)  
+# datmat.rep <- getSubmatrix.rep(datmat, rep.ids)  
