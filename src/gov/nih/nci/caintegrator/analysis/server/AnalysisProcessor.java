@@ -262,8 +262,9 @@ public class AnalysisProcessor implements MessageListener {
 			//generate the pca1 vs pca2 image
 			c.voidEval("maxComp1<-max(abs(pcaResult$x[,1]))");
 			c.voidEval("maxComp2<-max(abs(pcaResult$x[,2]))");
+			c.voidEval("maxComp3<-max(abs(pcaResult$x[,3]))");
 			c.voidEval("xrange<-c(-maxComp1,maxComp1)");
-			c.voidEval("yrange<-c(-maxComp1,maxComp1)");
+			c.voidEval("yrange<-c(-maxComp2,maxComp2)");
 			String plot1Cmd =  "plot(pcaResult$x[,1],pcaResult$x[,2],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component2\",xlab=\"PC1\",ylab=\"PC2\",pch=20)";
 			byte[] img1Code = getImageCode(c, pcaRequest, plot1Cmd);
 			result.setImage1Bytes(img1Code);
@@ -271,6 +272,7 @@ public class AnalysisProcessor implements MessageListener {
 			//generate the pca1 vs pca3 image
 			//  xrange<-c(-maxComp1,maxComp1)
 			//  yrange<-c(-maxComp1,maxComp1)
+			c.voidEval("yrange<-c(-maxComp3,maxComp3)");
 			String plot2Cmd = "plot(pcaResult$x[,1],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component3\",xlab=\"PC1\",ylab=\"PC3\",pch=20)";
 			byte[] img2Code = getImageCode(c, pcaRequest, plot2Cmd); 
 			result.setImage2Bytes(img2Code); 
@@ -278,7 +280,7 @@ public class AnalysisProcessor implements MessageListener {
 			
 			//generate the pca2 vs pca3 image
 			c.voidEval("xrange<-c(-maxComp2,maxComp2)");
-			c.voidEval("yrange<-c(-maxComp2,maxComp2)");	
+			c.voidEval("yrange<-c(-maxComp3,maxComp3)");	
 			String plot3Cmd =  "plot(pcaResult$x[,2],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component2 Vs Component3\",xlab=\"PC2\",ylab=\"PC3\",pch=20)";
 			byte[] img3Code = getImageCode(c, pcaRequest, plot3Cmd);
 			result.setImage3Bytes(img3Code);
