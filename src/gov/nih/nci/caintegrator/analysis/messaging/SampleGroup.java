@@ -11,7 +11,7 @@ import java.util.*;
  * @author Michael A. Harris
  *
  */
-public class SampleGroup extends HashSet implements Serializable {
+public class SampleGroup extends HashSet<String> implements Serializable {
 
 	private String groupName;
 	
