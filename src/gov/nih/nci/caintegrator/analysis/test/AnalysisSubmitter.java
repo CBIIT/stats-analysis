@@ -68,8 +68,9 @@ public class AnalysisSubmitter implements MessageListener {
 	//class comparison 
 	private JTextField ccSampleGroup1Ids = new JTextField(25);
 	private JTextField ccSampleGroup2Ids = new JTextField(25);
-	  
-	
+	private JTextField ccGroup1Name = new JTextField(10);
+	private JTextField ccGroup2Name = new JTextField(10);
+	private JComboBox  ccStatisticalMethodCombo = new JComboBox();
 	  /**
 	   * Topic session, hold on to this so you may close it.
 	   * Also used to create messages.
@@ -210,10 +211,8 @@ public class AnalysisSubmitter implements MessageListener {
 	/**
 	   * Publish the given String as a JMS message to the testTopic topic.
 	   */
-	  public void sendResuest(AnalysisRequest request) throws JMSException {
-
-		ClassComparisonAnalysisRequest ccRequest = new ClassComparisonAnalysisRequest(Integer.toString(12345),Integer.toString(1));
-		  
+	  public void sendRequest(AnalysisRequest request) throws JMSException {
+  
 	    // Create a message
 	    ObjectMessage msg = queueSession.createObjectMessage(request);
 	
@@ -253,8 +252,35 @@ public class AnalysisSubmitter implements MessageListener {
 			  System.out.println("Submitting class comparison request");
 			  ClassComparisonAnalysisRequest ccRequest = new ClassComparisonAnalysisRequest(Integer.toString(4567),Integer.toString(ccCounter++));
 				
-			}
-        	  
+			  //fill out the request
+			  ccRequest.setStatisticalMethod((ClassComparisonAnalysisRequest.StatisticalMethodType)ccStatisticalMethodCombo.getSelectedItem());
+			  
+			  //create the sample groups
+			  SampleGroup group1 = new SampleGroup(ccGroup1Name.getText());
+			  StringTokenizer t1 = new StringTokenizer(ccSampleGroup2Ids.getText(), ",");
+			  while  (t1.hasMoreTokens()) {
+			    String sampleId = t1.nextToken();
+				group1.add(sampleId);
+			  }
+			  ccRequest.addSampleGroup(group1);
+			  SampleGroup group2 = null;
+			  String group2Name = ccGroup2Name.getText();
+			  if ((group2Name != null)&&(group2Name.trim().length() > 0)) {
+			     group2 = new SampleGroup(group2Name);
+			     StringTokenizer t2 = new StringTokenizer(ccSampleGroup2Ids.getText(), ",");
+			     while (t2.hasMoreTokens()) {
+			       String sampleId = t2.nextToken();
+			       group2.add(sampleId);
+			     }
+			     ccRequest.addSampleGroup(group2);
+			  }
+			  try {
+				sendRequest(ccRequest);
+			  } catch (JMSException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace(System.out);
+			  }
+			}  
           });
           
           ccButtonPanel.add(ccSubmitButton);
@@ -266,10 +292,16 @@ public class AnalysisSubmitter implements MessageListener {
           
           ccSampleGroup1Ids.setBorder(new TitledBorder("Group1 Samples"));
           ccSampleGroup2Ids.setBorder(new TitledBorder("Group2 Samples"));
+          ccGroup1Name.setBorder(new TitledBorder("Group1 Name"));
+          ccGroup2Name.setBorder(new TitledBorder("Group2 Name"));
+          ccRequestCenterPanel.add(ccGroup1Name);          
           ccRequestCenterPanel.add(ccSampleGroup1Ids);
+          ccRequestCenterPanel.add(ccGroup2Name);
           ccRequestCenterPanel.add(ccSampleGroup2Ids);
-          
-          
+          ccStatisticalMethodCombo.addItem(ClassComparisonAnalysisRequest.StatisticalMethodType.TTest);
+          ccStatisticalMethodCombo.addItem(ClassComparisonAnalysisRequest.StatisticalMethodType.Wilcox);
+          ccStatisticalMethodCombo.setBorder(new TitledBorder("Statistical Method"));
+          ccRequestCenterPanel.add(ccStatisticalMethodCombo);
           
 		
 	}
@@ -350,7 +382,7 @@ public class AnalysisSubmitter implements MessageListener {
 			       req.setFoldChangeFilterValue(foldChangeFilterValue);
 			     }
 			     try {
-					sendResuest(req);
+					sendRequest(req);
 			     }
 				 catch (JMSException e) {
 					// TODO Auto-generated catch block

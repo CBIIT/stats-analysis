@@ -183,12 +183,80 @@ public class AnalysisProcessor implements MessageListener {
 	  }
 	  
 	  /**
+	   * This method will take a SampleGroup and generate the R command for 
+	   * to create the sampleId list. The returned lists can then be used as input 
+	   * parameters to the statistical methods (for example ttest).
+	   * @param group
+	   * @return
+	   */
+	  private String getRgroupCmd(SampleGroup group) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(group.getGroupName());
+    	sb.append(" <- c(");
+    	String id;
+    	for (Iterator i=group.iterator(); i.hasNext(); ) {
+    	  id = (String) i.next();
+    	  sb.append("\"").append(id).append("\"");
+    	  if (i.hasNext()) {
+    	    sb.append(",");	    	 
+    	  }
+    	  else {
+    	    sb.append(")");
+    	  }
+    	}
+    	return sb.toString();
+	  }
+	  
+	  /**
 	   * Process a class comparison analysis request.
 	   * @param ccRequest
 	   */
 	  public void processClassComparisonRequest(ClassComparisonAnalysisRequest ccRequest) {
-	    System.out.println("Processing class comparison request."); 
+	    System.out.println("Processing class comparison request: sessionId=" + ccRequest.getSessionId() + " taskId=" + ccRequest.getTaskId()); 
 		//call Rserve with the correct commands for class comparison
+	    Rconnection c = (Rconnection) connectionPool.checkOut();
+	    
+	    try {
+	    	int grp1Len, grp2Len;
+	    	List<SampleGroup> groupList = ccRequest.getSampleGroups();
+	    	SampleGroup group1 = groupList.get(0);
+	    	grp1Len = group1.size();
+	    	SampleGroup group2 = null;
+	    	c.voidEval(getRgroupCmd(group1));
+	    	if (groupList.size() > 1) {
+	    	  group2 = groupList.get(1);
+	    	  grp2Len = group2.size();
+	    	  c.voidEval(getRgroupCmd(group2));
+	    	  
+//	    	  //create the input data matrix using the sample groups
+		      c.voidEval("subMatrix <- getSubmatrix(dataMatrix," + group1.getGroupName() + "," + group2.getGroupName() + ")" );
+	    	  
+	    	}
+	    	else {
+	    		grp2Len = 0;
+	    		c.voidEval("grp2Dummy <- c()");
+	    		c.voidEval("subMatrix <- getSubmatrix(dataMatrix," + group1.getGroupName() + ", grp2Dummy)");
+	    	}
+	    	
+	    	
+	    	if (ccRequest.getStatisticalMethod() == ClassComparisonAnalysisRequest.StatisticalMethodType.TTest) {
+	    		//do the TTest computation
+	    		c.voidEval("ccResult <- myttest(subMatrix, " + grp1Len + ","  + grp2Len + ")");
+	    	
+	    	}
+	    	else if (ccRequest.getStatisticalMethod() == ClassComparisonAnalysisRequest.StatisticalMethodType.Wilcox) {
+	    	  //do the Wilcox computation
+	    		c.voidEval("ccResult <- mywilcox(subMatrix, " + grp1Len + ","  + grp2Len + ")");	
+	    	}
+	    	
+	    	
+	    }
+	    catch (RSrvException e) {
+	      e.printStackTrace(System.out);
+	    }
+	    finally {
+	      connectionPool.checkIn(c);
+	    }
 	    
 	    
 	  }
