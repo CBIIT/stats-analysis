@@ -56,7 +56,8 @@ public class AnalysisSubmitter implements MessageListener {
 	private int pcaCounter = 1;
 	private QueueConnection queueConnection;
 
-	private JTextField varianceFilterTF = new JTextField(12);
+	private JTextField pcaVarianceFilterTF = new JTextField(12);
+	private JTextField pcaFoldChangeFilterTF = new JTextField(12);
 	private ImagePanel pcaImage1 = new ImagePanel();
 	private ImagePanel pcaImage2 = new ImagePanel();
 	private ImagePanel pcaImage3 = new ImagePanel();
@@ -285,12 +286,14 @@ public class AnalysisSubmitter implements MessageListener {
           
           String[] platforms = {"Affy", "Cdna" };
           JComboBox pcaPlatform = new JComboBox(platforms);
-          varianceFilterTF.setBorder(new TitledBorder("Variance Filter Value:"));
-          varianceFilterTF.setText("0.9");
+          pcaVarianceFilterTF.setBorder(new TitledBorder("Variance Filter Value:"));
+          pcaVarianceFilterTF.setText("0.9");
+          pcaFoldChangeFilterTF.setBorder(new TitledBorder("Fold Change Filter Value:"));
+          pcaFoldChangeFilterTF.setText("");
           pcaPlatform.setBorder(new TitledBorder("Platform"));
           pcaParamPanel.add(pcaPlatform);
-          pcaParamPanel.add(varianceFilterTF);
-          
+          pcaParamPanel.add(pcaVarianceFilterTF);
+          pcaParamPanel.add(pcaFoldChangeFilterTF);
           pcaReqCenterPanel.add(pcaParamPanel);
           JTextField geneList = new JTextField(25);
           geneList.setBorder(new TitledBorder("Gene List:"));
@@ -309,12 +312,18 @@ public class AnalysisSubmitter implements MessageListener {
         	     PrincipalComponentAnalysisRequest req = new PrincipalComponentAnalysisRequest(1234,pcaCounter++);
         	     requestMap.put(new Integer(req.getTaskId()), req);
 			     req.setRequestStartTime(System.currentTimeMillis());
-			     double varianceFilterValue = Double.parseDouble(varianceFilterTF.getText());
-			     req.setVarianceFilterValue(varianceFilterValue);
-			      try {
+			     if (pcaVarianceFilterTF.getText().trim().length() > 0) {
+			       double varianceFilterValue = Double.parseDouble(pcaVarianceFilterTF.getText());
+			       req.setVarianceFilterValue(varianceFilterValue);
+			     }
+			     else if (pcaFoldChangeFilterTF.getText().trim().length() > 0) {
+			       double foldChangeFilterValue = Double.parseDouble(pcaFoldChangeFilterTF.getText()); 
+			       req.setFoldChangeFilterValue(foldChangeFilterValue);
+			     }
+			     try {
 					sendResuest(req);
-			      }
-				  catch (JMSException e) {
+			     }
+				 catch (JMSException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				 }      
