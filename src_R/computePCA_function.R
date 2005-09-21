@@ -14,7 +14,7 @@
     }   
 
     computePCA1 <- function(datmat, filterParam) {
-    filteredDataMatrix <- GeneFilter1(datmat, 3)
+    filteredDataMatrix <- GeneFilter1(datmat, filterParam)
     tmp <- apply(is.na(filteredDataMatrix),1,sum,na.rm=T)
     dpca <- prcomp(t(filteredDataMatrix[tmp==0,]))
     return(dpca)
@@ -31,7 +31,7 @@
     }
     
     computePCA2 <- function(datmat, filterParam) {
-    filteredDataMatrix <- GeneFilter2(datmat, 0.70)
+    filteredDataMatrix <- GeneFilter2(datmat, filterParam)
     tmp <- apply(is.na(filteredDataMatrix),1,sum,na.rm=T)
     dpca <- prcomp(t(filteredDataMatrix[tmp==0,]))
     return(dpca)
