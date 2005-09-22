@@ -16,7 +16,6 @@ public class ClassComparisonResultEntry implements java.io.Serializable {
 	
 	public ClassComparisonResultEntry() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public double getFoldChange() {
