@@ -12,9 +12,8 @@ public class ClassComparisonAnalysisResult extends AnalysisResult implements Ser
 
 	private List<ClassComparisonResultEntry> ccResultEntries;
 	
-	public ClassComparisonAnalysisResult(String sessionId, String taskId, int numDoubles) {
+	public ClassComparisonAnalysisResult(String sessionId, String taskId) {
 		super(sessionId, taskId);
-		//initArray(numDoubles);
 	}
 	
 	public String toString() {

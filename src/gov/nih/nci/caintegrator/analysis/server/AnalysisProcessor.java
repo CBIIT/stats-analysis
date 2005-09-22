@@ -50,7 +50,7 @@ public class AnalysisProcessor implements MessageListener {
 //	  
 //		
 //	}
-	
+	private boolean debugRcommands = false;
 	private RserveConnectionPool connectionPool;
 	private static String JBossMQ_locationIp = "156.40.128.136:1099";  //my machine	
 	private static int numRserveConnections = 1;
@@ -103,6 +103,7 @@ public class AnalysisProcessor implements MessageListener {
 			RserverIp = analysisServerConfigProps.getProperty("rserve_location");
 			numRserveConnections = Integer.parseInt(analysisServerConfigProps.getProperty("RserveConnectionPoolSize"));
 			RdataFileName = analysisServerConfigProps.getProperty("RdefinitionFile");
+			debugRcommands = Boolean.parseBoolean(analysisServerConfigProps.getProperty("debugRcommands"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace(System.out);
 		} catch (IOException e) {
@@ -208,6 +209,41 @@ public class AnalysisProcessor implements MessageListener {
 	  }
 	  
 	  /**
+	   * Evaluate an R command with no return value
+	   * @param c
+	   * @param command
+	   */
+	  private void doRvoidEval(Rconnection c, String command) {
+		if (debugRcommands) {
+		  System.out.println(command);
+		}
+		try {
+			c.voidEval(command);
+		} catch (RSrvException e) {
+			e.printStackTrace(System.out);
+		}
+	  }
+	  
+	  /**
+	   * Execute an R command with a return value
+	   * @param c
+	   * @param command
+	   * @return
+	   */
+	  private REXP doREval(Rconnection c, String command) {
+	    REXP returnVal = null;
+		try {
+			if (debugRcommands) {
+			  System.out.println(command);
+			}
+			returnVal = c.eval(command);
+		} catch (RSrvException e) {
+			e.printStackTrace(System.out);
+		}
+	    return returnVal;
+	  }
+	  
+	  /**
 	   * Process a class comparison analysis request.
 	   * @param ccRequest
 	   */
@@ -216,49 +252,72 @@ public class AnalysisProcessor implements MessageListener {
 		//call Rserve with the correct commands for class comparison
 	    Rconnection c = (Rconnection) connectionPool.checkOut();
 	    
-	    try {
-	    	int grp1Len, grp2Len;
-	    	List<SampleGroup> groupList = ccRequest.getSampleGroups();
-	    	SampleGroup group1 = groupList.get(0);
-	    	grp1Len = group1.size();
-	    	SampleGroup group2 = null;
-	    	c.voidEval(getRgroupCmd(group1));
-	    	if (groupList.size() > 1) {
-	    	  group2 = groupList.get(1);
-	    	  grp2Len = group2.size();
-	    	  c.voidEval(getRgroupCmd(group2));
-	    	  
-//	    	  //create the input data matrix using the sample groups
-		      c.voidEval("subMatrix <- getSubmatrix(dataMatrix," + group1.getGroupName() + "," + group2.getGroupName() + ")" );
-	    	  
-	    	}
-	    	else {
-	    		grp2Len = 0;
-	    		c.voidEval("grp2Dummy <- c()");
-	    		c.voidEval("subMatrix <- getSubmatrix(dataMatrix," + group1.getGroupName() + ", grp2Dummy)");
-	    	}
-	    	
-	    	
-	    	if (ccRequest.getStatisticalMethod() == ClassComparisonAnalysisRequest.StatisticalMethodType.TTest) {
-	    		//do the TTest computation
-	    		c.voidEval("ccResult <- myttest(subMatrix, " + grp1Len + ","  + grp2Len + ")");
-	    	
-	    	}
-	    	else if (ccRequest.getStatisticalMethod() == ClassComparisonAnalysisRequest.StatisticalMethodType.Wilcox) {
-	    	  //do the Wilcox computation
-	    		c.voidEval("ccResult <- mywilcox(subMatrix, " + grp1Len + ","  + grp2Len + ")");	
-	    	}
-	    	
-	    	
-	    }
-	    catch (RSrvException e) {
-	      e.printStackTrace(System.out);
-	    }
-	    finally {
-	      connectionPool.checkIn(c);
-	    }
-	    
-	    
+    	int grp1Len, grp2Len;
+    	List<SampleGroup> groupList = ccRequest.getSampleGroups();
+    	SampleGroup group1 = groupList.get(0);
+    	grp1Len = group1.size();
+    	SampleGroup group2 = null;
+    	String rCmd = null;
+    	rCmd = getRgroupCmd(group1);
+    	
+    	doRvoidEval(c, rCmd);
+    	
+    	if (groupList.size() > 1) {
+    	  group2 = groupList.get(1);
+    	  grp2Len = group2.size();
+    	  rCmd = getRgroupCmd(group2);
+    	  doRvoidEval(c, rCmd);
+    	  
+  	      //create the input data matrix using the sample groups
+    	  rCmd = "subMatrix <- getSubmatrix(dataMatrix," + group1.getGroupName() + "," + group2.getGroupName() + ")";
+    	  doRvoidEval(c, rCmd);    	  
+    	}
+    	else {
+    		grp2Len = 0;
+    		rCmd = "grp2Dummy <- c()";
+    		doRvoidEval(c, rCmd);
+    		
+    		rCmd = "subMatrix <- getSubmatrix(dataMatrix," + group1.getGroupName() + ", grp2Dummy)";
+    		doRvoidEval(c, rCmd);
+    	}
+    	    	
+    	if (ccRequest.getStatisticalMethod() == ClassComparisonAnalysisRequest.StatisticalMethodType.TTest) {
+    		//do the TTest computation
+    		rCmd = "ccResult <- myttest(subMatrix, " + grp1Len + ","  + grp2Len + ")";
+    		doRvoidEval(c, rCmd);	    	
+    	}
+    	else if (ccRequest.getStatisticalMethod() == ClassComparisonAnalysisRequest.StatisticalMethodType.Wilcox) {
+    	  //do the Wilcox computation
+    		rCmd = "ccResult <- mywilcox(subMatrix, " + grp1Len + ","  + grp2Len + ")";
+    		doRvoidEval(c, rCmd);
+    	}
+    	
+    	double[] meanGrp1 = doREval(c, "mean1 <- ccResult[,1]").asDoubleArray();
+    	double[] meanGrp2 = doREval(c, "mean2 <- ccResult[,2]").asDoubleArray();
+    	double[] meanDif  = doREval(c, "meanDif <- ccResult[,3]").asDoubleArray();
+    	double[] foldChange = doREval(c, "fc <- ccResult[,4]").asDoubleArray();
+    	double[] pva = doREval(c, "pva <- ccResult[,5]").asDoubleArray();
+    
+    	//load the result object
+    	//need to see if this works for single group comparison
+    	List<ClassComparisonResultEntry> resultEntries = new ArrayList<ClassComparisonResultEntry>(meanGrp1.length);
+    	ClassComparisonResultEntry resultEntry;
+    	for (int i=0; i < meanGrp1.length; i++) {
+    	  resultEntry = new ClassComparisonResultEntry();
+    	  resultEntry.setMeanGrp1(meanGrp1[i]);
+    	  resultEntry.setMeanGrp2(meanGrp2[i]);
+    	  resultEntry.setMeanDiff(meanDif[i]);
+    	  resultEntry.setFoldChange(foldChange[i]);
+    	  resultEntry.setPvalue(pva[i]);
+          resultEntries.add(resultEntry);
+    	}
+    	
+    	ClassComparisonAnalysisResult ccResult = new ClassComparisonAnalysisResult(ccRequest.getSessionId(), ccRequest.getTaskId());
+    	ccResult.setResultEntries(resultEntries);
+    	ccResult.setProcessorHost(getHostName());
+    	sendResult(ccResult);
+   
+        connectionPool.checkIn(c); 
 	  }
 	  
 	  /**
@@ -303,29 +362,19 @@ public class AnalysisProcessor implements MessageListener {
 			Vector labels = (Vector) exp.asVector();
 			Vector sampleIds = ((REXP)(labels.get(0))).asVector();
 			Vector pcaLabels =  ((REXP)(labels.get(1))).asVector();
-			
-			//String patientId = null;
-			//REXP tmp;
-//			System.out.println("  PatientIds: ");
-//			for (Iterator i=patientIds.iterator(); i.hasNext(); ) {
-//			  tmp = (REXP) i.next();
-//			  patientId = tmp.asString();
-//			  System.out.print(patientId);
-//			  if (i.hasNext()) System.out.print("\t");
-//			  else System.out.println();
-//			}	
 					
-			PCAresultEntry[] pcaArray = new PCAresultEntry[sampleIds.size()];
+			List<PCAresultEntry> pcaResults = new ArrayList<PCAresultEntry>(sampleIds.size());
+			//PCAresultEntry[] pcaArray = new PCAresultEntry[sampleIds.size()];
 			String sampleId = null;
 			int index = 0;
 			for (Iterator i=sampleIds.iterator(); i.hasNext(); ) {
 			  sampleId = ((REXP)i.next()).asString();
-			  pcaArray[index] = new PCAresultEntry(sampleId, pca1[index], pca2[index], pca3[index]);
+			  pcaResults.add(new PCAresultEntry(sampleId, pca1[index], pca2[index], pca3[index]));
 			  index++;
 			}
 			
 			PrincipalComponentAnalysisResult result = new PrincipalComponentAnalysisResult(pcaRequest.getSessionId(), pcaRequest.getTaskId());
-			result.setPCAarray(pcaArray);
+			result.setResultEntries(pcaResults);
 			
 			//generate the pca1 vs pca2 image
 			c.voidEval("maxComp1<-max(abs(pcaResult$x[,1]))");
