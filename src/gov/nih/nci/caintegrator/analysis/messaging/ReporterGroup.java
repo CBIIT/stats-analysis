@@ -16,6 +16,10 @@ public class ReporterGroup extends HashSet<String> implements Serializable {
 	private String groupName;
 	
 	
+	public ReporterGroup() {
+	  this("", 50);
+	}
+	
 	/**
 	 * Create a sample group using the default initial size of 50.
 	 * @param groupName
