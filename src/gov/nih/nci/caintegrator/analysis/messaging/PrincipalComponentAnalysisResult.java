@@ -11,6 +11,8 @@ public class PrincipalComponentAnalysisResult extends AnalysisResult implements 
 
 	private List<PCAresultEntry> pcaResultEntries;
 	
+	//These image arrays will be removed when the front end code 
+	//to generate the images is implemented.
 	private byte[] image1Bytes = null;
 	private byte[] image2Bytes = null;
 	private byte[] image3Bytes = null;
@@ -23,15 +25,15 @@ public class PrincipalComponentAnalysisResult extends AnalysisResult implements 
 	  return "PrincipalComponentAnalysisResult: sessionId=" + getSessionId() + " taskId=" + getTaskId();
 	}
 	
-	public List<PCAresultEntry> getPCAresultEntries() {
+	public List<PCAresultEntry> getResultEntries() {
 		return pcaResultEntries;
 	}
 
-	public void setPCAresultEntries(List<PCAresultEntry> resultEntries) {
+	public void setResultEntries(List<PCAresultEntry> resultEntries) {
 		this.pcaResultEntries = resultEntries;
 	}
 	
-	public int getNumPCAresultEntries() { 
+	public int getNumResultEntries() { 
 	  if (pcaResultEntries == null) {
 	    return 0;
 	  }
@@ -62,6 +64,4 @@ public class PrincipalComponentAnalysisResult extends AnalysisResult implements 
 		this.image3Bytes = image3Bytes;
 	}
 
-	
-	
 }
