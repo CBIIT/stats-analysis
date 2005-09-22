@@ -13,7 +13,9 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	
 	private double varianceFilterValue = -1.0;
 	private double foldChangeFilterValue = -1.0;
-	private List<String> differentiallyExpressedReporters = new ArrayList<String>();
+	private ReporterGroup reporterGroup = null;
+	private SampleGroup sampleGroup = null;
+	
 	
 	private ArrayPlatformType platform = ArrayPlatformType.AFFYMETRICS;
 	
@@ -22,17 +24,13 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	}
 	
 	public String toString() {
-	  return "PCArequest: sessionId=" + getSessionId() + " taskId=" + getTaskId() + " platform=" + platform + " varianceFilterValue=" + varianceFilterValue + " foldChangeFilterValue=" + foldChangeFilterValue + " diffExprGeneList.size=" + differentiallyExpressedReporters.size();
+	  int reporterGroupSize = -1;
+	  if (reporterGroup != null) {
+        reporterGroupSize = reporterGroup.size();
+	  }
+	  return "PCArequest: sessionId=" + getSessionId() + " taskId=" + getTaskId() + " platform=" + platform + " varianceFilterValue=" + varianceFilterValue + " foldChangeFilterValue=" + foldChangeFilterValue + " reporterGroupSize=" + reporterGroupSize;
 	}
-
-	public List<String> getDifferentiallyExpressedReporters() {
-		return differentiallyExpressedReporters;
-	}
-
-	public void setDifferentiallyExpressedReporters(List<String> differentiallyExpressedReporters) {
-		this.differentiallyExpressedReporters = differentiallyExpressedReporters;
-	}
-
+	
 	public double getVarianceFilterValue() {
 		return varianceFilterValue;
 	}
@@ -63,6 +61,43 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	
 	public boolean doVarianceFiltering() {
 	  return varianceFilterValue > 0.0;
+	}
+
+	/**
+	 * The reporter group contains the reporters to use when doing the 
+	 * PCA computation. If a reporter group has not been set then all
+	 * reporters will be used for the analysis. 
+	 * @return ReporterGroup
+	 */
+	public ReporterGroup getReporterGroup() {
+		return reporterGroup;
+	}
+
+	/**
+	 *  The reporter group contains the reporters to use when doing the PCA
+	 *  computation. If a reporter group has not been set then all reporters will
+	 *  be used for the analysis.
+	 *  
+	 * @param reporterGroup
+	 */
+	public void setReporterGroup(ReporterGroup reporterGroup) {
+		this.reporterGroup = reporterGroup;
+	}
+
+	/**
+	 * The sample group is the group of samples to use in the PCA analysis. 
+	 * @return SampleGroup
+	 */
+	public SampleGroup getSampleGroup() {
+		return sampleGroup;
+	}
+
+	/**
+	 * The sample group is the group of samples to use in the PCA analysis. 
+	 * @param sampleGroup
+	 */
+	public void setSampleGroup(SampleGroup sampleGroup) {
+		this.sampleGroup = sampleGroup;
 	}
 
 }
