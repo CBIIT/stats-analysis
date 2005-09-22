@@ -52,6 +52,7 @@ public class AnalysisSubmitter implements MessageListener {
 	private static Map requestMap = new HashMap();
 	
 	private PCAtableModel pcaTableModel = new PCAtableModel();
+	private CCtableModel ccTableModel = new CCtableModel();
 	//private ImagePanel pcaImagePanel = new ImagePanel();
 	private JPanel pcaImages = new JPanel();
 	private int pcaCounter = 1;
@@ -178,8 +179,8 @@ public class AnalysisSubmitter implements MessageListener {
 	  }
 	  
 	  private void processPCAresult(PrincipalComponentAnalysisResult result) {
-		  System.out.println("Proccessing PCA result.");
-		  pcaTableModel.setPCAdata(result.getPCAarray());
+		  System.out.println("Proccessing PCA result=" + result);
+		  pcaTableModel.setPCAdata(result.getResultEntries());
 		  
 		  //create the image from the PCA data
 		  byte[] img1Bytes = result.getImage1Bytes();
@@ -198,14 +199,13 @@ public class AnalysisSubmitter implements MessageListener {
 	  }
 	  
 	  private void processHCAresult(HierarchicalClusteringAnalysisResult result) {
-		  System.out.println("Processing HCA result.");
+		  System.out.println("Processing HCA result=" + result);
 		  
 	  }
 	  
 	  private void processCCresult(ClassComparisonAnalysisResult result) {
-		 System.out.println("Processiong CC result.");  
-		  
-		  
+		 System.out.println("Processiong CC result=" + result);  
+		 ccTableModel.setCCdata(result.getResultEntries()); 
 	  }
 	
 	/**
@@ -257,7 +257,7 @@ public class AnalysisSubmitter implements MessageListener {
 			  
 			  //create the sample groups
 			  SampleGroup group1 = new SampleGroup(ccGroup1Name.getText());
-			  StringTokenizer t1 = new StringTokenizer(ccSampleGroup2Ids.getText(), ",");
+			  StringTokenizer t1 = new StringTokenizer(ccSampleGroup1Ids.getText(), ",");
 			  while  (t1.hasMoreTokens()) {
 			    String sampleId = t1.nextToken();
 				group1.add(sampleId);
@@ -303,6 +303,11 @@ public class AnalysisSubmitter implements MessageListener {
           ccStatisticalMethodCombo.setBorder(new TitledBorder("Statistical Method"));
           ccRequestCenterPanel.add(ccStatisticalMethodCombo);
           
+          JSplitPane ccResponseSP = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+          JTable ccResultTable = new JTable(ccTableModel);
+          JScrollPane ccResultTableSP = new JScrollPane(ccResultTable);
+          ccResponseSP.add(ccResultTableSP, JSplitPane.TOP);
+          ccResponsePanel.add(ccResponseSP);
 		
 	}
 
@@ -365,8 +370,6 @@ public class AnalysisSubmitter implements MessageListener {
           pcaRequestPanel.add(pcaButtonPanel, BorderLayout.SOUTH);
           pcaRequestPanel.add(pcaReqCenterPanel, BorderLayout.CENTER);
           
-          
-    	
           pcaSubmitButton.addActionListener(new ActionListener() {
         	  public void actionPerformed(ActionEvent event) {
         	     System.out.println("Sending PCA request.");
@@ -477,17 +480,17 @@ public class AnalysisSubmitter implements MessageListener {
 		    }
 	  }
 	
-	  private class PCAtableModel extends AbstractTableModel {
+	private class CCtableModel extends AbstractTableModel {
 		  
-		  private String[] columnNames = {"SampleId", "PC1", "PC2", "PC3" }; 
-		  private PCAresultEntry[] pcaArray = new PCAresultEntry[0];
+		  private String[] columnNames = {"Mean Group1", "Mean Group2", "Mean Diff", "Fold Change", "P-Value" }; 
+		  private List<ClassComparisonResultEntry> ccResults = new ArrayList<ClassComparisonResultEntry>();
 		  
-		  public PCAtableModel() {
+		  public CCtableModel() {
 			
 		  }
 		  
-		  public void setPCAdata(PCAresultEntry[] pcaArray) {
-		     this.pcaArray = pcaArray;
+		  public void setCCdata(List<ClassComparisonResultEntry> ccResults) {
+		     this.ccResults = ccResults;
 		     this.fireTableDataChanged();
 		  }
 		  
@@ -495,22 +498,72 @@ public class AnalysisSubmitter implements MessageListener {
 		      return columnNames[col];
 		  }
 		  
-		  public int getRowCount() { return pcaArray.length; }
+		  public int getRowCount() { return ccResults.size(); }
 		  
 		  public int getColumnCount() { return columnNames.length; }
 		  
 		  public Object getValueAt(int row, int col) {
+			    ClassComparisonResultEntry resultEntry = ccResults.get(row);
 		        if (col == 0) {
-		          return pcaArray[row].getSampleId();
+		          return resultEntry.getMeanGrp1();
 		        }
 		        else if (col == 1) {
-		          return pcaArray[row].getPc1();
+		          return resultEntry.getMeanGrp2();
 		        }
 		        else if (col == 2) {
-		          return pcaArray[row].getPc2();
+		          return resultEntry.getMeanDiff();
 		        }
 		        else if (col == 3) {
-		          return pcaArray[row].getPc3();
+		          return resultEntry.getFoldChange();
+		        }
+		        else if (col == 4) {
+		          return resultEntry.getPvalue();
+		        }
+		        return null;
+		  }
+		  
+		  public boolean isCellEditable(int row, int col)
+		        { return false; }
+		    
+		   
+		  
+	  }
+	
+	  private class PCAtableModel extends AbstractTableModel {
+		  
+		  private String[] columnNames = {"SampleId", "PC1", "PC2", "PC3" }; 
+		  private List<PCAresultEntry> pcaResults = new ArrayList<PCAresultEntry>();
+		  
+		  public PCAtableModel() {
+			
+		  }
+		  
+		  public void setPCAdata(List<PCAresultEntry> pcaResults) {
+		     this.pcaResults = pcaResults;
+		     this.fireTableDataChanged();
+		  }
+		  
+		  public String getColumnName(int col) {
+		      return columnNames[col];
+		  }
+		  
+		  public int getRowCount() { return pcaResults.size(); }
+		  
+		  public int getColumnCount() { return columnNames.length; }
+		  
+		  public Object getValueAt(int row, int col) {
+			    PCAresultEntry resultEntry = pcaResults.get(row);
+		        if (col == 0) {
+		          return resultEntry.getSampleId();
+		        }
+		        else if (col == 1) {
+		          return resultEntry.getPc1();
+		        }
+		        else if (col == 2) {
+		          return resultEntry.getPc2();
+		        }
+		        else if (col == 3) {
+		          return resultEntry.getPc3();
 		        }
 		        return null;
 		  }
