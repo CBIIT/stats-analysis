@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.analysis.messaging;
 
+import java.util.*;
+
 /**
  * PrincipalComponentAnalysisResults are both in tabular and image form
  * @author Michael A. Harris
@@ -7,7 +9,7 @@ package gov.nih.nci.caintegrator.analysis.messaging;
  */
 public class PrincipalComponentAnalysisResult extends AnalysisResult implements java.io.Serializable {
 
-	private PCAresultEntry[] pcaArray;
+	private List<PCAresultEntry> pcaResultEntries;
 	
 	private byte[] image1Bytes = null;
 	private byte[] image2Bytes = null;
@@ -20,25 +22,26 @@ public class PrincipalComponentAnalysisResult extends AnalysisResult implements 
 	public String toString() {
 	  return "PrincipalComponentAnalysisResult: sessionId=" + getSessionId() + " taskId=" + getTaskId();
 	}
+	
+	public List<PCAresultEntry> getPCAresultEntries() {
+		return pcaResultEntries;
+	}
 
-	public void setPCAarray(PCAresultEntry[] pcaArray) {
-	  this.pcaArray = pcaArray;
+	public void setPCAresultEntries(List<PCAresultEntry> resultEntries) {
+		this.pcaResultEntries = resultEntries;
 	}
 	
-	public PCAresultEntry[] getPCAarray() { return pcaArray; }
-
-	public PCAresultEntry getPCAentry(int i) {
-	  if ((i >= pcaArray.length)||(i < 0)) return null; 
-	  return pcaArray[i];
+	public int getNumPCAresultEntries() { 
+	  if (pcaResultEntries == null) {
+	    return 0;
+	  }
+	  return pcaResultEntries.size();
 	}
-	
-	public int getNumPCAentries() { return  pcaArray.length; }
 
 	public byte[] getImage1Bytes() {
 		return image1Bytes;
 	}
 
-	
 	public void setImage1Bytes(byte[] imageBytes) {
 		this.image1Bytes = imageBytes;
 	}
@@ -58,5 +61,7 @@ public class PrincipalComponentAnalysisResult extends AnalysisResult implements 
 	public void setImage3Bytes(byte[] image3Bytes) {
 		this.image3Bytes = image3Bytes;
 	}
+
+	
 	
 }
