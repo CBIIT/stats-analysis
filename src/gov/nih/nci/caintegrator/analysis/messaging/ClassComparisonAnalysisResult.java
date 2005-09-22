@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.analysis.messaging;
 
 import java.io.Serializable;
+import java.util.*;
 
 /**
  * 
@@ -9,10 +10,7 @@ import java.io.Serializable;
  */
 public class ClassComparisonAnalysisResult extends AnalysisResult implements Serializable {
 
-	private double[] resultArray;
-	private double[][] arrayValues;
-	private String[] columnNames;
-	private String[] rowNames;
+	private List<ClassComparisonResultEntry> ccResultEntries;
 	
 	public ClassComparisonAnalysisResult(String sessionId, String taskId, int numDoubles) {
 		super(sessionId, taskId);
@@ -20,26 +18,22 @@ public class ClassComparisonAnalysisResult extends AnalysisResult implements Ser
 	}
 	
 	public String toString() {
-		  return "ClassComparisonAnalysisResult: sessionId=" + getSessionId() + " taskId=" + getTaskId();
+		  return "ClassComparisonAnalysisResult: sessionId=" + getSessionId() + " taskId=" + getTaskId() + " numResultEntries=" + getNumResultEntries();
     }
 	
-	public void setColumnNames(String[] columnNames) {
-	  this.columnNames = columnNames;
+	public int getNumResultEntries() { 
+	  if (ccResultEntries == null) {
+	    return 0;
+	  }
+	  return ccResultEntries.size();
 	}
-	
-	public void setRowNames(String[] rowNames) {
-	  this.rowNames = rowNames;
+
+	public List<ClassComparisonResultEntry> getResultEntries() {
+		return ccResultEntries;
 	}
-	
-	public void setArrayValues(double[][] arrayValues) {
-	  this.arrayValues = arrayValues;
+
+	public void setResultEntries(List<ClassComparisonResultEntry> ccResultEntries) {
+		this.ccResultEntries = ccResultEntries;
 	}
-	
-	public String[] getRowNames() {
-	  return rowNames;
-	}
-	
-	public String[] getColumnNames() {
-	  return columnNames;
-	}
+
 }
