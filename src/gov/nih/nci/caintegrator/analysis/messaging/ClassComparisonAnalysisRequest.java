@@ -3,6 +3,10 @@ package gov.nih.nci.caintegrator.analysis.messaging;
 import java.util.*;
 
 /**
+ * The class comparison request contains one or more SampleGroups. 
+ * These groups will be used by the class comparison algorithm to compute
+ * the group statistics.
+ * (For TTest there will be one or 2 sample groups)
  * 
  * @author Michael A. Harris
  *
