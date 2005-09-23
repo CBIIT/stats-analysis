@@ -248,11 +248,16 @@ public class AnalysisProcessor implements MessageListener {
 	   * @param ccRequest
 	   */
 	  public void processClassComparisonRequest(ClassComparisonAnalysisRequest ccRequest) {
-	    System.out.println("Processing class comparison request: sessionId=" + ccRequest.getSessionId() + " taskId=" + ccRequest.getTaskId()); 
+	    System.out.println("Processing class comparison request=" + ccRequest);
+	    		
+	    if (ccRequest.getSampleGroups().size()>2) {
+	      System.out.println("Warning: can't process multigroup comparison with more than 2 groups yet. Skipping request=" + ccRequest);
+	    }
+	    
 		//call Rserve with the correct commands for class comparison
 	    Rconnection c = (Rconnection) connectionPool.checkOut();
 	    
-    	int grp1Len, grp2Len;
+    	int grp1Len = 0, grp2Len = 0;
     	List<SampleGroup> groupList = ccRequest.getSampleGroups();
     	SampleGroup group1 = groupList.get(0);
     	grp1Len = group1.size();
@@ -262,33 +267,32 @@ public class AnalysisProcessor implements MessageListener {
     	
     	doRvoidEval(c, rCmd);
     	
-    	if (groupList.size() > 1) {
+    	if (groupList.size() == 2) {
+    	  //two group comparison
     	  group2 = groupList.get(1);
     	  grp2Len = group2.size();
     	  rCmd = getRgroupCmd(group2);
     	  doRvoidEval(c, rCmd);
     	  
   	      //create the input data matrix using the sample groups
-    	  rCmd = "subMatrix <- getSubmatrix(dataMatrix," + group1.getGroupName() + "," + group2.getGroupName() + ")";
+    	  rCmd = "ccInputMatrix <- getSubmatrix.twogrps(dataMatrix," + group1.getGroupName() + "," + group2.getGroupName() + ")";
     	  doRvoidEval(c, rCmd);    	  
     	}
-    	else {
+    	else if (groupList.size() == 1){
+    		//single group comparison
     		grp2Len = 0;
-    		rCmd = "grp2Dummy <- c()";
-    		doRvoidEval(c, rCmd);
-    		
-    		rCmd = "subMatrix <- getSubmatrix(dataMatrix," + group1.getGroupName() + ", grp2Dummy)";
+    		rCmd = "ccInputMatrix <- getSubmatrix.onegrp(dataMatrix," + group1.getGroupName() + ")";
     		doRvoidEval(c, rCmd);
     	}
     	    	
     	if (ccRequest.getStatisticalMethod() == ClassComparisonAnalysisRequest.StatisticalMethodType.TTest) {
     		//do the TTest computation
-    		rCmd = "ccResult <- myttest(subMatrix, " + grp1Len + ","  + grp2Len + ")";
+    		rCmd = "ccResult <- myttest(ccInputMatrix, " + grp1Len + ","  + grp2Len + ")";
     		doRvoidEval(c, rCmd);	    	
     	}
     	else if (ccRequest.getStatisticalMethod() == ClassComparisonAnalysisRequest.StatisticalMethodType.Wilcox) {
     	  //do the Wilcox computation
-    		rCmd = "ccResult <- mywilcox(subMatrix, " + grp1Len + ","  + grp2Len + ")";
+    		rCmd = "ccResult <- mywilcox(ccInputMatrix, " + grp1Len + ","  + grp2Len + ")";
     		doRvoidEval(c, rCmd);
     	}
     	
@@ -298,12 +302,19 @@ public class AnalysisProcessor implements MessageListener {
     	double[] foldChange = doREval(c, "fc <- ccResult[,4]").asDoubleArray();
     	double[] pva = doREval(c, "pva <- ccResult[,5]").asDoubleArray();
     
+    	//get the labels
+    	Vector reporterIds =   doREval(c,"ccLabels <- dimnames(ccResult)[[1]]").asVector();
+		//Vector reporterIds = ((REXP)(labels.get(0))).asVector();
+		//Vector columnLabels =  ((REXP)(labels.get(1))).asVector();
+    	
     	//load the result object
     	//need to see if this works for single group comparison
     	List<ClassComparisonResultEntry> resultEntries = new ArrayList<ClassComparisonResultEntry>(meanGrp1.length);
     	ClassComparisonResultEntry resultEntry;
+ 
     	for (int i=0; i < meanGrp1.length; i++) {
     	  resultEntry = new ClassComparisonResultEntry();
+    	  resultEntry.setReporterId(((REXP)reporterIds.get(i)).asString());
     	  resultEntry.setMeanGrp1(meanGrp1[i]);
     	  resultEntry.setMeanGrp2(meanGrp2[i]);
     	  resultEntry.setMeanDiff(meanDif[i]);
@@ -314,6 +325,14 @@ public class AnalysisProcessor implements MessageListener {
     	
     	ClassComparisonAnalysisResult ccResult = new ClassComparisonAnalysisResult(ccRequest.getSessionId(), ccRequest.getTaskId());
     	ccResult.setResultEntries(resultEntries);
+    	
+    	//need to send back the reporter names;
+    	
+    	ccResult.setGroup1Name(group1.getGroupName());
+    	if (group2 != null) {
+    	  ccResult.setGroup2Name(group2.getGroupName());
+    	}
+    	
     	ccResult.setProcessorHost(getHostName());
     	sendResult(ccResult);
    
@@ -343,15 +362,35 @@ public class AnalysisProcessor implements MessageListener {
 		try {
 			double[] pca1, pca2, pca3;
 			
+			doRvoidEval(c, "pcaInputMatrix <- dataMatrix");
+			
+			if (pcaRequest.getSampleGroup()!= null) {
+			  //sample group should never be null when passed from middle tier
+			  String sampleIds = pcaRequest.getSampleGroup().getIdsAsCommaDelimitedString();
+			  String rCmd = "sampleIds <- c(" + sampleIds + ")";
+			  doRvoidEval(c, rCmd);
+			  rCmd = "pcaInputMatrix <- getSubmatrix.onegrp(pcaInputMatrix, sampleIds)";
+			  doRvoidEval(c, rCmd);
+			}
+			
+			
+			if (pcaRequest.getReporterGroup()!= null) {
+			  String reporterIds = pcaRequest.getReporterGroup().getIdsAsCommaDelimitedString();
+			  String rCmd = "reporterIds <- c(" + reporterIds + ")";
+			  doRvoidEval(c, rCmd);
+			  rCmd = "pcaInputMatrix <- getSubmatrix.rep(pcaInputMatrix, reporterIds)";
+			  doRvoidEval(c, rCmd);
+			}
+			
 			if (pcaRequest.doVarianceFiltering()) {
 				double varianceFilterValue = pcaRequest.getVarianceFilterValue();
 				System.out.println("Processing principal component analysis request varianceFilterVal=" + varianceFilterValue);				
-				c.voidEval("pcaResult <- computePCAwithVariance(dataMatrix," + varianceFilterValue + " )");
+				c.voidEval("pcaResult <- computePCAwithVariance(pcaInputMatrix," + varianceFilterValue + " )");
 			}
 			else if (pcaRequest.doFoldChangeFiltering()) {
 				double foldChangeFilterValue = pcaRequest.getFoldChangeFilterValue();
 				System.out.println("Processing principal component analysis request foldChangeFilterVal=" + foldChangeFilterValue);
-				c.voidEval("pcaResult <- computePCAwithFC(dataMatrix," + foldChangeFilterValue + " )");
+				c.voidEval("pcaResult <- computePCAwithFC(pcaInputMatrix," + foldChangeFilterValue + " )");
 			}
 			
 			pca1 = c.eval("pcaMatrixX <- pcaResult$x[,1]").asDoubleArray();
