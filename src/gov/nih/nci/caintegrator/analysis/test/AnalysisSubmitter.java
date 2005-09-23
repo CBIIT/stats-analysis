@@ -61,6 +61,8 @@ public class AnalysisSubmitter implements MessageListener {
 
 	private JTextField pcaVarianceFilterTF = new JTextField(12);
 	private JTextField pcaFoldChangeFilterTF = new JTextField(12);
+	private JTextField pcaReporterIdsTF = new JTextField(20);
+	private JTextField pcaSampleIdsTF = new JTextField(20);
 	private ImagePanel pcaImage1 = new ImagePanel();
 	private ImagePanel pcaImage2 = new ImagePanel();
 	private ImagePanel pcaImage3 = new ImagePanel();
@@ -330,8 +332,7 @@ public class AnalysisSubmitter implements MessageListener {
 	  private void buildPCAGui(JTabbedPane tabbedPane) {
 		  JSplitPane pcaSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		  tabbedPane.addTab("Principal Component Analysis", pcaSplitPane);
-		  
-          
+		     
           JPanel pcaRequestPanel = new JPanel(new BorderLayout());
           JPanel pcaResponsePanel = new JPanel();
           pcaResponsePanel.setLayout(new BoxLayout(pcaResponsePanel, BoxLayout.Y_AXIS));
@@ -361,10 +362,11 @@ public class AnalysisSubmitter implements MessageListener {
           pcaParamPanel.add(pcaVarianceFilterTF);
           pcaParamPanel.add(pcaFoldChangeFilterTF);
           pcaReqCenterPanel.add(pcaParamPanel);
-          JTextField geneList = new JTextField(25);
-          geneList.setBorder(new TitledBorder("Gene List:"));
-          //pcaCenterPanel.add(new JLabel("Gene List"));
-          pcaReqCenterPanel.add(geneList);
+          
+          pcaReporterIdsTF.setBorder(new TitledBorder("Reporter List:"));
+          pcaReqCenterPanel.add(pcaReporterIdsTF);
+          pcaSampleIdsTF.setBorder(new TitledBorder("Sample List:"));
+          pcaReqCenterPanel.add(pcaSampleIdsTF);
           JButton pcaSubmitButton = new JButton("Submit");
           pcaButtonPanel.add(pcaSubmitButton);
           pcaRequestPanel.add(pcaButtonPanel, BorderLayout.SOUTH);
@@ -384,6 +386,34 @@ public class AnalysisSubmitter implements MessageListener {
 			       double foldChangeFilterValue = Double.parseDouble(pcaFoldChangeFilterTF.getText()); 
 			       req.setFoldChangeFilterValue(foldChangeFilterValue);
 			     }
+			     
+			     //load the reporter group if reporters are specified
+			     String reporterIds = pcaReporterIdsTF.getText();
+			     if ((reporterIds!= null)&&(reporterIds.trim().length() > 0)) {
+			       ReporterGroup reporterGroup = new ReporterGroup();
+			       StringTokenizer t = new StringTokenizer(reporterIds, ",");
+			       String reporterId;
+			       while (t.hasMoreTokens()) {
+			    	 reporterId = t.nextToken();
+			    	 reporterGroup.add(reporterId);
+			       }
+			       req.setReporterGroup(reporterGroup);
+			     }
+			    	 
+			     //load the sample group if samples are specified.
+			     //in the final application samples must always be specified
+			     String sampleIds = pcaSampleIdsTF.getText();
+			     if ((sampleIds!= null)&&(sampleIds.trim().length() > 0)) {
+			       SampleGroup sampleGroup = new SampleGroup("");
+			       StringTokenizer t = new StringTokenizer(sampleIds, ",");
+			       String sampleId;
+			       while (t.hasMoreTokens()) {
+			    	 sampleId = t.nextToken();
+			    	 sampleGroup.add(sampleId);
+			       }
+			       req.setSampleGroup(sampleGroup);
+			     }
+			     
 			     try {
 					sendRequest(req);
 			     }
@@ -457,20 +487,6 @@ public class AnalysisSubmitter implements MessageListener {
 		    
 		    submitter.buildAndShowGui();
 		    
-//		      req = new ClassComparisonAnalysisRequest(1234,i);
-//		      req.setNumDoubles(numDoubles);
-//		      for (int i=0; i < 3; i++) {
-//			      
-//			    	
-//			      System.out.println("AnalysisSubmitter sending request " + i);
-//			      
-//			      
-//			      Thread.sleep(20000);
-//		      }
-
-		    // Close down your publisher
-		    //submitter.close();
-
 		    } catch(Exception ex) {
 
 		    System.err.println(
@@ -482,7 +498,7 @@ public class AnalysisSubmitter implements MessageListener {
 	
 	private class CCtableModel extends AbstractTableModel {
 		  
-		  private String[] columnNames = {"Mean Group1", "Mean Group2", "Mean Diff", "Fold Change", "P-Value" }; 
+		  private String[] columnNames = {"Reporter Id", "Mean Group1", "Mean Group2", "Mean Diff", "Fold Change", "P-Value" }; 
 		  private List<ClassComparisonResultEntry> ccResults = new ArrayList<ClassComparisonResultEntry>();
 		  
 		  public CCtableModel() {
@@ -505,18 +521,21 @@ public class AnalysisSubmitter implements MessageListener {
 		  public Object getValueAt(int row, int col) {
 			    ClassComparisonResultEntry resultEntry = ccResults.get(row);
 		        if (col == 0) {
+		          return resultEntry.getReporterId();
+		        }
+			    if (col == 1) {
 		          return resultEntry.getMeanGrp1();
 		        }
-		        else if (col == 1) {
+		        else if (col == 2) {
 		          return resultEntry.getMeanGrp2();
 		        }
-		        else if (col == 2) {
+		        else if (col == 3) {
 		          return resultEntry.getMeanDiff();
 		        }
-		        else if (col == 3) {
+		        else if (col == 4) {
 		          return resultEntry.getFoldChange();
 		        }
-		        else if (col == 4) {
+		        else if (col == 5) {
 		          return resultEntry.getPvalue();
 		        }
 		        return null;
