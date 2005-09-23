@@ -15,6 +15,13 @@ public class SampleGroup extends HashSet<String> implements Serializable {
 
 	private String groupName;
 	
+	/**
+	 * Create a sample group with no group name and default initial size
+	 *
+	 */
+	public SampleGroup() {
+	  this("");
+	}
 	
 	/**
 	 * Create a sample group using the default initial size of 50.
@@ -36,4 +43,7 @@ public class SampleGroup extends HashSet<String> implements Serializable {
 	
 	public String getGroupName() { return groupName; }
 	
+	public void setGroupName(String name) {
+	  this.groupName = name;
+	}
 }
