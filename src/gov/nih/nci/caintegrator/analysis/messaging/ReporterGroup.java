@@ -16,8 +16,12 @@ public class ReporterGroup extends HashSet<String> implements Serializable {
 	private String groupName;
 	
 	
+	/**
+	 * Create a reporter group with no name and default initial size
+	 *
+	 */
 	public ReporterGroup() {
-	  this("", 50);
+	  this("");
 	}
 	
 	/**
@@ -38,6 +42,19 @@ public class ReporterGroup extends HashSet<String> implements Serializable {
 		this.groupName = groupName;
 	}
 	
+	/**
+	 * Get the reporter group name
+	 * @return
+	 */
 	public String getGroupName() { return groupName; }
 	
+	/**
+	 * Set the reporter group name
+	 * @param groupName
+	 */
+	public void setGroupName(String groupName) { 
+      this.groupName = groupName;
+	}
+	
 }
+  
