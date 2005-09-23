@@ -1,7 +1,6 @@
 package gov.nih.nci.caintegrator.analysis.messaging;
 
 import java.io.Serializable;
-import java.util.*;
 
 /**
  * This class represents a named group of samples. 
@@ -11,10 +10,8 @@ import java.util.*;
  * @author Michael A. Harris
  *
  */
-public class SampleGroup extends HashSet<String> implements Serializable {
+public class SampleGroup extends IdGroup implements Serializable {
 
-	private String groupName;
-	
 	/**
 	 * Create a sample group with no group name and default initial size
 	 *
@@ -37,13 +34,7 @@ public class SampleGroup extends HashSet<String> implements Serializable {
 	 * @param initialSize
 	 */
 	public SampleGroup(String groupName, int initialSize) {
-		super(initialSize);
-		this.groupName = groupName;
+		super(groupName, initialSize);
 	}
 	
-	public String getGroupName() { return groupName; }
-	
-	public void setGroupName(String name) {
-	  this.groupName = name;
-	}
 }
