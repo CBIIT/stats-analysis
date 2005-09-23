@@ -1,7 +1,6 @@
 package gov.nih.nci.caintegrator.analysis.messaging;
 
 import java.io.Serializable;
-import java.util.*;
 
 /**
  * This class represents a named group of reporters. 
@@ -11,10 +10,7 @@ import java.util.*;
  * @author Michael A. Harris
  *
  */
-public class ReporterGroup extends HashSet<String> implements Serializable {
-
-	private String groupName;
-	
+public class ReporterGroup extends IdGroup implements Serializable {
 	
 	/**
 	 * Create a reporter group with no name and default initial size
@@ -38,22 +34,7 @@ public class ReporterGroup extends HashSet<String> implements Serializable {
 	 * @param initialSize
 	 */
 	public ReporterGroup(String groupName, int initialSize) {
-		super(initialSize);
-		this.groupName = groupName;
-	}
-	
-	/**
-	 * Get the reporter group name
-	 * @return
-	 */
-	public String getGroupName() { return groupName; }
-	
-	/**
-	 * Set the reporter group name
-	 * @param groupName
-	 */
-	public void setGroupName(String groupName) { 
-      this.groupName = groupName;
+		super(groupName, initialSize);	
 	}
 	
 }
