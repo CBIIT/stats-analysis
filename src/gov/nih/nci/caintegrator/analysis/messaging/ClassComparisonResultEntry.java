@@ -8,6 +8,7 @@ package gov.nih.nci.caintegrator.analysis.messaging;
  */
 public class ClassComparisonResultEntry implements java.io.Serializable {
 
+	private String reporterId;
 	private double meanGrp1;
 	private double meanGrp2;
 	private double meanDiff;
@@ -56,6 +57,14 @@ public class ClassComparisonResultEntry implements java.io.Serializable {
 
 	public void setPvalue(double pvalue) {
 		this.pvalue = pvalue;
+	}
+
+	public String getReporterId() {
+		return reporterId;
+	}
+
+	public void setReporterId(String reporterId) {
+		this.reporterId = reporterId;
 	}
 
 }
