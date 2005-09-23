@@ -11,6 +11,8 @@ import java.util.*;
 public class ClassComparisonAnalysisResult extends AnalysisResult implements Serializable {
 
 	private List<ClassComparisonResultEntry> ccResultEntries;
+	private String group1Name = "";
+	private String group2Name = "";
 	
 	public ClassComparisonAnalysisResult(String sessionId, String taskId) {
 		super(sessionId, taskId);
@@ -33,6 +35,22 @@ public class ClassComparisonAnalysisResult extends AnalysisResult implements Ser
 
 	public void setResultEntries(List<ClassComparisonResultEntry> ccResultEntries) {
 		this.ccResultEntries = ccResultEntries;
+	}
+
+	public void setGroup1Name(String groupName) {
+	  this.group1Name = groupName;
+	}
+	
+	public void setGroup2Name(String groupName) {
+	  this.group2Name = groupName;
+	}
+
+	public String getGroup1Name() {
+		return group1Name;
+	}
+
+	public String getGroup2Name() {
+		return group2Name;
 	}
 
 }
