@@ -190,9 +190,9 @@ public class AnalysisProcessor implements MessageListener {
 	   * @param group
 	   * @return
 	   */
-	  private String getRgroupCmd(SampleGroup group) {
+	  private String getRgroupCmd(String rName, IdGroup group) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(group.getGroupName());
+		sb.append(rName);
     	sb.append(" <- c(");
     	String id;
     	for (Iterator i=group.iterator(); i.hasNext(); ) {
@@ -263,7 +263,7 @@ public class AnalysisProcessor implements MessageListener {
     	grp1Len = group1.size();
     	SampleGroup group2 = null;
     	String rCmd = null;
-    	rCmd = getRgroupCmd(group1);
+    	rCmd = getRgroupCmd(group1.getGroupName(), group1);
     	
     	doRvoidEval(c, rCmd);
     	
@@ -271,7 +271,7 @@ public class AnalysisProcessor implements MessageListener {
     	  //two group comparison
     	  group2 = groupList.get(1);
     	  grp2Len = group2.size();
-    	  rCmd = getRgroupCmd(group2);
+    	  rCmd = getRgroupCmd(group2.getGroupName(),group2);
     	  doRvoidEval(c, rCmd);
     	  
   	      //create the input data matrix using the sample groups
@@ -366,8 +366,7 @@ public class AnalysisProcessor implements MessageListener {
 			
 			if (pcaRequest.getSampleGroup()!= null) {
 			  //sample group should never be null when passed from middle tier
-			  String sampleIds = pcaRequest.getSampleGroup().getIdsAsCommaDelimitedString();
-			  String rCmd = "sampleIds <- c(" + sampleIds + ")";
+			  String rCmd = getRgroupCmd("sampleIds", pcaRequest.getSampleGroup());
 			  doRvoidEval(c, rCmd);
 			  rCmd = "pcaInputMatrix <- getSubmatrix.onegrp(pcaInputMatrix, sampleIds)";
 			  doRvoidEval(c, rCmd);
@@ -375,8 +374,7 @@ public class AnalysisProcessor implements MessageListener {
 			
 			
 			if (pcaRequest.getReporterGroup()!= null) {
-			  String reporterIds = pcaRequest.getReporterGroup().getIdsAsCommaDelimitedString();
-			  String rCmd = "reporterIds <- c(" + reporterIds + ")";
+			  String rCmd = getRgroupCmd("reporterIds", pcaRequest.getReporterGroup());
 			  doRvoidEval(c, rCmd);
 			  rCmd = "pcaInputMatrix <- getSubmatrix.rep(pcaInputMatrix, reporterIds)";
 			  doRvoidEval(c, rCmd);
