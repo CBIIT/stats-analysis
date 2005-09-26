@@ -359,7 +359,7 @@ public class AnalysisProcessor implements MessageListener {
 		Rconnection c = (Rconnection) connectionPool.checkOut();    
 		
 		//submit the pca request and get back the object
-		try {
+		
 			double[] pca1, pca2, pca3;
 			
 			doRvoidEval(c, "pcaInputMatrix <- dataMatrix");
@@ -383,18 +383,18 @@ public class AnalysisProcessor implements MessageListener {
 			if (pcaRequest.doVarianceFiltering()) {
 				double varianceFilterValue = pcaRequest.getVarianceFilterValue();
 				System.out.println("Processing principal component analysis request varianceFilterVal=" + varianceFilterValue);				
-				c.voidEval("pcaResult <- computePCAwithVariance(pcaInputMatrix," + varianceFilterValue + " )");
+				doRvoidEval(c,"pcaResult <- computePCAwithVariance(pcaInputMatrix," + varianceFilterValue + " )");
 			}
 			else if (pcaRequest.doFoldChangeFiltering()) {
 				double foldChangeFilterValue = pcaRequest.getFoldChangeFilterValue();
 				System.out.println("Processing principal component analysis request foldChangeFilterVal=" + foldChangeFilterValue);
-				c.voidEval("pcaResult <- computePCAwithFC(pcaInputMatrix," + foldChangeFilterValue + " )");
+				doRvoidEval(c,"pcaResult <- computePCAwithFC(pcaInputMatrix," + foldChangeFilterValue + " )");
 			}
 			
-			pca1 = c.eval("pcaMatrixX <- pcaResult$x[,1]").asDoubleArray();
-			pca2 = c.eval("pcaMatrixY <- pcaResult$x[,2]").asDoubleArray();
-			pca3 = c.eval("pcaMatrixZ <- pcaResult$x[,3]").asDoubleArray();
-			REXP exp =  c.eval("pcaLabels <- dimnames(pcaResult$x)");
+			pca1 = doREval(c,"pcaMatrixX <- pcaResult$x[,1]").asDoubleArray();
+			pca2 = doREval(c,"pcaMatrixY <- pcaResult$x[,2]").asDoubleArray();
+			pca3 = doREval(c,"pcaMatrixZ <- pcaResult$x[,3]").asDoubleArray();
+			REXP exp =  doREval(c,"pcaLabels <- dimnames(pcaResult$x)");
 			//System.out.println("Got back xVals.len=" + xVals.length + " yVals.len=" + yVals.length + " zVals.len=" + zVals.length);
 			Vector labels = (Vector) exp.asVector();
 			Vector sampleIds = ((REXP)(labels.get(0))).asVector();
@@ -414,11 +414,11 @@ public class AnalysisProcessor implements MessageListener {
 			result.setResultEntries(pcaResults);
 			
 			//generate the pca1 vs pca2 image
-			c.voidEval("maxComp1<-max(abs(pcaResult$x[,1]))");
-			c.voidEval("maxComp2<-max(abs(pcaResult$x[,2]))");
-			c.voidEval("maxComp3<-max(abs(pcaResult$x[,3]))");
-			c.voidEval("xrange<-c(-maxComp1,maxComp1)");
-			c.voidEval("yrange<-c(-maxComp2,maxComp2)");
+			doRvoidEval(c,"maxComp1<-max(abs(pcaResult$x[,1]))");
+			doRvoidEval(c,"maxComp2<-max(abs(pcaResult$x[,2]))");
+			doRvoidEval(c,"maxComp3<-max(abs(pcaResult$x[,3]))");
+			doRvoidEval(c,"xrange<-c(-maxComp1,maxComp1)");
+			doRvoidEval(c,"yrange<-c(-maxComp2,maxComp2)");
 			String plot1Cmd =  "plot(pcaResult$x[,1],pcaResult$x[,2],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component2\",xlab=\"PC1\",ylab=\"PC2\",pch=20)";
 			byte[] img1Code = getImageCode(c, pcaRequest, plot1Cmd);
 			result.setImage1Bytes(img1Code);
@@ -426,28 +426,22 @@ public class AnalysisProcessor implements MessageListener {
 			//generate the pca1 vs pca3 image
 			//  xrange<-c(-maxComp1,maxComp1)
 			//  yrange<-c(-maxComp1,maxComp1)
-			c.voidEval("yrange<-c(-maxComp3,maxComp3)");
+			doRvoidEval(c,"yrange<-c(-maxComp3,maxComp3)");
 			String plot2Cmd = "plot(pcaResult$x[,1],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component3\",xlab=\"PC1\",ylab=\"PC3\",pch=20)";
 			byte[] img2Code = getImageCode(c, pcaRequest, plot2Cmd); 
 			result.setImage2Bytes(img2Code); 
 			
 			
 			//generate the pca2 vs pca3 image
-			c.voidEval("xrange<-c(-maxComp2,maxComp2)");
-			c.voidEval("yrange<-c(-maxComp3,maxComp3)");	
+			doRvoidEval(c,"xrange<-c(-maxComp2,maxComp2)");
+			doRvoidEval(c,"yrange<-c(-maxComp3,maxComp3)");	
 			String plot3Cmd =  "plot(pcaResult$x[,2],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component2 Vs Component3\",xlab=\"PC2\",ylab=\"PC3\",pch=20)";
 			byte[] img3Code = getImageCode(c, pcaRequest, plot3Cmd);
 			result.setImage3Bytes(img3Code);
 			
 			sendResult(result);
-			
-		} catch (RSrvException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally {
-		   connectionPool.checkIn(c);
-		}
+		    connectionPool.checkIn(c);	
+		
 	  }
 	  
 	  public String getHostName() {
@@ -479,20 +473,20 @@ public class AnalysisProcessor implements MessageListener {
 	      String fileName = "image_" + request.getSessionId() + "_" + request.getTaskId() + ".bmp";
 	      REXP xp = null;
 	
-		  xp = c.eval("try(bitmap(\"" + fileName + "\"))");
+		  xp = doREval(c,"try(bitmap(\"" + fileName + "\"))");
 		  
 	      if (xp.asString()!=null) { // if there's a string then we have a problem, R sent an error
 	        System.out.println("Can't pen bitmat graphics device:\n"+xp.asString());
 	        // this is analogous to 'warnings', but for us it's sufficient to get just the 1st warning
-	        REXP w=c.eval("if (exists(\"last.warning\") && length(last.warning)>0) names(last.warning)[1] else 0");
+	        REXP w=doREval(c,"if (exists(\"last.warning\") && length(last.warning)>0) names(last.warning)[1] else 0");
 	        if (w.asString()!=null) System.out.println(w.asString());
 	              return new byte[0];
 	      }
 	         
 	               
 	       // ok, so the device should be fine - let's plot
-	       c.voidEval(plotCmd);
-	       c.voidEval("dev.off()");
+	       doRvoidEval(c,plotCmd);
+	       doRvoidEval(c,"dev.off()");
 	          
 		    // the file should be ready now, so let's read (ok this isn't pretty, but hey, this ain't no beauty contest *grin* =)
 	          // we read in chunks of bufSize (64k by default) and store the resulting byte arrays in a vector
@@ -540,10 +534,7 @@ public class AnalysisProcessor implements MessageListener {
       catch (IOException ex) {
         ex.printStackTrace(System.out);
       }
-      catch (RSrvException ex2) {
-    	ex2.printStackTrace(System.out);
-      }
-		
+      
 	  return imgCode;
 	    
 	}
