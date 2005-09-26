@@ -74,3 +74,18 @@ myttest <- function(datmat, m1=length(grp1ids), m2=length(grp21ids), var.equal=T
     rownames(result) <- rownames(datmat)
   return(result)
 }
+
+# raw.result<- myttest(datmat,length(grp1ids), length(grp21ids))
+# return: result$mean1,result$mean2,result$mean.dif,result$fc,result$pval
+# call FDR.ComparisonAdjustment.R or FWER.ComparisonAdjustment.R 
+
+# Identify differentially expressed genes based on absolute fold change>=2 and pvalue<=0.001
+
+mydiferentiallygenes <- function(datmat,raw.result,cons1=2, cons2=0.001) {
+sel <- (raw.result$fc >= cons1) & (raw.result$pval <=cons2)
+filtered.result <- raw.result[sel,]
+return(filtered.result)
+}
+
+# Call function
+# dif.exp.gene <- mydiferentiallygenes(datmat,raw.result,2,0.001)

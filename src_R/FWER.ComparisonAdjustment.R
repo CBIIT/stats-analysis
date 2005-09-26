@@ -10,7 +10,12 @@
 #       Multiple comparison adjustment:
 #       Family-Wise Type-I Error Rate (FWER): Bonferroni
 
-adjustP.Bonferroni <- function(pval) {
-adjustP <- p.adjust(pval, "bonferroni", length(pval))
-return(adjustP)
+adjustP.Bonferroni <- function(raw.result) {
+adjustP <- p.adjust(raw.result$pval, "bonferroni", length(raw.result$pval))
+adjust.result <- cbind(raw.result[,1:4],adjustP)
+return(adjust.result)
 }
+
+# adjust.result <- adjustP.Bonferroni(raw.result)
+# return adjust.result
+# call DifferentiallyGenesIdentified.R

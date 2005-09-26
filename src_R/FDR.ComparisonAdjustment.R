@@ -10,7 +10,12 @@
 #       Multiple comparison adjustment:
 #       False Discovery Rate (FDR): Benjamini-Hochberg
 
-adjustP.Benjamini.Hochberg <- function(pval) {
-adjustP <- p.adjust(pval, "BH", length(pval))
-return(adjustP)
+adjustP.Benjamini.Hochberg <- function(raw.result) {
+adjustP <- p.adjust(raw.result$pval, "BH", length(raw.result$pval))
+adjust.result <- cbind(raw.result[,1:4],adjustP)
+return(adjust.result)
 }
+
+# adjust.result <- adjustP.Benjamini.Hochberg(raw.result)
+# return adjust.result
+# call DifferentiallyGenesIdentified.R
