@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.analysis.server;
 import gov.nih.nci.caintegrator.analysis.messaging.RserveConnectionPool;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
+import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
 import org.rosuda.JRclient.RFileInputStream;
 import org.rosuda.JRclient.RSrvException;
@@ -360,8 +361,8 @@ public class AnalysisProcessor implements MessageListener {
 		
 		//submit the pca request and get back the object
 		
-			double[] pca1, pca2, pca3;
-			
+		double[] pca1, pca2, pca3;
+		try {
 			doRvoidEval(c, "pcaInputMatrix <- dataMatrix");
 			
 			if (pcaRequest.getSampleGroup()!= null) {
@@ -389,6 +390,12 @@ public class AnalysisProcessor implements MessageListener {
 				double foldChangeFilterValue = pcaRequest.getFoldChangeFilterValue();
 				System.out.println("Processing principal component analysis request foldChangeFilterVal=" + foldChangeFilterValue);
 				doRvoidEval(c,"pcaResult <- computePCAwithFC(pcaInputMatrix," + foldChangeFilterValue + " )");
+			}
+			
+			//check to make sure at least 3 components came back 
+			int numComponents = doREval(c,"length(pcaResult$x[1,])").asInt();
+			if (numComponents < 3) {
+			  throw new AnalysisServerException("PCA result has less than 3 components.");
 			}
 			
 			pca1 = doREval(c,"pcaMatrixX <- pcaResult$x[,1]").asDoubleArray();
@@ -440,11 +447,22 @@ public class AnalysisProcessor implements MessageListener {
 			result.setImage3Bytes(img3Code);
 			
 			sendResult(result);
-		    connectionPool.checkIn(c);	
+		}
+		catch (AnalysisServerException ex) {
+			sendException(ex);
+		}
+		finally {
+		    connectionPool.checkIn(c);
+		}
 		
 	  }
 	  
-	  public String getHostName() {
+	  private void sendException(AnalysisServerException ex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getHostName() {
         String hostname = "";
 	    try {
 	        InetAddress addr = InetAddress.getLocalHost();
