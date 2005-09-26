@@ -10,7 +10,7 @@
     GeneFilterWithFC <- function(datmat, cons=3, ...) {
     tmp <- apply(datmat, 1, quantile, c(.05, .95) , na.rm=TRUE)
     sum(2^(tmp[2,]-tmp[1,])>cons) 
-    filteredDataMatrix <- datmat[2^(tmp[2,]-tmp[1,])>cons, ]   
+    filteredDataMatrix <- as.matrix(datmat[2^(tmp[2,]-tmp[1,])>cons, ])
     return(filteredDataMatrix)
     }   
 
@@ -27,7 +27,7 @@
     GeneFilterWithVariance <- function(datmat, cons=0.70) {
     tmp1 <- apply(datmat, 1, var, na.rm=TRUE)
     tmp2 <- quantile(tmp1,cons)
-    filteredDataMatrix <- datmat[tmp1>=tmp2,]
+    filteredDataMatrix <- as.matrix(datmat[tmp1>=tmp2,])
     return(filteredDataMatrix)
     }
     
