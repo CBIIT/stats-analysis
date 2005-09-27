@@ -17,24 +17,26 @@ public class ClassComparisonAnalysisRequest extends AnalysisRequest implements j
 
 	public enum StatisticalMethodType {TTest, Wilcox };
 	
-	private StatisticalMethodType statisticalMethod = StatisticalMethodType.TTest;
-	private List<SampleGroup> sampleGroups = new ArrayList<SampleGroup>();
+	public enum ComparisonAdjustmentMethod {NONE, FWER, FDR };
+	
+	public enum ArrayPlatformType {AFFYMETRICS, CDNA};
 
+	private double foldChangeThreshold = Double.NEGATIVE_INFINITY;
+	
+	private double pValueThreshold = Double.POSITIVE_INFINITY;
+	
+	private ArrayPlatformType arrayPlatform = ArrayPlatformType.AFFYMETRICS;
+	
+	private ComparisonAdjustmentMethod comparisonAdjustmentMethod = ComparisonAdjustmentMethod.NONE;
+	
+	private StatisticalMethodType statisticalMethod = StatisticalMethodType.TTest;
+	
+	private SampleGroup group1 = null;
+	
+	private SampleGroup group2 = null;
 	
 	public ClassComparisonAnalysisRequest(String sessionid, String taskId) {
 		super(sessionid, taskId);
-	}
-	
-	public void addSampleGroup(SampleGroup group) {
-	  sampleGroups.add(group);
-	}
-	
-	/**
-	 * Get the list of sample groups for this request.
-	 * @return
-	 */
-	public List<SampleGroup> getSampleGroups() {
-	  return sampleGroups;
 	}
 	
 	public String toString() {
@@ -49,5 +51,62 @@ public class ClassComparisonAnalysisRequest extends AnalysisRequest implements j
 		this.statisticalMethod = statisticalMethod;
 	}
 
+	public ArrayPlatformType getArrayPlatform() {
+		return arrayPlatform;
+	}
+
+	public void setArrayPlatform(ArrayPlatformType arrayPlatform) {
+		this.arrayPlatform = arrayPlatform;
+	}
+
+	public ComparisonAdjustmentMethod getMultiComparisonAdjustmentMethod() {
+		return comparisonAdjustmentMethod;
+	}
+
+	public void setMultiComparisonAdjustmentMethod(
+			ComparisonAdjustmentMethod multiComparisonAdjustment) {
+		this.comparisonAdjustmentMethod = multiComparisonAdjustment;
+	}
+
+	public ComparisonAdjustmentMethod getComparisonAdjustmentMethod() {
+		return comparisonAdjustmentMethod;
+	}
+
+	public void setComparisonAdjustmentMethod(
+			ComparisonAdjustmentMethod comparisonAdjustmentMethod) {
+		this.comparisonAdjustmentMethod = comparisonAdjustmentMethod;
+	}
+
+	public double getFoldChangeThreshold() {
+		return foldChangeThreshold;
+	}
+
+	public void setFoldChangeThreshold(double foldChangeThreshold) {
+		this.foldChangeThreshold = foldChangeThreshold;
+	}
+
+	public double getPValueThreshold() {
+		return pValueThreshold;
+	}
+
+	public void setPValueThreshold(double valueThreshold) {
+		pValueThreshold = valueThreshold;
+	}
+
+	public SampleGroup getGroup1() {
+		return group1;
+	}
+
+	public void setGroup1(SampleGroup group1) {
+		this.group1 = group1;
+	}
+
+	public SampleGroup getGroup2() {
+		return group2;
+	}
+
+	public void setGroup2(SampleGroup group2) {
+		this.group2 = group2;
+	}
 
 }

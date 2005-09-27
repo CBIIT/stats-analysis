@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.analysis.test;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
+import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -39,6 +40,8 @@ import javax.swing.table.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import java.text.DecimalFormat;
+
 /**
  * This class tests submitting a request to the analysis server 
  * via JMS
@@ -74,6 +77,9 @@ public class AnalysisSubmitter implements MessageListener {
 	private JTextField ccGroup1Name = new JTextField(10);
 	private JTextField ccGroup2Name = new JTextField(10);
 	private JComboBox  ccStatisticalMethodCombo = new JComboBox();
+	private JComboBox  ccMultiComparisonAdjCombo = new JComboBox();
+	private JTextField ccFoldChangeFilterTF = new JTextField(12);
+	private JTextField ccPvalueFilterTF = new JTextField(12);
 	  /**
 	   * Topic session, hold on to this so you may close it.
 	   * Also used to create messages.
@@ -153,7 +159,10 @@ public class AnalysisSubmitter implements MessageListener {
 
 	      //String msg = ((TextMessage)m).getText();
 	      ObjectMessage msg = (ObjectMessage) m;
-	      AnalysisResult result = (AnalysisResult) msg.getObject();
+	      //AnalysisResult result = (AnalysisResult) msg.getObject();
+	      Object result = msg.getObject();
+	      
+	      
 	      //AnalysisRequest request = (AnalysisRequest) requestMap.get(new Integer(result.getTaskId()));
 	      //request.setRequestCompleteTime(System.currentTimeMillis());
 	      //long messageRTtime = request.getElapsedTime() - result.getResultObjCreateTime();
@@ -169,6 +178,10 @@ public class AnalysisSubmitter implements MessageListener {
 	      else if (result instanceof PrincipalComponentAnalysisResult) {
 	    	processPCAresult((PrincipalComponentAnalysisResult)result);
 	      }
+	      else if (result instanceof AnalysisServerException) {
+	        handleException((AnalysisServerException)result);
+	      }
+	    	  
 	      
 	      
 	    } catch(JMSException ex) {
@@ -180,7 +193,11 @@ public class AnalysisSubmitter implements MessageListener {
 
 	  }
 	  
-	  private void processPCAresult(PrincipalComponentAnalysisResult result) {
+	private void handleException(AnalysisServerException exception) {
+		 JOptionPane.showMessageDialog(null, exception.getMessage(), "AnalysisServerException", JOptionPane.ERROR_MESSAGE);
+	}
+
+	private void processPCAresult(PrincipalComponentAnalysisResult result) {
 		  System.out.println("Proccessing PCA result=" + result);
 		  pcaTableModel.setPCAdata(result.getResultEntries());
 		  
@@ -261,20 +278,20 @@ public class AnalysisSubmitter implements MessageListener {
 			  SampleGroup group1 = new SampleGroup(ccGroup1Name.getText());
 			  StringTokenizer t1 = new StringTokenizer(ccSampleGroup1Ids.getText(), ",");
 			  while  (t1.hasMoreTokens()) {
-			    String sampleId = t1.nextToken();
+			    String sampleId = t1.nextToken().trim();
 				group1.add(sampleId);
 			  }
-			  ccRequest.addSampleGroup(group1);
+			  ccRequest.setGroup1(group1);
 			  SampleGroup group2 = null;
 			  String group2Name = ccGroup2Name.getText();
 			  if ((group2Name != null)&&(group2Name.trim().length() > 0)) {
 			     group2 = new SampleGroup(group2Name);
 			     StringTokenizer t2 = new StringTokenizer(ccSampleGroup2Ids.getText(), ",");
 			     while (t2.hasMoreTokens()) {
-			       String sampleId = t2.nextToken();
+			       String sampleId = t2.nextToken().trim();
 			       group2.add(sampleId);
 			     }
-			     ccRequest.addSampleGroup(group2);
+			     ccRequest.setGroup2(group2);
 			  }
 			  try {
 				sendRequest(ccRequest);
@@ -286,6 +303,8 @@ public class AnalysisSubmitter implements MessageListener {
           });
           
           ccButtonPanel.add(ccSubmitButton);
+          
+         
           ccRequestPanel.add(ccButtonPanel, BorderLayout.SOUTH);
           JPanel ccRequestCenterPanel = new JPanel();
           BoxLayout bl = new BoxLayout(ccRequestCenterPanel, BoxLayout.Y_AXIS);
@@ -304,6 +323,20 @@ public class AnalysisSubmitter implements MessageListener {
           ccStatisticalMethodCombo.addItem(ClassComparisonAnalysisRequest.StatisticalMethodType.Wilcox);
           ccStatisticalMethodCombo.setBorder(new TitledBorder("Statistical Method"));
           ccRequestCenterPanel.add(ccStatisticalMethodCombo);
+          
+          ccMultiComparisonAdjCombo.addItem(ClassComparisonAnalysisRequest.ComparisonAdjustmentMethod.NONE);
+          ccMultiComparisonAdjCombo.addItem(ClassComparisonAnalysisRequest.ComparisonAdjustmentMethod.FDR);
+          ccMultiComparisonAdjCombo.addItem(ClassComparisonAnalysisRequest.ComparisonAdjustmentMethod.FWER);
+          ccMultiComparisonAdjCombo.setBorder(new TitledBorder("Multiple Comparison Adjustment"));
+          ccRequestCenterPanel.add(ccMultiComparisonAdjCombo);
+          
+          ccFoldChangeFilterTF.setBorder(new TitledBorder("Fold Change Filter Value"));
+          ccFoldChangeFilterTF.setText("2");
+          ccRequestCenterPanel.add(ccFoldChangeFilterTF);
+          
+          ccPvalueFilterTF.setBorder(new TitledBorder("P Value Filter Value"));
+          ccPvalueFilterTF.setText("0.001");
+          ccRequestCenterPanel.add(ccPvalueFilterTF);
           
           JSplitPane ccResponseSP = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
           JTable ccResultTable = new JTable(ccTableModel);
@@ -394,7 +427,7 @@ public class AnalysisSubmitter implements MessageListener {
 			       StringTokenizer t = new StringTokenizer(reporterIds, ",");
 			       String reporterId;
 			       while (t.hasMoreTokens()) {
-			    	 reporterId = t.nextToken();
+			    	 reporterId = t.nextToken().trim();
 			    	 reporterGroup.add(reporterId);
 			       }
 			       req.setReporterGroup(reporterGroup);
@@ -408,7 +441,7 @@ public class AnalysisSubmitter implements MessageListener {
 			       StringTokenizer t = new StringTokenizer(sampleIds, ",");
 			       String sampleId;
 			       while (t.hasMoreTokens()) {
-			    	 sampleId = t.nextToken();
+			    	 sampleId = t.nextToken().trim();
 			    	 sampleGroup.add(sampleId);
 			       }
 			       req.setSampleGroup(sampleGroup);
@@ -498,8 +531,11 @@ public class AnalysisSubmitter implements MessageListener {
 	
 	private class CCtableModel extends AbstractTableModel {
 		  
-		  private String[] columnNames = {"Reporter Id", "Mean Group1", "Mean Group2", "Mean Diff", "Fold Change", "P-Value" }; 
+		  private String[] columnNames = {"Reporter Id", "Mean Group1", "Mean Group2", "Mean Diff", "Fold Change", "P-Value" };
+		  private String group1Name = "Group 1";
+		  private String group2Name = "Group 2";
 		  private List<ClassComparisonResultEntry> ccResults = new ArrayList<ClassComparisonResultEntry>();
+		  private DecimalFormat fmt = new DecimalFormat("0.###E0");
 		  
 		  public CCtableModel() {
 			
@@ -524,25 +560,41 @@ public class AnalysisSubmitter implements MessageListener {
 		          return resultEntry.getReporterId();
 		        }
 			    if (col == 1) {
-		          return resultEntry.getMeanGrp1();
+		          return fmt.format(resultEntry.getMeanGrp1());
 		        }
 		        else if (col == 2) {
-		          return resultEntry.getMeanGrp2();
+		          return fmt.format(resultEntry.getMeanGrp2());
 		        }
 		        else if (col == 3) {
-		          return resultEntry.getMeanDiff();
+		          return fmt.format(resultEntry.getMeanDiff());
 		        }
 		        else if (col == 4) {
-		          return resultEntry.getFoldChange();
+		          return fmt.format(resultEntry.getFoldChange());
 		        }
 		        else if (col == 5) {
-		          return resultEntry.getPvalue();
+		          return fmt.format(resultEntry.getPvalue());
 		        }
 		        return null;
 		  }
 		  
 		  public boolean isCellEditable(int row, int col)
 		        { return false; }
+
+		  public String getGroup1Name() {
+			return group1Name;
+		  }
+
+		  public void setGroup1Name(String group1Name) {
+			this.group1Name = group1Name;
+		  }
+
+		  public String getGroup2Name() {
+			return group2Name;
+		  }
+
+		  public void setGroup2Name(String group2Name) {
+			this.group2Name = group2Name;
+		  }
 		    
 		   
 		  
@@ -552,6 +604,7 @@ public class AnalysisSubmitter implements MessageListener {
 		  
 		  private String[] columnNames = {"SampleId", "PC1", "PC2", "PC3" }; 
 		  private List<PCAresultEntry> pcaResults = new ArrayList<PCAresultEntry>();
+		  
 		  
 		  public PCAtableModel() {
 			
