@@ -318,28 +318,35 @@ public class AnalysisProcessor implements MessageListener {
 	    	}
 	    	
 	    	//do filtering
+	    	double foldChangeThreshold = ccRequest.getFoldChangeThreshold();
+	    	double pValueThreshold = ccRequest.getPvalueThreshold();
 	    	ComparisonAdjustmentMethod adjMethod = ccRequest.getComparisonAdjustmentMethod();
 	    	if (adjMethod == ComparisonAdjustmentMethod.NONE) {
 	    	  //get differentially expressed reporters using 
 	    	  //unadjusted Pvalue
+	    	  	
+	    	  //shouldn't need to pass in ccInputMatrix	
+	    	  rCmd = "ccResult  <- mydiferentiallygenes(ccResult," + foldChangeThreshold + "," + pValueThreshold + ")";
+	    	  doRvoidEval(c,rCmd);
 	    	}
 	    	else if (adjMethod == ComparisonAdjustmentMethod.FDR) {
 	    	  //do adjustment
-	    		
+	    	  rCmd = "adjust.result <- adjustP.Benjamini.Hochberg(ccResult)";
+	    	  doRvoidEval(c,rCmd);
 	    	  //get differentially expressed reporters using adjusted Pvalue
+	    	  rCmd = "ccResult  <- mydiferentiallygenes.adjustP(adjust.result," + foldChangeThreshold + "," + pValueThreshold + ")";
+		      doRvoidEval(c,rCmd);	
 	    	}
 	    	else if (adjMethod == ComparisonAdjustmentMethod.FWER) {
-	    	
+	    	  //do adjustment
+	    	  rCmd =  "adjust.result <- adjustP.Bonferroni(ccResult)";	
+	    	  doRvoidEval(c,rCmd);	
 	    	  //get differentially expresseed reporters using adjusted Pvalue
+	    	  rCmd = "ccResult  <- mydiferentiallygenes.adjustP(adjust.result," + foldChangeThreshold + "," + pValueThreshold + ")";
+			  doRvoidEval(c,rCmd);
 	    	}
 	    	
-	    	
-	    	
-	    	
 	    	//get the results and send
-	    	
-	    	
-	    	
 	    	
 	    	double[] meanGrp1 = doREval(c, "mean1 <- ccResult[,1]").asDoubleArray();
 	    	double[] meanGrp2 = doREval(c, "mean2 <- ccResult[,2]").asDoubleArray();
@@ -480,8 +487,6 @@ public class AnalysisProcessor implements MessageListener {
 			result.setImage1Bytes(img1Code);
 			
 			//generate the pca1 vs pca3 image
-			//  xrange<-c(-maxComp1,maxComp1)
-			//  yrange<-c(-maxComp1,maxComp1)
 			doRvoidEval(c,"yrange<-c(-maxComp3,maxComp3)");
 			String plot2Cmd = "plot(pcaResult$x[,1],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component3\",xlab=\"PC1\",ylab=\"PC3\",pch=20)";
 			byte[] img2Code = getImageCode(c, pcaRequest, plot2Cmd); 
@@ -616,16 +621,7 @@ public class AnalysisProcessor implements MessageListener {
              
 		  try {
 		    System.out.println("AnalysisProcessor sending result for sessionId=" + result.getSessionId() + " taskId=" + result.getTaskId());
-		    //long createStartTime = System.currentTimeMillis();
-			//ClassComparisonAnalysisResult ccResult = new ClassComparisonAnalysisResult(result.getSessionId(),result.getTaskId(), request.getNumDoubles());
-			//ccResult.setProcessorHost(System.getProperty("hostname"));
-			
-		    // Create a message
-		    
-		    //long createElapsedTime = System.currentTimeMillis() - createStartTime;
-		    //ccResult.setResultObjCreateTime(createElapsedTime);
-		    ObjectMessage msg = queueSession.createObjectMessage(result); 
-		    // Publish the message
+			ObjectMessage msg = queueSession.createObjectMessage(result); 
 		    resultSender.send(msg, DeliveryMode.NON_PERSISTENT, Message.DEFAULT_PRIORITY, Message.DEFAULT_TIME_TO_LIVE);
 		  }
 		  catch (JMSException ex) {
@@ -650,18 +646,9 @@ public class AnalysisProcessor implements MessageListener {
 	  public static void main(String[] args) {
 
 	    try {
-
-	      // Create the AnalysisProcessor, giving it the name of the
-	      // TopicConnection Factory and the Topic destination to use in
-	      // lookup.
 	      AnalysisProcessor processor = new AnalysisProcessor(
 	        // Name of ConnectionFactory
 	        "ConnectionFactory");
-	      //PrincipalComponentAnalysisRequest pcaReq = new PrincipalComponentAnalysisRequest(1234, 123);
-	      //processor.processPrincipalComponentAnalysisRequest(pcaReq);
-	      
-	      
-	        
 	    } catch(Exception ex) {
 
 	      System.err.println(
