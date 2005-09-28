@@ -555,7 +555,7 @@ public class AnalysisProcessor implements MessageListener {
 	   byte[] imgCode = new byte[0];
       
 	   try {	  	 
-	      String fileName = "image_" + request.getSessionId() + "_" + request.getTaskId() + ".bmp";
+	      String fileName = "image_" + request.getSessionId() + "_" + request.getTaskId() + "_" + System.currentTimeMillis() + ".bmp";
 	      REXP xp = null;
 	
 		  xp = doREval(c,"try(bitmap(\"" + fileName + "\"))");
@@ -612,13 +612,14 @@ public class AnalysisProcessor implements MessageListener {
 	          // ... and close the file ... and remove it - we have what we need :)
 	          
 	          is.close();
-			
-		
-			  //c.removeFile(fileName);
+			  c.removeFile(fileName);
       }
       catch (IOException ex) {
         ex.printStackTrace(System.out);
       }
+      catch (RSrvException e) {
+			e.printStackTrace(System.out);
+	  }
       
 	  return imgCode;
 	    
