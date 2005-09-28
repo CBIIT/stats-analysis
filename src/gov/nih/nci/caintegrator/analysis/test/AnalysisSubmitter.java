@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.analysis.test;
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 import static gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonAnalysisRequest.*;
+import static gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringAnalysisRequest.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -61,8 +62,10 @@ public class AnalysisSubmitter implements MessageListener {
 	private JPanel pcaImages = new JPanel();
 	private int pcaCounter = 1;
 	private int ccCounter = 1;
+	private int hcCounter = 1;
 	private QueueConnection queueConnection;
 
+	//pca
 	private JTextField pcaVarianceFilterTF = new JTextField(12);
 	private JTextField pcaFoldChangeFilterTF = new JTextField(12);
 	private JTextField pcaReporterIdsTF = new JTextField(20);
@@ -82,6 +85,12 @@ public class AnalysisSubmitter implements MessageListener {
 	private JTextField ccFoldChangeFilterTF = new JTextField(12);
 	private JTextField ccPvalueFilterTF = new JTextField(12);
 	private JComboBox ccArrayPlatformCombo = new JComboBox();
+	
+	//hc 
+	private JTextField hcFoldChangeFilterTF = new JTextField(12);
+	private JTextField hcReporterIdsTF = new JTextField(20);
+	private DistanceMatrixType hcDistanceMatrix = DistanceMatrixType.Correlation;
+	
 	  /**
 	   * Topic session, hold on to this so you may close it.
 	   * Also used to create messages.
@@ -375,6 +384,7 @@ public class AnalysisSubmitter implements MessageListener {
 	}
 
 	private void buildHCAGui(JTabbedPane tabbedPane) {
+		
 		 JSplitPane hcaSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		 tabbedPane.addTab("Hierarchical Clustering", hcaSplitPane);
 		 
@@ -386,8 +396,27 @@ public class AnalysisSubmitter implements MessageListener {
 		 
          JPanel hcaButtonPanel = new JPanel();
          JButton hcaSubmitButton = new JButton("Submit");
+         
+         hcaSubmitButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				HierarchicalClusteringAnalysisRequest hcRequest = new HierarchicalClusteringAnalysisRequest("234578907654", Integer.toString(hcCounter++));
+				
+				//load the request
+				
+				//send the request
+				try {
+					sendRequest(hcRequest);
+				} catch (JMSException e1) {
+					e1.printStackTrace(System.out);
+				}
+			}
+        	 
+         });
+         
          hcaButtonPanel.add(hcaSubmitButton);
          hcaRequestPanel.add(hcaButtonPanel, BorderLayout.SOUTH);
+         
 	}
 	  
 	  private void buildPCAGui(JTabbedPane tabbedPane) {

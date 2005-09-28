@@ -6,6 +6,8 @@ package gov.nih.nci.caintegrator.analysis.messaging;
  */
 public class HierarchicalClusteringAnalysisRequest extends AnalysisRequest implements java.io.Serializable {
 
+	public enum DistanceMatrixType {Correlation, Euclidean };
+	
 	public HierarchicalClusteringAnalysisRequest(String sessionId, String taskId) {
 		super(sessionId, taskId);
 		
