@@ -56,6 +56,8 @@ public class AnalysisProcessor implements MessageListener {
 //	  
 //		
 //	}
+	
+	public static String version = "2.5";
 	private boolean debugRcommands = false;
 	private RserveConnectionPool connectionPool;
 	private static String JBossMQ_locationIp = "156.40.128.136:1099";  //my machine	
@@ -144,11 +146,10 @@ public class AnalysisProcessor implements MessageListener {
 		
 		queueConnection.start();
 		
-	    System.out.println("AnalysisProcessor: successfully started queue connection");
-    
-	    
 	    //initialize Rserver connection
 	    connectionPool = new RserveConnectionPool(numRserveConnections, RserverIp, RdataFileName);
+	    
+	    System.out.println("AnalysisProcessor version=" + version +  " successfully initialized. Now listening for requests...");
 
 	  }
 
@@ -317,6 +318,9 @@ public class AnalysisProcessor implements MessageListener {
 	    		doRvoidEval(c, rCmd);
 	    	}
 	    	
+	    	//Create the result to return 
+	    	ClassComparisonAnalysisResult ccResult = new ClassComparisonAnalysisResult(ccRequest.getSessionId(), ccRequest.getTaskId());
+	    	
 	    	//do filtering
 	    	double foldChangeThreshold = ccRequest.getFoldChangeThreshold();
 	    	double pValueThreshold = ccRequest.getPvalueThreshold();
@@ -328,6 +332,7 @@ public class AnalysisProcessor implements MessageListener {
 	    	  //shouldn't need to pass in ccInputMatrix	
 	    	  rCmd = "ccResult  <- mydiferentiallygenes(ccResult," + foldChangeThreshold + "," + pValueThreshold + ")";
 	    	  doRvoidEval(c,rCmd);
+	    	  ccResult.setPvaluesAreAdjusted(false);
 	    	}
 	    	else if (adjMethod == ComparisonAdjustmentMethod.FDR) {
 	    	  //do adjustment
@@ -336,6 +341,7 @@ public class AnalysisProcessor implements MessageListener {
 	    	  //get differentially expressed reporters using adjusted Pvalue
 	    	  rCmd = "ccResult  <- mydiferentiallygenes.adjustP(adjust.result," + foldChangeThreshold + "," + pValueThreshold + ")";
 		      doRvoidEval(c,rCmd);	
+		      ccResult.setPvaluesAreAdjusted(true);
 	    	}
 	    	else if (adjMethod == ComparisonAdjustmentMethod.FWER) {
 	    	  //do adjustment
@@ -344,6 +350,7 @@ public class AnalysisProcessor implements MessageListener {
 	    	  //get differentially expresseed reporters using adjusted Pvalue
 	    	  rCmd = "ccResult  <- mydiferentiallygenes.adjustP(adjust.result," + foldChangeThreshold + "," + pValueThreshold + ")";
 			  doRvoidEval(c,rCmd);
+			  ccResult.setPvaluesAreAdjusted(true);
 	    	}
 	    	
 	    	//get the results and send
@@ -375,7 +382,7 @@ public class AnalysisProcessor implements MessageListener {
 	          resultEntries.add(resultEntry);
 	    	}
 	    	
-	    	ClassComparisonAnalysisResult ccResult = new ClassComparisonAnalysisResult(ccRequest.getSessionId(), ccRequest.getTaskId());
+	    	
 	    	ccResult.setResultEntries(resultEntries);
 	    	
 	    	ccResult.setGroup1(group1);

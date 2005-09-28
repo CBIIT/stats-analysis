@@ -227,7 +227,7 @@ public class AnalysisSubmitter implements MessageListener {
 	  
 	  private void processCCresult(ClassComparisonAnalysisResult result) {
 		 System.out.println("Processiong CC result=" + result);  
-		 ccTableModel.setCCdata(result.getResultEntries()); 
+		 ccTableModel.setCCdata(result); 
 	  }
 	
 	/**
@@ -339,17 +339,31 @@ public class AnalysisSubmitter implements MessageListener {
           ccComparisonAdjCombo.addItem(ComparisonAdjustmentMethod.FWER);
           ccComparisonAdjCombo.setBorder(new TitledBorder("Multiple Comparison Adjustment"));
           ccRequestCenterPanel.add(ccComparisonAdjCombo);
+          ccComparisonAdjCombo.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+			  ComparisonAdjustmentMethod adjMethod = (ComparisonAdjustmentMethod)ccComparisonAdjCombo.getSelectedItem();
+			  TitledBorder border = (TitledBorder) ccPvalueFilterTF.getBorder();
+			  if (adjMethod == ComparisonAdjustmentMethod.NONE) {
+			    border.setTitle("P-Value Filter Value");
+			  }
+			  else {
+				border.setTitle("Adjusted P-Value Filter Value");
+			  }
+			}  
+          });
           
           ccFoldChangeFilterTF.setBorder(new TitledBorder("Fold Change Filter Value"));
           ccFoldChangeFilterTF.setText("2");
           ccRequestCenterPanel.add(ccFoldChangeFilterTF);
           
-          ccPvalueFilterTF.setBorder(new TitledBorder("P Value Filter Value"));
+          ccPvalueFilterTF.setBorder(new TitledBorder("P-Value Filter Value"));
           ccPvalueFilterTF.setText("0.001");
           ccRequestCenterPanel.add(ccPvalueFilterTF);
           
           ccArrayPlatformCombo.addItem(ArrayPlatformType.AFFYMETRICS);
           ccArrayPlatformCombo.addItem(ArrayPlatformType.CDNA);
+          ccArrayPlatformCombo.setBorder(new TitledBorder("Array Platform"));
           ccRequestCenterPanel.add(ccArrayPlatformCombo);
           
           JSplitPane ccResponseSP = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
@@ -545,31 +559,58 @@ public class AnalysisSubmitter implements MessageListener {
 	
 	private class CCtableModel extends AbstractTableModel {
 		  
-		  private String[] columnNames = {"Reporter Id", "Mean Group1", "Mean Group2", "Mean Diff", "Fold Change", "P-Value" };
+		  private String[] defaultColumnNames = {"Reporter Id", "Mean Group1", "Mean Group2", "Mean Diff", "Fold Change", "P-Value" };
 		  private String group1Name = "Group 1";
 		  private String group2Name = "Group 2";
-		  private List<ClassComparisonResultEntry> ccResults = new ArrayList<ClassComparisonResultEntry>();
+		  private List<ClassComparisonResultEntry> ccResultEntries = new ArrayList<ClassComparisonResultEntry>();
+		  private ClassComparisonAnalysisResult result;
 		  private DecimalFormat fmt = new DecimalFormat("0.###E0");
 		  
 		  public CCtableModel() {
 			
 		  }
 		  
-		  public void setCCdata(List<ClassComparisonResultEntry> ccResults) {
-		     this.ccResults = ccResults;
+		  public void setCCdata(ClassComparisonAnalysisResult result) {
+		     this.result = result;
+		     this.ccResultEntries = result.getResultEntries();
 		     this.fireTableDataChanged();
+		     this.fireTableStructureChanged();
 		  }
 		  
 		  public String getColumnName(int col) {
-		      return columnNames[col];
+			  
+			  if (result == null) {
+				//no result set yet so just return   
+				return defaultColumnNames[col];  
+			  }
+			  
+			  switch(col) {
+				  case 0: return "Reporter Id";
+				  case 1: return "Mean " + result.getGroup1().getGroupName();
+				  case 2:
+					  if (result.getGroup2() != null) {
+					    return "Mean " + result.getGroup2().getGroupName();
+					  }
+					  return "";
+				  
+				  case 3: return "Mean Diff";
+				  case 4: return "Fold Change";
+				  case 5: 
+					  if (result.arePvaluesAdjusted()) {
+					    return "Adjusted P-Value";
+					  }
+					  return "P-Value";
+			  }
+			  return "";
 		  }
 		  
-		  public int getRowCount() { return ccResults.size(); }
 		  
-		  public int getColumnCount() { return columnNames.length; }
+		  public int getRowCount() { return ccResultEntries.size(); }
+		  
+		  public int getColumnCount() { return 6; }
 		  
 		  public Object getValueAt(int row, int col) {
-			    ClassComparisonResultEntry resultEntry = ccResults.get(row);
+			    ClassComparisonResultEntry resultEntry = ccResultEntries.get(row);
 		        if (col == 0) {
 		          return resultEntry.getReporterId();
 		        }
