@@ -59,15 +59,7 @@ public class ClassComparisonAnalysisRequest extends AnalysisRequest implements j
 		this.arrayPlatform = arrayPlatform;
 	}
 
-	public ComparisonAdjustmentMethod getMultiComparisonAdjustmentMethod() {
-		return comparisonAdjustmentMethod;
-	}
-
-	public void setMultiComparisonAdjustmentMethod(
-			ComparisonAdjustmentMethod multiComparisonAdjustment) {
-		this.comparisonAdjustmentMethod = multiComparisonAdjustment;
-	}
-
+	
 	public ComparisonAdjustmentMethod getComparisonAdjustmentMethod() {
 		return comparisonAdjustmentMethod;
 	}
@@ -81,16 +73,16 @@ public class ClassComparisonAnalysisRequest extends AnalysisRequest implements j
 		return foldChangeThreshold;
 	}
 
-	public void setFoldChangeThreshold(double foldChangeThreshold) {
-		this.foldChangeThreshold = foldChangeThreshold;
+	public void setFoldChangeThreshold(double thresholdValue) {
+		this.foldChangeThreshold = thresholdValue;
 	}
 
-	public double getPValueThreshold() {
+	public double getPvalueThreshold() {
 		return pValueThreshold;
 	}
 
-	public void setPValueThreshold(double valueThreshold) {
-		pValueThreshold = valueThreshold;
+	public void setPvalueThreshold(double thresholdValue) {
+		this.pValueThreshold = thresholdValue;
 	}
 
 	public SampleGroup getGroup1() {
