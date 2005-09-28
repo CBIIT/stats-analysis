@@ -2,6 +2,7 @@ package gov.nih.nci.caintegrator.analysis.test;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
+import static gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonAnalysisRequest.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -77,9 +78,10 @@ public class AnalysisSubmitter implements MessageListener {
 	private JTextField ccGroup1Name = new JTextField(10);
 	private JTextField ccGroup2Name = new JTextField(10);
 	private JComboBox  ccStatisticalMethodCombo = new JComboBox();
-	private JComboBox  ccMultiComparisonAdjCombo = new JComboBox();
+	private JComboBox  ccComparisonAdjCombo = new JComboBox();
 	private JTextField ccFoldChangeFilterTF = new JTextField(12);
 	private JTextField ccPvalueFilterTF = new JTextField(12);
+	private JComboBox ccArrayPlatformCombo = new JComboBox();
 	  /**
 	   * Topic session, hold on to this so you may close it.
 	   * Also used to create messages.
@@ -101,6 +103,7 @@ public class AnalysisSubmitter implements MessageListener {
 	 private Queue resultQueue;
 	 
 	 private JFrame frame = null;
+	
 
 	
 	public AnalysisSubmitter(String factoryJNDI)
@@ -272,7 +275,11 @@ public class AnalysisSubmitter implements MessageListener {
 			  ClassComparisonAnalysisRequest ccRequest = new ClassComparisonAnalysisRequest(Integer.toString(4567),Integer.toString(ccCounter++));
 				
 			  //fill out the request
-			  ccRequest.setStatisticalMethod((ClassComparisonAnalysisRequest.StatisticalMethodType)ccStatisticalMethodCombo.getSelectedItem());
+			  ccRequest.setStatisticalMethod((StatisticalMethodType)ccStatisticalMethodCombo.getSelectedItem());
+			  ccRequest.setComparisonAdjustmentMethod((ComparisonAdjustmentMethod)ccComparisonAdjCombo.getSelectedItem());
+			  ccRequest.setFoldChangeThreshold(Double.parseDouble(ccFoldChangeFilterTF.getText()));
+			  ccRequest.setPvalueThreshold(Double.parseDouble(ccPvalueFilterTF.getText()));
+			  ccRequest.setArrayPlatform((ArrayPlatformType) ccArrayPlatformCombo.getSelectedItem());
 			  
 			  //create the sample groups
 			  SampleGroup group1 = new SampleGroup(ccGroup1Name.getText());
@@ -293,6 +300,9 @@ public class AnalysisSubmitter implements MessageListener {
 			     }
 			     ccRequest.setGroup2(group2);
 			  }
+			  
+			  //fill in the paramters
+			  
 			  try {
 				sendRequest(ccRequest);
 			  } catch (JMSException e1) {
@@ -324,11 +334,11 @@ public class AnalysisSubmitter implements MessageListener {
           ccStatisticalMethodCombo.setBorder(new TitledBorder("Statistical Method"));
           ccRequestCenterPanel.add(ccStatisticalMethodCombo);
           
-          ccMultiComparisonAdjCombo.addItem(ClassComparisonAnalysisRequest.ComparisonAdjustmentMethod.NONE);
-          ccMultiComparisonAdjCombo.addItem(ClassComparisonAnalysisRequest.ComparisonAdjustmentMethod.FDR);
-          ccMultiComparisonAdjCombo.addItem(ClassComparisonAnalysisRequest.ComparisonAdjustmentMethod.FWER);
-          ccMultiComparisonAdjCombo.setBorder(new TitledBorder("Multiple Comparison Adjustment"));
-          ccRequestCenterPanel.add(ccMultiComparisonAdjCombo);
+          ccComparisonAdjCombo.addItem(ComparisonAdjustmentMethod.NONE);
+          ccComparisonAdjCombo.addItem(ComparisonAdjustmentMethod.FDR);
+          ccComparisonAdjCombo.addItem(ComparisonAdjustmentMethod.FWER);
+          ccComparisonAdjCombo.setBorder(new TitledBorder("Multiple Comparison Adjustment"));
+          ccRequestCenterPanel.add(ccComparisonAdjCombo);
           
           ccFoldChangeFilterTF.setBorder(new TitledBorder("Fold Change Filter Value"));
           ccFoldChangeFilterTF.setText("2");
@@ -337,6 +347,10 @@ public class AnalysisSubmitter implements MessageListener {
           ccPvalueFilterTF.setBorder(new TitledBorder("P Value Filter Value"));
           ccPvalueFilterTF.setText("0.001");
           ccRequestCenterPanel.add(ccPvalueFilterTF);
+          
+          ccArrayPlatformCombo.addItem(ArrayPlatformType.AFFYMETRICS);
+          ccArrayPlatformCombo.addItem(ArrayPlatformType.CDNA);
+          ccRequestCenterPanel.add(ccArrayPlatformCombo);
           
           JSplitPane ccResponseSP = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
           JTable ccResultTable = new JTable(ccTableModel);
