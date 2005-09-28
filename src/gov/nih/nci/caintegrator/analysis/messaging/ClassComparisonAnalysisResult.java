@@ -13,6 +13,7 @@ public class ClassComparisonAnalysisResult extends AnalysisResult implements Ser
 	private List<ClassComparisonResultEntry> ccResultEntries;
 	private SampleGroup group1;
 	private SampleGroup group2;
+	private boolean arePvaluesAdjusted = false;
 	
 	public ClassComparisonAnalysisResult(String sessionId, String taskId) {
 		super(sessionId, taskId);
@@ -51,6 +52,24 @@ public class ClassComparisonAnalysisResult extends AnalysisResult implements Ser
 
 	public void setGroup2(SampleGroup group2) {
 		this.group2 = group2;
+	}
+
+	/**
+	 * 
+	 * @return TRUE if the P-Values for this result are adjusted 
+	 * FALSE if they are not adjusted
+	 */
+	public boolean arePvaluesAdjusted() {
+	  return arePvaluesAdjusted;
+	}
+	
+	/**
+	 * Set to TRUE if the P-Values in the ClassComparisonResultEntries are 
+	 * adjusted (using multi-group adjustment methods) FALSE if they are not adjusted.
+	 * @param value
+	 */
+	public void setPvaluesAreAdjusted(boolean value) {
+	  this.arePvaluesAdjusted = value;
 	}
 
 }
