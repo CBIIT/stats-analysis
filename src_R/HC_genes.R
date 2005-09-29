@@ -6,21 +6,25 @@
 ###########################################################################################
 
 # Clustering over reporters
-mygenecluster <- function(x, diss=c("Correlation", "Euclidean"), meth=c("average","single","complete"), filename) {
+mygenecluster <- function(x, diss=c("Correlation", "Euclidean"), meth=c("average","single","complete")) {
     library(cluster)
 
-    png(filename="genecluster%d.png")
-    if (diss=='Correlation') 
-    genclst <- hclust(as.dist(1-cor(t(x),use="pair")), method=meth) 
-    plot(genclst,  xlab="", ylab="", cex=.5, sub="", hang=-1)
-    mtext(paste("1-correlation",meth), side=2,line=3,cex=.8)
-    #title("Clustering over the reporters", font=1,cex=0.5)
-    
-    if (diss=='Euclidean') {
-    genclst<- hclust(dist(t(t(x))),method=meth)
-    plot(genclst,  xlab="", ylab="", cex=.5, sub="", hang=-1)
-    mtext(paste("Euclidean",meth), side=2,line=3,cex=.8)
-    #title("Clustering over the reporters", font=1,cex=0.5)
+    if (diss=='Correlation') {
+      genclst <- hclust(as.dist(1-cor(t(x),use="pair")), method=meth) 
+    }
+    else if (diss=='Euclidean') {
+      genclst<- hclust(dist(t(t(x))),method=meth)
     } 
-    dev.off()
+    return(genclst)
 }
+
+
+# TO PLOT
+#    png(filename="genecluster%d.png")
+#    title("Clustering over the reporters", font=1,cex=0.5)
+#    plot(genclst,  xlab="", ylab="", cex=.5, sub="", hang=-1)
+#    mtext(paste("1-correlation",meth), side=2,line=3,cex=.8)
+# OR
+#    plot(genclst,  xlab="", ylab="", cex=.5, sub="", hang=-1)
+#    mtext(paste("Euclidean",meth), side=2,line=3,cex=.8)
+#    dev.off()
