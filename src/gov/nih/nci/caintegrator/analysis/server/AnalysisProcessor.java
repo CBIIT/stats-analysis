@@ -406,8 +406,21 @@ public class AnalysisProcessor implements MessageListener {
 	   * @param hcRequest
 	   */
 	  public void processHierarchicalClusteringRequest(HierarchicalClusteringRequest hcRequest) {
-	    System.out.println("Processing hierarchical clustering analysis request");
-	    //call Rserve with the correct commands
+	    System.out.println("Processing hierarchical clustering analysis request=" + hcRequest);
+	   
+	    Rconnection c = (Rconnection) connectionPool.checkOut();
+	    
+	    //do the clustering
+	    String rCmd = "samplecluster <- mysamplecluster(dataMatrix,\"Correlation\",\"average\")";
+	    doRvoidEval(c, rCmd);
+	    //get the image code and send back
+	    rCmd = "plot(sampclst, labels=arraylab, xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
+	    byte[] imgCode = getImageCode(c, hcRequest, rCmd);
+	    
+	    HierarchicalClusteringResult result = new HierarchicalClusteringResult(hcRequest.getSessionId(), hcRequest.getTaskId());
+	    result.setImageCode(imgCode);
+	    sendResult(result);
+	   
 		  
 	  }
 	  

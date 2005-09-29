@@ -89,10 +89,12 @@ public class AnalysisSubmitter implements MessageListener {
 	//hc 
 	private JTextField hcaFoldChangeFilterTF = new JTextField(3);
 	private JTextField hcaReporterIdsTF = new JTextField(25);
+	private JTextField hcaSampleIdsTF = new JTextField(25);
 	private JComboBox hcaDistanceMatrixCombo = new JComboBox();
 	private ButtonGroup hcaClusterByGroup = new ButtonGroup();
 	private JComboBox hcaArrayPlatformCombo = new JComboBox();
-	
+	private JComboBox hcaLinkageMethodCombo = new JComboBox();
+	private ImagePanel hcaImagePanel = new ImagePanel();
 	
 	  /**
 	   * Topic session, hold on to this so you may close it.
@@ -233,6 +235,9 @@ public class AnalysisSubmitter implements MessageListener {
 	  private void processHCAresult(HierarchicalClusteringResult result) {
 		  System.out.println("Processing HCA result=" + result);
 		  
+		  Image img = Toolkit.getDefaultToolkit().createImage(result.getImageCode());
+		  hcaImagePanel.setImage(img);
+		  hcaImagePanel.repaint();
 	  }
 	  
 	  private void processCCresult(ClassComparisonResult result) {
@@ -249,7 +254,7 @@ public class AnalysisSubmitter implements MessageListener {
 	    ObjectMessage msg = queueSession.createObjectMessage(request);
 	
 
-	    // Publish the message
+	    // Send the message
 	    requestSender.send(msg, DeliveryMode.NON_PERSISTENT, Message.DEFAULT_PRIORITY, Message.DEFAULT_TIME_TO_LIVE);
 	    
 	  }
@@ -395,6 +400,8 @@ public class AnalysisSubmitter implements MessageListener {
 		 hcaSplitPane.add(hcaRequestPanel, JSplitPane.TOP);
 		 hcaSplitPane.add(hcaResponsePanel, JSplitPane.BOTTOM);
 		 
+		 JScrollPane responseSP = new JScrollPane(hcaImagePanel);
+		 hcaResponsePanel.add(responseSP);
          JPanel hcaButtonPanel = new JPanel();
          JButton hcaSubmitButton = new JButton("Submit");
          
@@ -407,8 +414,34 @@ public class AnalysisSubmitter implements MessageListener {
 				hcaRequest.setArrayPlatform((HierarchicalClusteringRequest.ArrayPlatformType)hcaArrayPlatformCombo.getSelectedItem());
 				
 				String clusterByStr = hcaClusterByGroup.getSelection().getActionCommand();
-				//HierarchicalClusteringAnalysisRequest.
-				//hcaRequest.setClusterBy(hcaClusterByGroup.)
+				
+				hcaRequest.setClusterBy(ClusterByType.valueOf(clusterByStr));
+				hcaRequest.setArrayPlatform((HierarchicalClusteringRequest.ArrayPlatformType)hcaArrayPlatformCombo.getSelectedItem());
+				hcaRequest.setDistanceMatrix((DistanceMatrixType)hcaDistanceMatrixCombo.getSelectedItem());
+				hcaRequest.setLinkageMethod((LinkageMethodType)hcaLinkageMethodCombo.getSelectedItem());
+			    hcaRequest.setFoldChangeThreshold(Double.parseDouble(hcaFoldChangeFilterTF.getText()));
+				
+				//get reporter group			    
+				String reporterIds = hcaReporterIdsTF.getText();
+				if ((reporterIds != null) && (reporterIds.trim().length() > 0)) {
+				  ReporterGroup reporters = new ReporterGroup();
+				  StringTokenizer t = new StringTokenizer(reporterIds.trim(), ",");
+				  while (t.hasMoreTokens()) {
+				    reporters.add(t.nextToken().trim());
+				  }
+				  hcaRequest.setReporterGroup(reporters);
+				}
+				
+				
+				String sampleIds = hcaSampleIdsTF.getText();
+				if ((sampleIds != null) && (sampleIds.trim().length() > 0)) {
+				  SampleGroup samples = new SampleGroup();
+				  StringTokenizer t = new StringTokenizer(sampleIds.trim(), ",");
+				  while (t.hasMoreTokens()) {
+				    samples.add(t.nextToken().trim());
+				  }
+				  hcaRequest.setSampleGroup(samples);
+				}
 				
 				
 				//send the request
@@ -427,6 +460,7 @@ public class AnalysisSubmitter implements MessageListener {
          hcaFoldChangeFilterTF.setText("2");
          //hcaFoldChangeFilterTF.setBorder(new TitledBorder("Fold Change Threshold"));
      	 hcaReporterIdsTF.setBorder(new TitledBorder("Reporter Ids"));
+     	 hcaSampleIdsTF.setBorder(new TitledBorder("Sample Ids"));
      	 hcaDistanceMatrixCombo.addItem(DistanceMatrixType.Correlation);
      	 hcaDistanceMatrixCombo.addItem(DistanceMatrixType.Euclidean);
      	 hcaDistanceMatrixCombo.setBorder(new TitledBorder("Distance Matrix"));
@@ -435,7 +469,10 @@ public class AnalysisSubmitter implements MessageListener {
      	 JPanel hcaReq1Panel = new JPanel();
      	 hcaReq1Panel.add(new JLabel("Fold Change Threshold:"));
      	 hcaReq1Panel.add(hcaFoldChangeFilterTF);
-     	 hcaReq1Panel.add(hcaReporterIdsTF);
+     	 //hcaReq1Panel.add(hcaReporterIdsTF);
+     	
+     	 hcaRequestCenterPanel.add(hcaReporterIdsTF);
+     	 hcaRequestCenterPanel.add(hcaSampleIdsTF);
      	 hcaRequestCenterPanel.add(hcaReq1Panel);
      	 //hcaRequestCenterPanel.add(hcaDistanceMatrixCombo);
      	 hcaRequestPanel.add(hcaRequestCenterPanel, BorderLayout.CENTER);

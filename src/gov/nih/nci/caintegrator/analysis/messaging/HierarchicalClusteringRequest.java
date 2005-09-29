@@ -10,8 +10,8 @@ package gov.nih.nci.caintegrator.analysis.messaging;
 public class HierarchicalClusteringRequest extends AnalysisRequest implements java.io.Serializable {
 
 	public enum DistanceMatrixType {Correlation, Euclidean };
-	private enum ClusterByType {Genes, Samples};
-	private enum LinkageMethodType { Average, Single, Complete };
+	public enum ClusterByType {Genes, Samples};
+	public enum LinkageMethodType { Average, Single, Complete };
 	public enum ArrayPlatformType  {AFFYMETRICS, CDNA};
 	
 	private DistanceMatrixType distanceMatrix = DistanceMatrixType.Correlation;
