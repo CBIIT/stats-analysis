@@ -13,7 +13,7 @@ import java.util.*;
  */
 
 
-public class ClassComparisonAnalysisRequest extends AnalysisRequest implements java.io.Serializable {
+public class ClassComparisonRequest extends AnalysisRequest implements java.io.Serializable {
 
 	public enum StatisticalMethodType {TTest, Wilcox };
 	
@@ -35,7 +35,7 @@ public class ClassComparisonAnalysisRequest extends AnalysisRequest implements j
 	
 	private SampleGroup group2 = null;
 	
-	public ClassComparisonAnalysisRequest(String sessionid, String taskId) {
+	public ClassComparisonRequest(String sessionid, String taskId) {
 		super(sessionid, taskId);
 	}
 	

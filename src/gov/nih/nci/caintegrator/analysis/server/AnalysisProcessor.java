@@ -4,7 +4,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.RserveConnectionPool;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
-import static gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonAnalysisRequest.*;
+import static gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonRequest.*;
 
 
 import org.rosuda.JRclient.RFileInputStream;
@@ -169,11 +169,11 @@ public class AnalysisProcessor implements MessageListener {
 	      AnalysisRequest request = (AnalysisRequest) msg.getObject();
 	      System.out.println("AnalysisProcessor got request: " + request);
 	      
-	      if (request instanceof ClassComparisonAnalysisRequest) {
-	        processClassComparisonRequest((ClassComparisonAnalysisRequest)request);
+	      if (request instanceof ClassComparisonRequest) {
+	        processClassComparisonRequest((ClassComparisonRequest)request);
 	      }
-	      else if (request instanceof HierarchicalClusteringAnalysisRequest) {
-	        processHierarchicalClusteringRequest((HierarchicalClusteringAnalysisRequest)request);
+	      else if (request instanceof HierarchicalClusteringRequest) {
+	        processHierarchicalClusteringRequest((HierarchicalClusteringRequest)request);
 	      }
 	      else if (request instanceof PrincipalComponentAnalysisRequest) {
 	    	processPrincipalComponentAnalysisRequest((PrincipalComponentAnalysisRequest) request);
@@ -254,7 +254,7 @@ public class AnalysisProcessor implements MessageListener {
 	   * Process a class comparison analysis request.
 	   * @param ccRequest
 	   */
-	  public void processClassComparisonRequest(ClassComparisonAnalysisRequest ccRequest) {
+	  public void processClassComparisonRequest(ClassComparisonRequest ccRequest) {
 	    System.out.println("Processing class comparison request=" + ccRequest);
 	    		
 	    Rconnection c = null;
@@ -319,7 +319,7 @@ public class AnalysisProcessor implements MessageListener {
 	    	}
 	    	
 	    	//Create the result to return 
-	    	ClassComparisonAnalysisResult ccResult = new ClassComparisonAnalysisResult(ccRequest.getSessionId(), ccRequest.getTaskId());
+	    	ClassComparisonResult ccResult = new ClassComparisonResult(ccRequest.getSessionId(), ccRequest.getTaskId());
 	    	
 	    	//do filtering
 	    	double foldChangeThreshold = ccRequest.getFoldChangeThreshold();
@@ -405,7 +405,7 @@ public class AnalysisProcessor implements MessageListener {
 	   * Process a hierarchicalClusteringAnalysisRequest.
 	   * @param hcRequest
 	   */
-	  public void processHierarchicalClusteringRequest(HierarchicalClusteringAnalysisRequest hcRequest) {
+	  public void processHierarchicalClusteringRequest(HierarchicalClusteringRequest hcRequest) {
 	    System.out.println("Processing hierarchical clustering analysis request");
 	    //call Rserve with the correct commands
 		  

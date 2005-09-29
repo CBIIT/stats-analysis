@@ -8,14 +8,14 @@ import java.util.*;
  * @author Michael A. Harris
  *
  */
-public class ClassComparisonAnalysisResult extends AnalysisResult implements Serializable {
+public class ClassComparisonResult extends AnalysisResult implements Serializable {
 
 	private List<ClassComparisonResultEntry> ccResultEntries;
 	private SampleGroup group1;
 	private SampleGroup group2;
 	private boolean arePvaluesAdjusted = false;
 	
-	public ClassComparisonAnalysisResult(String sessionId, String taskId) {
+	public ClassComparisonResult(String sessionId, String taskId) {
 		super(sessionId, taskId);
 	}
 	
