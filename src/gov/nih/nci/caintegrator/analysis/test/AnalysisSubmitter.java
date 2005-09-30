@@ -87,12 +87,12 @@ public class AnalysisSubmitter implements MessageListener {
 	private JComboBox ccArrayPlatformCombo = new JComboBox();
 	
 	//hc 
-	private JTextField hcaFoldChangeFilterTF = new JTextField(3);
-	private JTextField hcaReporterIdsTF = new JTextField(25);
-	private JTextField hcaSampleIdsTF = new JTextField(25);
+	private JTextField hcaVarianceFilterTF = new JTextField(3);
+	private JTextField hcReporterIdsTF = new JTextField(25);
+	private JTextField hcSampleIdsTF = new JTextField(25);
 	private JComboBox hcaDistanceMatrixCombo = new JComboBox();
-	private ButtonGroup hcaClusterByGroup = new ButtonGroup();
-	private JComboBox hcaArrayPlatformCombo = new JComboBox();
+	private ButtonGroup hcClusterByGroup = new ButtonGroup();
+	private JComboBox hcArrayPlatformCombo = new JComboBox();
 	private JComboBox hcaLinkageMethodCombo = new JComboBox();
 	private ImagePanel hcaImagePanel = new ImagePanel();
 	
@@ -236,7 +236,7 @@ public class AnalysisSubmitter implements MessageListener {
 		  System.out.println("Processing HCA result=" + result);
 		  
 		  Image img = Toolkit.getDefaultToolkit().createImage(result.getImageCode());
-		  hcaImagePanel.setImage(img);
+		  hcaImagePanel.setImage(img,750,750);
 		  hcaImagePanel.repaint();
 	  }
 	  
@@ -389,64 +389,65 @@ public class AnalysisSubmitter implements MessageListener {
 		
 	}
 
-	private void buildHCAGui(JTabbedPane tabbedPane) {
+	private void buildHCGui(JTabbedPane tabbedPane) {
 		
-		 JSplitPane hcaSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		 tabbedPane.addTab("Hierarchical Clustering", hcaSplitPane);
+		 JSplitPane hcSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		 tabbedPane.addTab("Hierarchical Clustering", hcSplitPane);
 		 
-		 JPanel hcaRequestPanel = new JPanel(new BorderLayout());
-		 JPanel hcaResponsePanel = new JPanel();
+		 JPanel hcRequestPanel = new JPanel(new BorderLayout());
+		 JPanel hcResponsePanel = new JPanel();
 		 
-		 hcaSplitPane.add(hcaRequestPanel, JSplitPane.TOP);
-		 hcaSplitPane.add(hcaResponsePanel, JSplitPane.BOTTOM);
+		 hcSplitPane.add(hcRequestPanel, JSplitPane.TOP);
+		 hcSplitPane.add(hcResponsePanel, JSplitPane.BOTTOM);
 		 
 		 JScrollPane responseSP = new JScrollPane(hcaImagePanel);
-		 hcaResponsePanel.add(responseSP);
-         JPanel hcaButtonPanel = new JPanel();
-         JButton hcaSubmitButton = new JButton("Submit");
+		 hcResponsePanel.add(responseSP);
+         JPanel hcButtonPanel = new JPanel();
+         JButton hcSubmitButton = new JButton("Submit");
          
-         hcaSubmitButton.addActionListener(new ActionListener() {
+         hcSubmitButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				HierarchicalClusteringRequest hcaRequest = new HierarchicalClusteringRequest("234578907654", Integer.toString(hcCounter++));
+				System.out.println("Submitting hierarchical clustering request");
+				HierarchicalClusteringRequest hcRequest = new HierarchicalClusteringRequest("234578907654", Integer.toString(hcCounter++));
 				
 				//load the request
-				hcaRequest.setArrayPlatform((HierarchicalClusteringRequest.ArrayPlatformType)hcaArrayPlatformCombo.getSelectedItem());
+				hcRequest.setArrayPlatform((HierarchicalClusteringRequest.ArrayPlatformType)hcArrayPlatformCombo.getSelectedItem());
 				
-				String clusterByStr = hcaClusterByGroup.getSelection().getActionCommand();
+				String clusterByStr = hcClusterByGroup.getSelection().getActionCommand();
 				
-				hcaRequest.setClusterBy(ClusterByType.valueOf(clusterByStr));
-				hcaRequest.setArrayPlatform((HierarchicalClusteringRequest.ArrayPlatformType)hcaArrayPlatformCombo.getSelectedItem());
-				hcaRequest.setDistanceMatrix((DistanceMatrixType)hcaDistanceMatrixCombo.getSelectedItem());
-				hcaRequest.setLinkageMethod((LinkageMethodType)hcaLinkageMethodCombo.getSelectedItem());
-			    hcaRequest.setFoldChangeThreshold(Double.parseDouble(hcaFoldChangeFilterTF.getText()));
+				hcRequest.setClusterBy(ClusterByType.valueOf(clusterByStr));
+				hcRequest.setArrayPlatform((HierarchicalClusteringRequest.ArrayPlatformType)hcArrayPlatformCombo.getSelectedItem());
+				hcRequest.setDistanceMatrix((DistanceMatrixType)hcaDistanceMatrixCombo.getSelectedItem());
+				hcRequest.setLinkageMethod((LinkageMethodType)hcaLinkageMethodCombo.getSelectedItem());
+			    hcRequest.setVarianceFilterValue(Double.parseDouble(hcaVarianceFilterTF.getText()));
 				
 				//get reporter group			    
-				String reporterIds = hcaReporterIdsTF.getText();
+				String reporterIds = hcReporterIdsTF.getText();
 				if ((reporterIds != null) && (reporterIds.trim().length() > 0)) {
 				  ReporterGroup reporters = new ReporterGroup();
 				  StringTokenizer t = new StringTokenizer(reporterIds.trim(), ",");
 				  while (t.hasMoreTokens()) {
 				    reporters.add(t.nextToken().trim());
 				  }
-				  hcaRequest.setReporterGroup(reporters);
+				  hcRequest.setReporterGroup(reporters);
 				}
 				
 				
-				String sampleIds = hcaSampleIdsTF.getText();
+				String sampleIds = hcSampleIdsTF.getText();
 				if ((sampleIds != null) && (sampleIds.trim().length() > 0)) {
 				  SampleGroup samples = new SampleGroup();
 				  StringTokenizer t = new StringTokenizer(sampleIds.trim(), ",");
 				  while (t.hasMoreTokens()) {
 				    samples.add(t.nextToken().trim());
 				  }
-				  hcaRequest.setSampleGroup(samples);
+				  hcRequest.setSampleGroup(samples);
 				}
 				
 				
 				//send the request
 				try {
-					sendRequest(hcaRequest);
+					sendRequest(hcRequest);
 				} catch (JMSException e1) {
 					e1.printStackTrace(System.out);
 				}
@@ -454,44 +455,55 @@ public class AnalysisSubmitter implements MessageListener {
         	 
          });
          
-         hcaButtonPanel.add(hcaSubmitButton);
-         hcaRequestPanel.add(hcaButtonPanel, BorderLayout.SOUTH);
+         hcButtonPanel.add(hcSubmitButton);
+         hcRequestPanel.add(hcButtonPanel, BorderLayout.SOUTH);
          JPanel hcaRequestCenterPanel = new JPanel();
-         hcaFoldChangeFilterTF.setText("2");
+         hcaVarianceFilterTF.setText("0.9");
          //hcaFoldChangeFilterTF.setBorder(new TitledBorder("Fold Change Threshold"));
-     	 hcaReporterIdsTF.setBorder(new TitledBorder("Reporter Ids"));
-     	 hcaSampleIdsTF.setBorder(new TitledBorder("Sample Ids"));
+     	 hcReporterIdsTF.setBorder(new TitledBorder("Reporter Ids"));
+     	 hcSampleIdsTF.setBorder(new TitledBorder("Sample Ids"));
      	 hcaDistanceMatrixCombo.addItem(DistanceMatrixType.Correlation);
      	 hcaDistanceMatrixCombo.addItem(DistanceMatrixType.Euclidean);
      	 hcaDistanceMatrixCombo.setBorder(new TitledBorder("Distance Matrix"));
      	 hcaRequestCenterPanel.setLayout(new BoxLayout(hcaRequestCenterPanel, BoxLayout.Y_AXIS ));
      	 //hcaRequestCenterPanel.add(hcaFoldChangeFilterTF);
      	 JPanel hcaReq1Panel = new JPanel();
-     	 hcaReq1Panel.add(new JLabel("Fold Change Threshold:"));
-     	 hcaReq1Panel.add(hcaFoldChangeFilterTF);
+     	 hcaReq1Panel.add(new JLabel("Reporter Variance Constraint:"));
+     	 hcaReq1Panel.add(hcaVarianceFilterTF);
+     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.average);
+     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.single);
+     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.complete);
+     	 hcaLinkageMethodCombo.setBorder(new TitledBorder("Linkage Method"));
+     	 hcaReq1Panel.add(hcaLinkageMethodCombo);
      	 //hcaReq1Panel.add(hcaReporterIdsTF);
      	
-     	 hcaRequestCenterPanel.add(hcaReporterIdsTF);
-     	 hcaRequestCenterPanel.add(hcaSampleIdsTF);
+     	 hcaRequestCenterPanel.add(hcReporterIdsTF);
+     	 hcaRequestCenterPanel.add(hcSampleIdsTF);
      	 hcaRequestCenterPanel.add(hcaReq1Panel);
      	 //hcaRequestCenterPanel.add(hcaDistanceMatrixCombo);
-     	 hcaRequestPanel.add(hcaRequestCenterPanel, BorderLayout.CENTER);
+     	 hcRequestPanel.add(hcaRequestCenterPanel, BorderLayout.CENTER);
      	 
      	 
      	 JRadioButton hcaClusterByGenes = new JRadioButton("genes");
+     	 hcaClusterByGenes.setActionCommand("Genes");
      	 JRadioButton hcaClusterBySamples = new JRadioButton("samples");
+     	 hcaClusterBySamples.setActionCommand("Samples");
      	 
-     	 hcaClusterByGroup.add(hcaClusterByGenes);
-     	 hcaClusterByGroup.add(hcaClusterBySamples);
+     	 
+     	 hcClusterByGroup.add(hcaClusterByGenes);
+     	 hcClusterByGroup.add(hcaClusterBySamples);
+     	 
+     	 hcClusterByGroup.setSelected(hcaClusterBySamples.getModel(), true);
+     	 hcClusterByGroup.setSelected(hcaClusterByGenes.getModel(), false);
      	 
      	 JPanel clusterByPanel = new JPanel();
      	 
-     	 hcaArrayPlatformCombo.addItem(HierarchicalClusteringRequest.ArrayPlatformType.AFFYMETRICS);
-    	 hcaArrayPlatformCombo.addItem(HierarchicalClusteringRequest.ArrayPlatformType.CDNA);
-    	 hcaArrayPlatformCombo.setBorder(new TitledBorder("Array Platform"));
+     	 hcArrayPlatformCombo.addItem(HierarchicalClusteringRequest.ArrayPlatformType.AFFYMETRICS);
+    	 hcArrayPlatformCombo.addItem(HierarchicalClusteringRequest.ArrayPlatformType.CDNA);
+    	 hcArrayPlatformCombo.setBorder(new TitledBorder("Array Platform"));
     	 //clusterByPanel.add(hcaFoldChangeFilterTF);
      	 clusterByPanel.add(hcaDistanceMatrixCombo);
-    	 clusterByPanel.add(hcaArrayPlatformCombo);
+    	 clusterByPanel.add(hcArrayPlatformCombo);
      	 clusterByPanel.add(new JLabel("Cluster by"));
      	 clusterByPanel.add(hcaClusterByGenes);
      	 clusterByPanel.add(hcaClusterBySamples);
@@ -629,7 +641,7 @@ public class AnalysisSubmitter implements MessageListener {
           buildPCAGui(tabbedPane);
          
           //HCA
-          buildHCAGui(tabbedPane);
+          buildHCGui(tabbedPane);
           
           //Class Comparison
           buildCCGui(tabbedPane);
@@ -828,16 +840,18 @@ public class AnalysisSubmitter implements MessageListener {
 		  public Image getImage() {
 			return image;
 		  }
+		  
+		  public void setImage(Image image, int width, int height) {
+		    this.image = image;
+		    Dimension dim = new Dimension(width, height);
+		    this.setPreferredSize(dim);
+		    this.setSize(dim);
+		    this.setMinimumSize(dim);
+		    this.setMaximumSize(dim);
+		  }
 
 		  public void setImage(Image image) {
-			this.image = image;
-			//this.prepareImage(image, 200, 200, this);
-			Dimension dim = new Dimension(450, 450);
-			System.out.println("Setting image size to dim=" + dim);
-			this.setPreferredSize(dim);
-			this.setSize(dim);
-			this.setMinimumSize(dim);
-			this.setMaximumSize(dim);
+			setImage(image, 450,450);
 		  }
 		  
 	  }

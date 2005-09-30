@@ -11,14 +11,14 @@ public class HierarchicalClusteringRequest extends AnalysisRequest implements ja
 
 	public enum DistanceMatrixType {Correlation, Euclidean };
 	public enum ClusterByType {Genes, Samples};
-	public enum LinkageMethodType { Average, Single, Complete };
+	public enum LinkageMethodType { average, single, complete };
 	public enum ArrayPlatformType  {AFFYMETRICS, CDNA};
 	
 	private DistanceMatrixType distanceMatrix = DistanceMatrixType.Correlation;
 	private ClusterByType clusterBy = ClusterByType.Samples;
-	private LinkageMethodType linkageMethod = LinkageMethodType.Average;
+	private LinkageMethodType linkageMethod = LinkageMethodType.average;
 	private ArrayPlatformType arrayPlatform = ArrayPlatformType.AFFYMETRICS;
-	private double foldChangeThreshold = 2.0;
+	private double varianceFilterValue = 0.9;
 	private ReporterGroup reporterGroup;
 	private SampleGroup sampleGroup;        //not sure if we need this one
 	
@@ -56,12 +56,12 @@ public class HierarchicalClusteringRequest extends AnalysisRequest implements ja
 		this.distanceMatrix = distanceMatrix;
 	}
 
-	public double getFoldChangeThreshold() {
-		return foldChangeThreshold;
+	public double getVarianceFilterValue() {
+		return varianceFilterValue;
 	}
 
-	public void setFoldChangeThreshold(double foldChangeThreshold) {
-		this.foldChangeThreshold = foldChangeThreshold;
+	public void setVarianceFilterValue(double varianceFilterValue) {
+		this.varianceFilterValue = varianceFilterValue;
 	}
 
 	public LinkageMethodType getLinkageMethod() {

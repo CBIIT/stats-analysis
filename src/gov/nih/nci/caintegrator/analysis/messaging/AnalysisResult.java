@@ -14,6 +14,8 @@ public abstract class AnalysisResult implements Serializable {
 	private String taskId;
 	
 	private String processorHost = "";
+    private long startProcessingTime = -1L;
+    
 	
 	
 	public AnalysisResult(String sessionId, String taskId) {
@@ -35,6 +37,15 @@ public abstract class AnalysisResult implements Serializable {
 
 	public void setProcessorHost(String processorHost) {
 		this.processorHost = processorHost;
+	}
+	
+	private void setStartProcessingTime(long time) {
+	  this.startProcessingTime = time;
+	}
+	
+	private long getElapsedProcessingTime(long processingEndTime) {
+	  //return processingEndTime - processingStartTime;
+		return 0L;
 	}
 	
 	public abstract String toString();

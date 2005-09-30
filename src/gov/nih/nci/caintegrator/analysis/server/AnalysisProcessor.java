@@ -5,6 +5,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.RserveConnectionPool;
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 import static gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonRequest.*;
+import static gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringRequest.*;
 
 
 import org.rosuda.JRclient.RFileInputStream;
@@ -262,6 +263,12 @@ public class AnalysisProcessor implements MessageListener {
 			//call Rserve with the correct commands for class comparison
 		    c = (Rconnection) connectionPool.checkOut();
 		    
+		    if (c == null) {
+		      //should wait for connection and try again
+		      sendException(new AnalysisServerException("processClassComparisonRequest could not get an Rconnection."));
+		      return;
+		    }
+		    
 	    	int grp1Len = 0, grp2Len = 0;
 	    	SampleGroup group1 = ccRequest.getGroup1();
 	    	grp1Len = group1.size();
@@ -401,6 +408,10 @@ public class AnalysisProcessor implements MessageListener {
 	    }
 	  }
 	  
+	  private String getQuotedString(String inputStr) {
+	    return "\"" + inputStr + "\"";
+	  }
+	  
 	  /**
 	   * Process a hierarchicalClusteringAnalysisRequest.
 	   * @param hcRequest
@@ -410,18 +421,57 @@ public class AnalysisProcessor implements MessageListener {
 	   
 	    Rconnection c = (Rconnection) connectionPool.checkOut();
 	    
-	    //do the clustering
-	    String rCmd = "samplecluster <- mysamplecluster(dataMatrix,\"Correlation\",\"average\")";
-	    doRvoidEval(c, rCmd);
-	    //get the image code and send back
-	    rCmd = "plot(sampclst, labels=arraylab, xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
-	    byte[] imgCode = getImageCode(c, hcRequest, rCmd);
+	    if (c == null) {
+		  //should wait for connection and try again
+		  sendException(new AnalysisServerException("processHierarchicalClusteringRequest could not get an Rconnection."));
+		  return;
+		}
+	    
+	    
+	    
+	    //get the submatrix to operate on
+	    doRvoidEval(c, "hcInputMatrix <- dataMatrix");
+	  
+	    doRvoidEval(c, "hcInputMatrix <- GeneFilterWithVariance(hcInputMatrix," + hcRequest.getVarianceFilterValue() +  ")");
+	    
+		String rCmd = null;
+		if (hcRequest.getSampleGroup()!= null) {
+		  //sample group should never be null when passed from middle tier
+		  rCmd = getRgroupCmd("sampleIds", hcRequest.getSampleGroup());
+		  doRvoidEval(c, rCmd);
+		  rCmd = "hcInputMatrix <- getSubmatrix.onegrp(hcInputMatrix, sampleIds)";
+		  doRvoidEval(c, rCmd);
+		}
+		
+		
+		if (hcRequest.getReporterGroup()!= null) {
+		  rCmd = getRgroupCmd("reporterIds", hcRequest.getReporterGroup());
+		  doRvoidEval(c, rCmd);
+		  rCmd = "hcInputMatrix <- getSubmatrix.rep(hcInputMatrix, reporterIds)";
+		  doRvoidEval(c, rCmd);
+		}
+	    String plotCmd = null;
+	    //get the request parameters
+	    if (hcRequest.getClusterBy() == ClusterByType.Samples) {
+	      //cluster by samples
+	      rCmd = "mycluster <- mysamplecluster(hcInputMatrix," + getQuotedString(hcRequest.getDistanceMatrix().toString()) + "," + getQuotedString(hcRequest.getLinkageMethod().toString()) + ")";
+	      doRvoidEval(c, rCmd);
+	      plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[2]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
+	    }
+	    else if (hcRequest.getClusterBy() == ClusterByType.Genes) {
+	      //cluster by genes
+	      rCmd = "mycluster <- mygenecluster(hcInputMatrix," + getQuotedString(hcRequest.getDistanceMatrix().toString()) + "," + getQuotedString(hcRequest.getLinkageMethod().toString()) + ")";
+	      doRvoidEval(c, rCmd);
+	      plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[1]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
+	    }
+	    
+	    byte[] imgCode = getImageCode(c, hcRequest, plotCmd);
 	    
 	    HierarchicalClusteringResult result = new HierarchicalClusteringResult(hcRequest.getSessionId(), hcRequest.getTaskId());
 	    result.setImageCode(imgCode);
 	    sendResult(result);
+	    connectionPool.checkIn(c);
 	   
-		  
 	  }
 	  
 	  /**
@@ -432,6 +482,13 @@ public class AnalysisProcessor implements MessageListener {
 		
 		//call Rserve with the correct commands
 		Rconnection c = (Rconnection) connectionPool.checkOut();    
+		
+		if (c == null) {
+		  //should wait for connection and try again
+		  sendException(new AnalysisServerException("processPrincipalComponentAnalysisRequest could not get an Rconnection."));
+		  return;
+	    }
+		
 		
 		//submit the pca request and get back the object
 		
@@ -556,6 +613,8 @@ public class AnalysisProcessor implements MessageListener {
 	    }
 	    return hostname;
 	 }
+	
+	 
 	  
 	 /**
 	  * Get the byte representation of the image created with the plot command.
@@ -571,7 +630,10 @@ public class AnalysisProcessor implements MessageListener {
 	      String fileName = "image_" + request.getSessionId() + "_" + request.getTaskId() + "_" + System.currentTimeMillis() + ".bmp";
 	      REXP xp = null;
 	
-		  xp = doREval(c,"try(bitmap(\"" + fileName + "\"))");
+	      //bitmap(file, type = "png256", height = 6, width = 6, res = 72,
+		  //          pointsize, ...)
+	      
+		  xp = doREval(c,"try(bitmap(\"" + fileName + "\", height = 3, width = 3, res = 250 ))");
 		  
 	      if (xp.asString()!=null) { // if there's a string then we have a problem, R sent an error
 	        System.out.println("Can't pen bitmat graphics device:\n"+xp.asString());
