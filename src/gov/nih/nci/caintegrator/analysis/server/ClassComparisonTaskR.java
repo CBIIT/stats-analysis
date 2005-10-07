@@ -64,6 +64,7 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 						"Some sample ids did not match R data file for class comparison request.");
 				ex.setFailedRequest(ccRequest);
 				setException(ex);
+				return;
 			}
 		} else {
 			// single group comparison
