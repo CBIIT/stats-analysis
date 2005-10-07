@@ -46,16 +46,6 @@ import java.util.*;
  */
 public class AnalysisServer implements MessageListener, AnalysisResultSender {
 
-	// public AnalysisProcessor() {
-	// super();
-	// // TODO Auto-generated constructor stub
-	// }
-	//	
-	// public static void main(String[] args) {
-	//	  
-	//		
-	// }
-
 	public static String version = "2.5";
 
 	private boolean debugRcommands = false;
@@ -65,7 +55,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	private static String JBossMQ_locationIp = "156.40.128.136:1099"; // my
 																		// machine
 
-	private static int numRserveConnections = 1;
+	private static int numComputeThreads = 1;
 
 	private static String RserverIp = "156.40.134.31"; // cbiodev501
 
@@ -124,8 +114,8 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 					.getProperty("jmsmq_location");
 			RserverIp = analysisServerConfigProps
 					.getProperty("rserve_location");
-			numRserveConnections = Integer.parseInt(analysisServerConfigProps
-					.getProperty("RserveConnectionPoolSize"));
+			numComputeThreads = Integer.parseInt(analysisServerConfigProps
+					.getProperty("num_compute_threads"));
 			RdataFileName = analysisServerConfigProps
 					.getProperty("RdefinitionFile");
 			debugRcommands = Boolean.parseBoolean(analysisServerConfigProps
@@ -162,17 +152,18 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 
 		resultSender = queueSession.createSender(resultQueue);
 
+		// initialize the compute threads
+		
+		executor = new RThreadPoolExecutor(numComputeThreads, RserverIp,
+				RdataFileName, this);
+		
+		executor.setDebugRcommmands(debugRcommands);
+		
 		queueConnection.start();
 
-		// initialize Rserver connection
-		// connectionPool = new RserveConnectionPool(numRserveConnections,
-		// RserverIp, RdataFileName);
-		executor = new RThreadPoolExecutor(numRserveConnections, RserverIp,
-				RdataFileName, this);
-		executor.setDebugRcommmands(debugRcommands);
-
 		System.out.println("AnalysisServer version=" + version
-				+ " successfully initialized. Now listening for requests...");
+				+ " successfully initialized. numComputeThreads=" + numComputeThreads + " RserverIp=" + RserverIp + " RdataFileName=" + RdataFileName);
+		System.out.println("Now listening for requests...");
 
 	}
 
@@ -211,68 +202,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 
 	}
 
-	/**
-	 * This method will take a SampleGroup and generate the R command for to
-	 * create the sampleId list. The returned lists can then be used as input
-	 * parameters to the statistical methods (for example ttest).
-	 * 
-	 * @param group
-	 * @return
-	 */
-	private String getRgroupCmd(String rName, IdGroup group) {
-		StringBuffer sb = new StringBuffer();
-		sb.append(rName);
-		sb.append(" <- c(");
-		String id;
-		for (Iterator i = group.iterator(); i.hasNext();) {
-			id = (String) i.next();
-			sb.append("\"").append(id).append("\"");
-			if (i.hasNext()) {
-				sb.append(",");
-			} else {
-				sb.append(")");
-			}
-		}
-		return sb.toString();
-	}
-
-	/**
-	 * Evaluate an R command with no return value
-	 * 
-	 * @param c
-	 * @param command
-	 */
-	private void doRvoidEval(Rconnection c, String command) {
-		if (debugRcommands) {
-			System.out.println(command);
-		}
-		try {
-			c.voidEval(command);
-		} catch (RSrvException e) {
-			e.printStackTrace(System.out);
-		}
-	}
-
-	/**
-	 * Execute an R command with a return value
-	 * 
-	 * @param c
-	 * @param command
-	 * @return
-	 */
-	private REXP doREval(Rconnection c, String command) {
-		REXP returnVal = null;
-		try {
-			if (debugRcommands) {
-				System.out.println(command);
-			}
-			returnVal = c.eval(command);
-		} catch (RSrvException e) {
-			e.printStackTrace(System.out);
-		}
-		return returnVal;
-	}
-
+	
 	/**
 	 * Process a class comparison analysis request.
 	 * 
@@ -300,18 +230,17 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	public void processPrincipalComponentAnalysisRequest(
 			PrincipalComponentAnalysisRequest pcaRequest) {
 		executor.execute(new PrincipalComponentAnalysisTaskR(pcaRequest, true));
-
 	}
 
 	public void sendException(AnalysisServerException analysisServerException) {
 		try {
 			System.out
-					.println("AnalysisProcessor sending analysisServerException sessionId="
+					.println("AnalysisServer sending AnalysisServerException sessionId="
 							+ analysisServerException.getFailedRequest()
 									.getSessionId()
 							+ " taskId="
 							+ analysisServerException.getFailedRequest()
-									.getTaskId());
+									.getTaskId() + " msg=" + analysisServerException.getMessage());
 			ObjectMessage msg = queueSession
 					.createObjectMessage(analysisServerException);
 			resultSender.send(msg, DeliveryMode.NON_PERSISTENT,
@@ -321,28 +250,15 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 		}
 	}
 
-	public String getHostName() {
-		String hostname = "";
-		try {
-			InetAddress addr = InetAddress.getLocalHost();
-
-			// Get IP Address
-			byte[] ipAddr = addr.getAddress();
-
-			// Get hostname
-			hostname = addr.getHostName();
-		} catch (UnknownHostException e) {
-		}
-		return hostname;
-	}
+	
 
 	public void sendResult(AnalysisResult result) {
 
 		try {
-			System.out
-					.println("AnalysisProcessor sending result for sessionId="
-							+ result.getSessionId() + " taskId="
-							+ result.getTaskId());
+//			System.out
+//					.println("AnalysisServer sending result for sessionId="
+//							+ result.getSessionId() + " taskId="
+//							+ result.getTaskId());
 			ObjectMessage msg = queueSession.createObjectMessage(result);
 			resultSender.send(msg, DeliveryMode.NON_PERSISTENT,
 					Message.DEFAULT_PRIORITY, Message.DEFAULT_TIME_TO_LIVE);
@@ -368,7 +284,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	public static void main(String[] args) {
 
 		try {
-			AnalysisServer processor = new AnalysisServer(
+			AnalysisServer server = new AnalysisServer(
 			// Name of ConnectionFactory
 					"ConnectionFactory");
 		} catch (Exception ex) {

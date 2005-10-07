@@ -1,11 +1,14 @@
 package gov.nih.nci.caintegrator.analysis.server;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.*;
 import org.rosuda.JRclient.Rconnection;
 
 public class RThreadPoolExecutor extends ThreadPoolExecutor {
 
 	private AnalysisResultSender sender;
+	private String hostName = null;
 	private boolean debugRcommands = false;
 
 	public RThreadPoolExecutor(int nThreads, String RserveIp, String RdataFile,
@@ -17,6 +20,7 @@ public class RThreadPoolExecutor extends ThreadPoolExecutor {
 						RserveIp, RdataFile));
 
 		this.sender = sender;
+		this.hostName = getHostName();
 
 		prestartAllCoreThreads();
 	}
@@ -29,6 +33,7 @@ public class RThreadPoolExecutor extends ThreadPoolExecutor {
 		rTask.setExecutingThreadName(rThread.getName());
 		rTask.setRconnection(rThread.getRconnection());
 		rTask.setDebugRcommands(debugRcommands);
+		rTask.setStartTime(System.currentTimeMillis());
 		
 		super.beforeExecute(thread, task);
 		
@@ -39,21 +44,46 @@ public class RThreadPoolExecutor extends ThreadPoolExecutor {
 	protected void afterExecute(Runnable task, Throwable throwable) {
 		
 		AnalysisTaskR rTask = (AnalysisTaskR) task;
-		
-		rTask.setExecutingThreadName("");
-		rTask.cleanUp();
+		rTask.setComputeTime(System.currentTimeMillis() - rTask.getStartTime());
 		
 		if (rTask.getException() != null) {
+		  System.out.println(rTask.getExecutingThreadName() + " failed to complete task=" + rTask + " host=" + getHostName());
 		  sender.sendException(rTask.getException());
 		}
 		else {
+		  System.out.println(rTask.getExecutingThreadName() + " completed task=" + rTask + " host=" + getHostName() + " computeTime(ms)=" + rTask.getComputeTime());
+		  
 		  sender.sendResult(rTask.getResult());
 		}
+		
+		rTask.cleanUp();
 	}
 
 	public void setDebugRcommmands(boolean debugRcommands) {
 	  this.debugRcommands = debugRcommands;
 		
+	}
+	
+	
+	/**
+	 * Get the host name that is performing the execution 
+	 * @return
+	 */
+	public String getHostName() {
+		if (hostName == null) { 
+			try {
+				InetAddress addr = InetAddress.getLocalHost();
+	
+				// Get IP Address
+				byte[] ipAddr = addr.getAddress();
+	
+				// Get hostname
+				hostName = addr.getHostName();
+			} 
+			catch (UnknownHostException e) {
+			}
+		}
+		return hostName;
 	}
 
 }

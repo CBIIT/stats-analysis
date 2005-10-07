@@ -11,6 +11,9 @@ public abstract class AnalysisTask implements Runnable {
 	private String executingThreadName = "";
 
 	private AnalysisServerException ex = null;
+	
+	private Long startTime = 0L;
+	private Long computeTime = 0L;
 
 	public AnalysisTask(AnalysisRequest request) {
 		this.request = request;
@@ -54,5 +57,21 @@ public abstract class AnalysisTask implements Runnable {
 
 	public void setException(AnalysisServerException ex) {
 		this.ex = ex;
+	}
+
+	public Long getComputeTime() {
+		return computeTime;
+	}
+
+	public void setComputeTime(Long computeTime) {
+		this.computeTime = computeTime;
+	}
+
+	public Long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Long startTime) {
+		this.startTime = startTime;
 	}
 }
