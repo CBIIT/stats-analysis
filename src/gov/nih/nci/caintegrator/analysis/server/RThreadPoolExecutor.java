@@ -42,7 +42,13 @@ public class RThreadPoolExecutor extends ThreadPoolExecutor {
 		
 		rTask.setExecutingThreadName("");
 		rTask.cleanUp();
-		sender.sendResult(rTask.getResult());
+		
+		if (rTask.getException() != null) {
+		  sender.sendException(rTask.getException());
+		}
+		else {
+		  sender.sendResult(rTask.getResult());
+		}
 	}
 
 	public void setDebugRcommmands(boolean debugRcommands) {
