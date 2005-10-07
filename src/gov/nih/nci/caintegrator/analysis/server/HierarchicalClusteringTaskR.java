@@ -6,8 +6,6 @@ import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringRequest
 import gov.nih.nci.caintegrator.enumeration.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
-import org.rosuda.JRclient.Rconnection;
-
 public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 
 	private HierarchicalClusteringResult result;
@@ -60,7 +58,7 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 			rCmd = "mycluster <- mysamplecluster(hcInputMatrix,"
 					+ getQuotedString(hcRequest.getDistanceMatrix().toString())
 					+ ","
-					+ getQuotedString(hcRequest.getLinkageMethod().toString())
+					+ getQuotedString(hcRequest.getLinkageMethod().toString().toLowerCase())
 					+ ")";
 			doRvoidEval(rCmd);
 			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[2]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
@@ -69,7 +67,7 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 			rCmd = "mycluster <- mygenecluster(hcInputMatrix,"
 					+ getQuotedString(hcRequest.getDistanceMatrix().toString())
 					+ ","
-					+ getQuotedString(hcRequest.getLinkageMethod().toString())
+					+ getQuotedString(hcRequest.getLinkageMethod().toString().toLowerCase())
 					+ ")";
 			doRvoidEval(rCmd);
 			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[1]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
