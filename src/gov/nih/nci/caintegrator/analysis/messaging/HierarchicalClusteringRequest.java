@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.analysis.messaging;
 
-
+import gov.nih.nci.caintegrator.enumeration.*;
 
 /**
  * 
@@ -9,14 +9,14 @@ package gov.nih.nci.caintegrator.analysis.messaging;
  */
 public class HierarchicalClusteringRequest extends AnalysisRequest implements java.io.Serializable {
 
-	public enum DistanceMatrixType {Correlation, Euclidean };
-	public enum ClusterByType {Genes, Samples};
-	public enum LinkageMethodType { average, single, complete };
-	public enum ArrayPlatformType  {AFFYMETRICS, CDNA};
+	//public enum DistanceMatrixType {Correlation, Euclidean };
+	//public enum ClusterByType {Genes, Samples};
+	//public enum LinkageMethodType { average, single, complete };
+	
 	
 	private DistanceMatrixType distanceMatrix = DistanceMatrixType.Correlation;
 	private ClusterByType clusterBy = ClusterByType.Samples;
-	private LinkageMethodType linkageMethod = LinkageMethodType.average;
+	private LinkageMethodType linkageMethod = LinkageMethodType.Average;
 	private ArrayPlatformType arrayPlatform = ArrayPlatformType.AFFYMETRICS;
 	private double varianceFilterValue = 0.9;
 	private ReporterGroup reporterGroup;

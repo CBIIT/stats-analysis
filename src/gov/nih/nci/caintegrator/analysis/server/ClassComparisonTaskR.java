@@ -9,8 +9,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult;
 import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
 import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResultEntry;
 import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
-import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonRequest.ComparisonAdjustmentMethod;
-import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonRequest.StatisticalMethodType;
+import gov.nih.nci.caintegrator.enumeration.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
 import org.rosuda.JRclient.*;
@@ -100,9 +99,9 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 		// do filtering
 		double foldChangeThreshold = ccRequest.getFoldChangeThreshold();
 		double pValueThreshold = ccRequest.getPvalueThreshold();
-		ComparisonAdjustmentMethod adjMethod = ccRequest
-				.getComparisonAdjustmentMethod();
-		if (adjMethod == ComparisonAdjustmentMethod.NONE) {
+		MultiGroupComparisonAdjustmentType adjMethod = ccRequest
+				.getMultiGroupComparisonAdjustmentType();
+		if (adjMethod == MultiGroupComparisonAdjustmentType.NONE) {
 			// get differentially expressed reporters using
 			// unadjusted Pvalue
 
@@ -111,7 +110,7 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 					+ foldChangeThreshold + "," + pValueThreshold + ")";
 			doRvoidEval(rCmd);
 			ccResult.setPvaluesAreAdjusted(false);
-		} else if (adjMethod == ComparisonAdjustmentMethod.FDR) {
+		} else if (adjMethod == MultiGroupComparisonAdjustmentType.FDR) {
 			// do adjustment
 			rCmd = "adjust.result <- adjustP.Benjamini.Hochberg(ccResult)";
 			doRvoidEval(rCmd);
@@ -120,7 +119,7 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 					+ foldChangeThreshold + "," + pValueThreshold + ")";
 			doRvoidEval(rCmd);
 			ccResult.setPvaluesAreAdjusted(true);
-		} else if (adjMethod == ComparisonAdjustmentMethod.FWER) {
+		} else if (adjMethod == MultiGroupComparisonAdjustmentType.FWER) {
 			// do adjustment
 			rCmd = "adjust.result <- adjustP.Bonferroni(ccResult)";
 			doRvoidEval(rCmd);

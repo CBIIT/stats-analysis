@@ -1,5 +1,6 @@
 package gov.nih.nci.caintegrator.analysis.messaging;
 
+import gov.nih.nci.caintegrator.enumeration.*;
 import java.util.*;
 
 /**
@@ -9,8 +10,6 @@ import java.util.*;
  */
 public class PrincipalComponentAnalysisRequest extends AnalysisRequest implements java.io.Serializable {
 
-	public enum ArrayPlatformType  {AFFYMETRICS, CDNA};
-	
 	private double varianceFilterValue = -1.0;
 	private double foldChangeFilterValue = -1.0;
 	private ReporterGroup reporterGroup = null;

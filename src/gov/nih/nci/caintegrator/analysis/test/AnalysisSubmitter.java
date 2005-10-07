@@ -2,8 +2,7 @@ package gov.nih.nci.caintegrator.analysis.test;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
-import static gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonRequest.*;
-import static gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringRequest.*;
+import gov.nih.nci.caintegrator.enumeration.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -292,10 +291,10 @@ public class AnalysisSubmitter implements MessageListener {
 				
 			  //fill out the request
 			  ccRequest.setStatisticalMethod((StatisticalMethodType)ccStatisticalMethodCombo.getSelectedItem());
-			  ccRequest.setComparisonAdjustmentMethod((ComparisonAdjustmentMethod)ccComparisonAdjCombo.getSelectedItem());
+			  ccRequest.setMultiGroupComparisonAdjustmentType((MultiGroupComparisonAdjustmentType)ccComparisonAdjCombo.getSelectedItem());
 			  ccRequest.setFoldChangeThreshold(Double.parseDouble(ccFoldChangeFilterTF.getText()));
 			  ccRequest.setPvalueThreshold(Double.parseDouble(ccPvalueFilterTF.getText()));
-			  ccRequest.setArrayPlatform((ClassComparisonRequest.ArrayPlatformType) ccArrayPlatformCombo.getSelectedItem());
+			  ccRequest.setArrayPlatform((ArrayPlatformType) ccArrayPlatformCombo.getSelectedItem());
 			  
 			  //create the sample groups
 			  SampleGroup group1 = new SampleGroup(ccGroup1Name.getText());
@@ -345,22 +344,22 @@ public class AnalysisSubmitter implements MessageListener {
           ccRequestCenterPanel.add(ccSampleGroup1Ids);
           ccRequestCenterPanel.add(ccGroup2Name);
           ccRequestCenterPanel.add(ccSampleGroup2Ids);
-          ccStatisticalMethodCombo.addItem(ClassComparisonRequest.StatisticalMethodType.TTest);
-          ccStatisticalMethodCombo.addItem(ClassComparisonRequest.StatisticalMethodType.Wilcox);
+          ccStatisticalMethodCombo.addItem(StatisticalMethodType.TTest);
+          ccStatisticalMethodCombo.addItem(StatisticalMethodType.Wilcox);
           ccStatisticalMethodCombo.setBorder(new TitledBorder("Statistical Method"));
           ccRequestCenterPanel.add(ccStatisticalMethodCombo);
           
-          ccComparisonAdjCombo.addItem(ComparisonAdjustmentMethod.NONE);
-          ccComparisonAdjCombo.addItem(ComparisonAdjustmentMethod.FDR);
-          ccComparisonAdjCombo.addItem(ComparisonAdjustmentMethod.FWER);
+          ccComparisonAdjCombo.addItem(MultiGroupComparisonAdjustmentType.NONE);
+          ccComparisonAdjCombo.addItem(MultiGroupComparisonAdjustmentType.FDR);
+          ccComparisonAdjCombo.addItem(MultiGroupComparisonAdjustmentType.FWER);
           ccComparisonAdjCombo.setBorder(new TitledBorder("Multiple Comparison Adjustment"));
           ccRequestCenterPanel.add(ccComparisonAdjCombo);
           ccComparisonAdjCombo.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-			  ComparisonAdjustmentMethod adjMethod = (ComparisonAdjustmentMethod)ccComparisonAdjCombo.getSelectedItem();
+			  MultiGroupComparisonAdjustmentType adjMethod = (MultiGroupComparisonAdjustmentType)ccComparisonAdjCombo.getSelectedItem();
 			  TitledBorder border = (TitledBorder) ccPvalueFilterTF.getBorder();
-			  if (adjMethod == ComparisonAdjustmentMethod.NONE) {
+			  if (adjMethod == MultiGroupComparisonAdjustmentType.NONE) {
 			    border.setTitle("P-Value Filter Value");
 			  }
 			  else {
@@ -377,8 +376,8 @@ public class AnalysisSubmitter implements MessageListener {
           ccPvalueFilterTF.setText("0.001");
           ccRequestCenterPanel.add(ccPvalueFilterTF);
           
-          ccArrayPlatformCombo.addItem(ClassComparisonRequest.ArrayPlatformType.AFFYMETRICS);
-          ccArrayPlatformCombo.addItem(ClassComparisonRequest.ArrayPlatformType.CDNA);
+          ccArrayPlatformCombo.addItem(ArrayPlatformType.AFFYMETRICS);
+          ccArrayPlatformCombo.addItem(ArrayPlatformType.CDNA);
           ccArrayPlatformCombo.setBorder(new TitledBorder("Array Platform"));
           ccRequestCenterPanel.add(ccArrayPlatformCombo);
           
@@ -414,12 +413,12 @@ public class AnalysisSubmitter implements MessageListener {
 				HierarchicalClusteringRequest hcRequest = new HierarchicalClusteringRequest("234578907654", Integer.toString(hcCounter++));
 				
 				//load the request
-				hcRequest.setArrayPlatform((HierarchicalClusteringRequest.ArrayPlatformType)hcArrayPlatformCombo.getSelectedItem());
+				hcRequest.setArrayPlatform((ArrayPlatformType)hcArrayPlatformCombo.getSelectedItem());
 				
 				String clusterByStr = hcClusterByGroup.getSelection().getActionCommand();
 				
 				hcRequest.setClusterBy(ClusterByType.valueOf(clusterByStr));
-				hcRequest.setArrayPlatform((HierarchicalClusteringRequest.ArrayPlatformType)hcArrayPlatformCombo.getSelectedItem());
+				hcRequest.setArrayPlatform((ArrayPlatformType)hcArrayPlatformCombo.getSelectedItem());
 				hcRequest.setDistanceMatrix((DistanceMatrixType)hcaDistanceMatrixCombo.getSelectedItem());
 				hcRequest.setLinkageMethod((LinkageMethodType)hcaLinkageMethodCombo.getSelectedItem());
 			    hcRequest.setVarianceFilterValue(Double.parseDouble(hcaVarianceFilterTF.getText()));
@@ -472,9 +471,9 @@ public class AnalysisSubmitter implements MessageListener {
      	 JPanel hcaReq1Panel = new JPanel();
      	 hcaReq1Panel.add(new JLabel("Reporter Variance Constraint:"));
      	 hcaReq1Panel.add(hcaVarianceFilterTF);
-     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.average);
-     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.single);
-     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.complete);
+     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.Average);
+     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.Single);
+     	 hcaLinkageMethodCombo.addItem(LinkageMethodType.Complete);
      	 hcaLinkageMethodCombo.setBorder(new TitledBorder("Linkage Method"));
      	 hcaReq1Panel.add(hcaLinkageMethodCombo);
      	 //hcaReq1Panel.add(hcaReporterIdsTF);
@@ -500,8 +499,8 @@ public class AnalysisSubmitter implements MessageListener {
      	 
      	 JPanel clusterByPanel = new JPanel();
      	 
-     	 hcArrayPlatformCombo.addItem(HierarchicalClusteringRequest.ArrayPlatformType.AFFYMETRICS);
-    	 hcArrayPlatformCombo.addItem(HierarchicalClusteringRequest.ArrayPlatformType.CDNA);
+     	 hcArrayPlatformCombo.addItem(ArrayPlatformType.AFFYMETRICS);
+    	 hcArrayPlatformCombo.addItem(ArrayPlatformType.CDNA);
     	 hcArrayPlatformCombo.setBorder(new TitledBorder("Array Platform"));
     	 //clusterByPanel.add(hcaFoldChangeFilterTF);
      	 clusterByPanel.add(hcaDistanceMatrixCombo);

@@ -1,7 +1,5 @@
 package gov.nih.nci.caintegrator.analysis.server;
 
-import gov.nih.nci.caintegrator.analysis.messaging.RserveConnectionPool;
-
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 import static gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonRequest.*;
@@ -50,11 +48,9 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 
 	private boolean debugRcommands = false;
 
-	private RserveConnectionPool connectionPool;
-
-	private static String JBossMQ_locationIp = "156.40.128.136:1099"; // my
-																		// machine
-
+	
+	private static String JBossMQ_locationIp = "156.40.128.136:1099"; // my machine
+																		
 	private static int numComputeThreads = 1;
 
 	private static String RserverIp = "156.40.134.31"; // cbiodev501

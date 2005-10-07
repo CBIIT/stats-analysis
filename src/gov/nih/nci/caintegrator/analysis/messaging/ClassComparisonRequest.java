@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.analysis.messaging;
 
-import java.util.*;
+import gov.nih.nci.caintegrator.enumeration.*;
 
 /**
  * The class comparison request contains one or more SampleGroups. 
@@ -15,19 +15,13 @@ import java.util.*;
 
 public class ClassComparisonRequest extends AnalysisRequest implements java.io.Serializable {
 
-	public enum StatisticalMethodType {TTest, Wilcox };
-	
-	public enum ComparisonAdjustmentMethod {NONE, FWER, FDR };
-	
-	public enum ArrayPlatformType {AFFYMETRICS, CDNA};
-
 	private double foldChangeThreshold = Double.NEGATIVE_INFINITY;
 	
 	private double pValueThreshold = Double.POSITIVE_INFINITY;
 	
 	private ArrayPlatformType arrayPlatform = ArrayPlatformType.AFFYMETRICS;
 	
-	private ComparisonAdjustmentMethod comparisonAdjustmentMethod = ComparisonAdjustmentMethod.NONE;
+	private MultiGroupComparisonAdjustmentType multiGrpComparisonAdjType = MultiGroupComparisonAdjustmentType.NONE;
 	
 	private StatisticalMethodType statisticalMethod = StatisticalMethodType.TTest;
 	
@@ -60,13 +54,13 @@ public class ClassComparisonRequest extends AnalysisRequest implements java.io.S
 	}
 
 	
-	public ComparisonAdjustmentMethod getComparisonAdjustmentMethod() {
-		return comparisonAdjustmentMethod;
+	public MultiGroupComparisonAdjustmentType getMultiGroupComparisonAdjustmentType() {
+		return multiGrpComparisonAdjType;
 	}
 
-	public void setComparisonAdjustmentMethod(
-			ComparisonAdjustmentMethod comparisonAdjustmentMethod) {
-		this.comparisonAdjustmentMethod = comparisonAdjustmentMethod;
+	public void setMultiGroupComparisonAdjustmentType(
+			MultiGroupComparisonAdjustmentType mgCompAdjType) {
+		this.multiGrpComparisonAdjType = mgCompAdjType;
 	}
 
 	public double getFoldChangeThreshold() {

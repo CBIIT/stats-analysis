@@ -3,7 +3,7 @@ package gov.nih.nci.caintegrator.analysis.server;
 import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
 import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringResult;
 import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringRequest;
-import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringRequest.ClusterByType;
+import gov.nih.nci.caintegrator.enumeration.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
 import org.rosuda.JRclient.Rconnection;
