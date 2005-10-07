@@ -12,7 +12,7 @@ public class HierarchicalClusteringRequest extends AnalysisRequest implements ja
 	private DistanceMatrixType distanceMatrix = DistanceMatrixType.Correlation;
 	private ClusterByType clusterBy = ClusterByType.Samples;
 	private LinkageMethodType linkageMethod = LinkageMethodType.Average;
-	private ArrayPlatformType arrayPlatform = ArrayPlatformType.AFFYMETRICS;
+	private ArrayPlatformType arrayPlatform = ArrayPlatformType.AFFY_OLIGO_PLATFORM;
 	private double varianceFilterValue = 0.9;
 	private ReporterGroup reporterGroup;
 	private SampleGroup sampleGroup;        //not sure if we need this one

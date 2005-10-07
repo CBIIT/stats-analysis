@@ -19,7 +19,7 @@ public class ClassComparisonRequest extends AnalysisRequest implements java.io.S
 	
 	private double pValueThreshold = Double.POSITIVE_INFINITY;
 	
-	private ArrayPlatformType arrayPlatform = ArrayPlatformType.AFFYMETRICS;
+	private ArrayPlatformType arrayPlatform = ArrayPlatformType.AFFY_OLIGO_PLATFORM;
 	
 	private MultiGroupComparisonAdjustmentType multiGrpComparisonAdjType = MultiGroupComparisonAdjustmentType.NONE;
 	

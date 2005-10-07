@@ -15,7 +15,8 @@ public class PrincipalComponentAnalysisRequest extends AnalysisRequest implement
 	private SampleGroup sampleGroup = null;
 	
 	
-	private ArrayPlatformType platform = ArrayPlatformType.AFFYMETRICS;
+	private ArrayPlatformType platform = ArrayPlatformType.AFFY_OLIGO_PLATFORM;
+	
 	
 	public PrincipalComponentAnalysisRequest(String sessionId, String taskId) {
 		super(sessionId, taskId);

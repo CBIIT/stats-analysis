@@ -342,7 +342,7 @@ public class AnalysisSubmitter implements MessageListener {
           ccRequestCenterPanel.add(ccGroup2Name);
           ccRequestCenterPanel.add(ccSampleGroup2Ids);
           ccStatisticalMethodCombo.addItem(StatisticalMethodType.TTest);
-          ccStatisticalMethodCombo.addItem(StatisticalMethodType.Wilcox);
+          ccStatisticalMethodCombo.addItem(StatisticalMethodType.Wilcoxin);
           ccStatisticalMethodCombo.setBorder(new TitledBorder("Statistical Method"));
           ccRequestCenterPanel.add(ccStatisticalMethodCombo);
           
@@ -373,8 +373,8 @@ public class AnalysisSubmitter implements MessageListener {
           ccPvalueFilterTF.setText("0.001");
           ccRequestCenterPanel.add(ccPvalueFilterTF);
           
-          ccArrayPlatformCombo.addItem(ArrayPlatformType.AFFYMETRICS);
-          ccArrayPlatformCombo.addItem(ArrayPlatformType.CDNA);
+          ccArrayPlatformCombo.addItem(ArrayPlatformType.AFFY_OLIGO_PLATFORM);
+          ccArrayPlatformCombo.addItem(ArrayPlatformType.CDNA_ARRAY_PLATFORM);
           ccArrayPlatformCombo.setBorder(new TitledBorder("Array Platform"));
           ccRequestCenterPanel.add(ccArrayPlatformCombo);
           
@@ -496,8 +496,8 @@ public class AnalysisSubmitter implements MessageListener {
      	 
      	 JPanel clusterByPanel = new JPanel();
      	 
-     	 hcArrayPlatformCombo.addItem(ArrayPlatformType.AFFYMETRICS);
-    	 hcArrayPlatformCombo.addItem(ArrayPlatformType.CDNA);
+     	 hcArrayPlatformCombo.addItem(ArrayPlatformType.AFFY_OLIGO_PLATFORM);
+    	 hcArrayPlatformCombo.addItem(ArrayPlatformType.CDNA_ARRAY_PLATFORM);
     	 hcArrayPlatformCombo.setBorder(new TitledBorder("Array Platform"));
     	 //clusterByPanel.add(hcaFoldChangeFilterTF);
      	 clusterByPanel.add(hcaDistanceMatrixCombo);
@@ -530,10 +530,12 @@ public class AnalysisSubmitter implements MessageListener {
           
           BoxLayout bl = new BoxLayout(pcaReqCenterPanel, BoxLayout.Y_AXIS);
           pcaReqCenterPanel.setLayout(bl);
-          
-          
-          String[] platforms = {"Affy", "Cdna" };
-          JComboBox pcaPlatform = new JComboBox(platforms);
+            
+          JComboBox pcaPlatform = new JComboBox();
+          ArrayPlatformType[] platforms = ArrayPlatformType.values();
+          for (int i=0; i < platforms.length; i++) {
+            pcaPlatform.addItem(platforms[i]);
+          }
           pcaVarianceFilterTF.setBorder(new TitledBorder("Variance Filter Value:"));
           pcaVarianceFilterTF.setText("0.9");
           pcaFoldChangeFilterTF.setBorder(new TitledBorder("Fold Change Filter Value:"));

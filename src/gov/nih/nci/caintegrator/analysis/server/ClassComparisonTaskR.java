@@ -89,7 +89,7 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 			rCmd = "ccResult <- myttest(ccInputMatrix, " + grp1Len + ","
 					+ grp2Len + ")";
 			doRvoidEval(rCmd);
-		} else if (ccRequest.getStatisticalMethod() == StatisticalMethodType.Wilcox) {
+		} else if (ccRequest.getStatisticalMethod() == StatisticalMethodType.Wilcoxin) {
 			// do the Wilcox computation
 			rCmd = "ccResult <- mywilcox(ccInputMatrix, " + grp1Len + ","
 					+ grp2Len + ")";

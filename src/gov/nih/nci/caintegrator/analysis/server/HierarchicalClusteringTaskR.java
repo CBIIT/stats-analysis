@@ -18,6 +18,40 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 			boolean debugRcommands) {
 		super(request, debugRcommands);
 	}
+	
+	public HierarchicalClusteringRequest getRequest() {
+		return (HierarchicalClusteringRequest) super.getRequest();
+	}
+	
+	
+	/**
+	 * This method is used to keep an enumerated type value change from breaking the call to
+	 * the R function. The R function is expecting an exact match on the string passed 
+	 * as a parameter.
+	 * @return
+	 */
+	public String getDistanceMatrixRparamStr() {
+	  switch(getRequest().getDistanceMatrix()) {
+	  case Correlation : return getQuotedString("Correlation");
+	  case Euclidean : return getQuotedString("Euclidean");
+	  }
+	  return null;
+	}
+	
+	/**
+	 * This method is used to keep an enumerated type value change from breaking the call to
+	 * the R function. The R function is expecting an exact match on the string passed 
+	 * as a parameter.
+	 * @return
+	 */
+	public String getLinkageMethodRparamStr() {
+	  switch(getRequest().getLinkageMethod()) {
+	  case Average: return getQuotedString("average");
+	  case Complete: return getQuotedString("complete");
+	  case Single: return getQuotedString("single");
+	  }
+	  return null;
+	}
 
 	/**
 	 * Implement Hierarchical
@@ -56,18 +90,18 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 		if (hcRequest.getClusterBy() == ClusterByType.Samples) {
 			// cluster by samples
 			rCmd = "mycluster <- mysamplecluster(hcInputMatrix,"
-					+ getQuotedString(hcRequest.getDistanceMatrix().toString())
+					+ getDistanceMatrixRparamStr()
 					+ ","
-					+ getQuotedString(hcRequest.getLinkageMethod().toString().toLowerCase())
+					+ getLinkageMethodRparamStr()
 					+ ")";
 			doRvoidEval(rCmd);
 			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[2]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
 		} else if (hcRequest.getClusterBy() == ClusterByType.Genes) {
 			// cluster by genes
 			rCmd = "mycluster <- mygenecluster(hcInputMatrix,"
-					+ getQuotedString(hcRequest.getDistanceMatrix().toString())
+					+ getDistanceMatrixRparamStr()
 					+ ","
-					+ getQuotedString(hcRequest.getLinkageMethod().toString().toLowerCase())
+					+ getLinkageMethodRparamStr()
 					+ ")";
 			doRvoidEval(rCmd);
 			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[1]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
