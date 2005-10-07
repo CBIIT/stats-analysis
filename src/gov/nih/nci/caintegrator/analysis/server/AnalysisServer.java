@@ -68,26 +68,27 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	private static int numRserveConnections = 1;
 	private static String RserverIp = "156.40.134.31"; //cbiodev501
 	private static String RdataFileName = "/h1/harrismic/Rembrandt/RdataFiles/dataAndFunctions.R";
+	private RThreadPoolExecutor executor;
 	  /**
 	   * Topic connection, hold on to this so you may close it.
 	   */
-	  QueueConnection queueConnection;
-	  Queue requestQueue;
-	  Queue resultQueue;
+	private QueueConnection queueConnection;
+	private Queue requestQueue;
+	private Queue resultQueue;
 
 	  /**
 	   * Topic session, hold on to this so you may close it.
 	   * Also used to create messages.
 	   */
 	  //TopicSession topicSession;
-	  QueueSession queueSession;
+	private QueueSession queueSession;
 
 	  /**
 	   * Subscriber
 	   */
 	  //TopicSubscriber topicSubscriber;
-	  QueueReceiver requestReceiver;
-	  QueueSender resultSender;
+	private QueueReceiver requestReceiver;
+	private QueueSender resultSender;
 
 	  /**
 	   * Destination to subscribe to
@@ -152,7 +153,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 		
 	    //initialize Rserver connection
 	    //connectionPool = new RserveConnectionPool(numRserveConnections, RserverIp, RdataFileName);
-	    RThreadPoolExecutor computeThreads = new RThreadPoolExecutor(numRserveConnections, RserverIp, RdataFileName, this);
+	    executor = new RThreadPoolExecutor(numRserveConnections, RserverIp, RdataFileName, this);
 	
 	    System.out.println("AnalysisProcessor version=" + version +  " successfully initialized. Now listening for requests...");
 
@@ -260,156 +261,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	   * @param ccRequest
 	   */
 	  public void processClassComparisonRequest(ClassComparisonRequest ccRequest) {
-	    System.out.println("Processing class comparison request=" + ccRequest);
-	    		
-	    Rconnection c = null;
-	    try {
-			//call Rserve with the correct commands for class comparison
-		    c = (Rconnection) connectionPool.checkOut();
-		    
-		    if (c == null) {
-		      //should wait for connection and try again
-		      sendException(new AnalysisServerException("processClassComparisonRequest could not get an Rconnection."));
-		      return;
-		    }
-		    
-	    	int grp1Len = 0, grp2Len = 0;
-	    	SampleGroup group1 = ccRequest.getGroup1();
-	    	grp1Len = group1.size();
-	    	SampleGroup group2 = ccRequest.getGroup2(); 
-	    	String rCmd = null;
-	    	rCmd = getRgroupCmd(group1.getGroupName(), group1);
-	    	
-	    	doRvoidEval(c, rCmd);
-	 
-	    	if (group2 != null) {
-	    	  //two group comparison
-	    	  grp2Len = group2.size();
-	    	  rCmd = getRgroupCmd(group2.getGroupName(),group2);
-	    	  doRvoidEval(c, rCmd);
-	    	  
-	  	      //create the input data matrix using the sample groups
-	    	  rCmd = "ccInputMatrix <- getSubmatrix.twogrps(dataMatrix," + group1.getGroupName() + "," + group2.getGroupName() + ")";
-	    	  doRvoidEval(c, rCmd);    	  
-	    	  
-	    	  //check to make sure all identifiers matched in the R data file
-	    	  rCmd = "dim(ccInputMatrix)[2]";
-	    	  int numMatched = doREval(c,rCmd).asInt();
-	    	  if (numMatched != (grp1Len + grp2Len)) {
-	    	    AnalysisServerException ex = new AnalysisServerException("Some sample ids did not match R data file for class comparison request.");
-	    	    ex.setFailedRequest(ccRequest);
-	    	    sendException(ex);
-	    	  }
-	    	}
-	    	else {
-	    		//single group comparison
-	    		grp2Len = 0;
-	    		rCmd = "ccInputMatrix <- getSubmatrix.onegrp(dataMatrix," + group1.getGroupName() + ")";
-	    		doRvoidEval(c, rCmd);
-	    	}
-	    	    	
-	    	rCmd = "dim(ccInputMatrix)[2]";
-	  	    int numMatched = doREval(c,rCmd).asInt();
-	    	if (numMatched != (grp1Len + grp2Len)) {
-	    	  AnalysisServerException ex = new AnalysisServerException("Some sample ids did not match R data file for class comparison request.");
-	      	  ex.setFailedRequest(ccRequest);
-	      	  ex.setFailedRequest(ccRequest);
-	      	  throw ex;
-	    	}
-	  	    
-	    	
-	    	if (ccRequest.getStatisticalMethod() == StatisticalMethodType.TTest) {
-	    		//do the TTest computation
-	    		rCmd = "ccResult <- myttest(ccInputMatrix, " + grp1Len + ","  + grp2Len + ")";
-	    		doRvoidEval(c, rCmd);	    	
-	    	}
-	    	else if (ccRequest.getStatisticalMethod() == StatisticalMethodType.Wilcox) {
-	    	  //do the Wilcox computation
-	    		rCmd = "ccResult <- mywilcox(ccInputMatrix, " + grp1Len + ","  + grp2Len + ")";
-	    		doRvoidEval(c, rCmd);
-	    	}
-	    	
-	    	//Create the result to return 
-	    	ClassComparisonResult ccResult = new ClassComparisonResult(ccRequest.getSessionId(), ccRequest.getTaskId());
-	    	
-	    	//do filtering
-	    	double foldChangeThreshold = ccRequest.getFoldChangeThreshold();
-	    	double pValueThreshold = ccRequest.getPvalueThreshold();
-	    	ComparisonAdjustmentMethod adjMethod = ccRequest.getComparisonAdjustmentMethod();
-	    	if (adjMethod == ComparisonAdjustmentMethod.NONE) {
-	    	  //get differentially expressed reporters using 
-	    	  //unadjusted Pvalue
-	    	  	
-	    	  //shouldn't need to pass in ccInputMatrix	
-	    	  rCmd = "ccResult  <- mydiferentiallygenes(ccResult," + foldChangeThreshold + "," + pValueThreshold + ")";
-	    	  doRvoidEval(c,rCmd);
-	    	  ccResult.setPvaluesAreAdjusted(false);
-	    	}
-	    	else if (adjMethod == ComparisonAdjustmentMethod.FDR) {
-	    	  //do adjustment
-	    	  rCmd = "adjust.result <- adjustP.Benjamini.Hochberg(ccResult)";
-	    	  doRvoidEval(c,rCmd);
-	    	  //get differentially expressed reporters using adjusted Pvalue
-	    	  rCmd = "ccResult  <- mydiferentiallygenes.adjustP(adjust.result," + foldChangeThreshold + "," + pValueThreshold + ")";
-		      doRvoidEval(c,rCmd);	
-		      ccResult.setPvaluesAreAdjusted(true);
-	    	}
-	    	else if (adjMethod == ComparisonAdjustmentMethod.FWER) {
-	    	  //do adjustment
-	    	  rCmd =  "adjust.result <- adjustP.Bonferroni(ccResult)";	
-	    	  doRvoidEval(c,rCmd);	
-	    	  //get differentially expresseed reporters using adjusted Pvalue
-	    	  rCmd = "ccResult  <- mydiferentiallygenes.adjustP(adjust.result," + foldChangeThreshold + "," + pValueThreshold + ")";
-			  doRvoidEval(c,rCmd);
-			  ccResult.setPvaluesAreAdjusted(true);
-	    	}
-	    	
-	    	//get the results and send
-	    	
-	    	double[] meanGrp1 = doREval(c, "mean1 <- ccResult[,1]").asDoubleArray();
-	    	double[] meanGrp2 = doREval(c, "mean2 <- ccResult[,2]").asDoubleArray();
-	    	double[] meanDif  = doREval(c, "meanDif <- ccResult[,3]").asDoubleArray();
-	    	double[] foldChange = doREval(c, "fc <- ccResult[,4]").asDoubleArray();
-	    	double[] pva = doREval(c, "pva <- ccResult[,5]").asDoubleArray();
-	    
-	    	//get the labels
-	    	Vector reporterIds =   doREval(c,"ccLabels <- dimnames(ccResult)[[1]]").asVector();
-			//Vector reporterIds = ((REXP)(labels.get(0))).asVector();
-			//Vector columnLabels =  ((REXP)(labels.get(1))).asVector();
-	    	
-	    	//load the result object
-	    	//need to see if this works for single group comparison
-	    	List<ClassComparisonResultEntry> resultEntries = new ArrayList<ClassComparisonResultEntry>(meanGrp1.length);
-	    	ClassComparisonResultEntry resultEntry;
-	 
-	    	for (int i=0; i < meanGrp1.length; i++) {
-	    	  resultEntry = new ClassComparisonResultEntry();
-	    	  resultEntry.setReporterId(((REXP)reporterIds.get(i)).asString());
-	    	  resultEntry.setMeanGrp1(meanGrp1[i]);
-	    	  resultEntry.setMeanGrp2(meanGrp2[i]);
-	    	  resultEntry.setMeanDiff(meanDif[i]);
-	    	  resultEntry.setFoldChange(foldChange[i]);
-	    	  resultEntry.setPvalue(pva[i]);
-	          resultEntries.add(resultEntry);
-	    	}
-	    	
-	    	
-	    	ccResult.setResultEntries(resultEntries);
-	    	
-	    	ccResult.setGroup1(group1);
-	    	if (group2 != null) {
-	    	  ccResult.setGroup2(group2);
-	    	}
-	    	
-	    	ccResult.setProcessorHost(getHostName());
-	    	sendResult(ccResult);
-	    }
-	    catch (AnalysisServerException ex) {
-	      sendException(ex);
-	    }
-	    finally {
-	      connectionPool.checkIn(c);
-	    }
+	    executor.execute(new ClassComparisonTaskR(ccRequest));
 	  }
 	  
 	  private String getQuotedString(String inputStr) {
@@ -592,7 +444,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 		
 	  }
 	  
-	  private void sendException(AnalysisServerException analysisServerException) {
+	  public void sendException(AnalysisServerException analysisServerException) {
 		  try {
 			    System.out.println("AnalysisProcessor sending analysisServerException sessionId=" + analysisServerException.getFailedRequest().getSessionId() + " taskId=" + analysisServerException.getFailedRequest().getTaskId());
 			    ObjectMessage msg = queueSession.createObjectMessage(analysisServerException); 
