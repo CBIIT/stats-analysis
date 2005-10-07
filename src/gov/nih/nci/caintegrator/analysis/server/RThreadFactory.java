@@ -5,8 +5,9 @@ import java.util.concurrent.ThreadFactory;
 public class RThreadFactory implements ThreadFactory {
 
 	private String rServeIp;
+
 	private String rDataFileName;
-	
+
 	public RThreadFactory(String rServeIp, String rDataFileName) {
 		super();
 		this.rServeIp = rServeIp;
