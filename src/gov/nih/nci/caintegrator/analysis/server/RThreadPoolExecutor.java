@@ -6,12 +6,13 @@ import org.rosuda.JRclient.Rconnection;
 public class RThreadPoolExecutor extends ThreadPoolExecutor {
 
 	private AnalysisResultSender sender;
+	private boolean debugRcommands = false;
 
 	public RThreadPoolExecutor(int nThreads, String RserveIp, String RdataFile,
 			AnalysisResultSender sender) {
 
 		// create a new fixed thread pool
-		super(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS,
+		super(nThreads, nThreads, Long.MAX_VALUE, TimeUnit.NANOSECONDS,
 				new LinkedBlockingQueue<Runnable>(), new RThreadFactory(
 						RserveIp, RdataFile));
 
@@ -20,18 +21,33 @@ public class RThreadPoolExecutor extends ThreadPoolExecutor {
 		prestartAllCoreThreads();
 	}
 
-	protected void beforeExecute(RThread thread, AnalysisTaskR task) {
-		System.out.println("Thread name=" + thread.getName()
-				+ " executing task=" + task);
-		task.setExecutingThreadName(thread.getName());
-		task.setRconnection(thread.getRconnection());
+	protected void beforeExecute(Thread thread, Runnable task) {
+		
+		AnalysisTaskR rTask = (AnalysisTaskR) task;
+		RThread rThread = (RThread) thread;
+		
+		rTask.setExecutingThreadName(rThread.getName());
+		rTask.setRconnection(rThread.getRconnection());
+		rTask.setDebugRcommands(debugRcommands);
+		
 		super.beforeExecute(thread, task);
+		
+//		System.out.println("Thread name=" + rThread.getName()
+//				+ " executing task=" + rTask);
 	}
 
-	protected void afterExecute(AnalysisTaskR task, Throwable throwable) {
-		task.setExecutingThreadName("");
-		task.cleanUp();
-		sender.sendResult(task.getResult());
+	protected void afterExecute(Runnable task, Throwable throwable) {
+		
+		AnalysisTaskR rTask = (AnalysisTaskR) task;
+		
+		rTask.setExecutingThreadName("");
+		rTask.cleanUp();
+		sender.sendResult(rTask.getResult());
+	}
+
+	public void setDebugRcommmands(boolean debugRcommands) {
+	  this.debugRcommands = debugRcommands;
+		
 	}
 
 }

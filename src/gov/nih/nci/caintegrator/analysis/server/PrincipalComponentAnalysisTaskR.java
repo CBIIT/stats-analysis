@@ -29,11 +29,9 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 		PrincipalComponentAnalysisRequest pcaRequest = (PrincipalComponentAnalysisRequest) getRequest();
 		result = new PrincipalComponentAnalysisResult(getRequest()
 				.getSessionId(), getRequest().getTaskId());
-		// compute the PCA and assign to the result
-		// call Rserve with the correct commands
-
-		// submit the pca request and get back the object
-
+		
+		System.out.println(this.getExecutingThreadName() + " processing principal component analysis request=" + pcaRequest);
+		
 		double[] pca1, pca2, pca3;
 
 		doRvoidEval("pcaInputMatrix <- dataMatrix");
@@ -103,8 +101,6 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 			index++;
 		}
 
-		PrincipalComponentAnalysisResult result = new PrincipalComponentAnalysisResult(
-				pcaRequest.getSessionId(), pcaRequest.getTaskId());
 		result.setResultEntries(pcaResults);
 
 		// generate the pca1 vs pca2 image
@@ -137,10 +133,15 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 		return result;
 	}
 
-	@Override
+	/**
+	 * Clean up some R memory and release and remove the 
+	 * reference to the R connection so that this task can be 
+	 * garbage collected.
+	 */
 	public void cleanUp() {
-		// TODO Auto-generated method stub
-
+		doRvoidEval("remove(hcInputMatrix)");
+		doRvoidEval("remove(mycluster)");
+		setRconnection(null);
 	}
 
 }

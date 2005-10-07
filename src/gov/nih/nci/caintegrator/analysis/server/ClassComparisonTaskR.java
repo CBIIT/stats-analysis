@@ -31,8 +31,10 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 	public void run() {
 
 		ClassComparisonRequest ccRequest = (ClassComparisonRequest) getRequest();
+		
+		ccResult = new ClassComparisonResult(ccRequest.getSessionId(), ccRequest.getTaskId());
 
-		System.out.println("Processing class comparison request=" + ccRequest);
+		System.out.println(getExecutingThreadName() + ": processing class comparison request=" + ccRequest);
 
 		int grp1Len = 0, grp2Len = 0;
 		SampleGroup group1 = ccRequest.getGroup1();

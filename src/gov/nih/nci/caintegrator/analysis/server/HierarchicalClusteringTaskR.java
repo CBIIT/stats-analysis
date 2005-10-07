@@ -29,7 +29,7 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 		result = new HierarchicalClusteringResult(getRequest().getSessionId(),
 				getRequest().getTaskId());
 		System.out
-				.println("Processing hierarchical clustering analysis request="
+				.println(this.getExecutingThreadName() + " processing hierarchical clustering analysis request="
 						+ hcRequest);
 
 		// get the submatrix to operate on
@@ -77,8 +77,6 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 
 		byte[] imgCode = getImageCode(plotCmd);
 
-		HierarchicalClusteringResult result = new HierarchicalClusteringResult(
-				hcRequest.getSessionId(), hcRequest.getTaskId());
 		result.setImageCode(imgCode);
 	}
 
@@ -87,10 +85,13 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 		return result;
 	}
 
-	@Override
+	/**
+	 * Clean up some of the memory on the R server
+	 */
 	public void cleanUp() {
-		// TODO Auto-generated method stub
-
+		doRvoidEval("remove(hcInputMatrix)");
+		doRvoidEval("remove(mycluster)");
+		setRconnection(null);
 	}
 
 }

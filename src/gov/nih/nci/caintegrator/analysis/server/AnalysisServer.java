@@ -169,8 +169,9 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 		// RserverIp, RdataFileName);
 		executor = new RThreadPoolExecutor(numRserveConnections, RserverIp,
 				RdataFileName, this);
+		executor.setDebugRcommmands(debugRcommands);
 
-		System.out.println("AnalysisProcessor version=" + version
+		System.out.println("AnalysisServer version=" + version
 				+ " successfully initialized. Now listening for requests...");
 
 	}
