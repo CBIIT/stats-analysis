@@ -95,6 +95,7 @@ public class AnalysisSubmitter implements MessageListener {
 	private JComboBox hcArrayPlatformCombo = new JComboBox();
 	private JComboBox hcaLinkageMethodCombo = new JComboBox();
 	private ImagePanel hcaImagePanel = new ImagePanel();
+	private JPanel hcaImages = new JPanel();
 	
 	  /**
 	   * Topic session, hold on to this so you may close it.
@@ -225,9 +226,9 @@ public class AnalysisSubmitter implements MessageListener {
 		  Image img2 = Toolkit.getDefaultToolkit().createImage(img2Bytes);
 		  Image img3 = Toolkit.getDefaultToolkit().createImage(img3Bytes);
 		  		  
-		  pcaImage1.setImage(img1);
-		  pcaImage2.setImage(img2);
-		  pcaImage3.setImage(img3);
+		  pcaImage1.setImage(img1, 750, 750);
+		  pcaImage2.setImage(img2, 750, 750);
+		  pcaImage3.setImage(img3, 750, 750);
 		 		    
 		  pcaImages.repaint();
 	  }
@@ -237,7 +238,7 @@ public class AnalysisSubmitter implements MessageListener {
 		  
 		  Image img = Toolkit.getDefaultToolkit().createImage(result.getImageCode());
 		  hcaImagePanel.setImage(img,750,750);
-		  hcaImagePanel.repaint();
+		  hcaImages.repaint();
 	  }
 	  
 	  private void processCCresult(ClassComparisonResult result) {
@@ -400,7 +401,8 @@ public class AnalysisSubmitter implements MessageListener {
 		 hcSplitPane.add(hcRequestPanel, JSplitPane.TOP);
 		 hcSplitPane.add(hcResponsePanel, JSplitPane.BOTTOM);
 		 
-		 JScrollPane responseSP = new JScrollPane(hcaImagePanel);
+		 hcaImages.add(hcaImagePanel);
+		 JScrollPane responseSP = new JScrollPane(hcaImages);
 		 hcResponsePanel.add(responseSP);
          JPanel hcButtonPanel = new JPanel();
          JButton hcSubmitButton = new JButton("Submit");
