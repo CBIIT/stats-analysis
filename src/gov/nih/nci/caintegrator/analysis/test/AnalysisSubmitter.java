@@ -729,11 +729,18 @@ public class AnalysisSubmitter implements MessageListener {
 		  }
 		  
 		  
-		  public int getRowCount() { return ccResultEntries.size(); }
+		  public int getRowCount() { 
+			 if (ccResultEntries == null) return 0;  
+			 
+			 return ccResultEntries.size();
+		  }
 		  
 		  public int getColumnCount() { return 6; }
 		  
 		  public Object getValueAt(int row, int col) {
+			  
+			    if (ccResultEntries.isEmpty()) return null;
+			  
 			    ClassComparisonResultEntry resultEntry = ccResultEntries.get(row);
 		        if (col == 0) {
 		          return resultEntry.getReporterId();
