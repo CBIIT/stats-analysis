@@ -27,8 +27,6 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import java.awt.BorderLayout;
-import java.awt.Frame;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -53,7 +51,6 @@ public class AnalysisSubmitter implements MessageListener {
 
 	private static Logger logger = Logger.getLogger(AnalysisSubmitter.class);
     private static String appLocationIp = "156.40.128.136:1099";
-	private static Map requestMap = new HashMap();
 	
 	private PCAtableModel pcaTableModel = new PCAtableModel();
 	private CCtableModel ccTableModel = new CCtableModel();
@@ -560,7 +557,6 @@ public class AnalysisSubmitter implements MessageListener {
         	  public void actionPerformed(ActionEvent event) {
         	     System.out.println("Sending PCA request.");
         	     PrincipalComponentAnalysisRequest req = new PrincipalComponentAnalysisRequest(Integer.toString(1234),Integer.toString(pcaCounter++));
-        	     requestMap.put(new Integer(req.getTaskId()), req);
 			     req.setRequestStartTime(System.currentTimeMillis());
 			     if (pcaVarianceFilterTF.getText().trim().length() > 0) {
 			       double varianceFilterValue = Double.parseDouble(pcaVarianceFilterTF.getText());

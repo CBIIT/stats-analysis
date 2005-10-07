@@ -15,7 +15,6 @@ public class RThreadFactory implements ThreadFactory {
 	}
 
 	public Thread newThread(Runnable r) {
-		// TODO Auto-generated method stub
 		RThread thread = new RThread(r, rServeIp, rDataFileName);
 		return thread;
 	}

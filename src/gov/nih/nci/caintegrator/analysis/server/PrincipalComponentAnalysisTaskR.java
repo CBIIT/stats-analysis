@@ -9,7 +9,6 @@ import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
 import org.rosuda.JRclient.REXP;
-import org.rosuda.JRclient.Rconnection;
 
 public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 
@@ -87,11 +86,11 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 		// yVals.len=" + yVals.length + " zVals.len=" + zVals.length);
 		Vector labels = (Vector) exp.asVector();
 		Vector sampleIds = ((REXP) (labels.get(0))).asVector();
-		Vector pcaLabels = ((REXP) (labels.get(1))).asVector();
+//		Vector pcaLabels = ((REXP) (labels.get(1))).asVector();
 
 		List<PCAresultEntry> pcaResults = new ArrayList<PCAresultEntry>(
 				sampleIds.size());
-		// PCAresultEntry[] pcaArray = new PCAresultEntry[sampleIds.size()];
+
 		String sampleId = null;
 		int index = 0;
 		for (Iterator i = sampleIds.iterator(); i.hasNext();) {

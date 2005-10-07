@@ -2,17 +2,6 @@ package gov.nih.nci.caintegrator.analysis.server;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
-import static gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonRequest.*;
-import static gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringRequest.*;
-
-import org.rosuda.JRclient.RFileInputStream;
-import org.rosuda.JRclient.RSrvException;
-import org.rosuda.JRclient.Rconnection;
-import org.rosuda.JRclient.REXP;
-
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Vector;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -30,7 +19,6 @@ import javax.naming.NamingException;
 import javax.jms.DeliveryMode;
 
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 /**

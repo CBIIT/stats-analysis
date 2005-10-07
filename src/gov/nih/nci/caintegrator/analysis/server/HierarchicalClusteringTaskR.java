@@ -4,7 +4,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
 import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringResult;
 import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringRequest;
 import gov.nih.nci.caintegrator.enumeration.*;
-import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
+//import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
 public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 

@@ -10,11 +10,6 @@ public class RThread extends Thread {
 
 	private Rconnection rConnection;
 
-	// public RThread() {
-	// super();
-	// // TODO Auto-generated constructor stub
-	// }
-
 	public RThread(Runnable target, String rServeIp, String rDataFileName) {
 		super(target);
 		this.rServeIp = rServeIp;
@@ -64,45 +59,10 @@ public class RThread extends Thread {
 		return rConnection;
 	}
 
-	// public RThread(ThreadGroup group, Runnable target) {
-	// super(group, target);
-	// // TODO Auto-generated constructor stub
-	// }
-
-	// public RThread(String name) {
-	// super(name);
-	// // TODO Auto-generated constructor stub
-	// }
-	//
-	// public RThread(ThreadGroup group, String name) {
-	// super(group, name);
-	// // TODO Auto-generated constructor stub
-	// }
-	//
-	// public RThread(Runnable target, String name) {
-	// super(target, name);
-	// // TODO Auto-generated constructor stub
-	// }
-	//
-	// public RThread(ThreadGroup group, Runnable target,
-	// String name) {
-	// super(group, target, name);
-	// // TODO Auto-generated constructor stub
-	// }
-
-	// public RThread(ThreadGroup group, Runnable target,
-	// String name, long stackSize) {
-	// super(group, target, name, stackSize);
-	// // TODO Auto-generated constructor stub
-	// }
-
+	
 	public String getRDataFileName() {
 		return rDataFileName;
 	}
-
-	// public void setRDataFileName(String dataFileName) {
-	// rDataFileName = dataFileName;
-	// }
 
 	public String getRServeIp() {
 		return rServeIp;
@@ -120,10 +80,5 @@ public class RThread extends Thread {
 			e.printStackTrace(System.out);
 		}
 	}
-
-	// public void setRdataFileName(String dataFileName) {
-	// // TODO Auto-generated method stub
-	//		
-	// }
 
 }

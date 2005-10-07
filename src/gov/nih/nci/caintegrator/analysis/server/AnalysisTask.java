@@ -1,7 +1,6 @@
 package gov.nih.nci.caintegrator.analysis.server;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
-import org.rosuda.JRclient.Rconnection;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
 public abstract class AnalysisTask implements Runnable {

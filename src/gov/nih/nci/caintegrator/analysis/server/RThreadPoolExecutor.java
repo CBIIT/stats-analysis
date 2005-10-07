@@ -3,7 +3,6 @@ package gov.nih.nci.caintegrator.analysis.server;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.*;
-import org.rosuda.JRclient.Rconnection;
 
 public class RThreadPoolExecutor extends ThreadPoolExecutor {
 
@@ -61,7 +60,6 @@ public class RThreadPoolExecutor extends ThreadPoolExecutor {
 
 	public void setDebugRcommmands(boolean debugRcommands) {
 	  this.debugRcommands = debugRcommands;
-		
 	}
 	
 	
@@ -73,11 +71,6 @@ public class RThreadPoolExecutor extends ThreadPoolExecutor {
 		if (hostName == null) { 
 			try {
 				InetAddress addr = InetAddress.getLocalHost();
-	
-				// Get IP Address
-				byte[] ipAddr = addr.getAddress();
-	
-				// Get hostname
 				hostName = addr.getHostName();
 			} 
 			catch (UnknownHostException e) {
