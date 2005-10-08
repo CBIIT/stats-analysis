@@ -1,5 +1,6 @@
 package gov.nih.nci.caintegrator.ui.dtos;
 
+import gov.nih.nci.caintegrator.enumeration.Operator;
 import gov.nih.nci.caintegrator.exceptions.ValidationException;
 import gov.nih.nci.caintegrator.query.Validatable;
 /**
@@ -20,7 +21,7 @@ public enum QueryDTO implements Validatable{
 	private QueryParametersDTO parameters;
 	private String queryID;
 	private QueryDTO siblingQueryDTO;
-	private BooleanOperandDTO operand;
+	private Operator operator;
 	
 	public boolean validate() throws ValidationException{
 		/*
@@ -75,16 +76,16 @@ public enum QueryDTO implements Validatable{
 		this.queryID = uniqueID;
 	}
 	/**
-	 * @return Returns the operand.
+	 * @return Returns the operator.
 	 */
-	public BooleanOperandDTO getOperand() {
-		return operand;
+	public Operator getOperator() {
+		return operator;
 	}
 	/**
-	 * @param operand The operand to set.
+	 * @param operator The operator to set.
 	 */
-	public void setOperand(BooleanOperandDTO operand) {
-		this.operand = operand;
+	public void setOperator(Operator operator) {
+		this.operator = operator;
 	}
 
 }
