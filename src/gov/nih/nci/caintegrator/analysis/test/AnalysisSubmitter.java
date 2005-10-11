@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.analysis.test;
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 import gov.nih.nci.caintegrator.enumeration.*;
+import gov.nih.nci.caintegrator.analysis.visualization.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -69,6 +70,7 @@ public class AnalysisSubmitter implements MessageListener {
 	private ImagePanel pcaImage1 = new ImagePanel();
 	private ImagePanel pcaImage2 = new ImagePanel();
 	private ImagePanel pcaImage3 = new ImagePanel();
+	private SelectablePlot3DPanel pca3Dviz = new SelectablePlot3DPanel();
 
 	
 	//class comparison 
@@ -208,10 +210,26 @@ public class AnalysisSubmitter implements MessageListener {
 	private void handleException(AnalysisServerException exception) {
 		 JOptionPane.showMessageDialog(null, exception.getMessage(), "AnalysisServerException", JOptionPane.ERROR_MESSAGE);
 	}
+	
+	private PlotData convertPCAresultEntry2plotData(PCAresultEntry entry) {
+	  PlotData pd = new PlotData(entry.getSampleId(), entry.getPc1(), entry.getPc2(), entry.getPc3());
+	  return pd;
+	}
 
 	private void processPCAresult(PrincipalComponentAnalysisResult result) {
 		  System.out.println("Proccessing PCA result=" + result);
-		  pcaTableModel.setPCAdata(result.getResultEntries());
+		  List<PCAresultEntry> entryList = result.getResultEntries();
+		  pcaTableModel.setPCAdata(entryList);
+		  
+		  PlotData[] plotData = new PlotData[entryList.size()];
+		  int i = 0;
+		  for (PCAresultEntry entry : entryList) {
+		     plotData[i] = convertPCAresultEntry2plotData(entry);
+		     i++;
+		  }
+		  
+	  	  pca3Dviz.addScatterPlot("Patient Data", plotData);
+	  		
 		  
 		  //create the image from the PCA data
 		  byte[] img1Bytes = result.getImage1Bytes();
@@ -510,7 +528,8 @@ public class AnalysisSubmitter implements MessageListener {
      	 
 	}
 	  
-	  private void buildPCAGui(JTabbedPane tabbedPane) {
+	
+	private void buildPCAGui(JTabbedPane tabbedPane) {
 		  JSplitPane pcaSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		  tabbedPane.addTab("Principal Component Analysis", pcaSplitPane);
 		     
@@ -612,7 +631,12 @@ public class AnalysisSubmitter implements MessageListener {
           JScrollPane pcaResultTableSP = new JScrollPane(pcaResultTable);
           pcaResponseSP.add(pcaResultTableSP, JSplitPane.TOP);
           
+          pca3Dviz.addLegend("SOUTH");
+          pca3Dviz.setEditable(true);
+          pca3Dviz.setNotable(true);
+
           pcaImages = new JPanel();
+          pcaImages.add(pca3Dviz);
           pcaImages.add(pcaImage1);
     	  pcaImages.add(pcaImage2);
     	  pcaImages.add(pcaImage3);
