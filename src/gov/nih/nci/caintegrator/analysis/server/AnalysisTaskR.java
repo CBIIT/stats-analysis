@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Vector;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.*;
+
 
 import org.rosuda.JRclient.REXP;
 import org.rosuda.JRclient.RFileInputStream;
@@ -115,6 +119,16 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 			}
 		}
 		return sb.toString();
+	}
+	
+	public Image getImage(String plotCmd) {
+		
+		byte[] imgCode = getImageCode(plotCmd);
+		
+		Image img = Toolkit.getDefaultToolkit().createImage(imgCode);
+		
+		return img;
+		
 	}
 
 	/**
