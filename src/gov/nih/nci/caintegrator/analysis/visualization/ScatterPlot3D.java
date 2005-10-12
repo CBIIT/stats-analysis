@@ -1,7 +1,5 @@
 package gov.nih.nci.caintegrator.analysis.visualization;
 
-
-
 import java.awt.*;
 
 import javax.swing.*;
@@ -10,6 +8,15 @@ import java.util.*;
 import org.math.plot.*;
 import org.math.plot.render.*;
 import org.math.plot.plots.*;
+
+/**
+ * This class extends the JMathPlot Plot class. It adds the
+ * ability to create 3DScatterPlots using PlotData instead of an 
+ * array of doubles.
+ * 
+ * @author Michael A. Harris
+ *
+ */
 
 public class ScatterPlot3D extends Plot {
 

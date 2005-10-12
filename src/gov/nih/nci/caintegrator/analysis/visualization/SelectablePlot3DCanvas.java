@@ -10,6 +10,15 @@ import org.math.plot.plots.ScatterPlot;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * This class extends the JMathPlot Plot3DCanvas. 
+ * It adds tooltips that popup when the mouse moves over
+ * a data point.
+ * 
+ * @author Michael A. Harris
+ *
+ */
+
 public class SelectablePlot3DCanvas extends Plot3DCanvas {
 
 	public SelectablePlot3DCanvas() {

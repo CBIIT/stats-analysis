@@ -14,7 +14,7 @@ import javax.swing.JTabbedPane;
 import org.math.plot.*;
 
 /**
- * Copyright : BSD License
+ * E
  * 
  * @author Yann RICHET
  */

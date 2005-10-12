@@ -1,5 +1,12 @@
 package gov.nih.nci.caintegrator.analysis.visualization;
 
+/**
+ * A class representing a named data point.
+ * 
+ * @author Michael A. Harris
+ *
+ */
+
 public class PlotData {
 
 	private double x, y, z;

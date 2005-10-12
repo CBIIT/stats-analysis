@@ -1,6 +1,11 @@
 package gov.nih.nci.caintegrator.analysis.visualization;
 
-
+/**
+ * This class extends the JMathPlot Plot3DPanel.   It adds the ability to create
+ * 3D scatter plots of named data points. 
+ * 
+ * @author Michael A. Harris
+ */
 
 import java.awt.Color;
 
