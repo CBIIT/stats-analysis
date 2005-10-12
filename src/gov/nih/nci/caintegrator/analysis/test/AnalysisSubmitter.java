@@ -41,6 +41,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import java.text.DecimalFormat;
+import java.util.*;
 
 /**
  * This class tests submitting a request to the analysis server 
@@ -72,6 +73,19 @@ public class AnalysisSubmitter implements MessageListener {
 	private ImagePanel pcaImage3 = new ImagePanel();
 	private SelectablePlot3DPanel pca3Dviz = new SelectablePlot3DPanel();
 
+	private SampleGroup gbmGrp = new SampleGroup("GBM");
+	private SampleGroup astroGrp = new SampleGroup("ASTRO");
+	private SampleGroup normalGrp = new SampleGroup("NORMAL");
+	private SampleGroup oligoGrp = new SampleGroup("OLIGO");
+	private SampleGroup mixedGrp = new SampleGroup("MIXED");
+	
+	private String gbmHFids = "HF0024,HF0031,HF0048,HF0050,HF0066,HF0089,HF0138,HF0142,HF0180,HF0184,HF0212,HF0218,HF0244,HF0268,HF0300.3,HF0316,HF0350,HF0408,HF0435,HF0442.5,HF0445,HF0460,HF0505,HF0520,HF0543,HF0583,HF0627,HF0652.4,HF0654,HF0702,HF0790,HF0850,HF0855,HF0894,HF0936,HF0954.2,HF0963,HF0982,HF0986,HF0990,HF0992,HF0996,HF1057,HF1058,HF1077,HF1078,HF1097,HF1122,HF1137,HF1178,HF1186,HF1191,HF1220,HF1242,HF1255,HF1262,HF1280,HF1286,HF1292,HF1318,HF1326,HF1338,HF1356,HF1357,HF1382,HF1397,HF1409,HF1458,HF1475,HF1490,HF1492,HF1494,HF1509,HF1517,HF1534,HF1538,HF1540,HF1585,HF1589,HF1608,HF1618,HF1628,HF1640,HF1667,HF1671,HF1702";
+	private String oligoHFids = "HF0087,HF0251,HF0285,HF0291,HF0327,HF0329,HF0332,HF0434,HF0453,HF0471,HF0488,HF0510,HF0599,HF0615,HF0639,HF0670,HF0726,HF0813,HF0816,HF0822,HF0828,HF0835,HF0897,HF0899,HF0914,HF0920,HF0931,HF0960,HF0962,HF0966,HF0975,HF1136,HF1150,HF1156,HF1167,HF1185,HF1219,HF1227,HF1235,HF1325,HF1334,HF1345,HF1348,HF1380,HF1381,HF1489,HF1493,HF1502,HF1551,HF1606,HF1613,HF1677";
+	private String astroHFids = "HF0017,HF0026,HF0108,HF0152,HF0189,HF0223,HF0450,HF0491,HF0608,HF0757,HF0778,HF0953,HF1000,HF1032,HF1139,HF1232,HF1246,HF1269,HF1295,HF1316,HF1344,HF1366,HF1407,HF1442,HF1469,HF1487,HF1511,HF1568,HF1581,HF1587,HF1708";
+	private String mixedHFids = "HF0022,HF0183,HF0252,HF0305,HF0606,HF0802,HF0844,HF0891,HF1090,HF1297,HF1319,HF1588";
+	private String normalHFids = "HF0088,HF0120,HF0131,HF0137,HF0141,HF0151,HF0163,HF0171,HF0178,HF0201,HF0211,HF0232,HF0295,HF0303,HF0312,HF0377,HF0383,HF0467,HF0512,HF0523,HF0526,HF0533,HF0593,HF0616";
+
+	
 	
 	//class comparison 
 	private JTextField ccSampleGroup1Ids = new JTextField(25);
@@ -155,6 +169,10 @@ public class AnalysisSubmitter implements MessageListener {
 	    requestQueue = (Queue)context.lookup("queue/AnalysisRequest");
 	    resultQueue = (Queue)context.lookup("queue/AnalysisResponse");
 
+	    //load sample groups this will be provided in the middle tier
+	    initializeSampleGroups();
+	    
+	    
 	    // Create a publisher
 	    requestSender = queueSession.createSender(requestQueue);
 		resultReceiver = queueSession.createReceiver(resultQueue);
@@ -162,7 +180,24 @@ public class AnalysisSubmitter implements MessageListener {
 		queueConnection.start();
 	}
 	
-	  /**
+	private void initializeSampleGroups() {
+	  initializeSampleGroup(gbmGrp, gbmHFids);
+	  initializeSampleGroup(astroGrp, astroHFids);
+	  initializeSampleGroup(oligoGrp, oligoHFids);
+	  initializeSampleGroup(mixedGrp, mixedHFids);
+	  initializeSampleGroup(normalGrp, normalHFids);
+	}
+	
+	private void initializeSampleGroup(SampleGroup grp, String identifierStr) {
+	  StringTokenizer t = new StringTokenizer(identifierStr, ",");
+	  String id;
+	  while(t.hasMoreTokens()) {
+	    id = t.nextToken().trim();
+	    grp.add(id.trim());
+	  }
+	}
+
+	/**
 	   * Implementation of the MessageListener interface,
 	   * messages will be received through this method.
 	   */
@@ -215,6 +250,12 @@ public class AnalysisSubmitter implements MessageListener {
 	  PlotData pd = new PlotData(entry.getSampleId(), entry.getPc1(), entry.getPc2(), entry.getPc3());
 	  return pd;
 	}
+	
+	private PlotData[] getPlotArray(List<PlotData> plotDataList) {
+	  PlotData[] retArr = new PlotData[plotDataList.size()];
+	  plotDataList.toArray(retArr);
+	  return retArr;
+	}
 
 	private void processPCAresult(PrincipalComponentAnalysisResult result) {
 		  System.out.println("Proccessing PCA result=" + result);
@@ -223,13 +264,39 @@ public class AnalysisSubmitter implements MessageListener {
 		  
 		  PlotData[] plotData = new PlotData[entryList.size()];
 		  int i = 0;
+		  PlotData pd;
+		  List<PlotData> gbmPlotData = new ArrayList<PlotData>();
+		  List<PlotData> astroPlotData = new ArrayList<PlotData>();
+		  List<PlotData> oligoPlotData = new ArrayList<PlotData>();
+		  List<PlotData> mixedPlotData = new ArrayList<PlotData>();
+		  List<PlotData> normalPlotData = new ArrayList<PlotData>();
+		  
 		  for (PCAresultEntry entry : entryList) {
-		     plotData[i] = convertPCAresultEntry2plotData(entry);
-		     i++;
+			 pd = convertPCAresultEntry2plotData(entry);
+			 if (gbmGrp.contains(pd.getName())) {
+			   gbmPlotData.add(pd);
+			 }
+			 else if (oligoGrp.contains(pd.getName())) {
+			   oligoPlotData.add(pd);
+			 }
+			 else if (astroGrp.contains(pd.getName())) {
+				astroPlotData.add(pd); 
+			 }
+			 else if (mixedGrp.contains(pd.getName())) {
+				mixedPlotData.add(pd);
+			 }
+			 else if (normalGrp.contains(pd.getName())) {
+				normalPlotData.add(pd);
+			 }
 		  }
 		  
-	  	  pca3Dviz.addScatterPlot("Patient Data", plotData);
-	  		
+		  
+		  
+	  	  pca3Dviz.addScatterPlot("GBM", getPlotArray(gbmPlotData));
+	  	  pca3Dviz.addScatterPlot("ASTRO", getPlotArray(astroPlotData));
+	  	  pca3Dviz.addScatterPlot("OLIGO", getPlotArray(oligoPlotData));
+	  	  pca3Dviz.addScatterPlot("MIXED", getPlotArray(mixedPlotData));
+	  	  pca3Dviz.addScatterPlot("NORMAL", getPlotArray(normalPlotData));
 		  
 		  //create the image from the PCA data
 		  byte[] img1Bytes = result.getImage1Bytes();
