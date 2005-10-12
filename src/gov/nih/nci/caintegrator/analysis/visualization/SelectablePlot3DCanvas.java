@@ -25,7 +25,7 @@ public class SelectablePlot3DCanvas extends Plot3DCanvas {
 	}
 	
 	public void mouseClicked(MouseEvent event) {
-	  super.mouseClicked(event);
+	  //super.mouseClicked(event);
 	  System.out.println("Mouse clicked on point=" + event.getPoint());
 	}
 	
