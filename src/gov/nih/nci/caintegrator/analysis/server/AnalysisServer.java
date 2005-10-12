@@ -85,7 +85,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	 * @param topicJNDI
 	 *            name of the topic destination to look up
 	 */
-	public AnalysisServer(String factoryJNDI) throws JMSException,
+	public AnalysisServer(String factoryJNDI, String serverPropertiesFileName) throws JMSException,
 			NamingException {
 
 		// load properties from a properties file
@@ -93,7 +93,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 
 		try {
 			analysisServerConfigProps.load(new FileInputStream(
-					"analysisServer.properties"));
+					serverPropertiesFileName));
 			JBossMQ_locationIp = analysisServerConfigProps
 					.getProperty("jmsmq_location");
 			RserverIp = analysisServerConfigProps
@@ -149,6 +149,11 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 				+ " successfully initialized. numComputeThreads=" + numComputeThreads + " RserverIp=" + RserverIp + " RdataFileName=" + RdataFileName);
 		System.out.println("Now listening for requests...");
 
+	}
+
+	public AnalysisServer(String factoryJNDI) throws JMSException,
+	NamingException {
+	  this(factoryJNDI, "analysisServer.properties");
 	}
 
 	/**
@@ -268,10 +273,15 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	public static void main(String[] args) {
 
 		try {
-			AnalysisServer server = new AnalysisServer(
-			// Name of ConnectionFactory
-					"ConnectionFactory");
-		} catch (Exception ex) {
+			if (args.length > 0) {
+			  String serverPropsFile = args[0];
+			  AnalysisServer server = new AnalysisServer("ConnectionFactory", serverPropsFile);
+			}
+			else {
+			  AnalysisServer server = new AnalysisServer("ConnectionFactory");
+			}
+		} 
+		catch (Exception ex) {
 
 			System.err
 					.println("An exception occurred while testing AnalysisProcessor: "
