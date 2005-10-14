@@ -40,11 +40,11 @@ public class SelectablePlot3DPanel extends Plot3DPanel {
 //		return ((SelectablePlot3DCanvas) plotCanvas).addScatterPlot(name, c, plotData);
 //	}
 	
-	public int addScatterPlot(String name, Color c, double[]... XY) {
+	public int addScatterPlot(String name, Color c, double[][] XY) {
 		return ((SelectablePlot3DCanvas) plotCanvas).addScatterPlot(name, c, XY);
 	}
 
-	public int addScatterPlot(String name, double[]... XY) {
+	public int addScatterPlot(String name, double[][] XY) {
 		return addScatterPlot(name, getNewColor(), XY);
 	}
 

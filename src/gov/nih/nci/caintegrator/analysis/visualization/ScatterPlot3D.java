@@ -68,8 +68,14 @@ public class ScatterPlot3D extends Plot {
 				draw.setDotType(AbstractDrawer.ROUND_DOT);
 		}
 
+		double[] plotDataArr = new double[3];
+		
 		for (int i = 0; i < plotData.length; i++) {
-			draw.drawDot(plotData[i].getX(), plotData[i].getY(), plotData[i].getZ());
+			plotDataArr[0] = plotData[i].getX();
+			plotDataArr[1] = plotData[i].getY();
+			plotDataArr[2] = plotData[i].getZ();
+ 			//draw.drawDot(plotData[i].getX(), plotData[i].getY(), plotData[i].getZ());
+			draw.drawDot(plotDataArr);
 		}
 	}
 
@@ -98,10 +104,15 @@ public class ScatterPlot3D extends Plot {
 		return plotData;
 	}
 	
-	public java.util.List<PlotData> getPickedData(int[] screenCoordTest, AbstractDrawer draw) {
-		java.util.List<PlotData> matchedData = new ArrayList<PlotData>();
+	public java.util.List getPickedData(int[] screenCoordTest, AbstractDrawer draw) {
+		java.util.List matchedData = new ArrayList();
+		double[] plotDataArr = new double[3];
 		for (int i = 0; i < plotData.length; i++) {
-			int[] screenCoord = draw.project(plotData[i].getX(), plotData[i].getY(), plotData[i].getZ());
+			plotDataArr[0] = plotData[i].getX();
+			plotDataArr[1] = plotData[i].getY();
+			plotDataArr[2] = plotData[i].getZ();
+			//int[] screenCoord = draw.project(plotData[i].getX(), plotData[i].getY(), plotData[i].getZ());
+			int [] screenCoord = draw.project(plotDataArr);
 
 			//System.out.println("isSelected checking screenCoord=(" + screenCoord[0] + "," + screenCoord[1] + ") against testCoord=(" + screenCoordTest[0] + "," + screenCoordTest[1] + ")");
 			
@@ -167,12 +178,10 @@ public class ScatterPlot3D extends Plot {
 		new FrameView(p2).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	@Override
 	public void setData(double[][] d) {
 		throw new IllegalStateException("Call setPlotData instead");
 	}
 
-	@Override
 	public double[][] getData() {
 		return XY;
 	}
