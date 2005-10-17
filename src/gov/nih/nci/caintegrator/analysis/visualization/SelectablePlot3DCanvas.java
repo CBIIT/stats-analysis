@@ -60,7 +60,7 @@ public class SelectablePlot3DCanvas extends Plot3DCanvas {
 			matchedData = ((ScatterPlot3D)getPlot(i)).getPickedData(mousePos, draw);
 			if (!matchedData.isEmpty()) {
 			  PlotData dp = (PlotData) matchedData.get(0);
-			  setToolTipText("Mouse over data point=" + dp);
+			  setToolTipText(dp.toString());
 			  foundMatch = true;
 			  break;
 			}
