@@ -42,6 +42,7 @@ import java.awt.Graphics2D;
 
 import java.text.DecimalFormat;
 import java.util.*;
+import java.io.*;
 
 /**
  * This class tests submitting a request to the analysis server 
@@ -257,10 +258,18 @@ public class AnalysisSubmitter implements MessageListener {
 	  return retArr;
 	}
 
+	private void dumpPlotData(PrintWriter out, String groupName,  List<PlotData> theList) {
+		for (PlotData data : theList) {
+		  out.println(data.getName() + "," + groupName + "," + data.getX() + "," + data.getY() + "," + data.getZ());
+		}
+	}
+	
 	private void processPCAresult(PrincipalComponentAnalysisResult result) {
 		  System.out.println("Proccessing PCA result=" + result);
 		  List<PCAresultEntry> entryList = result.getResultEntries();
 		  pcaTableModel.setPCAdata(entryList);
+		  
+		  
 		  
 		  PlotData[] plotData = new PlotData[entryList.size()];
 		  int i = 0;
@@ -290,7 +299,19 @@ public class AnalysisSubmitter implements MessageListener {
 			 }
 		  }
 		  
-		  
+//		dump the pca data
+//		  try {
+//			  PrintWriter out = new PrintWriter(new FileWriter("HFpca.txt"));
+//		      dumpPlotData(out, "GBM",  gbmPlotData);
+//		      dumpPlotData(out, "ASTRO", astroPlotData);
+//		      dumpPlotData(out, "OLIGO", oligoPlotData);
+//		      dumpPlotData(out, "MIXED", mixedPlotData);
+//		      dumpPlotData(out, "NORMAL", normalPlotData);	  
+//			  out.close();
+//		  } catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//		  }
 		  
 	  	  pca3Dviz.addScatterPlot("GBM", getPlotArray(gbmPlotData));
 	  	  pca3Dviz.addScatterPlot("ASTRO", getPlotArray(astroPlotData));

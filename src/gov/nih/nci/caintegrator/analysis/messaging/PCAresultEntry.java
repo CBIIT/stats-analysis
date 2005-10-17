@@ -36,4 +36,8 @@ public class PCAresultEntry implements Serializable {
 	public double getPc3() {
 		return pc3;
 	}
+
+	public String toCommaDelimitedString() {
+	  return sampleId +"," + pc1 + "," + pc2 + "," + pc3;
+	}
 }
