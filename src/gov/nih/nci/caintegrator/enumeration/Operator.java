@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.enumeration;
 
+import java.io.Serializable;
+
 
 /**
  * @author sahnih
@@ -7,7 +9,7 @@ package gov.nih.nci.caintegrator.enumeration;
  * are used through out the caIntegrator to formulate criteria.
  *
  */
-public enum Operator {
+public enum Operator implements Serializable{
 	GT, //greater than
 	LT, //less than
 	EQ, //equals

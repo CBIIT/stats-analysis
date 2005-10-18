@@ -1,6 +1,8 @@
 package gov.nih.nci.caintegrator.enumeration;
 
-public enum StatisticalSignificanceType {
+import java.io.Serializable;
+
+public enum StatisticalSignificanceType implements Serializable{
 	pValue,
 	adjustedpValue;
 }

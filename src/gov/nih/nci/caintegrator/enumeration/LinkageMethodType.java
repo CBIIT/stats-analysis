@@ -1,4 +1,10 @@
 package gov.nih.nci.caintegrator.enumeration;
 
-public enum LinkageMethodType { Average, Single, Complete };
+import java.io.Serializable;
+
+public enum LinkageMethodType implements Serializable{
+	Average,
+	Single,
+	Complete;
+	}
 

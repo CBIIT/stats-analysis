@@ -1,6 +1,8 @@
 package gov.nih.nci.caintegrator.enumeration;
 
-public enum ArrayPlatformType {
+import java.io.Serializable;
+
+public enum ArrayPlatformType implements Serializable{
 AFFY_OLIGO_PLATFORM {
 	public String toString()
 	{ 

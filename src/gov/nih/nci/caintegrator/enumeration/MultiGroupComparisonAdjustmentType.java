@@ -1,10 +1,12 @@
 package gov.nih.nci.caintegrator.enumeration;
 
+import java.io.Serializable;
+
 /**
  * @author sahnih
  *
  */
-public enum MultiGroupComparisonAdjustmentType {
+public enum MultiGroupComparisonAdjustmentType implements Serializable{
 	/** Lists all the possible MultiGroup Comparison Adjustment Types used in 
 	 * Class Comparion
 	 */

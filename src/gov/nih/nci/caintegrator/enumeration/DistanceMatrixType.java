@@ -1,4 +1,9 @@
 package gov.nih.nci.caintegrator.enumeration;
 
-public enum DistanceMatrixType {Correlation, Euclidean }
+import java.io.Serializable;
+
+public enum DistanceMatrixType implements Serializable {
+	Correlation,
+	Euclidean;
+	}
 

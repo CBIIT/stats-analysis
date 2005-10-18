@@ -1,4 +1,9 @@
 package gov.nih.nci.caintegrator.enumeration;
 
-public enum ClusterByType {Genes, Samples};
+import java.io.Serializable;
+
+public enum ClusterByType implements Serializable{
+	Genes,
+	Samples;
+}
 

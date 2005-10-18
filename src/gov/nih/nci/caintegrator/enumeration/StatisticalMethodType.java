@@ -1,6 +1,8 @@
 package gov.nih.nci.caintegrator.enumeration;
 
-public enum StatisticalMethodType { 
+import java.io.Serializable;
+
+public enum StatisticalMethodType implements Serializable{ 
 	TTest { 
 		public String toString() 
 		{ 
