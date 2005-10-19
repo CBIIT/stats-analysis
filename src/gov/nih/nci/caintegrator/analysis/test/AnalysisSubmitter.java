@@ -53,7 +53,7 @@ import java.io.*;
 public class AnalysisSubmitter implements MessageListener {
 
 	private static Logger logger = Logger.getLogger(AnalysisSubmitter.class);
-    private static String appLocationIp = "156.40.128.136:1099";
+    private static String appLocationIp = "156.40.131.38:1099";
 	
 	private PCAtableModel pcaTableModel = new PCAtableModel();
 	private CCtableModel ccTableModel = new CCtableModel();
