@@ -41,7 +41,7 @@ public class MultiGroupComparisonAdjustmentTypeDE extends DomainElement implemen
 	 *            the value
 	 */
 	public void setValue(Object obj) throws Exception {
-		if (!(obj instanceof String))
+		if (!(obj instanceof MultiGroupComparisonAdjustmentType))
 			throw new Exception(
 					"Could not set the value.  Parameter is of invalid data type: "
 							+ obj);

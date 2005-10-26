@@ -10,7 +10,11 @@ public enum MultiGroupComparisonAdjustmentType implements Serializable{
 	/** Lists all the possible MultiGroup Comparison Adjustment Types used in 
 	 * Class Comparion
 	 */
-	NONE , 
+	NONE { 
+        public String toString() 
+        { 
+            return "";
+        } }, 
 	FWER { 
 		public String toString() 
 		{ 

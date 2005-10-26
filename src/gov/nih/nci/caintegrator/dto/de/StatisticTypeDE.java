@@ -41,7 +41,7 @@ public class StatisticTypeDE extends DomainElement implements Serializable, Clon
 	 *            the value
 	 */
 	public void setValue(Object obj) throws Exception {
-		if (!(obj instanceof String))
+		if (!(obj instanceof StatisticalMethodType))
 			throw new Exception(
 					"Could not set the value.  Parameter is of invalid data type: "
 							+ obj);
