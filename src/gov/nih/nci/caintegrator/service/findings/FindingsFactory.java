@@ -42,7 +42,7 @@ public interface FindingsFactory {
 	public ClinicalFinding createClinicalFinding(Query query);
 	
 	/**
-	 * Creates and returns a ClassComparisonFinding using the parameters
+	 * Creates and returns a ClassComparisonFinding using the parameters passed in the given query
 	 * @param query
 	 * @return
 	 */
