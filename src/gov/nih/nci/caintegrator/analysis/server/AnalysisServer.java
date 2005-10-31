@@ -6,6 +6,7 @@ import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.ExceptionListener;
 import javax.jms.ObjectMessage;
 import javax.jms.QueueConnection;
 import javax.jms.QueueConnectionFactory;
@@ -30,13 +31,12 @@ import java.util.*;
  * AnalysisServer should register handlers which are specifed from a
  * configuration file.
  */
-public class AnalysisServer implements MessageListener, AnalysisResultSender {
+public class AnalysisServer implements MessageListener, ExceptionListener, AnalysisResultSender {
 
-	public static String version = "2.5";
+	public static String version = "3.0";
 
 	private boolean debugRcommands = false;
 
-	
 	private static String JBossMQ_locationIp = "156.40.128.136:1099"; // my machine
 																		
 	private static int numComputeThreads = 1;
@@ -47,21 +47,19 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 
 	private RThreadPoolExecutor executor;
 
-	/**
-	 * Topic connection, hold on to this so you may close it.
-	 */
 	private QueueConnection queueConnection;
 
 	private Queue requestQueue;
 
 	private Queue resultQueue;
 
-	/**
-	 * Topic session, hold on to this so you may close it. Also used to create
-	 * messages.
-	 */
-	// TopicSession topicSession;
 	private QueueSession queueSession;
+	
+	private Hashtable contextProperties = new Hashtable();
+	
+	private String factoryJNDI = null;
+	
+	private static long reconnectWaitTimeMS = 10000L;
 
 	/**
 	 * Subscriber
@@ -87,6 +85,8 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	 */
 	public AnalysisServer(String factoryJNDI, String serverPropertiesFileName) throws JMSException,
 			NamingException {
+		
+		this.factoryJNDI = factoryJNDI;
 
 		// load properties from a properties file
 		Properties analysisServerConfigProps = new Properties();
@@ -104,38 +104,16 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 					.getProperty("RdefinitionFile");
 			debugRcommands = Boolean.parseBoolean(analysisServerConfigProps
 					.getProperty("debugRcommands"));
+			reconnectWaitTimeMS = Long.parseLong(analysisServerConfigProps
+					.getProperty("reconnectWaitTimeMS"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace(System.out);
 		} catch (IOException e) {
 			e.printStackTrace(System.out);
+		} catch (NumberFormatException nfException) {
+			nfException.printStackTrace(System.out);
 		}
-
-		Hashtable props = new Hashtable();
-		props.put(Context.INITIAL_CONTEXT_FACTORY,
-				"org.jnp.interfaces.NamingContextFactory");
-		props.put(Context.PROVIDER_URL, JBossMQ_locationIp);
-		props.put("java.naming.rmi.security.manager", "yes");
-		props.put(Context.URL_PKG_PREFIXES, "org.jboss.naming");
-
-		// Get the initial context with given properties
-		Context context = new InitialContext(props);
-
-		requestQueue = (Queue) context.lookup("queue/AnalysisRequest");
-		resultQueue = (Queue) context.lookup("queue/AnalysisResponse");
-		QueueConnectionFactory qcf = (QueueConnectionFactory) context
-				.lookup(factoryJNDI);
-
-		queueConnection = qcf.createQueueConnection();
-
-		queueSession = queueConnection.createQueueSession(false,
-				QueueSession.AUTO_ACKNOWLEDGE);
-
-		requestReceiver = queueSession.createReceiver(requestQueue);
-
-		requestReceiver.setMessageListener(this);
-
-		resultSender = queueSession.createSender(resultQueue);
-
+		
 		// initialize the compute threads
 		
 		executor = new RThreadPoolExecutor(numComputeThreads, RserverIp,
@@ -143,11 +121,18 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 		
 		executor.setDebugRcommmands(debugRcommands);
 		
-		queueConnection.start();
+		//establish the JMS queue connections
+		contextProperties.put(Context.INITIAL_CONTEXT_FACTORY,
+		   "org.jnp.interfaces.NamingContextFactory");
+		contextProperties.put(Context.PROVIDER_URL, JBossMQ_locationIp);
+		contextProperties.put("java.naming.rmi.security.manager", "yes");
+		contextProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.naming");
+		
+		establishQueueConnection();
+		
 
 		System.out.println("AnalysisServer version=" + version
 				+ " successfully initialized. numComputeThreads=" + numComputeThreads + " RserverIp=" + RserverIp + " RdataFileName=" + RdataFileName);
-		System.out.println("Now listening for requests...");
 
 	}
 
@@ -155,6 +140,54 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 	NamingException {
 	  this(factoryJNDI, "analysisServer.properties");
 	}
+	
+	
+	private void establishQueueConnection() {
+        
+		try {
+			
+		  System.out.println("Attempting to establish queue connection with provider: " + contextProperties.get(Context.PROVIDER_URL));
+			
+		  //Get the initial context with given properties
+		  Context context = new InitialContext(contextProperties);
+
+		  requestQueue = (Queue) context.lookup("queue/AnalysisRequest");
+		  resultQueue = (Queue) context.lookup("queue/AnalysisResponse");
+		  QueueConnectionFactory qcf = (QueueConnectionFactory) context
+				.lookup(factoryJNDI);
+
+		  queueConnection = qcf.createQueueConnection();
+		  queueConnection.setExceptionListener(this);
+			
+		  queueSession = queueConnection.createQueueSession(false,
+					QueueSession.AUTO_ACKNOWLEDGE);
+			
+		  requestReceiver = queueSession.createReceiver(requestQueue);
+	
+		  requestReceiver.setMessageListener(this);
+			 
+		  resultSender = queueSession.createSender(resultQueue);
+		  
+		  queueConnection.start();
+		  
+		  System.out.println("  successfully established queue connection.");
+		  System.out.println("Now listening for requests...");
+		  
+		}
+		catch (Exception ex) {
+		  System.out.println("  could not establish connection. Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds..."); 
+		  try { 
+		    Thread.sleep(reconnectWaitTimeMS);
+		    establishQueueConnection();
+		  }
+		  catch (Exception ex2) {
+		    System.out.println("Caugh exception while trying to sleep.." + ex2.getMessage());
+		    ex2.printStackTrace(System.out);
+		    return;
+		  }
+	    }
+	}
+	
 
 	/**
 	 * Implementation of the MessageListener interface, messages will be
@@ -190,7 +223,7 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 		}
 
 	}
-
+	
 	
 	/**
 	 * Process a class comparison analysis request.
@@ -290,6 +323,17 @@ public class AnalysisServer implements MessageListener, AnalysisResultSender {
 
 		}
 
+	}
+
+	/**
+	 * If there is a problem with the connection then re-establish 
+	 * the connection.
+	 */
+	public void onException(JMSException exception) {
+	  System.out.println("onException: caught JMSexception: " + exception.getMessage());
+	  
+	  //attempt to re-establish the queue connection
+	  establishQueueConnection();
 	}
 
 }
