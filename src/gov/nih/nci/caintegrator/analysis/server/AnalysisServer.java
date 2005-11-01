@@ -141,51 +141,62 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 	  this(factoryJNDI, "analysisServer.properties");
 	}
 	
-	
+	/**
+	 * Establish a connection to the JMS queues.  If it is not possible
+	 * to connect then this method will sleep for reconnectWaitTimeMS milliseconds and
+	 * then try to connect again.  
+	 *
+	 */
 	private void establishQueueConnection() {
         
-		try {
-			
-		  System.out.println("Attempting to establish queue connection with provider: " + contextProperties.get(Context.PROVIDER_URL));
-			
-		  //Get the initial context with given properties
-		  Context context = new InitialContext(contextProperties);
-
-		  requestQueue = (Queue) context.lookup("queue/AnalysisRequest");
-		  resultQueue = (Queue) context.lookup("queue/AnalysisResponse");
-		  QueueConnectionFactory qcf = (QueueConnectionFactory) context
-				.lookup(factoryJNDI);
-
-		  queueConnection = qcf.createQueueConnection();
-		  queueConnection.setExceptionListener(this);
-			
-		  queueSession = queueConnection.createQueueSession(false,
-					QueueSession.AUTO_ACKNOWLEDGE);
-			
-		  requestReceiver = queueSession.createReceiver(requestQueue);
+		boolean connected = false;
+		Context context = null;
+		
+		while (!connected) {
+		
+			try {
+				
+			  System.out.println("Attempting to establish queue connection with provider: " + contextProperties.get(Context.PROVIDER_URL));
+				
+			  //Get the initial context with given properties
+			  context = new InitialContext(contextProperties);
 	
-		  requestReceiver.setMessageListener(this);
-			 
-		  resultSender = queueSession.createSender(resultQueue);
-		  
-		  queueConnection.start();
-		  
-		  System.out.println("  successfully established queue connection.");
-		  System.out.println("Now listening for requests...");
-		  
+			  requestQueue = (Queue) context.lookup("queue/AnalysisRequest");
+			  resultQueue = (Queue) context.lookup("queue/AnalysisResponse");
+			  QueueConnectionFactory qcf = (QueueConnectionFactory) context
+					.lookup(factoryJNDI);
+	
+			  queueConnection = qcf.createQueueConnection();
+			  queueConnection.setExceptionListener(this);
+				
+			  queueSession = queueConnection.createQueueSession(false,
+						QueueSession.AUTO_ACKNOWLEDGE);
+				
+			  requestReceiver = queueSession.createReceiver(requestQueue);
+		
+			  requestReceiver.setMessageListener(this);
+				 
+			  resultSender = queueSession.createSender(resultQueue);
+			  
+			  queueConnection.start();
+			  
+			  connected = true;
+			  System.out.println("  successfully established queue connection.");
+			  System.out.println("Now listening for requests...");
+			  
+			}
+			catch (Exception ex) {
+			  System.out.println("  could not establish connection. Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds..."); 
+			  try { 
+			    Thread.sleep(reconnectWaitTimeMS);
+			  }
+			  catch (Exception ex2) {
+			    System.out.println("Caugh exception while trying to sleep.." + ex2.getMessage());
+			    ex2.printStackTrace(System.out);
+			    return;
+			  }
+		    }
 		}
-		catch (Exception ex) {
-		  System.out.println("  could not establish connection. Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds..."); 
-		  try { 
-		    Thread.sleep(reconnectWaitTimeMS);
-		    establishQueueConnection();
-		  }
-		  catch (Exception ex2) {
-		    System.out.println("Caugh exception while trying to sleep.." + ex2.getMessage());
-		    ex2.printStackTrace(System.out);
-		    return;
-		  }
-	    }
 	}
 	
 
