@@ -2,6 +2,7 @@ package gov.nih.nci.caintegrator.service.findings;
 
 import gov.nih.nci.caintegrator.dto.query.ClassComparisonQueryDTO;
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
+import gov.nih.nci.caintegrator.exceptions.FrameworkException;
 
 /**
  * This interface will provide the method signatures of the
@@ -44,8 +45,9 @@ public interface FindingsFactory {
 	 * Creates and returns a ClassComparisonFinding using the parameters passed in the given query
 	 * @param query
 	 * @return
+	 * @throws FrameworkException 
 	 */
-	public ClassComparisonFinding createClassComparisonFinding(ClassComparisonQueryDTO query, String sessionID, String taskID);
+	public ClassComparisonFinding createClassComparisonFinding(ClassComparisonQueryDTO query, String sessionID, String taskID) throws FrameworkException;
 	/**
 	 * Creates and returns a PCAFinding using the parameters of the given query 
 	 * described in the passed QueryDTOold.

@@ -3,7 +3,6 @@ package gov.nih.nci.caintegrator.service.findings;
 import java.io.Serializable;
 
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
-import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 /***
  * This class is abstract so that it will not be instantiated directly.  It is
@@ -19,7 +18,6 @@ public abstract class Finding implements Serializable{
 	private String sessionId;
 	private String taskId;
 	private FindingStatus status;
-	private AnalysisResult analysisResult;
 	/**
 	 * @return Returns the elapsedTime.
 	 */
@@ -38,7 +36,7 @@ public abstract class Finding implements Serializable{
 	 */
 	public void setEndTime(long endTime) {
 		this.endTime = endTime;
-		this.elapsedTime = this.startTime-this.endTime;
+		this.elapsedTime = this.endTime-this.startTime;
 	}
 	/**
 	 * @return Returns the queryDTO.

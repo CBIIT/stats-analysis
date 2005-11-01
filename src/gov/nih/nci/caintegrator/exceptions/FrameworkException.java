@@ -1,14 +1,13 @@
 package gov.nih.nci.caintegrator.exceptions;
 
-public class FindingsQueryException extends FrameworkException{
-
+public class FrameworkException extends Throwable {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public FindingsQueryException(String string) {
+	public FrameworkException(String string) {
 		super(string);
 	}
-
 }

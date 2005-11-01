@@ -8,13 +8,10 @@ import gov.nih.nci.caintegrator.analysis.messaging.AnalysisRequest;
  * @author Michael A Harris
  *
  */
-public class AnalysisServerException extends Throwable {
+public class AnalysisServerException extends FrameworkException {
 
 	private AnalysisRequest failedRequest;
 	
-	public AnalysisServerException() {
-	  super();
-	}
 	
 	public AnalysisServerException(String info) {
 	  super(info);

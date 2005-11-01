@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.exceptions;
 
-public class ValidationException extends Throwable{
+public class ValidationException extends FrameworkException{
 
 	/**
 	 * 
