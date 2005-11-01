@@ -1,8 +1,7 @@
 package gov.nih.nci.caintegrator.service.findings;
 
-import gov.nih.nci.caintegrator.dto.finding.ClassComparisonFindingsResultset;
-import gov.nih.nci.caintegrator.dto.query.ClassComparisonQuery;
-import gov.nih.nci.caintegrator.dto.query.Query;
+import gov.nih.nci.caintegrator.dto.query.ClassComparisonQueryDTO;
+import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 
 /**
  * This interface will provide the method signatures of the
@@ -23,7 +22,7 @@ public interface FindingsFactory {
 	 * @param query
 	 * @return
 	 */
-	public KMFinding createKMFinding(Query query);
+	public KMFinding createKMFinding(QueryDTO query);
 	/**
 	 * Creates and returns a CopyNumberFinding for the query using
 	 * the parameters for the given query.
@@ -31,46 +30,46 @@ public interface FindingsFactory {
 	 * @param query
 	 * @return
 	 */
-	public CopyNumberFinding createCopyNumberFinding(Query query);
+	public CopyNumberFinding createCopyNumberFinding(QueryDTO query);
 	
 	/**
 	 * Creates and returns a ClinicalFinding using the parameters
-	 * of the given query described in the passed QueryDTO.
+	 * of the given query described in the passed QueryDTOold.
 	 * @param query
 	 * @return
 	 */
-	public ClinicalFinding createClinicalFinding(Query query);
+	public ClinicalFinding createClinicalFinding(QueryDTO query);
 	
 	/**
 	 * Creates and returns a ClassComparisonFinding using the parameters passed in the given query
 	 * @param query
 	 * @return
 	 */
-	public void createClassComparisonFinding(ClassComparisonQuery query, String sessionID, String taskID);
+	public ClassComparisonFinding createClassComparisonFinding(ClassComparisonQueryDTO query, String sessionID, String taskID);
 	/**
 	 * Creates and returns a PCAFinding using the parameters of the given query 
-	 * described in the passed QueryDTO.
+	 * described in the passed QueryDTOold.
 	 * @param query
 	 * @return
 	 */
-	public PCAFinding createPCAFinding(Query query);
+	public PCAFinding createPCAFinding(QueryDTO query);
 	/**
 	 * Creates and returns an HCAFinding from the given query described 
-	 * in the passed QueryDTO.
+	 * in the passed QueryDTOold.
 	 * 
 	 * @param query
 	 * @return
 	 */
-	public HCAFinding createHCAFinding(Query query);
+	public HCAFinding createHCAFinding(QueryDTO query);
 	/**
 	 * Creates and returns a Gene Expression Intensity finding
 	 * (GEIntensityFinding) from the given query described 
-	 * in the passed QueryDTO.
+	 * in the passed QueryDTOold.
 	 * 
 	 * @param query
 	 * @return
 	 */
-	public GEIntensityFinding createGEIntensityFinding(Query query);
+	public GEIntensityFinding createGEIntensityFinding(QueryDTO query);
 	
 	/**
 	 * I added this because I was thinking of a framework that would allow
@@ -87,7 +86,7 @@ public interface FindingsFactory {
 	 * @param query
 	 * @return
 	 */
-	public Object createCustomFinding(Query query);
+	public Object createCustomFinding(QueryDTO query);
 	
 	
 }
