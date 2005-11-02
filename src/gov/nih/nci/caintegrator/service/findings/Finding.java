@@ -2,6 +2,8 @@ package gov.nih.nci.caintegrator.service.findings;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
+
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 /***
@@ -18,6 +20,15 @@ public abstract class Finding implements Serializable{
 	private String sessionId;
 	private String taskId;
 	private FindingStatus status;
+	private Logger logger = Logger.getLogger(Finding.class);
+	
+	
+	public Finding(String session, String task, FindingStatus status) {
+		 setTaskId(task);
+		 setSessionId(session);
+		 setStatus(status);
+	}
+	
 	/**
 	 * @return Returns the elapsedTime.
 	 */
@@ -85,6 +96,16 @@ public abstract class Finding implements Serializable{
 	 */
 	public void setStatus(FindingStatus status) {
 		this.status = status;
+		switch(status) { 
+		case Running:
+			setStartTime(System.currentTimeMillis());
+			break;
+		case Error: case Completed:
+			setEndTime(System.currentTimeMillis());
+			break;
+		default:
+			logger.error("Uknown FindingState passed");
+		}
 	}
 	/**
 	 * @return Returns the taskId.

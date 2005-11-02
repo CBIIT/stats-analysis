@@ -5,14 +5,16 @@ import java.util.List;
 import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult;
 import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResultEntry;
 import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
+import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 
 public class ClassComparisonFinding extends AnalysisFinding{
 	private ClassComparisonResult myResults;
 	
-	public ClassComparisonFinding(ClassComparisonResult result) {
-		myResults = result;
+	public ClassComparisonFinding(String session, String task, FindingStatus status, ClassComparisonResult result) {
+		super(session, task, status);
+		setMyResults(result);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#arePvaluesAdjusted()
 	 */

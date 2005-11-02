@@ -5,7 +5,6 @@ import java.io.Serializable;
 import gov.nih.nci.caintegrator.query.Validatable;
 
 public interface QueryDTO extends Validatable,Serializable, Cloneable {
-	void setQueryName(String name);
-	String getQueryName();
-
+	public void setQueryName(String name);
+	public String getQueryName();
 }
