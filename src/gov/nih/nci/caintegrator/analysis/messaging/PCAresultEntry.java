@@ -11,6 +11,8 @@ import java.io.Serializable;
  */
 public class PCAresultEntry implements Serializable {
 
+	private static final long serialVersionUID = -2386991282555858152L;
+	
 	private double pc1, pc2, pc3;
 	private String sampleId;
 	

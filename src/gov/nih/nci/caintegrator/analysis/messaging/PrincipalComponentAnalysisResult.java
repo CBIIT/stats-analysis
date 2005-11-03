@@ -9,6 +9,8 @@ import java.util.*;
  */
 public class PrincipalComponentAnalysisResult extends AnalysisResult implements java.io.Serializable {
 
+    private static final long serialVersionUID = 8261481392869209636L;
+
 	private List<PCAresultEntry> pcaResultEntries;
 	
 	//These image arrays will be removed when the front end code 

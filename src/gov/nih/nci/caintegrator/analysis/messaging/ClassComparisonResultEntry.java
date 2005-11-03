@@ -8,6 +8,8 @@ package gov.nih.nci.caintegrator.analysis.messaging;
  */
 public class ClassComparisonResultEntry implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1502121870957007356L;
+	
 	private String reporterId;
 	private double meanGrp1;
 	private double meanGrp2;

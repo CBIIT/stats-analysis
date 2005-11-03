@@ -15,6 +15,8 @@ import gov.nih.nci.caintegrator.enumeration.*;
 
 public class ClassComparisonRequest extends AnalysisRequest implements java.io.Serializable {
 
+	private static final long serialVersionUID = 3585836220854093162L;
+
 	private double foldChangeThreshold = Double.NEGATIVE_INFINITY;
 	
 	private double pValueThreshold = Double.POSITIVE_INFINITY;

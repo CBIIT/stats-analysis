@@ -12,6 +12,8 @@ import java.io.Serializable;
  */
 public class SampleGroup extends IdGroup implements Serializable {
 
+	private static final long serialVersionUID = 2211055318464268842L;
+
 	/**
 	 * Create a sample group with no group name and default initial size
 	 *

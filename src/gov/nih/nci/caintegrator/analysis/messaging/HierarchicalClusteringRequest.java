@@ -9,6 +9,8 @@ import gov.nih.nci.caintegrator.enumeration.*;
  */
 public class HierarchicalClusteringRequest extends AnalysisRequest implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1142074172476509433L;
+	
 	private DistanceMatrixType distanceMatrix = DistanceMatrixType.Correlation;
 	private ClusterByType clusterBy = ClusterByType.Samples;
 	private LinkageMethodType linkageMethod = LinkageMethodType.Average;

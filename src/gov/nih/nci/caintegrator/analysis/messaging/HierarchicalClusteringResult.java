@@ -7,6 +7,8 @@ package gov.nih.nci.caintegrator.analysis.messaging;
  */
 public class HierarchicalClusteringResult extends AnalysisResult implements java.io.Serializable {
 
+	private static final long serialVersionUID = -2260310314882984398L;
+	
 	private byte[] imgCode;
 	
 	public HierarchicalClusteringResult(String sessionId, String taskId) {

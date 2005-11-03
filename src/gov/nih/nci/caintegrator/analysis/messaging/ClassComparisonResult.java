@@ -10,6 +10,8 @@ import java.util.*;
  */
 public class ClassComparisonResult extends AnalysisResult implements Serializable {
 
+	private static final long serialVersionUID = -1152528513884181284L;
+	
 	private List<ClassComparisonResultEntry> ccResultEntries;
 	private SampleGroup group1;
 	private SampleGroup group2;

@@ -12,6 +12,8 @@ import java.io.Serializable;
  */
 public class ReporterGroup extends IdGroup implements Serializable {
 	
+	private static final long serialVersionUID = 8945244827842008498L;
+
 	/**
 	 * Create a reporter group with no name and default initial size
 	 *

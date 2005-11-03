@@ -9,6 +9,8 @@ import gov.nih.nci.caintegrator.enumeration.*;
  */
 public class PrincipalComponentAnalysisRequest extends AnalysisRequest implements java.io.Serializable {
 
+	private static final long serialVersionUID = 7086281126369177414L;
+	
 	private double varianceFilterValue = -1.0;
 	private double foldChangeFilterValue = -1.0;
 	private ReporterGroup reporterGroup = null;
