@@ -33,7 +33,7 @@ import java.util.*;
  */
 public class AnalysisServer implements MessageListener, ExceptionListener, AnalysisResultSender {
 
-	public static String version = "3.0";
+	public static String version = "3.1";
 
 	private boolean debugRcommands = false;
 
@@ -342,6 +342,17 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 	 */
 	public void onException(JMSException exception) {
 	  System.out.println("onException: caught JMSexception: " + exception.getMessage());
+	  
+	  try
+      {
+         queueConnection.setExceptionListener(null);
+         close();
+      }
+      catch (JMSException c)
+      {
+        System.out.println("Ignoring exception thrown when closing broken connection msg=" + c.getMessage());
+        c.printStackTrace(System.out);
+      }
 	  
 	  //attempt to re-establish the queue connection
 	  establishQueueConnection();
