@@ -59,6 +59,6 @@ public class ClassComparisonFinding extends AnalysisFinding{
 	 * @param myResults The myResults to set.
 	 */
 	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
-		this.myResults = (ClassComparisonResult)myResults;
+		this.myResults = (ClassComparisonResult)results;
 	}
 }
