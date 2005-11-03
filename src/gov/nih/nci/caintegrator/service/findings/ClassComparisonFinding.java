@@ -2,6 +2,7 @@ package gov.nih.nci.caintegrator.service.findings;
 
 import java.util.List;
 
+import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
 import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult;
 import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResultEntry;
 import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
@@ -16,7 +17,7 @@ public class ClassComparisonFinding extends AnalysisFinding{
 	
 	public ClassComparisonFinding(String session, String task, FindingStatus status, ClassComparisonResult result) {
 		super(session, task, status);
-		setMyResults(result);
+		setAnalysisResult(result);
 	}
 	
 	/* (non-Javadoc)
@@ -57,16 +58,7 @@ public class ClassComparisonFinding extends AnalysisFinding{
 	/**
 	 * @param myResults The myResults to set.
 	 */
-	public void setMyResults(ClassComparisonResult myResults) {
-		this.myResults = myResults;
+	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
+		this.myResults = (ClassComparisonResult)myResults;
 	}
-
-	/**
-	 * @return Returns the myResults.
-	 */
-	public ClassComparisonResult getMyResults() {
-		return myResults;
-	}
-
-	
 }
