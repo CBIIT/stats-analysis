@@ -3,18 +3,15 @@ package gov.nih.nci.caintegrator.dto.de;
 import gov.nih.nci.caintegrator.enumeration.Operator;
 import gov.nih.nci.caintegrator.enumeration.StatisticalSignificanceType;
 
-public class StatisticalSignificanceDE extends DomainElement {
-	private StatisticalSignificanceType statisticType;
+public class GeneVectorPercentileDE extends DomainElement {
 	private Operator operator = Operator.GE;
 	/**
 	 * @param value
 	 * @param operator
-	 * @param type
 	 */
-	public StatisticalSignificanceDE(Double value, Operator operator, StatisticalSignificanceType type) {
+	public GeneVectorPercentileDE(Double value, Operator operator) {
 		super(value);
 		this.operator = operator;
-		statisticType = type;
 	}
 	/**
 	 * 
@@ -30,20 +27,20 @@ public class StatisticalSignificanceDE extends DomainElement {
 		setValueObject((Double) obj);
 	}
 	/**
-	 * Sets the pValue for this <code>StatisticalSignificanceDE</code> object
+	 * Sets the percentile for this <code>GeneVectorPercentileDE</code> object
 	 * 
-	 * @param pValue
-	 *            the pValue
+	 * @param percentile
+	 *            the percentile
 	 */
-	public void setValueObject(Double pValue) {
-		if (pValue != null) {
-			value = pValue;
+	public void setValueObject(Double percentile) {
+		if (percentile != null) {
+			value = percentile;
 		}
 	}
 	/**
-	 * Returns the pValue for this StatisticalSignificanceDE obect.
+	 * Returns the percentile for this GeneVectorPercentileDE obect.
 	 * 
-	 * @return the pValue for this <code>StatisticalSignificanceDE</code> object
+	 * @return the percentile for this <code>GeneVectorPercentileDE</code> object
 	 */
 	public Double getValueObject() {
 		return (Double) getValue();
@@ -54,12 +51,6 @@ public class StatisticalSignificanceDE extends DomainElement {
 	public void setOperator(Operator operator) {
 		this.operator = operator;
 	}
-	public StatisticalSignificanceType getStatisticType() {
-		return statisticType;
-	}
-	public void setStatisticType(StatisticalSignificanceType statisticType) {
-		this.statisticType = statisticType;
-	}
 	/**
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance
@@ -68,8 +59,8 @@ public class StatisticalSignificanceDE extends DomainElement {
 	 * @return -A minimum 2 deep copy of this object.
 	 */
 	public Object clone() {
-		StatisticalSignificanceDE myStatisticalSignificanceDE = (StatisticalSignificanceDE) super.clone();
-		return myStatisticalSignificanceDE;
+		GeneVectorPercentileDE myGeneVectorPercentileDE = (GeneVectorPercentileDE) super.clone();
+		return myGeneVectorPercentileDE;
 	}
 
 }
