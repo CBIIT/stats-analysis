@@ -1,11 +1,10 @@
 package gov.nih.nci.caintegrator.service.findings.strategies;
 
-import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
+import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 import gov.nih.nci.caintegrator.exceptions.FindingsAnalysisException;
 import gov.nih.nci.caintegrator.exceptions.FindingsQueryException;
 import gov.nih.nci.caintegrator.exceptions.ValidationException;
 import gov.nih.nci.caintegrator.service.findings.Finding;
-import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 /**
  * This interface defines the required methods for every type of
  * Finding that can be performed in caIntegrator.  

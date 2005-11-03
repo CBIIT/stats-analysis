@@ -8,6 +8,10 @@ import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 
 public class ClassComparisonFinding extends AnalysisFinding{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ClassComparisonResult myResults;
 	
 	public ClassComparisonFinding(String session, String task, FindingStatus status, ClassComparisonResult result) {
