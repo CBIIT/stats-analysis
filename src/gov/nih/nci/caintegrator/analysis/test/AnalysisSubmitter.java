@@ -18,6 +18,7 @@ import javax.jms.QueueSender;
 import javax.jms.QueueReceiver;
 import javax.jms.ObjectMessage;
 import javax.jms.MessageListener;
+import javax.jms.ExceptionListener;
 import javax.jms.Session;
 import javax.jms.JMSException;
 import javax.jms.DeliveryMode;
@@ -50,10 +51,10 @@ import java.io.*;
  * @author Michael A. Harris
  *
  */
-public class AnalysisSubmitter implements MessageListener {
+public class AnalysisSubmitter implements MessageListener, ExceptionListener {
 
 	private static Logger logger = Logger.getLogger(AnalysisSubmitter.class);
-    private static String appLocationIp = "156.40.131.38:1099";
+    private static String appLocationIp = "156.40.128.136:1099";
 	
 	private PCAtableModel pcaTableModel = new PCAtableModel();
 	private CCtableModel ccTableModel = new CCtableModel();
@@ -158,6 +159,7 @@ public class AnalysisSubmitter implements MessageListener {
 
 	    // Create the connection
 	    queueConnection = queueConnectionFactory.createQueueConnection();
+	    queueConnection.setExceptionListener(this);
 
 	    // Create the session
 	    queueSession = queueConnection.createQueueSession(
@@ -973,5 +975,11 @@ public class AnalysisSubmitter implements MessageListener {
 		  }
 		  
 	  }
+
+	public void onException(JMSException jmsException) {
+	  System.out.println("Caught JMS exception: " + jmsException.getMessage());
+	  System.out.println("Stack trace:");
+	  jmsException.printStackTrace(System.out);
+	}
 
 }
