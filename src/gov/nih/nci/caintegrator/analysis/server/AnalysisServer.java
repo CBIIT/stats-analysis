@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.analysis.server;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
+
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
 import javax.jms.JMSException;
@@ -33,17 +34,21 @@ import java.util.*;
  */
 public class AnalysisServer implements MessageListener, ExceptionListener, AnalysisResultSender {
 
-	public static String version = "3.3";
+	public static String version = "3.4";
 
 	private boolean debugRcommands = false;
 
-	private static String JBossMQ_locationIp = "156.40.128.136:1099"; // my machine
+	private static String JBossMQ_locationIp = null;
 																		
-	private static int numComputeThreads = 1;
+	private static int numComputeThreads = -1;
+	
+	private static int defaultNumComputeThreads = 1;
 
-	private static String RserverIp = "156.40.134.31"; // cbiodev501
+	private static String RserverIp = null;
+	
+	private static String defaultRserverIp = "localhost";
 
-	private static String RdataFileName = "/h1/harrismic/Rembrandt/RdataFiles/dataAndFunctions.R";
+	private static String RdataFileName = null;
 
 	private RThreadPoolExecutor executor;
 
@@ -59,7 +64,9 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 	
 	private String factoryJNDI = null;
 	
-	private static long reconnectWaitTimeMS = 10000L;
+	private static long reconnectWaitTimeMS = -1L;
+	
+	private static long defaultReconnectWaitTimeMS = 10000L;
 
 	/**
 	 * Subscriber
@@ -69,10 +76,7 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 
 	private QueueSender resultSender;
 
-	/**
-	 * Destination to subscribe to
-	 */
-	// Topic topic;
+	
 	/**
 	 * Sets up all the JMS fixtures.
 	 * 
@@ -94,24 +98,21 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 		try {
 			analysisServerConfigProps.load(new FileInputStream(
 					serverPropertiesFileName));
-			JBossMQ_locationIp = analysisServerConfigProps
-					.getProperty("jmsmq_location");
-			RserverIp = analysisServerConfigProps
-					.getProperty("rserve_location");
-			numComputeThreads = Integer.parseInt(analysisServerConfigProps
-					.getProperty("num_compute_threads"));
-			RdataFileName = analysisServerConfigProps
-					.getProperty("RdefinitionFile");
-			debugRcommands = Boolean.parseBoolean(analysisServerConfigProps
-					.getProperty("debugRcommands"));
-			reconnectWaitTimeMS = Long.parseLong(analysisServerConfigProps
-					.getProperty("reconnectWaitTimeMS"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace(System.out);
-		} catch (IOException e) {
-			e.printStackTrace(System.out);
-		} catch (NumberFormatException nfException) {
-			nfException.printStackTrace(System.out);
+			
+			JBossMQ_locationIp = getMandatoryStringProperty(analysisServerConfigProps, "jmsmq_location");
+
+			RserverIp = getStringProperty(analysisServerConfigProps,"rserve_location", defaultRserverIp);
+			
+			numComputeThreads = getIntegerProperty(analysisServerConfigProps,"num_compute_threads", defaultNumComputeThreads);
+			
+			RdataFileName = getMandatoryStringProperty(analysisServerConfigProps,"RdefinitionFile");
+			
+			debugRcommands = getBooleanProperty(analysisServerConfigProps, "debugRcommands", false);
+			
+			reconnectWaitTimeMS = getLongProperty(analysisServerConfigProps, "reconnectWaitTimeMS", defaultReconnectWaitTimeMS); 
+		} catch (Exception ex) {
+		  System.out.println("Error loading server properties from file: " + analysisServerConfigProps);
+		  ex.printStackTrace(System.out);
 		}
 		
 		// initialize the compute threads
@@ -130,16 +131,56 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 		
 		establishQueueConnection();
 		
-
 		System.out.println("AnalysisServer version=" + version
 				+ " successfully initialized. numComputeThreads=" + numComputeThreads + " RserverIp=" + RserverIp + " RdataFileName=" + RdataFileName);
 
+	}
+	
+	private boolean getBooleanProperty(Properties props, String propertyName, boolean defaultValue) {
+	  String propValue = props.getProperty(propertyName);
+	  if (propValue == null) {
+	    return defaultValue;
+	  }
+	  return Boolean.parseBoolean(propValue);
+	}
+	
+	private String getMandatoryStringProperty(Properties props, String propertyName) {
+	  String propValue = props.getProperty(propertyName);
+	  if (propValue == null) {
+	    throw new IllegalStateException("Could not load mandatory property name=" + propertyName);
+	  }
+	  return propValue;
+	}
+	
+	private String getStringProperty(Properties props, String propertyName, String defaultValue) {
+		  String propValue = props.getProperty(propertyName);
+		  if (propValue == null) {
+		    return defaultValue;
+		  }
+		  return propValue;
+	}
+	
+	private int getIntegerProperty(Properties props, String propertyName, int defaultValue) {
+		String propValue = props.getProperty(propertyName);
+		if (propValue == null) {
+		    return defaultValue;
+		}
+		return Integer.parseInt(propValue);
+	}
+	
+	private long getLongProperty(Properties props, String propertyName, long defaultValue) {
+		String propValue = props.getProperty(propertyName);
+		if (propValue == null) {
+		    return defaultValue;
+		}
+		return Long.parseLong(propValue);
 	}
 
 	public AnalysisServer(String factoryJNDI) throws JMSException,
 	NamingException {
 	  this(factoryJNDI, "analysisServer.properties");
 	}
+	
 	
 	/**
 	 * Establish a connection to the JMS queues.  If it is not possible
@@ -310,10 +351,7 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 		queueConnection.close();
 	}
 
-	/**
-	 * Run an example subscribing to topic testTopic. Only works up to and
-	 * including JBoss 2.4.0
-	 */
+	
 	public static void main(String[] args) {
 
 		try {
