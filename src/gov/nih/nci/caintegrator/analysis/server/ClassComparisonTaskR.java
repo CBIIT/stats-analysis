@@ -17,6 +17,7 @@ import org.rosuda.JRclient.*;
 public class ClassComparisonTaskR extends AnalysisTaskR {
 
 	private ClassComparisonResult ccResult = null;
+	public static final int MIN_GROUP_SIZE = 3;
 
 	public ClassComparisonTaskR(ClassComparisonRequest request) {
 		this(request, false);
@@ -35,11 +36,37 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 
 		System.out.println(getExecutingThreadName() + ": processing class comparison request=" + ccRequest);
 
-		int grp1Len = 0, grp2Len = 0;
 		SampleGroup group1 = ccRequest.getGroup1();
-		grp1Len = group1.size();
 		SampleGroup group2 = ccRequest.getGroup2();
+		
+		if ((group1 == null) || (group1.size() < MIN_GROUP_SIZE)) {
+			  AnalysisServerException ex = new AnalysisServerException(
+				"Group1 is null or has less than " + MIN_GROUP_SIZE + " entries.");		 
+		      ex.setFailedRequest(ccRequest);
+		      setException(ex);
+		      return;
+		}
+		
+		
+		if ((group2 == null) || (group2.size() < MIN_GROUP_SIZE)) {
+			  AnalysisServerException ex = new AnalysisServerException(
+				"Group2 is null or has less than " + MIN_GROUP_SIZE + " entries.");		 
+		      ex.setFailedRequest(ccRequest);
+		      setException(ex);
+		      return;
+		}
+		
+		//For now assume that there are two groups. When we get data for two channel array then
+		//allow only one group so leaving in the possiblity of having only one group in the code 
+		//below eventhough the one group case won't be executed because of the test above.
+		
+		
+		int grp1Len = 0, grp2Len = 0;
+		
+		grp1Len = group1.size();
+		
 		String rCmd = null;
+	
 		rCmd = getRgroupCmd(group1.getGroupName(), group1);
 
 		doRvoidEval(rCmd);
@@ -47,6 +74,7 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 		if (group2 != null) {
 			// two group comparison
 			grp2Len = group2.size();
+			
 			rCmd = getRgroupCmd(group2.getGroupName(), group2);
 			doRvoidEval(rCmd);
 
@@ -179,8 +207,8 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 	 * Clean up some of the resources
 	 */
 	public void cleanUp() {
-		doRvoidEval("remove(ccInputMatrix)");
-		doRvoidEval("remove(ccResult)");
+		//doRvoidEval("remove(ccInputMatrix)");
+		//doRvoidEval("remove(ccResult)");
 		setRconnection(null);
 	}
 }
