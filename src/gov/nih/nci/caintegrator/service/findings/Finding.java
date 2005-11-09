@@ -94,13 +94,14 @@ public abstract class Finding implements Serializable{
 	/**
 	 * @param status The status to set.
 	 */
-	public void setStatus(FindingStatus status) {
-		this.status = status;
+	public void setStatus(FindingStatus findingStatus) {
+		this.status = findingStatus;
 		switch(status) { 
 		case Running:
 			setStartTime(System.currentTimeMillis());
 			break;
-		case Error: case Completed:
+		case Error:
+		case Completed:
 			setEndTime(System.currentTimeMillis());
 			break;
 		default:

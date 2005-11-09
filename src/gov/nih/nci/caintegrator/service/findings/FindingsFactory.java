@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.service.findings;
 
 import gov.nih.nci.caintegrator.dto.query.ClassComparisonQueryDTO;
+import gov.nih.nci.caintegrator.dto.query.PrincipleComponentAnalysisQueryDTO;
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 import gov.nih.nci.caintegrator.exceptions.FrameworkException;
 
@@ -54,7 +55,8 @@ public interface FindingsFactory {
 	 * @param query
 	 * @return
 	 */
-	public PCAFinding createPCAFinding(QueryDTO query);
+	public PrincipalComponentAnalysisFinding createPCAFinding(PrincipleComponentAnalysisQueryDTO queryDTO, String sessionID, String taskID) throws FrameworkException;
+
 	/**
 	 * Creates and returns an HCAFinding from the given query described 
 	 * in the passed QueryDTOold.
