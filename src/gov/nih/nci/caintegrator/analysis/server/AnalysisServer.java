@@ -34,7 +34,7 @@ import java.util.*;
  */
 public class AnalysisServer implements MessageListener, ExceptionListener, AnalysisResultSender {
 
-	public static String version = "3.4";
+	public static String version = "3.5";
 
 	private boolean debugRcommands = false;
 
