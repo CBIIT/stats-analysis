@@ -36,7 +36,17 @@ public class ClassComparisonRequest extends AnalysisRequest implements java.io.S
 	}
 	
 	public String toString() {
-	  return "ClassComparisonAnalysisRequest: sessionId=" + getSessionId() + " taskId=" + getTaskId();
+	  String retStr = "ClassComparisonAnalysisRequest: sessionId=" + getSessionId() + " taskId=" + getTaskId();
+	  
+	  if (group1 != null) { 
+	    retStr += " GRP1=" + group1.getGroupName();
+	  }
+	  
+	  if (group2 != null) {
+	    retStr += " GRP2=" + group2.getGroupName();
+	  }
+	  
+	  return retStr;
 	}
 
 	public StatisticalMethodType getStatisticalMethod() {
