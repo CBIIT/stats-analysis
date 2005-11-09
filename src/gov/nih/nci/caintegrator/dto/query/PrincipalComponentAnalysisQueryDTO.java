@@ -8,7 +8,7 @@ import gov.nih.nci.caintegrator.dto.de.InstitutionNameDE;
 
 import java.util.Collection;
 
-public interface PrincipleComponentAnalysisQueryDTO extends QueryDTO {
+public interface PrincipalComponentAnalysisQueryDTO extends QueryDTO {
 
 	/**
 	 * @return Returns the arrayPlatformDE.
