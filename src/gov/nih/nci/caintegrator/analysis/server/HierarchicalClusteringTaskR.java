@@ -121,8 +121,8 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 	 * Clean up some of the memory on the R server
 	 */
 	public void cleanUp() {
-		doRvoidEval("remove(hcInputMatrix)");
-		doRvoidEval("remove(mycluster)");
+		//doRvoidEval("remove(hcInputMatrix)");
+		//doRvoidEval("remove(mycluster)");
 		setRconnection(null);
 	}
 
