@@ -65,9 +65,13 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 		
 		grp1Len = group1.size();
 		
+		String grp1RName = "GRP1";
+		String grp2RName = "GRP2";
+		
+		
 		String rCmd = null;
 	
-		rCmd = getRgroupCmd(group1.getGroupName(), group1);
+		rCmd = getRgroupCmd(grp1RName, group1);
 
 		doRvoidEval(rCmd);
 
@@ -75,12 +79,12 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 			// two group comparison
 			grp2Len = group2.size();
 			
-			rCmd = getRgroupCmd(group2.getGroupName(), group2);
+			rCmd = getRgroupCmd(grp2RName, group2);
 			doRvoidEval(rCmd);
 
 			// create the input data matrix using the sample groups
 			rCmd = "ccInputMatrix <- getSubmatrix.twogrps(dataMatrix,"
-					+ group1.getGroupName() + "," + group2.getGroupName() + ")";
+					+ grp1RName + "," + grp2RName + ")";
 			doRvoidEval(rCmd);
 
 			// check to make sure all identifiers matched in the R data file
@@ -97,7 +101,7 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 			// single group comparison
 			grp2Len = 0;
 			rCmd = "ccInputMatrix <- getSubmatrix.onegrp(dataMatrix,"
-					+ group1.getGroupName() + ")";
+					+ grp1RName + ")";
 			doRvoidEval(rCmd);
 		}
 
