@@ -17,7 +17,19 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeriesCollection;
-
+/**
+ * The KaplanMeierPlot is a class that will generate a Java2D JFreeChart object
+ * with the KaplanMeierPlotPointSeriesSet Collection that is passed to it. The
+ * generated plot can then be rendered in a number of ways using the JFreeChart
+ * utilities.
+ * 
+ * The reason for this class is that the Kaplan-Meier survival plot is a mix of 
+ * both an XY Line plot and a Scatter plot of different data, and has no 
+ * direct representation in the JFreeChart.
+ * 
+ * @author BauerD
+ *
+ */
 
 public class KaplanMeierPlot{
 
