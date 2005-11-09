@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.dto.de;
 
+import gov.nih.nci.caintegrator.enumeration.ArrayPlatformType;
+
 import java.io.Serializable;
 
 /**
@@ -53,6 +55,25 @@ public class ArrayPlatformDE extends DomainElement implements Serializable,
 		return (String) getValue();
 	}
 
+	public ArrayPlatformType getValueObjectAsArrayPlatformType(){
+
+		if(getValueObject().equals(ArrayPlatformType.AFFY_OLIGO_PLATFORM.toString())){
+			return ArrayPlatformType.AFFY_OLIGO_PLATFORM; 
+		}
+		else if(getValueObject().equals(ArrayPlatformType.AFFY_100K_SNP_ARRAY.toString())){
+			return ArrayPlatformType.AFFY_100K_SNP_ARRAY; 
+		}
+		else if(getValueObject().equals(ArrayPlatformType.ALL_PLATFROM.toString())){
+			return ArrayPlatformType.ALL_PLATFROM; 
+		}
+		else if(getValueObject().equals(ArrayPlatformType.ARRAY_CGH.toString())){
+			return ArrayPlatformType.ARRAY_CGH; 
+		}
+		else if(getValueObject().equals(ArrayPlatformType.CDNA_ARRAY_PLATFORM)){
+			return ArrayPlatformType.CDNA_ARRAY_PLATFORM; 
+		}
+		return null;
+	}
 	/**
 	 * Sets the arrayName for this <code>ArrayPlatformDE</code> object
 	 * 

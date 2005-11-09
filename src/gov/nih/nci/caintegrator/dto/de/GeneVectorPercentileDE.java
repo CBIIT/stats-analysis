@@ -38,12 +38,26 @@ public class GeneVectorPercentileDE extends DomainElement {
 		}
 	}
 	/**
-	 * Returns the percentile for this GeneVectorPercentileDE obect.
-	 * 
-	 * @return the percentile for this <code>GeneVectorPercentileDE</code> object
+	 * Returns the raw value entered by the user for this GeneVectorPercentileDE obect.
+	 * For example if value is 70, then raw value is 70.00
+	 * To get decimal percentile value @see gov.nih.nci.caintegrator.dto.de.GeneVectorPercentileDE#getDecimalValue()
+	 * @return the raw value for this <code>GeneVectorPercentileDE</code> object
 	 */
 	public Double getValueObject() {
 		return (Double) getValue();
+	}
+	/**
+	 * Returns the decimal percentile for this GeneVectorPercentileDE obect.
+	 * For example if value is 70, then decimal value is .07
+	 * 
+	 * @return the percentile for this <code>GeneVectorPercentileDE</code> object
+	 */
+	public Double getDecimalValue() {
+		Double newValue = null;
+		if(getValueObject() != null){
+			newValue = getValueObject()/100.00;
+		}
+		return newValue;	
 	}
 	public Operator getOperator() {
 		return operator;
