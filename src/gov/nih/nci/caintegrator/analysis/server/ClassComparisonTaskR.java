@@ -65,8 +65,8 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 		
 		grp1Len = group1.size();
 		
-		String grp1RName = "GRP1";
-		String grp2RName = "GRP2";
+		String grp1RName = "GRP1IDS";
+		String grp2RName = "GRP2IDS";
 		
 		
 		String rCmd = null;
