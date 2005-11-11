@@ -7,6 +7,7 @@ import javax.security.sasl.AuthenticationException;
 
 import org.apache.log4j.Logger;
 
+import gov.nih.nci.caintegrator.security.UserCredentials.UserRole;
 import gov.nih.nci.security.AuthenticationManager;
 import gov.nih.nci.security.SecurityServiceProvider;
 import gov.nih.nci.security.exceptions.CSException;
@@ -51,7 +52,7 @@ public class SecurityManager {
 		boolean authenticated = localAuthenticate(userName,password);
 		Set groups = new HashSet();
 		if(authenticated) {
-			credentials = new UserCredentials(userName,null, null);
+			credentials = new UserCredentials(userName,UserRole.PUBLIC, null);
 		}
 		return credentials;
 	}
@@ -73,24 +74,24 @@ public class SecurityManager {
 	            loggedIn = am.login(username, password);
 
 	        } catch (CSException e) {
-	            logger.debug("loginFail");
-	            logger.error(e);
-	            throw new AuthenticationException("User Name or Password is not correct");
-	        }
-	        /**the following  if clause will only be used until the 
-	         * app is released as a backdoor for developers and non NIH
-	         * folks. Once the app is moved, this clause should also be removed.
-	         * -kevin rosso
-	         */
-	        if(username.equals("RBTuser") && password.equals("RBTpass")){
-	            loggedIn = true;
-	        }
-	        if(loggedIn) {
-	            logger.debug("loginSuccess");
-	        } else {
-	            logger.debug("loginFail");
+	        	/**the following  if clause will only be used until the 
+		         * app is released as a backdoor for developers and non NIH
+		         * folks. Once the app is moved, this clause should also be removed.
+		         * -kevin rosso
+		         */
+		        if(username.equals("RBTuser") && password.equals("RBTpass")){
+		            loggedIn = true;
+		        }
+		        if(loggedIn) {
+		            logger.debug("loginSuccess");
+		        } else {
+		        	logger.debug("loginFail");
+		            logger.error(e);
+		            throw new AuthenticationException("User Name or Password is not correct");		            
+		        }
 	            
 	        }
+	        
 	        return loggedIn;
 	}
 }
