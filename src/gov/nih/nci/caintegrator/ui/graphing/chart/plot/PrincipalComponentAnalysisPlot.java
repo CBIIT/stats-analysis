@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.ui.graphing.chart.plot;
 
+import org.jfree.chart.JFreeChart;
+
 public class PrincipalComponentAnalysisPlot {
 
 	public static enum PCAcolorByType {Disease, DiseaseGrade, Gender };
@@ -9,6 +11,8 @@ public class PrincipalComponentAnalysisPlot {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public JFreeChart getChart() { return null; }
 
 	/**
 	 * @param args
