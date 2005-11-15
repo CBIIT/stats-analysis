@@ -7,7 +7,7 @@ import gov.nih.nci.caintegrator.dto.de.DistanceMatrixTypeDE;
 import gov.nih.nci.caintegrator.dto.de.GeneIdentifierDE;
 import gov.nih.nci.caintegrator.dto.de.GeneVectorPercentileDE;
 import gov.nih.nci.caintegrator.dto.de.InstitutionNameDE;
-import gov.nih.nci.caintegrator.enumeration.LinkageMethodType;
+import gov.nih.nci.caintegrator.dto.de.LinkageMethodTypeDE;
 
 import java.util.Collection;
 
@@ -91,12 +91,12 @@ public interface HierarchicalClusteringQueryDTO extends QueryDTO {
 	/**
 	 * @return Returns the linkageMethodTypeDE.
 	 */
-	public abstract LinkageMethodType getLinkageMethodTypeDE();
+	public abstract LinkageMethodTypeDE getLinkageMethodTypeDE();
 
 	/**
 	 * @param linkageMethodTypeDE The linkageMethodTypeDE to set.
 	 */
 	public abstract void setLinkageMethodTypeDE(
-			LinkageMethodType linkageMethodTypeDE);
+			LinkageMethodTypeDE linkageMethodTypeDE);
 
 }
