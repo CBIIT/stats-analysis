@@ -9,6 +9,7 @@ import gov.nih.nci.caintegrator.ui.graphing.chart.plot.PrincipalComponentAnalysi
 
 import gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier.KaplanMeierPlotPointSeriesSet;
 import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint;
+import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint.*;
 
 import org.jfree.chart.JFreeChart;
 
@@ -22,13 +23,21 @@ public class CaIntegratorChartFactory {
 		return km.getKmChart();
 	}
 	
+	/**
+	 * Generate 3 JFreeCharts which together give a 2 dimensional representation
+	 * of the 3 dimensional principal component data.
+	 * 
+	 * @param pcaData
+	 * @param colorBy
+	 * @return a list containing the 3 JFreeCharts
+	 */
 	public static List<JFreeChart> getPrincipalComponentAnalysisGraphs(Collection<PrincipalComponentAnalysisDataPoint> pcaData, PCAcolorByType colorBy) {
-	  List<JFreeChart> pcaPlotList = new ArrayList();
-	  PrincipalComponentAnalysisPlot PC1vsPC2 = new PrincipalComponentAnalysisPlot(PCAcomponent.PC1,PCAcomponent.PC2);
+	  List<JFreeChart> pcaPlotList = new ArrayList<JFreeChart>();
+	  PrincipalComponentAnalysisPlot PC1vsPC2 = new PrincipalComponentAnalysisPlot(pcaData, PCAcomponent.PC1,PCAcomponent.PC2, colorBy);
 	  pcaPlotList.add(PC1vsPC2.getChart());
-	  PrincipalComponentAnalysisPlot PC1vsPC3 = new PrincipalComponentAnalysisPlot(PCAcomponent.PC1,PCAcomponent.PC3);
+	  PrincipalComponentAnalysisPlot PC1vsPC3 = new PrincipalComponentAnalysisPlot(pcaData, PCAcomponent.PC1,PCAcomponent.PC3, colorBy);
 	  pcaPlotList.add(PC1vsPC3.getChart());
-	  PrincipalComponentAnalysisPlot PC2vsPC3 = new PrincipalComponentAnalysisPlot(PCAcomponent.PC2,PCAcomponent.PC3);
+	  PrincipalComponentAnalysisPlot PC2vsPC3 = new PrincipalComponentAnalysisPlot(pcaData, PCAcomponent.PC2,PCAcomponent.PC3, colorBy);
 	  pcaPlotList.add(PC2vsPC3.getChart());
 	  
 	  return pcaPlotList;
