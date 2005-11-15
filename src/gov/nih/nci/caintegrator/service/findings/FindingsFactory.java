@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.service.findings;
 
 import gov.nih.nci.caintegrator.dto.query.ClassComparisonQueryDTO;
+import gov.nih.nci.caintegrator.dto.query.HierarchicalClusteringQueryDTO;
 import gov.nih.nci.caintegrator.dto.query.PrincipalComponentAnalysisQueryDTO;
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 import gov.nih.nci.caintegrator.exceptions.FrameworkException;
@@ -64,7 +65,7 @@ public interface FindingsFactory {
 	 * @param query
 	 * @return
 	 */
-	public HCAFinding createHCAFinding(QueryDTO query);
+	public HCAFinding createHCAFinding(HierarchicalClusteringQueryDTO queryDTO, String sessionID, String taskID) throws FrameworkException;
 	/**
 	 * Creates and returns a Gene Expression Intensity finding
 	 * (GEIntensityFinding) from the given query described 
