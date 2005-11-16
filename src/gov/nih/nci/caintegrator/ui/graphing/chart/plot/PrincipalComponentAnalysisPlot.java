@@ -32,7 +32,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+/**
+ * This class generates a plot for the PrincipalComponentAnalysis graph.
+ * @author Michael A Harris
+ *
+ */
 public class PrincipalComponentAnalysisPlot {
 
 	
