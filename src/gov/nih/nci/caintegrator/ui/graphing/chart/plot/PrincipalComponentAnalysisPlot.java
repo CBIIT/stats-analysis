@@ -212,7 +212,6 @@ public class PrincipalComponentAnalysisPlot {
 	private void writeBoundingRectImageMap(PrintWriter writer, String name, Collection<ChartEntity> boundingEntities, boolean useOverlibToolTip) {
 	  System.out.println("Num entities=" + boundingEntities.size());
 	  StringBuffer sb = new StringBuffer();
-      //XYAnnotationEntity annotationEntity;
       ChartEntity chartEntity;
       String areaTag;
 
@@ -222,13 +221,11 @@ public class PrincipalComponentAnalysisPlot {
 	  sb.append(StringUtils.getLineSeparator());
       for (Iterator i=boundingEntities.iterator(); i.hasNext(); ) {
        	 chartEntity = (ChartEntity) i.next();
-       	 //if (chartEntity instanceof XYAnnotationEntity) {
-       	   //annotationEntity = (ChartEntity) chartEntity;
-       	   areaTag = chartEntity.getImageMapAreaTag(ttg, urlg).trim();
-       	   if (areaTag.length() > 0) {
-             sb.append(chartEntity.getImageMapAreaTag(ttg, urlg));
-             sb.append(StringUtils.getLineSeparator());
-       	   }
+       	 areaTag = chartEntity.getImageMapAreaTag(ttg, urlg).trim();
+   	     if (areaTag.length() > 0) {
+           sb.append(chartEntity.getImageMapAreaTag(ttg, urlg));
+           sb.append(StringUtils.getLineSeparator());
+   	     }
       }
       sb.append("</map>");
       writer.println(sb.toString());
@@ -252,7 +249,6 @@ public class PrincipalComponentAnalysisPlot {
 	     shape = entity.getArea();
 	     boundingRect = shape.getBounds2D();
 	     boundingEntity = new ChartEntity(boundingRect, entity.getToolTipText(), entity.getURLText());
-	     //boundingEntity = new XYAnnotationEntity(boundingRect, entity.getRendererIndex(), entity.getToolTipText(), entity.getURLText());
 	     boundingEntities.add(boundingEntity);
 	  }
 	  return boundingEntities;
