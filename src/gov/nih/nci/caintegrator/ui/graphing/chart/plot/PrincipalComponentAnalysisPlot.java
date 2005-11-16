@@ -184,67 +184,77 @@ public class PrincipalComponentAnalysisPlot {
 
 	public JFreeChart getChart() { return pcaChart; }
 	
+	/**
+	 * Same interface as ChartUtilities.writeImageMap. This version will find the 
+	 * bounding rectangles for the entities in the ChartRenderingInfo object and will write those
+	 * to the image map.
+	 * @param writer
+	 * @param name
+	 * @param info
+	 * @param useOverlibToolTip
+	 */
+	public void writeBoundingRectImageMap(PrintWriter writer, String name, ChartRenderingInfo info, boolean useOverlibToolTip) {
+	  EntityCollection collection = info.getEntityCollection();
+      Collection entities = collection.getEntities();	
+		
+      Collection<ChartEntity> boundingEntities = getBoundingEntities(entities);
+      writeBoundingRectImageMap(writer, name, boundingEntities, useOverlibToolTip);
+		
+	}
 	
 	/**
-	 * This method handles overlapping entities.  The JFreeChart writeImageMap 
-	 * utilities appear to not report entities that overlap with other entities.
-	 * @param b 
-	 * @param info2 
-	 * @param string 
-	 * @param writer 
-	 *
+	 * Write the image map for the collection of bounding entities.
+	 * @param writer
+	 * @param name
+	 * @param boundingEntities
+	 * @param useOverlibToolTip
 	 */
-	public void writeImageMap(PrintWriter writer, String name, ChartRenderingInfo info, boolean useOverlibToolTip) {
-		
-		
-		 /*
-		  *  StringBuffer sb = new StringBuffer();
-        sb.append("<map id=\"" + name + "\" name=\"" + name + "\">");
-        sb.append(StringUtils.getLineSeparator());
-        EntityCollection entities = info.getEntityCollection();
-        if (entities != null) {
-            int count = entities.getEntityCount();
-            for (int i = count - 1; i >= 0; i--) {
-                ChartEntity entity = entities.getEntity(i);
-                if (entity.getToolTipText() != null 
-                        || entity.getURLText() != null) {
-                    String area = entity.getImageMapAreaTag(
-                        toolTipTagFragmentGenerator, urlTagFragmentGenerator
-                    );
-                    if (area.length() > 0) {
-                        sb.append(area);
-                        sb.append(StringUtils.getLineSeparator());
-                    }
-                }
-            }
-        }
-        sb.append("</map>");
-		  */
-		
-		 StringBuffer sb = new StringBuffer();
-		 sb.append("<map id=\"" + name + "\" name=\"" + name + "\">");
-		 sb.append(StringUtils.getLineSeparator());
-		 
-		 EntityCollection collection = info.getEntityCollection();
-         Collection entities = collection.getEntities();
-         System.out.println("Num entities=" + entities.size());
-         XYAnnotationEntity annotationEntity;
-         ChartEntity chartEntity;
-         int count = 0;
-         StandardToolTipTagFragmentGenerator ttg = new StandardToolTipTagFragmentGenerator();
-         StandardURLTagFragmentGenerator urlg = new StandardURLTagFragmentGenerator();
-         for (Iterator i=entities.iterator(); i.hasNext(); ) {
-	       	 chartEntity = (ChartEntity) i.next();
-	       	 if (chartEntity instanceof XYAnnotationEntity) {
-	       	   annotationEntity = (XYAnnotationEntity) chartEntity;
-	           sb.append(annotationEntity.getImageMapAreaTag(ttg, urlg));
-	           sb.append(StringUtils.getLineSeparator());	             
-	       	 }
-         }
-         sb.append("</map>");
-         writer.println(sb.toString());
+	private void writeBoundingRectImageMap(PrintWriter writer, String name, Collection<ChartEntity> boundingEntities, boolean useOverlibToolTip) {
+	  System.out.println("Num entities=" + boundingEntities.size());
+	  StringBuffer sb = new StringBuffer();
+      //XYAnnotationEntity annotationEntity;
+      ChartEntity chartEntity;
+      String areaTag;
+
+      StandardToolTipTagFragmentGenerator ttg = new StandardToolTipTagFragmentGenerator();
+      StandardURLTagFragmentGenerator urlg = new StandardURLTagFragmentGenerator();
+      sb.append("<map id=\"" + name + "\" name=\"" + name + "\">");
+	  sb.append(StringUtils.getLineSeparator());
+      for (Iterator i=boundingEntities.iterator(); i.hasNext(); ) {
+       	 chartEntity = (ChartEntity) i.next();
+       	 //if (chartEntity instanceof XYAnnotationEntity) {
+       	   //annotationEntity = (ChartEntity) chartEntity;
+       	   areaTag = chartEntity.getImageMapAreaTag(ttg, urlg).trim();
+       	   if (areaTag.length() > 0) {
+             sb.append(chartEntity.getImageMapAreaTag(ttg, urlg));
+             sb.append(StringUtils.getLineSeparator());
+       	   }
+      }
+      sb.append("</map>");
+      writer.println(sb.toString());
 	}
-
 	
-
+	/**
+	 * Get a collection of entities with the area shape equal to the bounding rectangle
+	 * for the shape of original entity. This is necessary because the Javascript for the sample 
+	 * selection lasso can only handle rect objects.
+	 * @param entities
+	 * @return a collection of entities containing the bounding rectangles of the original entities
+	 */
+	private Collection<ChartEntity> getBoundingEntities(Collection entities) {
+	  ChartEntity entity;
+	  ChartEntity boundingEntity;
+	  Shape shape;
+	  Rectangle2D boundingRect;
+	  Collection<ChartEntity> boundingEntities = new ArrayList<ChartEntity>();
+	  for (Iterator i=entities.iterator(); i.hasNext(); ) {
+	     entity = (ChartEntity) i.next();
+	     shape = entity.getArea();
+	     boundingRect = shape.getBounds2D();
+	     boundingEntity = new ChartEntity(boundingRect, entity.getToolTipText(), entity.getURLText());
+	     //boundingEntity = new XYAnnotationEntity(boundingRect, entity.getRendererIndex(), entity.getToolTipText(), entity.getURLText());
+	     boundingEntities.add(boundingEntity);
+	  }
+	  return boundingEntities;
+	}
 }

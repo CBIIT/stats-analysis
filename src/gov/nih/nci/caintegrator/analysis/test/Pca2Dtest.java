@@ -78,7 +78,7 @@ public class Pca2Dtest {
 	  				new StandardEntityCollection());
 	          ChartUtilities.saveChartAsPNG(file_pc1vspc2, pc1vspc2.getChart(), 650, 400, pc1vspc2info);
 	          PrintWriter pw1 = new PrintWriter(new FileWriter("PC1vsPC2.im"));
-	          pc1vspc2.writeImageMap(pw1, "PC1vsPC2",pc1vspc2info, true);
+	          pc1vspc2.writeBoundingRectImageMap(pw1, "PC1vsPC2",pc1vspc2info, true);
 	          pw1.close();
 	          
 	          //PC1 vs PC3
@@ -89,7 +89,7 @@ public class Pca2Dtest {
 	  				new StandardEntityCollection());
 	          ChartUtilities.saveChartAsPNG(file_pc1vspc3, pc1vspc3.getChart(), 650, 400, pc1vspc3info);
 	          PrintWriter pw2 = new PrintWriter(new FileWriter("PC1vsPC3.im"));
-	          pc1vspc3.writeImageMap(pw2, "PC1vsPC3",pc1vspc3info, true);
+	          pc1vspc3.writeBoundingRectImageMap(pw2, "PC1vsPC3",pc1vspc3info, true);
 	          pw2.close();
 	          
 	          
@@ -101,7 +101,7 @@ public class Pca2Dtest {
 	  				new StandardEntityCollection());
 	          ChartUtilities.saveChartAsPNG(file_pc2vspc3, pc2vspc3.getChart(), 650, 400, pc2vspc3info);
 	          PrintWriter pw3 = new PrintWriter(new FileWriter("PC2vsPC3.im"));
-	          pc1vspc3.writeImageMap(pw3, "PC2vsPC3",pc2vspc3info, true);
+	          pc1vspc3.writeBoundingRectImageMap(pw3, "PC2vsPC3",pc2vspc3info, true);
 	          pw3.close();
 	        }
 	        catch (IOException ex) {
