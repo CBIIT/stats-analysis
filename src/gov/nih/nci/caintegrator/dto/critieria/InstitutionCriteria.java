@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.dto.critieria;
 
-import gov.nih.nci.caintegrator.dto.de.InstitutionNameDE;
+import gov.nih.nci.caintegrator.dto.de.InstitutionDE;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,26 +22,26 @@ public class InstitutionCriteria  extends Criteria implements Serializable,Clone
 	 * track down if you aren't ultra familiar with the code base, so add those
 	 * methods now! (Not necesary for primitives.)
 	 */
-	private Collection institutionNames;
+	private Collection<InstitutionDE> institutes;
 
 
-	public void setInstitutionNames(Collection institutionNameObjs) {
-		for (Iterator iterator = institutionNameObjs.iterator(); iterator.hasNext();) {
+	public void setInstitutions(Collection<InstitutionDE> institutionsObjs) {
+		for (Iterator iterator = institutionsObjs.iterator(); iterator.hasNext();) {
 			Object obj = iterator.next();
-			if (obj instanceof InstitutionNameDE) {
-				getInstitutionNames().add(obj);
+			if (obj instanceof InstitutionDE) {
+				getInstitutions().add((InstitutionDE)obj);
 			}
 		}
 	}
 
-	public void setInsitutionName(InstitutionNameDE institutionName) {
-		getInstitutionNames().add(institutionName);
+	public void setInsitution(InstitutionDE institution) {
+		getInstitutions().add(institution);
 	}
 
-	private Collection getInstitutionNames() {
-		if (institutionNames == null)
-			institutionNames = new ArrayList();
-		return institutionNames;
+	private Collection<InstitutionDE> getInstitutions() {
+		if (institutes == null)
+			institutes = new ArrayList();
+		return institutes;
 	}
 
 	public InstitutionCriteria() {
@@ -61,10 +61,10 @@ public class InstitutionCriteria  extends Criteria implements Serializable,Clone
 	public Object clone() {
 		InstitutionCriteria myClone = null;
 		myClone = (InstitutionCriteria) super.clone();
-		if(this.institutionNames!=null) {
-			myClone.institutionNames = new ArrayList();
-			for (Iterator i = institutionNames.iterator(); i.hasNext();) {
-				myClone.institutionNames.add(((InstitutionNameDE) i.next()).clone());
+		if(this.institutes!=null) {
+			myClone.institutes= new ArrayList();
+			for (Iterator i = institutes.iterator(); i.hasNext();) {
+				myClone.institutes.add((InstitutionDE)((InstitutionDE) i.next()).clone());
 			}
 		}
 		return myClone;
