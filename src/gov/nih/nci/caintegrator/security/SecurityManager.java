@@ -1,16 +1,17 @@
 package gov.nih.nci.caintegrator.security;
 
-import java.util.HashSet;
 import java.util.Set;
+
+import gov.nih.nci.caintegrator.security.UserCredentials.UserRole;
+import gov.nih.nci.security.AuthenticationManager;
+import gov.nih.nci.security.AuthorizationManager;
+import gov.nih.nci.security.SecurityServiceProvider;
+import gov.nih.nci.security.authorization.domainobjects.User;
+import gov.nih.nci.security.exceptions.CSException;
 
 import javax.security.sasl.AuthenticationException;
 
 import org.apache.log4j.Logger;
-
-import gov.nih.nci.caintegrator.security.UserCredentials.UserRole;
-import gov.nih.nci.security.AuthenticationManager;
-import gov.nih.nci.security.SecurityServiceProvider;
-import gov.nih.nci.security.exceptions.CSException;
 /**
  * This will eventually become an implementation class of the security manager
  * interface that will be bundled with caIntegrator.  For now it will reside in
@@ -23,13 +24,14 @@ import gov.nih.nci.security.exceptions.CSException;
 public class SecurityManager {
 	private static SecurityManager instance;
 	private static Logger logger = Logger.getLogger(SecurityManager.class);
-	static {
-		instance = new SecurityManager();
-	}
+	private static AuthorizationManager authorizationManager;
 	
-	private SecurityManager() {}
+	private SecurityManager(){}
 		
-	public static SecurityManager getInstance() {
+	public static SecurityManager getInstance(){
+		if( instance == null){
+			instance = new SecurityManager();
+		}
 		return instance;
 	}
 
@@ -50,10 +52,19 @@ public class SecurityManager {
 	public UserCredentials authenticate(String userName, String password) throws AuthenticationException{
 		UserCredentials credentials = null;
 		boolean authenticated = localAuthenticate(userName,password);
-		Set groups = new HashSet();
-		if(authenticated) {
-			credentials = new UserCredentials(userName,UserRole.PUBLIC, null);
+		try {
+			authorizationManager = getAuthorizationManager();
+		}catch(Exception e) {
+			logger.error(e);
+			logger.debug(e);
+			throw new AuthenticationException("Unable to obtain AuthenticationManager");
 		}
+		if(authenticated) {
+			User user = authorizationManager.getUser(userName);
+			Set allowableDataSets = user.getProtectionElements();
+			credentials = new UserCredentials(userName, UserRole.SUPER_USER, allowableDataSets);
+		}
+		
 		return credentials;
 	}
 	
@@ -69,7 +80,9 @@ public class SecurityManager {
 		 
 	        boolean loggedIn = false;
 	        try {
-	            logger.debug("Testing Logging");            
+	            /**
+	    		 * TODO get application Ccontext from system properties
+	    		 */
 	            am = SecurityServiceProvider.getAuthenticationManager("rembrandt");
 	            loggedIn = am.login(username, password);
 
@@ -83,6 +96,7 @@ public class SecurityManager {
 		            loggedIn = true;
 		        }
 		        if(loggedIn) {
+		        	
 		            logger.debug("loginSuccess");
 		        } else {
 		        	logger.debug("loginFail");
@@ -94,4 +108,21 @@ public class SecurityManager {
 	        
 	        return loggedIn;
 	}
+	private static AuthorizationManager getAuthorizationManager() throws CSException{
+		if(authorizationManager==null) {
+			authorizationManager = SecurityServiceProvider.getAuthorizationManager("rembrandt");
+		}
+		return authorizationManager;
+	}
+	
+	private User getUser(String loginName){
+		if(authorizationManager!=null) {
+			return authorizationManager.getUser(loginName);
+		}else {
+			return null;
+		}
+	}
+	
+	
+
 }
