@@ -5,8 +5,12 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.LegendItem;
+import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.LegendItemSource;
 import org.jfree.chart.annotations.XYShapeAnnotation;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
@@ -17,6 +21,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.StringUtils;
 
@@ -25,6 +30,7 @@ import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.Prin
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Paint;
 import java.awt.Shape;
 import java.util.*;
 import java.awt.geom.*;
@@ -73,12 +79,17 @@ public class PrincipalComponentAnalysisPlot {
 		String xLabel = component1.toString();
 		String yLabel = component2.toString();
 		
+		
+		
 		pcaChart = ChartFactory.createScatterPlot("Principal Component Analysis",xLabel, yLabel, null,  PlotOrientation.VERTICAL,
 	            true, 
 	            true, 
 	            false );
 		
 		XYPlot plot = (XYPlot) pcaChart.getPlot();
+		
+		buildLegend();
+		
 	    plot.setNoDataMessage(null);
 	    XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
 	    renderer.setToolTipGenerator(new StandardXYToolTipGenerator());
@@ -105,8 +116,52 @@ public class PrincipalComponentAnalysisPlot {
         
         System.out.println("domainAxis=" + domainAxis.getLabel());
         System.out.println("rangeAxis=" + rangeAxis.getLabel());
-	        
+         
 	    createGlyphsAndAddToPlot(plot);     
+	}
+	
+	/**
+	 * Build the legend
+	 *
+	 */
+	private void buildLegend() {
+	
+	  LegendTitle legend = pcaChart.getLegend();
+	  LegendItemSource[] sources = new LegendItemSource[1];
+	  PcaLegendItemSource legendSrc = new PcaLegendItemSource();
+	  LegendItem item = null;
+	    
+	  //Rect=survival less than 10 months
+	  item = new LegendItem("Survival less than 10 months", null, null, null, new Rectangle2D.Double(0,0,8,8), Color.BLACK);
+	  legendSrc.addLegendItem(item);
+	  
+	  //Circle=survival 10 months or more
+	  item = new LegendItem("Survival over 10 months", null, null, null, new Ellipse2D.Double(0,0,8,8), Color.BLACK);
+	  legendSrc.addLegendItem(item);
+	    
+	  if (colorBy == PCAcolorByType.Disease) {
+	    //go through the disease color map and add legend items
+		String diseaseName = null;
+		Color diseaseColor = null;
+		for (Iterator i=diseaseColorMap.keySet().iterator(); i.hasNext(); ) {
+		  diseaseName = (String) i.next();
+		  diseaseColor = (Color) diseaseColorMap.get(diseaseName);
+		  item = new LegendItem(diseaseName, null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), diseaseColor);
+		  //item = new LegendItem(diseaseName, null, null, null, new Rectangle2D.Double(0,0,6,6), diseaseColor);
+		  legendSrc.addLegendItem(item);
+		}
+		  
+	  }
+	  else if (colorBy == PCAcolorByType.Gender) {
+		  item = new LegendItem("Male", null, null, null, new Rectangle2D.Double(0,0,6,6), Color.BLUE);
+		  legendSrc.addLegendItem(item);
+		  item = new LegendItem("Female", null, null, null, new Rectangle2D.Double(0,0,6,6), Color.PINK);
+		  legendSrc.addLegendItem(item);
+	  }
+	  
+	    
+	  sources[0] = legendSrc;
+	  legend.setSources(sources);
 	}
 	
 	/**
@@ -128,8 +183,8 @@ public class PrincipalComponentAnalysisPlot {
 	    
 	    x = pcaPoint.getComponentValue(component1);
 	    y = pcaPoint.getComponentValue(component2);
-	    
-	    if (pcaPoint.getSurvivalInMonths() < 10.0) {
+	    double survival = pcaPoint.getSurvivalInMonths();
+	    if ((survival > 0) && (survival < 10.0)) {
 	      Rectangle2D.Double rect = new Rectangle2D.Double();
 	      rect.setFrameFromCenter(x,y, x+3,y+3);
 	      glyphShape = rect;
@@ -256,5 +311,24 @@ public class PrincipalComponentAnalysisPlot {
 	     boundingEntities.add(boundingEntity);
 	  }
 	  return boundingEntities;
+	}
+	
+	/**
+	 * A class for building the legend
+	 * @author harrismic
+	 *
+	 */
+	private class PcaLegendItemSource implements LegendItemSource {
+
+		private LegendItemCollection items = new LegendItemCollection();
+		
+		public void addLegendItem(LegendItem item) {
+		  items.add(item); 
+		}
+		
+		public LegendItemCollection getLegendItems() {
+			return items;
+		}
+		
 	}
 }
