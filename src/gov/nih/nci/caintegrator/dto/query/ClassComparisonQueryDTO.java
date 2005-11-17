@@ -2,7 +2,7 @@ package gov.nih.nci.caintegrator.dto.query;
 
 import gov.nih.nci.caintegrator.dto.de.ArrayPlatformDE;
 import gov.nih.nci.caintegrator.dto.de.ExprFoldChangeDE;
-import gov.nih.nci.caintegrator.dto.de.InstitutionNameDE;
+import gov.nih.nci.caintegrator.dto.de.InstitutionDE;
 import gov.nih.nci.caintegrator.dto.de.MultiGroupComparisonAdjustmentTypeDE;
 import gov.nih.nci.caintegrator.dto.de.StatisticTypeDE;
 import gov.nih.nci.caintegrator.dto.de.StatisticalSignificanceDE;
@@ -56,8 +56,8 @@ public interface ClassComparisonQueryDTO extends QueryDTO{
 	public void setComparisonGroups(
 			Collection<ClinicalQueryDTO> comparisonGroups);
 	
-	public InstitutionNameDE getInstitutionNameDE();
+	public InstitutionDE getInstitutionDE();
 	
-	public void setInstitutionNameDE(InstitutionNameDE institutionNameDE);
+	public void setInstitutionDE(InstitutionDE institutionDE);
 
 }

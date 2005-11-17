@@ -4,7 +4,7 @@ import gov.nih.nci.caintegrator.dto.de.ArrayPlatformDE;
 import gov.nih.nci.caintegrator.dto.de.CloneIdentifierDE;
 import gov.nih.nci.caintegrator.dto.de.GeneIdentifierDE;
 import gov.nih.nci.caintegrator.dto.de.GeneVectorPercentileDE;
-import gov.nih.nci.caintegrator.dto.de.InstitutionNameDE;
+import gov.nih.nci.caintegrator.dto.de.InstitutionDE;
 
 import java.util.Collection;
 
@@ -31,15 +31,15 @@ public interface PrincipalComponentAnalysisQueryDTO extends QueryDTO {
 	public abstract void setComparisonGroup(ClinicalQueryDTO comparisonGroup);
 
 	/**
-	 * @return Returns the institutionNameDE.
+	 * @return Returns the institutionDE.
 	 */
-	public abstract InstitutionNameDE getInstitutionNameDE();
+	public abstract InstitutionDE getInstitutionDE();
 
 	/**
-	 * @param institutionNameDE The institutionNameDE to set.
+	 * @param institutionDE The institutionDE to set.
 	 */
-	public abstract void setInstitutionNameDE(
-			InstitutionNameDE institutionNameDE);
+	public abstract void setInstitutionDE(
+			InstitutionDE institutionDE);
 
 	/**
 	 * @return Returns the geneIdentifierDEs.

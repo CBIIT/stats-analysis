@@ -6,10 +6,8 @@ import gov.nih.nci.caintegrator.dto.de.ClusterTypeDE;
 import gov.nih.nci.caintegrator.dto.de.DistanceMatrixTypeDE;
 import gov.nih.nci.caintegrator.dto.de.GeneIdentifierDE;
 import gov.nih.nci.caintegrator.dto.de.GeneVectorPercentileDE;
-import gov.nih.nci.caintegrator.dto.de.InstitutionNameDE;
+import gov.nih.nci.caintegrator.dto.de.InstitutionDE;
 import gov.nih.nci.caintegrator.dto.de.LinkageMethodTypeDE;
-import gov.nih.nci.caintegrator.enumeration.LinkageMethodType;
-
 
 import java.util.Collection;
 
@@ -28,13 +26,13 @@ public interface HierarchicalClusteringQueryDTO extends QueryDTO {
 	/**
 	 * @return Returns the institutionNameDE.
 	 */
-	public abstract InstitutionNameDE getInstitutionNameDE();
+	public abstract InstitutionDE getInstitutionDE();
 
 	/**
 	 * @param institutionNameDE The institutionNameDE to set.
 	 */
-	public abstract void setInstitutionNameDE(
-			InstitutionNameDE institutionNameDE);
+	public abstract void setInstitutionDE(
+			InstitutionDE institutionDE);
 
 	/**
 	 * @return Returns the geneIdentifierDEs.
