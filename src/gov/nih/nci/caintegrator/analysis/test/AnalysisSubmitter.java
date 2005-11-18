@@ -37,6 +37,8 @@ import java.awt.event.WindowEvent;
 import java.util.*;
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+
 import javax.swing.table.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -341,8 +343,15 @@ public class AnalysisSubmitter implements MessageListener, ExceptionListener {
 		  System.out.println("Processing HCA result=" + result);
 		  
 		  Image img = Toolkit.getDefaultToolkit().createImage(result.getImageCode());
+		  
 		  hcaImagePanel.setImage(img,750,750);
 		  hcaImages.repaint();
+		  
+		  //Test 
+		  //BufferedImage buffImg = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+		  //Graphics2D g = buffImg.createGraphics();
+		  //g.drawImage(buffImg, null, 0,0)
+		  
 	  }
 	  
 	  private void processCCresult(ClassComparisonResult result) {
