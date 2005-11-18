@@ -17,6 +17,13 @@ public class PrincipalComponentAnalysisDataPoint {
 	public PrincipalComponentAnalysisDataPoint(String sampleId) {
 		this.sampleId = sampleId;
 	}
+	
+	public PrincipalComponentAnalysisDataPoint(String sampleId, double pc1value, double pc2value, double pc3value) {
+	  this.sampleId = sampleId;
+	  this.pc1value = pc1value;
+	  this.pc2value = pc2value;
+	  this.pc3value = pc3value;
+	}
 
 	
 	/**
