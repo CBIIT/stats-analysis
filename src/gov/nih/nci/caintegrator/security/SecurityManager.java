@@ -86,8 +86,8 @@ public class SecurityManager {
 				for(Iterator i = protectionElements.iterator();i.hasNext();) {
 					ProtectionElementPrivilegeContext pepc = (ProtectionElementPrivilegeContext)i.next();
 					ProtectionElement pe = pepc.getProtectionElement();
-					Integer objectId = Integer.getInteger( pe.getObjectId());
-					String description = pe.getProtectionElementDescription();
+					Integer objectId = new Integer(pe.getObjectId());
+					String description = pe.getProtectionElementName();
 					institutes.put(description,objectId);
 				}
 				credentials = new UserCredentials(userName, UserRole.SUPER_USER, institutes);
