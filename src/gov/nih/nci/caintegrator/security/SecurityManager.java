@@ -1,13 +1,20 @@
 package gov.nih.nci.caintegrator.security;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import gov.nih.nci.caintegrator.security.UserCredentials.UserRole;
 import gov.nih.nci.security.AuthenticationManager;
 import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.SecurityServiceProvider;
+import gov.nih.nci.security.UserProvisioningManager;
+import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
+import gov.nih.nci.security.authorization.domainobjects.ProtectionElementPrivilegeContext;
 import gov.nih.nci.security.authorization.domainobjects.User;
 import gov.nih.nci.security.exceptions.CSException;
+import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 
 import javax.security.sasl.AuthenticationException;
 
@@ -25,6 +32,7 @@ public class SecurityManager {
 	private static SecurityManager instance;
 	private static Logger logger = Logger.getLogger(SecurityManager.class);
 	private static AuthorizationManager authorizationManager;
+	private static UserProvisioningManager userProvisioningManager;
 	
 	private SecurityManager(){}
 		
@@ -46,7 +54,9 @@ public class SecurityManager {
 	 * 
 	 * @param userName
 	 * @param password
-	 * @return userCredentials
+	 * @return userCredentials can be null if any exceptions are thrown while
+	 * trying to access the SecurityManager classes.
+	 *  
 	 * @throws AuthenticationException
 	 */
 	public UserCredentials authenticate(String userName, String password) throws AuthenticationException{
@@ -54,17 +64,42 @@ public class SecurityManager {
 		boolean authenticated = localAuthenticate(userName,password);
 		try {
 			authorizationManager = getAuthorizationManager();
+			userProvisioningManager = getUserProvisioningManager();
 		}catch(Exception e) {
 			logger.error(e);
 			logger.debug(e);
-			throw new AuthenticationException("Unable to obtain AuthenticationManager");
+			throw new AuthenticationException("Unable to obtain Required Security Managers");
 		}
 		if(authenticated) {
+			HashMap<String, Integer> institutes = new HashMap<String, Integer>();
 			User user = authorizationManager.getUser(userName);
-			Set allowableDataSets = user.getProtectionElements();
-			credentials = new UserCredentials(userName, UserRole.SUPER_USER, allowableDataSets);
+			Set protectionElements;
+			try {
+				protectionElements = userProvisioningManager.getProtectionElementPrivilegeContextForUser(user.getUserId().toString());
+			} catch (Exception e) {
+				logger.error("No ProtectionElementPrivlegeContexts found for user:"+ userName);
+				logger.error(e);
+				throw new AuthenticationException("ProtectionElementPrivlegeContexts are null");
+			}
+			if(protectionElements!=null) {
+				try {
+				for(Iterator i = protectionElements.iterator();i.hasNext();) {
+					ProtectionElementPrivilegeContext pepc = (ProtectionElementPrivilegeContext)i.next();
+					ProtectionElement pe = pepc.getProtectionElement();
+					Integer objectId = Integer.getInteger( pe.getObjectId());
+					String description = pe.getProtectionElementDescription();
+					institutes.put(description,objectId);
+				}
+				credentials = new UserCredentials(userName, UserRole.SUPER_USER, institutes);
+				}catch(NullPointerException npe) {
+					logger.error("Security Objects are null.") ;
+					throw new AuthenticationException("SecurityObjects are null");
+				}
+			}
+			
+		}if(credentials==null){
+			logger.error("authenticate is returning a Null Credentials Object");
 		}
-		
 		return credentials;
 	}
 	
@@ -122,7 +157,13 @@ public class SecurityManager {
 			return null;
 		}
 	}
+	private static UserProvisioningManager getUserProvisioningManager() throws CSException{
+		if(userProvisioningManager==null) {
+			userProvisioningManager = SecurityServiceProvider.getUserProvisioningManager("rembrandt");
+		}
+		return userProvisioningManager;
+	}
 	
 	
-
+	
 }

@@ -1,9 +1,11 @@
 package gov.nih.nci.caintegrator.security;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 /***
  * Class that will hold the "Credentials" required to fully use a caIntegrator
- * based application.  It will hold the Role of the user and the groups that
+ * based application.  It will hold the Role of the user and the institutes that
  * the user is associated with.
  * 
  * The UserCredentials may have 1 of 3 roles.
@@ -11,7 +13,7 @@ import java.util.Set;
  *  UserRole.PUBLIC is able to access only public data
  *  
  *  UserRole.INSTITUTE is able to view PUBLIC data and the data of the Institutes
- *  listed in the Set groups.
+ *  listed in the Set institutes.
  *  
  *  UserRole.SUPER_USER is able to view all data across all institutes as well
  *  as all public data
@@ -24,17 +26,17 @@ public class UserCredentials {
 
 	private String userName;
 	private UserRole role;
-	private Set groups;
+	private HashMap institutes;
 	private boolean authenticated = false;
 	
 	public enum UserRole{PUBLIC,INSTITUTE,SUPER_USER}
 
 	/**
-	 * The groups whose data the user is allowed to see
+	 * The institutes whose data the user is allowed to see
 	 * @return
 	 */
-	public Set getGroups() {
-		return this.groups;
+	public HashMap getInstitutes() {
+		return this.institutes;
 	}
 
 	/**
@@ -56,12 +58,12 @@ public class UserCredentials {
 	 * set by the SecurityManager, they can not be modified.
 	 * @param userName
 	 * @param role
-	 * @param groups
+	 * @param institutes
 	 */
-	protected UserCredentials(String userName, UserRole role, Set groups) {
+	protected UserCredentials(String userName, UserRole role, HashMap groups) {
 		this.userName = userName;
 		this.role = role;
-		this.groups = groups;
+		this.institutes = groups;
 		if(role!=null) {
 			authenticated = true;
 		}
