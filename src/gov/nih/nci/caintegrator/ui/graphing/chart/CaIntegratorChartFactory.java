@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import gov.nih.nci.caintegrator.enumeration.ClinicalFactorType;
 import gov.nih.nci.caintegrator.ui.graphing.chart.plot.ClinicalPlot;
 import gov.nih.nci.caintegrator.ui.graphing.chart.plot.KaplanMeierPlot;
 import gov.nih.nci.caintegrator.ui.graphing.chart.plot.PrincipalComponentAnalysisPlot;
