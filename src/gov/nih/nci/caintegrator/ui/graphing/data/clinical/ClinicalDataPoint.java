@@ -1,8 +1,10 @@
 package gov.nih.nci.caintegrator.ui.graphing.data.clinical;
 
+import gov.nih.nci.caintegrator.enumeration.ClinicalFactorType;
+
 public class ClinicalDataPoint {
 	
-	public static enum ClinicalFactorType {AgeAtDx, Treatment, NeurologicalAssessment, Survival };
+	
 	public static enum PatientGenderType { Male, Female };
 	
 	private String patientId;
