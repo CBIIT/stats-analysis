@@ -1,8 +1,9 @@
 package gov.nih.nci.caintegrator.security;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import gov.nih.nci.caintegrator.dto.de.InstitutionDE;
+
+import java.util.Collection;
+
 /***
  * Class that will hold the "Credentials" required to fully use a caIntegrator
  * based application.  It will hold the Role of the user and the institutes that
@@ -10,9 +11,9 @@ import java.util.Set;
  * 
  * The UserCredentials may have 1 of 3 roles.
  * 	
- *  UserRole.PUBLIC is able to access only public data
+ *  UserRole.PUBLIC_USER is able to access only public data
  *  
- *  UserRole.INSTITUTE is able to view PUBLIC data and the data of the Institutes
+ *  UserRole.INSTITUTE_USER is able to view PUBLIC_USER data and the data of the Institutes
  *  listed in the Set institutes.
  *  
  *  UserRole.SUPER_USER is able to view all data across all institutes as well
@@ -26,16 +27,32 @@ public class UserCredentials {
 
 	private String userName;
 	private UserRole role;
-	private HashMap institutes;
+	private Collection<InstitutionDE> institutes;
 	private boolean authenticated = false;
 	
-	public enum UserRole{PUBLIC,INSTITUTE,SUPER_USER}
+	public enum UserRole{
+		PUBLIC_USER, INSTITUTE_USER, SUPER_USER;
+		public  String toString()
+		{
+			switch(this) {
+			case PUBLIC_USER:
+				return "PUBLIC_USER";
+			case INSTITUTE_USER:
+				return "INSTITUTE_USER";
+			case SUPER_USER:
+				return "SUPER_USER";
+			default:
+				//this should never happen
+				return "UNDEFINED_USER_ROLE";
+			}
+		}	
+	}
 
 	/**
 	 * The institutes whose data the user is allowed to see
 	 * @return
 	 */
-	public HashMap getInstitutes() {
+	public Collection<InstitutionDE> getInstitutes() {
 		return this.institutes;
 	}
 
@@ -60,10 +77,10 @@ public class UserCredentials {
 	 * @param role
 	 * @param institutes
 	 */
-	protected UserCredentials(String userName, UserRole role, HashMap groups) {
+	protected UserCredentials(String userName, UserRole role, Collection<InstitutionDE> allowableData) {
 		this.userName = userName;
 		this.role = role;
-		this.institutes = groups;
+		this.institutes = allowableData;
 		if(role!=null) {
 			authenticated = true;
 		}
