@@ -171,13 +171,7 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 			doRvoidEval(plotCmd);
 			doRvoidEval("dev.off()");
 
-			// the file should be ready now, so let's read (ok this isn't
-			// pretty, but hey, this ain't no beauty contest *grin* =)
-			// we read in chunks of bufSize (64k by default) and store the
-			// resulting byte arrays in a vector
-			// ... just in case the file gets really big ...
-			// we don't know the size in advance, because it's just a stream.
-			// also we can't rewind it, so we have to store it piece-by-piece
+			
 			RFileInputStream is = rConnection.openFile(fileName);
 			Vector buffers = new Vector();
 			int bufSize = 65536;
