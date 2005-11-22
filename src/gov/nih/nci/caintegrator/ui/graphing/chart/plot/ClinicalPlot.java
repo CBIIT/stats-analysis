@@ -2,7 +2,7 @@ package gov.nih.nci.caintegrator.ui.graphing.chart.plot;
 
 import gov.nih.nci.caintegrator.ui.graphing.data.DataRange;
 import gov.nih.nci.caintegrator.ui.graphing.data.clinical.ClinicalDataPoint;
-import gov.nih.nci.caintegrator.ui.graphing.data.clinical.ClinicalDataPoint.ClinicalFactorType;
+import gov.nih.nci.caintegrator.enumeration.ClinicalFactorType;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -35,7 +35,7 @@ public class ClinicalPlot {
 	private Collection<ClinicalDataPoint> dataPoints;
 	private Map diseaseColorMap = new HashMap();
 
-	public ClinicalPlot(Collection<ClinicalDataPoint> clinicalData, ClinicalFactorType factor1, ClinicalFactorType factor2) {
+	public ClinicalPlot(Collection<ClinicalDataPoint> clinicalData, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor1, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor2) {
 	  this.factor1 = factor1;
 	  this.factor2 = factor2;
 	  this.dataPoints = clinicalData;
@@ -98,7 +98,7 @@ public class ClinicalPlot {
 	 * @param factor
 	 * @return
 	 */
-	private DataRange getDataRange(Collection<ClinicalDataPoint> dataPoints2, ClinicalFactorType factor) {
+	private DataRange getDataRange(Collection<ClinicalDataPoint> dataPoints2, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor) {
 	  double maxValue = Double.MIN_VALUE;
 	  double minValue = Double.MAX_VALUE;
 	  double value;
