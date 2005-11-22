@@ -27,7 +27,6 @@ import org.jfree.util.StringUtils;
 
 import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint;
 import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint.*;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Paint;

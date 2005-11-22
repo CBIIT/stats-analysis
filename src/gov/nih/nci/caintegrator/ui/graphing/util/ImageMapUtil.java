@@ -62,6 +62,33 @@ public class ImageMapUtil {
       sb.append("</map>");
       writer.println(sb.toString());
 	}
+    
+    public static String returnBoundingRectImageMap(PrintWriter writer, String name,  boolean useOverlibToolTip,ChartRenderingInfo info) {
+        EntityCollection collection = info.getEntityCollection();
+        Collection entities = collection.getEntities(); 
+        
+        Collection<ChartEntity> myBoundingEntities = getBoundingEntities(entities);  
+        
+        System.out.println("Num entities=" + myBoundingEntities.size());
+          StringBuffer sb = new StringBuffer();
+          ChartEntity chartEntity;
+          String areaTag;
+
+          RembrandtStandardToolTipTagFragmentGenerator ttg = new RembrandtStandardToolTipTagFragmentGenerator();
+          StandardURLTagFragmentGenerator urlg = new StandardURLTagFragmentGenerator();
+          sb.append("<map id=\"" + name + "\" name=\"" + name + "\">");
+          sb.append(StringUtils.getLineSeparator());
+          for (Iterator i=myBoundingEntities.iterator(); i.hasNext(); ) {
+             chartEntity = (ChartEntity) i.next();
+             areaTag = chartEntity.getImageMapAreaTag(ttg, urlg).trim();
+             if (areaTag.length() > 0) {
+               sb.append(chartEntity.getImageMapAreaTag(ttg, urlg));
+               sb.append(StringUtils.getLineSeparator());
+             }
+          }
+          sb.append("</map>");
+          return sb.toString();
+        }
 	
 	/**
 	 * Get a collection of entities with the area shape equal to the bounding rectangle
