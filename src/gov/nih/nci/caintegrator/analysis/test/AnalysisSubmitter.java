@@ -24,11 +24,21 @@ import javax.jms.JMSException;
 import javax.jms.DeliveryMode;
 
 import org.apache.log4j.Logger;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.annotations.XYImageAnnotation;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.encoders.EncoderUtil;
+import org.jfree.chart.encoders.ImageFormat;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -347,10 +357,76 @@ public class AnalysisSubmitter implements MessageListener, ExceptionListener {
 		  hcaImagePanel.setImage(img,750,750);
 		  hcaImages.repaint();
 		  
-		  //Test 
-		  //BufferedImage buffImg = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
-		  //Graphics2D g = buffImg.createGraphics();
-		  //g.drawImage(buffImg, null, 0,0)
+		  //write the bytes to a file
+		  byte imageBytes[] = result.getImageCode();
+		  
+		  try {
+			  OutputStream out = new FileOutputStream("image_file_save.png");
+			  //PrintWriter out = new PrintWriter(new FileWriter("image_test.png"));
+			  out.write(imageBytes, 0, imageBytes.length);
+//			  for (int i=0; i < imageBytes.length; i++) {
+//			    out.write(imageBytes[i]);
+//			  }
+			  out.close();
+		  }
+		  catch (IOException ex) {
+		    ex.printStackTrace(System.out);
+		  }
+		  
+		  
+		  //try writing the image to a file
+		  JFreeChart hcChart = ChartFactory.createScatterPlot("Principal Component Analysis","", "", null,  PlotOrientation.VERTICAL,
+		            true, 
+		            true, 
+		            false );
+		  
+		  
+		 
+		  hcChart.setBackgroundImage(img);
+		  XYPlot plot = (XYPlot) hcChart.getPlot();
+		  
+		  NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
+	      NumberAxis rangeAxis  =	(NumberAxis) plot.getRangeAxis();
+	        
+	        //should determine axis range using datapoints.
+	        
+	        //domainAxis.setAutoRangeIncludesZero(false);
+	        
+	        
+	        domainAxis.setRange(0.0, 800.0);
+	        rangeAxis.setRange(0.0, 800.0);
+		  
+		  XYImageAnnotation annot = new XYImageAnnotation(200,200,img);
+		  plot.addAnnotation(annot);
+		  
+		  
+		  
+		  String fileName = "hcResult2.png";
+		  File pngFile = new File(fileName);
+		  try {
+		  ChartUtilities.saveChartAsPNG(pngFile, hcChart, 750, 750);
+		  }
+		  catch (IOException ex) {
+		    ex.printStackTrace(System.out);
+		  }
+		  
+		  
+//		  BufferedImage buffImg = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
+//		  Graphics g = buffImg.createGraphics();
+
+//		  //g.drawImage(img, null, 0,0);
+//		  g.drawImage(img, 0,0, Color.GREEN, null);
+//		  String fileName = "hcResult_" + result.getSessionId() + "_" + result.getTaskId() + ".png";
+//		  try {
+//		    FileOutputStream out = new FileOutputStream(fileName);
+//		    //ChartUtils.saveChartAsPNG();
+//		    EncoderUtil.writeBufferedImage(buffImg, ImageFormat.PNG, out);
+//		    ChartUtilities.saveChartAsPNG()
+//		    out.close();
+//		  }
+//		  catch (IOException ex) {
+//		    ex.printStackTrace(System.out);
+//		  }
 		  
 	  }
 	  
