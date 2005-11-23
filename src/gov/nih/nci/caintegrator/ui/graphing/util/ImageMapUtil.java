@@ -55,8 +55,10 @@ public class ImageMapUtil {
        	 chartEntity = (ChartEntity) i.next();
        	 areaTag = chartEntity.getImageMapAreaTag(ttg, urlg).trim();
    	     if (areaTag.length() > 0) {
-           sb.append(chartEntity.getImageMapAreaTag(ttg, urlg));
-           sb.append(StringUtils.getLineSeparator());
+   	    	 if(sb.indexOf(chartEntity.getImageMapAreaTag(ttg, urlg)) == -1)	{
+   	    		 sb.append(chartEntity.getImageMapAreaTag(ttg, urlg));
+   	    		 sb.append(StringUtils.getLineSeparator());
+   	    	 }
    	     }
       }
       sb.append("</map>");
@@ -82,8 +84,10 @@ public class ImageMapUtil {
              chartEntity = (ChartEntity) i.next();
              areaTag = chartEntity.getImageMapAreaTag(ttg, urlg).trim();
              if (areaTag.length() > 0) {
-               sb.append(chartEntity.getImageMapAreaTag(ttg, urlg));
-               sb.append(StringUtils.getLineSeparator());
+            	 if(sb.indexOf(chartEntity.getImageMapAreaTag(ttg, urlg)) == -1)	{
+            		 sb.append(chartEntity.getImageMapAreaTag(ttg, urlg));
+            		 sb.append(StringUtils.getLineSeparator());
+            	 }
              }
           }
           sb.append("</map>");
