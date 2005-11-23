@@ -121,16 +121,7 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 		return sb.toString();
 	}
 	
-	public Image getImage(String plotCmd) {
-		
-		byte[] imgCode = getImageCode(plotCmd);
-		
-		Image img = Toolkit.getDefaultToolkit().createImage(imgCode);
-		
-		return img;
-		
-	}
-
+	
 	/**
 	 * Get the byte representation of the image created with the plot command.
 	 * May be able to change this to return a Java Image object.
@@ -139,7 +130,7 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 	 * @param plotCmd
 	 * @return
 	 */
-	public byte[] getImageCode(String plotCmd) {
+	public byte[] getImageCode(String plotCmd, int imgHeight, int imgWidth) {
 
 		byte[] imgCode = new byte[0];
 
@@ -153,7 +144,7 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 			// pointsize, ...)
 
 			xp = doREval("try(bitmap(\"" + fileName
-					+ "\", height = 3, width = 3, res = 250 ))");
+					+ "\", height = " + imgHeight + ", width = " + imgWidth + ", res = 72 ))");
 
 			if (xp.asString() != null) { // if there's a string then we have
 											// a problem, R sent an error

@@ -334,19 +334,19 @@ public class AnalysisSubmitter implements MessageListener, ExceptionListener {
 	  	  pca3Dviz.addScatterPlot("NORMAL", getPlotArray(normalPlotData));
 		  
 		  //create the image from the PCA data
-		  byte[] img1Bytes = result.getImage1Bytes();
-		  byte[] img2Bytes = result.getImage2Bytes();
-		  byte[] img3Bytes = result.getImage3Bytes();
-		  
-		  Image img1 = Toolkit.getDefaultToolkit().createImage(img1Bytes);
-		  Image img2 = Toolkit.getDefaultToolkit().createImage(img2Bytes);
-		  Image img3 = Toolkit.getDefaultToolkit().createImage(img3Bytes);
-		  		  
-		  pcaImage1.setImage(img1, 750, 750);
-		  pcaImage2.setImage(img2, 750, 750);
-		  pcaImage3.setImage(img3, 750, 750);
-		 		    
-		  pcaImages.repaint();
+//		  byte[] img1Bytes = result.getImage1Bytes();
+//		  byte[] img2Bytes = result.getImage2Bytes();
+//		  byte[] img3Bytes = result.getImage3Bytes();
+//		  
+//		  Image img1 = Toolkit.getDefaultToolkit().createImage(img1Bytes);
+//		  Image img2 = Toolkit.getDefaultToolkit().createImage(img2Bytes);
+//		  Image img3 = Toolkit.getDefaultToolkit().createImage(img3Bytes);
+//		  		  
+//		  pcaImage1.setImage(img1, 750, 750);
+//		  pcaImage2.setImage(img2, 750, 750);
+//		  pcaImage3.setImage(img3, 750, 750);
+//		 		    
+//		  pcaImages.repaint();
 	  }
 	  
 	  private void processHCAresult(HierarchicalClusteringResult result) {

@@ -1,5 +1,12 @@
 package gov.nih.nci.caintegrator.analysis.server;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+
+import org.rosuda.JRclient.REXP;
+
 import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
 import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringResult;
 import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringRequest;
@@ -107,9 +114,29 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[1]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
 		}
 
-		byte[] imgCode = getImageCode(plotCmd);
-
+		
+		Vector orderedLabels = doREval("clusterLabels <-  mycluster$labels[mycluster$order]").asVector();
+		
+		int imgWidth = Math.round(0.05f * ((float) orderedLabels.size()));
+		int imgHeight = 5;
+		
+		byte[] imgCode = getImageCode(plotCmd, imgHeight, imgWidth);
 		result.setImageCode(imgCode);
+		
+		List<String> orderedLabelList = new ArrayList<String>(orderedLabels.size());
+		String label = null;
+		for (int i=0; i < orderedLabels.size(); i++ ) {
+		  label = ((REXP) orderedLabels.get(i)).asString();
+		  orderedLabelList.add(i,label);
+		}
+		
+		if (hcRequest.getClusterBy() == ClusterByType.Genes) {
+		  result.setClusteredReporterIDs(orderedLabelList);
+		}
+		else if (hcRequest.getClusterBy() == ClusterByType.Samples) {
+		  result.setClusteredSampleIDs(orderedLabelList);
+		}
+		
 	}
 
 	@Override

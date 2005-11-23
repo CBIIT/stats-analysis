@@ -103,27 +103,27 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 		result.setResultEntries(pcaResults);
 
 		// generate the pca1 vs pca2 image
-		doRvoidEval("maxComp1<-max(abs(pcaResult$x[,1]))");
-		doRvoidEval("maxComp2<-max(abs(pcaResult$x[,2]))");
-		doRvoidEval("maxComp3<-max(abs(pcaResult$x[,3]))");
-		doRvoidEval("xrange<-c(-maxComp1,maxComp1)");
-		doRvoidEval("yrange<-c(-maxComp2,maxComp2)");
-		String plot1Cmd = "plot(pcaResult$x[,1],pcaResult$x[,2],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component2\",xlab=\"PC1\",ylab=\"PC2\",pch=20)";
-		byte[] img1Code = getImageCode(plot1Cmd);
-		result.setImage1Bytes(img1Code);
-
-		// generate the pca1 vs pca3 image
-		doRvoidEval("yrange<-c(-maxComp3,maxComp3)");
-		String plot2Cmd = "plot(pcaResult$x[,1],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component3\",xlab=\"PC1\",ylab=\"PC3\",pch=20)";
-		byte[] img2Code = getImageCode(plot2Cmd);
-		result.setImage2Bytes(img2Code);
-
-		// generate the pca2 vs pca3 image
-		doRvoidEval("xrange<-c(-maxComp2,maxComp2)");
-		doRvoidEval("yrange<-c(-maxComp3,maxComp3)");
-		String plot3Cmd = "plot(pcaResult$x[,2],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component2 Vs Component3\",xlab=\"PC2\",ylab=\"PC3\",pch=20)";
-		byte[] img3Code = getImageCode(plot3Cmd);
-		result.setImage3Bytes(img3Code);
+//		doRvoidEval("maxComp1<-max(abs(pcaResult$x[,1]))");
+//		doRvoidEval("maxComp2<-max(abs(pcaResult$x[,2]))");
+//		doRvoidEval("maxComp3<-max(abs(pcaResult$x[,3]))");
+//		doRvoidEval("xrange<-c(-maxComp1,maxComp1)");
+//		doRvoidEval("yrange<-c(-maxComp2,maxComp2)");
+//		String plot1Cmd = "plot(pcaResult$x[,1],pcaResult$x[,2],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component2\",xlab=\"PC1\",ylab=\"PC2\",pch=20)";
+//		byte[] img1Code = getImageCode(plot1Cmd);
+//		result.setImage1Bytes(img1Code);
+//
+//		// generate the pca1 vs pca3 image
+//		doRvoidEval("yrange<-c(-maxComp3,maxComp3)");
+//		String plot2Cmd = "plot(pcaResult$x[,1],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component1 Vs Component3\",xlab=\"PC1\",ylab=\"PC3\",pch=20)";
+//		byte[] img2Code = getImageCode(plot2Cmd);
+//		result.setImage2Bytes(img2Code);
+//
+//		// generate the pca2 vs pca3 image
+//		doRvoidEval("xrange<-c(-maxComp2,maxComp2)");
+//		doRvoidEval("yrange<-c(-maxComp3,maxComp3)");
+//		String plot3Cmd = "plot(pcaResult$x[,2],pcaResult$x[,3],xlim=xrange,ylim=yrange,main=\"Component2 Vs Component3\",xlab=\"PC2\",ylab=\"PC3\",pch=20)";
+//		byte[] img3Code = getImageCode(plot3Cmd);
+//		result.setImage3Bytes(img3Code);
 
 	}
 

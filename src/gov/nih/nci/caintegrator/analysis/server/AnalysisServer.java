@@ -192,6 +192,7 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
         
 		boolean connected = false;
 		Context context = null;
+		int numConnectAttempts = 0;
 		
 		while (!connected) {
 		
@@ -222,12 +223,24 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			  queueConnection.start();
 			  
 			  connected = true;
+			  numConnectAttempts = 0;
 			  System.out.println("  successfully established queue connection.");
 			  System.out.println("Now listening for requests...");
 			  
 			}
 			catch (Exception ex) {
-			  System.out.println("  could not establish connection. Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds..."); 
+			  numConnectAttempts++;
+			  
+			  if (numConnectAttempts <= 10) {
+			    System.out.println("  could not establish connection after numAttempts=" + numConnectAttempts + "  Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds...");
+			    if (numConnectAttempts == 10) {
+			      System.out.println("  Will only print connection attempts every 600 atttempts to reduce log size.");
+			    }
+			  }
+			  else if ((numConnectAttempts % 600) == 0) {
+				System.out.println("  could not establish connection after numAttempts=" + numConnectAttempts + " will keep trying every " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds...");
+			  }
+			  
 			  try { 
 			    Thread.sleep(reconnectWaitTimeMS);
 			  }
