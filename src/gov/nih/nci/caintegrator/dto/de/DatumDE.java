@@ -30,6 +30,10 @@ public class DatumDE extends DomainElement implements Serializable, Cloneable {
 	 * FoldChangeRatio
 	 */
 	public final static String FOLD_CHANGE_RATIO = "FoldChangeRatio";
+	/**
+	 * StandardDeviationRatio
+	 */
+	public final static String STD_DEVIATION_RATIO = "StandardDeviationRatio";
 
 	/**
 	 * FoldChangeSampleIntensity
