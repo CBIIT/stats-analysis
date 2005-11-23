@@ -48,23 +48,23 @@ public class PrincipalComponentAnalysisFinding extends AnalysisFinding {
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.PrincipalComponentAnalysisResult#getImage1Bytes()
 	 */
-	public byte[] getImage1Bytes() {
-		return pcaResults.getImage1Bytes();
-	}
+//	public byte[] getImage1Bytes() {
+//		return pcaResults.getImage1Bytes();
+//	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.PrincipalComponentAnalysisResult#getImage2Bytes()
 	 */
-	public byte[] getImage2Bytes() {
-		return pcaResults.getImage2Bytes();
-	}
+//	public byte[] getImage2Bytes() {
+//		return pcaResults.getImage2Bytes();
+//	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.PrincipalComponentAnalysisResult#getImage3Bytes()
 	 */
-	public byte[] getImage3Bytes() {
-		return pcaResults.getImage3Bytes();
-	}
+//	public byte[] getImage3Bytes() {
+//		return pcaResults.getImage3Bytes();
+//	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.PrincipalComponentAnalysisResult#getNumResultEntries()
