@@ -63,7 +63,7 @@ public class ImageMapUtil {
       writer.println(sb.toString());
 	}
     
-    public static String returnBoundingRectImageMap(PrintWriter writer, String name,  boolean useOverlibToolTip,ChartRenderingInfo info) {
+    public static String getBoundingRectImageMapTag(String name,  boolean useOverlibToolTip,ChartRenderingInfo info) {
         EntityCollection collection = info.getEntityCollection();
         Collection entities = collection.getEntities(); 
         
