@@ -78,7 +78,7 @@ public class ImageMapUtil {
 
           RembrandtStandardToolTipTagFragmentGenerator ttg = new RembrandtStandardToolTipTagFragmentGenerator();
           StandardURLTagFragmentGenerator urlg = new StandardURLTagFragmentGenerator();
-          sb.append("<map id=\"" + name + "\" name=\"" + name + "\">");
+          sb.append("\n\n<MAP name=\"" + name + "\">");
           sb.append(StringUtils.getLineSeparator());
           for (Iterator i=myBoundingEntities.iterator(); i.hasNext(); ) {
              chartEntity = (ChartEntity) i.next();
@@ -90,7 +90,7 @@ public class ImageMapUtil {
             	 }
              }
           }
-          sb.append("</map>");
+          sb.append("</MAP>\n\n");
           return sb.toString();
         }
 	
