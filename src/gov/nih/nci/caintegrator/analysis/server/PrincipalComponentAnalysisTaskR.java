@@ -8,11 +8,14 @@ import java.util.Vector;
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
+import org.apache.log4j.Logger;
 import org.rosuda.JRclient.REXP;
 
 public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 
 	private PrincipalComponentAnalysisResult result = null;
+	
+	private static Logger logger = Logger.getLogger(PrincipalComponentAnalysisTaskR.class);
 
 	public PrincipalComponentAnalysisTaskR(
 			PrincipalComponentAnalysisRequest request) {
@@ -29,7 +32,7 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 		result = new PrincipalComponentAnalysisResult(getRequest()
 				.getSessionId(), getRequest().getTaskId());
 		
-		System.out.println(this.getExecutingThreadName() + " processing principal component analysis request=" + pcaRequest);
+		logger.info(getExecutingThreadName() + " processing principal component analysis request=" + pcaRequest);
 		
 		double[] pca1, pca2, pca3;
 
@@ -53,16 +56,14 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 
 		if (pcaRequest.doVarianceFiltering()) {
 			double varianceFilterValue = pcaRequest.getVarianceFilterValue();
-			System.out
-					.println("Processing principal component analysis request varianceFilterVal="
+			logger.info("Processing principal component analysis request varianceFilterVal="
 							+ varianceFilterValue);
 			doRvoidEval("pcaResult <- computePCAwithVariance(pcaInputMatrix,"
 					+ varianceFilterValue + " )");
 		} else if (pcaRequest.doFoldChangeFiltering()) {
 			double foldChangeFilterValue = pcaRequest
 					.getFoldChangeFilterValue();
-			System.out
-					.println("Processing principal component analysis request foldChangeFilterVal="
+			logger.info("Processing principal component analysis request foldChangeFilterVal="
 							+ foldChangeFilterValue);
 			doRvoidEval("pcaResult <- computePCAwithFC(pcaInputMatrix,"
 					+ foldChangeFilterValue + " )");

@@ -4,6 +4,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.*;
 
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
+
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -20,6 +21,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.jms.DeliveryMode;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
+
 import java.io.*;
 import java.util.*;
 
@@ -34,7 +38,7 @@ import java.util.*;
  */
 public class AnalysisServer implements MessageListener, ExceptionListener, AnalysisResultSender {
 
-	public static String version = "3.5";
+	public static String version = "4.0";
 
 	private boolean debugRcommands = false;
 
@@ -68,6 +72,8 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 	
 	private static long defaultReconnectWaitTimeMS = 10000L;
 
+	private static Logger logger = Logger.getLogger(AnalysisServer.class);
+	
 	/**
 	 * Subscriber
 	 */
@@ -111,8 +117,10 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			
 			reconnectWaitTimeMS = getLongProperty(analysisServerConfigProps, "reconnectWaitTimeMS", defaultReconnectWaitTimeMS); 
 		} catch (Exception ex) {
-		  System.out.println("Error loading server properties from file: " + analysisServerConfigProps);
-		  ex.printStackTrace(System.out);
+		  logger.error("Error loading server properties from file: " + analysisServerConfigProps);
+		  logger.error(ex);
+		  //System.out.println("Error loading server properties from file: " + analysisServerConfigProps);
+		  //ex.printStackTrace(System.out);
 		}
 		
 		// initialize the compute threads
@@ -131,8 +139,9 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 		
 		establishQueueConnection();
 		
-		System.out.println("AnalysisServer version=" + version
+		logger.info("AnalysisServer version=" + version
 				+ " successfully initialized. numComputeThreads=" + numComputeThreads + " RserverIp=" + RserverIp + " RdataFileName=" + RdataFileName);
+		
 
 	}
 	
@@ -198,7 +207,7 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 		
 			try {
 				
-			  System.out.println("Attempting to establish queue connection with provider: " + contextProperties.get(Context.PROVIDER_URL));
+			  logger.info("Attempting to establish queue connection with provider: " + contextProperties.get(Context.PROVIDER_URL));
 				
 			  //Get the initial context with given properties
 			  context = new InitialContext(contextProperties);
@@ -224,29 +233,31 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			  
 			  connected = true;
 			  numConnectAttempts = 0;
-			  System.out.println("  successfully established queue connection.");
-			  System.out.println("Now listening for requests...");
-			  
+			  //System.out.println("  successfully established queue connection.");
+			  //System.out.println("Now listening for requests...");
+			  logger.info("  successfully established queue connection.");
+			  logger.info("Now listening for requests...");
 			}
 			catch (Exception ex) {
 			  numConnectAttempts++;
 			  
 			  if (numConnectAttempts <= 10) {
-			    System.out.println("  could not establish connection after numAttempts=" + numConnectAttempts + "  Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds...");
+			    logger.info("  could not establish connection after numAttempts=" + numConnectAttempts + "  Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds...");
 			    if (numConnectAttempts == 10) {
-			      System.out.println("  Will only print connection attempts every 600 atttempts to reduce log size.");
+			      logger.info("  Will only print connection attempts every 600 atttempts to reduce log size.");
 			    }
 			  }
 			  else if ((numConnectAttempts % 600) == 0) {
-				System.out.println("  could not establish connection after numAttempts=" + numConnectAttempts + " will keep trying every " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds...");
+				logger.info("  could not establish connection after numAttempts=" + numConnectAttempts + " will keep trying every " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds...");
 			  }
 			  
 			  try { 
 			    Thread.sleep(reconnectWaitTimeMS);
 			  }
 			  catch (Exception ex2) {
-			    System.out.println("Caugh exception while trying to sleep.." + ex2.getMessage());
-			    ex2.printStackTrace(System.out);
+			    logger.error("Caugh exception while trying to sleep.." + ex2.getMessage());
+			    logger.error(ex2);
+			    //ex2.printStackTrace(System.out);
 			    return;
 			  }
 		    }
@@ -268,8 +279,9 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			// String msg = ((TextMessage)m).getText();
 			ObjectMessage msg = (ObjectMessage) m;
 			AnalysisRequest request = (AnalysisRequest) msg.getObject();
-			System.out.println("AnalysisProcessor got request: " + request);
-
+			//System.out.println("AnalysisProcessor got request: " + request);
+			logger.info("AnalysisProcessor got request: " + request);
+			
 			if (request instanceof ClassComparisonRequest) {
 				processClassComparisonRequest((ClassComparisonRequest) request);
 			} else if (request instanceof HierarchicalClusteringRequest) {
@@ -281,9 +293,10 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			// sendResult(request);
 
 		} catch (JMSException ex) {
-
-			System.err.println("AnalysisProcessor exception: " + ex);
-			ex.printStackTrace();
+            logger.error("AnalysisProcessor exception: " + ex);
+            logger.error(ex);
+//			System.err.println("AnalysisProcessor exception: " + ex);
+//			ex.printStackTrace();
 
 		}
 
@@ -321,8 +334,7 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 
 	public void sendException(AnalysisServerException analysisServerException) {
 		try {
-			System.out
-					.println("AnalysisServer sending AnalysisServerException sessionId="
+			logger.info("AnalysisServer sending AnalysisServerException sessionId="
 							+ analysisServerException.getFailedRequest()
 									.getSessionId()
 							+ " taskId="
@@ -333,7 +345,9 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			resultSender.send(msg, DeliveryMode.NON_PERSISTENT,
 					Message.DEFAULT_PRIORITY, Message.DEFAULT_TIME_TO_LIVE);
 		} catch (JMSException ex) {
-			ex.printStackTrace(System.out);
+			logger.error("Error while sending AnalysisException");
+			logger.error(ex);
+			//ex.printStackTrace(System.out);
 		}
 	}
 
@@ -351,6 +365,7 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 					Message.DEFAULT_PRIORITY, Message.DEFAULT_TIME_TO_LIVE);
 		} catch (JMSException ex) {
 			ex.printStackTrace(System.out);
+			logger.error(ex);
 		}
 	}
 
@@ -367,6 +382,8 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 	
 	public static void main(String[] args) {
 
+	    BasicConfigurator.configure();
+		
 		try {
 			if (args.length > 0) {
 			  String serverPropsFile = args[0];
@@ -378,10 +395,13 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 		} 
 		catch (Exception ex) {
 
-			System.err
-					.println("An exception occurred while testing AnalysisProcessor: "
-							+ ex);
-			ex.printStackTrace();
+			logger.error("An exception occurred while testing AnalysisProcessor: "
+					+ ex);
+			logger.error(ex);
+//			System.err
+//					.println("An exception occurred while testing AnalysisProcessor: "
+//							+ ex);
+//			ex.printStackTrace();
 
 		}
 
@@ -392,8 +412,8 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 	 * the connection.
 	 */
 	public void onException(JMSException exception) {
-	  System.out.println("onException: caught JMSexception: " + exception.getMessage());
-	  
+	  //System.out.println("onException: caught JMSexception: " + exception.getMessage());
+	  logger.error("onException: caught JMSexception: " + exception.getMessage());
 	  try
       {
          queueConnection.setExceptionListener(null);
@@ -401,7 +421,8 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
       }
       catch (JMSException c)
       {
-        System.out.println("Ignoring exception thrown when closing broken connection msg=" + c.getMessage());
+    	logger.info("Ignoring exception thrown when closing broken connection msg=" + c.getMessage());
+        //System.out.println("Ignoring exception thrown when closing broken connection msg=" + c.getMessage());
         //c.printStackTrace(System.out);
       }
 	  

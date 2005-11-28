@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Vector;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.*;
+//import java.awt.Image;
+//import java.awt.Toolkit;
+//import java.awt.*;
 
 
+import org.apache.log4j.Logger;
 import org.rosuda.JRclient.REXP;
 import org.rosuda.JRclient.RFileInputStream;
 import org.rosuda.JRclient.RSrvException;
@@ -22,6 +23,8 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 	private Rconnection rConnection = null;
 
 	private boolean debugRcommands = false;
+	
+	private static Logger logger = Logger.getLogger(AnalysisTaskR.class);
 
 	public AnalysisTaskR(AnalysisRequest request) {
 		super(request);
@@ -63,12 +66,12 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 	 */
 	protected void doRvoidEval(String command) {
 		if (debugRcommands) {
-			System.out.println(command);
+			logger.debug(command);
 		}
 		try {
 			rConnection.voidEval(command);
 		} catch (RSrvException e) {
-			e.printStackTrace(System.out);
+			logger.error(e);
 		}
 	}
 
@@ -83,11 +86,11 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 		REXP returnVal = null;
 		try {
 			if (debugRcommands) {
-				System.out.println(command);
+			  logger.debug(command);
 			}
 			returnVal = rConnection.eval(command);
 		} catch (RSrvException e) {
-			e.printStackTrace(System.out);
+		  logger.error(e);
 		}
 		return returnVal;
 	}
@@ -148,13 +151,13 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 
 			if (xp.asString() != null) { // if there's a string then we have
 											// a problem, R sent an error
-				System.out.println("Can't pen bitmat graphics device:\n"
+				logger.error("Can't pen bitmat graphics device:\n"
 						+ xp.asString());
 				// this is analogous to 'warnings', but for us it's sufficient
 				// to get just the 1st warning
 				REXP w = doREval("if (exists(\"last.warning\") && length(last.warning)>0) names(last.warning)[1] else 0");
 				if (w.asString() != null)
-					System.out.println(w.asString());
+					logger.warn(w.asString());
 				return new byte[0];
 			}
 
@@ -183,12 +186,10 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 			if (imgLength < 10) { // this shouldn't be the case actually,
 									// beause we did some error checking, but
 									// for those paranoid ...
-				System.out
-						.println("Cannot load image, check R output, probably R didn't produce anything.");
+				logger.error("Cannot load image, check R output, probably R didn't produce anything.");
 				return new byte[0];
 			}
-			System.out
-					.println("The image file is " + imgLength + " bytes big.");
+			logger.info("The image file is " + imgLength + " bytes big.");
 
 			// now let's join all the chunks into one, big array ...
 			imgCode = new byte[imgLength];
@@ -207,9 +208,9 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 			is.close();
 			rConnection.removeFile(fileName);
 		} catch (IOException ex) {
-			ex.printStackTrace(System.out);
+			logger.error(ex);
 		} catch (RSrvException e) {
-			e.printStackTrace(System.out);
+			logger.error(e);
 		}
 
 		return imgCode;

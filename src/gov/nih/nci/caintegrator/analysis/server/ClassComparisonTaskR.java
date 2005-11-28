@@ -12,12 +12,15 @@ import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
 import gov.nih.nci.caintegrator.enumeration.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 
+import org.apache.log4j.Logger;
 import org.rosuda.JRclient.*;
 
 public class ClassComparisonTaskR extends AnalysisTaskR {
 
 	private ClassComparisonResult ccResult = null;
 	public static final int MIN_GROUP_SIZE = 3;
+	
+	private static Logger logger = Logger.getLogger(ClassComparisonTaskR.class);
 
 	public ClassComparisonTaskR(ClassComparisonRequest request) {
 		this(request, false);
@@ -34,7 +37,7 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 		
 		ccResult = new ClassComparisonResult(ccRequest.getSessionId(), ccRequest.getTaskId());
 
-		System.out.println(getExecutingThreadName() + ": processing class comparison request=" + ccRequest);
+		logger.info(getExecutingThreadName() + ": processing class comparison request=" + ccRequest);
 
 		SampleGroup group1 = ccRequest.getGroup1();
 		SampleGroup group2 = ccRequest.getGroup2();

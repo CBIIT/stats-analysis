@@ -4,11 +4,15 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.*;
 
+import org.apache.log4j.Logger;
+
 public class RThreadPoolExecutor extends ThreadPoolExecutor {
 
 	private AnalysisResultSender sender;
 	private String hostName = null;
 	private boolean debugRcommands = false;
+	
+	private static Logger logger = Logger.getLogger(RThreadPoolExecutor.class);
 
 	public RThreadPoolExecutor(int nThreads, String RserveIp, String RdataFile,
 			AnalysisResultSender sender) {
@@ -46,12 +50,11 @@ public class RThreadPoolExecutor extends ThreadPoolExecutor {
 		rTask.setComputeTime(System.currentTimeMillis() - rTask.getStartTime());
 		
 		if (rTask.getException() != null) {
-		  System.out.println(rTask.getExecutingThreadName() + " failed to complete task=" + rTask + " host=" + getHostName());
+		  logger.info(rTask.getExecutingThreadName() + " failed to complete task=" + rTask + " host=" + getHostName());
 		  sender.sendException(rTask.getException());
 		}
 		else {
-		  System.out.println(rTask.getExecutingThreadName() + " completed task=" + rTask + " host=" + getHostName() + " computeTime(ms)=" + rTask.getComputeTime());
-		  
+		  logger.info(rTask.getExecutingThreadName() + " completed task=" + rTask + " host=" + getHostName() + " computeTime(ms)=" + rTask.getComputeTime());
 		  sender.sendResult(rTask.getResult());
 		}
 		

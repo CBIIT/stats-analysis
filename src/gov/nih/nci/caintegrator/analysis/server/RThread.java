@@ -1,5 +1,6 @@
 package gov.nih.nci.caintegrator.analysis.server;
 
+import org.apache.log4j.Logger;
 import org.rosuda.JRclient.*;
 
 public class RThread extends Thread {
@@ -9,13 +10,16 @@ public class RThread extends Thread {
 	private String rDataFileName;
 
 	private Rconnection rConnection;
+	
+	private static Logger logger = Logger.getLogger(RThread.class);
+
 
 	public RThread(Runnable target, String rServeIp, String rDataFileName) {
 		super(target);
 		this.rServeIp = rServeIp;
 		this.rDataFileName = rDataFileName;
 		initializeRconnection();
-		System.out.println("RThread name=" + getName()
+		logger.info("RThread name=" + getName()
 				+ " successfully initialized R connection.");
 	}
 
@@ -29,7 +33,7 @@ public class RThread extends Thread {
 			long start, elapsedtime;
 			if (rConnection.needLogin()) { // if server requires
 											// authentication, send one
-				System.out.println("authentication required.");
+				logger.info("authentication required.");
 				rConnection.login("guest", "guest");
 			}
 
@@ -41,17 +45,15 @@ public class RThread extends Thread {
 			rCmd = "source(\"" + rDataFileName + "\")";
 			rConnection.voidEval(rCmd);
 			elapsedtime = System.currentTimeMillis() - start;
-			System.out
-					.println("\tDone initializing Rserver connection elapsedTime="
+			logger.info("\tDone initializing Rserver connection elapsedTime="
 							+ elapsedtime);
 
 		} catch (RSrvException rse) {
-			System.out.println("Rserve exception: " + rse.getMessage());
+			logger.error("Rserve exception: " + rse.getMessage());
 		} catch (Exception e) {
-			System.out
-					.println("Something went wrong, but it's not the Rserve: "
+			logger.error("Something went wrong, but it's not the Rserve: "
 							+ e.getMessage());
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
@@ -77,7 +79,7 @@ public class RThread extends Thread {
 		try {
 			super.finalize();
 		} catch (Throwable e) {
-			e.printStackTrace(System.out);
+			logger.error(e);
 		}
 	}
 
