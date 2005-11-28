@@ -118,6 +118,7 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 		Vector orderedLabels = doREval("clusterLabels <-  mycluster$labels[mycluster$order]").asVector();
 		
 		int imgWidth = Math.round(0.05f * ((float) orderedLabels.size()));
+		imgWidth = Math.max(3, imgWidth);
 		int imgHeight = 5;
 		
 		byte[] imgCode = getImageCode(plotCmd, imgHeight, imgWidth);
