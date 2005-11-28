@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
 import org.rosuda.JRclient.REXP;
 
 import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
@@ -16,6 +17,8 @@ import gov.nih.nci.caintegrator.enumeration.*;
 public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 
 	private HierarchicalClusteringResult result;
+	
+	private static Logger logger = Logger.getLogger(HierarchicalClusteringTaskR.class);
 
 	public HierarchicalClusteringTaskR(HierarchicalClusteringRequest request) {
 		this(request, false);
@@ -67,8 +70,7 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 		HierarchicalClusteringRequest hcRequest = (HierarchicalClusteringRequest) getRequest();
 		result = new HierarchicalClusteringResult(getRequest().getSessionId(),
 				getRequest().getTaskId());
-		System.out
-				.println(this.getExecutingThreadName() + " processing hierarchical clustering analysis request="
+		logger.info(getExecutingThreadName() + " processing hierarchical clustering analysis request="
 						+ hcRequest);
 
 		// get the submatrix to operate on
@@ -102,7 +104,7 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 					+ getLinkageMethodRparamStr()
 					+ ")";
 			doRvoidEval(rCmd);
-			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[2]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
+			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[2]], xlab=\"\", ylab=\"\",ps=8,sub=\"\", hang=-1)";
 		} else if (hcRequest.getClusterBy() == ClusterByType.Genes) {
 			// cluster by genes
 			rCmd = "mycluster <- mygenecluster(hcInputMatrix,"
@@ -111,15 +113,15 @@ public class HierarchicalClusteringTaskR extends AnalysisTaskR {
 					+ getLinkageMethodRparamStr()
 					+ ")";
 			doRvoidEval(rCmd);
-			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[1]], xlab=\"\", ylab=\"\",cex=.5,sub=\"\", hang=-1)";
+			plotCmd = "plot(mycluster, labels=dimnames(hcInputMatrix)[[1]], xlab=\"\", ylab=\"\",ps=8,sub=\"\", hang=-1)";
 		}
 
 		
 		Vector orderedLabels = doREval("clusterLabels <-  mycluster$labels[mycluster$order]").asVector();
-		
-		int imgWidth = Math.round(0.05f * ((float) orderedLabels.size()));
+		float numPix = (float)orderedLabels.size() * 15.0f;
+		int imgWidth = Math.round(numPix/72.0f);
 		imgWidth = Math.max(3, imgWidth);
-		int imgHeight = 5;
+		int imgHeight = 10;
 		
 		byte[] imgCode = getImageCode(plotCmd, imgHeight, imgWidth);
 		result.setImageCode(imgCode);
