@@ -29,6 +29,7 @@ import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.Prin
 import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint.*;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Paint;
 import java.awt.Shape;
 import java.util.*;
@@ -116,7 +117,13 @@ public class PrincipalComponentAnalysisPlot {
         System.out.println("domainAxis=" + domainAxis.getLabel());
         System.out.println("rangeAxis=" + rangeAxis.getLabel());
          
-	    createGlyphsAndAddToPlot(plot);     
+	    createGlyphsAndAddToPlot(plot);  
+	    
+	   // Paint p = new GradientPaint(0, 0, Color.white, 1000, 0, Color.green);
+	    //try and match the UI e9e9e9
+	    Paint p = new Color(233, 233, 233);
+	    
+	    pcaChart.setBackgroundPaint(p);
 	}
 	
 	/**
