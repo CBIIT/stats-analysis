@@ -30,16 +30,6 @@ public interface PrincipalComponentAnalysisQueryDTO extends QueryDTO {
 	 */
 	public abstract void setComparisonGroup(ClinicalQueryDTO comparisonGroup);
 
-	/**
-	 * @return Returns the institutionDE.
-	 */
-	public abstract InstitutionDE getInstitutionDE();
-
-	/**
-	 * @param institutionDE The institutionDE to set.
-	 */
-	public abstract void setInstitutionDE(
-			InstitutionDE institutionDE);
 
 	/**
 	 * @return Returns the geneIdentifierDEs.
@@ -73,5 +63,16 @@ public interface PrincipalComponentAnalysisQueryDTO extends QueryDTO {
 	 */
 	public abstract void setReporterIdentifierDEs(
 			Collection<CloneIdentifierDE> reporterIdentifierDEs);
+	/**
+	 * @return Returns the institutionNameDE.
+	 */
+	public abstract Collection<InstitutionDE> getInstitutionDEs();
+
+	/**
+	 * @param institutionNameDE The institutionNameDE to set.
+	 */
+	public abstract void setInstitutionDEs(
+			Collection<InstitutionDE> institutionDE);
+
 
 }

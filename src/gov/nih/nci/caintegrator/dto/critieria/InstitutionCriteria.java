@@ -24,30 +24,17 @@ public class InstitutionCriteria  extends Criteria implements Serializable,Clone
 	 */
 	private Collection<InstitutionDE> institutes;
 
-    public Collection<InstitutionDE> getInstitutes() {
-        return institutes;
-    }
-
-    public void setInstitutes(Collection<InstitutionDE> institutes) {
-        this.institutes = institutes;
-    }
-
-    public void setInstitutions(Collection<InstitutionDE> institutionsObjs) {
-		for (Iterator iterator = institutionsObjs.iterator(); iterator.hasNext();) {
-			Object obj = iterator.next();
-			if (obj instanceof InstitutionDE) {
-				getInstitutions().add((InstitutionDE)obj);
-			}
-		}
+    public void setInstitutions(Collection<InstitutionDE> institutes) {
+    	this.institutes = institutes;
 	}
 
 	public void setInsitution(InstitutionDE institution) {
 		getInstitutions().add(institution);
 	}
 
-	private Collection<InstitutionDE> getInstitutions() {
+	public Collection<InstitutionDE> getInstitutions() {
 		if (institutes == null)
-			institutes = new ArrayList();
+			institutes = new ArrayList<InstitutionDE>();
 		return institutes;
 	}
 

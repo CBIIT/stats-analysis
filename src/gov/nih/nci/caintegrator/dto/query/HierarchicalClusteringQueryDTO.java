@@ -24,17 +24,6 @@ public interface HierarchicalClusteringQueryDTO extends QueryDTO {
 	public abstract void setArrayPlatformDE(ArrayPlatformDE arrayPlatformDE);
 
 	/**
-	 * @return Returns the institutionNameDE.
-	 */
-	public abstract InstitutionDE getInstitutionDE();
-
-	/**
-	 * @param institutionNameDE The institutionNameDE to set.
-	 */
-	public abstract void setInstitutionDE(
-			InstitutionDE institutionDE);
-
-	/**
 	 * @return Returns the geneIdentifierDEs.
 	 */
 	public abstract Collection<GeneIdentifierDE> getGeneIdentifierDEs();
@@ -98,5 +87,16 @@ public interface HierarchicalClusteringQueryDTO extends QueryDTO {
 	 */
 	public abstract void setLinkageMethodTypeDE(
 			LinkageMethodTypeDE linkageMethodTypeDE);
+	/**
+	 * @return Returns the institutionNameDE.
+	 */
+	public abstract Collection<InstitutionDE> getInstitutionDEs();
+
+	/**
+	 * @param institutionNameDE The institutionNameDE to set.
+	 */
+	public abstract void setInstitutionDEs(
+			Collection<InstitutionDE> institutionDE);
+
 
 }

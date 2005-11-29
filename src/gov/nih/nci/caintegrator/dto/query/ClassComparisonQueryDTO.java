@@ -8,6 +8,7 @@ import gov.nih.nci.caintegrator.dto.de.StatisticTypeDE;
 import gov.nih.nci.caintegrator.dto.de.StatisticalSignificanceDE;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface ClassComparisonQueryDTO extends QueryDTO{
 
@@ -56,8 +57,15 @@ public interface ClassComparisonQueryDTO extends QueryDTO{
 	public void setComparisonGroups(
 			Collection<ClinicalQueryDTO> comparisonGroups);
 	
-	public InstitutionDE getInstitutionDE();
-	
-	public void setInstitutionDE(InstitutionDE institutionDE);
+	/**
+	 * @return Returns the institutionNameDE.
+	 */
+	public abstract Collection<InstitutionDE> getInstitutionDEs();
+
+	/**
+	 * @param institutionNameDE The institutionNameDE to set.
+	 */
+	public abstract void setInstitutionDEs(
+			Collection<InstitutionDE> institutionDE);
 
 }
