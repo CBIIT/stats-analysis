@@ -38,7 +38,7 @@ import java.util.*;
  */
 public class AnalysisServer implements MessageListener, ExceptionListener, AnalysisResultSender {
 
-	public static String version = "4.0";
+	public static String version = "4.1";
 
 	private boolean debugRcommands = false;
 
@@ -369,17 +369,6 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 		}
 	}
 
-	/**
-	 * Close session and connection.
-	 */
-	public void close() throws JMSException {
-
-		queueSession.close();
-		queueSession = null;
-		queueConnection.close();
-	}
-
-	
 	public static void main(String[] args) {
 
 	    BasicConfigurator.configure();
@@ -416,8 +405,11 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 	  logger.error("onException: caught JMSexception: " + exception.getMessage());
 	  try
       {
-         queueConnection.setExceptionListener(null);
-         close();
+		 if (queueConnection != null) {
+           queueConnection.setExceptionListener(null);
+           //close();
+           queueConnection.close();
+		 }
       }
       catch (JMSException c)
       {
