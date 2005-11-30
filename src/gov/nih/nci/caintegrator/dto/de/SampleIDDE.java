@@ -7,8 +7,7 @@ import java.io.Serializable;
  * 
  * @author BhattarR, BauerD
  */
-public class SampleIDDE extends DomainElement implements Serializable,
-		Cloneable {
+public class SampleIDDE extends DomainElement implements Cloneable, Comparable{
 
 	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
@@ -73,5 +72,27 @@ public class SampleIDDE extends DomainElement implements Serializable,
 	public Object clone() {
 		SampleIDDE myClone = (SampleIDDE) super.clone();
 		return myClone;
+	}
+
+	public int compareTo(Object anotherSampleIDDE) throws ClassCastException {
+	    if (!(anotherSampleIDDE instanceof SampleIDDE))
+	      throw new ClassCastException("A SampleIDDE object expected.");
+	    
+	    String anotherSampleValue = (String)((SampleIDDE) anotherSampleIDDE).getValueObject();  
+	    return this.getValueObject().compareTo(anotherSampleValue);    
+	  }
+	
+	public boolean equals(Object anotherSampleIDDE){
+	    if(!(anotherSampleIDDE instanceof SampleIDDE))
+	        return false;
+	    if(((SampleIDDE)anotherSampleIDDE).getValue().equals(value)) 
+	      return true;
+	    else return false;
+	   
+	  }//end overridden equals()
+
+	public int hashCode(){
+		return getValueObject().hashCode();
+		
 	}
 }
