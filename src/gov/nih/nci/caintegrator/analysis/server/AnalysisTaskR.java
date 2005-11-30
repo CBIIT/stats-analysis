@@ -127,7 +127,8 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 	
 	/**
 	 * Get the byte representation of the image created with the plot command.
-	 * May be able to change this to return a Java Image object.
+	 * May be able to change this to return a Java Image object.  This code follows the
+	 * example of how to transfer an image using Rserve in the Rserve examples. 
 	 * 
 	 * @param request
 	 * @param plotCmd
