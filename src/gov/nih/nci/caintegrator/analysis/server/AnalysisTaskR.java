@@ -140,18 +140,15 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 		try {
 			String fileName = "image_" + getRequest().getSessionId() + "_"
 					+ getRequest().getTaskId() + "_"
-					+ System.currentTimeMillis() + ".bmp";
+					+ System.currentTimeMillis() + ".png";
 			REXP xp = null;
-
-			// bitmap(file, type = "png256", height = 6, width = 6, res = 72,
-			// pointsize, ...)
 
 			xp = doREval("try(bitmap(\"" + fileName
 					+ "\", height = " + imgHeight + ", width = " + imgWidth + ", res = 72 ))");
 
 			if (xp.asString() != null) { // if there's a string then we have
 											// a problem, R sent an error
-				logger.error("Can't pen bitmat graphics device:\n"
+				logger.error("Problem getting the graphics device:\n"
 						+ xp.asString());
 				// this is analogous to 'warnings', but for us it's sufficient
 				// to get just the 1st warning
@@ -161,13 +158,13 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 				return new byte[0];
 			}
 
-			// ok, so the device should be fine - let's plot
+			//do the plot
 			doRvoidEval(plotCmd);
 			doRvoidEval("dev.off()");
 
 			
 			RFileInputStream is = rConnection.openFile(fileName);
-			Vector buffers = new Vector();
+			Vector<byte[]> buffers = new Vector<byte[]>();
 			int bufSize = 65536;
 			byte[] buf = new byte[bufSize];
 			int imgLength = 0;
@@ -183,15 +180,13 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 				if (n < bufSize)
 					break;
 			}
-			if (imgLength < 10) { // this shouldn't be the case actually,
-									// beause we did some error checking, but
-									// for those paranoid ...
+			if (imgLength < 10) { 
 				logger.error("Cannot load image, check R output, probably R didn't produce anything.");
 				return new byte[0];
 			}
 			logger.info("The image file is " + imgLength + " bytes big.");
 
-			// now let's join all the chunks into one, big array ...
+			// join all the chunks into one, big array ...
 			imgCode = new byte[imgLength];
 			int imgPos = 0;
 			for (Enumeration e = buffers.elements(); e.hasMoreElements();) {
@@ -199,11 +194,8 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 				System.arraycopy(b, 0, imgCode, imgPos, bufSize);
 				imgPos += bufSize;
 			}
-			if (n > 0)
-				System.arraycopy(buf, 0, imgCode, imgPos, n);
-
-			// ... and close the file ... and remove it - we have what we need
-			// :)
+			
+			if (n > 0) System.arraycopy(buf, 0, imgCode, imgPos, n);
 
 			is.close();
 			rConnection.removeFile(fileName);
