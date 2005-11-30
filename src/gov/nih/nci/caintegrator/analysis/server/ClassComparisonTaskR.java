@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.analysis.server;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.*;
 
 import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonRequest;
 import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult;
@@ -15,6 +16,12 @@ import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
 import org.apache.log4j.Logger;
 import org.rosuda.JRclient.*;
 
+/**
+ * Performs the class comparison computation using R.
+ * 
+ * @author harrismic
+ *
+ */
 public class ClassComparisonTaskR extends AnalysisTaskR {
 
 	private ClassComparisonResult ccResult = null;
@@ -59,9 +66,36 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 		      return;
 		}
 		
+		
+		//check to see if there are any overlapping samples between the two groups
+		if ((group1 != null)&&(group2 != null)) {
+		  
+		  //get overlap between the two sets
+		  Set<String> intersection = new HashSet<String>();
+		  intersection.addAll(group1);
+		  intersection.retainAll(group2);
+		  
+		  if (intersection.size() > 0) {
+		     //the groups are overlapping so return an exception
+			 StringBuffer ids = new StringBuffer();
+			 for (Iterator i=intersection.iterator(); i.hasNext(); ) {
+			   ids.append(i.next());
+			   if (i.hasNext()) {
+			     ids.append(",");
+			   }
+			 }
+			 
+			 AnalysisServerException ex = new AnalysisServerException(
+				      "Can not perform class comparison with overlapping groups. Overlapping ids=" + ids.toString());		 
+				      ex.setFailedRequest(ccRequest);
+				      setException(ex);
+				      return;   
+		  }
+		}
+		
 		//For now assume that there are two groups. When we get data for two channel array then
 		//allow only one group so leaving in the possiblity of having only one group in the code 
-		//below eventhough the one group case won't be executed because of the test above.
+		//below eventhough the one group case won't be executed because of the tests above.
 		
 		
 		int grp1Len = 0, grp2Len = 0;
