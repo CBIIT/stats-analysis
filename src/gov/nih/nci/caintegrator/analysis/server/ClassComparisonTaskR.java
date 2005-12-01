@@ -25,6 +25,7 @@ import org.rosuda.JRclient.*;
 public class ClassComparisonTaskR extends AnalysisTaskR {
 
 	private ClassComparisonResult ccResult = null;
+	private Comparator classComparisonComparator = new ClassComparisonComparator();
 	public static final int MIN_GROUP_SIZE = 3;
 	
 	private static Logger logger = Logger.getLogger(ClassComparisonTaskR.class);
@@ -227,6 +228,9 @@ public class ClassComparisonTaskR extends AnalysisTaskR {
 			resultEntry.setPvalue(pva[i]);
 			resultEntries.add(resultEntry);
 		}
+		
+		
+		Collections.sort(resultEntries, classComparisonComparator);
 
 		ccResult.setResultEntries(resultEntries);
 
