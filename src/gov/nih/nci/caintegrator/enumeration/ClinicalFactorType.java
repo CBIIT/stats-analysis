@@ -3,8 +3,9 @@ package gov.nih.nci.caintegrator.enumeration;
 public  enum ClinicalFactorType {
 	AgeAtDx, 
 	Treatment, 
-	NeurologicalAssessment, 
+	KarnofskyAssessment, 
 	Survival,
-	Gender};
+	Gender,
+	Disease};
 	
 
