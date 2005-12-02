@@ -11,7 +11,7 @@ public class ClinicalDataPoint {
 	private double ageAtDx;
 	private String treatment;  
 	private String diseaseName;
-	private double neurologicalAssessment;
+	private double karnofskyAssessment;
 	private double survival;
 	private PatientGenderType gender;
 	private int diseaseGrade;
@@ -20,12 +20,12 @@ public class ClinicalDataPoint {
 	  this.patientId = patientId;
 	}
 
-	public ClinicalDataPoint(String patientId,PatientGenderType gender, String diseaseName, int diseaseGrade, double ageAtDx, String treatment, double neurologicalAssessment, double survival) {
+	public ClinicalDataPoint(String patientId,PatientGenderType gender, String diseaseName, int diseaseGrade, double ageAtDx, String treatment, double karnofskyAssessment, double survival) {
 	  this.patientId = patientId;
 	  this.gender = gender;
 	  this.ageAtDx = ageAtDx;
 	  this.treatment = treatment;
-	  this.neurologicalAssessment = neurologicalAssessment;
+	  this.karnofskyAssessment = karnofskyAssessment;
 	  this.survival = survival;
 	  this.diseaseName = diseaseName;
 	  this.diseaseGrade = diseaseGrade;
@@ -40,7 +40,7 @@ public class ClinicalDataPoint {
 	public double getFactorValue(ClinicalFactorType factor) {
 	  switch(factor) {
 	  case AgeAtDx: return getAgeAtDx();
-	  case NeurologicalAssessment: return getNeurologicalAssessment();
+	  case KarnofskyAssessment: return getKarnofskyAssessmentAssessment();
 	  case Survival: return getSurvival();
 	  }
 	  return Double.NEGATIVE_INFINITY;
@@ -54,12 +54,12 @@ public class ClinicalDataPoint {
 		this.ageAtDx = ageAtDx;
 	}
 
-	public double getNeurologicalAssessment() {
-		return neurologicalAssessment;
+	public double getKarnofskyAssessmentAssessment() {
+		return karnofskyAssessment;
 	}
 
 	public void setNeurologicalAssessment(double neurologicalAssessment) {
-		this.neurologicalAssessment = neurologicalAssessment;
+		this.karnofskyAssessment = neurologicalAssessment;
 	}
 
 	public double getSurvival() {
