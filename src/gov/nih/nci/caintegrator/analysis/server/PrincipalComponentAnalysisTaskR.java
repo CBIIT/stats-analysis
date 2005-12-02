@@ -45,6 +45,9 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 			rCmd = "pcaInputMatrix <- getSubmatrix.onegrp(pcaInputMatrix, sampleIds)";
 			doRvoidEval(rCmd);
 		}
+		else {
+		  logger.error("PCA request has null sample group.");
+		}
 
 		if (pcaRequest.getReporterGroup() != null) {
 			String rCmd = getRgroupCmd("reporterIds", pcaRequest
@@ -52,6 +55,9 @@ public class PrincipalComponentAnalysisTaskR extends AnalysisTaskR {
 			doRvoidEval(rCmd);
 			rCmd = "pcaInputMatrix <- getSubmatrix.rep(pcaInputMatrix, reporterIds)";
 			doRvoidEval(rCmd);
+		}
+		else {
+		  logger.info("PCA request has null reporter group. Using all reporters.");
 		}
 
 		if (pcaRequest.doVarianceFiltering()) {
