@@ -1,6 +1,3 @@
-/**
- * 
- */
 package gov.nih.nci.caintegrator.util;
 
 import gov.nih.nci.caintegrator.exceptions.ValidationException;
