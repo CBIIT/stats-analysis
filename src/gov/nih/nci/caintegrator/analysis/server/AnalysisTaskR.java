@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Vector;
+import java.io.*;
+
 //import java.awt.Image;
 //import java.awt.Toolkit;
 //import java.awt.*;
@@ -163,41 +165,8 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 			doRvoidEval(plotCmd);
 			doRvoidEval("dev.off()");
 
-			
 			RFileInputStream is = rConnection.openFile(fileName);
-			Vector<byte[]> buffers = new Vector<byte[]>();
-			int bufSize = 65536;
-			byte[] buf = new byte[bufSize];
-			int imgLength = 0;
-			int n = 0;
-			while (true) {
-				n = is.read(buf);
-				if (n == bufSize) {
-					buffers.addElement(buf);
-					buf = new byte[bufSize];
-				}
-				if (n > 0)
-					imgLength += n;
-				if (n < bufSize)
-					break;
-			}
-			if (imgLength < 10) { 
-				logger.error("Cannot load image, check R output, probably R didn't produce anything.");
-				return new byte[0];
-			}
-			logger.info("The image file is " + imgLength + " bytes big.");
-
-			// join all the chunks into one, big array ...
-			imgCode = new byte[imgLength];
-			int imgPos = 0;
-			for (Enumeration e = buffers.elements(); e.hasMoreElements();) {
-				byte[] b = (byte[]) e.nextElement();
-				System.arraycopy(b, 0, imgCode, imgPos, bufSize);
-				imgPos += bufSize;
-			}
-			
-			if (n > 0) System.arraycopy(buf, 0, imgCode, imgPos, n);
-
+			imgCode = getBytes(is);
 			is.close();
 			rConnection.removeFile(fileName);
 		} catch (IOException ex) {
@@ -206,7 +175,32 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 			logger.error(e);
 		}
 
+		logger.info("getImageCode returning image numBytes=" + imgCode.length);
 		return imgCode;
 
+	}
+
+	/**
+	 * Get an array of bytes from a stream
+	 * @param is
+	 * @return
+	 */
+	private byte[] getBytes(InputStream is) {
+	  ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+	  int numRead = -1;
+	  try {
+		  //using the buffer size from the Rserve example. Not sure why they are
+		  //setting it to this value.
+		  byte[] buff = new byte[65536];
+		  while ((numRead = is.read(buff)) != -1) {
+		    byteStream.write(buff, 0, numRead);
+		  }
+	  }
+	  catch (IOException ex) {
+	    logger.error(ex);
+	  }
+	  byte[] returnArray = byteStream.toByteArray();
+	  logger.debug("getBytes returning numbytes=" + returnArray.length);
+	  return byteStream.toByteArray();
 	}
 }
