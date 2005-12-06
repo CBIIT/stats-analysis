@@ -216,17 +216,17 @@ public class PrincipalComponentAnalysisPlot {
 	      glyphShape = circle;
 	    }
 	    else {
-	      Rectangle2D.Double rect = new Rectangle2D.Double();
-	      rect.setFrameFromCenter(x,y, x+2,y+2);
-//	      GeneralPath gp = new GeneralPath();
-//	      float xf = (float)x;
-//	      float yf = (float)y;
-//	      //make a triangle
-//	      gp.moveTo(xf,yf);
-//	      gp.moveTo(xf-1,yf+1);
-//	      gp.moveTo(xf+1,yf+1);
-//	      gp.closePath();
-	      glyphShape = rect;
+	      //Rectangle2D.Double rect = new Rectangle2D.Double();
+	      //rect.setFrameFromCenter(x,y, x+2,y+2);
+	      GeneralPath gp = new GeneralPath();
+	      float xf = (float)x;
+	      float yf = (float)y;
+	      //make a triangle
+	      gp.moveTo(xf,yf);
+	      gp.lineTo(xf+3.0f,yf-3.0f);
+	      gp.lineTo(xf-3.0f,yf-3.0f);
+	      gp.closePath();
+	      glyphShape = gp;
 	    }
 	    
 	    glyphColor = getColorForDataPoint(pcaPoint); 
