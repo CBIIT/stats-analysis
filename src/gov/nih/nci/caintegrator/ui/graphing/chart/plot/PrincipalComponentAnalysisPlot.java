@@ -25,6 +25,7 @@ import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.StringUtils;
 
+import gov.nih.nci.caintegrator.enumeration.GenderType;
 import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint;
 import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint.*;
 import java.awt.BasicStroke;
@@ -203,8 +204,14 @@ public class PrincipalComponentAnalysisPlot {
 	    
 	    glyphColor = getColorForDataPoint(pcaPoint); 
 	    glyph = new XYShapeAnnotation(glyphShape, new BasicStroke(1.0f), Color.BLACK, glyphColor);
-	    String tooltip = pcaPoint.getSampleId() + " " + pcaPoint.getDiseaseName() + " survivalMonths=" + pcaPoint.getSurvivalInMonths();
-	    glyph.setToolTipText(tooltip);
+        String tooltip = "";   
+            if(pcaPoint.getSurvivalInMonths()<=0.0){
+    	        tooltip = pcaPoint.getSampleId() + " " + pcaPoint.getDiseaseName();
+            }
+            else{
+               tooltip = pcaPoint.getSampleId() + " " + pcaPoint.getDiseaseName() + " survivalMonths=" + pcaPoint.getSurvivalInMonths();
+            }
+        glyph.setToolTipText(tooltip);
 	    plot.addAnnotation(glyph);
 	  }
 	  
@@ -231,13 +238,16 @@ public class PrincipalComponentAnalysisPlot {
 	    retColor = diseaseColor;
 	  }
 	  else if (colorBy == PCAcolorByType.Gender) {
-	    PatientGenderType gender = pcaPoint.getGender();
-	    if (gender == PatientGenderType.Female) {
+	    GenderType gender = pcaPoint.getGender();
+	    if (gender == GenderType.F) {
 	      retColor = Color.PINK;
 	    }
-	    else if (gender == PatientGenderType.Male) {
+	    else if (gender == GenderType.M) {
 	      retColor = Color.BLUE;
 	    }
+        else if (gender == GenderType.O) {
+              retColor = Color.ORANGE;
+            }
 	  }
 	  
 	  if (retColor == null) {

@@ -1,14 +1,14 @@
 package gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis;
 
+import gov.nih.nci.caintegrator.enumeration.GenderType;
+
 public class PrincipalComponentAnalysisDataPoint {
 
 	public static enum PCAcomponent { PC1, PC2, PC3 };
-	public static enum PatientGenderType { Male, Female, Unknown };
-	
 	private String sampleId;
 	private String diseaseName;
 	private int diseaseGrade;
-	private PatientGenderType gender;
+	private GenderType gender;
 	private double survivalInMonths;
 	private double pc1value;
 	private double pc2value;
@@ -57,11 +57,11 @@ public class PrincipalComponentAnalysisDataPoint {
 		this.diseaseName = diseaseName;
 	}
 
-	public PatientGenderType getGender() {
+	public GenderType getGender() {
 		return gender;
 	}
 
-	public void setGender(PatientGenderType gender) {
+	public void setGender(GenderType gender) {
 		this.gender = gender;
 	}
 

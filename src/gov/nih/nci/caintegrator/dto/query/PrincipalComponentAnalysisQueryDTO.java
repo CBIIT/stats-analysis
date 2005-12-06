@@ -29,7 +29,17 @@ public interface PrincipalComponentAnalysisQueryDTO extends QueryDTO {
 	 * @param comparisonGroup The comparisonGroup to set.
 	 */
 	public abstract void setComparisonGroup(ClinicalQueryDTO comparisonGroup);
+    /**
+     * @return Returns the comparisonGroups.
+     */
+    public Collection<ClinicalQueryDTO> getComparisonGroups();
 
+    /**
+     * @param comparisonGroups The comparisonGroups to set.
+     */
+    public void setComparisonGroups(
+            Collection<ClinicalQueryDTO> comparisonGroups);
+    
 
 	/**
 	 * @return Returns the geneIdentifierDEs.
