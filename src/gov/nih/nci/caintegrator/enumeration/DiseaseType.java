@@ -10,15 +10,15 @@ import java.awt.Color;
  *
  */
 public enum DiseaseType {
-	ASTROCYTOMA { Color getColor() {return Color.BLUE; }},
-	GBM { Color getColor() {return Color.GREEN; }},
-	MIXED { Color getColor() {return Color.MAGENTA; }},
-	NON_TUMOR {Color getColor() {return Color.YELLOW; }},
-	OLIGODENDROGLIOMA {Color getColor() {return Color.CYAN; }},
-	UNCLASSIFIED {Color getColor() {return Color.GRAY; }},
-	UNKNOWN {Color getColor() {return Color.DARK_GRAY; }};
+	ASTROCYTOMA { public Color  getColor() {return Color.BLUE; }},
+	GBM { public Color getColor() {return Color.GREEN; }},
+	MIXED { public Color getColor() {return Color.MAGENTA; }},
+	NON_TUMOR {public Color getColor() {return Color.YELLOW; }},
+	OLIGODENDROGLIOMA {public Color getColor() {return Color.CYAN; }},
+	UNCLASSIFIED {public Color getColor() {return Color.GRAY; }},
+	UNKNOWN {public Color getColor() {return Color.DARK_GRAY; }};
 	
-	abstract Color getColor();
+	public abstract Color getColor();
 }
 
 
