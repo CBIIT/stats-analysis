@@ -1,12 +1,10 @@
 package gov.nih.nci.caintegrator.service.findings;
 
+import java.util.List;
+
 import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
 import gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringResult;
-import gov.nih.nci.caintegrator.analysis.messaging.PCAresultEntry;
-import gov.nih.nci.caintegrator.analysis.messaging.PrincipalComponentAnalysisResult;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
-
-import java.util.List;
 
 public class HCAFinding extends AnalysisFinding{
     /**
@@ -42,6 +40,20 @@ public class HCAFinding extends AnalysisFinding{
     public byte[] getImageCode() {
         return hcResults.getImageCode();
     }
+
+	/* (non-Javadoc)
+	 * @see gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringResult#getClusteredReporterIDs()
+	 */
+	public List<String> getClusteredReporterIDs() {
+		return hcResults.getClusteredReporterIDs();
+	}
+
+	/* (non-Javadoc)
+	 * @see gov.nih.nci.caintegrator.analysis.messaging.HierarchicalClusteringResult#getClusteredSampleIDs()
+	 */
+	public List<String> getClusteredSampleIDs() {
+		return hcResults.getClusteredSampleIDs();
+	}
 
     
    
