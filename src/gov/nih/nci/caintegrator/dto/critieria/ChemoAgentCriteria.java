@@ -3,11 +3,14 @@ package gov.nih.nci.caintegrator.dto.critieria;
 import gov.nih.nci.caintegrator.dto.de.ChemoAgentDE;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * This class encapsulates ChemoAgentDE criteria. It contains a collection of
  * ChemoAgentDE.
- * 
+ *
  * @author Dana Zhang, BauerD
  */
 
@@ -24,18 +27,44 @@ public class ChemoAgentCriteria extends Criteria implements Serializable,
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private ChemoAgentDE chemoAgentDE;
+	private Collection agents;
 
 	public ChemoAgentCriteria() {
 	}
 
+
+
 	public void setChemoAgentDE(ChemoAgentDE chemoAgentDE) {
 		if (chemoAgentDE != null) {
-			this.chemoAgentDE = chemoAgentDE;
+			//this.chemoAgentDE = chemoAgentDE;
+			getAgentMembers().add(chemoAgentDE);
 		}
 	}
 
 	public ChemoAgentDE getChemoAgentDE() {
 		return chemoAgentDE;
+	}
+
+		// this is to deal with multiple disease entries
+	public void setAgents(Collection multiAgents) {
+			if (multiAgents != null) {
+				Iterator iter = multiAgents.iterator();
+				while (iter.hasNext()) {
+					ChemoAgentDE chemoAgentDE = (ChemoAgentDE) iter.next();
+					getAgentMembers().add(chemoAgentDE);
+				}
+			}
+	}
+
+  private Collection getAgentMembers() {
+		if (agents == null) {
+			agents = new ArrayList();
+		}
+		return agents;
+	}
+
+	public Collection getAgents() {
+		return agents;
 	}
 
 	public boolean isValid() {
@@ -45,7 +74,7 @@ public class ChemoAgentCriteria extends Criteria implements Serializable,
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance
 	 * and then sets all the non-primitive data fields to clones of themselves.
-	 * 
+	 *
 	 * @return -A minimum 2 deep copy of this object.
 	 */
 	public Object clone() {

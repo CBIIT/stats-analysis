@@ -3,11 +3,14 @@ package gov.nih.nci.caintegrator.dto.critieria;
 import gov.nih.nci.caintegrator.dto.de.RadiationTherapyDE;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * This class encapsulates RadiationTherapyDE criteria. It contains a collection
  * of RadiationTherapyDE.
- * 
+ *
  * Dana Zhang Date: August 30, 2004 Version 1.0
  */
 
@@ -24,16 +27,40 @@ public class RadiationTherapyCriteria extends Criteria implements Serializable,
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private RadiationTherapyDE radiationTherapyDE;
+	private Collection radiationSites;
+
 
 	public RadiationTherapyCriteria() {
 	}
 
 	public void setRadiationTherapyDE(RadiationTherapyDE radiationTherapyDE) {
 		if (radiationTherapyDE != null) {
-			this.radiationTherapyDE = radiationTherapyDE;
+			getRadiationMembers().add(radiationTherapyDE);
+			
 		}
 	}
 
+   	// this is to deal with multiple disease entries
+   	public void setRadiations(Collection multiRadiations) {
+   			if (multiRadiations != null) {
+   				Iterator iter = multiRadiations.iterator();
+   				while (iter.hasNext()) {
+   					RadiationTherapyDE radiationTherapyDE = (RadiationTherapyDE) iter.next();
+   					getRadiationMembers().add(radiationTherapyDE);
+   				}
+   			}
+   	}
+
+   private Collection getRadiationMembers() {
+		if (radiationSites == null) {
+			radiationSites = new ArrayList();
+		}
+		return radiationSites;
+	}
+
+   public Collection getRadiations() {
+   		return radiationSites;
+	}
 	public RadiationTherapyDE getRadiationTherapyDE() {
 		return radiationTherapyDE;
 	}
@@ -45,7 +72,7 @@ public class RadiationTherapyCriteria extends Criteria implements Serializable,
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance
 	 * and then sets all the non-primitive data fields to clones of themselves.
-	 * 
+	 *
 	 * @return -A minimum 2 deep copy of this object.
 	 */
 	public Object clone() {
