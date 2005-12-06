@@ -1,20 +1,33 @@
 package gov.nih.nci.caintegrator.ui.graphing.chart.plot;
 
+import gov.nih.nci.caintegrator.enumeration.DiseaseType;
+import gov.nih.nci.caintegrator.enumeration.GenderType;
+import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint;
+import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint.PCAcomponent;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Paint;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.LegendItemSource;
 import org.jfree.chart.annotations.XYShapeAnnotation;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.StandardEntityCollection;
-import org.jfree.chart.entity.XYAnnotationEntity;
 import org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
@@ -22,23 +35,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.LegendTitle;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.util.StringUtils;
-
-import gov.nih.nci.caintegrator.enumeration.GenderType;
-import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint;
-import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint.*;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.util.*;
-import java.awt.geom.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 /**
  * This class generates a plot for the PrincipalComponentAnalysis graph.
  * @author Michael A Harris
@@ -55,7 +52,7 @@ public class PrincipalComponentAnalysisPlot {
 	private PCAcolorByType colorBy;
 	private PCAcomponent component1;
 	private PCAcomponent component2;
-	private Map diseaseColorMap = new HashMap();
+	//private Map diseaseColorMap = new HashMap();
 	private Collection<PrincipalComponentAnalysisDataPoint> dataPoints;
 	private JFreeChart pcaChart = null;
 	
@@ -65,11 +62,11 @@ public class PrincipalComponentAnalysisPlot {
 	  this.component2 = component2;
 	  this.dataPoints = dataPoints;
 	  
-	  diseaseColorMap.put("GBM", Color.GREEN);
-	  diseaseColorMap.put("ASTRO", Color.BLUE);
-	  diseaseColorMap.put("NORMAL", Color.YELLOW);
-	  diseaseColorMap.put("OLIGO", Color.CYAN);
-	  diseaseColorMap.put("MIXED", Color.MAGENTA);
+//	  diseaseColorMap.put("GBM", Color.GREEN);
+//	  diseaseColorMap.put("ASTRO", Color.BLUE);
+//	  diseaseColorMap.put("NORMAL", Color.YELLOW);
+//	  diseaseColorMap.put("OLIGO", Color.CYAN);
+//	  diseaseColorMap.put("MIXED", Color.MAGENTA);
 	  
 	  createChart();
 	  
@@ -145,25 +142,42 @@ public class PrincipalComponentAnalysisPlot {
 	  //Circle=survival 10 months or more
 	  item = new LegendItem("Survival over 10 months", null, null, null, new Ellipse2D.Double(0,0,8,8), Color.BLACK);
 	  legendSrc.addLegendItem(item);
-	    
+	  
+	  //Triangle if data if survival data is missing
+	  GeneralPath triangle = new GeneralPath();
+//	  triangle.moveTo(1.0f,0.0f);
+//	  triangle.moveTo(0.0f,1.0f);
+//	  triangle.moveTo(1.0f,1.0f);
+	  triangle.moveTo(0.0f, -4.0f);
+	  triangle.lineTo(4.0f, 4.0f);
+	  triangle.lineTo(-4.0f, 4.0f);
+	  triangle.closePath();
+	  //triangle.closePath();
+	  item = new LegendItem("Survival Unknown", null, null, null, triangle, Color.BLACK);
+	  legendSrc.addLegendItem(item);  
+	  
 	  if (colorBy == PCAcolorByType.Disease) {
 	    //go through the disease color map and add legend items
 		String diseaseName = null;
 		Color diseaseColor = null;
-		for (Iterator i=diseaseColorMap.keySet().iterator(); i.hasNext(); ) {
-		  diseaseName = (String) i.next();
-		  diseaseColor = (Color) diseaseColorMap.get(diseaseName);
+		DiseaseType[] diseases = DiseaseType.values();
+		for (int i=0; i < diseases.length; i++ ) {
+		  diseaseName = diseases[i].name();
+		  diseaseColor = diseases[i].getColor();
 		  item = new LegendItem(diseaseName, null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), diseaseColor);
 		  //item = new LegendItem(diseaseName, null, null, null, new Rectangle2D.Double(0,0,6,6), diseaseColor);
 		  legendSrc.addLegendItem(item);
 		}
-		  
+//		item = new LegendItem("Unknown", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), Color.GRAY);
+//		legendSrc.addLegendItem(item);
 	  }
 	  else if (colorBy == PCAcolorByType.Gender) {
-		  item = new LegendItem("Male", null, null, null, new Rectangle2D.Double(0,0,6,6), Color.BLUE);
+		  item = new LegendItem("Male", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), Color.BLUE);
 		  legendSrc.addLegendItem(item);
-		  item = new LegendItem("Female", null, null, null, new Rectangle2D.Double(0,0,6,6), Color.PINK);
+		  item = new LegendItem("Female", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), Color.PINK);
 		  legendSrc.addLegendItem(item);
+//		  item = new LegendItem("Unknown", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f),Color.GRAY);
+//		  legendSrc.addLegendItem(item);
 	  }
 	  
 	    
@@ -193,13 +207,26 @@ public class PrincipalComponentAnalysisPlot {
 	    double survival = pcaPoint.getSurvivalInMonths();
 	    if ((survival > 0) && (survival < 10.0)) {
 	      Rectangle2D.Double rect = new Rectangle2D.Double();
-	      rect.setFrameFromCenter(x,y, x+3,y+3);
+	      rect.setFrameFromCenter(x,y, x+2,y+2);
 	      glyphShape = rect;
 	    }
-	    else {
+	    else if ((survival > 0) && (survival >= 10.0)) {
 	      Ellipse2D.Double circle = new Ellipse2D.Double();
-	      circle.setFrameFromCenter(x,y, x+3, y+3);
+	      circle.setFrameFromCenter(x,y, x+2, y+2);
 	      glyphShape = circle;
+	    }
+	    else {
+	      Rectangle2D.Double rect = new Rectangle2D.Double();
+	      rect.setFrameFromCenter(x,y, x+2,y+2);
+//	      GeneralPath gp = new GeneralPath();
+//	      float xf = (float)x;
+//	      float yf = (float)y;
+//	      //make a triangle
+//	      gp.moveTo(xf,yf);
+//	      gp.moveTo(xf-1,yf+1);
+//	      gp.moveTo(xf+1,yf+1);
+//	      gp.closePath();
+	      glyphShape = rect;
 	    }
 	    
 	    glyphColor = getColorForDataPoint(pcaPoint); 
@@ -229,7 +256,12 @@ public class PrincipalComponentAnalysisPlot {
 	  Color retColor = null;
 	  
 	  if (colorBy == PCAcolorByType.Disease) {
-	    Color diseaseColor = (Color) diseaseColorMap.get(pcaPoint.getDiseaseName());
+		String diseaseName = pcaPoint.getDiseaseName();
+		Color diseaseColor = Color.GRAY;
+		if (diseaseName != null) {
+		  DiseaseType disease = DiseaseType.valueOf(diseaseName);
+		  diseaseColor = disease.getColor();
+		}
 	    
 	    int grade = pcaPoint.getDiseaseGrade();
 	    for (int i=0; i < grade-1; i++) {
@@ -239,15 +271,8 @@ public class PrincipalComponentAnalysisPlot {
 	  }
 	  else if (colorBy == PCAcolorByType.Gender) {
 	    GenderType gender = pcaPoint.getGender();
-	    if (gender == GenderType.F) {
-	      retColor = Color.PINK;
-	    }
-	    else if (gender == GenderType.M) {
-	      retColor = Color.BLUE;
-	    }
-        else if (gender == GenderType.O) {
-              retColor = Color.ORANGE;
-            }
+	    retColor = gender.getColor();
+
 	  }
 	  
 	  if (retColor == null) {
