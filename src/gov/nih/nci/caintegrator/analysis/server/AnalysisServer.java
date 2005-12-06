@@ -23,6 +23,7 @@ import javax.jms.DeliveryMode;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.io.*;
 import java.util.*;
@@ -38,7 +39,7 @@ import java.util.*;
  */
 public class AnalysisServer implements MessageListener, ExceptionListener, AnalysisResultSender {
 
-	public static String version = "4.7";
+	public static String version = "5.0";
 
 	private boolean debugRcommands = false;
 
@@ -105,6 +106,9 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			analysisServerConfigProps.load(new FileInputStream(
 					serverPropertiesFileName));
 			
+			//Configure log4J
+			PropertyConfigurator.configure(analysisServerConfigProps);
+			
 			JBossMQ_locationIp = getMandatoryStringProperty(analysisServerConfigProps, "jmsmq_location");
 
 			RserverIp = getStringProperty(analysisServerConfigProps,"rserve_location", defaultRserverIp);
@@ -115,7 +119,9 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			
 			debugRcommands = getBooleanProperty(analysisServerConfigProps, "debugRcommands", false);
 			
-			reconnectWaitTimeMS = getLongProperty(analysisServerConfigProps, "reconnectWaitTimeMS", defaultReconnectWaitTimeMS); 
+			reconnectWaitTimeMS = getLongProperty(analysisServerConfigProps, "reconnectWaitTimeMS", defaultReconnectWaitTimeMS);
+			
+			
 		} catch (Exception ex) {
 		  logger.error("Error loading server properties from file: " + analysisServerConfigProps);
 		  logger.error(ex);
@@ -207,7 +213,7 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 		
 			try {
 				
-			  logger.info("Attempting to establish queue connection with provider: " + contextProperties.get(Context.PROVIDER_URL));
+			  //logger.info("Attempting to establish queue connection with provider: " + contextProperties.get(Context.PROVIDER_URL));
 				
 			  //Get the initial context with given properties
 			  context = new InitialContext(contextProperties);
@@ -235,16 +241,16 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 			  numConnectAttempts = 0;
 			  //System.out.println("  successfully established queue connection.");
 			  //System.out.println("Now listening for requests...");
-			  logger.info("  successfully established queue connection.");
+			  logger.info("  successfully established queue connection with provider=" + contextProperties.get(Context.PROVIDER_URL));
 			  logger.info("Now listening for requests...");
 			}
 			catch (Exception ex) {
 			  numConnectAttempts++;
 			  
 			  if (numConnectAttempts <= 10) {
-			    logger.info("  could not establish connection after numAttempts=" + numConnectAttempts + "  Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds...");
+			    logger.warn("  could not establish connection with provider=" + contextProperties.get(Context.PROVIDER_URL) + " after numAttempts=" + numConnectAttempts + "  Will try again in  " + Long.toString(reconnectWaitTimeMS/1000L) + " seconds...");
 			    if (numConnectAttempts == 10) {
-			      logger.info("  Will only print connection attempts every 600 atttempts to reduce log size.");
+			      logger.warn("  Will only print connection attempts every 600 atttempts to reduce log size.");
 			    }
 			  }
 			  else if ((numConnectAttempts % 600) == 0) {
@@ -371,11 +377,10 @@ public class AnalysisServer implements MessageListener, ExceptionListener, Analy
 
 	public static void main(String[] args) {
 
-	    BasicConfigurator.configure();
-		
 		try {
 			if (args.length > 0) {
 			  String serverPropsFile = args[0];
+			  
 			  AnalysisServer server = new AnalysisServer("ConnectionFactory", serverPropsFile);
 			}
 			else {
