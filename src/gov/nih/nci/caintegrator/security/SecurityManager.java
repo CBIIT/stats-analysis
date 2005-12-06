@@ -119,6 +119,13 @@ public class SecurityManager {
 						String name = pe.getProtectionElementName();
 						institutes.add(new InstitutionDE(name,instituteId));
 					}
+					
+					logger.debug("Username: "+userName+" has the following credentials:");
+					logger.debug("--------------------------------------------------------");
+					for(InstitutionDE institute:institutes) {
+						logger.debug("Allowed to read:" +institute.getInstituteName());
+					}
+					logger.debug("--------------------------------------------------------");
 					/*
 					 * Create the UserRole for the application.  Right now
 					 * this isn't really used for anything as the actual
