@@ -20,7 +20,7 @@ public abstract class Finding implements Serializable{
 	private String sessionId;
 	private String taskId;
 	private FindingStatus status;
-	private Logger logger = Logger.getLogger(Finding.class);
+	private static Logger logger = Logger.getLogger(Finding.class);
 	
 	
 	public Finding(String session, String task, FindingStatus status) {

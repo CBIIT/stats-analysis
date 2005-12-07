@@ -21,7 +21,7 @@ public class KaplanMeierAlgorithms {
 	private ArrayList<KaplanMeierSampleInfo> downSamples;
 	private double myUpperThreshold;
 	private double myLowerThreshold;
-	Logger logger = Logger.getLogger(KaplanMeierAlgorithms.class);
+	private static Logger logger = Logger.getLogger(KaplanMeierAlgorithms.class);
 	
 	public KaplanMeierAlgorithms(KaplanMeierSampleInfo[] samples, double upperThreshold, double lowerThreshold) {
 		allSamples = new ArrayList<KaplanMeierSampleInfo>();
