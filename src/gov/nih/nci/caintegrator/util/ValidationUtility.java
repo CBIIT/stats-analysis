@@ -16,7 +16,7 @@ public class ValidationUtility {
 	 */
 	public static void checkForNull(Object object) throws ValidationException{
 		if(object == null)
-			throw new ValidationException(object.getClass().getName()+" cannot be Null");
+			throw new ValidationException("Null Validation Exception");
 	}
 
 }
