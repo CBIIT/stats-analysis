@@ -1,4 +1,4 @@
-package gov.nih.nci.caintegrator.analysis.test;
+package gov.nih.nci.caintegrator.analysis.visualization.test;
 
 import gov.nih.nci.caintegrator.ui.graphing.chart.plot.PrincipalComponentAnalysisPlot;
 import gov.nih.nci.caintegrator.ui.graphing.chart.plot.PrincipalComponentAnalysisPlot.PCAcolorByType;

@@ -1,4 +1,4 @@
-package gov.nih.nci.caintegrator.analysis.test;
+package gov.nih.nci.caintegrator.analysis.visualization.test;
 
 import gov.nih.nci.caintegrator.analysis.messaging.*;
 import gov.nih.nci.caintegrator.exceptions.AnalysisServerException;
