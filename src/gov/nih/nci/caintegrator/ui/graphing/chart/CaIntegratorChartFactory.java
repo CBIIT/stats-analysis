@@ -69,9 +69,9 @@ public class CaIntegratorChartFactory {
 	 */
 	public static List<JFreeChart> getClinicalGraphs(Collection<ClinicalDataPoint> clinicalData) {
 		List<JFreeChart> clinicalPlotList = new ArrayList<JFreeChart>();
-		ClinicalPlot ageAtDxVSsurvival = new ClinicalPlot(clinicalData, ClinicalFactorType.AgeAtDx,ClinicalFactorType.Survival);
+		ClinicalPlot ageAtDxVSsurvival = new ClinicalPlot(clinicalData, ClinicalFactorType.AgeAtDx,ClinicalFactorType.SurvivalLength);
 		clinicalPlotList.add(ageAtDxVSsurvival.getChart());
-		ClinicalPlot neurologicalAssessmentVSsurvival = new ClinicalPlot(clinicalData, ClinicalFactorType.KarnofskyAssessment,ClinicalFactorType.Survival);
+		ClinicalPlot neurologicalAssessmentVSsurvival = new ClinicalPlot(clinicalData, ClinicalFactorType.KarnofskyAssessment,ClinicalFactorType.SurvivalLength);
 		clinicalPlotList.add(neurologicalAssessmentVSsurvival.getChart());
 		  
 		return clinicalPlotList; 

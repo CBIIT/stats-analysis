@@ -41,7 +41,7 @@ public class ClinicalDataPoint {
 	  switch(factor) {
 	  case AgeAtDx: return getAgeAtDx();
 	  case KarnofskyAssessment: return getKarnofskyAssessmentAssessment();
-	  case Survival: return getSurvival();
+	  case SurvivalLength: return getSurvival();
 	  }
 	  return Double.NEGATIVE_INFINITY;
 	}

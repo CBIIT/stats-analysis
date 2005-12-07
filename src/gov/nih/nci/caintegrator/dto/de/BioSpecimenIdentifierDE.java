@@ -29,8 +29,8 @@ public class BioSpecimenIdentifierDE extends DomainElement implements
 	 * Initializes a newly created <code>BioSpecimenIdentifierDE</code> object
 	 * so that it represents an AlleleFrequencyDE.
 	 */
-	public BioSpecimenIdentifierDE(String sampleID) {
-		super(sampleID);
+	public BioSpecimenIdentifierDE(Long bioSpecimenID) {
+		super(bioSpecimenID);
 	}
 
 	/**
@@ -40,11 +40,11 @@ public class BioSpecimenIdentifierDE extends DomainElement implements
 	 *            the value
 	 */
 	public void setValue(Object obj) throws Exception {
-		if (!(obj instanceof String))
+		if (!(obj instanceof Long))
 			throw new Exception(
 					"Could not set the value.  Parameter is of invalid data type: "
 							+ obj);
-		setValueObject((String) obj);
+		setValueObject((Long) obj);
 	}
 
 	/**
@@ -53,8 +53,8 @@ public class BioSpecimenIdentifierDE extends DomainElement implements
 	 * @return the sampleID for this <code>BioSpecimenIdentifierDE</code>
 	 *         object
 	 */
-	public String getValueObject() {
-		return (String) getValue();
+	public Long getValueObject() {
+		return (Long) getValue();
 	}
 
 	/**
@@ -63,9 +63,9 @@ public class BioSpecimenIdentifierDE extends DomainElement implements
 	 * @param sampleID
 	 *            the sampleID
 	 */
-	public void setValueObject(String sampleID) {
-		if (sampleID != null) {
-			value = sampleID;
+	public void setValueObject(Long bioSpecimenID) {
+		if (bioSpecimenID != null) {
+			value = bioSpecimenID;
 		}
 	}
 	/**

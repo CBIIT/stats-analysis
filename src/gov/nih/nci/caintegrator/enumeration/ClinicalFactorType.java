@@ -4,8 +4,9 @@ public  enum ClinicalFactorType {
 	AgeAtDx, 
 	Treatment, 
 	KarnofskyAssessment, 
-	Survival,
+	SurvivalLength,
 	Gender,
-	Disease};
+	Disease,
+	Censor};
 	
 
