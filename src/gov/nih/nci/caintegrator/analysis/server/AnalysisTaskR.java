@@ -1,24 +1,18 @@
 package gov.nih.nci.caintegrator.analysis.server;
 
+import gov.nih.nci.caintegrator.analysis.messaging.AnalysisRequest;
+import gov.nih.nci.caintegrator.analysis.messaging.IdGroup;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Enumeration;
+import java.io.InputStream;
 import java.util.Iterator;
-import java.util.Vector;
-import java.io.*;
-
-//import java.awt.Image;
-//import java.awt.Toolkit;
-//import java.awt.*;
-
 
 import org.apache.log4j.Logger;
 import org.rosuda.JRclient.REXP;
 import org.rosuda.JRclient.RFileInputStream;
 import org.rosuda.JRclient.RSrvException;
 import org.rosuda.JRclient.Rconnection;
-
-import gov.nih.nci.caintegrator.analysis.messaging.AnalysisRequest;
-import gov.nih.nci.caintegrator.analysis.messaging.IdGroup;
 
 public abstract class AnalysisTaskR extends AnalysisTask {
 
@@ -142,8 +136,10 @@ public abstract class AnalysisTaskR extends AnalysisTask {
 
 		try {
 			String fileName = "image_" + getRequest().getSessionId() + "_"
-					+ getRequest().getTaskId() + "_"
 					+ System.currentTimeMillis() + ".png";
+			
+		    fileName = fileName.replace(' ','_');  //should never have spaces but just to be sure
+			
 			REXP xp = null;
 
 			xp = doREval("try(bitmap(\"" + fileName
