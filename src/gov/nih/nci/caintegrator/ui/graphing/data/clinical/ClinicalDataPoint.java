@@ -1,31 +1,33 @@
 package gov.nih.nci.caintegrator.ui.graphing.data.clinical;
 
 import gov.nih.nci.caintegrator.enumeration.ClinicalFactorType;
+import gov.nih.nci.caintegrator.enumeration.GenderType;
 
 public class ClinicalDataPoint {
 	
 	
-	public static enum PatientGenderType { Male, Female };
+	//public static enum PatientGenderType { Male, Female };
 	
-	private String patientId;
-	private double ageAtDx;
-	private String treatment;  
-	private String diseaseName;
-	private double karnofskyAssessment;
-	private double survival;
-	private PatientGenderType gender;
-	private int diseaseGrade;
+	public static final double MISSING_CLINICAL_FACTOR_VALUE = Double.NEGATIVE_INFINITY;
+	private String patientId = null;
+	private double ageAtDx = MISSING_CLINICAL_FACTOR_VALUE;
+	private String treatment = null;
+	private String diseaseName = null;
+	private double karnofskyScore = MISSING_CLINICAL_FACTOR_VALUE;
+	private double survival = MISSING_CLINICAL_FACTOR_VALUE;
+	private GenderType gender = GenderType.O;
+	private int diseaseGrade = -1;
 	
 	public ClinicalDataPoint(String patientId) {
 	  this.patientId = patientId;
 	}
 
-	public ClinicalDataPoint(String patientId,PatientGenderType gender, String diseaseName, int diseaseGrade, double ageAtDx, String treatment, double karnofskyAssessment, double survival) {
+	public ClinicalDataPoint(String patientId,GenderType gender, String diseaseName, int diseaseGrade, double ageAtDx, String treatment, double karnofskyScore, double survival) {
 	  this.patientId = patientId;
 	  this.gender = gender;
 	  this.ageAtDx = ageAtDx;
 	  this.treatment = treatment;
-	  this.karnofskyAssessment = karnofskyAssessment;
+	  this.karnofskyScore = karnofskyScore;
 	  this.survival = survival;
 	  this.diseaseName = diseaseName;
 	  this.diseaseGrade = diseaseGrade;
@@ -40,10 +42,10 @@ public class ClinicalDataPoint {
 	public double getFactorValue(ClinicalFactorType factor) {
 	  switch(factor) {
 	  case AgeAtDx: return getAgeAtDx();
-	  case KarnofskyAssessment: return getKarnofskyAssessmentAssessment();
+	  case KarnofskyAssessment: return getKarnofskyScore();
 	  case SurvivalLength: return getSurvival();
 	  }
-	  return Double.NEGATIVE_INFINITY;
+	  return MISSING_CLINICAL_FACTOR_VALUE;
 	}
 
 	public double getAgeAtDx() {
@@ -54,12 +56,12 @@ public class ClinicalDataPoint {
 		this.ageAtDx = ageAtDx;
 	}
 
-	public double getKarnofskyAssessmentAssessment() {
-		return karnofskyAssessment;
+	public double getKarnofskyScore() {
+		return karnofskyScore;
 	}
 
-	public void setNeurologicalAssessment(double neurologicalAssessment) {
-		this.karnofskyAssessment = neurologicalAssessment;
+	public void setKarnofskyScore(double karnofskyScore) {
+		this.karnofskyScore = karnofskyScore;
 	}
 
 	public double getSurvival() {
@@ -82,11 +84,11 @@ public class ClinicalDataPoint {
 		return patientId;
 	}
 
-	public PatientGenderType getGender() {
+	public GenderType getGender() {
 		return gender;
 	}
 
-	public void setGender(PatientGenderType gender) {
+	public void setGender(GenderType gender) {
 		this.gender = gender;
 	}
 

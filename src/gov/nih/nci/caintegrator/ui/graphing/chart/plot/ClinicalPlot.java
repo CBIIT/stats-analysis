@@ -1,8 +1,9 @@
 package gov.nih.nci.caintegrator.ui.graphing.chart.plot;
 
+import gov.nih.nci.caintegrator.enumeration.ClinicalFactorType;
+import gov.nih.nci.caintegrator.enumeration.DiseaseType;
 import gov.nih.nci.caintegrator.ui.graphing.data.DataRange;
 import gov.nih.nci.caintegrator.ui.graphing.data.clinical.ClinicalDataPoint;
-import gov.nih.nci.caintegrator.enumeration.ClinicalFactorType;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -10,9 +11,7 @@ import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -33,19 +32,14 @@ public class ClinicalPlot {
 	private ClinicalFactorType factor1;
 	private ClinicalFactorType factor2;
 	private Collection<ClinicalDataPoint> dataPoints;
-	private Map diseaseColorMap = new HashMap();
+	//private Map diseaseColorMap = new HashMap();
 
 	public ClinicalPlot(Collection<ClinicalDataPoint> clinicalData, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor1, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor2) {
 	  this.factor1 = factor1;
 	  this.factor2 = factor2;
 	  this.dataPoints = clinicalData;
 	  
-	  diseaseColorMap.put("GBM", Color.GREEN);
-	  diseaseColorMap.put("ASTRO", Color.BLUE);
-	  diseaseColorMap.put("NORMAL", Color.YELLOW);
-	  diseaseColorMap.put("OLIGO", Color.CYAN);
-	  diseaseColorMap.put("MIXED", Color.MAGENTA);
-	  
+	  createChart();	  
 	}
 	public JFreeChart getChart() { return clinicalChart; }
 
@@ -79,8 +73,8 @@ public class ClinicalPlot {
         domainAxis.setAutoRangeIncludesZero(false);
         
         //get domain and range of the axis.
-        DataRange domainAxisLimits = getDataRange(dataPoints, factor1);
-        DataRange rangeAxisLimits = getDataRange(dataPoints, factor2);
+        DataRange domainAxisLimits = getDataRange(dataPoints, factor1, true);
+        DataRange rangeAxisLimits = getDataRange(dataPoints, factor2,  true);
         
         domainAxis.setRange(domainAxisLimits.getMinRange(), domainAxisLimits.getMaxRange());
         rangeAxis.setRange(rangeAxisLimits.getMinRange(), domainAxisLimits.getMaxRange());
@@ -98,7 +92,7 @@ public class ClinicalPlot {
 	 * @param factor
 	 * @return
 	 */
-	private DataRange getDataRange(Collection<ClinicalDataPoint> dataPoints2, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor) {
+	private DataRange getDataRange(Collection<ClinicalDataPoint> dataPoints2, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor, boolean onlyIncludePositveValues) {
 	  double maxValue = Double.MIN_VALUE;
 	  double minValue = Double.MAX_VALUE;
 	  double value;
@@ -106,11 +100,11 @@ public class ClinicalPlot {
 	  for (Iterator i=dataPoints.iterator(); i.hasNext(); ) {
 		dataPoint = (ClinicalDataPoint)i.next();
 		value = dataPoint.getFactorValue(factor);
-		if (value < minValue) {
+		if ((value < minValue)&&(value >= 0)) {
 		  minValue = value;
 		}
 		
-		if (value > maxValue) {
+		if ((value > maxValue)&&(value >= 0)) {
 		  maxValue = value;
 		}
 	  }
@@ -132,31 +126,43 @@ public class ClinicalPlot {
 	    x = clinicalPoint.getFactorValue(factor1);
 	    y = clinicalPoint.getFactorValue(factor2);
 	    
-	    Rectangle2D.Double rect = new Rectangle2D.Double();
-	    rect.setFrameFromCenter(x,y, x+3,y+3);
-	    glyphShape = rect;
-	    glyphColor = getColorForDataPoint(clinicalPoint); 
-	    glyph = new XYShapeAnnotation(glyphShape, new BasicStroke(1.0f), Color.BLACK, glyphColor);
-	    String tooltip = clinicalPoint.getPatientId() + " " + clinicalPoint.getDiseaseName() + " survivalMonths=" + clinicalPoint.getSurvival();
-	    glyph.setToolTipText(tooltip);
-	    plot.addAnnotation(glyph);
+	    if ((x!= ClinicalDataPoint.MISSING_CLINICAL_FACTOR_VALUE) && 
+	        (y!= ClinicalDataPoint.MISSING_CLINICAL_FACTOR_VALUE)) {
+	    
+	    	Rectangle2D.Double rect = new Rectangle2D.Double();
+		    rect.setFrameFromCenter(x,y, x+3,y+3);
+		    glyphShape = rect;
+		    glyphColor = getColorForDataPoint(clinicalPoint); 
+		    glyph = new XYShapeAnnotation(glyphShape, new BasicStroke(1.0f), Color.BLACK, glyphColor);
+		    String tooltip = clinicalPoint.getPatientId() + " " + clinicalPoint.getDiseaseName() + " survivalMonths=" + clinicalPoint.getSurvival();
+		    glyph.setToolTipText(tooltip);
+		    plot.addAnnotation(glyph);
+	    }  
 	  }
 		
 	}
 	
 	private Color getColorForDataPoint(ClinicalDataPoint clinicalPoint) {
-      Color defaultColor = Color.GRAY;
-	  Color retColor = null;
-		  
-	  Color diseaseColor = (Color) diseaseColorMap.get(clinicalPoint.getDiseaseName());
-	  if (diseaseColor != null) {	    
-	    int grade = clinicalPoint.getDiseaseGrade();
+        
+	  String diseaseName = clinicalPoint.getDiseaseName();
+	  Color diseaseColor = Color.GRAY;
+	  Color defaultColor = Color.GRAY;
+	  Color retColor = Color.GRAY;
+	  
+	  if (diseaseName != null) {
+	    DiseaseType disease = DiseaseType.valueOf(diseaseName);
+	    diseaseColor = disease.getColor();
+	  }
+	    
+	  int grade = clinicalPoint.getDiseaseGrade();
+	  if (grade > 0) {
 	    for (int i=0; i < grade-1; i++) {
 	      diseaseColor = diseaseColor.brighter();
 	    }
-	    retColor = diseaseColor;
 	  }
-		    
+	  retColor = diseaseColor;
+	  
+	  	    
 	  if (retColor == null) {
 	    retColor = defaultColor;
 	  }
@@ -177,14 +183,22 @@ public class ClinicalPlot {
 	       
       //go through the disease color map and add legend items
       String diseaseName = null;
-      Color diseaseColor = null;
-      for (Iterator i=diseaseColorMap.keySet().iterator(); i.hasNext(); ) {
-	    diseaseName = (String) i.next();
-	    diseaseColor = (Color) diseaseColorMap.get(diseaseName);
-	    item = new LegendItem(diseaseName, null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), diseaseColor);
-	    //item = new LegendItem(diseaseName, null, null, null, new Rectangle2D.Double(0,0,6,6), diseaseColor);
+	  Color diseaseColor = null;
+	  DiseaseType[] diseases = DiseaseType.values();
+	  for (int i=0; i < diseases.length; i++ ) {
+	    diseaseName = diseases[i].name();
+	    diseaseColor = diseases[i].getColor();
+	    item = new LegendItem(diseaseName, null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), diseaseColor);	 
 	    legendSrc.addLegendItem(item);
 	  }
+      
+//      for (Iterator i=diseaseColorMap.keySet().iterator(); i.hasNext(); ) {
+//	    diseaseName = (String) i.next();
+//	    diseaseColor = (Color) diseaseColorMap.get(diseaseName);
+//	    item = new LegendItem(diseaseName, null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), diseaseColor);
+//	    //item = new LegendItem(diseaseName, null, null, null, new Rectangle2D.Double(0,0,6,6), diseaseColor);
+//	    legendSrc.addLegendItem(item);
+//	  }
 		    
 	  sources[0] = legendSrc;
 	  legend.setSources(sources);
