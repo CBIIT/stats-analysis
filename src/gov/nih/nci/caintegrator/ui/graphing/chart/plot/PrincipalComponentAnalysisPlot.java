@@ -172,10 +172,19 @@ public class PrincipalComponentAnalysisPlot {
 //		legendSrc.addLegendItem(item);
 	  }
 	  else if (colorBy == PCAcolorByType.Gender) {
-		  item = new LegendItem("Male", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), Color.BLUE);
-		  legendSrc.addLegendItem(item);
-		  item = new LegendItem("Female", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), Color.PINK);
-		  legendSrc.addLegendItem(item);
+		  String genderName = null;
+		  Color genderColor = null;
+		  GenderType[] genderTypes = GenderType.values();
+		  for (int i=0; i < genderTypes.length; i++) {
+		    genderName = genderTypes[i].toString();
+		    genderColor = genderTypes[i].getColor();
+		    item = new LegendItem(genderName, null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), genderColor);
+		    legendSrc.addLegendItem(item);
+		  }
+//		  item = new LegendItem("Male", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), Color.BLUE);
+//		  legendSrc.addLegendItem(item);
+//		  item = new LegendItem("Female", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), Color.PINK);
+//		  legendSrc.addLegendItem(item);
 //		  item = new LegendItem("Unknown", null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f),Color.GRAY);
 //		  legendSrc.addLegendItem(item);
 	  }
@@ -271,7 +280,10 @@ public class PrincipalComponentAnalysisPlot {
 	  }
 	  else if (colorBy == PCAcolorByType.Gender) {
 	    GenderType gender = pcaPoint.getGender();
-	    retColor = gender.getColor();
+	    
+	    if (gender != null) { 
+	      retColor = gender.getColor();
+	    }
 
 	  }
 	  
