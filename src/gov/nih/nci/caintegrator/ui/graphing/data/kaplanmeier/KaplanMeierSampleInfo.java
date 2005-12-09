@@ -4,19 +4,17 @@ package gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier;
  * @author XiaoN
  */
 public class KaplanMeierSampleInfo {
-	/**
-	 * WE NEED TO ADD SAMPLE ID TO THIS CLASS
-	 */
-	String name; 
+
+	String sampleID; 
 	int time; 
 	int censor; //(0/1)
 	double value; //Expr/CN value
 	
-	public KaplanMeierSampleInfo(String name,int t, int c, double v) {
+	public KaplanMeierSampleInfo(String sampleID,int t, int c, double v) {
 		setTime(t); 
 		setCensor(c); 
 		setValue(v); 
-		setName(name);
+		setSampleID(sampleID);
 	}
 	
 	public KaplanMeierSampleInfo(int t, int c, double v) {
@@ -36,18 +34,8 @@ public class KaplanMeierSampleInfo {
 	public void setCensor(int censor) {
 		this.censor = censor;
 	}
-	/**
-	 * @return Returns the name.
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name The name to set.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+
+
 	/**
 	 * @return Returns the time.
 	 */
@@ -71,5 +59,19 @@ public class KaplanMeierSampleInfo {
 	 */
 	public void setValue(double value) {
 		this.value = value;
+	}
+
+	/**
+	 * @return Returns the sampleID.
+	 */
+	public String getSampleID() {
+		return sampleID;
+	}
+
+	/**
+	 * @param sampleID The sampleID to set.
+	 */
+	public void setSampleID(String sampleID) {
+		this.sampleID = sampleID;
 	}
 }
