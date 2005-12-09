@@ -77,7 +77,7 @@ public class ClinicalPlot {
         DataRange rangeAxisLimits = getDataRange(dataPoints, factor2,  true);
         
         domainAxis.setRange(domainAxisLimits.getMinRange(), domainAxisLimits.getMaxRange());
-        rangeAxis.setRange(rangeAxisLimits.getMinRange(), domainAxisLimits.getMaxRange());
+        rangeAxis.setRange(rangeAxisLimits.getMinRange(), rangeAxisLimits.getMaxRange());
         
         
         System.out.println("domainAxis=" + domainAxis.getLabel());
@@ -130,7 +130,7 @@ public class ClinicalPlot {
 	        (y!= ClinicalDataPoint.MISSING_CLINICAL_FACTOR_VALUE)) {
 	    
 	    	Rectangle2D.Double rect = new Rectangle2D.Double();
-		    rect.setFrameFromCenter(x,y, x+3,y+3);
+		    rect.setFrameFromCenter(x,y, x+1,y+1);
 		    glyphShape = rect;
 		    glyphColor = getColorForDataPoint(clinicalPoint); 
 		    glyph = new XYShapeAnnotation(glyphShape, new BasicStroke(1.0f), Color.BLACK, glyphColor);
