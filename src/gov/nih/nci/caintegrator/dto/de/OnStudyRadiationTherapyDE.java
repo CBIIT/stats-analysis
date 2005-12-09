@@ -6,9 +6,9 @@ import java.io.Serializable;
  * This  class encapsulates the properties of an caintergator 
  * RadiationTherapyDE object.
  *  
- * @author Dana Zhang, BauerD
+ * @author Dana Zhang
  */
-public class RadiationTherapyDE extends DomainElement implements Serializable, Cloneable{
+public class OnStudyRadiationTherapyDE extends DomainElement implements Serializable, Cloneable{
    
     
 	/**
@@ -24,16 +24,16 @@ public class RadiationTherapyDE extends DomainElement implements Serializable, C
 
 	
    /**
-    * Initializes a newly created <code>RadiationTherapyDE</code> object so that it represents an RadiationTherapyDE.
+    * Initializes a newly created <code>OnStudyRadiationTherapyDE</code> object so that it represents an OnStudyRadiationTherapyDE.
     */
-    public RadiationTherapyDE(String radiationTherapy) {
-        super(radiationTherapy);
+    public OnStudyRadiationTherapyDE(String onStudyRadiationTherapy) {
+        super(onStudyRadiationTherapy);
     }
 	
   
 
   /**
-    * Sets the value for this <code>RadiationTherapyDE</code> object
+    * Sets the value for this <code>OnStudyRadiationTherapyDE</code> object
     * @param object the value    
 	*/  	
     public void setValue(Object obj) throws Exception {
@@ -43,8 +43,8 @@ public class RadiationTherapyDE extends DomainElement implements Serializable, C
     }
 
   /**
-    * Returns the radiationTherapy for this RadiationTherapyDE obect.
-    * @return the radiationTherapy for this <code>RadiationTherapyDE</code> object
+    * Returns the OnStudyRadiation for this OnStudyRadiationTherapyDE obect.
+    * @return the OnStudyRadiationfor this <code>OnStudyRadiationTherapyDE</code> object
     */	
     public String getValueObject() {
         return (String) getValue();
@@ -54,11 +54,12 @@ public class RadiationTherapyDE extends DomainElement implements Serializable, C
     * Sets the radiationTherapy for this <code>RadiationTherapyDE</code> object
     * @param radiationTherapy the radiationTherapy    
 	*/ 
-    public void setValueObject(String radiationTherapy) {
-	  if(radiationTherapy != null){
-        value = radiationTherapy;
+    public void setValueObject(String onStudyRadiationTherapy) {
+	  if(onStudyRadiationTherapy != null){
+        value = onStudyRadiationTherapy;
 		}
     }
+    
     /**
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance
@@ -66,8 +67,9 @@ public class RadiationTherapyDE extends DomainElement implements Serializable, C
 	 * 
 	 * @return -A minimum 2 deep copy of this object.
 	 */
+    
     public Object clone() {
-    	RadiationTherapyDE myClone = (RadiationTherapyDE) super.clone();
+    	OnStudyRadiationTherapyDE myClone = (OnStudyRadiationTherapyDE) super.clone();
 		return myClone;
 	}
 }
