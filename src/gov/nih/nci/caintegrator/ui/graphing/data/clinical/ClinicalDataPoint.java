@@ -8,13 +8,13 @@ public class ClinicalDataPoint {
 	
 	//public static enum PatientGenderType { Male, Female };
 	
-	public static final double MISSING_CLINICAL_FACTOR_VALUE = Double.NEGATIVE_INFINITY;
+	public static final double MISSING_CLINICAL_FACTOR_VALUE = -1.0;
 	private String patientId = null;
 	private double ageAtDx = MISSING_CLINICAL_FACTOR_VALUE;
 	private String treatment = null;
 	private String diseaseName = null;
 	private double karnofskyScore = MISSING_CLINICAL_FACTOR_VALUE;
-	private double survival = MISSING_CLINICAL_FACTOR_VALUE;
+	private double survivalInMonths = MISSING_CLINICAL_FACTOR_VALUE;
 	private GenderType gender = GenderType.O;
 	private int diseaseGrade = -1;
 	
@@ -28,7 +28,7 @@ public class ClinicalDataPoint {
 	  this.ageAtDx = ageAtDx;
 	  this.treatment = treatment;
 	  this.karnofskyScore = karnofskyScore;
-	  this.survival = survival;
+	  this.survivalInMonths = survival/30.0;
 	  this.diseaseName = diseaseName;
 	  this.diseaseGrade = diseaseGrade;
 	}
@@ -43,7 +43,7 @@ public class ClinicalDataPoint {
 	  switch(factor) {
 	  case AgeAtDx: return getAgeAtDx();
 	  case KarnofskyAssessment: return getKarnofskyScore();
-	  case SurvivalLength: return getSurvival();
+	  case SurvivalLength: return getSurvivalInMonths();
 	  }
 	  return MISSING_CLINICAL_FACTOR_VALUE;
 	}
@@ -64,12 +64,12 @@ public class ClinicalDataPoint {
 		this.karnofskyScore = karnofskyScore;
 	}
 
-	public double getSurvival() {
-		return survival;
+	public double getSurvivalInMonths() {
+		return survivalInMonths;
 	}
 
 	public void setSurvival(double survival) {
-		this.survival = survival;
+		this.survivalInMonths = survival/30.0;
 	}
 
 	public String getTreatment() {

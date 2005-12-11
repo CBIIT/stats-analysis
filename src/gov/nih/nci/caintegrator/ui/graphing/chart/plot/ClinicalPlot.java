@@ -79,7 +79,7 @@ public class ClinicalPlot {
         domainAxis.setRange(domainAxisLimits.getMinRange(), domainAxisLimits.getMaxRange());
         rangeAxis.setRange(rangeAxisLimits.getMinRange(), rangeAxisLimits.getMaxRange());
         
-        
+     
         System.out.println("domainAxis=" + domainAxis.getLabel());
         System.out.println("rangeAxis=" + rangeAxis.getLabel());
          
@@ -134,7 +134,7 @@ public class ClinicalPlot {
 		    glyphShape = rect;
 		    glyphColor = getColorForDataPoint(clinicalPoint); 
 		    glyph = new XYShapeAnnotation(glyphShape, new BasicStroke(1.0f), Color.BLACK, glyphColor);
-		    String tooltip = clinicalPoint.getPatientId() + " " + clinicalPoint.getDiseaseName() + " survivalMonths=" + clinicalPoint.getSurvival();
+		    String tooltip = clinicalPoint.getPatientId() + " " + clinicalPoint.getDiseaseName() + " survivalMonths=" + clinicalPoint.getSurvivalInMonths();
 		    glyph.setToolTipText(tooltip);
 		    plot.addAnnotation(glyph);
 	    }  
