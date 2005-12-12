@@ -95,6 +95,8 @@ public class DatumDE extends DomainElement implements Serializable, Cloneable {
 	 */
 	public final static String CENSOR = "Censor";
 
+	public static final String UNIFIED_GENE_ID = "UnifiedGeneID";
+
 	/**
 	 * Censor
 	 */
