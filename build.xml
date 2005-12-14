@@ -8,7 +8,7 @@
 		<echo>
 			Artifacts copied to ${anthill.artifacts.dir}
 		</echo>
-		<copy file="caintegrator-analysis-commons.jar" todir="${anthill.artifacts.dir}"/>
+		<copy file="caintegrator-spec.jar" todir="${anthill.artifacts.dir}"/>
 	</target>
 	
 	<target name="build_jar">
