@@ -1,0 +1,40 @@
+<project name="caintegrator-spec" default="build_jar" basedir=".">
+	<property file="basic_build.properties"/>
+	<!--
+	TARGET: COMPILE
+		Compiles the source directory
+	-->
+	<target name="build_dependency" if="anthill.artifacts.dir" depends="build_jar">
+		<echo>
+			Artifacts copied to ${anthill.artifacts.dir}
+		</echo>
+		<copy file="caintegrator-spec.jar" todir="${anthill.artifacts.dir}"/>
+	</target>
+	
+	<target name="build_jar">
+		<delete dir="${build.classes.dir}" failonerror="false"/>
+		<mkdir dir="${build.classes.dir}"/>
+		<javac srcdir="${build.source.dir}" destdir="${build.classes.dir}" source="1.5" excludes="**/test/**" debug="true" debuglevel="lines,vars,source">
+			<classpath>
+				<fileset dir="${build.deploy.lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+				<fileset dir="${build.do.not.deploy.lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+				<fileset dir="${anthill.dependency.artifacts.dir}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+		<jar jarfile="caintegrator-spec.jar">
+			<fileset dir="${build.classes.dir}"/>
+			<fileset dir="${build.deploy.lib.dir}">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${anthill.dependency.artifacts.dir}">
+				<include name="*.jar"/>
+			</fileset>
+		</jar>
+	</target>
+</project>
