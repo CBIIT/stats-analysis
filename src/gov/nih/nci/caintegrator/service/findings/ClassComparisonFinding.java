@@ -1,7 +1,9 @@
 package gov.nih.nci.caintegrator.service.findings;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
 import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult;
@@ -10,6 +12,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
 import gov.nih.nci.caintegrator.dto.de.SampleIDDE;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 
+
 public class ClassComparisonFinding extends AnalysisFinding{
 	/**
 	 * 
@@ -17,6 +20,8 @@ public class ClassComparisonFinding extends AnalysisFinding{
 	private static final long serialVersionUID = 1L;
 	private ClassComparisonResult myResults;
 	private Collection<SampleIDDE> samplesNotFound;
+	private Map reporterAnnotationsMap;
+	
 	public ClassComparisonFinding(String session, String task, FindingStatus status, ClassComparisonResult result) {
 		super(session, task, status);
 		setAnalysisResult(result);
@@ -77,4 +82,13 @@ public class ClassComparisonFinding extends AnalysisFinding{
 	public void setSamplesNotFound(Collection<SampleIDDE> samplesNotFound) {
 		this.samplesNotFound = samplesNotFound;
 	}
+
+	public Map getReporterAnnotationsMap() {
+		return reporterAnnotationsMap;
+	}
+
+	public void setReporterAnnotationsMap(Map reporterResultsetMap) {
+		this.reporterAnnotationsMap = reporterResultsetMap;
+	}
+	
 }
