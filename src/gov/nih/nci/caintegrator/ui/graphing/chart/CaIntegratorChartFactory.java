@@ -67,15 +67,15 @@ public class CaIntegratorChartFactory {
 	 * @param clinicalData
 	 * @return
 	 */
-	public static List<JFreeChart> getClinicalGraphs(Collection<ClinicalDataPoint> clinicalData) {
-		List<JFreeChart> clinicalPlotList = new ArrayList<JFreeChart>();
-		ClinicalPlot ageAtDxVSsurvival = new ClinicalPlot(clinicalData, ClinicalFactorType.AgeAtDx,ClinicalFactorType.SurvivalLength);
-		clinicalPlotList.add(ageAtDxVSsurvival.getChart());
-		ClinicalPlot neurologicalAssessmentVSsurvival = new ClinicalPlot(clinicalData, ClinicalFactorType.KarnofskyAssessment,ClinicalFactorType.SurvivalLength);
-		clinicalPlotList.add(neurologicalAssessmentVSsurvival.getChart());
-		  
-		return clinicalPlotList; 
-	}
+//	public static List<JFreeChart> getClinicalGraphs(Collection<ClinicalDataPoint> clinicalData) {
+//		List<JFreeChart> clinicalPlotList = new ArrayList<JFreeChart>();
+//		ClinicalPlot ageAtDxVSsurvival = new ClinicalPlot(clinicalData, ClinicalFactorType.AgeAtDx,ClinicalFactorType.SurvivalLength);
+//		clinicalPlotList.add(ageAtDxVSsurvival.getChart());
+//		ClinicalPlot neurologicalAssessmentVSsurvival = new ClinicalPlot(clinicalData, ClinicalFactorType.KarnofskyAssessment,ClinicalFactorType.SurvivalLength);
+//		clinicalPlotList.add(neurologicalAssessmentVSsurvival.getChart());
+//		  
+//		return clinicalPlotList; 
+//	}
 	
 	/**
 	 * Create three clinical graphs. The clinical graphs are scatter plots:
@@ -84,10 +84,12 @@ public class CaIntegratorChartFactory {
 	 * c) survivalInMonths vs Neurological Assessment
 	 * 
 	 * @param clinicalData
+	 * @param string2 
+	 * @param factor1AxisLabel 
 	 * @return
 	 */
-	public static JFreeChart getClinicalGraph(Collection<ClinicalDataPoint> clinicalData, ClinicalFactorType factor1, ClinicalFactorType factor2) {
-		ClinicalPlot plot = new ClinicalPlot(clinicalData, factor1,factor2);
+	public static JFreeChart getClinicalGraph(Collection<ClinicalDataPoint> clinicalData, ClinicalFactorType factor1, String factor1AxisLabel, ClinicalFactorType factor2, String factor2AxisLabel) {
+		ClinicalPlot plot = new ClinicalPlot(clinicalData, factor1, factor1AxisLabel,factor2,factor2AxisLabel );
 		return plot.getChart();
 	}
 }
