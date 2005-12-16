@@ -33,16 +33,20 @@ public class ClinicalPlot {
 	private JFreeChart clinicalChart = null;
 	private ClinicalFactorType factor1;
 	private ClinicalFactorType factor2;
+	private String factor1AxisLabel;
+	private String factor2AxisLabel;
 	private Collection<ClinicalDataPoint> dataPoints;
 	private NumberFormat nf = NumberFormat.getNumberInstance();
 	
 	//private Map diseaseColorMap = new HashMap();
 
-	public ClinicalPlot(Collection<ClinicalDataPoint> clinicalData, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor1, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor2) {
+	public ClinicalPlot(Collection<ClinicalDataPoint> clinicalData, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor1, String factor1AxisLabel, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor2, String factor2AxisLabel) {
 	  this.factor1 = factor1;
 	  this.factor2 = factor2;
 	  this.dataPoints = clinicalData;
 	  this.nf.setMaximumFractionDigits(1);
+	  this.factor1AxisLabel = factor1AxisLabel;
+	  this.factor2AxisLabel = factor2AxisLabel;
 	  
 	  createChart();	  
 	}
@@ -51,8 +55,10 @@ public class ClinicalPlot {
 	
 	private void createChart() {
 		
-		String xLabel = factor1.toString();
-		String yLabel = factor2.toString();
+		//String xLabel = factor1.toString();
+		String xLabel = factor1AxisLabel;
+		//String yLabel = factor2.toString();
+		String yLabel = factor2AxisLabel;
 			
 		clinicalChart = ChartFactory.createScatterPlot("Clinical Plot",xLabel, yLabel, null,  PlotOrientation.VERTICAL,
 	            true, 
@@ -86,8 +92,11 @@ public class ClinicalPlot {
         //domainAxis.setRange(domainAxisLimits.getMinRange(), domainAxisLimits.getMaxRange());
         //rangeAxis.setRange(rangeAxisLimits.getMinRange(), rangeAxisLimits.getMaxRange());
         
-        domainAxis.setRange(0.0,105.0);
-        rangeAxis.setRange(0.0,105.0);
+        double domainMax = Math.max(100.0, domainAxisLimits.getMaxRange())+5.0;
+        double rangeMax = Math.max(100.0, rangeAxisLimits.getMaxRange())+5.0;
+        
+        domainAxis.setRange(0.0,domainMax);
+        rangeAxis.setRange(0.0,rangeMax);
      
         System.out.println("domainAxis=" + domainAxis.getLabel());
         System.out.println("rangeAxis=" + rangeAxis.getLabel());
@@ -145,8 +154,8 @@ public class ClinicalPlot {
 		     float yf = (float)y;
 		      //make a triangle
 		      gp.moveTo(xf,yf);
-		      gp.lineTo(xf+1.0f,yf-1.0f);
-		      gp.lineTo(xf-1.0f,yf-1.0f);
+		      gp.lineTo(xf+1.5f,yf-1.5f);
+		      gp.lineTo(xf-1.5f,yf-1.5f);
 		      gp.closePath();
 		      glyphShape = gp;
 	    	
