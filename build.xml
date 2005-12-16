@@ -10,7 +10,6 @@
 		</echo>
 		<copy file="caintegrator-spec.jar" todir="${anthill.artifacts.dir}"/>
 	</target>
-	
 	<target name="build_jar_anthill">
 		<delete dir="${build.classes.dir}" failonerror="false"/>
 		<mkdir dir="${build.classes.dir}"/>
@@ -38,23 +37,24 @@
 		</jar>
 	</target>
 	<target name="build_jar">
-			<delete dir="${build.classes.dir}" failonerror="false"/>
-			<mkdir dir="${build.classes.dir}"/>
-			<javac srcdir="${build.source.dir}" destdir="${build.classes.dir}" source="1.5" excludes="**/test/**" debug="true" debuglevel="lines,vars,source">
-				<classpath>
-					<fileset dir="${build.deploy.lib.dir}">
-						<include name="*.jar"/>
-					</fileset>
-					<fileset dir="${build.do.not.deploy.lib.dir}">
-						<include name="*.jar"/>
-					</fileset>
-				</classpath>
-			</javac>
-			<jar jarfile="caintegrator-spec.jar">
-				<fileset dir="${build.classes.dir}"/>
+		<delete dir="${build.classes.dir}" failonerror="false"/>
+		<mkdir dir="${build.classes.dir}"/>
+		<javac srcdir="${build.source.dir}" destdir="${build.classes.dir}" source="1.5" excludes="**/test/**" debug="true" debuglevel="lines,vars,source">
+			<classpath>
 				<fileset dir="${build.deploy.lib.dir}">
 					<include name="*.jar"/>
 				</fileset>
-			</jar>
-		</target>
+				<fileset dir="${build.do.not.deploy.lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+		<jar jarfile="caintegrator-spec.jar">
+			<fileset dir="${build.classes.dir}"/>
+			<fileset dir="${build.deploy.lib.dir}">
+				<include name="*.jar"/>
+			</fileset>
+		</jar>
+	</target>
+	<target name="noop"/>
 </project>
