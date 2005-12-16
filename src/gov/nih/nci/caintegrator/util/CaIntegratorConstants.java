@@ -76,6 +76,8 @@ public class CaIntegratorConstants {
 	public static final String SESSION_CRITERIA_BAG_KEY = "rembrandt.criteriaMap";
 	
 	public static final String JMS_PROPERTIES = "jms.properties";
+	public static final String GRAPH_BLANK = " ";
+	public static final Long PUBLIC_ACCESS = new Long(8);;
 	
 	public static enum GraphType{KaplanMeierGeneExpression, KaplanMeierCopyNumber, GeneExrpression};
 	
