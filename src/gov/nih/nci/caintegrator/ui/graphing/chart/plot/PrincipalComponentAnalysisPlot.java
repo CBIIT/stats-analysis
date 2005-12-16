@@ -14,6 +14,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -55,12 +56,14 @@ public class PrincipalComponentAnalysisPlot {
 	//private Map diseaseColorMap = new HashMap();
 	private Collection<PrincipalComponentAnalysisDataPoint> dataPoints;
 	private JFreeChart pcaChart = null;
+	private NumberFormat nf = NumberFormat.getNumberInstance();
 	
 	public PrincipalComponentAnalysisPlot(Collection<PrincipalComponentAnalysisDataPoint> dataPoints, PCAcomponent component1, PCAcomponent component2, PCAcolorByType colorBy) {
 	  this.colorBy = colorBy;
 	  this.component1 = component1;
 	  this.component2 = component2;
 	  this.dataPoints = dataPoints;
+	  this.nf.setMaximumFractionDigits(1);
 	  
 //	  diseaseColorMap.put("GBM", Color.GREEN);
 //	  diseaseColorMap.put("ASTRO", Color.BLUE);
@@ -245,7 +248,7 @@ public class PrincipalComponentAnalysisPlot {
     	        tooltip = pcaPoint.getSampleId() + " " + pcaPoint.getDiseaseName();
             }
             else{
-               tooltip = pcaPoint.getSampleId() + " " + pcaPoint.getDiseaseName() + " survivalMonths=" + pcaPoint.getSurvivalInMonths();
+               tooltip = pcaPoint.getSampleId() + " " + pcaPoint.getDiseaseName() + " survivalMonths=" + nf.format(pcaPoint.getSurvivalInMonths());
             }
         glyph.setToolTipText(tooltip);
 	    plot.addAnnotation(glyph);
