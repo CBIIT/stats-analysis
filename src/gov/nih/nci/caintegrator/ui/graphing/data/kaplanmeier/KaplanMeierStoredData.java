@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier;
 
 import gov.nih.nci.caintegrator.ui.graphing.data.CachableGraphData;
 
+import java.text.DecimalFormat;
 import java.util.Collection;
 
 /**
@@ -66,6 +67,9 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	private String upLabel;
 
 	private String id;
+     
+    private DecimalFormat resultFormat = new DecimalFormat("0.0000");
+
 
 	/**
 	 * @return Returns the chartTitle.
@@ -120,7 +124,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param downVsIntPvalue The downVsIntPvalue to set.
 	 */
 	public void setDownVsIntPvalue(Double downVsIntPvalue) {
-		this.downVsIntPvalue = downVsIntPvalue;
+		this.downVsIntPvalue = new Double(resultFormat.format(downVsIntPvalue));
 	}
 
 	/**
@@ -134,7 +138,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param downVsRest The downVsRest to set.
 	 */
 	public void setDownVsRest(Double downVsRest) {
-		this.downVsRest = downVsRest;
+		this.downVsRest = new Double(resultFormat.format(downVsRest));
 	}
 
 	/**
@@ -176,7 +180,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param intVsRest The intVsRest to set.
 	 */
 	public void setIntVsRest(Double intVsRest) {
-		this.intVsRest = intVsRest;
+		this.intVsRest = new Double(resultFormat.format(intVsRest));
 	}
 
 	/**
@@ -218,7 +222,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param upVsDownPvalue The upVsDownPvalue to set.
 	 */
 	public void setUpVsDownPvalue(Double upVsDownPvalue) {
-		this.upVsDownPvalue = upVsDownPvalue;
+		this.upVsDownPvalue = new Double(resultFormat.format(upVsDownPvalue));
 	}
 
 	/**
@@ -232,7 +236,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param upVsIntPvalue The upVsIntPvalue to set.
 	 */
 	public void setUpVsIntPvalue(Double upVsIntPvalue) {
-		this.upVsIntPvalue = upVsIntPvalue;
+		this.upVsIntPvalue = new Double(resultFormat.format(upVsIntPvalue));        
 	}
 
 	/**
@@ -246,7 +250,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param upVsRest The upVsRest to set.
 	 */
 	public void setUpVsRest(Double upVsRest) {
-		this.upVsRest = upVsRest;
+		this.upVsRest = new Double(resultFormat.format(upVsRest));
 	}
 	
 
@@ -295,7 +299,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param downVsRestPvalue The downVsRestPvalue to set.
 	 */
 	public void setDownVsRestPvalue(Double downVsRestPvalue) {
-		this.downVsRestPvalue = downVsRestPvalue;
+		this.downVsRestPvalue = new Double(resultFormat.format(downVsRestPvalue));
 	}
 
 	/**
@@ -309,7 +313,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param intVsRestPvalue The intVsRestPvalue to set.
 	 */
 	public void setIntVsRestPvalue(Double intVsRestPvalue) {
-		this.intVsRestPvalue = intVsRestPvalue;
+		this.intVsRestPvalue = new Double(resultFormat.format(intVsRestPvalue));
 	}
 
 	/**
@@ -323,7 +327,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param upVsRestPvalue The upVsRestPvalue to set.
 	 */
 	public void setUpVsRestPvalue(Double upVsRestPvalue) {
-		this.upVsRestPvalue = upVsRestPvalue;
+		this.upVsRestPvalue = new Double(resultFormat.format(upVsRestPvalue));
 	}
 
 	/**
