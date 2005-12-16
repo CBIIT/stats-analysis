@@ -8,10 +8,12 @@ import gov.nih.nci.caintegrator.ui.graphing.data.clinical.ClinicalDataPoint;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Shape;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Collection;
 import java.util.Iterator;
+import java.text.NumberFormat;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -32,12 +34,15 @@ public class ClinicalPlot {
 	private ClinicalFactorType factor1;
 	private ClinicalFactorType factor2;
 	private Collection<ClinicalDataPoint> dataPoints;
+	private NumberFormat nf = NumberFormat.getNumberInstance();
+	
 	//private Map diseaseColorMap = new HashMap();
 
 	public ClinicalPlot(Collection<ClinicalDataPoint> clinicalData, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor1, gov.nih.nci.caintegrator.enumeration.ClinicalFactorType factor2) {
 	  this.factor1 = factor1;
 	  this.factor2 = factor2;
 	  this.dataPoints = clinicalData;
+	  this.nf.setMaximumFractionDigits(1);
 	  
 	  createChart();	  
 	}
@@ -64,6 +69,7 @@ public class ClinicalPlot {
 	    renderer.setUseOutlinePaint(true);
         plot.setRangeCrosshairVisible(false);
 	    plot.setDomainCrosshairVisible(false);
+	   
 	       	        
         NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
         NumberAxis rangeAxis  =	(NumberAxis) plot.getRangeAxis();
@@ -76,9 +82,12 @@ public class ClinicalPlot {
         DataRange domainAxisLimits = getDataRange(dataPoints, factor1, true);
         DataRange rangeAxisLimits = getDataRange(dataPoints, factor2,  true);
         
-        domainAxis.setRange(domainAxisLimits.getMinRange(), domainAxisLimits.getMaxRange());
-        rangeAxis.setRange(rangeAxisLimits.getMinRange(), rangeAxisLimits.getMaxRange());
         
+        //domainAxis.setRange(domainAxisLimits.getMinRange(), domainAxisLimits.getMaxRange());
+        //rangeAxis.setRange(rangeAxisLimits.getMinRange(), rangeAxisLimits.getMaxRange());
+        
+        domainAxis.setRange(0.0,105.0);
+        rangeAxis.setRange(0.0,105.0);
      
         System.out.println("domainAxis=" + domainAxis.getLabel());
         System.out.println("rangeAxis=" + rangeAxis.getLabel());
@@ -119,6 +128,7 @@ public class ClinicalPlot {
 	  Color glyphColor;
 	  
 	  ClinicalDataPoint clinicalPoint;
+	  String survivalLenStr;
 	  double x, y;
 	  for (Iterator i=dataPoints.iterator(); i.hasNext(); ) {
 	    clinicalPoint = (ClinicalDataPoint) i.next();
@@ -129,12 +139,31 @@ public class ClinicalPlot {
 	    if ((x!= ClinicalDataPoint.MISSING_CLINICAL_FACTOR_VALUE) && 
 	        (y!= ClinicalDataPoint.MISSING_CLINICAL_FACTOR_VALUE)) {
 	    
-	    	Rectangle2D.Double rect = new Rectangle2D.Double();
-		    rect.setFrameFromCenter(x,y, x+1,y+1);
-		    glyphShape = rect;
+	    	//Make this a triangle
+	    	 GeneralPath gp = new GeneralPath();
+		     float xf = (float)x;
+		     float yf = (float)y;
+		      //make a triangle
+		      gp.moveTo(xf,yf);
+		      gp.lineTo(xf+1.0f,yf-1.0f);
+		      gp.lineTo(xf-1.0f,yf-1.0f);
+		      gp.closePath();
+		      glyphShape = gp;
+	    	
+	    	//Rectangle2D.Double rect = new Rectangle2D.Double();
+		    //rect.setFrameFromCenter(x,y, x+1,y+1);
+		    //glyphShape = rect;
 		    glyphColor = getColorForDataPoint(clinicalPoint); 
 		    glyph = new XYShapeAnnotation(glyphShape, new BasicStroke(1.0f), Color.BLACK, glyphColor);
-		    String tooltip = clinicalPoint.getPatientId() + " " + clinicalPoint.getDiseaseName() + " survivalMonths=" + clinicalPoint.getSurvivalInMonths();
+		    
+		    if (clinicalPoint.getSurvivalInMonths() >= 0.0) {
+		      survivalLenStr = nf.format(clinicalPoint.getSurvivalInMonths());
+		    }
+		    else {
+		      survivalLenStr = "";
+		    }
+		    
+		    String tooltip = clinicalPoint.getPatientId() + " " + clinicalPoint.getDiseaseName() + " survivalMonths=" + survivalLenStr;
 		    glyph.setToolTipText(tooltip);
 		    plot.addAnnotation(glyph);
 	    }  
