@@ -27,6 +27,7 @@ import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.LegendItemSource;
 import org.jfree.chart.annotations.XYShapeAnnotation;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
@@ -113,6 +114,9 @@ public class PrincipalComponentAnalysisPlot {
         
         domainAxis.setRange(-150.0, 150.0);
         rangeAxis.setRange(-150.0, 150.0);
+        
+        domainAxis.setTickUnit(new NumberTickUnit(25.0));
+        rangeAxis.setTickUnit(new NumberTickUnit(25.0));
         
         
         System.out.println("domainAxis=" + domainAxis.getLabel());
