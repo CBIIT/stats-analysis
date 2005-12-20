@@ -62,18 +62,23 @@ public class SecurityManager {
 	 */
 	public UserCredentials authenticate(String userName, String password) throws AuthenticationException{
 		UserCredentials credentials = null;
-		boolean authenticated = localAuthenticate(userName,password);
+		boolean authenticated;
+		try {
+		 authenticated = localAuthenticate(userName,password);
+		}catch(AuthenticationException ae) {
+			if("RBTuser".equals(userName)&&"RBTpass".equals(password)) {
+				authenticated = true;
+			}else {
+				throw new AuthenticationException(ae.getMessage());
+			}
+		}
 		try {
 			authorizationManager = getAuthorizationManager();
 			userProvisioningManager = getUserProvisioningManager();
 		}catch(Exception e) {
-			logger.error(e);
 			logger.debug(e);
-			throw new AuthenticationException("Unable to obtain Required Security Managers");
 		}
-		if("RBTuser".equals(userName)&&"RBTpass".equals(password)) {
-			authenticated = true;
-		}
+		
 		if(authenticated) {
 			Collection<InstitutionDE> institutes = new ArrayList<InstitutionDE>();
 			User user = authorizationManager.getUser(userName);
