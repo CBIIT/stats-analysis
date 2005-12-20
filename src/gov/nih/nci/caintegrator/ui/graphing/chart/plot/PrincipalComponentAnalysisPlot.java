@@ -2,6 +2,8 @@ package gov.nih.nci.caintegrator.ui.graphing.chart.plot;
 
 import gov.nih.nci.caintegrator.enumeration.DiseaseType;
 import gov.nih.nci.caintegrator.enumeration.GenderType;
+import gov.nih.nci.caintegrator.ui.graphing.data.DataRange;
+import gov.nih.nci.caintegrator.ui.graphing.data.clinical.ClinicalDataPoint;
 import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint;
 import gov.nih.nci.caintegrator.ui.graphing.data.principalComponentAnalysis.PrincipalComponentAnalysisDataPoint.PCAcomponent;
 
@@ -107,21 +109,30 @@ public class PrincipalComponentAnalysisPlot {
         NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
         NumberAxis rangeAxis  =	(NumberAxis) plot.getRangeAxis();
         
+        
         //should determine axis range using datapoints.
+        DataRange component1Range = getDataRange(dataPoints, PCAcomponent.PC1);
+        DataRange component2Range = getDataRange(dataPoints, PCAcomponent.PC2);
+        DataRange component3Range = getDataRange(dataPoints, PCAcomponent.PC3);
+        
+        Double pc1AbsMax = Math.max(Math.abs(component1Range.getMaxRange()), Math.abs(component1Range.getMinRange()));
+        Double pc2AbsMax = Math.max(Math.abs(component2Range.getMaxRange()), Math.abs(component2Range.getMinRange()));
+        Double pc3AbsMax = Math.max(Math.abs(component3Range.getMaxRange()), Math.abs(component3Range.getMinRange()));
+        
+        Double maxAbsVal = Math.max(pc1AbsMax, pc2AbsMax);
+        
+        maxAbsVal = Math.max(maxAbsVal, pc3AbsMax);
+        
+        maxAbsVal = Math.max(150.0, maxAbsVal);
         
         domainAxis.setAutoRangeIncludesZero(false);
-        
-        
-        domainAxis.setRange(-150.0, 150.0);
-        rangeAxis.setRange(-150.0, 150.0);
+         
+        domainAxis.setRange(-maxAbsVal, maxAbsVal);
+        rangeAxis.setRange(-maxAbsVal, maxAbsVal);
         
         domainAxis.setTickUnit(new NumberTickUnit(25.0));
         rangeAxis.setTickUnit(new NumberTickUnit(25.0));
-        
-        
-        System.out.println("domainAxis=" + domainAxis.getLabel());
-        System.out.println("rangeAxis=" + rangeAxis.getLabel());
-         
+          
 	    createGlyphsAndAddToPlot(plot);  
 	    
 	   // Paint p = new GradientPaint(0, 0, Color.white, 1000, 0, Color.green);
@@ -371,6 +382,33 @@ public class PrincipalComponentAnalysisPlot {
 	     boundingEntities.add(boundingEntity);
 	  }
 	  return boundingEntities;
+	}
+	
+	
+	/**
+	 * Get the range of values for a given clinical factor
+	 * @param dataPoints
+	 * @param factor
+	 * @return
+	 */
+	private DataRange getDataRange(Collection<PrincipalComponentAnalysisDataPoint> dataPoints, PCAcomponent component) {
+	  double maxValue = Double.MIN_VALUE;
+	  double minValue = Double.MAX_VALUE;
+	  double value;
+	  
+	  for (PrincipalComponentAnalysisDataPoint dataPoint:dataPoints) {
+		value = dataPoint.getComponentValue(component);
+		if (value < minValue) {
+		  minValue = value;
+		}
+		
+		if (value > maxValue) {
+		  maxValue = value;
+		}
+	  }
+	  
+	  DataRange range = new DataRange(minValue, maxValue);
+	  return range;
 	}
 	
 	/**
