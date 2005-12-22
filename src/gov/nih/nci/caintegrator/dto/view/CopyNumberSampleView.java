@@ -49,6 +49,8 @@
  */
 package gov.nih.nci.caintegrator.dto.view;
 
+import java.io.Serializable;
+
 import gov.nih.nci.caintegrator.dto.de.DomainElementClass;
 
 /**
@@ -56,7 +58,7 @@ import gov.nih.nci.caintegrator.dto.de.DomainElementClass;
  * Date: Nov 1, 2004
  * 
  */
-public class CopyNumberSampleView extends View {
+public class CopyNumberSampleView extends View implements Serializable{
 
 	private DomainElementClass[] validDEs;
 	private GroupType groupType = GroupType.DISEASE_TYPE_GROUP; //always defalut to disease

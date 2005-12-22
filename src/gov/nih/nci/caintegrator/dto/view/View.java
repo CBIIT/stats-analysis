@@ -2,6 +2,7 @@ package gov.nih.nci.caintegrator.dto.view;
 
 import gov.nih.nci.caintegrator.dto.de.DomainElementClass;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -9,7 +10,7 @@ import java.util.Iterator;
 /**
  * @author BhattarR
  */
-abstract public class View implements Viewable{
+abstract public class View implements Viewable,Serializable{
 	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
 	 * data field that is added to this class also be cloneable and be added to

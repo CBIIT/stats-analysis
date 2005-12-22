@@ -49,13 +49,15 @@
  */
 package gov.nih.nci.caintegrator.dto.view;
 
+import java.io.Serializable;
+
 
 /**
  * @author SahniH
  * Date: Oct 12, 2004
  * 
  */
-public abstract class GroupType {
+public abstract class GroupType implements Serializable{
     public abstract GroupType getGroupType();
     public final static DiseaseTypeGroup DISEASE_TYPE_GROUP = new DiseaseTypeGroup();
     public final static AgeGroup AGE_GROUP = new AgeGroup();
