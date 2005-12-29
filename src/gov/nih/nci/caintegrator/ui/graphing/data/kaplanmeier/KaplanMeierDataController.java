@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier;
 import gov.nih.nci.caintegrator.util.CaIntegratorConstants;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,28 +45,48 @@ public class KaplanMeierDataController {
 
 	public KaplanMeierDataController(double _upFold, double _downFold, String _geneName,
 			KaplanMeierSampleInfo[] samples, String plotType) {
-
+		final DecimalFormat decimalFormat = new DecimalFormat("0.00");	
 		geneSymbol = _geneName;
 		setPlotType(plotType);
 		setUpFold(_upFold);
 		setDownFold(_downFold);
 		if (samples != null) {
-			plotPointSeriesSetCollection = new ArrayList<KaplanMeierPlotPointSeriesSet>();
-			kaplanMeier = new KaplanMeierAlgorithms(samples, this.getUpFold(),
-					this.getDownFold());
-			// All Sample Series
-			plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.ALL_SAMPLES,
-					"All Samples ", Color.BLUE));
-			// UpRegulated Samples Series
-			plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.UPREGULATED,
-					geneSymbol + getUpLabel() + " >= " + upFold + "X ",Color.RED));
-			// Down Regulation Series
-			plotPointSeriesSetCollection
-					.add(getDataSeries(samples, Regulation.DOWNREGULATED, geneSymbol
-							+ getDownLabel() + " <= " + 1 / downFold + "X ",Color.GREEN));
-			// intermediate samples
-			plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.INTERMEDIATE,
-					geneSymbol + " Intermediate ",Color.ORANGE));
+			if (plotType != null && plotType.equals(CaIntegratorConstants.GENE_EXP_KMPLOT)) {	
+				plotPointSeriesSetCollection = new ArrayList<KaplanMeierPlotPointSeriesSet>();
+				kaplanMeier = new KaplanMeierAlgorithms(samples, this.getUpFold(),
+						this.getDownFold());
+				// All Sample Series
+				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.ALL_SAMPLES,
+						"All Samples ", Color.BLUE));
+				// UpRegulated Samples Series
+				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.UPREGULATED,
+						geneSymbol + getUpLabel() + " >= " + decimalFormat.format(upFold) + "X ",Color.RED));
+				// Down Regulation Series
+				plotPointSeriesSetCollection
+						.add(getDataSeries(samples, Regulation.DOWNREGULATED, geneSymbol
+								+ getDownLabel() + " <= " + decimalFormat.format(1/downFold)+ "X ",Color.GREEN));
+				// intermediate samples
+				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.INTERMEDIATE,
+						geneSymbol + " Intermediate ",Color.ORANGE));
+			}
+			else if (plotType != null && plotType.equals(CaIntegratorConstants.COPY_NUMBER_KMPLOT)) {	
+				plotPointSeriesSetCollection = new ArrayList<KaplanMeierPlotPointSeriesSet>();
+				kaplanMeier = new KaplanMeierAlgorithms(samples, this.getUpFold(),
+						this.getDownFold());
+				// All Sample Series
+				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.ALL_SAMPLES,
+						"All Samples ", Color.BLUE));
+				// UpRegulated Samples Series
+				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.UPREGULATED,
+						geneSymbol + getUpLabel() + " >= " + decimalFormat.format(upFold) + "copies ",Color.RED));
+				// Down Regulation Series
+				plotPointSeriesSetCollection
+						.add(getDataSeries(samples, Regulation.DOWNREGULATED, geneSymbol
+								+ getDownLabel() + " <= " + decimalFormat.format(downFold) + "copies ",Color.GREEN));
+				// intermediate samples
+				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.INTERMEDIATE,
+						geneSymbol + " Intermediate ",Color.ORANGE));
+			}
 		} else {
 			logger.error("gov.nih.nci.nautilus.ui.struts.form.quicksearch.noRecord");
 			// throw new exception
