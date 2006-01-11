@@ -27,7 +27,7 @@ public class DistanceMatrixTypeDE extends DomainElement {
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.dto.de.DomainElement#setValue(java.lang.Object)
 	 */
-	@Override
+	
 	public void setValue(Object obj) throws Exception {
 		if (!(obj instanceof DistanceMatrixType))
 			throw new Exception(

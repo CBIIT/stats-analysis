@@ -27,7 +27,7 @@ public class ClusterTypeDE extends DomainElement {
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.dto.de.DomainElement#setValue(java.lang.Object)
 	 */
-	@Override
+	
 	public void setValue(Object obj) throws Exception {
 		if (!(obj instanceof ClusterByType))
 			throw new Exception(
@@ -56,7 +56,7 @@ public class ClusterTypeDE extends DomainElement {
 			value = clusterByType;
 		}
 	}
-	/**
+	/**L
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance
 	 * and then sets all the non-primitive data fields to clones of themselves.
