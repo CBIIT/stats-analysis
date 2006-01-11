@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+
+/**
+ * This class encapsulates OnStudySurgeryTitleCriteria.
+ * It contains a collection of one or more
+ * Onstudy Therapy Section's OnStudySurgeryTitleDE.
+ *
+ * Dana Zhang 
+ */
 public class OnStudySurgeryTitleCriteria extends Criteria implements Serializable,
 		Cloneable {
 	/**
@@ -22,11 +30,25 @@ public class OnStudySurgeryTitleCriteria extends Criteria implements Serializabl
 	 */ 
 
 	private OnStudySurgeryTitleDE onStudySurgeryTitleDE;	
+	
+	/**
+	 * Represents a collection of one or more 
+	 * Onstudy Therapy OnStudySurgeryTitleDE object.
+	 */
 	private Collection titles;
 
+	/**
+	  * Default constructor
+	  *
+	  */
 	public OnStudySurgeryTitleCriteria() {
 	}
-	           
+	 
+	/**
+	 * Sets the Onstudy therapy surgerytitle object by adding it to the collection
+	 * one OnStudySurgeryTitleDE at a time
+	 * 
+	 */
 	public void setOnStudySurgeryTitleDE(OnStudySurgeryTitleDE onStudySurgeryTitleDE) {
 		if (onStudySurgeryTitleDE != null) {
 			getTitleMembers().add(onStudySurgeryTitleDE);
@@ -34,6 +56,9 @@ public class OnStudySurgeryTitleCriteria extends Criteria implements Serializabl
 		}
 	}
 
+	/**
+	 * this is to deal with setting multiple onstudy therapy surgeryTitle  entries
+	 */
 	public void setTitles(Collection multiTitles) {
 		if (multiTitles != null) {
 			Iterator iter = multiTitles.iterator();
@@ -44,6 +69,9 @@ public class OnStudySurgeryTitleCriteria extends Criteria implements Serializabl
 		}
     }
 	
+	/**
+   	 * private method to get a collection of onstudy therapy surgeryTitle objects
+   	 */
 	private Collection getTitleMembers() {
 		if (titles == null) {
 			titles = new ArrayList();
@@ -51,15 +79,28 @@ public class OnStudySurgeryTitleCriteria extends Criteria implements Serializabl
 		return titles;
 	}
 
+	 /**
+	    * Returns a collection of OnStudySurgeryTitleDE objects.
+	    * 
+	    */
 	public Collection getTitles() {
 		return titles;
 	}
+	
+	 /**
+	    * Returns a single of OnStudySurgeryTitleDE objects.
+	    * 
+	    */
 	public OnStudySurgeryTitleDE getOnStudySurgeryTitleDE() {
 		return onStudySurgeryTitleDE;
 	}
+	
+	/**
+	 *  Used to validate onstudy Therapy surgery title, returns true for now
+	 */
 
 	public boolean isValid() {
-		// find out later to see if we need validate SurgeryTypes
+		// find out later to see if we need validate onstudy SurgeryTitle
 		return true;
 	}
 	/**

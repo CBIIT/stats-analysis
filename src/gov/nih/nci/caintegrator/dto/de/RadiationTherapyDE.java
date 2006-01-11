@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * This  class encapsulates the properties of an caintergator 
- * RadiationTherapyDE object.
+ * Prior Therapy Section RadiationTherapyDE object.
  *  
  * @author Dana Zhang, BauerD
  */
@@ -21,10 +21,11 @@ public class RadiationTherapyDE extends DomainElement implements Serializable, C
 	 * track down if you aren't ultra familiar with the code base, so add those
 	 * methods now! (Not necesary for primitives.)
 	 */
-
+   
 	
    /**
-    * Initializes a newly created <code>RadiationTherapyDE</code> object so that it represents an RadiationTherapyDE.
+    * Initializes a newly created <code>RadiationTherapyDE</code> object 
+    * so that it represents a RadiationTherapyDE.
     */
     public RadiationTherapyDE(String radiationTherapy) {
         super(radiationTherapy);
@@ -51,7 +52,7 @@ public class RadiationTherapyDE extends DomainElement implements Serializable, C
     }
 
   /**
-    * Sets the radiationTherapy for this <code>RadiationTherapyDE</code> object
+    * Sets the priorTherapyRadiationTherapy for this <code>RadiationTherapyDE</code> object
     * @param radiationTherapy the radiationTherapy    
 	*/ 
     public void setValueObject(String radiationTherapy) {

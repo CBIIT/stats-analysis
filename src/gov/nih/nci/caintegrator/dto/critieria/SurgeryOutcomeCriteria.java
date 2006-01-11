@@ -9,10 +9,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * This class encapsulates SurgeryTypeDE criteria. It contains a collection of
- * SurgeryTypeDE.
+ * This class encapsulates prior therapy SurgeryType criteria. 
+ * It contains a collection of prior therapy SurgeryTypeDE.
  *
- * @author Dana Zhang, BauerD
+ * @author Dana Zhang
  */
 
 public class SurgeryOutcomeCriteria extends Criteria implements Serializable,
@@ -27,11 +27,27 @@ public class SurgeryOutcomeCriteria extends Criteria implements Serializable,
 	 * track down if you aren't ultra familiar with the code base, so add those
 	 * methods now! (Not necesary for primitives.)
 	 */
+	
 	private SurgeryOutcomeDE surgeryOutcomeDE;	
+	
+	/**
+	 * Represents a collection of one or more 
+	 * Prior Therapy SurgeryOutcomeDE object.
+	 */
 	private Collection outcomes;
 
+	/**
+	 * Default constructor
+	 *
+	 */
 	public SurgeryOutcomeCriteria() {
 	}
+	
+	/**
+	 * Sets the prior therapy SurgeryOutcomeDE object by adding it to the collection
+	 * one prior therapy SurgeryOutcomeDE at a time
+	 * 
+	 */
 
 	public void setSurgeryOutcomeDE(SurgeryOutcomeDE surgeryOutcomeDE) {
 		if (surgeryOutcomeDE != null) {
@@ -39,7 +55,10 @@ public class SurgeryOutcomeCriteria extends Criteria implements Serializable,
 			
 		}
 	}
-
+	
+	/**
+	 * this is to deal with setting multiple prior therapy SurgeryOutcomeDE  entries
+	 */
 	public void setOutcomes(Collection multiOutcomes) {
 		if (multiOutcomes != null) {
 			Iterator iter = multiOutcomes.iterator();
@@ -49,7 +68,10 @@ public class SurgeryOutcomeCriteria extends Criteria implements Serializable,
 			}
 		}
     }
-	
+
+	/**
+   	 * private method to get a colletion of  prior therapy SurgeryOutcomeDE objects.
+   	 */
 	private Collection getOutcomeMembers() {
 		if (outcomes == null) {
 			outcomes = new ArrayList();
@@ -57,15 +79,27 @@ public class SurgeryOutcomeCriteria extends Criteria implements Serializable,
 		return outcomes;
 	}
 
+	/**
+	  * Returns a collection of prior therapy SurgeryOutcomeDE objects.
+	  * 
+	  */
 	public Collection getOutcomes() {
 		return outcomes;
 	}
+	
+	/**
+	  * Returns a single prior therapy SurgeryOutcomeDE object.
+	  * 
+	  */
 	public SurgeryOutcomeDE getSurgeryOutcomeDE() {
 		return surgeryOutcomeDE;
 	}
 
+	/**
+	 * Used to validate SurgeryOutcomeDE, returns true for now
+	 */
 	public boolean isValid() {
-		// find out later to see if we need validate SurgeryTypes
+		// find out later to see if we need validate SurgeryOutcomeDE
 		return true;
 	}
 	/**

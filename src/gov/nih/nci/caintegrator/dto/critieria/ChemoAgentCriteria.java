@@ -8,10 +8,11 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * This class encapsulates ChemoAgentDE criteria. It contains a collection of
- * ChemoAgentDE.
+ * This class encapsulates Prior Therapy ChemoAgent Criteria. 
+ * It contains a collection of one or more
+ * Prior Therapy Section's ChemoAgentDE
  *
- * @author Dana Zhang, BauerD
+ * @author Dana Zhang
  */
 
 public class ChemoAgentCriteria extends Criteria implements Serializable,
@@ -26,26 +27,40 @@ public class ChemoAgentCriteria extends Criteria implements Serializable,
 	 * track down if you aren't ultra familiar with the code base, so add those
 	 * methods now! (Not necesary for primitives.)
 	 */
+	
+	
 	private ChemoAgentDE chemoAgentDE;
+	
+	/**
+	 * Represents a collection of one or more 
+	 * Prior Therapy ChemoAgentDE object.
+	 */
 	private Collection agents;
 
+	/**
+	 * Default constructor
+	 *
+	 */
 	public ChemoAgentCriteria() {
 	}
 
 
-
+	/**
+	 * Sets the prior therapy chemoAgentDE object by adding it to the collection
+	 * one ChemoAgentDE at a time
+	 * 
+	 */
 	public void setChemoAgentDE(ChemoAgentDE chemoAgentDE) {
-		if (chemoAgentDE != null) {
-			//this.chemoAgentDE = chemoAgentDE;
+		if (chemoAgentDE != null) {			
 			getAgentMembers().add(chemoAgentDE);
 		}
 	}
-
-	public ChemoAgentDE getChemoAgentDE() {
-		return chemoAgentDE;
-	}
-
-		// this is to deal with multiple disease entries
+    
+	/**
+	 * this is to deal with setting multiple prior therapy chemoAgentDE  entries
+	 */
+ 
+		
 	public void setAgents(Collection multiAgents) {
 			if (multiAgents != null) {
 				Iterator iter = multiAgents.iterator();
@@ -56,17 +71,34 @@ public class ChemoAgentCriteria extends Criteria implements Serializable,
 			}
 	}
 
+	/**
+   	 * private method to get a colletion of  prior therapy chemoAgent objects.
+   	 */
   private Collection getAgentMembers() {
 		if (agents == null) {
 			agents = new ArrayList();
 		}
 		return agents;
 	}
-
+  /**
+   * Returns a collection of priorTherapyChemoAgentDE objects.
+   * 
+   */
 	public Collection getAgents() {
 		return agents;
 	}
+	
+	/**
+	   * Returns a single priorTherapyChemoAgentDE object.
+	   * 
+	   */
+	public ChemoAgentDE getChemoAgentDE() {
+		return chemoAgentDE;
+	}
 
+	/**
+	  *  Used to validate Prior Therapy ChemoAgentDE, returns true for now
+	  */
 	public boolean isValid() {
 		return true;
 	}

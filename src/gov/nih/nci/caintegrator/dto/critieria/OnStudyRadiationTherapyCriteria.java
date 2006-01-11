@@ -8,8 +8,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * This class encapsulates RadiationTherapyDE criteria. It contains a collection
- * of RadiationTherapyDE.
+ * This class encapsulates OnStudyRadiationTherapyCriteria.
+ * It contains a collection of one or more
+ * Onstudy Therapy Section's OnStudyRadiationTherapyDE.
  *
  * Dana Zhang Date: August 30, 2004 Version 1.0
  */
@@ -27,11 +28,25 @@ public class OnStudyRadiationTherapyCriteria extends Criteria implements Seriali
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private OnStudyRadiationTherapyDE onStudyRadiationTherapyDE;
+	
+	/**
+	 * Represents a collection of one or more 
+	 * Onstudy Therapy OnStudyRadiationTherapyDE object.
+	 */
 	private Collection radiationSites;
 
-
+	 /**
+     * Default constructor
+     *
+     */
 	public OnStudyRadiationTherapyCriteria() {
 	}
+	
+	/**
+	 * Sets the Onstudy therapy radiation object by adding it to the collection
+	 * one OnStudyRadiationTherapyDE at a time
+	 * 
+	 */
 
 	public void setOnStudyRadiationTherapyDE(OnStudyRadiationTherapyDE onStudyRadiationTherapyDE) {
 		if (onStudyRadiationTherapyDE != null) {
@@ -40,7 +55,9 @@ public class OnStudyRadiationTherapyCriteria extends Criteria implements Seriali
 		}
 	}
 
-   	// this is to deal with multiple disease entries
+	/**
+	 * this is to deal with setting multiple onstudy therapy radiation  entries
+	 */
    	public void setRadiations(Collection multiRadiations) {
    			if (multiRadiations != null) {
    				Iterator iter = multiRadiations.iterator();
@@ -51,6 +68,9 @@ public class OnStudyRadiationTherapyCriteria extends Criteria implements Seriali
    			}
    	}
 
+   	/**
+   	 * private method to get a collection of onstudy therapy radiation objects
+   	 */
    private Collection getRadiationMembers() {
 		if (radiationSites == null) {
 			radiationSites = new ArrayList();
@@ -58,13 +78,25 @@ public class OnStudyRadiationTherapyCriteria extends Criteria implements Seriali
 		return radiationSites;
 	}
 
+   /**
+    * Returns a collection of onStudyRadiationTherapyDE objects.
+    * 
+    */
    public Collection getRadiations() {
    		return radiationSites;
 	}
+   
+   /**
+	 * Returns a single of onStudyRadiationTherapyDE object.
+	 * 
+	 */
 	public OnStudyRadiationTherapyDE getOnStudyRadiationTherapyDE() {
 		return onStudyRadiationTherapyDE;
 	}
-
+	
+	/**
+	 *  Used to validate onstudy Therapy radiation, returns true for now
+	 */
 	public boolean isValid() {
 		return true;
 	}

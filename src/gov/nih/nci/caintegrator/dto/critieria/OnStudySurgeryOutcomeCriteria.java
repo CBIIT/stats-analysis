@@ -9,10 +9,11 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * This class encapsulates SurgeryTypeDE criteria. It contains a collection of
- * SurgeryTypeDE.
+ * This class encapsulates OnStudySurgeryOutcomeCriteria.
+ * It contains a collection of one or more
+ * Onstudy Therapy Section's OnStudySurgeryOutcomeDE.
  *
- * @author Dana Zhang, BauerD
+ * Dana Zhang Date: August 30, 2004 Version 1.0
  */
 
 public class OnStudySurgeryOutcomeCriteria extends Criteria implements Serializable,
@@ -28,18 +29,35 @@ public class OnStudySurgeryOutcomeCriteria extends Criteria implements Serializa
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private OnStudySurgeryOutcomeDE onStudySurgeryOutcomeDE;	
+	
+	/**
+	 * Represents a collection of one or more 
+	 * Onstudy Therapy OnStudySurgeryOutcomeDE object.
+	 */
 	private Collection outcomes;
 
+
+  /**
+    * Default constructor
+    *
+    */
 	public OnStudySurgeryOutcomeCriteria() {
 	}
-
+	
+	/**
+	 * Sets the Onstudy therapy surgeryOutcome object by adding it to the collection
+	 * one OnStudySurgeryOutcomeDE at a time
+	 * 
+	 */
 	public void setOnStudySurgeryOutcomeDE(OnStudySurgeryOutcomeDE onStudySurgeryOutcomeDE) {
 		if (onStudySurgeryOutcomeDE != null) {
 			getOutcomeMembers().add(onStudySurgeryOutcomeDE);
 			
 		}
 	}
-
+	/**
+	 * this is to deal with setting multiple onstudy therapy surgeryOutcome  entries
+	 */
 	public void setOutcomes(Collection multiOutcomes) {
 		if (multiOutcomes != null) {
 			Iterator iter = multiOutcomes.iterator();
@@ -50,6 +68,9 @@ public class OnStudySurgeryOutcomeCriteria extends Criteria implements Serializa
 		}
     }
 	
+ 	/**
+   	 * private method to get a collection of onstudy therapy surgeryOutcome objects
+   	 */
 	private Collection getOutcomeMembers() {
 		if (outcomes == null) {
 			outcomes = new ArrayList();
@@ -57,15 +78,27 @@ public class OnStudySurgeryOutcomeCriteria extends Criteria implements Serializa
 		return outcomes;
 	}
 
+	  /**
+	    * Returns a collection of OnStudySurgeryOutcomeDE objects.
+	    * 
+	    */
 	public Collection getOutcomes() {
 		return outcomes;
 	}
+	
+	  /**
+	    * Returns a single of OnStudySurgeryOutcomeDE objects.
+	    * 
+	    */
 	public OnStudySurgeryOutcomeDE getOnStudySurgeryOutcomeDE() {
 		return onStudySurgeryOutcomeDE;
 	}
 
+	/**
+	 *  Used to validate onstudy Therapy surgery outcome, returns true for now
+	 */
 	public boolean isValid() {
-		// find out later to see if we need validate SurgeryTypes
+		// find out later to see if we need validate OnStudySurgeryOutcomeDE
 		return true;
 	}
 	/**

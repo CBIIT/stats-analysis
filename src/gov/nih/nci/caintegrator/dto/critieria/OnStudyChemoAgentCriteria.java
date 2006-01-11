@@ -8,12 +8,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * This class encapsulates ChemoAgentDE criteria. It contains a collection of
- * ChemoAgentDE.
+ * This class encapsulates OnStudyChemoAgentCriteria. 
+ * It contains a collection of one or more
+ * Onstudy Therapy Section's OnStudyChemoAgentDE.
  *
- * @author Dana Zhang, BauerD
+ * Dana Zhang Date: August 30, 2004 Version 1.0
  */
-
 public class OnStudyChemoAgentCriteria extends Criteria implements Serializable,
 		Cloneable {
 	/**
@@ -27,13 +27,28 @@ public class OnStudyChemoAgentCriteria extends Criteria implements Serializable,
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private OnStudyChemoAgentDE onStudychemoAgentDE;
+	
+	/**
+	 * Represents a collection of one or more 
+	 * Onstudy Therapy OnStudyChemoAgentDE object.
+	 */
 	private Collection agents;
 
+	
+	 /**
+     * Default constructor
+     *
+     */
 	public OnStudyChemoAgentCriteria() {
 	}
 
 
 
+	/**
+	 * Sets the Onstudy therapy chemoAgent object by adding it to the collection
+	 * one OnStudyChemoAgentDE at a time
+	 * 
+	 */
 	public void setOnStudyChemoAgentDE(OnStudyChemoAgentDE onStudychemoAgentDE) {
 		if (onStudychemoAgentDE != null) {
 			
@@ -41,11 +56,12 @@ public class OnStudyChemoAgentCriteria extends Criteria implements Serializable,
 		}
 	}
 
-	public OnStudyChemoAgentDE getOnStudyChemoAgentDE() {
-		return onStudychemoAgentDE;
-	}
+	
 
-		// this is to deal with multiple disease entries
+	/**
+	 * this is to deal with setting multiple onstudy therapy chemoAgent  entries
+	 */
+		
 	public void setAgents(Collection multiAgents) {
 			if (multiAgents != null) {
 				Iterator iter = multiAgents.iterator();
@@ -56,17 +72,35 @@ public class OnStudyChemoAgentCriteria extends Criteria implements Serializable,
 			}
 	}
 
+	/**
+   	 * private method to get a collection of onstudy therapy chemoAgent objects
+   	 */
   private Collection getAgentMembers() {
 		if (agents == null) {
 			agents = new ArrayList();
 		}
 		return agents;
 	}
+  
+  /**
+   * Returns a collection of OnStudyChemoAgentDE objects.
+   * 
+   */
 
 	public Collection getAgents() {
 		return agents;
 	}
-
+	/**
+	   * Returns a single of OnStudyChemoAgentDE object.
+	   * 
+	   */
+	public OnStudyChemoAgentDE getOnStudyChemoAgentDE() {
+			return onStudychemoAgentDE;
+		}
+	 
+	/**
+	 *  Used to validate onstudy Therapy chemoAgent, returns true for now
+	 */
 	public boolean isValid() {
 		return true;
 	}

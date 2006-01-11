@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * This class encapsulates KarnofskyClinicalEvalDE criteria. It contains a collection of
- * KarnofskyClinicalEvalDE.
+ * KarnofskyClinicalEvalDE object.
  * 
  * @author Dana Zhang, BauerD
  */
@@ -24,9 +24,19 @@ public class KarnofskyClinicalEvalCriteria extends Criteria implements Serializa
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private KarnofskyClinicalEvalDE karnofskyClinicalEvalDE;
+	
+	/**
+	 * Default constructor
+	 *
+	 */
 
 	public KarnofskyClinicalEvalCriteria() {
 	}
+	
+	/**
+	 * Sets the KarnofskyClinicalEvalDE object
+	 * 
+	 */
 
 	public void setKarnofskyClinicalEvalDE(KarnofskyClinicalEvalDE karnofskyClinicalEvalDE) {
 		if (karnofskyClinicalEvalDE != null) {
@@ -34,10 +44,17 @@ public class KarnofskyClinicalEvalCriteria extends Criteria implements Serializa
 		}
 	}
 
+	/**
+	 * Gets the KarnofskyClinicalEvalDE object
+	 * 
+	 */
 	public KarnofskyClinicalEvalDE getKarnofskyClinicalEvalDE() {
 		return karnofskyClinicalEvalDE;
 	}
 
+	/**
+	  *  Used to validate karnofskyClinicalEvalDE, returns true for now
+	  */
 	public boolean isValid() {
 		return true;
 	}

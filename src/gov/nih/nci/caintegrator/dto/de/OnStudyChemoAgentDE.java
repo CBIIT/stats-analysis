@@ -2,11 +2,11 @@ package gov.nih.nci.caintegrator.dto.de;
 
 import java.io.Serializable;
 
-//caintergator classes
+
 
 /**
- * This class encapsulates the properties of an caintergator OnStudyChemoAgentDE
- * object.
+ * This class encapsulates the properties of a caintergator 
+ * Onstudy Therapy Section OnStudyChemoAgentDE  object.
  * 
  * @author Dana Zhang
  */
@@ -24,15 +24,15 @@ public class OnStudyChemoAgentDE extends DomainElement implements Serializable,
 	 */
 
 	/**
-	 * Initializes a newly created <code>ChemoAgentDE</code> object so that it
-	 * represents an ChemoAgentDE.
+	 * Initializes a newly created <code>OnStudyChemoAgentDE</code> object so that it
+	 * represents an OnStudyChemoAgentDE.
 	 */
 	public OnStudyChemoAgentDE(String onStudyChemoAgentDE) {
 		super(onStudyChemoAgentDE);
 	}
 
 	/**
-	 * Sets the value for this <code>ChemoAgentDE</code> object
+	 * Sets the value for this <code>OnStudyChemoAgentDE</code> object
 	 * 
 	 * @param object
 	 *            the value
@@ -46,9 +46,9 @@ public class OnStudyChemoAgentDE extends DomainElement implements Serializable,
 	}
 
 	/**
-	 * Returns the chemoAgentName for this ChemoAgentDE obect.
+	 * Returns the Onstudy chemoAgentName for this OnStudyChemoAgentDE obect.
 	 * 
-	 * @return the chemoAgentName for this <code>ChemoAgentDE</code> object
+	 * @return the Onstudy chemoAgentName for this <code>OnStudyChemoAgentDE</code> object
 	 */
 	public String getValueObject() {
 		return (String) getValue();

@@ -18,7 +18,7 @@ public class GeneVectorPercentileDE extends DomainElement {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Override
+
 	public void setValue(Object obj) throws Exception {
 		if (!(obj instanceof Double))
 			throw new Exception(

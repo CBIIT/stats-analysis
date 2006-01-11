@@ -2,14 +2,15 @@ package gov.nih.nci.caintegrator.dto.de;
 
 import java.io.Serializable;
 
-//caintergator classes
 
 /**
- * This class encapsulates the properties of an caintergator KarnofskyClinicalEvalDE
- * object.
- * 
- * @author Dana Zhang, BauerD
+ * This class encapsulates the properties of an caintergator 
+ * KarnofskyClinicalEvalDEobject.
+ *
+ * @author Dana Zhang
  */
+
+
 public class KarnofskyClinicalEvalDE extends DomainElement implements Serializable,
 		Cloneable {
 	/**

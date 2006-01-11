@@ -3,8 +3,8 @@ package gov.nih.nci.caintegrator.dto.de;
 import java.io.Serializable;
 
 /**
- * This class encapsulates the properties of an caintergator SurgeryOutcomeDE.java
- * object.
+ * This class encapsulates the properties of an caintergator 
+ * Prior Surgery section SurgeryOutcomeDE.java object.
  *
  * @author Dana Zhang, BauerD
  */
@@ -28,15 +28,15 @@ public class SurgeryOutcomeDE extends DomainElement implements Serializable,
 
 
 	/**
-	 * Initializes a newly created <code>SurgeryTypeDE</code> object so that
-	 * it represents an SurgeryOutcomeDE.java.
+	 * Initializes a newly created <code>SurgeryOutcomeDE</code> object so that
+	 * it represents a SurgeryOutcomeDE.
 	 */
 	public SurgeryOutcomeDE(String surgeryOutcome) {
 		super(surgeryOutcome);
 	}
 
 	/**
-	 * Sets the value for this <code>SurgeryTypeDE</code> object
+	 * Sets the value for this <code>SurgeryOutcomeDE</code> object
 	 *
 	 * @param object
 	 *            the value
@@ -50,7 +50,7 @@ public class SurgeryOutcomeDE extends DomainElement implements Serializable,
 	}
 
 	/**
-	 * Returns the surgeryOutcomeDE for this surgeryOutcome obect.
+	 * Returns the surgeryOutcomeDE for this surgeryOutcome object.
 	 *
 	 * @return the surgeryOutcomeDE for this <code>surgeryOutcomeDE</code> object
 	 */
@@ -59,10 +59,10 @@ public class SurgeryOutcomeDE extends DomainElement implements Serializable,
 	}
 
 	/**
-	 * Sets the surgeryType for this <code>SurgeryTypeDE</code> object
+	 * Sets the priorTheraySurgeryOutcome for this <code>SurgeryOutcomeDE</code> object
 	 *
-	 * @param surgeryType
-	 *            the surgeryType
+	 * @param surgeryOutcome
+	 *            the surgeryOutcome
 	 */
 	public void setValueObject(String surgeryOutcome) {
 		if (surgeryOutcome != null) {

@@ -2,6 +2,14 @@ package gov.nih.nci.caintegrator.dto.de;
 
 import java.io.Serializable;
 
+/**
+ * This class encapsulates the properties of a caintergator 
+ * Onstudy Therapy Section OnStudySurgeryTitleDE
+ * object.
+ *
+ * @author Dana Zhang
+ */
+
 public class OnStudySurgeryTitleDE extends DomainElement implements Serializable,
 		Cloneable {
 
@@ -23,14 +31,14 @@ public class OnStudySurgeryTitleDE extends DomainElement implements Serializable
 
 	/**
 	 * Initializes a newly created <code>onStudySurgeryTitleDE</code> object so that
-	 * it represents an onStudySurgeryTitleDE.java.
+	 * it represents a onStudySurgeryTitleDE object.
 	 */
 	public OnStudySurgeryTitleDE(String onStudySurgeryTitle) {
 		super(onStudySurgeryTitle);
 	}
 
 	/**
-	 * Sets the value for this <code>SurgeryTypeDE</code> object
+	 * Sets the value for this <code>onStudySurgeryTitleDE</code> object
 	 *
 	 * @param object
 	 *            the value
@@ -44,19 +52,19 @@ public class OnStudySurgeryTitleDE extends DomainElement implements Serializable
 	}
 
 	/**
-	 * Returns the surgeryOutcomeDE for this surgeryOutcome obect.
+	 * Returns the onStudySurgeryTitleDE for this onStudySurgeryTitleDE obect.
 	 *
-	 * @return the surgeryOutcomeDE for this <code>surgeryOutcomeDE</code> object
+	 * @return the onStudySurgeryTitleDE for this <code>onStudySurgeryTitleDE</code> object
 	 */
 	public String getValueObject() {
 		return (String) getValue();
 	}
 
 	/**
-	 * Sets the onStudySurgeryTitleDE for this <code>onStudySurgeryTitleDE</code> object
+	 * Sets the onStudySurgeryTitle for this <code>onStudySurgeryTitleDE</code> object
 	 *
 	 * @param onStudySurgeryTitleDE
-	 *            the onStudySurgeryTitleDE
+	 *            the onStudySurgeryTitle
 	 */
 	public void setValueObject(String onStudySurgeryTitle) {
 		if (onStudySurgeryTitle != null) {

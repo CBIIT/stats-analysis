@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * This  class encapsulates the properties of an caintergator 
- * RadiationTherapyDE object.
+ * Onstudy Therapy Section OnStudyRadiationTherapyDE object.
  *  
  * @author Dana Zhang
  */
@@ -24,7 +24,8 @@ public class OnStudyRadiationTherapyDE extends DomainElement implements Serializ
 
 	
    /**
-    * Initializes a newly created <code>OnStudyRadiationTherapyDE</code> object so that it represents an OnStudyRadiationTherapyDE.
+    * Initializes a newly created <code>OnStudyRadiationTherapyDE</code> object 
+    * so that it represents an OnStudyRadiationTherapyDE.
     */
     public OnStudyRadiationTherapyDE(String onStudyRadiationTherapy) {
         super(onStudyRadiationTherapy);
@@ -51,8 +52,8 @@ public class OnStudyRadiationTherapyDE extends DomainElement implements Serializ
     }
 
   /**
-    * Sets the radiationTherapy for this <code>RadiationTherapyDE</code> object
-    * @param radiationTherapy the radiationTherapy    
+    * Sets the onStudyRadiationTherapy for this <code>OnStudyRadiationTherapyDE</code> object
+    * @param onStudyRadiationTherapy the onStudyRadiationTherapy    
 	*/ 
     public void setValueObject(String onStudyRadiationTherapy) {
 	  if(onStudyRadiationTherapy != null){

@@ -2,6 +2,13 @@ package gov.nih.nci.caintegrator.dto.de;
 
 import java.io.Serializable;
 
+/**
+ * This class encapsulates the properties of an caintergator 
+ * Prior Surgery section SurgeryTitleDE object.
+ *
+ * @author Dana Zhang
+ */
+
 public class PriorSurgeryTitleDE extends DomainElement implements Serializable,
 		Cloneable {
 
@@ -22,15 +29,15 @@ public class PriorSurgeryTitleDE extends DomainElement implements Serializable,
 
 
 	/**
-	 * Initializes a newly created <code>SurgeryTypeDE</code> object so that
-	 * it represents an SurgeryOutcomeDE.java.
+	 * Initializes a newly created <code>PriorSurgeryTitleDE</code> object so that
+	 * it represents a PriorSurgeryTitleDE object.
 	 */
 	public PriorSurgeryTitleDE(String surgeryTitle) {
 		super(surgeryTitle);
 	}
 
 	/**
-	 * Sets the value for this <code>SurgeryTypeDE</code> object
+	 * Sets the value for this <code>PriorSurgeryTitleDE</code> object
 	 *
 	 * @param object
 	 *            the value
@@ -44,19 +51,19 @@ public class PriorSurgeryTitleDE extends DomainElement implements Serializable,
 	}
 
 	/**
-	 * Returns the surgeryOutcomeDE for this surgeryOutcome obect.
+	 * Returns the PriorSurgeryTitleDE for this PriorSurgeryTitle object.
 	 *
-	 * @return the surgeryOutcomeDE for this <code>surgeryOutcomeDE</code> object
+	 * @return the PriorSurgeryTitleDE for this <code>PriorSurgeryTitleDE</code> object
 	 */
 	public String getValueObject() {
 		return (String) getValue();
 	}
 
 	/**
-	 * Sets the surgeryType for this <code>SurgeryTypeDE</code> object
+	 * Sets the priorTherapySurgeryTitle for this <code>PriorSurgeryTitleDE</code> object
 	 *
-	 * @param surgeryType
-	 *            the surgeryType
+	 * @param surgeryTitle
+	 *            the surgeryTitle
 	 */
 	public void setValueObject(String surgeryTitle) {
 		if (surgeryTitle != null) {

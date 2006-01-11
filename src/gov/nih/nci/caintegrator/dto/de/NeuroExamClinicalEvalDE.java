@@ -2,7 +2,7 @@ package gov.nih.nci.caintegrator.dto.de;
 
 import java.io.Serializable;
 
-//caintergator classes
+
 
 /**
  * This class encapsulates the properties of an caintergator NeuroExamClinicalEvalDE

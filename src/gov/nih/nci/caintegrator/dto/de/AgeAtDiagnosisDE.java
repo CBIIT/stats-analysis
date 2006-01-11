@@ -22,7 +22,9 @@ public class AgeAtDiagnosisDE extends DomainElement implements Serializable,
 	 * methods now! (Not necesary for primitives.)
 	 */
 
-	// the type of age limit
+	/**
+	 * the type of age limit
+	 */ 
 	private String ageLimitType = null;
 
 	// indicates a lower age limit

@@ -1,11 +1,20 @@
 package gov.nih.nci.caintegrator.dto.critieria;
 
+import gov.nih.nci.caintegrator.dto.de.OnStudySurgeryTitleDE;
 import gov.nih.nci.caintegrator.dto.de.RaceDE;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+
+/**
+ * This class encapsulates RaceCriteria.
+ * It contains a collection of one or more
+ * RaceDE.
+ *
+ * Dana Zhang 
+ */
 
 public class RaceCriteria extends Criteria implements Serializable,Cloneable {
 	
@@ -23,16 +32,30 @@ public class RaceCriteria extends Criteria implements Serializable,Cloneable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	
 	
-	// it allows multi-select for races on UI
+	
+	/**
+	 * Represents a collection of one or more 
+	 * RaceDE object, it allows multi-select for races on UI
+	 */
 	
 	private Collection races;
+	
+	/**
+	  * Default constructor
+	  *
+	  */
 	
 	public RaceCriteria(){}
 	
 	
-   // this is to deal with single race entry
+  
+	/**
+	 * Sets the raceDE object by adding it to the collection
+	 * one RaceDE at a time
+	 * 
+	 */
 	
 	public void setRace(RaceDE raceNameDE) {
 		if (raceNameDE != null) {
@@ -40,7 +63,10 @@ public class RaceCriteria extends Criteria implements Serializable,Cloneable {
 		}
 	}
 	
-//	 this is to deal with multiple race entries
+   /**
+	 * this is to deal with setting multiple race  entries
+	 */
+	
 	public void setRaces(Collection multiRaces) {
 		if (multiRaces != null) {
 			Iterator iter = multiRaces.iterator();
@@ -51,20 +77,30 @@ public class RaceCriteria extends Criteria implements Serializable,Cloneable {
 		}
 	}
 
+	/**
+   	 * private method to get a collection of RaceDE objects
+   	 */
     private Collection getRaceMembers(){
     	if (races == null) {
     		races = new ArrayList();
 		}   
     	return races;    	
     }
-
+    
+    /**
+	  * Returns a collection of RaceDE objects.
+	  * 
+	  */
+    
     public Collection getRaces() {
 		return races;
 	}
     
-	@Override
+    /**
+	 *  Used to validate race, returns true for now
+	 */
 	public boolean isValid() {
-		// TODO Auto-generated method stub
+		
     	return true;
 	}
 	

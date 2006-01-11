@@ -8,7 +8,7 @@ import java.io.Serializable;
  * This class encapsulates the properties of an caintergator MRIClinicalEvalDE
  * object.
  * 
- * @author Dana Zhang, BauerD
+ * @author Dana Zhang
  */
 public class MRIClinicalEvalDE extends DomainElement implements Serializable,
 		Cloneable {

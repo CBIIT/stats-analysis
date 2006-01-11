@@ -23,21 +23,37 @@ public class LanskyClinicalEvalCriteria extends Criteria implements Serializable
 	 * track down if you aren't ultra familiar with the code base, so add those
 	 * methods now! (Not necesary for primitives.)
 	 */
-	private LanskyClinicalEvalDE lanskyClinicalEvalDE;
+	private LanskyClinicalEvalDE lanskyClinicalEvalDE;	
+	
+	/**
+	 * Default constructor
+	 *
+	 */
 
 	public LanskyClinicalEvalCriteria() {
 	}
 
+	/**
+	 * Sets the LanskyClinicalEvalDE object
+	 * 
+	 */
 	public void setLanskyClinicalEvalDE(LanskyClinicalEvalDE lanskyClinicalEvalDE) {
 		if (lanskyClinicalEvalDE != null) {
 			this.lanskyClinicalEvalDE = lanskyClinicalEvalDE;
 		}
 	}
 
+	/**
+	 * Gets the LanskyClinicalEvalDE object
+	 * 
+	 */
 	public LanskyClinicalEvalDE getLanskyClinicalEvalDE() {
 		return lanskyClinicalEvalDE;
 	}
 
+	/**
+	  *  Used to validate LanskyClinicalEvalDE, returns true for now
+	  */
 	public boolean isValid() {
 		return true;
 	}

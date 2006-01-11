@@ -2,6 +2,15 @@ package gov.nih.nci.caintegrator.dto.de;
 
 import java.io.Serializable;
 
+/**
+ * This class encapsulates the properties of a caintergator 
+ * RaceDE object.
+ *
+ * @author Dana Zhang
+ */
+
+
+
 public class RaceDE extends DomainElement implements Serializable, Cloneable  {
 	
 	/**
@@ -18,7 +27,22 @@ public class RaceDE extends DomainElement implements Serializable, Cloneable  {
 	private static final long serialVersionUID = 1L; 
 
 
-	@Override
+	/**
+	 * Initializes a newly created <code>RaceDE</code> object so that
+	 * it represents a RaceDE object.
+	 */
+	public RaceDE(String raceName) {
+		super(raceName);
+		
+	}
+	
+	/**
+	 * Sets the value for this <code>RaceDE</code> object
+	 *
+	 * @param object
+	 *            the value
+	 */
+	
 	public void setValue(Object obj) throws Exception {
 		if (!(obj instanceof String))
 			throw new Exception(
@@ -29,9 +53,9 @@ public class RaceDE extends DomainElement implements Serializable, Cloneable  {
 	}
 	
 	/**
-	 * Returns the diseaseName for this DiseaseNameDE obect.
+	 * Returns the raceName for this RaceDE obect.
 	 * 
-	 * @return the diseaseName for this <code>DiseaseNameDE</code> object
+	 * @return the raceName for this <code>RaceDE</code> object
 	 */
 	public String getValueObject() {
 		return (String) getValue();
@@ -48,10 +72,7 @@ public class RaceDE extends DomainElement implements Serializable, Cloneable  {
 			value = raceName;
 		}
 	}
-	public RaceDE(String raceName) {
-		super(raceName);
-		
-	}
+	
 	
 	/**
 	 * Overrides the protected Object.clone() method exposing it as public.

@@ -24,19 +24,37 @@ public class MRIClinicalEvalCriteria extends Criteria implements Serializable,
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private MRIClinicalEvalDE mriClinicalEvalDE;
+	
+	/**
+	 * Default constructor
+	 *
+	 */
 
 	public MRIClinicalEvalCriteria() {
 	}
-
+   
+	/**
+	 * Sets the MRIClinicalEvalDE object
+	 * 
+	 */
 	public void setMRIClinicalEvalDE(MRIClinicalEvalDE mriClinicalEvalDE) {
 		if (mriClinicalEvalDE != null) {
 			this.mriClinicalEvalDE = mriClinicalEvalDE;
 		}
 	}
 
+	
+	/**
+	 * Gets the MRIClinicalEvalDE object
+	 * 
+	 */
 	public MRIClinicalEvalDE getMRIClinicalEvalDE() {
 		return mriClinicalEvalDE;
 	}
+	
+	/**
+	  *  Used to validate MRIClinicalEvalDE, returns true for now
+	  */
 
 	public boolean isValid() {
 		return true;

@@ -3,10 +3,11 @@ package gov.nih.nci.caintegrator.dto.de;
 import java.io.Serializable;
 
 /**
- * This class encapsulates the properties of an caintergator OnStudySurgeryOutcomeDE.java
+ * This class encapsulates the properties of a caintergator 
+ * Onstudy Therapy Section OnStudySurgeryOutcomeDE
  * object.
  *
- * @author Dana Zhang, BauerD
+ * @author Dana Zhang
  */
 public class OnStudySurgeryOutcomeDE extends DomainElement implements Serializable,
 		Cloneable {
@@ -29,14 +30,14 @@ public class OnStudySurgeryOutcomeDE extends DomainElement implements Serializab
 
 	/**
 	 * Initializes a newly created <code>OnStudySurgeryOutcomeDE</code> object so that
-	 * it represents an OnStudySurgeryOutcomeDE.java.
+	 * it represents a OnStudySurgeryOutcomeDE object.
 	 */
 	public OnStudySurgeryOutcomeDE(String onStudySurgeryOutcome) {
 		super(onStudySurgeryOutcome);
 	}
 
 	/**
-	 * Sets the value for this <code>SurgeryTypeDE</code> object
+	 * Sets the value for this <code>OnStudySurgeryOutcomeDE</code> object
 	 *
 	 * @param object
 	 *            the value
@@ -50,19 +51,19 @@ public class OnStudySurgeryOutcomeDE extends DomainElement implements Serializab
 	}
 
 	/**
-	 * Returns the surgeryOutcomeDE for this surgeryOutcome obect.
+	 * Returns the Onstudy surgeryOutcomeDE for this OnStudySurgeryOutcomeDE obect.
 	 *
-	 * @return the surgeryOutcomeDE for this <code>surgeryOutcomeDE</code> object
+	 * @return the Onstudy surgeryOutcomeDE for this <code>OnStudySurgeryOutcomeDE</code> object
 	 */
 	public String getValueObject() {
 		return (String) getValue();
 	}
 
 	/**
-	 * Sets the surgeryType for this <code>SurgeryTypeDE</code> object
+	 * Sets the onStudySurgeryOutcome for this <code>OnStudySurgeryOutcomeDE</code> object
 	 *
-	 * @param surgeryType
-	 *            the surgeryType
+	 * @param onStudySurgeryOutcome
+	 *            the onStudySurgeryOutcome
 	 */
 	public void setValueObject(String onStudySurgeryOutcome) {
 		if (onStudySurgeryOutcome != null) {

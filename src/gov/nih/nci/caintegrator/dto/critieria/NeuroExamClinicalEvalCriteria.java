@@ -24,20 +24,36 @@ public class NeuroExamClinicalEvalCriteria extends Criteria implements Serializa
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private NeuroExamClinicalEvalDE neuroExamClinicalEvalDE;
+	
+	/**
+	 * Default constructor
+	 *
+	 */
 
 	public NeuroExamClinicalEvalCriteria() {
 	}
 
+	/**
+	 * Sets the NeuroExamClinicalEvalDE object
+	 * 
+	 */
 	public void setNeuroExamClinicalEvalDE(NeuroExamClinicalEvalDE neuroExamClinicalEvalDE) {
 		if (neuroExamClinicalEvalDE != null) {
 			this.neuroExamClinicalEvalDE = neuroExamClinicalEvalDE;
 		}
 	}
 
+	/**
+	 * Gets the NeuroExamClinicalEvalDE object
+	 * 
+	 */
 	public NeuroExamClinicalEvalDE getNeuroExamClinicalEvalDE() {
 		return neuroExamClinicalEvalDE;
 	}
-
+	
+	/**
+	  *  Used to validate NeuroExamClinicalEvalDE, returns true for now
+	  */
 	public boolean isValid() {
 		return true;
 	}

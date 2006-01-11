@@ -8,8 +8,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * This class encapsulates RadiationTherapyDE criteria. It contains a collection
- * of RadiationTherapyDE.
+ * This class encapsulates Prior Therapy RadiationTherapy Criteria. 
+ * It contains a collection of one or more
+ * Prior Therapy Section's RadiationTherapyDE.
  *
  * Dana Zhang Date: August 30, 2004 Version 1.0
  */
@@ -26,13 +27,28 @@ public class RadiationTherapyCriteria extends Criteria implements Serializable,
 	 * track down if you aren't ultra familiar with the code base, so add those
 	 * methods now! (Not necesary for primitives.)
 	 */
+	
+	
 	private RadiationTherapyDE radiationTherapyDE;
+	
+	/**
+	 * Represents a collection of one or more 
+	 * Prior Therapy RadiationTherapyDE object.
+	 */
 	private Collection radiationSites;
 
-
+    /**
+     * Default constructor
+     *
+     */
 	public RadiationTherapyCriteria() {
 	}
 
+	/**
+	 * Sets the prior therapy radiation object by adding it to the collection
+	 * one RadiationTherapyDE at a time
+	 * 
+	 */
 	public void setRadiationTherapyDE(RadiationTherapyDE radiationTherapyDE) {
 		if (radiationTherapyDE != null) {
 			getRadiationMembers().add(radiationTherapyDE);
@@ -40,7 +56,10 @@ public class RadiationTherapyCriteria extends Criteria implements Serializable,
 		}
 	}
 
-   	// this is to deal with multiple disease entries
+   	
+	/**
+	 * this is to deal with setting multiple prior therapy radiation  entries
+	 */
    	public void setRadiations(Collection multiRadiations) {
    			if (multiRadiations != null) {
    				Iterator iter = multiRadiations.iterator();
@@ -51,6 +70,10 @@ public class RadiationTherapyCriteria extends Criteria implements Serializable,
    			}
    	}
 
+   	
+   	/**
+   	 * private method to get a collection of prior therapy radiation objects
+   	 */
    private Collection getRadiationMembers() {
 		if (radiationSites == null) {
 			radiationSites = new ArrayList();
@@ -58,13 +81,25 @@ public class RadiationTherapyCriteria extends Criteria implements Serializable,
 		return radiationSites;
 	}
 
+   /**
+    * Returns a collection of priorTherapyRadiationDE objects.
+    * 
+    */
    public Collection getRadiations() {
    		return radiationSites;
 	}
+   
+   /**
+    * Returns a single priorTherapyRadiationDE object.
+    * 
+    */
 	public RadiationTherapyDE getRadiationTherapyDE() {
 		return radiationTherapyDE;
 	}
 
+	/**
+	 *  Used to validate Prior Therapy RadiationTherapyDE, returns true for now
+	 */
 	public boolean isValid() {
 		return true;
 	}

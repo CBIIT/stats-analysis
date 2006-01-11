@@ -2,13 +2,12 @@ package gov.nih.nci.caintegrator.dto.de;
 
 import java.io.Serializable;
 
-//caintergator classes
 
 /**
- * This class encapsulates the properties of an caintergator ChemoAgentDE
- * object.
+ * This class encapsulates the properties of an caintergator 
+ * Prior Therapy Section ChemoAgentDE  object.
  * 
- * @author Dana Zhang, BauerD
+ * @author Dana Zhang
  */
 public class ChemoAgentDE extends DomainElement implements Serializable,
 		Cloneable {
@@ -25,7 +24,7 @@ public class ChemoAgentDE extends DomainElement implements Serializable,
 
 	/**
 	 * Initializes a newly created <code>ChemoAgentDE</code> object so that it
-	 * represents an ChemoAgentDE.
+	 * represents a ChemoAgentDE.
 	 */
 	public ChemoAgentDE(String chemoAgentName) {
 		super(chemoAgentName);
@@ -55,7 +54,7 @@ public class ChemoAgentDE extends DomainElement implements Serializable,
 	}
 
 	/**
-	 * Sets the chemoAgentName for this <code>ChemoAgentDE</code> object
+	 * Sets the priorTherapyChemoAgentName for this <code>ChemoAgentDE</code> object
 	 * 
 	 * @param chemoAgentName
 	 *            the chemoAgentName

@@ -1,12 +1,22 @@
 package gov.nih.nci.caintegrator.dto.critieria;
 
 import gov.nih.nci.caintegrator.dto.de.PriorSurgeryTitleDE;
-import gov.nih.nci.caintegrator.dto.de.SurgeryOutcomeDE;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+
+
+/**
+ * This class encapsulates Prior Therapy SurgeryTitle Criteria. 
+ * It contains a collection of one or more
+ * Prior Therapy Section's PriorSurgeryTitleDE
+ *
+ * @author Dana Zhang
+ */
+
 
 public class PriorSurgeryTitleCriteria extends Criteria implements Serializable,
 		Cloneable {
@@ -22,18 +32,37 @@ public class PriorSurgeryTitleCriteria extends Criteria implements Serializable,
 	 */ 
 
 	private PriorSurgeryTitleDE priorSurgeryTitleDE;	
+	
+	/**
+	 * Represents a collection of one or more 
+	 * Prior Therapy PriorSurgeryTitleDE object.
+	 */
 	private Collection titles;
+	
+	/**
+	 * Default constructor
+	 *
+	 */
 
 	public PriorSurgeryTitleCriteria() {
 	}
 
+	/**
+	 * Sets the prior therapy PriorSurgeryTitleDE object by adding it to the collection
+	 * one PriorSurgeryTitleDE at a time
+	 * 
+	 */
 	public void setPriorSurgeryTitleDE(PriorSurgeryTitleDE priorSurgeryTitleDE) {
 		if (priorSurgeryTitleDE != null) {
 			getTitleMembers().add(priorSurgeryTitleDE);
 			
 		}
 	}
-
+	
+	/**
+	 * this is to deal with setting multiple prior therapy PriorSurgeryTitleDE  entries
+	 */
+	
 	public void setTitles(Collection multiTitles) {
 		if (multiTitles != null) {
 			Iterator iter = multiTitles.iterator();
@@ -44,6 +73,10 @@ public class PriorSurgeryTitleCriteria extends Criteria implements Serializable,
 		}
     }
 	
+	/**
+   	 * private method to get a colletion of  prior therapy PriorSurgeryTitleDE objects.
+   	 */
+	
 	private Collection getTitleMembers() {
 		if (titles == null) {
 			titles = new ArrayList();
@@ -51,15 +84,27 @@ public class PriorSurgeryTitleCriteria extends Criteria implements Serializable,
 		return titles;
 	}
 
+	/**
+	   * Returns a collection of PriorSurgeryTitleDE objects.
+	   * 
+	   */
 	public Collection getTitles() {
 		return titles;
 	}
+	
+	/**
+	  * Returns a single PriorSurgeryTitleDE object.
+	  * 
+	  */
 	public PriorSurgeryTitleDE getPriorSurgeryTitleDE() {
 		return priorSurgeryTitleDE;
 	}
 
+	/**
+	 * Used to validate PriorSurgeryTitle, returns true for now
+	 */
 	public boolean isValid() {
-		// find out later to see if we need validate SurgeryTypes
+		// find out later to see if we need validate PriorSurgeryTitle
 		return true;
 	}
 	/**
