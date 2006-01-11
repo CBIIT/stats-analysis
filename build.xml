@@ -10,7 +10,7 @@
 		</echo>
 		<copy file="caintegrator-spec.jar" todir="${anthill.artifacts.dir}"/>
 	</target>
-	<target name="build_jar_anthill">
+	<target name="build_jar_anthill" if="jms.jar.present" depends="warning">
 		<delete dir="${build.classes.dir}" failonerror="false"/>
 		<mkdir dir="${build.classes.dir}"/>
 		<javac srcdir="${build.source.dir}" destdir="${build.classes.dir}" source="1.5" excludes="**/test/**" debug="true" debuglevel="lines,vars,source">
@@ -36,7 +36,19 @@
 			</fileset>
 		</jar>
 	</target>
-	<target name="build_jar">
+	<target name="jar_check">
+		<property name="weka.jar" value="${build.deploy.lib.dir}/weka.jar" />
+		<available file="${weka.jar}" property="required_jars.present"/>
+		<condition property="required_jars.not.present">
+			<not>
+				<istrue value="${required_jars.present}"/>
+			</not>
+		</condition>
+	</target>
+	<target name="warning" if="required_jars.not.present" depends="jar_check">
+		<echo>Build Failed! The required jars are not present in the deployed_jars dir to compile!  Please see /deployed_jars/readme.txt</echo>
+	</target>
+	<target name="build_jar" if="required_jars.present" depends="warning">
 		<delete dir="${build.classes.dir}" failonerror="false"/>
 		<mkdir dir="${build.classes.dir}"/>
 		<javac srcdir="${build.source.dir}" destdir="${build.classes.dir}" source="1.5" excludes="**/test/**" debug="true" debuglevel="lines,vars,source">
