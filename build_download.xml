@@ -8,11 +8,11 @@
 		<copy file="${project_name}.zip" todir="${anthill.artifacts.dir}"/>
 	</target>
 	<target name="build_codebase">
-	     <echo>Building the caintegrator-analysis-commons.jar...</echo>
+	     <echo>Building the caintegrator-spec.jar...</echo>
 	    <ant target="build_jar" dir="."/>
 	</target>
 		<target name="build_codebase_anthill">
-	     <echo>Building the caintegrator-analysis-commons.jar...</echo>
+	     <echo>Building the caintegrator-spec.jar...</echo>
 	    <ant target="build_jar_anthill" dir="."/>
 	</target>
 	<!--
