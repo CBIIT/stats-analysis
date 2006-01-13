@@ -1,11 +1,11 @@
 <project name="caintegrator-spec" default="build_zip_file_anthill" basedir=".">
 	<property file="basic_build.properties"/>
 
-	<target name="build_dependency" if="anthill.artifacts.dir" depends="build_zip_file_anthill">
+	<target name="build_dependency" if="${anthill.artifacts.dir}" depends="build_zip_file_anthill">
 		<echo>
 			Artifacts copied to ${anthill.artifacts.dir}
 		</echo>
-		<copy file="${project_name}.zip" todir="${anthill.artifacts.dir}"/>
+		<copy file="${module_name}.zip" todir="${anthill.artifacts.dir}"/>
 	</target>
 	<target name="build_codebase">
 	     <echo>Building the caintegrator-spec.jar...</echo>
@@ -20,18 +20,20 @@
 		Zip the source code and compiled caintegrator-spec.jar
 	-->
 	<target name="build_zip_file" depends="build_codebase">
-	     <zip destfile="${project_name}.zip">
-			 <zipfileset dir="${build.source.dir}" prefix="${build.source.dir}"/>
-			 <zipfileset dir="${build.deploy.lib.dir}" prefix="${build.deploy.lib.dir}">
+     	 <delete file="${module_name}.zip"/>
+	     <zip destfile="${module_name}.zip">
+			 <zipfileset dir="${build.source.dir}" prefix="${project_name}/${module_name}/${build.source.dir}"/>
+			 <zipfileset dir="${build.deploy.lib.dir}" prefix="${project_name}/${module_name}/${build.deploy.lib.dir}">
 			 	<include name="*.jar"/>
 			 </zipfileset>
-			 <zipfileset dir="${build.do.not.deploy.lib.dir}" prefix="${build.do.not.deploy.lib.dir}">
+			 <zipfileset dir="${build.do.not.deploy.lib.dir}" prefix="${project_name}/${module_name}/${build.do.not.deploy.lib.dir}">
 			 	<include name="*.jar"/>
+			 	<exclude name="Rserve.jar"/>
 			 </zipfileset>
-			 <zipfileset dir="." prefix=".">
+			 <zipfileset dir="." prefix="${project_name}/${module_name}/.">
                 <include name="build.xml"/>
                 <include name="basic_build.properties"/>
-                <include name="${project_name}.jar"/>
+                <include name="${module_name}.jar"/>
              </zipfileset>		
          </zip>
      </target>
@@ -41,21 +43,23 @@
 		Zip the source code and compiled caintegrator-spec.jar
 	-->
 	<target name="build_zip_file_anthill" depends="build_codebase_anthill">
-		<zip destfile="${project_name}.zip">
-			 <zipfileset dir="${build.source.dir}" prefix="${build.source.dir}"/>
-			 <zipfileset dir="${build.deploy.lib.dir}" prefix="${build.deploy.lib.dir}">
+		<delete file="${module_name}.zip"/>
+		<zip destfile="${module_name}.zip">
+			 <zipfileset dir="${build.source.dir}" prefix="${project_name}/${module_name}/${build.source.dir}"/>
+			 <zipfileset dir="${build.deploy.lib.dir}" prefix="${project_name}/${module_name}/${build.deploy.lib.dir}">
+			 	<include name="*.jar"/>
+			 	<exclude name="Rserve.jar"/>
+			 </zipfileset>
+			 <zipfileset dir="${anthill.dependency.artifacts.dir}" prefix="${project_name}/${module_name}/${build.deploy.lib.dir}">
+			 	<include name="*caintegrator-analysis-commons.jar"/>
+			 </zipfileset>
+			 <zipfileset dir="${build.do.not.deploy.lib.dir}" prefix="${project_name}/${module_name}/${build.do.not.deploy.lib.dir}">
 			 	<include name="*.jar"/>
 			 </zipfileset>
-			 <zipfileset dir="${anthill.dependency.artifacts.dir}" prefix="${build.deploy.lib.dir}">
-			 	<include name="*.jar"/>
-			 </zipfileset>
-			 <zipfileset dir="${build.do.not.deploy.lib.dir}" prefix="${build.do.not.deploy.lib.dir}">
-			 	<include name="*.jar"/>
-			 </zipfileset>
-			 <zipfileset dir="." prefix=".">
+			 <zipfileset dir="." prefix="${project_name}/${module_name}/.">
                 <include name="build.xml"/>
                 <include name="basic_build.properties"/>
-                <include name="${project_name}.jar"/>
+                <include name="${module_name}.jar"/>
              </zipfileset>		
          </zip>
      </target>
