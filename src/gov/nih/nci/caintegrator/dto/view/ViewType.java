@@ -64,6 +64,8 @@ import java.io.Serializable;
 * 
 */
 
+
+
 public abstract class ViewType implements Serializable, Cloneable{
 
 	/**
