@@ -101,10 +101,10 @@ public class ClassComparisonFinding extends AnalysisFinding{
 	}
 
 	/* (non-Javadoc)
-	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getGroup2()
+	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getBaselineGroup()
 	 */
-	public SampleGroup getGroup2() {
-		return myResults.getGroup2();
+	public SampleGroup getBaselineGroup() {
+		return myResults.getBaselineGroup();
 	}
 
 	/* (non-Javadoc)
