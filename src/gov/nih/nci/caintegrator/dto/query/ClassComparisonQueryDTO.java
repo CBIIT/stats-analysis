@@ -108,13 +108,13 @@ public interface ClassComparisonQueryDTO extends QueryDTO{
 	/**
 	 * @return Returns the comparisonGroups.
 	 */
-	public Collection<ClinicalQueryDTO> getComparisonGroups();
+	public List<ClinicalQueryDTO> getComparisonGroups();
 
 	/**
 	 * @param comparisonGroups The comparisonGroups to set.
 	 */
 	public void setComparisonGroups(
-			Collection<ClinicalQueryDTO> comparisonGroups);
+			List<ClinicalQueryDTO> comparisonGroups);
 	
 	/**
 	 * @return Returns the institutionNameDE.
