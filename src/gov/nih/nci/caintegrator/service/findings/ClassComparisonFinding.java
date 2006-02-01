@@ -81,6 +81,8 @@ public class ClassComparisonFinding extends AnalysisFinding{
 	private Collection<SampleIDDE> samplesNotFound;
 	private Map reporterAnnotationsMap;
 	
+	private Object ccForm;
+	
 	public ClassComparisonFinding(String session, String task, FindingStatus status, ClassComparisonResult result) {
 		super(session, task, status);
 		setAnalysisResult(result);
@@ -148,6 +150,14 @@ public class ClassComparisonFinding extends AnalysisFinding{
 
 	public void setReporterAnnotationsMap(Map reporterResultsetMap) {
 		this.reporterAnnotationsMap = reporterResultsetMap;
+	}
+
+	public Object getCcForm() {
+		return ccForm;
+	}
+
+	public void setCcForm(Object ccForm) {
+		this.ccForm = ccForm;
 	}
 	
 }
