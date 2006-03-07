@@ -128,6 +128,9 @@ public class ArrayPlatformDE extends DomainElement implements Serializable,
 		else if(getValueObject().equals(ArrayPlatformType.ARRAY_CGH.toString())){
 			return ArrayPlatformType.ARRAY_CGH; 
 		}
+        else if(getValueObject().equals(ArrayPlatformType.AGILENT.toString())){
+            return ArrayPlatformType.AGILENT; 
+        }
 		else if(getValueObject().equals(ArrayPlatformType.CDNA_ARRAY_PLATFORM)){
 			return ArrayPlatformType.CDNA_ARRAY_PLATFORM; 
 		}
