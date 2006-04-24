@@ -116,22 +116,22 @@ public class ArrayPlatformDE extends DomainElement implements Serializable,
 
 	public ArrayPlatformType getValueObjectAsArrayPlatformType(){
 
-		if(getValueObject().equals(ArrayPlatformType.AFFY_OLIGO_PLATFORM.toString())){
+		if(getValueObject().equals(ArrayPlatformType.AFFY_OLIGO_PLATFORM.name())){
 			return ArrayPlatformType.AFFY_OLIGO_PLATFORM; 
 		}
-		else if(getValueObject().equals(ArrayPlatformType.AFFY_100K_SNP_ARRAY.toString())){
+		else if(getValueObject().equals(ArrayPlatformType.AFFY_100K_SNP_ARRAY.name())){
 			return ArrayPlatformType.AFFY_100K_SNP_ARRAY; 
 		}
-		else if(getValueObject().equals(ArrayPlatformType.ALL_PLATFROM.toString())){
+		else if(getValueObject().equals(ArrayPlatformType.ALL_PLATFROM.name())){
 			return ArrayPlatformType.ALL_PLATFROM; 
 		}
-		else if(getValueObject().equals(ArrayPlatformType.ARRAY_CGH.toString())){
+		else if(getValueObject().equals(ArrayPlatformType.ARRAY_CGH.name())){
 			return ArrayPlatformType.ARRAY_CGH; 
 		}
-        else if(getValueObject().equals(ArrayPlatformType.AGILENT.toString())){
+        else if(getValueObject().equals(ArrayPlatformType.AGILENT.name())){
             return ArrayPlatformType.AGILENT; 
         }
-		else if(getValueObject().equals(ArrayPlatformType.CDNA_ARRAY_PLATFORM)){
+		else if(getValueObject().equals(ArrayPlatformType.CDNA_ARRAY_PLATFORM.name())){
 			return ArrayPlatformType.CDNA_ARRAY_PLATFORM; 
 		}
 		return null;
