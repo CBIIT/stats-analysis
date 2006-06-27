@@ -88,7 +88,7 @@ public class KaplanMeierDataController {
 
 	private double downFold = 2.0;
 
-	private static enum Regulation{UPREGULATED, DOWNREGULATED, ALL_SAMPLES, INTERMEDIATE};
+	private static enum Regulation{UPREGULATED, DOWNREGULATED, ALL_SAMPLES, INTERMEDIATE,SAMPLE_LIST1,SAMPLE_LIST2};
 	
 	private KaplanMeierAlgorithms kaplanMeier = null;
 
@@ -152,6 +152,26 @@ public class KaplanMeierDataController {
 		}
 		populateStoredData();
 	}
+	public KaplanMeierDataController(KaplanMeierSampleInfo[] sampleList1, KaplanMeierSampleInfo[] sampleList2, String plotType) {
+		final DecimalFormat decimalFormat = new DecimalFormat("0.0");	
+		setPlotType(plotType);
+		kaplanMeier = new KaplanMeierAlgorithms(sampleList1, sampleList2);
+		if (sampleList1 != null  && sampleList2 != null) {
+			if (plotType != null && plotType.equals(CaIntegratorConstants.SAMPLE_KMPLOT)) {	
+				plotPointSeriesSetCollection = new ArrayList<KaplanMeierPlotPointSeriesSet>();
+				// Sample List of Interest Series
+				plotPointSeriesSetCollection.add(getDataSeries(sampleList1, Regulation.SAMPLE_LIST1,
+						"Samples Of Interest", Color.RED));
+				// Sample List of Interest Series
+				plotPointSeriesSetCollection.add(getDataSeries(sampleList2, Regulation.SAMPLE_LIST2,
+						"Rest of Samples", Color.BLUE));	
+			}			
+		} else {
+			logger.error("gov.nih.nci.nautilus.ui.struts.form.quicksearch.noRecord");
+			// throw new exception
+		}
+		populateStoredDataforSamplePlot();
+	}
 	/**
 	 * This method will create and ecapsulate all the required stored data 
 	 * associated with the Kaplan-Meier plot that we generated
@@ -187,7 +207,28 @@ public class KaplanMeierDataController {
 		storedData.setIntVsRestPvalue(new Double(kaplanMeier.getLogRankPValue(intSamples)));
 		storedData.setNumberOfPlots(getNumberOfPlots());
 	}
-
+	/**
+	 * This method will create and ecapsulate all the required stored data 
+	 * associated with the SAMPLE List Kaplan-Meier plot that we generated
+	 *
+	 */
+	private void populateStoredDataforSamplePlot() {
+		storedData = new KaplanMeierStoredData();
+		storedData.setSamplePlot1Label("Samples Of Interest");
+		storedData.setSamplePlot2Label("Rest of Samples");
+		NumberFormat numberFormatter;
+		numberFormatter = NumberFormat.getNumberInstance();
+		numberFormatter.setMaximumFractionDigits(5);
+		Collection<KaplanMeierSampleInfo> sampleList1 = kaplanMeier.getSampleList1();
+		Collection<KaplanMeierSampleInfo> sampleList2 = kaplanMeier.getSampleList2();
+		storedData.setPlotPointSeriesCollection(plotPointSeriesSetCollection);
+		storedData.setSampleList1(sampleList1);
+		storedData.setSampleList2(sampleList2);
+		storedData.setSampleList1Count(getSampleCount(sampleList1));
+		storedData.setSampleList2Count(getSampleCount(sampleList2));
+		storedData.setSampleList1VsSampleList2(new Double(kaplanMeier.getLogRankPValue(sampleList1,sampleList2)));
+		storedData.setNumberOfPlots(getNumberOfPlots());
+	}
 	/**********************************
 	 * @param container
 	 * @param regulated
@@ -213,6 +254,12 @@ public class KaplanMeierDataController {
 			samples = kaplanMeier.getIntSamples();
 			logger.debug(geneSymbol + " Up: <" + this.getUpFold()
 					+ "AND Down: >" + this.getDownFold() + " ");
+			break;
+		case SAMPLE_LIST1:
+			samples = kaplanMeier.getSampleList1();
+			break;
+		case SAMPLE_LIST2:
+			samples = kaplanMeier.getSampleList2();
 			break;
 		default:
 			throw new RuntimeException("Invalid Criteria for KM Plot");
@@ -364,6 +411,14 @@ public class KaplanMeierDataController {
 		}
 		if (kaplanMeier.getIntSamples() != null
 				&& kaplanMeier.getIntSamples().size() > 0) {
+			count++;
+		}
+		if (kaplanMeier.getSampleList1() != null
+				&& kaplanMeier.getSampleList1().size() > 0) {
+			count++;
+		}
+		if (kaplanMeier.getSampleList2() != null
+				&& kaplanMeier.getSampleList2().size() > 0) {
 			count++;
 		}
 		return new Integer(count);

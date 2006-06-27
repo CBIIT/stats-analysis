@@ -90,6 +90,8 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	private String chartTitle = null;
 
 	private Double upVsDownPvalue = null;
+	
+	private Double sampleList1VsSampleList2 = null;
 
 	private Double upVsIntPvalue = null;
 
@@ -108,6 +110,10 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	private Integer intSampleCount = new Integer(0);
 
 	private Integer allSampleCount = new Integer(0);
+	
+	private Integer sampleList1Count = new Integer(0);
+	
+	private Integer sampleList2Count = new Integer(0);
 
 	private Collection<KaplanMeierSampleInfo> allSamples;
 
@@ -117,6 +123,10 @@ public class KaplanMeierStoredData implements CachableGraphData{
 
 	private Collection<KaplanMeierSampleInfo> intSamples;
 	
+	private Collection<KaplanMeierSampleInfo> sampleList1;
+	
+	private Collection<KaplanMeierSampleInfo> sampleList2;
+	
 	private Integer numberOfPlots;
 
 	private Collection<KaplanMeierPlotPointSeriesSet> plotPointSeriesCollection;
@@ -124,6 +134,10 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	private String downLabel;
 
 	private String upLabel;
+	
+	private String samplePlot1Label;
+	
+	private String samplePlot2Label;
 
 	private String id;
      
@@ -476,5 +490,103 @@ public class KaplanMeierStoredData implements CachableGraphData{
 
 	public String getId() {
 		return id;
+	}
+
+	/**
+	 * @return Returns the sampleList1Count.
+	 */
+	public Integer getSampleList1Count() {
+		return sampleList1Count;
+	}
+
+	/**
+	 * @param sampleList1Count The sampleList1Count to set.
+	 */
+	public void setSampleList1Count(Integer sampleList1Count) {
+		this.sampleList1Count = sampleList1Count;
+	}
+
+	/**
+	 * @return Returns the sampleList1VsSampleList2.
+	 */
+	public Double getSampleList1VsSampleList2() {
+		return sampleList1VsSampleList2;
+	}
+
+	/**
+	 * @param sampleList1VsSampleList2 The sampleList1VsSampleList2 to set.
+	 */
+	public void setSampleList1VsSampleList2(Double sampleList1VsSampleList2) {
+		this.sampleList1VsSampleList2 = sampleList1VsSampleList2;
+	}
+
+	/**
+	 * @return Returns the sampleList2Count.
+	 */
+	public Integer getSampleList2Count() {
+		return sampleList2Count;
+	}
+
+	/**
+	 * @param sampleList2Count The sampleList2Count to set.
+	 */
+	public void setSampleList2Count(Integer sampleList2Count) {
+		this.sampleList2Count = sampleList2Count;
+	}
+
+	/**
+	 * @return Returns the samplePlot1Label.
+	 */
+	public String getSamplePlot1Label() {
+		return samplePlot1Label;
+	}
+
+	/**
+	 * @param samplePlot1Label The samplePlot1Label to set.
+	 */
+	public void setSamplePlot1Label(String samplePlot1Label) {
+		this.samplePlot1Label = samplePlot1Label;
+	}
+
+	/**
+	 * @return Returns the samplePlot2Label.
+	 */
+	public String getSamplePlot2Label() {
+		return samplePlot2Label;
+	}
+
+	/**
+	 * @param samplePlot2Label The samplePlot2Label to set.
+	 */
+	public void setSamplePlot2Label(String samplePlot2Label) {
+		this.samplePlot2Label = samplePlot2Label;
+	}
+
+	/**
+	 * @return Returns the sampleList1.
+	 */
+	public Collection<KaplanMeierSampleInfo> getSampleList1() {
+		return sampleList1;
+	}
+
+	/**
+	 * @param sampleList1 The sampleList1 to set.
+	 */
+	public void setSampleList1(Collection<KaplanMeierSampleInfo> sampleList1) {
+		this.sampleList1 = sampleList1;
+	}
+
+	/**
+	 * @return Returns the sampleList2.
+	 */
+	public Collection<KaplanMeierSampleInfo> getSampleList2() {
+		return sampleList2;
+	}
+
+	/**
+	 * @param sampleList2 The sampleList2 to set.
+	 */
+	public void setSampleList2(Collection<KaplanMeierSampleInfo> sampleList2) {
+		this.sampleList2 = sampleList2;
 	}
 }

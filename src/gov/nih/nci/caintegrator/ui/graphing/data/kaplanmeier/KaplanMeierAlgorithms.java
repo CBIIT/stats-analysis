@@ -78,6 +78,8 @@ public class KaplanMeierAlgorithms {
 	private ArrayList<KaplanMeierSampleInfo> upSamples;
 	private ArrayList<KaplanMeierSampleInfo> intSamples;
 	private ArrayList<KaplanMeierSampleInfo> downSamples;
+	private ArrayList<KaplanMeierSampleInfo> sampleList1;
+	private ArrayList<KaplanMeierSampleInfo> sampleList2;
 	private double myUpperThreshold;
 	private double myLowerThreshold;
 	private static Logger logger = Logger.getLogger(KaplanMeierAlgorithms.class);
@@ -92,6 +94,16 @@ public class KaplanMeierAlgorithms {
 		this.myUpperThreshold = upperThreshold;
 		this.myLowerThreshold = lowerThreshold;
 		createSampleGroups();
+	}
+	@SuppressWarnings("unchecked")
+	public KaplanMeierAlgorithms(KaplanMeierSampleInfo[] sampleInfoList1, KaplanMeierSampleInfo[] sampleInfoList2) {
+	
+		sampleList1 = new ArrayList<KaplanMeierSampleInfo>();
+		sampleList2 = new ArrayList<KaplanMeierSampleInfo>();
+		sampleList1.addAll(Arrays.asList(sampleInfoList1));
+		sampleList2.addAll(Arrays.asList(sampleInfoList2));
+		Collections.sort(sampleList1, new KaplanMeierSampleComparator());
+		Collections.sort(sampleList2, new KaplanMeierSampleComparator());
 	}
 	
 	private void createSampleGroups() {
@@ -368,5 +380,29 @@ public class KaplanMeierAlgorithms {
 			}
 			return val;
 		}
+	}
+	/**
+	 * @return Returns the sampleList1.
+	 */
+	public ArrayList<KaplanMeierSampleInfo> getSampleList1() {
+		return sampleList1;
+	}
+	/**
+	 * @param sampleList1 The sampleList1 to set.
+	 */
+	public void setSampleList1(ArrayList<KaplanMeierSampleInfo> sampleList1) {
+		this.sampleList1 = sampleList1;
+	}
+	/**
+	 * @return Returns the sampleList2.
+	 */
+	public ArrayList<KaplanMeierSampleInfo> getSampleList2() {
+		return sampleList2;
+	}
+	/**
+	 * @param sampleList2 The sampleList2 to set.
+	 */
+	public void setSampleList2(ArrayList<KaplanMeierSampleInfo> sampleList2) {
+		this.sampleList2 = sampleList2;
 	}
 }
