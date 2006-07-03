@@ -116,22 +116,30 @@ public class ArrayPlatformDE extends DomainElement implements Serializable,
 
 	public ArrayPlatformType getValueObjectAsArrayPlatformType(){
 
-		if(getValueObject().equals(ArrayPlatformType.AFFY_OLIGO_PLATFORM.name())){
+		String vo = getValueObject();
+		
+		if(vo.equalsIgnoreCase(ArrayPlatformType.AFFY_OLIGO_PLATFORM.name()) ||
+		   vo.equalsIgnoreCase(ArrayPlatformType.AFFY_OLIGO_PLATFORM.toString())){
 			return ArrayPlatformType.AFFY_OLIGO_PLATFORM; 
 		}
-		else if(getValueObject().equals(ArrayPlatformType.AFFY_100K_SNP_ARRAY.name())){
+		else if(vo.equals(ArrayPlatformType.AFFY_100K_SNP_ARRAY.name()) ||
+				vo.equalsIgnoreCase(ArrayPlatformType.AFFY_100K_SNP_ARRAY.toString())){
 			return ArrayPlatformType.AFFY_100K_SNP_ARRAY; 
 		}
-		else if(getValueObject().equals(ArrayPlatformType.ALL_PLATFROM.name())){
-			return ArrayPlatformType.ALL_PLATFROM; 
+		else if(vo.equals(ArrayPlatformType.ALL_PLATFORM.name()) ||
+				vo.equalsIgnoreCase(ArrayPlatformType.ALL_PLATFORM.toString())){
+			return ArrayPlatformType.ALL_PLATFORM; 
 		}
-		else if(getValueObject().equals(ArrayPlatformType.ARRAY_CGH.name())){
+		else if(vo.equals(ArrayPlatformType.ARRAY_CGH.name()) || 
+				vo.equalsIgnoreCase(ArrayPlatformType.ARRAY_CGH.toString())){
 			return ArrayPlatformType.ARRAY_CGH; 
 		}
-        else if(getValueObject().equals(ArrayPlatformType.AGILENT.name())){
+        else if(vo.equals(ArrayPlatformType.AGILENT.name()) ||
+        		vo.equalsIgnoreCase(ArrayPlatformType.AGILENT.toString())){
             return ArrayPlatformType.AGILENT; 
         }
-		else if(getValueObject().equals(ArrayPlatformType.CDNA_ARRAY_PLATFORM.name())){
+		else if(vo.equals(ArrayPlatformType.CDNA_ARRAY_PLATFORM.name()) ||
+				vo.equalsIgnoreCase(ArrayPlatformType.CDNA_ARRAY_PLATFORM.toString())){
 			return ArrayPlatformType.CDNA_ARRAY_PLATFORM; 
 		}
 		return null;
