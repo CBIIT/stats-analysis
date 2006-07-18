@@ -102,10 +102,17 @@ public class DiseaseOrGradeCriteria extends Criteria implements Serializable,
 
 	// this is to deal with multiple disease entries
 	public void setDiseases(Collection multiDiseases) {
+        DiseaseNameDE diseaseNamede = null;
 		if (multiDiseases != null) {
 			Iterator iter = multiDiseases.iterator();
 			while (iter.hasNext()) {
-				DiseaseNameDE diseaseNamede = (DiseaseNameDE) iter.next();
+                Object disease = iter.next();
+                if(disease instanceof DiseaseNameDE){
+                     diseaseNamede = (DiseaseNameDE) disease;
+                }
+                else if (disease instanceof String){
+                     diseaseNamede = new DiseaseNameDE((String)disease);
+                }
 				getDiseaseMembers().add(diseaseNamede);
 			}
 		}
