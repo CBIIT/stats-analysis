@@ -39,6 +39,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.LegendTitle;
+import org.jfree.util.ShapeUtilities;
 import org.jfree.util.StringUtils;
 /**
  * This class generates a plot for the PrincipalComponentAnalysis graph.
@@ -110,15 +111,15 @@ public class PrincipalComponentAnalysisPlot {
 	//Color for Disease grade will be brighter the higher the grade
 	//if this doesn't work we will use distinct colors when coloring by disease grade.
 	
-	public static enum PCAcolorByType {Disease, DiseaseGrade, Gender };
+	public static enum PCAcolorByType {Disease, DiseaseGrade, Gender, NONE };
 	
-	private PCAcolorByType colorBy;
-	private PCAcomponent component1;
-	private PCAcomponent component2;
+	protected PCAcolorByType colorBy;
+	protected PCAcomponent component1;
+	protected PCAcomponent component2;
 	//private Map diseaseColorMap = new HashMap();
-	private Collection<PrincipalComponentAnalysisDataPoint> dataPoints;
-	private JFreeChart pcaChart = null;
-	private NumberFormat nf = NumberFormat.getNumberInstance();
+	protected Collection<PrincipalComponentAnalysisDataPoint> dataPoints;
+	protected JFreeChart pcaChart = null;
+	protected NumberFormat nf = NumberFormat.getNumberInstance();
 	
 	public PrincipalComponentAnalysisPlot(Collection<PrincipalComponentAnalysisDataPoint> dataPoints, PCAcomponent component1, PCAcomponent component2, PCAcolorByType colorBy) {
 	  this.colorBy = colorBy;
@@ -137,7 +138,7 @@ public class PrincipalComponentAnalysisPlot {
 	  
 	}
 	
-	private void createChart() {
+	protected void createChart() {
 		
 		String xLabel = component1.toString();
 		String yLabel = component2.toString();
@@ -151,7 +152,9 @@ public class PrincipalComponentAnalysisPlot {
 		
 		XYPlot plot = (XYPlot) pcaChart.getPlot();
 		
-		buildLegend();
+		if(!this.colorBy.equals(PCAcolorByType.NONE)){
+			buildLegend();
+		}	
 		
 	    plot.setNoDataMessage(null);
 	    XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
@@ -205,7 +208,7 @@ public class PrincipalComponentAnalysisPlot {
 	 * Build the legend
 	 *
 	 */
-	private void buildLegend() {
+	protected void buildLegend() {
 	
 	  LegendTitle legend = pcaChart.getLegend();
 	  LegendItemSource[] sources = new LegendItemSource[1];
@@ -232,6 +235,13 @@ public class PrincipalComponentAnalysisPlot {
 	  //triangle.closePath();
 	  item = new LegendItem("Survival Unknown", null, null, null, triangle, Color.BLACK);
 	  legendSrc.addLegendItem(item);  
+	  
+	  //Diamond=survival N/A, for non_tumor/normal
+	  Shape r = new Rectangle2D.Double(0,0,8,8);
+	  Shape d = ShapeUtilities.rotateShape(r, new Double(0.785398163), new Float(0),new Float(0));
+	  item = new LegendItem("Survival N/A", null, null, null, d, Color.BLACK);
+	  legendSrc.addLegendItem(item);
+	  
 	  
 	  if (colorBy == PCAcolorByType.Disease) {
 	    //go through the disease color map and add legend items
@@ -278,7 +288,7 @@ public class PrincipalComponentAnalysisPlot {
 	 * is represented by a square. Component1 values are represented by X 
 	 * Component2 values are represented by Y
 	 */
-	private void createGlyphsAndAddToPlot(XYPlot plot) {
+	protected void createGlyphsAndAddToPlot(XYPlot plot) {
 	  XYShapeAnnotation glyph;
 	  Shape glyphShape;
 	  Color glyphColor;
@@ -337,7 +347,7 @@ public class PrincipalComponentAnalysisPlot {
 	 * @param pcaPoint
 	 * @return
 	 */
-	private Color getColorForDataPoint(PrincipalComponentAnalysisDataPoint pcaPoint) {
+	protected Color getColorForDataPoint(PrincipalComponentAnalysisDataPoint pcaPoint) {
 	  Color defaultColor = Color.GRAY;
 	  Color retColor = null;
 	  
@@ -398,7 +408,7 @@ public class PrincipalComponentAnalysisPlot {
 	 * @param boundingEntities
 	 * @param useOverlibToolTip
 	 */
-	private void writeBoundingRectImageMap(PrintWriter writer, String name, Collection<ChartEntity> boundingEntities, boolean useOverlibToolTip) {
+	protected void writeBoundingRectImageMap(PrintWriter writer, String name, Collection<ChartEntity> boundingEntities, boolean useOverlibToolTip) {
 	  System.out.println("Num entities=" + boundingEntities.size());
 	  StringBuffer sb = new StringBuffer();
       ChartEntity chartEntity;
@@ -427,7 +437,7 @@ public class PrincipalComponentAnalysisPlot {
 	 * @param entities
 	 * @return a collection of entities containing the bounding rectangles of the original entities
 	 */
-	private Collection<ChartEntity> getBoundingEntities(Collection entities) {
+	protected Collection<ChartEntity> getBoundingEntities(Collection entities) {
 	  ChartEntity entity;
 	  ChartEntity boundingEntity;
 	  Shape shape;
@@ -450,7 +460,7 @@ public class PrincipalComponentAnalysisPlot {
 	 * @param factor
 	 * @return
 	 */
-	private DataRange getDataRange(Collection<PrincipalComponentAnalysisDataPoint> dataPoints, PCAcomponent component) {
+	protected DataRange getDataRange(Collection<PrincipalComponentAnalysisDataPoint> dataPoints, PCAcomponent component) {
 	  double maxValue = Double.MIN_VALUE;
 	  double minValue = Double.MAX_VALUE;
 	  double value;
@@ -475,9 +485,9 @@ public class PrincipalComponentAnalysisPlot {
 	 * @author harrismic
 	 *
 	 */
-	private class PcaLegendItemSource implements LegendItemSource {
+	protected class PcaLegendItemSource implements LegendItemSource {
 
-		private LegendItemCollection items = new LegendItemCollection();
+		protected LegendItemCollection items = new LegendItemCollection();
 		
 		public void addLegendItem(LegendItem item) {
 		  items.add(item); 
