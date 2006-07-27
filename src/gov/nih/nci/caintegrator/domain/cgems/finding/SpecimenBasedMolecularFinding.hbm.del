@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : SpecimenBasedMolecularFinding.hbm.xml
+    Created on : June 26, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for SpecimenBasedMolecularFinding
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding">
+   <class name="SpecimenBasedMolecularFinding" 
+    	table="needs to be created"
+        lazy="true">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.String" 
+           column="FINDING_ID?? needs to be created">
+           <generator class="assigned" />
+       </id>     
+     
+     
+   
+    <!--  m-1 relationship -->
+    
+   <many-to-one name="specimen" class="gov.nih.nci.caintegrator.domain..Specimen" column="SPECIMEN_ID" />
+    
+   
+    <!-- SpecimenBasedMolecularFinding has a sub-class called VariationFinding -->  
+ 	</class>
+</hibernate-mapping>
