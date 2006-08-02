@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.annotation.snp">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.annotation.snp">
    <class name="SNPAnnotation" 
     	table="SNP_DIM"
         lazy="true">
@@ -79,7 +79,7 @@
        <set name="geneBiomarkerCollection" table="GENE_SNP_ASSO" outer-join="true" lazy="false">
                <cache usage="read-write" />
                <key column="SNPANNO_ID" />
-               <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.annotation.gene.GeneBiomarker"
+               <many-to-many class="gov.nih.nci.caintegrator.domain.annotation.gene.GeneBiomarker"
                         outer-join="true"  column="GENE_ID" />
        </set>
 
@@ -113,24 +113,24 @@
      <set name="snpAssociationFindingCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="SNPANNO_ID" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.analysis.snp.SNPAssociationFinding" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding" />
      </set>   
      
       <set name="snpAssayCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="SNPANNO_ID" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPAssay" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAssay" />
      </set>  
      
       <set name="genotypeFindingCollection" lazy="true" inverse="true">
          <key column="SNPANNO_ID" />
-         <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.finding.variation.germline.GenotypeFinding" />
+         <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.germline.GenotypeFinding" />
      </set>   
      
       <set name="snpFrequencyCollection" lazy="true" inverse="true">
           <cache usage="read-write" />
           <key column="SNPANNO_ID" />
-          <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.finding.variation.snpFrequency.SNPFrequencyFinding" />
+          <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.SNPFrequencyFinding" />
      </set>  
 	</class>
 </hibernate-mapping>

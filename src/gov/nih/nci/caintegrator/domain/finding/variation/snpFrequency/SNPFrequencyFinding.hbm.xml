@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.finding.variation.snpFrequency">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency">
    <class name="SNPFrequencyFinding" 
     	table="SNP_FREQUENCY_FACT"
         lazy="true"
@@ -107,10 +107,10 @@
       
                   
     <!-- here is for m-1 relationships -->  
-      <many-to-one name="snpAnnotation" lazy="false" class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPAnnotation"
+      <many-to-one name="snpAnnotation" lazy="false" class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation"
                    column="SNPANNO_ID" />
 
-      <many-to-one name="population" lazy="false" class="gov.nih.nci.rembrandt.domain.cgems.study.Population"
+      <many-to-one name="population" lazy="false" class="gov.nih.nci.caintegrator.domain.study.Population"
                    column="POPULATION_ID" />
      
 

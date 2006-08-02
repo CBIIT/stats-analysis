@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.study">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study">
    <class name="Study" 
     	table="STUDY_DIM"
         lazy="true">
@@ -66,14 +66,14 @@
       <set name="populationCollection" table="STUDY_STDPOPUPLATION_ASSO" lazy="true">
          <cache usage="read-write" />
          <key column="STUDY_NAME"  />
-         <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.Population" column="POPULATION_ID" />
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.Population" column="POPULATION_ID" />
       </set>              
      
      
       <set name="snpPanelCollection" table="STUDY_PANEL_ASSO" lazy="true"> 
       <cache usage="read-write" />
       <key column="STUDY_NAME" />
-      <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPPanel" column="SNP_PANEL_ID" />
+      <many-to-many class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPPanel" column="SNP_PANEL_ID" />
      </set>  
      
     <!-- here is for 1-m relationships -->   
@@ -82,13 +82,13 @@
      <set name="studyParticipantCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="STUDY_NAME" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.StudyParticipant" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.study.StudyParticipant" />
      </set>  
     
      <set name="genoTypeFindingCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="STUDY_NAME" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.finding.variation.germline.GenotypeFinding" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.germline.GenotypeFinding" />
     </set>  
     
    
@@ -96,14 +96,14 @@
      <set name="associatedStudyCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="STUDY_NAME" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.Study" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.study.Study" />
     </set> 
     
      <!--  m-1 relationship -->
     
   <!-- TODO: Fix this Ram
 
-   <many-to-one name="study" class="gov.nih.nci.rembrandt.domain.cgems.study.Study" column="STUDY_NAME"
+   <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.Study" column="STUDY_NAME"
            insert="" />
   -->
 

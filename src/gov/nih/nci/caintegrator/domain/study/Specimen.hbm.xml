@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.study">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study">
 <class name="Specimen" 
     	table="SPECIMEN"
         lazy="true">
@@ -53,18 +53,18 @@
     <!--  m-1 relationship -->
     
    <many-to-one name="studyParticipant" lazy="false"
-                class="gov.nih.nci.rembrandt.domain.cgems.study.StudyParticipant"
+                class="gov.nih.nci.caintegrator.domain.study.StudyParticipant"
                 column="PARTICIPANT_DID" />
     
     <!--  1-1 relationship -->
     <many-to-one name="timeCourse"
-            class="gov.nih.nci.rembrandt.domain.cgems.study.TimeCourse"
+            class="gov.nih.nci.caintegrator.domain.study.TimeCourse"
             column="TIMECOURSE_ID"/>
 
    
     <!-- Specimen has a sub-class called DNASpecimen -->  
        
-   <joined-subclass name="gov.nih.nci.rembrandt.domain.cgems.study.DNASpecimen"
+   <joined-subclass name="gov.nih.nci.caintegrator.domain.study.DNASpecimen"
                     table="DNA_SPECIMEN" lazy="false" dynamic-update="false"
                     dynamic-insert="false" select-before-update="false">
        <key column="SPECIMEN_ID" on-delete="noaction" />

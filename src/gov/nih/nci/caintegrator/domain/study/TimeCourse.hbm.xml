@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.study">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study">
    <class name="TimeCourse" 
     	table="STUDY_TIMECOURSE_DIM"
         lazy="true">

@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.analysis.snp">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.analysis.snp">
    <class name="SNPAnalysisGroup"
     	table="SNP_ANALYSIS_GROUP"
         lazy="true">
@@ -54,7 +54,7 @@
        <set name="studyParticipantCollection" table="STDPT_ANALYSIS_GRP_AS" lazy="true">
          <cache usage="read-write" />
          <key column="ANA_GRP_ID" />
-         <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.StudyParticipant"
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.StudyParticipant"
                 column="PARTICIPANT_DID" />
       </set>            
  
@@ -62,7 +62,7 @@
     <!--  m-1 relationship -->
     
    <many-to-one name="snpAssociationAnalysis"
-                class="gov.nih.nci.rembrandt.domain.cgems.analysis.snp.SNPAssociationAnalysis"
+                class="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationAnalysis"
            column="ASSO_ANALYSIS_ID"  />
   
       

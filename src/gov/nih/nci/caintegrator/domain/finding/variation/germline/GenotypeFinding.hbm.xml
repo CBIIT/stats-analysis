@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.finding.variation.germline">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.variation.germline">
    <class name="GenotypeFinding" 
     	table="GENOTYPE_FACT"
         >
@@ -83,22 +83,22 @@
                  update="false" />  
                     
             <many-to-one name="snpAnnotation"
-           class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPAnnotation"
+           class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation"
            column="SNPANNO_ID"
            />
 
-       <many-to-one name="study" class="gov.nih.nci.rembrandt.domain.cgems.study.Study"
+       <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.Study"
            column="STUDY_NAME"
            not-null="true" />
 
       <many-to-one name="specimen"  lazy="false"
-           class="gov.nih.nci.rembrandt.domain.cgems.study.Specimen"
+           class="gov.nih.nci.caintegrator.domain.study.Specimen"
            column="SPECIMEN_ID"
            not-null="true" />
 
 
        <many-to-one name="snpAssay"
-           class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPAssay"
+           class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAssay"
            column="ASSAY_ID"
            not-null="true" />
 

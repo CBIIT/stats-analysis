@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.study">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study">
    <class name="Population" 
     	table="STUDY_POPULATION"
         lazy="true">
@@ -59,7 +59,7 @@
       <set name="studyCollection" table="STUDY_STDPOPUPLATION_ASSO" lazy="true">
          <cache usage="read-write" />
          <key column="POPULATION_ID" />
-         <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.Study"
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.Study"
                        column="STUDY_NAME" />
       </set>  
                 
@@ -69,13 +69,13 @@
    <set name="snpFrequencyCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="POPULATION_ID" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.finding.variation.snpFrequency.SNPFrequencyFinding" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.SNPFrequencyFinding" />
     </set>     
     
    <set name="studyParticipantCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="POPULATION_ID" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.StudyParticipant" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.study.StudyParticipant" />
     </set>   	   
       
       

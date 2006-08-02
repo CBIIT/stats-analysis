@@ -219,7 +219,7 @@ public  class GeneBiomarker
    * 
    */
 
-   // private Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.GOTerm> goTermCollection = new HashSet<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GOTerm>();
+   // private Set <gov.nih.nci.caintegrator.domain.annotation.gene.GOTerm> goTermCollection = new HashSet<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GOTerm>();
       /**
    * The Gene Ontology (GO) project is a collaborative effort to address the need for consistent descriptions 
    * of gene products in different databases. The goal of the Gene Ontology project is to produce a controlled 
@@ -231,14 +231,14 @@ public  class GeneBiomarker
    * 
    */
 
-   /* public Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GOTerm> getGoTermCollection(){
+   /* public Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.GOTerm> getGoTermCollection(){
         return goTermCollection;
     }
 
 	      
 	               
 	   
-    public void setGoTermCollection(Set<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GOTerm> goTermCollection){
+    public void setGoTermCollection(Set<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GOTerm> goTermCollection){
         this.goTermCollection = goTermCollection;
     }
 	   
@@ -255,7 +255,7 @@ public  class GeneBiomarker
    * 
    */
 
-//    private Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GeneExprReporter> geneExprReporterCollection = new HashSet<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GeneExprReporter>();
+//    private Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter> geneExprReporterCollection = new HashSet<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter>();
       /**
    * A Design Element that represents some biological material (clone, oligo, etc.) on an array which 
    * will report on some biosequence or biosequences; eg: Affymetrix probeset or cDNA clone (Note: may 
@@ -263,14 +263,14 @@ public  class GeneBiomarker
    * 
    */
 
-  /*  public Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GeneExprReporter> getGeneExprReporterCollection(){
+  /*  public Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter> getGeneExprReporterCollection(){
         return geneExprReporterCollection;
     }
 
 	      
 	               
 	   
-    public void setGeneExprReporterCollection(Set<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GeneExprReporter> geneExprReporterCollection){
+    public void setGeneExprReporterCollection(Set<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter> geneExprReporterCollection){
         this.geneExprReporterCollection = geneExprReporterCollection;
     }
 */
@@ -292,7 +292,7 @@ public  class GeneBiomarker
    * 
    */
 
-//    private Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GenBankAccession> genBankAccessionCollection = new HashSet<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GenBankAccession>();
+//    private Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.GenBankAccession> genBankAccessionCollection = new HashSet<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GenBankAccession>();
       /**
    * The accession number is the unique identifier assigned to the entire sequence record when the record 
    * is submitted to GenBank. 
@@ -300,14 +300,14 @@ public  class GeneBiomarker
    */
 
 /*
-    public Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GenBankAccession> getGenBankAccessionCollection(){
+    public Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.GenBankAccession> getGenBankAccessionCollection(){
         return genBankAccessionCollection;
     }
 
 	      
 	               
 	   
-    public void setGenBankAccessionCollection(Set<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GenBankAccession> genBankAccessionCollection){
+    public void setGenBankAccessionCollection(Set<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GenBankAccession> genBankAccessionCollection){
         this.genBankAccessionCollection = genBankAccessionCollection;
     }
 	   
@@ -325,7 +325,7 @@ public  class GeneBiomarker
    * 
    */
 
-//    private Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.Pathway> pathwayCollection = new HashSet<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.Pathway>();
+//    private Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.Pathway> pathwayCollection = new HashSet<gov.nih.nci.caintegrator.domain.annotation.gene.bean.Pathway>();
       /**
    * An elaboration of the sequence of chemical reactions leading from one compound to another taking 
    * place in living tissue._A statement or an account describing something._Value Domain for java 
@@ -334,14 +334,14 @@ public  class GeneBiomarker
    */
 /*
 
-    public Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.Pathway> getPathwayCollection(){
+    public Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.Pathway> getPathwayCollection(){
         return pathwayCollection;
     }
 
 	      
 	               
 	   
-    public void setPathwayCollection(Set<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.Pathway> pathwayCollection){
+    public void setPathwayCollection(Set<gov.nih.nci.caintegrator.domain.annotation.gene.bean.Pathway> pathwayCollection){
         this.pathwayCollection = pathwayCollection;
     }
 	   
@@ -358,21 +358,21 @@ public  class GeneBiomarker
    * 
    */
 
-//    private Set <gov.nih.nci.rembrandt.domain.cgems.annotation.protein.bean.ProteinBiomarker> proteinBiomarkerCollection = new HashSet<gov.nih.nci.rembrandt.domain.cgems.annotation.protein.bean.ProteinBiomarker>();
+//    private Set <gov.nih.nci.caintegrator.domain.annotation.protein.bean.ProteinBiomarker> proteinBiomarkerCollection = new HashSet<gov.nih.nci.caintegrator.domain.annotation.protein.bean.ProteinBiomarker>();
       /**
    * A ProteinBiomarker is a protein or antibody based biological parameter that is indicative of a physiological 
    * or pathological state. For example, HER2 is a biomarker used to identify risk of breast cancer. 
    * 
    */
 
- /*   public Set <gov.nih.nci.rembrandt.domain.cgems.annotation.protein.bean.ProteinBiomarker> getProteinBiomarkerCollection(){
+ /*   public Set <gov.nih.nci.caintegrator.domain.annotation.protein.bean.ProteinBiomarker> getProteinBiomarkerCollection(){
         return proteinBiomarkerCollection;
     }
 
 	      
 	               
 	   
-    public void setProteinBiomarkerCollection(Set<gov.nih.nci.rembrandt.domain.cgems.annotation.protein.bean.ProteinBiomarker> proteinBiomarkerCollection){
+    public void setProteinBiomarkerCollection(Set<gov.nih.nci.caintegrator.domain.annotation.protein.bean.ProteinBiomarker> proteinBiomarkerCollection){
         this.proteinBiomarkerCollection = proteinBiomarkerCollection;
     }
 	   
@@ -386,19 +386,19 @@ public  class GeneBiomarker
    * Alternative gene symbol to the official HUGO gene symbol
    */
 
-//    private Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GeneAlias> geneAliasCollection = new HashSet<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GeneAlias>();
+//    private Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias> geneAliasCollection = new HashSet<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias>();
       /**
    * Alternative gene symbol to the official HUGO gene symbol
    */
 
- /*   public Set <gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GeneAlias> getGeneAliasCollection(){
+ /*   public Set <gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias> getGeneAliasCollection(){
         return geneAliasCollection;
     }
 
 	      
 	               
 	   
-    public void setGeneAliasCollection(Set<gov.nih.nci.rembrandt.domain.cgems.annotation.gene.bean.GeneAlias> geneAliasCollection){
+    public void setGeneAliasCollection(Set<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias> geneAliasCollection){
         this.geneAliasCollection = geneAliasCollection;
     }
 */

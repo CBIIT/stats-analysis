@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.analysis.snp">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.analysis.snp">
    <class name="SNPAssociationAnalysis" 
     	table="SNP_ASSOCIATION_ANALYSIS"
         lazy="true">
@@ -55,13 +55,13 @@
      <set name="analysisGroupCollection" lazy="false" inverse="true">
       <cache usage="read-write" />
       <key column="ASSO_ANALYSIS_ID" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.analysis.snp.SNPAnalysisGroup" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAnalysisGroup" />
      </set>   
      
       <set name="snpAssociationFindingCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="ASSO_ANALYSIS_ID" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.analysis.snp.SNPAssociationFinding" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding" />
      </set>  
      	
       

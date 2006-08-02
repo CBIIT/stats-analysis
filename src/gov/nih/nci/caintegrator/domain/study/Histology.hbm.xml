@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.study">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study">
    <class name="Histology" 
     	table="HISTOLOGY"
         lazy="true">
@@ -75,7 +75,7 @@
         <set name="studyParticipantCollection" table="HISTOLOGY" lazy="true">
          <cache usage="read-write" />
          <key column="HISTOLOGY_ID" />
-         <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.StudyParticipant"
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.StudyParticipant"
                        column="PARTICIPANT_DID" />
       </set>
        -->
@@ -83,7 +83,7 @@
        <!-- here is for 1-1 relationships -->
        <!-- TODO: CHECK WITH DANA.  TIMECOURSE_ID (property-ref) should be "id"
         <one-to-one name="timeCourse"
-               class="gov.nih.nci.rembrandt.domain.cgems.study.TimeCourse"
+               class="gov.nih.nci.caintegrator.domain.study.TimeCourse"
            property-ref="TIMECOURSE_ID"  constrained="false" embed-xml="true" />
        -->
  	</class>

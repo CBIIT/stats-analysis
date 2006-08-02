@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.analysis.snp">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.analysis.snp">
    <class name="SNPAssociationFinding" 
     	table="SNP_ANALYSIS_FINDING_FACT"
         lazy="true">
@@ -43,8 +43,8 @@
             
      <!--  m-1 relationship -->
     
-   <many-to-one name="snpAnnotation" lazy="false"  class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPAnnotation" column="SNPANNO_ID" />
-   <many-to-one name="snpAssociationAnalysis" lazy="false" class="gov.nih.nci.rembrandt.domain.cgems.analysis.snp.SNPAssociationAnalysis" column="ASSO_ANALYSIS_ID" />
+   <many-to-one name="snpAnnotation" lazy="false"  class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation" column="SNPANNO_ID" />
+   <many-to-one name="snpAssociationAnalysis" lazy="false" class="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationAnalysis" column="ASSO_ANALYSIS_ID" />
       
       
 	</class>

@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.study">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study">
    <class name="StudyParticipant" 
     	table="STUDY_PARTICIPANT"
         lazy="true">
@@ -129,7 +129,7 @@
       <set name="analysisGroupCollection" table="STDPT_ANALYSIS_GRP_AS" lazy="true">
          <cache usage="read-write" />
          <key column="PARTICIPANT_DID" />
-         <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.analysis.snp.SNPAnalysisGroup"
+         <many-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAnalysisGroup"
                 column="ANA_GRP_ID" />
       </set>      
       
@@ -138,7 +138,7 @@
        <set name="histologyCollection" table="HISTOLOGY" lazy="true">
          <cache usage="read-write" />
          <key column="PARTICIPANT_DID" />
-         <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.Histology" column="HISTOLOGY_ID" />
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.Histology" column="HISTOLOGY_ID" />
       </set>
       -->
                 
@@ -149,13 +149,13 @@
      <set name="specimenCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="PARTICIPANT_DID" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.study.Specimen" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.study.Specimen" />
     </set>  
     
       
      <!-- here is for m-1 relationships -->  
-      <many-to-one name="study" class="gov.nih.nci.rembrandt.domain.cgems.study.Study" column="STUDY_NAME"  />
-      <many-to-one name="population" class="gov.nih.nci.rembrandt.domain.cgems.study.Population" column="POPULATION_ID" />
+      <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.Study" column="STUDY_NAME"  />
+      <many-to-one name="population" class="gov.nih.nci.caintegrator.domain.study.Population" column="POPULATION_ID" />
             
       
 	</class>

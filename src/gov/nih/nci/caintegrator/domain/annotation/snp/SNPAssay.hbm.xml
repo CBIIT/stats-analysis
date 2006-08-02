@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.annotation.snp">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.annotation.snp">
    <class name="SNPAssay" 
     	table="SNP_ASSAY"
         lazy="true">
@@ -84,16 +84,16 @@
      <set name="genotypeFindingCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="ASSAY_ID" />
-      <one-to-many class="gov.nih.nci.rembrandt.domain.cgems.finding.variation.germline.GenotypeFinding" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.germline.GenotypeFinding" />
      </set>     
 
    <many-to-one name="snpPanel"
-             class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPPanel"
+             class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPPanel"
              column="SNP_PANEL_ID"
              not-null="true" />
 
    <many-to-one name="snpAnnotation"
-             class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPAnnotation"
+             class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation"
              column="SNPANNO_ID"
              not-null="true" />
 

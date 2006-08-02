@@ -12,7 +12,7 @@
 	"C:/hibernate-3.1/src/org/hibernate/hibernate-mapping-3.0.dtd">
 	
 
-<hibernate-mapping package="gov.nih.nci.rembrandt.domain.cgems.annotation.gene">
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.annotation.gene">
    <class name="GeneBiomarker" 
     	table="GENE_DIM"
         lazy="true">
@@ -78,7 +78,7 @@
       <set name="snpAnnotationCollection" table="GENE_SNP_ASSO" lazy="true">
          <cache usage="read-write" />
          <key column="GENE_ID" />
-         <many-to-many class="gov.nih.nci.rembrandt.domain.cgems.annotation.snp.SNPAnnotation" column="SNPANNO_ID" />
+         <many-to-many class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation" column="SNPANNO_ID" />
       </set>                         
 	</class>
 </hibernate-mapping>
