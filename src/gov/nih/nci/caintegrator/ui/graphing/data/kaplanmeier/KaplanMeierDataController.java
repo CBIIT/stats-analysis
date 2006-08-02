@@ -152,7 +152,11 @@ public class KaplanMeierDataController {
 		}
 		populateStoredData();
 	}
-	public KaplanMeierDataController(KaplanMeierSampleInfo[] sampleList1, KaplanMeierSampleInfo[] sampleList2, String plotType) {
+	
+	public KaplanMeierDataController(KaplanMeierSampleInfo[] sampleList1, KaplanMeierSampleInfo[] sampleList2, String plotType, String group1Name, String group2Name) {
+		String g1 = (group1Name!=null && group1Name.length()>0) ? group1Name : "All Samples";
+		String g2 = (group2Name!=null && group2Name.length()>0) ? group2Name : "All Samples";
+		
 		final DecimalFormat decimalFormat = new DecimalFormat("0.0");	
 		setPlotType(plotType);
 		kaplanMeier = new KaplanMeierAlgorithms(sampleList1, sampleList2);
@@ -161,16 +165,21 @@ public class KaplanMeierDataController {
 				plotPointSeriesSetCollection = new ArrayList<KaplanMeierPlotPointSeriesSet>();
 				// Sample List of Interest Series
 				plotPointSeriesSetCollection.add(getDataSeries(sampleList1, Regulation.SAMPLE_LIST1,
-						"Samples Of Interest", Color.RED));
+						g1 /*"Samples Of Interest"*/, Color.RED));
 				// Sample List of Interest Series
 				plotPointSeriesSetCollection.add(getDataSeries(sampleList2, Regulation.SAMPLE_LIST2,
-						"Rest of Samples", Color.BLUE));	
+						g2 /*"Rest of Samples"*/, Color.BLUE));	
 			}			
 		} else {
 			logger.error("gov.nih.nci.nautilus.ui.struts.form.quicksearch.noRecord");
 			// throw new exception
 		}
 		populateStoredDataforSamplePlot();
+
+	}
+	
+	public KaplanMeierDataController(KaplanMeierSampleInfo[] sampleList1, KaplanMeierSampleInfo[] sampleList2, String plotType) {
+		this(sampleList1, sampleList2, plotType, "Samples Of Interest", "Rest of the Samples");
 	}
 	/**
 	 * This method will create and ecapsulate all the required stored data 
