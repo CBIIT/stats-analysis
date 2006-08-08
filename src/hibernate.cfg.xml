@@ -27,5 +27,4 @@
 
 
     </session-factory>
-<!-- "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"> -->
 </hibernate-configuration>
