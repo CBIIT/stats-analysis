@@ -3,7 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-	<session-factory name="foo">
+	<session-factory name="cgems">
         <!-- Database connection settings -->
         <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
         <property name="connection.url">jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CPDEV</property>
