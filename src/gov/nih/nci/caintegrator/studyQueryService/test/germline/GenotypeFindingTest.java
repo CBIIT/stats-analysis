@@ -46,7 +46,7 @@ public class GenotypeFindingTest extends TestCase {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
         ppc.setChromosome("8");
         ppc.setStartPosition(new Long(76065000));  // 76065158
-        ppc.setEndPosition(new Long(76075000));    // should give 4 GenotypeFindings
+        ppc.setEndPosition(new Long(76070000));    // should give 4 GenotypeFindings
 
         /*
         ppc.setChromosome("X");
@@ -65,13 +65,13 @@ public class GenotypeFindingTest extends TestCase {
     protected void setUpDBSnpCrit() {
        Collection<String> dbSNPIds = new ArrayList<String>();
        dbSNPIds.add("rs10215692");
-       dbSNPIds.add("rs10216611");
+       //dbSNPIds.add("rs10216611");
        annotCrit.setSnpIdentifiers(dbSNPIds );
     }
 
     public void testSNPAnnotCrit() {
         setUpSNPPhysicalPositionCrit();
-        executeSearch();
+        executeGenotypeFindingSearch(0, 60);
     }
 
     protected void setUpPanelCrit() {
@@ -83,13 +83,18 @@ public class GenotypeFindingTest extends TestCase {
 
     public void testPanelCrit() {
         setUpPanelCrit();
-        executeSearch();
+        setUpDBSnpCrit();
+        executeGenotypeFindingSearch(0, 60);
     }
 
+    public void testDBSnpCrit() {
+        setUpDBSnpCrit();
+        executeGenotypeFindingSearch(0, 60);
+    }
     public void testPanelAndSNPAnnotCrit() {
         setUpPanelCrit();
         setUpSNPPhysicalPositionCrit();
-        executeSearch();
+        executeGenotypeFindingSearch(0, 60);
     }
     public void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
@@ -179,7 +184,7 @@ public class GenotypeFindingTest extends TestCase {
         //setUpGenotypeCrit();
 
         // 4. execute search
-        executeGenotypeFindingSearch(0, 100);
+        executeGenotypeFindingSearch(0, 60);
     }
 
     private void executeGenotypeFindingSearch(int startIndex, int endIndex) {
