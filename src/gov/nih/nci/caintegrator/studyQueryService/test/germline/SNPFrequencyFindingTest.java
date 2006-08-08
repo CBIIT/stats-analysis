@@ -1,8 +1,8 @@
 package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
-import gov.nih.nci.caintegrator.domain.finding.Finding;
-import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.SNPFrequencyFinding;
-import gov.nih.nci.caintegrator.domain.study.Population;
+import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
+import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
@@ -59,7 +59,7 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
     }
     public static Test suite() {
         TestSuite suit =  new TestSuite();
-        suit.addTest(new TestSuite(SNPFrequencyFinding.class));
+        suit.addTest(new TestSuite(SNPFrequencyFindingTest.class));
         return suit;
     }
 

@@ -1,9 +1,9 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
-import gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationAnalysis;
-import gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding;
-import gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation;
-import gov.nih.nci.caintegrator.domain.finding.Finding;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
+import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.*;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;

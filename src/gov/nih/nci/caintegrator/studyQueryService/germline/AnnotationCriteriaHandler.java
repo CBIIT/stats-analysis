@@ -108,8 +108,8 @@ public class AnnotationCriteriaHandler {
 
     private static void handlePositionCriteria(PhysicalPositionCriteria poistionCrit, StringBuffer snpAnnotHSQL, HashMap params) {
         String chromosome = poistionCrit.getChromosome();
-        Long startPos = poistionCrit.getStartPosition();
-        Long endPos = poistionCrit.getEndPosition();
+        Integer startPos = poistionCrit.getStartPosition();
+        Integer endPos = poistionCrit.getEndPosition();
 
         if ((chromosome == null) || (startPos == null) || (endPos == null) )
              throw new RuntimeException("Chromosme, StartPosition, EndPosition are required ");

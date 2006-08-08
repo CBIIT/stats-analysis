@@ -1,8 +1,8 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
-import gov.nih.nci.caintegrator.domain.finding.Finding;
-import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.SNPFrequencyFinding;
-import gov.nih.nci.caintegrator.domain.study.Population;
+import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
+import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.util.HQLHelper;

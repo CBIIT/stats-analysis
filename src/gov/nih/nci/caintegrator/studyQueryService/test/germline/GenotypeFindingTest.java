@@ -1,25 +1,27 @@
 package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
-import junit.framework.TestCase;
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation;
-import gov.nih.nci.caintegrator.domain.finding.Finding;
-import gov.nih.nci.caintegrator.domain.finding.SpecimenBasedMolecularFinding;
-import gov.nih.nci.caintegrator.domain.finding.variation.germline.GenotypeFinding;
-import gov.nih.nci.caintegrator.domain.study.DNASpecimen;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
+import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.finding.bean.SpecimenBasedMolecularFinding;
+import gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding;
+import gov.nih.nci.caintegrator.domain.study.bean.DNASpecimen;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.germline.*;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.GenotypeFindingCriteriaDTO;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
-import java.util.Collection;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  * Author: Ram Bhattaru
@@ -45,8 +47,8 @@ public class GenotypeFindingTest extends TestCase {
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
         ppc.setChromosome("8");
-        ppc.setStartPosition(new Long(76065000));  // 76065158
-        ppc.setEndPosition(new Long(76070000));    // should give 4 GenotypeFindings
+        ppc.setStartPosition(new Integer(76065000));  // 76065158
+        ppc.setEndPosition(new Integer(76075000));    // should give 4 GenotypeFindings
 
         /*
         ppc.setChromosome("X");

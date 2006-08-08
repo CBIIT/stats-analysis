@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
-import gov.nih.nci.caintegrator.domain.finding.Finding;
+import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 
 import java.util.Collection;

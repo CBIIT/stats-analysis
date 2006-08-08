@@ -1,7 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
-import gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding;
-import gov.nih.nci.caintegrator.domain.finding.Finding;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding;
+import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.*;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;

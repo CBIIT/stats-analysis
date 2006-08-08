@@ -1,21 +1,26 @@
 package gov.nih.nci.caintegrator.util;
 
-import org.hibernate.cfg.Configuration;
-import org.hibernate.SessionFactory;
-import org.hibernate.Session;
-import org.hibernate.HibernateException;
-import org.hibernate.Transaction;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
+import gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding;
+import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
+import gov.nih.nci.caintegrator.domain.study.bean.Histology;
+import gov.nih.nci.caintegrator.domain.study.bean.Population;
+import gov.nih.nci.caintegrator.domain.study.bean.Specimen;
+import gov.nih.nci.caintegrator.domain.study.bean.Study;
+import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
+import gov.nih.nci.caintegrator.domain.study.bean.TimeCourse;
 
-import gov.nih.nci.caintegrator.domain.analysis.snp.SNPAnalysisGroup;
-import gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationAnalysis;
-import gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding;
-import gov.nih.nci.caintegrator.domain.annotation.gene.GeneBiomarker;
-import gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation;
-import gov.nih.nci.caintegrator.domain.annotation.snp.SNPAssay;
-import gov.nih.nci.caintegrator.domain.annotation.snp.SNPPanel;
-import gov.nih.nci.caintegrator.domain.finding.variation.germline.GenotypeFinding;
-import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.SNPFrequencyFinding;
-import gov.nih.nci.caintegrator.domain.study.*;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 
 public class HibernateUtil {
