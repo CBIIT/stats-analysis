@@ -56,4 +56,13 @@
 		<fail message="Build Failed! The required ${weka.jar} is not present to compile!  Please see ${build.deploy.lib.dir}/readme.txt" />
 	</target>
 	<target name="noop"/>
+    <target name="config_hibernate">
+		<delete file="src/hibernate.cfg.xml"/>
+		<copy file="src/hibernate.cfg.xml.template" tofile="src/hibernate.cfg.xml"/>
+        <replaceregexp file="src/hibernate.cfg.xml" match="__DRIVER__" replace="${connection.driver_class}" flags="g"/>
+		<replaceregexp file="src/hibernate.cfg.xml" match="__DBURL__" replace="${connection.url}" flags="g"/>
+		<replaceregexp file="src/hibernate.cfg.xml" match="__DBUSER__" replace="${connection.username}" flags="g"/>
+		<replaceregexp file="src/hibernate.cfg.xml" match="__DBPASSWORD__" replace="${connection.password}" flags="g"/>
+        <replaceregexp file="src/hibernate.cfg.xml" match="__DIALECT__" replace="${dialect}" flags="g"/>
+     </target>
 </project>
