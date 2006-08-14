@@ -243,15 +243,15 @@ public  class StudyParticipant
    * Indicates whether a patient is surviving.
    */
 
-    private java.lang.Boolean survivalStatus;
+    private java.lang.String survivalStatus;
     /**
    * Indicates whether a patient is surviving.
    */
 
-	public  java.lang.Boolean getSurvivalStatus(){
+	public  java.lang.String getSurvivalStatus(){
         return survivalStatus;
     }
-    public void setSurvivalStatus( java.lang.Boolean survivalStatus){
+    public void setSurvivalStatus( java.lang.String survivalStatus){
         this.survivalStatus = survivalStatus;
     }
 	

@@ -185,29 +185,34 @@ public  class Activity
 	   
 	   
 	      
+			
+			
+			
+			
       /**
    * The treatment arm and other specifics regarding the participation of the Subject to a particular 
    * Study. 
    * 
    */
 
-    private Set <gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant> studyParticipantCollection = new HashSet<gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant>();
+    private gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant studyParticipant;
       /**
    * The treatment arm and other specifics regarding the participation of the Subject to a particular 
    * Study. 
    * 
    */
 
-    public Set <gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant> getStudyParticipantCollection(){
-        return studyParticipantCollection;
+    public gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant getStudyParticipant(){
+        return studyParticipant;			
     }
 
 	      
 	               
 	   
-    public void setStudyParticipantCollection(Set<gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant> studyParticipantCollection){
-        this.studyParticipantCollection = studyParticipantCollection;
-    }
+
+    public void setStudyParticipant(gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant studyParticipant){
+        this.studyParticipant = studyParticipant;
+    }	
 	   
 	   
 	

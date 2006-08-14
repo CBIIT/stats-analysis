@@ -19,7 +19,7 @@
         
        <!-- id -->
        <id name="id" 
-           type="java.lang.String" 
+           type="java.lang.Long" 
            column="TIMECOURSE_ID">
            <generator class="assigned" />
        </id>       

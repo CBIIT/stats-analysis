@@ -24,13 +24,13 @@
            <generator class="assigned" />
        </id>
 
-       <!-- caseControlStatus -->
+       <!-- caseControlStatus 
         <property name="caseControlStatus"
                  type="java.lang.String"
                  column="CASE_CONTROL_STATUS"
                  insert="false"
                  update="false" />
-
+-->
         <!-- administrativeGenderCode -->        
        <property name="administrativeGenderCode" 
                  type="java.lang.String" 
@@ -47,20 +47,20 @@
 
        <component name="ageAtDiagnosis" class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement"> 
             <property name="absoluteValue" column="AGE_AT_DIAGNOSIS" insert="false" update="false"/>
-            <property name="minValue" column="AGE_AT_DIAGNOSIS" insert="false" update="false"/>
-            <property name="maxValue" column="AGE_AT_DIAGNOSIS" insert="false" update="false"/>
+            <property name="minValue" column="AGE_AT_DIAGNOSIS_MIN" insert="false" update="false"/>
+            <property name="maxValue" column="AGE_AT_DIAGNOSIS_MAX" insert="false" update="false"/>
        </component>
 
        <component name="ageAtDeath" class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement"> 
             <property name="absoluteValue" column="AGE_AT_DEATH" insert="false" update="false"/>
-            <property name="minValue" column="AGE_AT_DEATH" insert="false" update="false"/>
-            <property name="maxValue" column="AGE_AT_DEATH" insert="false" update="false"/>
+            <property name="minValue" column="AGE_AT_DEATH_MIN" insert="false" update="false"/>
+            <property name="maxValue" column="AGE_AT_DEATH_MAX" insert="false" update="false"/>
        </component>
 
        <component name="ageAtEnrollment" class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement"> 
             <property name="absoluteValue" column="AGE_AT_ENROLL" insert="false" update="false"/>
-            <property name="minValue" column="AGE_AT_ENROLL" insert="false" update="false"/>
-            <property name="maxValue" column="AGE_AT_ENROLL" insert="false" update="false"/>
+            <property name="minValue" column="AGE_AT_ENROLL_MIN" insert="false" update="false"/>
+            <property name="maxValue" column="AGE_AT_ENROLL_MAX" insert="false" update="false"/>
        </component>
                 
         <!-- ageAtEnrollment 
@@ -127,7 +127,7 @@
                 
 	     <!--  survivalStatus -->                 
         <property name="survivalStatus" 
-                 type="org.hibernate.type.YesNoType"
+                 type="java.lang.String"
                  column="SURVIVAL_STATUS"
                  insert="false" 
                  update="false" />                 
@@ -161,7 +161,11 @@
      
     <!-- here is for 1-m relationships --> 
  
-    
+    <set name="activityCollection" inverse="true" cascade="none">
+        <key column="PATIENT_DID" not-null="false"/>
+        <one-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Activity"/>
+    </set> 
+ 
      <set name="specimenCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="PARTICIPANT_DID" />
