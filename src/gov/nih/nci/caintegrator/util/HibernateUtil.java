@@ -52,23 +52,6 @@ public class HibernateUtil {
                                 configure().
                                 buildSessionFactory();
 */
-
-                                c.addClass(GenotypeFinding.class);
-                                c.addClass(SNPAssay.class);
-                                c.addClass(SNPPanel.class);
-                                c.addClass(SNPAnnotation.class);
-                                c.addClass(SNPAnalysisGroup.class);
-                                c.addClass(Histology.class);
-                                c.addClass(Population.class);
-                                c.addClass(SNPAssociationAnalysis.class);
-                                c.addClass(SNPAssociationFinding.class);
-                                c.addClass(SNPFrequencyFinding.class);
-                                c.addClass(Specimen.class);
-                                c.addClass(Study.class);
-                                c.addClass(StudyParticipant.class);
-                                c.addClass(TimeCourse.class);
-                                c.addClass(GeneBiomarker.class);
-
            sessionFactory = c.configure().
                                 buildSessionFactory();
 
