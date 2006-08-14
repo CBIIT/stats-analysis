@@ -60,11 +60,15 @@ package gov.nih.nci.breastCancer.service;
 import gov.nih.nci.breastCancer.dto.BreastCancerClinicalFindingCriteria;
 import gov.nih.nci.breastCancer.dto.ClinicalFindingCriteria;
 import gov.nih.nci.caintegrator.domain.finding.clinical.breastCancer.bean.BreastCancerClinicalFinding;
+import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.enumeration.Operator;
+import gov.nih.nci.caintegrator.util.HQLHelper;
+import gov.nih.nci.caintegrator.util.HibernateUtil;
 
-import java.util.HashMap;
+import java.util.*;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
@@ -153,6 +157,24 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
         }
 
         /////////////////////////////////////////////////////
+        // Handle pathlogical tumor size parameter
+        /////////////////////////////////////////////////////
+        if (theCriteria.getPathologicalTumorSize() != null)
+        {
+            if (theCriteria.getPathologicalTumorSizeOperator() == Operator.GE)
+            {
+                theHQL.append(theANDString + " f.pathologicalTumorSize >= :pathologicalTumorSize ");
+            }
+            else if (theCriteria.getPathologicalTumorSizeOperator() == Operator.LE)
+            {
+                theHQL.append(theANDString + " f.pathologicalTumorSize <= :pathologicalTumorSize ");
+            }
+
+            inParams.put("pathologicalTumorSize", theCriteria.getPathologicalTumorSize());
+            theANDString = " AND ";
+        }
+
+        /////////////////////////////////////////////////////
         // Handle nodal morphology parameter
         /////////////////////////////////////////////////////
         if (theCriteria.getNodalMorphologyCollection() != null && theCriteria.getNodalMorphologyCollection().size() > 0)
@@ -164,18 +186,18 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
 
         /////////////////////////////////////////////////////
         // Handle percent LD change parameter
+        //
+        // NOTE: This is timepoint based, plus the GUI 
+        // specifies it as percentage "decrease", so we need
+        // to map it differently as the database stores 
+        // it as a delta.
         /////////////////////////////////////////////////////
         if (theCriteria.getPercentLDChange() != null)
         {
-            if (theCriteria.getPercentLDChangeOperator() == Operator.GE)
-            {
-                theHQL.append(theANDString + " f.percentLDChange >= :percentLDChange ");
-            }
-            else if (theCriteria.getPercentLDChangeOperator() == Operator.LE)
-            {
-                theHQL.append(theANDString + " f.percentLDChange <= :percentLDChange ");
-            }
-            inParams.put("percentLDChange", theCriteria.getPercentLDChange());
+            Set<String> theSPs = getStudyParticipantsForLDChange(theCriteria);
+            
+            theHQL.append(theANDString + " f.studyParticipant IN (:f_studyParticipants) ");
+            inParams.put("f_studyParticipants", theSPs);
             theANDString = " AND ";
         }
 
@@ -234,15 +256,85 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
             theANDString = " AND ";
         }
 
+        /////////////////////////////////////////////////////
+        // Handle chemo parameter
+        /////////////////////////////////////////////////////
+        if (theCriteria.getChemoCollection() != null && theCriteria.getChemoCollection().size() > 0)
+        {
+            theHQL.append(theANDString + " f.chemo IN (:f_chemo) ");
+            inParams.put("f_chemo", theCriteria.getChemoCollection());
+            theANDString = " AND ";
+        }
+
+
         logger.info("HQL: " + theHQL.toString());
         logger.debug("Exiting handleCriteria");
 
         return theHQL;
     }
+    
+    //////////////////////////////////////////////////////////////
+    // Get a list of the study participant ID's for an LD and TimeCourse
+    //////////////////////////////////////////////////////////////
+    private Set<String> getStudyParticipantsForLDChange(BreastCancerClinicalFindingCriteria inCriteria)
+    {
+        logger.debug("Entering getStudyParticipantsForLDChange");
+        
+        Set<String> theReturnSet = new HashSet<String>();
+
+        String theHQL = "from BreastCancerClinicalFinding AS f LEFT JOIN FETCH f.studyParticipant  ";
+        
+        // Only look @ records if they are associated w/ a SP who has a finding that matches
+        if (inCriteria.getPercentLDChangeOperator() == Operator.GE)
+        {
+            theHQL += " WHERE f.percentLDChangeFromBaseline <= :f_percentLDChangeFromBaseline AND f.timeCourse.name = :f_timeCourse_name";
+        }
+        else if (inCriteria.getPercentLDChangeOperator() == Operator.LE)
+        {
+            theHQL += " WHERE f.percentLDChangeFromBaseline >= :f_percentLDChangeFromBaseline AND f.timeCourse.name = :f_timeCourse_name";         
+        }
+        
+        HashMap<String, Object> theParams = new HashMap<String, Object>();
+        theParams.put("f_percentLDChangeFromBaseline", -1.0 * inCriteria.getPercentLDChange());
+        theParams.put("f_timeCourse_name", inCriteria.getPercentLDChangeTimeCourse());
+        
+        try
+        {
+            Session theSession = HibernateUtil.getSession();
+            Query theQuery = theSession.createQuery(theHQL.toString());
+            HQLHelper.setParamsOnQuery(theParams, theQuery);
+
+            List theSPList = theQuery.list();
+
+            for (Object theObject : theSPList)
+            {
+                BreastCancerClinicalFinding theSP = (BreastCancerClinicalFinding) theObject;
+                theReturnSet.add(theSP.getStudyParticipant().getId());
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            logger.error("Error getting study participant IDs: ", e);
+        }
+        
+        // Nothing matched.  Return a -1, thus matching nothing
+        if (theReturnSet.size() == 0)
+        {
+            theReturnSet.add("-1");
+        }
+        
+        logger.debug("Exiting getStudyParticipantsForLDChange");
+        
+        return theReturnSet;
+    }
 }
 
 /**
- * $Id: BreastCancerClinicalFindingHandler.java,v 1.1 2006-08-14 16:59:40 georgeda Exp $
+ * $Id: BreastCancerClinicalFindingHandler.java,v 1.2 2006-08-14 20:14:57 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/08/14 16:59:40  georgeda
+ * Initial revision
+ *
  */

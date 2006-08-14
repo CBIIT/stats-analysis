@@ -76,9 +76,11 @@ public class BreastCancerClinicalFindingCriteria extends ClinicalFindingCriteria
     private Operator pathologicalTumorSizeOperator;
     private Double percentLDChange;
     private Operator percentLDChangeOperator;
+    private String percentLDChangeTimeCourse;
     private Set<String> estrogenReceptorStatusCollection;
     private Set<String> her2CommunityAssessmentCollection;
     private Set<String> progesteronReceptorStatusCollection;
+    private Set<String> chemoCollection;
     
     /**
      * Get the specific handler for the BreastCancerClinicalFinding object
@@ -313,10 +315,45 @@ public class BreastCancerClinicalFindingCriteria extends ClinicalFindingCriteria
     {
         this.progesteronReceptorStatusCollection = progesteronReceptorStatusCollection;
     }
+
+    /**
+     * @return Returns the chemoCollection.
+     */
+    public Set<String> getChemoCollection()
+    {
+        return chemoCollection;
+    }
+
+    /**
+     * @param chemoCollection The chemoCollection to set.
+     */
+    public void setChemoCollection(Set<String> chemoCollection)
+    {
+        this.chemoCollection = chemoCollection;
+    }
+
+    /**
+     * @return Returns the percentLDChangeTimeCourse.
+     */
+    public String getPercentLDChangeTimeCourse()
+    {
+        return percentLDChangeTimeCourse;
+    }
+
+    /**
+     * @param percentLDChangeTimeCourse The percentLDChangeTimeCourse to set.
+     */
+    public void setPercentLDChangeTimeCourse(String percentLDChangeTimeCourse)
+    {
+        this.percentLDChangeTimeCourse = percentLDChangeTimeCourse;
+    }
 }
 
 /**
- *  $Id: BreastCancerClinicalFindingCriteria.java,v 1.1 2006-08-14 16:59:40 georgeda Exp $
+ *  $Id: BreastCancerClinicalFindingCriteria.java,v 1.2 2006-08-14 20:14:57 georgeda Exp $
  * 
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.1  2006/08/14 16:59:40  georgeda
+ *  Initial revision
+ *
  */

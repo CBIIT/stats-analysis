@@ -264,8 +264,6 @@ public class StudyParticipantHandler
             for (Object theObject : theSAList)
             {
                 SubstanceAdministration theSA = (SubstanceAdministration) theObject;
-
-                System.out.println("ID: " + theSA.getStudyParticipant().getId());
                 theReturnSet.add(theSA.getStudyParticipant().getId());
             }
         }
@@ -289,7 +287,10 @@ public class StudyParticipantHandler
 }
 
 /**
- * $Id: StudyParticipantHandler.java,v 1.1 2006-08-14 16:59:40 georgeda Exp $
+ * $Id: StudyParticipantHandler.java,v 1.2 2006-08-14 20:14:57 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2006/08/14 16:59:40  georgeda
+ * Initial revision
+ *
  */
