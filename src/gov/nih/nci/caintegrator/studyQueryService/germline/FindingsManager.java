@@ -19,7 +19,8 @@ public class FindingsManager {
         return findingCritDTO.getHandler().getFindings(findingCritDTO, fromIndex, toIndex);
     }
 
-    public static Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit) {
-        return SNPAnnotationCriteriaHandler.
+    public static Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
+    throws Exception {
+        return SNPAnnotationCriteriaHandler.getSNPAnnotations(annotCrit, null);
     }
 }

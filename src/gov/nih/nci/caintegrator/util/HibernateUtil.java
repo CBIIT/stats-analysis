@@ -9,12 +9,7 @@ import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
 import gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding;
 import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
-import gov.nih.nci.caintegrator.domain.study.bean.Histology;
-import gov.nih.nci.caintegrator.domain.study.bean.Population;
-import gov.nih.nci.caintegrator.domain.study.bean.Specimen;
-import gov.nih.nci.caintegrator.domain.study.bean.Study;
-import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
-import gov.nih.nci.caintegrator.domain.study.bean.TimeCourse;
+import gov.nih.nci.caintegrator.domain.study.bean.*;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -33,7 +28,7 @@ public class HibernateUtil {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration c= new Configuration();
-            /*sessionFactory = c.
+            sessionFactory = c.
                                 addClass(GenotypeFinding.class).
                                 addClass(SNPAssay.class).
                                 addClass(SNPPanel.class).
@@ -48,12 +43,12 @@ public class HibernateUtil {
                                 addClass(Study.class).
                                 addClass(StudyParticipant.class).
                                 addClass(TimeCourse.class).
-
+                                addClass(Activity.class).
+                                addClass(GeneBiomarker.class).
                                 configure().
                                 buildSessionFactory();
-*/
-           sessionFactory = c.configure().
-                                buildSessionFactory();
+
+
 
         } catch (Throwable ex) {
             ex.printStackTrace();

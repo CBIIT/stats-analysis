@@ -10,14 +10,14 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCrite
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria;
 import gov.nih.nci.caintegrator.util.HQLHelper;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 
 /**
  * Author: Ram Bhattaru
  * Date:   Jul 5, 2006
  * Time:   4:52:03 PM
  */
-public class AnnotationCriteriaHandler {
-   // private final static String TARGET_SNPANNOTATION_ALIAS = "s";
+public class SNPAnnotationCriteriaHandler {
     /**
      * This method converts each of the annotation specified in the criteria in
      * to AnnotationIDs.  In the current release only PanelCriteria, PositionCriteria
@@ -106,6 +106,22 @@ public class AnnotationCriteriaHandler {
         return allSNPAnnotIDs;
     }
 
+    /**
+     * This method converts each of the annotation specified in the criteria in
+     * to AnnotationIDs.  In the current release only PanelCriteria, PositionCriteria
+    *  and SnpIdentifier are only supported.  CytobandCriteria,   GenePathways,
+    *  GeneOntology are not supported in thie release.
+    *  criteria
+     *
+     * @param annotCrit
+     * @param session
+     * @return Set of SNPAnnotation IDs
+     */
+
+  /*  public static List<SNPAnnotation> handle(AnnotationCriteria annotCrit,  Session session)
+    throws Exception {
+
+    }*/
     private static void handlePositionCriteria(PhysicalPositionCriteria poistionCrit, StringBuffer snpAnnotHSQL, HashMap params) {
         String chromosome = poistionCrit.getChromosome();
         Integer startPos = poistionCrit.getStartPosition();
