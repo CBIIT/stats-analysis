@@ -78,7 +78,7 @@ public class BreastCancerClinicalFindingCriteria extends ClinicalFindingCriteria
     private Operator percentLDChangeOperator;
     private String percentLDChangeTimeCourse;
     private Set<String> estrogenReceptorStatusCollection;
-    private Set<String> her2CommunityAssessmentCollection;
+    private Set<String> her2AssessmentCollection;
     private Set<String> progesteronReceptorStatusCollection;
     private Set<String> chemoCollection;
     
@@ -143,17 +143,17 @@ public class BreastCancerClinicalFindingCriteria extends ClinicalFindingCriteria
     /**
      * @return Returns the her2CommunityAssessmentCollection.
      */
-    public Set<String> getHer2CommunityAssessmentCollection()
+    public Set<String> getHer2AssessmentCollection()
     {
-        return her2CommunityAssessmentCollection;
+        return her2AssessmentCollection;
     }
 
     /**
-     * @param her2CommunityAssessmentCollection The her2CommunityAssessmentCollection to set.
+     * @param her2AssessmentCollection The her2AssessmentCollection to set.
      */
-    public void setHer2CommunityAssessmentCollection(Set<String> her2CommunityAssessmentCollection)
+    public void setHer2AssessmentCollection(Set<String> her2AssessmentCollection)
     {
-        this.her2CommunityAssessmentCollection = her2CommunityAssessmentCollection;
+        this.her2AssessmentCollection = her2AssessmentCollection;
     }
 
     /**
@@ -350,9 +350,12 @@ public class BreastCancerClinicalFindingCriteria extends ClinicalFindingCriteria
 }
 
 /**
- *  $Id: BreastCancerClinicalFindingCriteria.java,v 1.2 2006-08-14 20:14:57 georgeda Exp $
+ *  $Id: BreastCancerClinicalFindingCriteria.java,v 1.3 2006-08-15 19:48:08 georgeda Exp $
  * 
  *  $Log: not supported by cvs2svn $
+ *  Revision 1.2  2006/08/14 20:14:57  georgeda
+ *  Finished fleshing out mappings from DTO to DB and back
+ *
  *  Revision 1.1  2006/08/14 16:59:40  georgeda
  *  Initial revision
  *

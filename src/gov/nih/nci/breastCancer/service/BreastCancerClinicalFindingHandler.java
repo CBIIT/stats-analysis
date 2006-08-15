@@ -106,6 +106,7 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
         /////////////////////////////////////////////////////
         if (theCriteria.getClinicalStageCollection() != null && theCriteria.getClinicalStageCollection().size() > 0)
         {
+            System.out.println("Clinical stage: " + theCriteria.getClinicalStageCollection());
             theHQL.append(theANDString + " f.clinicalStage IN (:f_clinicalStage) ");
             inParams.put("f_clinicalStage", theCriteria.getClinicalStageCollection());
             theANDString = " AND ";
@@ -116,6 +117,7 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
         /////////////////////////////////////////////////////
         if (theCriteria.getClinicalResponseCollection() != null && theCriteria.getClinicalResponseCollection().size() > 0)
         {
+            System.out.println("Clinical response: " + theCriteria.getClinicalResponseCollection());
             theHQL.append(theANDString + " f.clinicalResponse IN (:f_clinicalResponse) ");
             inParams.put("f_clinicalResponse", theCriteria.getClinicalResponseCollection());
             theANDString = " AND ";
@@ -222,16 +224,16 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
         /////////////////////////////////////////////////////
         // Handle her2 community assessment parameter
         /////////////////////////////////////////////////////
-        if (theCriteria.getHer2CommunityAssessmentCollection() != null && theCriteria.getHer2CommunityAssessmentCollection().size() > 0)
+        if (theCriteria.getHer2AssessmentCollection() != null && theCriteria.getHer2AssessmentCollection().size() > 0)
         {
 
             theHQL.append(theANDString + " ( ");
             String theORClause = "";
             int count = 0;
-            for (String theHER2Status : theCriteria.getHer2CommunityAssessmentCollection())
+            for (String theHER2Status : theCriteria.getHer2AssessmentCollection())
             {
-                theHQL.append(theORClause + " f.her2CommunityAssessment LIKE :f_her2CommunityAssessment" + count);
-                inParams.put("f_her2CommunityAssessment" + count++, "%" + theHER2Status + "%");
+                theHQL.append(theORClause + " f.her2Assessment LIKE :f_her2Assessment" + count);
+                inParams.put("f_her2Assessment" + count++, "%" + theHER2Status + "%");
                 theORClause = " OR ";
             }
             theHQL.append(" ) ");
@@ -331,9 +333,12 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
 }
 
 /**
- * $Id: BreastCancerClinicalFindingHandler.java,v 1.2 2006-08-14 20:14:57 georgeda Exp $
+ * $Id: BreastCancerClinicalFindingHandler.java,v 1.3 2006-08-15 19:48:18 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/08/14 20:14:57  georgeda
+ * Finished fleshing out mappings from DTO to DB and back
+ *
  * Revision 1.1  2006/08/14 16:59:40  georgeda
  * Initial revision
  *
