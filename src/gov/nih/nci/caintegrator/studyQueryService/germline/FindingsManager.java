@@ -1,7 +1,9 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
+import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 
 import java.util.Collection;
 
@@ -15,5 +17,9 @@ public class FindingsManager {
                                                             int toIndex)
     throws Exception {
         return findingCritDTO.getHandler().getFindings(findingCritDTO, fromIndex, toIndex);
+    }
+
+    public static Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit) {
+        return SNPAnnotationCriteriaHandler.
     }
 }

@@ -30,7 +30,7 @@ abstract public class FindingsHandler {
          /* 1. Handle AnnotationCriteria which will bring back SNPs */
          AnnotationCriteria annotCrit = critDTO.getAnnotationCriteria();
          if (annotCrit != null) {
-           snpAnnotationIDs = AnnotationCriteriaHandler.handle(annotCrit, session);
+           snpAnnotationIDs = SNPAnnotationCriteriaHandler.handle(annotCrit, session);
          }
 
          System.out.print("SNP Annotations Retrieved: " + snpAnnotationIDs.size());
