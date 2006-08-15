@@ -118,10 +118,10 @@ public class SNPAnnotationCriteriaHandler {
      * @return Set of SNPAnnotation IDs
      */
 
-  /*  public static List<SNPAnnotation> handle(AnnotationCriteria annotCrit,  Session session)
+    public static List<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit,  Session session)
     throws Exception {
-
-    }*/
+      return null;
+    }
     private static void handlePositionCriteria(PhysicalPositionCriteria poistionCrit, StringBuffer snpAnnotHSQL, HashMap params) {
         String chromosome = poistionCrit.getChromosome();
         Integer startPos = poistionCrit.getStartPosition();
