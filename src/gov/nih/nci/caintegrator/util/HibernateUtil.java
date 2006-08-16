@@ -1,20 +1,15 @@
 package gov.nih.nci.caintegrator.util;
 
-import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
-import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
-import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.*;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
-import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
-import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay;
-import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.*;
+import gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding;
+import gov.nih.nci.caintegrator.domain.finding.clinical.breastCancer.bean.BreastCancerClinicalFinding;
 import gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding;
 import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
 import gov.nih.nci.caintegrator.domain.study.bean.*;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
 
@@ -45,6 +40,10 @@ public class HibernateUtil {
                                 addClass(TimeCourse.class).
                                 addClass(Activity.class).
                                 addClass(GeneBiomarker.class).
+                                addClass(ClinicalFinding.class).
+                                addClass(BreastCancerClinicalFinding.class).
+                                addClass(Agent.class).
+                                addClass(Procedure.class).
                                 configure().
                                 buildSessionFactory();
 
