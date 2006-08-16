@@ -1,13 +1,12 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 import org.hibernate.Session;
 
@@ -43,5 +42,15 @@ abstract public class FindingsHandler {
 
          session.close();
          return findings;
+     }
+
+     public static List<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
+     throws Exception {
+         List<SNPAnnotation> snpAnnotationObjs = new ArrayList<SNPAnnotation>();
+         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+         session.beginTransaction();
+         snpAnnotationObjs = SNPAnnotationCriteriaHandler.getSNPAnnotations(annotCrit, session);
+         session.close();
+         return snpAnnotationObjs;
      }
 }

@@ -13,14 +13,14 @@ import java.util.Collection;
  * Time: 5:21:49 PM
  */
 public class FindingsManager {
-    public static Collection<? extends Finding> getFindings(FindingCriteriaDTO findingCritDTO, int fromIndex,
-                                                            int toIndex)
+    public static Collection<? extends Finding> getFindings(FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
     throws Exception {
-        return findingCritDTO.getHandler().getFindings(findingCritDTO, fromIndex, toIndex);
+        return findingCritDTO.getHandler().getFindings(
+                findingCritDTO, fromIndex, toIndex);
     }
 
     public static Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
     throws Exception {
-        return SNPAnnotationCriteriaHandler.getSNPAnnotations(annotCrit, null);
+        return FindingsHandler.getSNPAnnotations(annotCrit);
     }
 }

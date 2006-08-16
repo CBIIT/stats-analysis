@@ -67,7 +67,7 @@ public class GenotypeFindingTest extends TestCase {
     protected void setUpDBSnpCrit() {
        Collection<String> dbSNPIds = new ArrayList<String>();
        dbSNPIds.add("rs10215692");
-       //dbSNPIds.add("rs10216611");
+       dbSNPIds.add("rs10216611");
        annotCrit.setSnpIdentifiers(dbSNPIds );
     }
 
