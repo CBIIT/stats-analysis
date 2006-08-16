@@ -98,7 +98,7 @@ public class GenotypeFindingTest extends TestCase {
         setUpSNPPhysicalPositionCrit();
         executeGenotypeFindingSearch(0, 60);
     }
-    public void setUpGeneBiomarkerCrit() {
+    protected void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
         geneSymbols.add(new String("USP48"));
         geneSymbols.add(new String("HSPG2"));
@@ -117,7 +117,7 @@ public class GenotypeFindingTest extends TestCase {
         setUpStudyParticipantAttributesCriteria();
    }
 
-    private void setUpStudyParticipantAttributesCriteria() {
+    protected void setUpStudyParticipantAttributesCriteria() {
         spCrit.setAgeAtDeath(85);
         spCrit.setAgeAtDiagnosis(45);
         spCrit.setAgeAtEnrollment(46);
@@ -160,14 +160,14 @@ public class GenotypeFindingTest extends TestCase {
         spCrit.setStudySubjectIdentifierCollection (cs);
     }
 
-    private void setUpStudyCriteria() {
+    protected void setUpStudyCriteria() {
         StudyCriteria studyCrit = new StudyCriteria();
         studyCrit.setName("A");
         studyCrit.setSponsorStudyIdentifier("NIH");
         spCrit.setStudyCriteria(studyCrit);
     }
 
-     private void setUpPopulationCriteria() {
+     protected void setUpPopulationCriteria() {
         PopulationCriteria popCrit = new PopulationCriteria();
         popCrit.setName("Mexican");
         spCrit.setPopulationCriteria(popCrit);
