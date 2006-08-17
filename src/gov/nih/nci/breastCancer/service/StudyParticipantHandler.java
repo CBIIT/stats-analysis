@@ -208,23 +208,13 @@ public class StudyParticipantHandler
         /////////////////////////////////////////////////////
         if (inCriteria.getAgeCollection() != null)
         {
-            String theMaxParameterName = "AGE_AT_DIAGNOSIS_MAX";
-            String theMinParameterName = "AGE_AT_DIAGNOSIS_MIN";
-
             theHQL.append(theANDString + "(");
 
             String theORClause = "";
-            int count = 0;
             for (NumericMeasurement theValue : inCriteria.getAgeCollection())
             {
-
-                String theParameterName = theMinParameterName + count;
-                theHQL.append(theORClause + " ( s.ageAtDiagnosis.minValue >= :" + theParameterName);
-                inParams.put(theParameterName, theValue.getMinValue());
-
-                theParameterName = theMaxParameterName + count;
-                theHQL.append(" AND s.ageAtDiagnosis.maxValue <= :" + theParameterName + ") ");
-                inParams.put(theParameterName, theValue.getMaxValue());
+                theHQL.append(theORClause + " ( s.ageAtDiagnosis.minValue >= " + theValue.getMinValue().intValue());
+                theHQL.append(" AND s.ageAtDiagnosis.maxValue <= " + theValue.getMaxValue().intValue() +  ") ");
                 theORClause = " OR ";
             }
 
@@ -287,9 +277,12 @@ public class StudyParticipantHandler
 }
 
 /**
- * $Id: StudyParticipantHandler.java,v 1.2 2006-08-14 20:14:57 georgeda Exp $
+ * $Id: StudyParticipantHandler.java,v 1.3 2006-08-17 19:25:57 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/08/14 20:14:57  georgeda
+ * Finished fleshing out mappings from DTO to DB and back
+ *
  * Revision 1.1  2006/08/14 16:59:40  georgeda
  * Initial revision
  *
