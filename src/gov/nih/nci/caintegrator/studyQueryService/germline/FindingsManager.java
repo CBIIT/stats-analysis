@@ -3,7 +3,9 @@ package gov.nih.nci.caintegrator.studyQueryService.germline;
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 
@@ -30,5 +32,10 @@ public class FindingsManager {
     public static Collection<Study> getStudies(StudyCriteria studyCrit)
     throws Exception {
         return ObjectQueryHandler.getStudyObjects(studyCrit);
+    }
+
+    public static Collection<SNPAssociationAnalysis> getSNPAssociationAnalysis(SNPAssociationAnalysisCriteria  assocCrit)
+    throws Exception {
+        return ObjectQueryHandler.getSNPAssociationAnalysisObjects(assocCrit);
     }
 }

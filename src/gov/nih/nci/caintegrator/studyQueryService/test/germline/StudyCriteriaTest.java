@@ -28,8 +28,8 @@ public class StudyCriteriaTest extends GenotypeFindingTest {
     }
 
     protected void setUpStudyCriteria() {
-        //studyCrit.setName("A");
-        //studyCrit.setSponsorStudyIdentifier("NIH");
+        //studyCrit.setName("CGEMS Prostate Scan 1");
+        //studyCrit.setSponsorStudyIdentifier("NCI DCEG, NCI OCG");
     }
 
     private void executeSearch() {
