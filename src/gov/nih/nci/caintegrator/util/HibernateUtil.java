@@ -44,6 +44,7 @@ public class HibernateUtil {
                                 addClass(BreastCancerClinicalFinding.class).
                                 addClass(Agent.class).
                                 addClass(Procedure.class).
+                                addClass(SubstanceAdministration.class).
                                 configure().
                                 buildSessionFactory();
 
