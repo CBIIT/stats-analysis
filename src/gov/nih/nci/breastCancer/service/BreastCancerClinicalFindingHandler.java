@@ -60,7 +60,6 @@ package gov.nih.nci.breastCancer.service;
 import gov.nih.nci.breastCancer.dto.BreastCancerClinicalFindingCriteria;
 import gov.nih.nci.breastCancer.dto.ClinicalFindingCriteria;
 import gov.nih.nci.caintegrator.domain.finding.clinical.breastCancer.bean.BreastCancerClinicalFinding;
-import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.enumeration.Operator;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
@@ -333,9 +332,12 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
 }
 
 /**
- * $Id: BreastCancerClinicalFindingHandler.java,v 1.3 2006-08-15 19:48:18 georgeda Exp $
+ * $Id: BreastCancerClinicalFindingHandler.java,v 1.4 2006-08-17 18:05:09 georgeda Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/08/15 19:48:18  georgeda
+ * More cleanup
+ *
  * Revision 1.2  2006/08/14 20:14:57  georgeda
  * Finished fleshing out mappings from DTO to DB and back
  *
