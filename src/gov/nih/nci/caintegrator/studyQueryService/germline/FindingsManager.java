@@ -11,6 +11,7 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCrite
 
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * User: Ram Bhattaru
@@ -26,7 +27,7 @@ public class FindingsManager {
 
     public static Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
     throws Exception {
-        return FindingsHandler.getSNPAnnotations(annotCrit);
+            return FindingsHandler.getSNPAnnotations(annotCrit);
     }
 
     public static Collection<Study> getStudies(StudyCriteria studyCrit)
@@ -38,4 +39,10 @@ public class FindingsManager {
     throws Exception {
         return ObjectQueryHandler.getSNPAssociationAnalysisObjects(assocCrit);
     }
+
+    public static List<String> getChromosomes()
+    throws Exception {
+        return ObjectQueryHandler.getChromosomes();
+    }
+
 }

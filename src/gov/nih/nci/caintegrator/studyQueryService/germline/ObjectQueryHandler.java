@@ -6,16 +6,19 @@ import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 
 
-import java.util.Collection;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.text.MessageFormat;
 
 import org.hibernate.Session;
 import org.hibernate.Query;
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Projections;
 
 /**
  * Author: Ram Bhattaru
@@ -24,6 +27,7 @@ import org.hibernate.Query;
  */
 
 public class ObjectQueryHandler {
+    private static List<String> CHROMOSOME_LIST = null;
 
     public static Collection<Study> getStudyObjects(StudyCriteria studyCrit) {
         if (studyCrit == null) return new ArrayList<Study>();
@@ -56,6 +60,7 @@ public class ObjectQueryHandler {
         Query studyQuery = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, studyQuery );
         List<Study> studyObjs = studyQuery.list();
+        session.close();
         return studyObjs;
     }
 
@@ -90,6 +95,51 @@ public class ObjectQueryHandler {
         Query analysisQuery = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, analysisQuery);
         List<SNPAssociationAnalysis> analysisObjs = analysisQuery.list();
+
+        session.close();
         return analysisObjs;
+    }
+
+    public static List<String> getChromosomes() {
+        if (CHROMOSOME_LIST == null) {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+
+          /* The below code is extremely slow.  Hence commented out.
+            At the same time, we do not have a class that is mapped to
+            CHR_START_END table.  So as a temp solution use direct SQL query
+          */
+          /*  Criteria crit = session.createCriteria(SNPAnnotation.class );
+              crit.setProjection(Projections.property("chromosomeName"));
+              List<String> values = crit.list();
+           */
+          
+            SQLQuery q = session.createSQLQuery("SELECT chromosome FROM CHR_START_END");
+            q.list();
+            List<String> values = q.list();
+            /* now sort them and place 'em in CHROMOSOME_LIST */
+            CHROMOSOME_LIST = new ArrayList<String>();
+
+            String[] sortedChrs = new String[22];
+            SortedSet<String> sexChromosomes = new TreeSet<String>();
+            for (int i = 0; i < values.size(); i++) {
+                String chr = values.get(i);
+                try {
+                    int index = Integer.parseInt(chr) - 1;
+                    sortedChrs[index] =  chr;
+                } catch(NumberFormatException e) {
+                    sexChromosomes.add(chr); // either X, Y, or MT
+                }
+             }
+
+            for (int i = 0, j = 0; i < sortedChrs.length; i++) {
+                String sortedChr = sortedChrs[i];
+                CHROMOSOME_LIST.add(j++, sortedChr);
+            }
+
+            CHROMOSOME_LIST.addAll(sexChromosomes);
+            session.close();
+        }
+        return CHROMOSOME_LIST;
     }
 }
