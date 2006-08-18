@@ -45,6 +45,7 @@ public class HibernateUtil {
                                 addClass(Agent.class).
                                 addClass(Procedure.class).
                                 addClass(SubstanceAdministration.class).
+                                addClass(Surgery.class).
                                 configure().
                                 buildSessionFactory();
 
