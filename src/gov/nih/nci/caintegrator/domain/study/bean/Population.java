@@ -229,9 +229,15 @@ public  class Population
     public void setStudyCollection(Set<gov.nih.nci.caintegrator.domain.study.bean.Study> studyCollection){
         this.studyCollection = studyCollection;
     }
-	   
-	   
-	
 
-			
+
+    public String toString() {
+        return "Population{" +
+                "description='" + description + '\'' +
+                ", id=" + id +
+                ", memberCount=" + memberCount +
+                ", name='" + name + '\'' +
+                ", source='" + source + '\'' +
+                '}';
+    }
 }

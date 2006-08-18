@@ -181,9 +181,14 @@ public  class SNPAnalysisGroup
     public void setStudyParticipantCollection(Set<gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant> studyParticipantCollection){
         this.studyParticipantCollection = studyParticipantCollection;
     }
-	   
-	   
-	
 
-			
+
+    public String toString() {
+        return "SNPAnalysisGroup{" +
+                "name='" + name + '\'' +
+                ", memberCount=" + memberCount +
+                ", id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

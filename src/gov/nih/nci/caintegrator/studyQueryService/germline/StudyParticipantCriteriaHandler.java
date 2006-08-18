@@ -3,7 +3,10 @@ package gov.nih.nci.caintegrator.studyQueryService.germline;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.util.HQLHelper;
+import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
+import gov.nih.nci.caintegrator.domain.study.bean.Specimen;
 
 import java.util.List;
 
@@ -14,6 +17,8 @@ import java.text.MessageFormat;
 
 import org.hibernate.Session;
 import org.hibernate.Query;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * Author: Ram Bhattaru
@@ -39,7 +44,7 @@ public class StudyParticipantCriteriaHandler {
         HashMap params = new HashMap();  // to hold HQL Parameters
 
         StringBuffer spHQL = new StringBuffer("SELECT sm.id FROM Specimen sm  " +
-                                            " JOIN sm.studyParticipant sp {0} {1} WHERE ");
+                                            " JOIN sm.studyParticipant sp {0} {1} {2} WHERE ");
 
         /* 1. Handle the StudyParticipant Attributes Criteria itself */
         boolean hqlAppended = handleStudyPartcioantAttributeCriteria(spCrit, spHQL, params);
@@ -58,18 +63,26 @@ public class StudyParticipantCriteriaHandler {
             populationJoin  = handlePopulationCriteria(popCrit, spHQL, params);
         }
 
-        /* 4. now substitute the {0} & {1} parameter studyJoin & populationJoin */
+        /* 4. Handle AnalysisGroupCriteria  */
+        StringBuffer analysisGroupJoin = new StringBuffer("");
+        AnalysisGroupCriteria groupCrit = spCrit.getAnalysisGroupCriteria();
+        if (groupCrit != null) {
+            analysisGroupJoin = handleAnalysisGroupCriteria(groupCrit, spHQL, params);
+
+        }
+        /* 5. now substitute the {0} & {1} parameter studyJoin & populationJoin */
         String tmp = spHQL.toString();
         spHQL = new StringBuffer(MessageFormat.format(tmp, new Object[] {
-                                        studyJoin, populationJoin}));
+                                        studyJoin, populationJoin, analysisGroupJoin}));
 
-        /* 5. Do some HouseKeeping tasks */
+        /* 6. Do some HouseKeeping tasks */
         String tmpHSQL = HQLHelper.removeTrailingToken(spHQL, "AND");
         String finalHSQL = HQLHelper.removeTrailingToken(new StringBuffer(tmpHSQL), "OR");
 
-        /* 6.  Execute total HQL to retrive Specimens */
+        /* 7.  Execute total HQL to retrive Specimens */
         // first check if every condition is empty,  If it is return no specimenIDs
-        if (!hqlAppended  && studyJoin.length() < 1 && populationJoin.length() < 1)
+        if (!hqlAppended  && studyJoin.length() < 1 && populationJoin.length() < 1
+                && analysisGroupJoin.length() < 1 )
             return new ArrayList<String>();
 
         Query q = session.createQuery(finalHSQL);
@@ -89,6 +102,7 @@ public class StudyParticipantCriteriaHandler {
         Integer daysOnStudy = crit.getDaysOnStudy();
         Boolean offStudy = crit.getOffStudy();
         Boolean survivalStatus = crit.getSurvivalStatus();
+        String caseControlStatus = crit.getCaseControlStatus();
         Collection<String> ethnicGroups = crit.getEthnicGroupCodeCollection();
         Collection<String> familyHistories = crit.getFamilyHistoryCollection();
         Collection<String> instNames = crit.getInstitutionNameCollection();
@@ -170,6 +184,13 @@ public class StudyParticipantCriteriaHandler {
             params.put("survivalStatus", survivalStatus );
             hqlAppended = true;
         }
+
+        if(caseControlStatus != null) {
+            spHQL.append(" sp.caseControlStatus  = :caseControlStatus AND ");
+            params.put("caseControlStatus", caseControlStatus );
+            hqlAppended = true;
+        }
+
         return hqlAppended;
     }
 
@@ -185,6 +206,21 @@ public class StudyParticipantCriteriaHandler {
             }
         }
         return populationJoin;
+    }
+
+    public static StringBuffer handleAnalysisGroupCriteria(AnalysisGroupCriteria groupCrit, StringBuffer spHQL, HashMap params) {
+        StringBuffer groupJoin = new StringBuffer("");
+        if (groupCrit != null) {
+            String[] groupNames = groupCrit.getNames();
+            ArrayList<String> names = new ArrayList<String>();
+            for (int i = 0; i < groupNames.length; names.add(groupNames[i++]));
+            if (groupNames != null && groupNames.length > 0) {
+                groupJoin.append(" JOIN sp.analysisGroupCollection ");
+                spHQL.append("sp.analysisGroupCollection.name IN (:names) AND ");
+                params.put("names", names);
+            }
+        }
+        return groupJoin;
     }
 
     public static StringBuffer handleStudyCriteria(StudyCriteria studyCrit, StringBuffer studyHql, HashMap params) {

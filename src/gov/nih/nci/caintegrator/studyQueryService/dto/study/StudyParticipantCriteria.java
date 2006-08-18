@@ -2,6 +2,7 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.study;
 
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 
 import java.util.Collection;
 
@@ -15,8 +16,9 @@ import java.util.Collection;
  * Subject to a particular Study.
  */
 public class StudyParticipantCriteria {
-    public PopulationCriteria populationCriteria;
-    public StudyCriteria studyCriteria;
+    private PopulationCriteria populationCriteria;
+    private StudyCriteria studyCriteria;
+    private AnalysisGroupCriteria analysisGroupCriteria;
     private Collection<String> administrativeGenderCodeCollection;
 	private Integer ageAtDeath;
 	private Integer ageAtDiagnosis;
@@ -30,9 +32,18 @@ public class StudyParticipantCriteria {
 	private Collection<String> raceCodeCollection;
 	private Collection<String> studySubjectIdentifierCollection;
 	private Boolean survivalStatus;
+    private String caseControlStatus;
 
     public PopulationCriteria getPopulationCriteria() {
         return populationCriteria;
+    }
+
+    public String getCaseControlStatus() {
+        return caseControlStatus;
+    }
+
+    public void setCaseControlStatus(String caseControlStatus) {
+        this.caseControlStatus = caseControlStatus;
     }
 
     public void setPopulationCriteria(PopulationCriteria populationCriteria) {
@@ -150,5 +161,13 @@ public class StudyParticipantCriteria {
 
     public void setAdministrativeGenderCodeCollection(Collection<String> administrativeGenderCodeCollection) {
         this.administrativeGenderCodeCollection = administrativeGenderCodeCollection;
+    }
+
+    public AnalysisGroupCriteria getAnalysisGroupCriteria() {
+        return analysisGroupCriteria;
+    }
+
+    public void setAnalysisGroupCriteria(AnalysisGroupCriteria analysisGroupCriteria) {
+        this.analysisGroupCriteria = analysisGroupCriteria;
     }
 }

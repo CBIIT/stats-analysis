@@ -1,12 +1,13 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
+import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
-import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 
 
 import java.util.*;
@@ -14,11 +15,7 @@ import java.text.MessageFormat;
 
 import org.hibernate.Session;
 import org.hibernate.Query;
-import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Property;
-import org.hibernate.criterion.Projections;
 
 /**
  * Author: Ram Bhattaru
@@ -100,6 +97,7 @@ public class ObjectQueryHandler {
         return analysisObjs;
     }
 
+
     public static List<String> getChromosomes() {
         if (CHROMOSOME_LIST == null) {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -113,7 +111,7 @@ public class ObjectQueryHandler {
               crit.setProjection(Projections.property("chromosomeName"));
               List<String> values = crit.list();
            */
-          
+
             SQLQuery q = session.createSQLQuery("SELECT chromosome FROM CHR_START_END");
             q.list();
             List<String> values = q.list();

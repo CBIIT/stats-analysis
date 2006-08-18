@@ -24,13 +24,12 @@
            <generator class="assigned" />
        </id>
 
-       <!-- caseControlStatus 
         <property name="caseControlStatus"
                  type="java.lang.String"
                  column="CASE_CONTROL_STATUS"
                  insert="false"
                  update="false" />
--->
+
         <!-- administrativeGenderCode -->        
        <property name="administrativeGenderCode" 
                  type="java.lang.String" 
@@ -142,7 +141,7 @@
          
       <!-- here is for m-m relationships --> 
       
-      <set name="analysisGroupCollection" table="STDPT_ANALYSIS_GRP_AS" lazy="true">
+      <set name="analysisGroupCollection" table="STDPT_ANALYSIS_GRP_AS" lazy="false">
          <cache usage="read-write" />
          <key column="PARTICIPANT_DID" />
          <many-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup"
@@ -175,7 +174,8 @@
       
      <!-- here is for m-1 relationships -->  
       <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.bean.Study" column="STUDY_NAME"  />
-      <many-to-one name="population" class="gov.nih.nci.caintegrator.domain.study.bean.Population" column="POPULATION_ID" />
+      <many-to-one name="population" class="gov.nih.nci.caintegrator.domain.study.bean.Population" column="POPULATION_ID"
+              lazy = "false"  />
             
       
 	</class>

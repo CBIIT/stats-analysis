@@ -586,9 +586,23 @@ public  class StudyParticipant
     public void setClinicalFindingCollection(Set<gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding> clinicalFindingCollection){
         this.clinicalFindingCollection = clinicalFindingCollection;
     }
-	   
-	   
-	
 
-			
+
+    public String toString() {
+        return "StudyParticipant{" +
+                "administrativeGenderCode='" + administrativeGenderCode + '\'' +
+                ", caseControlStatus='" + caseControlStatus + '\'' +
+                ", daysOffStudy=" + daysOffStudy +
+                ", daysOnStudy=" + daysOnStudy +
+                ", ethnicGroupCode='" + ethnicGroupCode + '\'' +
+                ", familyHistory='" + familyHistory + '\'' +
+                ", id='" + id + '\'' +
+                ", institutionName='" + institutionName + '\'' +
+                ", isOffStudy=" + isOffStudy +
+                ", raceCode='" + raceCode + '\'' +
+                ", studySubjectIdentifier='" + studySubjectIdentifier + '\'' +
+                ", survivalStatus='" + survivalStatus + '\'' +
+                ", population=" + population +
+                '}';
+    }
 }

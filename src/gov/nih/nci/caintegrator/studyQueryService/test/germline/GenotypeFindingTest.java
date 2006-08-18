@@ -9,6 +9,7 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCrite
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.GenotypeFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
@@ -32,7 +33,7 @@ import junit.framework.TestSuite;
 public class GenotypeFindingTest extends TestCase {
     protected AnnotationCriteria annotCrit;
     private GenotypeFindingCriteriaDTO gfDTO;
-    private StudyParticipantCriteria spCrit;
+    protected StudyParticipantCriteria spCrit;
 
     protected void setUp() throws Exception {
         gfDTO = new GenotypeFindingCriteriaDTO();
@@ -67,7 +68,7 @@ public class GenotypeFindingTest extends TestCase {
     protected void setUpDBSnpCrit() {
        Collection<String> dbSNPIds = new ArrayList<String>();
        dbSNPIds.add("rs10215692");
-       dbSNPIds.add("rs10216611");
+       //dbSNPIds.add("rs10216611");
        annotCrit.setSnpIdentifiers(dbSNPIds );
     }
 
@@ -101,8 +102,8 @@ public class GenotypeFindingTest extends TestCase {
     protected void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
         geneSymbols.add(new String("USP48"));
-        geneSymbols.add(new String("HSPG2"));
-        geneSymbols.add(new String("ALPL"));
+        //geneSymbols.add(new String("HSPG2"));
+        //geneSymbols.add(new String("ALPL"));
 
         annotCrit.setGeneSymbols(geneSymbols);
 
@@ -118,27 +119,30 @@ public class GenotypeFindingTest extends TestCase {
    }
 
     protected void setUpStudyParticipantAttributesCriteria() {
-        spCrit.setAgeAtDeath(85);
-        spCrit.setAgeAtDiagnosis(45);
-        spCrit.setAgeAtEnrollment(46);
-        spCrit.setDaysOffStudy(100);
-        spCrit.setDaysOnStudy(360);
-        spCrit.setSurvivalStatus(Boolean.TRUE);
-        spCrit.setOffStudy(Boolean.FALSE);
+        //spCrit.setAgeAtDeath(85);
+        //spCrit.setAgeAtDiagnosis(45);
+        //spCrit.setAgeAtEnrollment(2);
+        //spCrit.setDaysOffStudy(100);
+        spCrit.setDaysOnStudy(999);
+        //spCrit.setSurvivalStatus(Boolean.TRUE);
+        //spCrit.setOffStudy(Boolean.FALSE);
 
         // set collections
         Collection ca = new ArrayList();
-        ca.add("Male");
+        ca.add("MALE");
         spCrit.setAdministrativeGenderCodeCollection(ca);
 
         Collection ce = new ArrayList();
-        ce.add("Asian");
+        ce.add("CAUCASIAN");
         spCrit.setEthnicGroupCodeCollection(ce);
 
+/*
         Collection cf = new ArrayList();
         cf.add("Chelestrol");
         spCrit.setFamilyHistoryCollection(cf);
+*/
 
+/*
         Collection ci = new ArrayList();
         ci.add("NCICB");
         spCrit.setInstitutionNameCollection(ci);
@@ -158,6 +162,7 @@ public class GenotypeFindingTest extends TestCase {
         cs.add("8");
         cs.add("9");cs.add("10");
         spCrit.setStudySubjectIdentifierCollection (cs);
+*/
     }
 
     protected void setUpStudyCriteria() {
@@ -167,26 +172,39 @@ public class GenotypeFindingTest extends TestCase {
         spCrit.setStudyCriteria(studyCrit);
     }
 
+    protected void setUpAnalysisGroupCriteria() {
+        AnalysisGroupCriteria crit = new AnalysisGroupCriteria();
+        crit.setNames(new String[] {"control"});
+        //"early", "advanced"
+        spCrit.setAnalysisGroupCriteria(crit);
+    }
+
      protected void setUpPopulationCriteria() {
         PopulationCriteria popCrit = new PopulationCriteria();
-        popCrit.setName("Mexican");
+        //popCrit.setName("CASE_ADVANCED");
+        popCrit.setName("CASE_ADVANCED");
         spCrit.setPopulationCriteria(popCrit);
      }
 
     public void testGenotypeFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        setUpSNPPhysicalPositionCrit();
-        setUpDBSnpCrit();
-        //setUpGeneBiomarkerCrit();
+        //setUpSNPPhysicalPositionCrit();
+        //setUpDBSnpCrit();
+        setUpGeneBiomarkerCrit();
+        setUpPopulationCriteria();
 
         // 2. setup StudyParticipant Criteria
         //setUpStudyParticipantCrit();
+        //setUpStudyParticipantAttributesCriteria();
+
+
+        setUpAnalysisGroupCriteria();
 
         // 3. set up Genotype Crit itself
         //setUpGenotypeCrit();
 
         // 4. execute search
-        executeGenotypeFindingSearch(0, 60);
+        executeGenotypeFindingSearch(0, 20);
     }
 
     private void executeGenotypeFindingSearch(int startIndex, int endIndex) {
@@ -199,7 +217,7 @@ public class GenotypeFindingTest extends TestCase {
            for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                GenotypeFinding finding =  (GenotypeFinding)iterator.next();
                System.out.println("Fact ID:      " + finding.getId());
-               System.out.println("Specimen ID:  " + finding.getSpecimen());
+               System.out.println("Participant ID:  " + finding.getSpecimen().getStudyParticipant());
                System.out.println("QualityScore: " + finding.getQualityScore());
                System.out.println("Status:       " + finding.getStatus());
                System.out.println("Allel1:       " + finding.getAllele1());
