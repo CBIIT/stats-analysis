@@ -93,6 +93,23 @@ public  class BreastCancerClinicalFinding
 	
 	   
     /**
+   * DCIS only thing left following surgery 1=Yes
+   */
+
+    private gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment dcisOnly;
+    /**
+   * DCIS only thing left following surgery 1=Yes
+   */
+
+	public  gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment getDcisOnly(){
+        return dcisOnly;
+    }
+    public void setDcisOnly( gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment dcisOnly){
+        this.dcisOnly = dcisOnly;
+    }
+	
+	   
+    /**
    * Estrogen Receptor Status – Total Score Total Score = ER_PS+ ER_IS Considered Allred Score; = 3 is 
    * positive 
    * 
@@ -332,6 +349,27 @@ public  class BreastCancerClinicalFinding
     }
     public void setPathologicalTumorSize( gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement pathologicalTumorSize){
         this.pathologicalTumorSize = pathologicalTumorSize;
+    }
+	
+	   
+    /**
+   * Pathology Assessment Staging 1= Stage 0 (DCIS only) 2= Stage I 3= Stage IIA 4=Stage IIB 5= Stage IIIA 
+   * 6= Stage IIIB 7=Stage IIIC 8= Stage IV 
+   * 
+   */
+
+    private gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment pathologyStage;
+    /**
+   * Pathology Assessment Staging 1= Stage 0 (DCIS only) 2= Stage I 3= Stage IIA 4=Stage IIB 5= Stage IIIA 
+   * 6= Stage IIIB 7=Stage IIIC 8= Stage IV 
+   * 
+   */
+
+	public  gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment getPathologyStage(){
+        return pathologyStage;
+    }
+    public void setPathologyStage( gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment pathologyStage){
+        this.pathologyStage = pathologyStage;
     }
 	
 	   

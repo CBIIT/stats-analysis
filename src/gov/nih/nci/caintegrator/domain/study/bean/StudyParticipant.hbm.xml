@@ -141,7 +141,7 @@
          
       <!-- here is for m-m relationships --> 
       
-      <set name="analysisGroupCollection" table="STDPT_ANALYSIS_GRP_AS" lazy="false">
+      <set name="analysisGroupCollection" table="STDPT_ANALYSIS_GRP_AS" lazy="true">
          <cache usage="read-write" />
          <key column="PARTICIPANT_DID" />
          <many-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup"

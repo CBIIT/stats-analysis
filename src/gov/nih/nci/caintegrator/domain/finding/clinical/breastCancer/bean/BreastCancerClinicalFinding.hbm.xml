@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    $Id: BreastCancerClinicalFinding.hbm.xml,v 1.1 2006-08-14 16:58:52 georgeda Exp $
+    $Id: BreastCancerClinicalFinding.hbm.xml,v 1.2 2006-08-18 20:00:54 georgeda Exp $
     
     $Log: not supported by cvs2svn $
+    Revision 1.1  2006/08/14 16:58:52  georgeda
+    Updated w/ newest OM changes (Rev 1.51)
+
 -->
 
 <!DOCTYPE hibernate-mapping PUBLIC 
@@ -91,5 +94,12 @@
         <component name="herceptinReceived" class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment"> 
             <property name="value" column="HERCEPTIN"/>
         </component>
+        <component name="dcisOnly" class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment"> 
+            <property name="value" column="DCISONLY"/>
+        </component>
+        <component name="pathologyStage" class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment"> 
+            <property name="value" column="PATHOLOGYSTAGE"/>
+        </component>
+        
 	</union-subclass>
 </hibernate-mapping>
