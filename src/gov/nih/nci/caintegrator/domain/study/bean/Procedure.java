@@ -47,6 +47,40 @@ public  class Procedure
         this.targetSiteCode = targetSiteCode;
     }
 	
+	   
+    /**
+   * DOCUMENT ME!
+   */
+
+    private java.lang.String procedureType;
+    /**
+   * DOCUMENT ME!
+   */
+
+	public  java.lang.String getProcedureType(){
+        return procedureType;
+    }
+    public void setProcedureType( java.lang.String procedureType){
+        this.procedureType = procedureType;
+    }
+	
+	   
+    /**
+   * DOCUMENT ME!
+   */
+
+    private java.lang.String procedureName;
+    /**
+   * DOCUMENT ME!
+   */
+
+	public  java.lang.String getProcedureName(){
+        return procedureName;
+    }
+    public void setProcedureName( java.lang.String procedureName){
+        this.procedureName = procedureName;
+    }
+	
 
 
 		public boolean equals(Object obj){
