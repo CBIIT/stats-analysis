@@ -29,17 +29,16 @@ public class SubjectSearchTest extends GenotypeFindingTest {
             System.out.println("Number of Subjects Retrieved: " + subjects.size());
             for (Iterator<StudyParticipant> iterator = subjects.iterator(); iterator.hasNext();) {
                 StudyParticipant subject =  iterator.next();
-                System.out.println("Study Subject Identifier: " + subject.getStudySubjectIdentifier());
-                System.out.println("Institution Name: " + subject.getInstitutionName());
-                System.out.println("Race Code: " + subject.getRaceCode());
-                System.out.println("Case Control Status: " + subject.getCaseControlStatus());
-                System.out.println("Days On Study: " + subject.getDaysOnStudy());
-                // below are NOt included as lazily initialized.  If needed can initialize it
-                System.out.println("Analysis Group Collection: \n" + subject.getAnalysisGroupCollection());
-                System.out.println("Population: "+ subject.getPopulation());
+                System.out.println("STUDY PARTICIPANT DE_IDENTIFIER ID: " +
+                                    subject.getStudySubjectIdentifier());
+                System.out.println("GENDER: " + subject.getAdministrativeGenderCode());
+                System.out.println("AGE (PLEASE CONFIRM THIS - WHICH AGE -): " + subject.getAgeAtEnrollment());
+                System.out.println("AFFECTION STATUS: (PLEASE CONFIRM THIS -): " + subject.getSurvivalStatus());
+                System.out.println("FAMILY HISTORY: " + subject.getFamilyHistory());
+                System.out.println("Population Name: "+ subject.getPopulation().getName());
             }
         } catch (Throwable t)  {
-           System.out.println("CGEMS Exception in getting Chromosomes: " + t.toString());
+           System.out.println("CGEMS Exception in getting Study Subjects: " + t.toString());
            t.printStackTrace();
        }
     }
