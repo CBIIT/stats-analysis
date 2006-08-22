@@ -253,12 +253,13 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
     }
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
-        List<SNPAnnotation> snpObjs = new ArrayList<SNPAnnotation>();
+        List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
-           snpObjs.add(finding.getSnpAnnotation());
+           gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
+           //Collection<GeneBiomarker> gbs = finding.getSnpAnnotation().getGeneBiomarkerCollection();
         }
-        Hibernate.initialize(snpObjs);
+        Hibernate.initialize(gbObjs);
     }
 
 }
