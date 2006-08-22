@@ -146,6 +146,14 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
               condition = " = ";
               break;
             }
+            case LE: {
+              condition = " <= ";
+              break;
+            }
+            case GE: {
+              condition = " >= ";
+              break;
+            }
             default: {
                 // this should never happen.
                 condition = " = ";

@@ -35,7 +35,7 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
         /*setSNPAssociationAnalysisCriteria();
         setSNPAssociationGroupCriteria();
         */
-        //setSNPFindingCriteria();
+        setSNPFindingCriteria();
         executeSNPFrequencyFindingSearch(0, 100000);
     }
 
@@ -74,7 +74,7 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
     }
 
     private void setSNPFindingCriteria() {
-        safDTO.setpValue(new Float(0.9), ArithematicOperator.LT);
+        safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
         //safDTO.setRank(new Integer(7), ArithematicOperator.LT);
     }
 
