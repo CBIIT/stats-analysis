@@ -36,7 +36,7 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
         setSNPAssociationGroupCriteria();
         */
         //setSNPFindingCriteria();
-        executeSNPFrequencyFindingSearch(0, 50);
+        executeSNPFrequencyFindingSearch(0, 100000);
     }
 
     private void executeSNPFrequencyFindingSearch(int startIndex, int endIndex) {

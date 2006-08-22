@@ -101,9 +101,10 @@ public class GenotypeFindingTest extends TestCase {
     }
     protected void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
-        geneSymbols.add(new String("USP48"));
+        //geneSymbols.add(new String("USP48"));
         //geneSymbols.add(new String("HSPG2"));
-        //geneSymbols.add(new String("ALPL"));
+        geneSymbols.add(new String("MET"));
+        geneSymbols.add(new String("EGFR"));
 
         annotCrit.setGeneSymbols(geneSymbols);
 
