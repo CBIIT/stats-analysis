@@ -119,6 +119,8 @@ public class SNPAnnotationCriteriaHandler {
                is included.  So add panel criteria to the above SNPAnnotation criteria as subselect with
                preciding OR operator */
             finalHQL = new StringBuffer(finalWithoutWhereHQL).append(" OR ").append(panelBasedSNPAnnotCrit).toString();
+        } else {
+            finalHQL = new StringBuffer(finalWithoutWhereHQL).toString();
         }
 /*
         if (panelBasedSNPAnnotCrit.length() > 0) {
