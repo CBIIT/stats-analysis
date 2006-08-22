@@ -18,7 +18,17 @@ import org.hibernate.Session;
 abstract public class FindingsHandler {
      protected abstract Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO,
                                                                     Set<String> snpAnnotationIDs, Session session, int start, int end);
-     protected abstract void initializeProxies(Collection<? extends Finding> findings);
+     protected abstract void initializeProxies(Collection<? extends Finding> findings, Session session);
+
+     public final static Boolean isAnyCriteriaSpecified(AnnotationCriteria annotCrit) {
+         boolean annotCritPresent = false;
+         if (SNPAnnotationCriteriaHandler.isAnnotationCriteriaPresent(annotCrit) )
+            annotCritPresent = true;
+         //if (crit)
+          return null;
+     }
+
+
      public Collection<? extends Finding> getFindings(FindingCriteriaDTO critDTO, int fromIndex, int toIndex)
      throws Exception {
 
@@ -38,7 +48,7 @@ abstract public class FindingsHandler {
          /* 2.  Apply all other criteria mentioned in the query and return as concrete type findings */
          Collection<? extends Finding> findings =
                  getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
-         initializeProxies(findings);
+         initializeProxies(findings, session);
 
          session.close();
          return findings;
@@ -53,4 +63,6 @@ abstract public class FindingsHandler {
          session.close();
          return snpAnnotationObjs;
      }
+
+
 }

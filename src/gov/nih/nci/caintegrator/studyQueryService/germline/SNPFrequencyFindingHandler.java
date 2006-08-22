@@ -31,9 +31,10 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         final HashMap params = new HashMap();
 
         /* 1. Include Annotation Criteria in TargetFinding query   */
-        String snpAnnotJoin = " LEFT JOIN FETCH sf.snpAnnotation ";
+        String snpAnnotJoin = "";
         String snpAnnotCond = "";
         if (snpAnnotationIDs.size() > 0) {
+            snpAnnotJoin = "LEFT JOIN FETCH sf.snpAnnotation ";
             snpAnnotCond = " sf.snpAnnotation.id IN (:snpAnnotationIDs) AND ";
             params.put("snpAnnotationIDs", snpAnnotationIDs);
         }
@@ -42,19 +43,22 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         addSNPFrequencyFindingAttriuteCrit(findingCritDTO, targetHQL, params);
 
         /*  3. Handle population & Study criteria  */
-        String populationJoin = " LEFT JOIN FETCH sf.population ";
+        String populationJoin = null;
         String populationCond = "";
         List<Population> populationList = handlePopulationCriteria(findingCritDTO, session);
         if (populationList.size() > 0) {
+            populationJoin = " LEFT JOIN FETCH sf.population ";
             populationCond = " sf.population IN (:populationList) ";
             params.put("populationList", populationList);
         }
 
+/*
         /*  4. If no criteria is resulted in any condition to be filtered
-            (or if no criteria is specified), return empty list */
+            (or if no criteria is specified), return empty list
         if ( (snpAnnotationIDs.size() < 1) && (populationList.size() < 1) &&
                 (params.size() < 1) )
             return new ArrayList<SNPFrequencyFinding>();
+*/
 
         String hql  = MessageFormat.format(targetHQL.toString(), new Object[] {
                             snpAnnotJoin, populationJoin, snpAnnotCond, populationCond });
@@ -171,7 +175,11 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         }
 
     }
-    protected void initializeProxies(Collection<? extends Finding> findings) {
+    protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
 
+    }
+
+    protected Boolean ifFindingCriteriaSpecified(SNPFrequencyFindingCriteriaDTO crit) {
+        return null;
     }
 }

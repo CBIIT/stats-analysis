@@ -26,13 +26,14 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
     }
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        setUpSNPPhysicalPositionCrit();
+       /* setUpSNPPhysicalPositionCrit();
         setUpDBSnpCrit();
         setUpPanelCrit();
         setUpGeneBiomarkerCrit();
 
         setSNPAssociationAnalysisCriteria();
         setSNPAssociationGroupCriteria();
+        */
         setSNPFindingCriteria();
         executeSNPFrequencyFindingSearch(0, 50);
     }
@@ -46,10 +47,12 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
                     System.out.println("ID: " + finding.getId());
                     System.out.println("pValue" + finding.getPvalue());
                     System.out.println("Rank" + finding.getRank());
-                    System.out.println("SNP Association Analysis: " + finding.getSnpAssociationAnalysis());
-                    System.out.println("SNP SNPAnalysisGroup: " + finding.getSnpAssociationAnalysis().getAnalysisGroupCollection());
-                    System.out.println("SNP Annotation: ");
-                    printSNPAnnotation(finding.getSnpAnnotation());
+                    System.out.println("DBSNP ID: " + finding.getSnpAnnotation().getDbsnpId());
+                    System.out.println("Analysis Name: " + finding.getSnpAssociationAnalysis().getName());
+                    System.out.println("Physical Position: " + finding.getSnpAnnotation().getChromosomeLocation());
+                    System.out.println("Chromosome: " + finding.getSnpAnnotation().getChromosomeName());
+                    //System.out.println("Associated Genes: " + finding.getSnpAnnotation().getGeneBiomarkerCollection());
+
                 }
             } catch (Throwable t)  {
                 System.out.println("CGEMS Exception: ");
@@ -65,8 +68,8 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
     }
 
     private void setSNPFindingCriteria() {
-        safDTO.setpValue(new Float(4.00), ArithematicOperator.GT);
-        safDTO.setRank(new Integer(7), ArithematicOperator.LT);
+        safDTO.setpValue(new Float(0.9), ArithematicOperator.LT);
+        //safDTO.setRank(new Integer(7), ArithematicOperator.LT);
     }
 
     private void setSNPAssociationAnalysisCriteria() {

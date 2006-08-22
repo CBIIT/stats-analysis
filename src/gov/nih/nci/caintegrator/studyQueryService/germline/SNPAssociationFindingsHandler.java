@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.studyQueryService.germline;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.*;
@@ -15,6 +16,7 @@ import java.text.MessageFormat;
 import org.hibernate.Session;
 import org.hibernate.Query;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -26,20 +28,41 @@ import org.hibernate.criterion.Restrictions;
 public class SNPAssociationFindingsHandler extends FindingsHandler {
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, int start, int end) {
         Collection<SNPAssociationFinding>  snpAssociationFindings =
-                Collections.synchronizedList(
-                    new ArrayList<SNPAssociationFinding>());
+                            Collections.synchronizedList(new ArrayList<SNPAssociationFinding>());
 
         SNPAssociationFindingCriteriaDTO findingCritDTO = (SNPAssociationFindingCriteriaDTO) critDTO;
-        StringBuffer targetHQL = new StringBuffer(" FROM SNPAssociationFinding sa {0} {1} WHERE {2} {3} {4} ");
+        StringBuffer targetHQL =
+/*
+                        new StringBuffer(
+                            "SELECT sa,snpAnnot.id, snpAnnot.chromosomeLocation, " +
+                                    " snpAnnot.chromosomeName, snpAnnot.dbsnpId," +
+                                    " biomarkers.hugoGeneSymbol,  analysis.name " +
+                                    " FROM SNPAssociationFinding sa " +
+                                    " JOIN sa.snpAnnotation snpAnnot " +
+                                    " JOIN snpAnnot.geneBiomarkerCollection biomarkers" +
+                                    " JOIN sa.snpAssociationAnalysis analysis "  +
+                                    " {0} {1} " +
+                                    " WHERE {2} {3} {4} "
+                        );
+*/
+                new StringBuffer(
+                    " FROM SNPAssociationFinding sa JOIN sa.snpAnnotation snpAnnot " +
+                      //      " JOIN snpAnnot.geneBiomarkerCollection biomarkers" +
+                            " JOIN sa.snpAssociationAnalysis analysis "  +
+                            " {0} {1} " +
+                            " WHERE {2} {3} {4} "
+                );
+
         final HashMap params = new HashMap();
 
         /* 1.  Include SNPAssociationFinding attribute criteria in  TargetFinding query */
         StringBuffer myAttributeHql = handleMyOwnAttributeCriteria(findingCritDTO, params);
 
         /* 2. Include Annotation Criteria in TargetFinding query   */
-        String snpAnnotJoin = " LEFT JOIN FETCH sa.snpAnnotation ";
+        String snpAnnotJoin = "";
         String snpAnnotCond = "";
         if (snpAnnotationIDs.size() > 0) {
+            snpAnnotJoin = " LEFT JOIN FETCH sa.snpAnnotation ";
             snpAnnotCond = " sa.snpAnnotation.id IN (:snpAnnotationIDs) AND ";
             params.put("snpAnnotationIDs", snpAnnotationIDs);
         }
@@ -60,11 +83,21 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
         /* 6. Now execute the final TargetFinding query and return results  */
         Query q = session.createQuery(finalHQL);
-        if (params.size() == 0) return snpAssociationFindings;  // no condition met
         HQLHelper.setParamsOnQuery(params, q);
         q.setFirstResult(start);
         q.setMaxResults(end);
-        return q.list();
+        Iterator triplets = q.list().iterator();
+        while(triplets.hasNext()) {
+            Object[] triplet = (Object[]) triplets.next();
+            SNPAssociationFinding finding = (SNPAssociationFinding) triplet[0];
+            SNPAnnotation snpAnnot = (SNPAnnotation) triplet[1];
+            finding.setSnpAnnotation(snpAnnot);
+            SNPAssociationAnalysis analysis = (SNPAssociationAnalysis) triplet[2];
+            finding.setSnpAssociationAnalysis(analysis);
+            snpAssociationFindings.add(finding);
+        }
+
+        return snpAssociationFindings ;
     }
 
     private StringBuffer handleMyOwnAttributeCriteria(SNPAssociationFindingCriteriaDTO findingCritDTO, HashMap params) {
@@ -171,7 +204,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 findingCritDTO.getSnpAssociationAnalysisCriteriaCollection();
 
         if (anaCrits != null && anaCrits.size() > 0) {
-            analysisJoin = " LEFT JOIN FETCH sa.snpAssociationAnalysis ";
+            //analysisJoin = " LEFT JOIN FETCH sa.snpAssociationAnalysis ";
             int suffix = 0;
             for (Iterator<SNPAssociationAnalysisCriteria> iterator = anaCrits.iterator(); iterator.hasNext();) {
                 SNPAssociationAnalysisCriteria anaCritObj =  iterator.next();
@@ -219,12 +252,13 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         return h;
     }
 
-    protected void initializeProxies(Collection<? extends Finding> findings) {
-
+    protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
+        List<SNPAnnotation> snpObjs = new ArrayList<SNPAnnotation>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
-           SNPAnnotation snpAnnot = finding.getSnpAnnotation();
+           snpObjs.add(finding.getSnpAnnotation());
         }
-
+        Hibernate.initialize(snpObjs);
     }
+
 }

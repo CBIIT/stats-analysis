@@ -52,7 +52,7 @@ public class SNPAnnotationCriteriaHandler {
      * This method retrieves ANPAnnotations based on AnnotationCriteria passed in.
      * In the current release AnnotationCriteria only PanelCriteria, PositionCriteria
      * and SnpIdentifier are supported.  CytobandCriteria,   GenePathways,
-     *  GeneOntology will be supported in later releases.
+     * GeneOntology will be supported in later releases.
      *
      * @param annotCrit
      * @param session
@@ -108,10 +108,18 @@ public class SNPAnnotationCriteriaHandler {
         String paramReplacedHql = MessageFormat.format(snpAnnotHSQL.toString(), new Object[] { geneSymbolCond });
         String interHSQL = HQLHelper.removeTrailingAND(new StringBuffer(paramReplacedHql));
         String finalWithWhereHSQL = HQLHelper.removeTrailingOR(new StringBuffer(interHSQL));
-        String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(finalWithWhereHSQL), "WHERE");
+        String finalWithoutWhereHQL = HQLHelper.removeTrailingToken(new StringBuffer(finalWithWhereHSQL), "WHERE");
 
-        /* 6  Handle PanelCritera */
-        String panelBasedSNPAnnotCrit = handlePanelCriteriaInHSQL(panelCrit, params);
+        /* 6  Include PanelCritera */
+        String panelBasedSNPAnnotCrit = includePanelCriteriaInHSQL(panelCrit, params);
+        String finalHQL = new String("");
+        if (panelBasedSNPAnnotCrit.length() > 0 ) {
+            /* implies that there is already at least one other criteria (such as PhysicalPosition,
+               dbSNPIdentifiers etc) was metnioned and at the samtime there is also hql for PanelCrit
+               is included.  So add panel criteria to the above SNPAnnotation criteria as subselect with
+               preciding OR operator */
+            finalHQL = new StringBuffer(finalWithoutWhereHQL).append(" OR ").append(panelBasedSNPAnnotCrit).toString();
+        }
 /*
         if (panelBasedSNPAnnotCrit.length() > 0) {
             // append the above SNPAnnotation criteria as sub select
@@ -121,13 +129,47 @@ public class SNPAnnotationCriteriaHandler {
            panelBasedSNPAnnotCrit.append(finalHQL);
         }
 */
-        // add panel criteria to the above SNPAnnotation criteria as subselect
-        StringBuffer allAnnotCrit = new StringBuffer().append(finalHQL).append(panelBasedSNPAnnotCrit);
-        Query q = session.createQuery(allAnnotCrit.toString());
+        if (finalHQL.indexOf(" WHERE ") == -1) {
+            /* means no WHERE clause at all which means selecting entire table.  So return no anotations
+             so that the annotaiton clause does not need to be included in final Finding HQL */
+            return annotObjs;
+        }
+        Query q = session.createQuery(finalHQL.toString());
         HQLHelper.setParamsOnQuery(params, q);
         annotObjs =  q.list();
         return annotObjs;
     }
+
+    public static Boolean isAnnotationCriteriaPresent(AnnotationCriteria annotCrit) {
+        boolean criteriaPresent = false;
+
+        PhysicalPositionCriteria poistionCrit = annotCrit.getPhysicalPositionCriteria();
+        Collection<String> dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
+        Collection<String> geneSymbols = annotCrit.getGeneSymbols();
+        PanelCriteria panelCrit = annotCrit.getPanelCriteria();
+        /* TODO: when the following are implemented in  the next release pl take care of the below:
+        String[] geneOntology = annotCrit.getGeneOntology();
+        String[] genePathways = annotCrit.getGenePathways();
+        CytobandCriteria cytobandCriteria = annotCrit.CytobandCriteria();
+        */
+        if (poistionCrit != null) {
+          String chromosome = poistionCrit.getChromosome();
+          Integer startPos = poistionCrit.getStartPosition();
+          Integer endPos = poistionCrit.getEndPosition();
+          if ((chromosome != null)) criteriaPresent = true;
+        }
+
+        if (dbSNPIdentifiers !=  null && dbSNPIdentifiers.size() > 0) criteriaPresent = true;
+        if (geneSymbols != null && geneSymbols.size() > 0) criteriaPresent = true;
+        if (panelCrit != null) {
+            String name = panelCrit.getName();
+            String version = panelCrit.getVersion();
+            if (name != null || version != null) criteriaPresent = true;
+        }
+
+        return new Boolean(criteriaPresent);
+    }
+
 
     private static void handlePositionCriteria(PhysicalPositionCriteria poistionCrit, StringBuffer snpAnnotHSQL, HashMap params) {
         String chromosome = poistionCrit.getChromosome();
@@ -143,43 +185,48 @@ public class SNPAnnotationCriteriaHandler {
         snpAnnotHSQL.append(tmp);
     }
 
-    private static String handlePanelCriteriaInHSQL(PanelCriteria panelCrit,  HashMap params ) {
+    /**
+     * This method call implies that there is already at least one other criteria (such as PhysicalPosition,
+     * dbSNPIdentifiers etc) was metnioned.
+     * @param panelCrit
+     * @param params
+     * @return hql containg panelCriteria (or empty string if no PanelCrit is specified)
+     */
+    private static String includePanelCriteriaInHSQL(PanelCriteria panelCrit,  HashMap params ) {
+
             StringBuffer emptyBuffer = new StringBuffer("");
             if (panelCrit == null) return emptyBuffer.toString();
 
             String name = panelCrit.getName();
             String version = panelCrit.getVersion();
-
             if (name == null & version == null) return emptyBuffer.toString();
 
-            StringBuffer snpAnnotIDsCrit = new StringBuffer(
-      //              " SELECT annot
-                    //  FROM SNPAssay sa join sa.snpAnnotation annot join sa.snpPanel sp WHERE ");
-                //"  FROM SNPAssay sa JOIN sa.snpPanel sp WHERE ");
-                " OR s.id IN ( SELECT sa.snpAnnotation.id " +
-                              " FROM SNPAssay sa JOIN sa.snpPanel sp WHERE ");
-
+            StringBuffer snpAnnotIDsCrit = new StringBuffer("");
+            boolean panelCritAdded = false;
+            StringBuffer panelClause = new StringBuffer("");
             if (name != null) {
-              snpAnnotIDsCrit.append(" sp.name = :name AND ");
+              panelClause.append(" sp.name = :name AND ");
               params.put( "name", name);
+              panelCritAdded = true;
             }
             if (version != null) {
-              snpAnnotIDsCrit.append(" sp.version = :version ");
+              panelClause.append(" sp.version = :version ");
               params.put( "version", version);
+              panelCritAdded = true;
             }
 
-            String interHQL = HQLHelper.removeTrailingToken(snpAnnotIDsCrit, "AND");
-            StringBuffer finalHQL = new StringBuffer(interHQL).append(" ) ");
-          /*  Query q = session.createQuery(finalHQL);
-            HQLHelper.setParamsOnQuery(params, q);
-            panelBasedSNPAnnotIDs = q.list();
-            */
+            if (panelCritAdded) {
+                snpAnnotIDsCrit.append( " s.id IN ( SELECT sa.snpAnnotation.id " +
+                                        " FROM SNPAssay sa JOIN sa.snpPanel sp WHERE ");
+                snpAnnotIDsCrit.append(panelClause);
+            }
 
-            /* now we will attach the cluase that will be appended in calling
-                method for SNPAnnotation crti itself */
-            //snpAnnotIDsCrit.append(" AND sa.snpAnnotation.id IN ");
+            StringBuffer finalHQL = new StringBuffer("");
+            if (snpAnnotIDsCrit.length() > 0) {
+                String interHQL = HQLHelper.removeTrailingToken(snpAnnotIDsCrit, "AND");
+                finalHQL = new StringBuffer(interHQL).append(" ) ");
+            }
+
             return finalHQL.toString();
         }
-
-
 }

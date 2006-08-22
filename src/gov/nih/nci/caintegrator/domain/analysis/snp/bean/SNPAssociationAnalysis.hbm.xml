@@ -52,20 +52,16 @@
      
       <!-- here is for 1-m relationships -->  
     
-     <set name="analysisGroupCollection" lazy="false" inverse="true">
-      <cache usage="read-write" />
-      <key column="ASSO_ANALYSIS_ID" />
-      <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup" />
-     </set>   
+         <set name="analysisGroupCollection"  inverse="true">
+              <cache usage="read-write" />
+              <key column="ASSO_ANALYSIS_ID" />
+              <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup" />
+         </set>
      
-      <set name="snpAssociationFindingCollection" lazy="true" inverse="true">
-      <cache usage="read-write" />
-      <key column="ASSO_ANALYSIS_ID" />
-      <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding" />
-     </set>  
-     	
-      
-      
-      
+          <set name="snpAssociationFindingCollection"  inverse="true">
+              <cache usage="read-write" />
+              <key column="ASSO_ANALYSIS_ID" />
+              <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding" />
+         </set>
 	</class>
 </hibernate-mapping>

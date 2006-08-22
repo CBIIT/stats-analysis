@@ -404,9 +404,6 @@ public  class GeneBiomarker
     public void setGeneAliasCollection(Set<gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias> geneAliasCollection){
         this.geneAliasCollection = geneAliasCollection;
     }
-	   
-	   
-	
 
-			
+
 }

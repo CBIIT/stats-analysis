@@ -137,7 +137,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                                 {getFindingType().getName(), FINDING_ALIAS, FINDING_ALIAS, FINDING_ALIAS}));
     }*/
 
-    protected void initializeProxies(Collection<? extends Finding> findings) {
+    protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
             GenotypeFinding finding =  (GenotypeFinding) iterator.next();
             Hibernate.initialize(finding.getSnpAnnotation());
