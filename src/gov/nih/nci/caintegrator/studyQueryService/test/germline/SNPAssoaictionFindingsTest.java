@@ -2,6 +2,7 @@ package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding;
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.*;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
@@ -29,12 +30,12 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
        /* setUpSNPPhysicalPositionCrit();
         setUpDBSnpCrit();
         setUpPanelCrit();
-        setUpGeneBiomarkerCrit();
+        */setUpGeneBiomarkerCrit();
 
-        setSNPAssociationAnalysisCriteria();
+        /*setSNPAssociationAnalysisCriteria();
         setSNPAssociationGroupCriteria();
         */
-        setSNPFindingCriteria();
+        //setSNPFindingCriteria();
         executeSNPFrequencyFindingSearch(0, 50);
     }
 
@@ -51,8 +52,13 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
                     System.out.println("Analysis Name: " + finding.getSnpAssociationAnalysis().getName());
                     System.out.println("Physical Position: " + finding.getSnpAnnotation().getChromosomeLocation());
                     System.out.println("Chromosome: " + finding.getSnpAnnotation().getChromosomeName());
-                    //System.out.println("Associated Genes: " + finding.getSnpAnnotation().getGeneBiomarkerCollection());
+                    System.out.print("Associated Genes: "  );
 
+                    Collection<GeneBiomarker> bioMarkers = finding.getSnpAnnotation().getGeneBiomarkerCollection();
+                    for (Iterator<GeneBiomarker> iterator1 = bioMarkers.iterator(); iterator1.hasNext();) {
+                        GeneBiomarker geneBiomarker =  iterator1.next();
+                        System.out.println(geneBiomarker.getHugoGeneSymbol() + " ");
+                    }
                 }
             } catch (Throwable t)  {
                 System.out.println("CGEMS Exception: ");
