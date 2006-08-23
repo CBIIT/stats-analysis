@@ -27,24 +27,26 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
     }
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-       /* setUpSNPPhysicalPositionCrit();
-        setUpDBSnpCrit();
-        setUpPanelCrit();
-        */setUpGeneBiomarkerCrit();
+         //setUpSNPPhysicalPositionCrit();
+        //setUpDBSnpCrit();
+        //setUpPanelCrit();
+        //setUpGeneBiomarkerCrit();
 
-        /*setSNPAssociationAnalysisCriteria();
-        setSNPAssociationGroupCriteria();
-        */
-        setSNPFindingCriteria();
-        executeSNPFrequencyFindingSearch(0, 100000);
+        setSNPAssociationAnalysisCriteria();
+        //setSNPAssociationGroupCriteria();
+
+        //setSNPFindingCriteria();
+        executeSNPFrequencyFindingSearch(0, 500);
     }
 
     private void executeSNPFrequencyFindingSearch(int startIndex, int endIndex) {
             try {
+                Long t1 = System.currentTimeMillis();
                 Collection<? extends Finding> findings = FindingsManager.getFindings(safDTO, startIndex, endIndex);
+                System.out.println("RESULTS COUNT: " + findings.size());
                 for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                     SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
-                    System.out.println("RESULTS COUNT: " + findings.size());
+
                     System.out.println("ID: " + finding.getId());
                     System.out.println("pValue" + finding.getPvalue());
                     System.out.println("Rank" + finding.getRank());
@@ -59,7 +61,9 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
                         GeneBiomarker geneBiomarker =  iterator1.next();
                         System.out.println(geneBiomarker.getHugoGeneSymbol() + " ");
                     }
-                }
+                 }
+                 Long t2 = System.currentTimeMillis();
+                System.out.println("Time Taken: " + (t2 - t1) + " ms" );
             } catch (Throwable t)  {
                 System.out.println("CGEMS Exception: ");
                 t.printStackTrace();
@@ -82,18 +86,18 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
         Collection analysisCrits = new ArrayList<SNPAssociationAnalysisCriteria>();
 
         SNPAssociationAnalysisCriteria methodAndNameCrit = new SNPAssociationAnalysisCriteria();
-        methodAndNameCrit.setMethods("P-Test");
-        methodAndNameCrit.setName("HigherOrder");
+        //methodAndNameCrit.setMethods("P-Test");
+        methodAndNameCrit.setName("score test");
         analysisCrits.add(methodAndNameCrit);
 
-        SNPAssociationAnalysisCriteria methodOnlyCrit = new SNPAssociationAnalysisCriteria();
+   /*     SNPAssociationAnalysisCriteria methodOnlyCrit = new SNPAssociationAnalysisCriteria();
         methodOnlyCrit.setMethods("Q-Test");
         analysisCrits.add(methodOnlyCrit);
 
         SNPAssociationAnalysisCriteria nameOnlyCrit = new SNPAssociationAnalysisCriteria();
         nameOnlyCrit.setName("Cluster");
         analysisCrits.add(nameOnlyCrit);
-
+*/
         safDTO.setSnpAssociationAnalysisCriteriaCollection(analysisCrits);
      }
 

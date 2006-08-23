@@ -26,7 +26,7 @@ import org.hibernate.criterion.Restrictions;
  */
 
 public class SNPAssociationFindingsHandler extends FindingsHandler {
-    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, int start, int end) {
+    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,  Session session, int start, int end) {
         Collection<SNPAssociationFinding>  snpAssociationFindings =
                             Collections.synchronizedList(new ArrayList<SNPAssociationFinding>());
 
@@ -46,12 +46,11 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                         );
 */
                 new StringBuffer(
-                    " FROM SNPAssociationFinding sa JOIN sa.snpAnnotation snpAnnot " +
-                      //      " JOIN snpAnnot.geneBiomarkerCollection biomarkers" +
+                            " FROM SNPAssociationFinding sa JOIN sa.snpAnnotation snpAnnot " +
                             " JOIN sa.snpAssociationAnalysis analysis "  +
                             " {0} {1} " +
                             " WHERE {2} {3} {4} "
-                );
+                    );
 
         final HashMap params = new HashMap();
 
@@ -61,10 +60,19 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         /* 2. Include Annotation Criteria in TargetFinding query   */
         String snpAnnotJoin = "";
         String snpAnnotCond = "";
-        if (snpAnnotationIDs.size() > 0) {
-            snpAnnotJoin = " LEFT JOIN FETCH sa.snpAnnotation ";
-            snpAnnotCond = " sa.snpAnnotation.id IN (:snpAnnotationIDs) AND ";
-            params.put("snpAnnotationIDs", snpAnnotationIDs);
+        if (snpAnnotationIDs != null) {
+            /* means some annotation criteria is specified */
+            if (snpAnnotationIDs.size() > 0) {
+                snpAnnotJoin = " LEFT JOIN FETCH sa.snpAnnotation ";
+                snpAnnotCond = " sa.snpAnnotation.id IN (:snpAnnotationIDs) AND ";
+                params.put("snpAnnotationIDs", snpAnnotationIDs);
+            }
+            else {
+                /* means no annotations were selected from the Annotation Criteria Hence  when we
+                 and with rest of other criteria, no results should be returned */
+                snpAnnotJoin = " LEFT JOIN FETCH sa.snpAnnotation ";
+                snpAnnotCond = " (0 != 0) AND ";
+            }
         }
 
         /* 3. Include SNPAnalysisGroup Criteria in TargetFinding query by converting and adding to AnalysisGroupCriteria */
@@ -218,8 +226,6 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 SNPAssociationAnalysisCriteria anaCritObj =  iterator.next();
                 String methods = anaCritObj.getMethods();
                 String name = anaCritObj.getName();
-
-                System.out.println("Methods: " + methods + "    Name: " + name);
 
                 if ((methods == null) && (name == null)) continue;
 

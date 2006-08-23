@@ -47,9 +47,15 @@ public class GenotypeFindingTest extends TestCase {
     }
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
+/*
         ppc.setChromosome("8");
         ppc.setStartPosition(new Integer(76065000));  // 76065158
         ppc.setEndPosition(new Integer(76075000));    // should give 4 GenotypeFindings
+
+*/
+        ppc.setChromosome("X");
+        ppc.setStartPosition(new Integer(1));  // 76065158
+        ppc.setEndPosition(new Integer(1000000000));    // should give 4 GenotypeFindings
 
         /*
         ppc.setChromosome("X");
@@ -67,8 +73,9 @@ public class GenotypeFindingTest extends TestCase {
     }
     protected void setUpDBSnpCrit() {
        Collection<String> dbSNPIds = new ArrayList<String>();
-       dbSNPIds.add("rs10215692");
+       //dbSNPIds.add("rs10215692");
        //dbSNPIds.add("rs10216611");
+        dbSNPIds.add("rs10170496");
        annotCrit.setSnpIdentifiers(dbSNPIds );
     }
 
@@ -103,8 +110,9 @@ public class GenotypeFindingTest extends TestCase {
         Collection<String> geneSymbols = new ArrayList<String> ();
         //geneSymbols.add(new String("USP48"));
         //geneSymbols.add(new String("HSPG2"));
-        geneSymbols.add(new String("MET"));
-        geneSymbols.add(new String("EGFR"));
+        //geneSymbols.add(new String("MET"));
+        //geneSymbols.add(new String("EGFR"));
+        geneSymbols.add(new String("blimp"));
 
         annotCrit.setGeneSymbols(geneSymbols);
 
@@ -192,20 +200,20 @@ public class GenotypeFindingTest extends TestCase {
         //setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
         setUpGeneBiomarkerCrit();
-        setUpPopulationCriteria();
+        //setUpPopulationCriteria();
 
         // 2. setup StudyParticipant Criteria
         //setUpStudyParticipantCrit();
         //setUpStudyParticipantAttributesCriteria();
 
 
-        setUpAnalysisGroupCriteria();
+        //setUpAnalysisGroupCriteria();
 
         // 3. set up Genotype Crit itself
         //setUpGenotypeCrit();
 
         // 4. execute search
-        executeGenotypeFindingSearch(0, 20);
+        executeGenotypeFindingSearch(0, 500);
     }
 
     private void executeGenotypeFindingSearch(int startIndex, int endIndex) {

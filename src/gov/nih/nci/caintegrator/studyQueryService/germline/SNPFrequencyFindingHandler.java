@@ -31,8 +31,10 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         final HashMap params = new HashMap();
 
         /* 1. Include Annotation Criteria in TargetFinding query   */
+
         String snpAnnotJoin = "";
         String snpAnnotCond = "";
+        if (snpAnnotationIDs != null)
         if (snpAnnotationIDs.size() > 0) {
             snpAnnotJoin = "LEFT JOIN FETCH sf.snpAnnotation ";
             snpAnnotCond = " sf.snpAnnotation.id IN (:snpAnnotationIDs) AND ";

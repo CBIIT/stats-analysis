@@ -33,18 +33,20 @@ public class SNPAnnotationCriteriaHandler {
     public static Set<String> handle(AnnotationCriteria annotCrit,  Session session)
     throws Exception {
 
-        Set<String> allSNPAnnotIDs = new HashSet();
-        if (annotCrit == null) return allSNPAnnotIDs;
+        Set<String> allSNPAnnotIDs = null;
+        if (annotCrit == null) throw new Exception ("Annotation criteria can not be null");
 
         List<SNPAnnotation> annotObjs = getSNPAnnotations(annotCrit, session);
 
-        /* add ids from this annotObjs list to results i.e allSNPAnnotIDs */
-        for (int i = 0; i < annotObjs.size(); i++) {
-            SNPAnnotation snpAnnotation =  annotObjs.get(i);
-            allSNPAnnotIDs.add(snpAnnotation.getId());
+        if (annotObjs != null) {
+            allSNPAnnotIDs = new HashSet();
+            /* add ids from this annotObjs list to results i.e allSNPAnnotIDs */
+            for (int i = 0; i < annotObjs.size(); i++) {
+                SNPAnnotation snpAnnotation =  annotObjs.get(i);
+                allSNPAnnotIDs.add(snpAnnotation.getId());
+            }
+            System.out.println("Total SNPAnnotations Retrieved: " + allSNPAnnotIDs.size());
         }
-
-        System.out.println("Total SNPAnnotations Retrieved: " + allSNPAnnotIDs.size());
         return allSNPAnnotIDs;
     }
 
@@ -63,7 +65,7 @@ public class SNPAnnotationCriteriaHandler {
     throws Exception {
 
         List<SNPAnnotation> annotObjs = new ArrayList<SNPAnnotation>();
-        if (annotCrit == null) return annotObjs;
+        if (annotCrit == null) throw new Exception ("Annotation criteria can not be null");
 
         PhysicalPositionCriteria poistionCrit = annotCrit.getPhysicalPositionCriteria();
         Collection<String> dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
@@ -134,7 +136,10 @@ public class SNPAnnotationCriteriaHandler {
         if (finalHQL.indexOf(" WHERE ") == -1) {
             /* means no WHERE clause at all which means selecting entire table.  So return no anotations
              so that the annotaiton clause does not need to be included in final Finding HQL */
-            return annotObjs;
+            /* TODO: this way of returning "null" in general is a bad parctice.  This is done as
+               temporary fix.  It will be re-factored later --  Ram 08/23/06
+            */
+            return null;
         }
         Query q = session.createQuery(finalHQL.toString());
         HQLHelper.setParamsOnQuery(params, q);

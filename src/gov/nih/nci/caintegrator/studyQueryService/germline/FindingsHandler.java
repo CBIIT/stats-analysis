@@ -42,8 +42,13 @@ abstract public class FindingsHandler {
            snpAnnotationIDs = SNPAnnotationCriteriaHandler.handle(annotCrit, session);
          }
 
-         System.out.print("SNP Annotations Retrieved: " + snpAnnotationIDs.size());
-         System.out.println(snpAnnotationIDs);
+         if (snpAnnotationIDs != null) {
+            System.out.print("SNP Annotations Retrieved: " + snpAnnotationIDs.size());
+            System.out.println(snpAnnotationIDs);
+         }
+         else {
+             System.out.println("No Annotation Criteria was specified ");
+         }
 
          /* 2.  Apply all other criteria mentioned in the query and return as concrete type findings */
          Collection<? extends Finding> findings =
