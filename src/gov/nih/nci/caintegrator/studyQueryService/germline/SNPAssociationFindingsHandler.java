@@ -52,6 +52,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                             " WHERE {2} {3} {4} "
                     );
 
+      //  if (snpAnnotationIDs != null && if (snpAnnotationIDs.size() > 0) {
+      //      /* means some annotation criteria is specified */
+
+
         final HashMap params = new HashMap();
 
         /* 1.  Include SNPAssociationFinding attribute criteria in  TargetFinding query */
