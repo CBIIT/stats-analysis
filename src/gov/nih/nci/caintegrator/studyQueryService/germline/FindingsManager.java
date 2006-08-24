@@ -4,11 +4,13 @@ import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
+import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 
 
@@ -41,6 +43,20 @@ public class FindingsManager {
         return ObjectQueryHandler.getStudyObjects(studyCrit);
     }
 
+    /**
+     * This method returns  Population objects based on criteria.  If criteria object is
+     * passed in that does not have name criteria specified, this method will return <b>all</b>
+     * Population Objects.  If name is specified in populationCrit, then this method returns
+     * all population object that matches the names (or LIKE name)
+     *
+     * @param populationCrit
+     * @return Collection of Population Objects
+     * @throws Exception
+     */
+    public static Collection<Population> getPopulations(PopulationCriteria populationCrit)
+    throws Exception {
+        return ObjectQueryHandler.getPopulationObjects(populationCrit);
+    }
     public static Collection<SNPAssociationAnalysis> getSNPAssociationAnalysis(SNPAssociationAnalysisCriteria  assocCrit)
     throws Exception {
         return ObjectQueryHandler.getSNPAssociationAnalysisObjects(assocCrit);
@@ -50,5 +66,7 @@ public class FindingsManager {
     throws Exception {
         return ObjectQueryHandler.getChromosomes();
     }
+
+
 
 }

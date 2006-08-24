@@ -2,11 +2,13 @@ package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
+import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 
 
@@ -16,6 +18,9 @@ import java.text.MessageFormat;
 import org.hibernate.Session;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.MatchMode;
 
 /**
  * Author: Ram Bhattaru
@@ -59,6 +64,42 @@ public class ObjectQueryHandler {
         List<Study> studyObjs = studyQuery.list();
         session.close();
         return studyObjs;
+    }
+
+    /**
+     * This method returns  Population objects based on criteria.  If criteria object is
+     * passed in that does not have name criteria specified, this method will return <b>all</b>
+     * Population Objects.  If name is specified in populationCrit, then this method returns
+     * all population object that matches the names (or LIKE name)
+     *
+     * @param populationCrit
+     * @return Collection of Population Objects
+     */
+    public static Collection<Population> getPopulationObjects(PopulationCriteria populationCrit) {
+        if (populationCrit == null) return new ArrayList<Population>();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        HashMap params = new HashMap();
+        StringBuffer populationCritHQL = new StringBuffer(" FROM Population p " );
+        Criteria crit = session.createCriteria(Population.class);
+        String name = populationCrit.getName();
+        if (name != null && name.length() > 0) {
+            crit.add(Restrictions.ilike("name",name, MatchMode.ANYWHERE ));
+        }
+        List<Population> popObjs = crit.list();
+/*
+        if (name != null && name.length() > 0) {
+            populationCritHQL.append(" WEHRE UPPER(p.name) LIKE '%:name%' ");
+            params.put("name", name.toUpperCase());
+        }
+
+        Query populationQuery = session.createQuery(populationCritHQL.toString());
+        HQLHelper.setParamsOnQuery(params, populationQuery);
+        List<Population> popObjs = populationQuery.list();
+*/
+        session.close();
+        return popObjs;
     }
 
     public static Collection<SNPAssociationAnalysis> getSNPAssociationAnalysisObjects(SNPAssociationAnalysisCriteria crit) {

@@ -16,7 +16,6 @@ public class HQLHelper {
            while (iter.hasNext()) {
                String key = (String)iter.next();
                Object value =  params.get(key);
-               Class c = value.getClass();
 
                if (value instanceof List)
                    q.setParameterList(key, (ArrayList)value);
