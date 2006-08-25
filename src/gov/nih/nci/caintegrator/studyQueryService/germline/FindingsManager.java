@@ -68,7 +68,7 @@ public class FindingsManager {
     }
     
     /**
-     * This method posts the Findings to an FTP site that is configured during run time
+     * This method posts the Findings to an FTP site that is configured during application start up
      * @param email
      * @param findingCritDTO
      * @param fromIndex
