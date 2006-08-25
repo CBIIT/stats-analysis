@@ -66,6 +66,19 @@ public class FindingsManager {
     throws Exception {
         return ObjectQueryHandler.getChromosomes();
     }
+    
+    /**
+     * This method posts the Findings to an FTP site that is configured during run time
+     * @param email
+     * @param findingCritDTO
+     * @param fromIndex
+     * @param toIndex
+     * @throws Exception
+     */
+    public static void getFindingsViaFTP(String email, FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
+    throws Exception {
+        
+    }
 
 
 
