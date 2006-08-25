@@ -69,5 +69,6 @@ abstract public class FindingsHandler {
          return snpAnnotationObjs;
      }
 
+     protected static int IN_PARAMETERS  = 50;
 
 }

@@ -27,7 +27,7 @@ import org.hibernate.criterion.Restrictions;
 
 public class SNPAssociationFindingsHandler extends FindingsHandler {
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,  Session session, int start, int end) {
-        Collection<SNPAssociationFinding>  snpAssociationFindings =
+        List<SNPAssociationFinding>  snpAssociationFindings =
                             Collections.synchronizedList(new ArrayList<SNPAssociationFinding>());
 
         SNPAssociationFindingCriteriaDTO findingCritDTO = (SNPAssociationFindingCriteriaDTO) critDTO;
@@ -55,6 +55,28 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
       //  if (snpAnnotationIDs != null && if (snpAnnotationIDs.size() > 0) {
       //      /* means some annotation criteria is specified */
 
+        if (snpAnnotationIDs != null && snpAnnotationIDs.size() > 0) {
+            ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
+            for (int i = 0; i < arrayIDs.size();) {
+                StringBuffer hql = new StringBuffer("").append(targetHQL);
+                Collection values = new ArrayList();
+                int begIndex = i;
+                i += IN_PARAMETERS ;
+                int endIndex = (i < arrayIDs.size()) ? endIndex = i : (arrayIDs.size());
+                values.addAll(arrayIDs.subList(begIndex,  endIndex));
+                Collection<SNPAssociationFinding> batchFindings = executeTargetFindingQuery(findingCritDTO, values, session, hql, start, end);
+                snpAssociationFindings.addAll(batchFindings);
+                if (snpAssociationFindings.size() > 500)  break;
+            }
+        }
+
+
+        return snpAssociationFindings.subList(0, 500);
+    }
+
+    private Collection<SNPAssociationFinding> executeTargetFindingQuery(SNPAssociationFindingCriteriaDTO findingCritDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end) {
+        Collection<SNPAssociationFinding>  snpAssociationFindings =
+                                    new ArrayList<SNPAssociationFinding>();
 
         final HashMap params = new HashMap();
 
@@ -73,7 +95,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             }
             else {
                 /* means no annotations were selected from the Annotation Criteria Hence  when we
-                 and with rest of other criteria, no results should be returned */
+                   and with rest of other criteria, no results should be returned */
                 snpAnnotJoin = " LEFT JOIN FETCH sa.snpAnnotation ";
                 snpAnnotCond = " (0 != 0) AND ";
             }
