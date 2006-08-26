@@ -66,12 +66,13 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 values.addAll(arrayIDs.subList(begIndex,  endIndex));
                 Collection<SNPAssociationFinding> batchFindings = executeTargetFindingQuery(findingCritDTO, values, session, hql, start, end);
                 snpAssociationFindings.addAll(batchFindings);
-                if (snpAssociationFindings.size() > 500)  break;
+                if (snpAssociationFindings.size() > 501)
+                    return snpAssociationFindings.subList(0, 501);
             }
         }
 
 
-        return snpAssociationFindings.subList(0, 500);
+        return snpAssociationFindings;
     }
 
     private Collection<SNPAssociationFinding> executeTargetFindingQuery(SNPAssociationFindingCriteriaDTO findingCritDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end) {
