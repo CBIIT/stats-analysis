@@ -3,7 +3,7 @@
 <!--
     Document   : GenotypeFinding.hbm.xml
     Created on : June 26, 2006
-    Author     : Dana Zhang
+    Author     : Dana Zhang, Ram Bhattaru
     Description: Hibernate mapping file for GenotypeFinding
 -->
 
@@ -82,16 +82,17 @@
                  insert="false" 
                  update="false" />  
                     
-            <many-to-one name="snpAnnotation"
+        <many-to-one name="snpAnnotation"
            class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation"
            column="SNPANNO_ID"
-           />
+        />
 
-       <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.bean.Study"
+       <many-to-one name="study"
+           class="gov.nih.nci.caintegrator.domain.study.bean.Study"
            column="STUDY_NAME"
            not-null="true" />
 
-      <many-to-one name="specimen"  lazy="false"
+      <many-to-one name="specimen"
            class="gov.nih.nci.caintegrator.domain.study.bean.Specimen"
            column="SPECIMEN_ID"
            not-null="true" />

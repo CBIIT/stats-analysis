@@ -2,16 +2,16 @@ package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding;
+import gov.nih.nci.caintegrator.domain.study.bean.Specimen;
+import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.GenotypeFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
-import gov.nih.nci.caintegrator.util.DBEvent;
 import gov.nih.nci.caintegrator.util.HQLHelper;
-import gov.nih.nci.caintegrator.util.ThreadController;
-import gov.nih.nci.caintegrator.util.ThreadPool;
 
 import java.util.*;
+import java.text.MessageFormat;
 
 import org.hibernate.Session;
 import org.hibernate.Query;
@@ -23,18 +23,45 @@ import org.hibernate.Hibernate;
  * Time:   3:08:00 PM
  */
 public class GenotypeFindingsHandler extends FindingsHandler {
-    Collection<GenotypeFinding>  genotypeFindings = Collections.synchronizedList(new ArrayList<GenotypeFinding>());
-    List factEventList = Collections.synchronizedList(new ArrayList());
-    private final static int VALUES_PER_THREAD = 50;
 
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
-                                                          final Session session, final int fromIndex, final int toIndex) {
+                                                          final Session session, final int startIndex, final int endIndex) {
+        List<GenotypeFinding>  genotypeFindings = Collections.synchronizedList(
+                                                   new ArrayList<GenotypeFinding>());
+        final StringBuffer targetHQL = new StringBuffer(
+                " FROM GenotypeFinding " + TARGET_FINDING_ALIAS + " {0} WHERE {1} ") ;
+
+       /* 2. Add hql to handle AnnotationCriteria (using the SNPAnnotatiosIDs passed in) */
+        if (snpAnnotationIDs != null && snpAnnotationIDs.size() > 0) {
+              ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
+              for (int i = 0; i < arrayIDs.size();) {
+                  StringBuffer hql = new StringBuffer("").append(targetHQL);
+                  Collection values = new ArrayList();
+                  int begIndex = i;
+                  i += IN_PARAMETERS ;
+                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                  Collection<GenotypeFinding> batchFindings = executeTargetFindingQuery(
+                          critDTO, values, session, hql, startIndex, endIndex);
+                  genotypeFindings.addAll(batchFindings);
+                  if (genotypeFindings.size() > 501)
+                      return genotypeFindings.subList(0, 501);
+              }
+          }
+
+        return genotypeFindings;
+    }
+
+    protected Collection<GenotypeFinding> executeTargetFindingQuery(FindingCriteriaDTO critDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end) {
         GenotypeFindingCriteriaDTO findingCritDTO = (GenotypeFindingCriteriaDTO) critDTO;
+        final HashMap params = new HashMap();
 
-        final StringBuffer targetHQL = new StringBuffer(" FROM GenotypeFinding g WHERE ");
-        final Hashtable params = new Hashtable();
+        /* 1. Include Annotation Criteria in TargetFinding query   */
+        StringBuffer snpAnnotJoin = new StringBuffer("");
+        StringBuffer snpAnnotCond = new StringBuffer("");
+        appendAnnotationCriteriaHQL(snpAnnotationIDs, snpAnnotJoin, snpAnnotCond, params);
 
-        /* 1. Handle GenoType Attributes Criteria itself  and populate targetHQL/params */
+        /* 2. Handle GenoType Attributes Criteria itself  and populate targetHQL/params */
         addGenoTypeAttributeCriteria(findingCritDTO, targetHQL, params);
 
          /* 2. Add hql to handle StudyParticipantCriteria */
@@ -42,94 +69,47 @@ public class GenotypeFindingsHandler extends FindingsHandler {
          if (spCrit != null) {
              List<String> specimenIDs = StudyParticipantCriteriaHandler.handle(spCrit, session);
              if (specimenIDs.size() > 0) {
-                 targetHQL.append(" g.specimen.id IN ( :specimenIDs ) AND ");
+                 targetHQL.append(TARGET_FINDING_ALIAS + ".specimen.id IN ( :specimenIDs ) AND ");
                  params.put("specimenIDs", specimenIDs);
              }
          }
 
-       /* 2. Add hql to handle AnnotationCriteria (using the SNPAnnotatiosIDs passed in) */
-       if (snpAnnotationIDs.size() > 0)  {
+         String hql  = MessageFormat.format(targetHQL.toString(), new Object[] {
+                        snpAnnotJoin.toString(), snpAnnotCond.toString()} );
+         String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), "AND");
+         Query q = session.createQuery(finalHQL);
+         HQLHelper.setParamsOnQuery(params, q);
+         q.setFirstResult(start);
+         q.setMaxResults(end);
 
-            targetHQL.append(" g.snpAnnotation.id IN ( :snpAnnotationIDs )");
-            ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
-
-            int threads = arrayIDs.size()/VALUES_PER_THREAD ;
-
-            final int noOfThreads = (threads == 0) ? 1 : threads;
-            final int MAX_RESULT_SETTING = ((toIndex - fromIndex) > noOfThreads) ?
-                                            ((toIndex - fromIndex))/noOfThreads : 1;
-
-            for (int i = 0, threadCount = 0; i < arrayIDs.size();) {
-                Collection values = new ArrayList();
-                int begIndex = i;
-                i += VALUES_PER_THREAD ;
-                int endIndex = (i < arrayIDs.size()) ? endIndex = i : (arrayIDs.size());
-                values.addAll(arrayIDs.subList(begIndex,  endIndex));
-                params.put("snpAnnotationIDs", values);
-
-                System.out.println("Thread ID: "+ threadCount++);
-                final DBEvent.GenotypeRetrieveEvent dbEvent = new DBEvent.GenotypeRetrieveEvent();
-                factEventList.add(dbEvent);
-
-                ThreadPool.AppThread t = ThreadPool.newAppThread(
-                          new ThreadPool.MyRunnable() {
-                              public void codeToRun() {
-                                  Query q = session.createQuery(targetHQL.toString());
-                                  HQLHelper.setParamsOnQuery(params, q);
-                                  q.setFirstResult(fromIndex);
-                                  List objs = q.setMaxResults(MAX_RESULT_SETTING).list();
-                                  genotypeFindings.addAll(objs);
-                                  dbEvent.setCompleted(true);
-                              }
-                          }
-                );
-                t.start();
-           }
-       }
-        try {
-            ThreadController.sleepOnEvents(factEventList);
-        } catch (InterruptedException e) {
-            // No big deal.  Ignore it
-            e.printStackTrace();
-        }
-        return genotypeFindings;
+         List<GenotypeFinding> findings = q.list();
+         return findings;
     }
 
-    private void addGenoTypeAttributeCriteria(GenotypeFindingCriteriaDTO crit, StringBuffer hql, Hashtable params) {
+
+
+
+    private void addGenoTypeAttributeCriteria(GenotypeFindingCriteriaDTO crit, StringBuffer hql, HashMap params) {
         Float score = crit.getQualityScore();
         String status = crit.getStatus();
         ArithematicOperator oper =
            (crit.getOperatorType() == null) ? ArithematicOperator.EQ : crit.getOperatorType();
 
         if (status != null) {
-           hql.append(" g.status = :status AND ");
+           hql.append(TARGET_FINDING_ALIAS + "status = :status AND ");
            params.put("status", status);
         }
 
         if (score != null) {
-           applyScoreCondition(oper, hql);
-           params.put("score", score);
+            String clause =  TARGET_FINDING_ALIAS + ".score {0} :score AND ";
+            String condition = HQLHelper.prepareCondition(oper);
+            String formattedClause = MessageFormat.format(clause, new Object[] {condition} );
+            hql.append(formattedClause);
+            params.put("score", score);
         }
     }
 
-    private void applyScoreCondition(ArithematicOperator oper, StringBuffer hql) {
-        switch(oper) {
-              case GT: {
-                 hql.append("g.qualityScore > :score AND ");
-                 break;
-              }
-              case LT: {
-                  hql.append("g.qualityScore < :score AND ");
-                  break;
-              }
-              case EQ: {
-                  hql.append("g.qualityScore = :score AND ");
-              }
-              default: {
-                  // this should never happen.  If happens simply ignore it
-              }
-          }
-    }
+
     /*  protected StringBuffer buildTargetFindingHSQL() {
         String targetHSQL = new String(" FROM {0} {1} LEFT JOIN FETCH {2}.specimen " +
                                  " LEFT JOIN FETCH {3}.specimen.studyParticipant WHERE ");
@@ -138,11 +118,28 @@ public class GenotypeFindingsHandler extends FindingsHandler {
     }*/
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
-        for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
+      /*  for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
             GenotypeFinding finding =  (GenotypeFinding) iterator.next();
             Hibernate.initialize(finding.getSnpAnnotation());
             Hibernate.initialize(finding.getSnpAssay());
             Hibernate.initialize(finding.getStudy());
+        }*/
+
+
+        /* initialize Specimen objects associated with GenotypeFinding objects */
+        List<Specimen> specimenObjs = new ArrayList<Specimen>();
+        for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
+           GenotypeFinding finding = (GenotypeFinding ) iterator.next();
+           specimenObjs.add( finding.getSpecimen());
         }
+        Hibernate.initialize(specimenObjs);
+
+        /* initialize Specimen objects associated with GenotypeFinding objects */
+        List<StudyParticipant> studyParticipantObjs = new ArrayList<StudyParticipant>();
+        for (Iterator<Specimen> iterator = specimenObjs.iterator(); iterator.hasNext();) {
+            Specimen specimen =  iterator.next();
+
+        }
+
     }
 }

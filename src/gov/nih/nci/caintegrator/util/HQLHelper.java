@@ -86,4 +86,36 @@ public class HQLHelper {
         HQLHelper.removeTrailingToken(hSQL, "WHERE");
       }
 */
+
+    public static String prepareCondition(ArithematicOperator pValueOP) {
+        String condition = null;
+        switch(pValueOP) {
+            case GT: {
+              condition = " > ";
+              break;
+            }
+            case LT: {
+              condition = " < ";
+              break;
+            }
+            case EQ: {
+              condition = " = ";
+              break;
+            }
+            case LE: {
+              condition = " <= ";
+              break;
+            }
+            case GE: {
+              condition = " >= ";
+              break;
+            }
+            default: {
+                // this should never happen.
+                condition = " = ";
+            }
+         }
+
+         return condition;
+    }
 }

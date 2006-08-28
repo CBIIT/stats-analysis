@@ -24,7 +24,13 @@
            <generator class="assigned" />
        </id>
        
-       
+       <!-- completionRate -->
+       <property name="completionRate"
+                 type="java.lang.Double"
+                 column="COMPLETION_RATE"
+                 insert="false"
+                 update="false" />
+
         <!-- hardyWeinbergPValue -->        
        <property name="hardyWeinbergPValue" 
                  type="java.lang.Float" 

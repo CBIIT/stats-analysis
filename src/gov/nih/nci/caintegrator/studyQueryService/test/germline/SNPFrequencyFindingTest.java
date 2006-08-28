@@ -6,6 +6,7 @@ import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
+import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,27 +29,36 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
     }
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        setUpSNPPhysicalPositionCrit();
+       //setUpSNPPhysicalPositionCrit();
         setUpDBSnpCrit();
-        setUpPanelCrit();
-        setUpGeneBiomarkerCrit();
+       // setUpPanelCrit();
+       setUpGeneBiomarkerCrit();
 
-        freqDTO.setPopulationName("Mexican");
+        //freqDTO.setPopulationName("Mexican");
+        freqDTO.setMinorAlleleFrequency(new Float(3.0));
+        freqDTO.setCompletionRate(new Double(0.97), ArithematicOperator.LE);
 
         executeSNPFrequencyFindingSearch(0, 10000);
    }
 
     private void executeSNPFrequencyFindingSearch(int startIndex, int endIndex) {
            try {
-             Collection<? extends Finding> findings = FindingsManager.getFindings(freqDTO, startIndex, endIndex);
+               Collection<? extends Finding> findings = FindingsManager.getFindings(freqDTO, startIndex, endIndex);
+               System.out.println("RESULTS COUNT: " + findings.size());
                for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                    SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
-                   System.out.println("Finding: " + finding);
+                   System.out.println("Completion Rate: " + finding.getCompletionRate());
+                   System.out.println("HardyWeinbergPValue: " + finding.getHardyWeinbergPValue());
+                   System.out.println("HeterozygoteCount: " + finding.getHeterozygoteCount());
+                   System.out.println("MissingAlleleCount: " + finding.getMissingAlleleCount());
+                   System.out.println("OtherAllele: " + finding.getOtherAllele());
+                   System.out.println("OtherAlleleCount: " + finding.getOtherAlleleCount());
+                   System.out.println("MissingGenotypeCount: " + finding.getMissingGenotypeCount());
+
                    printSNPAnnotation(finding.getSnpAnnotation());
-                //   printPopulation(finding.getPopulation());
+                   printPopulation(finding.getPopulation());
                }
-               System.out.println("RESULTS COUNT: " + findings.size());
-           } catch (Throwable t)  {
+               } catch (Throwable t)  {
              System.out.println("CGEMS Exception: ");
              t.printStackTrace();
            }

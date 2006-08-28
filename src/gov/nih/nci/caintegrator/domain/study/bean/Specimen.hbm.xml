@@ -52,7 +52,7 @@
      
     <!--  m-1 relationship -->
     
-   <many-to-one name="studyParticipant" lazy="false"
+   <many-to-one name="studyParticipant"
                 class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant"
                 column="PARTICIPANT_DID" />
     

@@ -224,8 +224,17 @@ public  class SNPFrequencyFinding
     public void setReferenceAlleleCount(Integer referenceAlleleCount){
         this.referenceAlleleCount = referenceAlleleCount;
     }
-	
-	   
+
+    public Double completionRate;
+
+    public Double getCompletionRate() {
+        return completionRate;
+    }
+
+    public void setCompletionRate(Double completionRate) {
+        this.completionRate = completionRate;
+    }
+
     /**
    * Count of the genotypes homogygous for the reference allele at a given locus and population 
    * 
@@ -329,16 +338,8 @@ public  class SNPFrequencyFinding
         return snpAnnotation;			
     }
 
-	      
-	               
-	   
-
     public void setSnpAnnotation(gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation snpAnnotation){
         this.snpAnnotation = snpAnnotation;
     }	
-	   
-	   
-	
-
 			
 }

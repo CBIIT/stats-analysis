@@ -3,7 +3,7 @@
 <!--
     Document   : SNPAnnotation.hbm.xml
     Created on : June 26, 2006
-    Author     : Dana Zhang
+    Author     : Dana Zhang, Ram Bhattaru
     Description: Hibernate mapping file for SNPAnnotation
 -->
 
@@ -68,14 +68,6 @@
                  insert="false" 
                  update="false" />
                  
-  <!--    TODO: This has been moving in to Gene table by Alex.  Not complete yet. So need to revist:  RAM
-       <property name="hugoGeneSymbol"
-                 type="java.lang.String"
-                 column="GENE_SYMBOL"
-                 insert="false"
-                 update="false" />
-
-  -->
        <set name="geneBiomarkerCollection" table="GENE_SNP_ASSO" batch-size="30">
                <cache usage="read-write" />
                <key column="SNPANNO_ID" />

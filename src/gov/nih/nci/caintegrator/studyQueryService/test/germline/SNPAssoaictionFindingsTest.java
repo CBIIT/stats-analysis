@@ -27,16 +27,16 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
     }
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        setUpSNPPhysicalPositionCrit();
-        //setUpDBSnpCrit();
+       //setUpSNPPhysicalPositionCrit();
+        setUpDBSnpCrit();
         //setUpPanelCrit();
-        //setUpGeneBiomarkerCrit();
+        setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
 
-        //setSNPFindingCriteria();
-        executeSNPFrequencyFindingSearch(0, 500);
+        setSNPFindingCriteria();
+        executeSNPFrequencyFindingSearch(0, 501);
     }
 
     private void executeSNPFrequencyFindingSearch(int startIndex, int endIndex) {

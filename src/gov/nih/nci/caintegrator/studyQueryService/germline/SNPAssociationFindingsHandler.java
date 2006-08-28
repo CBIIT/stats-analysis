@@ -26,7 +26,7 @@ import org.hibernate.criterion.Restrictions;
  */
 
 public class SNPAssociationFindingsHandler extends FindingsHandler {
-    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,  Session session, int start, int end) {
+    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,  Session session, int startIndex, int endIndex) {
         List<SNPAssociationFinding>  snpAssociationFindings =
                             Collections.synchronizedList(new ArrayList<SNPAssociationFinding>());
 
@@ -46,11 +46,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                         );
 */
                 new StringBuffer(
-                            " FROM SNPAssociationFinding sa JOIN sa.snpAnnotation snpAnnot " +
-                            " JOIN sa.snpAssociationAnalysis analysis "  +
-                            " {0} {1} " +
-                            " WHERE {2} {3} {4} "
-                    );
+                            " FROM SNPAssociationFinding " + TARGET_FINDING_ALIAS + " JOIN "+ TARGET_FINDING_ALIAS +
+                                            ".snpAnnotation snpAnnot " + " JOIN "+ TARGET_FINDING_ALIAS +
+                                            ".snpAssociationAnalysis analysis "  + " {0} {1} " + " WHERE {2} {3} {4} "
+                            );
 
       //  if (snpAnnotationIDs != null && if (snpAnnotationIDs.size() > 0) {
       //      /* means some annotation criteria is specified */
@@ -62,20 +61,20 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 Collection values = new ArrayList();
                 int begIndex = i;
                 i += IN_PARAMETERS ;
-                int endIndex = (i < arrayIDs.size()) ? endIndex = i : (arrayIDs.size());
-                values.addAll(arrayIDs.subList(begIndex,  endIndex));
-                Collection<SNPAssociationFinding> batchFindings = executeTargetFindingQuery(findingCritDTO, values, session, hql, start, end);
+                int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+                values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                Collection<SNPAssociationFinding> batchFindings = executeTargetFindingQuery(findingCritDTO, values, session, hql, startIndex, endIndex);
                 snpAssociationFindings.addAll(batchFindings);
                 if (snpAssociationFindings.size() > 501)
                     return snpAssociationFindings.subList(0, 501);
             }
         }
-
-
         return snpAssociationFindings;
     }
 
-    private Collection<SNPAssociationFinding> executeTargetFindingQuery(SNPAssociationFindingCriteriaDTO findingCritDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end) {
+    protected Collection<SNPAssociationFinding> executeTargetFindingQuery(FindingCriteriaDTO critDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end) {
+
+        SNPAssociationFindingCriteriaDTO  findingCritDTO= (SNPAssociationFindingCriteriaDTO) critDTO;
         Collection<SNPAssociationFinding>  snpAssociationFindings =
                                     new ArrayList<SNPAssociationFinding>();
 
@@ -84,23 +83,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         /* 1.  Include SNPAssociationFinding attribute criteria in  TargetFinding query */
         StringBuffer myAttributeHql = handleMyOwnAttributeCriteria(findingCritDTO, params);
 
-        /* 2. Include Annotation Criteria in TargetFinding query   */
-        String snpAnnotJoin = "";
-        String snpAnnotCond = "";
-        if (snpAnnotationIDs != null) {
-            /* means some annotation criteria is specified */
-            if (snpAnnotationIDs.size() > 0) {
-                snpAnnotJoin = " LEFT JOIN FETCH sa.snpAnnotation ";
-                snpAnnotCond = " sa.snpAnnotation.id IN (:snpAnnotationIDs) AND ";
-                params.put("snpAnnotationIDs", snpAnnotationIDs);
-            }
-            else {
-                /* means no annotations were selected from the Annotation Criteria Hence  when we
-                   and with rest of other criteria, no results should be returned */
-                snpAnnotJoin = " LEFT JOIN FETCH sa.snpAnnotation ";
-                snpAnnotCond = " (0 != 0) AND ";
-            }
-        }
+        /* 2. Include HQL to handle Annotation Criteria to snpAnnotJoin & snpAnnotCond */
+        StringBuffer snpAnnotJoin = new StringBuffer("");
+        StringBuffer snpAnnotCond = new StringBuffer("");
+        appendAnnotationCriteriaHQL(snpAnnotationIDs, snpAnnotJoin, snpAnnotCond, params);
 
         /* 3. Include SNPAnalysisGroup Criteria in TargetFinding query by converting and adding to AnalysisGroupCriteria */
         handleAnalysisGroupCriteria(findingCritDTO, session);
@@ -112,7 +98,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
         /* 5. Assemble the Query with all criteria conditions together */
         String tmpHQL = MessageFormat.format(targetHQL.toString(), new Object[] {
-                 snpAnnotJoin, analysisJoin, myAttributeHql, snpAnnotCond, analysisCondition});
+                 snpAnnotJoin.toString(), analysisJoin, myAttributeHql, snpAnnotCond.toString(), analysisCondition});
         String hql= HQLHelper.removeTrailingToken(new StringBuffer(tmpHQL), " AND");
         String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), " OR");
 
@@ -143,8 +129,8 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             ArithematicOperator pValueOP = findingCritDTO.getpValueOperator();
             if (pValueOP == null) pValueOP = ArithematicOperator.EQ; // (default)
             StringBuffer hql = new StringBuffer("");
-            String condition = prepareCondition(pValueOP);
-            String clause = " sa.pvalue {0} :pValue AND ";
+            String condition = HQLHelper.prepareCondition(pValueOP);
+            String clause = TARGET_FINDING_ALIAS + ".pvalue {0} :pValue AND ";
             String formattedClause = MessageFormat.format(clause, new Object[] {condition} );
             hql.append(formattedClause);
             params.put("pValue", pValue);
@@ -156,46 +142,14 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             ArithematicOperator rankOP = findingCritDTO.getRankOperator();
             if (rankOP == null) rankOP = ArithematicOperator.EQ; // (default)
             StringBuffer hql = new StringBuffer("");
-            String condition = prepareCondition(rankOP);
-            String clause = " sa.rank {0} :rank AND ";
+            String condition = HQLHelper.prepareCondition(rankOP);
+            String clause = TARGET_FINDING_ALIAS + ".rank {0} :rank AND ";
             String formattedClause = MessageFormat.format(clause, new Object[] {condition} );
             hql.append(formattedClause);
             params.put("rank", rank);
             myHql.append(hql);
         }
         return myHql;
-    }
-
-    private String prepareCondition(ArithematicOperator pValueOP) {
-        String condition = null;
-        switch(pValueOP) {
-            case GT: {
-              condition = " > ";
-              break;
-            }
-            case LT: {
-              condition = " < ";
-              break;
-            }
-            case EQ: {
-              condition = " = ";
-              break;
-            }
-            case LE: {
-              condition = " <= ";
-              break;
-            }
-            case GE: {
-              condition = " >= ";
-              break;
-            }
-            default: {
-                // this should never happen.
-                condition = " = ";
-            }
-         }
-
-         return condition;
     }
 
     private void handleAnalysisGroupCriteria(SNPAssociationFindingCriteriaDTO findingCritDTO, Session session) {
@@ -260,7 +214,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 if (methods != null) {
                     String methodParam = "methods" + suffix;
                     StringBuffer tmpAnalysisCond = new StringBuffer("");
-                    tmpAnalysisCond.append(" sa.snpAssociationAnalysis.methods = :{0} ");
+                    tmpAnalysisCond.append( TARGET_FINDING_ALIAS + ".snpAssociationAnalysis.methods = :{0} ");
                     analysisCond.append(MessageFormat.format(tmpAnalysisCond.toString(), new Object[] { methodParam }));
                     params.put(methodParam, methods);
                     methodTrailingAND.append(" AND ");
@@ -270,7 +224,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                     analysisCond.append(methodTrailingAND);
                     String nameParam = "name" + suffix;
                     StringBuffer tmpAnalysisCond = new StringBuffer("");
-                    tmpAnalysisCond.append(" sa.snpAssociationAnalysis.name = :{0} ");
+                    tmpAnalysisCond.append(TARGET_FINDING_ALIAS + ".snpAssociationAnalysis.name = :{0} ");
                     analysisCond.append(MessageFormat.format(tmpAnalysisCond.toString(), new Object[] { nameParam }));
                     params.put(nameParam, name);
                 }
@@ -298,7 +252,6 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
            gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
-           //Collection<GeneBiomarker> gbs = finding.getSnpAnnotation().getGeneBiomarkerCollection();
         }
         Hibernate.initialize(gbObjs);
     }

@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.germline;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 import gov.nih.nci.caintegrator.studyQueryService.germline.SNPFrequencyFindingHandler;
+import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
 /**
  * User: Ram Bhattaru
@@ -22,7 +23,25 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
 	 * from Hard-Wienberg proportions
 	 */
 	private Float hardyWeinbergPValue;
-	/**
+
+    public Double completionRate;
+    ArithematicOperator completeRateOperator;
+
+    public Double getCompletionRate() {
+        return completionRate;
+    }
+
+    public ArithematicOperator getCompleteRateOperator() {
+        return completeRateOperator;
+    }
+
+    public void setCompletionRate(Double completionRate,  ArithematicOperator completeRateOperator) {
+        this.completionRate = completionRate;
+        this.completeRateOperator = completeRateOperator;
+    }
+
+
+    /**
 	 * Count of the observed heterogyzote genotypes at a given locus and population
 	 */
 	private Integer heterozygoteCount;
