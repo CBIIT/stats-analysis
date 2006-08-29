@@ -30,29 +30,18 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         List<SNPAssociationFinding>  snpAssociationFindings =
                             Collections.synchronizedList(new ArrayList<SNPAssociationFinding>());
 
-        SNPAssociationFindingCriteriaDTO findingCritDTO = (SNPAssociationFindingCriteriaDTO) critDTO;
-        StringBuffer targetHQL =
-/*
-                        new StringBuffer(
-                            "SELECT sa,snpAnnot.id, snpAnnot.chromosomeLocation, " +
-                                    " snpAnnot.chromosomeName, snpAnnot.dbsnpId," +
-                                    " biomarkers.hugoGeneSymbol,  analysis.name " +
-                                    " FROM SNPAssociationFinding sa " +
-                                    " JOIN sa.snpAnnotation snpAnnot " +
-                                    " JOIN snpAnnot.geneBiomarkerCollection biomarkers" +
-                                    " JOIN sa.snpAssociationAnalysis analysis "  +
-                                    " {0} {1} " +
-                                    " WHERE {2} {3} {4} "
-                        );
-*/
-                new StringBuffer(
-                            " FROM SNPAssociationFinding " + TARGET_FINDING_ALIAS + " JOIN "+ TARGET_FINDING_ALIAS +
-                                            ".snpAnnotation snpAnnot " + " JOIN "+ TARGET_FINDING_ALIAS +
-                                            ".snpAssociationAnalysis analysis "  + " {0} {1} " + " WHERE {2} {3} {4} "
-                            );
+        /* if AnnotationCriteria results in no SNPs then return no findings */
+          if (snpAnnotationIDs != null && snpAnnotationIDs.size() == 0)
+              return snpAssociationFindings;
 
-      //  if (snpAnnotationIDs != null && if (snpAnnotationIDs.size() > 0) {
-      //      /* means some annotation criteria is specified */
+        SNPAssociationFindingCriteriaDTO findingCritDTO = (SNPAssociationFindingCriteriaDTO) critDTO;
+        StringBuffer targetHQL = new StringBuffer(
+                            " FROM SNPAssociationFinding " + TARGET_FINDING_ALIAS +
+                             " JOIN "+ TARGET_FINDING_ALIAS +
+                              ".snpAnnotation snpAnnot " + " JOIN "+ TARGET_FINDING_ALIAS +
+                              ".snpAssociationAnalysis analysis "  + " {0} {1} " +
+                              " WHERE {2} {3} {4} "
+                            );
 
         if (snpAnnotationIDs != null && snpAnnotationIDs.size() > 0) {
             ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
@@ -68,6 +57,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 if (snpAssociationFindings.size() > 501)
                     return snpAssociationFindings.subList(0, 501);
             }
+        } else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */
+             Collection<SNPAssociationFinding> findings = executeTargetFindingQuery(
+                    critDTO, null, session, targetHQL, startIndex, endIndex);
+              snpAssociationFindings.addAll(findings);
         }
         return snpAssociationFindings;
     }
@@ -100,7 +93,8 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         String tmpHQL = MessageFormat.format(targetHQL.toString(), new Object[] {
                  snpAnnotJoin.toString(), analysisJoin, myAttributeHql, snpAnnotCond.toString(), analysisCondition});
         String hql= HQLHelper.removeTrailingToken(new StringBuffer(tmpHQL), " AND");
-        String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), " OR");
+        String noORHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), " OR");
+        String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(noORHQL), "WHERE");
 
         /* 6. Now execute the final TargetFinding query and return results  */
         Query q = session.createQuery(finalHQL);
@@ -201,15 +195,12 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 findingCritDTO.getSnpAssociationAnalysisCriteriaCollection();
 
         if (anaCrits != null && anaCrits.size() > 0) {
-            //analysisJoin = " LEFT JOIN FETCH sa.snpAssociationAnalysis ";
             int suffix = 0;
             for (Iterator<SNPAssociationAnalysisCriteria> iterator = anaCrits.iterator(); iterator.hasNext();) {
                 SNPAssociationAnalysisCriteria anaCritObj =  iterator.next();
                 String methods = anaCritObj.getMethods();
                 String name = anaCritObj.getName();
-
                 if ((methods == null) && (name == null)) continue;
-
                 StringBuffer methodTrailingAND = new StringBuffer("");
                 if (methods != null) {
                     String methodParam = "methods" + suffix;

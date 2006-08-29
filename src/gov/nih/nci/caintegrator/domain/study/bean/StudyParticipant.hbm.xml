@@ -175,7 +175,7 @@
      <!-- here is for m-1 relationships -->  
       <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.bean.Study" column="STUDY_NAME"  />
       <many-to-one name="population" class="gov.nih.nci.caintegrator.domain.study.bean.Population" column="POPULATION_ID"
-              lazy = "false"  />
+                />
             
       
 	</class>

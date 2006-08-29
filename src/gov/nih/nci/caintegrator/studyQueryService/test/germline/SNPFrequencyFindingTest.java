@@ -3,6 +3,8 @@ package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
@@ -30,15 +32,14 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
        //setUpSNPPhysicalPositionCrit();
-        setUpDBSnpCrit();
+       setUpDBSnpCrit();
        // setUpPanelCrit();
        setUpGeneBiomarkerCrit();
 
-        //freqDTO.setPopulationName("Mexican");
-        freqDTO.setMinorAlleleFrequency(new Float(3.0));
-        freqDTO.setCompletionRate(new Double(0.97), ArithematicOperator.LE);
-
-        executeSNPFrequencyFindingSearch(0, 10000);
+        //freqDTO.setMinorAlleleFrequency(new Float(3.0), ArithematicOperator.LE);
+         freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
+        //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
+        executeSNPFrequencyFindingSearch(0, 501);
    }
 
     private void executeSNPFrequencyFindingSearch(int startIndex, int endIndex) {
@@ -54,15 +55,24 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
                    System.out.println("OtherAllele: " + finding.getOtherAllele());
                    System.out.println("OtherAlleleCount: " + finding.getOtherAlleleCount());
                    System.out.println("MissingGenotypeCount: " + finding.getMissingGenotypeCount());
-
+                   System.out.println("MinorAlleleFrequency : " + finding.getMinorAlleleFrequency());
                    printSNPAnnotation(finding.getSnpAnnotation());
                    printPopulation(finding.getPopulation());
                }
                } catch (Throwable t)  {
-             System.out.println("CGEMS Exception: ");
+             System.out.println("CGEMS Ex   ception: ");
              t.printStackTrace();
            }
     }
+    protected void printSNPAnnotation(SNPAnnotation annot) {
+        super.printSNPAnnotation(annot);
+        Collection<GeneBiomarker> c = annot.getGeneBiomarkerCollection();
+        for (Iterator<GeneBiomarker> iterator = c.iterator(); iterator.hasNext();) {
+            GeneBiomarker geneBiomarker =  iterator.next();
+            System.out.println("Biomarker: " + geneBiomarker.getHugoGeneSymbol());
+        }
+    }
+
     protected void printPopulation(Population p) {
         System.out.println("Population");
         System.out.println("        " + p);

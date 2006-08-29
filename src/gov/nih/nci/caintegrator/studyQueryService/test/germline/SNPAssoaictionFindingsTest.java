@@ -28,7 +28,7 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
        //setUpSNPPhysicalPositionCrit();
-        setUpDBSnpCrit();
+        //setUpDBSnpCrit();
         //setUpPanelCrit();
         setUpGeneBiomarkerCrit();
 

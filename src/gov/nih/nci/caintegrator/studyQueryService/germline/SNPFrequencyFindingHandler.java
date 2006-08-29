@@ -4,6 +4,7 @@ import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.util.HQLHelper;
@@ -12,10 +13,7 @@ import gov.nih.nci.caintegrator.util.ArithematicOperator;
 import java.util.*;
 import java.text.MessageFormat;
 
-import org.hibernate.Session;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Hibernate;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -26,13 +24,19 @@ import org.hibernate.criterion.Restrictions;
 public class SNPFrequencyFindingHandler extends FindingsHandler {
 
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, int startIndex, int endIndex) {
+
         List<SNPFrequencyFinding>  snpFrequencyFindings =
                 Collections.synchronizedList(new ArrayList<SNPFrequencyFinding>());
 
-        //SNPFrequencyFindingCriteriaDTO findingCritDTO = (SNPFrequencyFindingCriteriaDTO) critDTO;
-        final StringBuffer targetHQL = new StringBuffer(
-                " FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS + " {0} {1} WHERE {2} {3} ");
+        /* if AnnotationCriteria results in no SNPs then return no findings */
+        if (snpAnnotationIDs != null && snpAnnotationIDs.size() == 0)
+            return snpFrequencyFindings;
 
+        final StringBuffer targetHQL = new StringBuffer(
+                        " FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS +
+                        " {0} {1} WHERE {2} {3} ");
+
+        /*  if AnnotationCriteria resulted in some SNPs:  */
         if (snpAnnotationIDs != null && snpAnnotationIDs.size() > 0) {
             ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
             for (int i = 0; i < arrayIDs.size();) {
@@ -49,27 +53,25 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
                     return snpFrequencyFindings.subList(0, 501);
             }
         }
+        else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */
+            Collection<SNPFrequencyFinding> findings = executeTargetFindingQuery(
+                    critDTO, null, session, targetHQL, startIndex, endIndex);
+            snpFrequencyFindings.addAll(findings);
+        }
+
         return snpFrequencyFindings ;
-       }
-
-
+    }
 
     protected Collection<SNPFrequencyFinding> executeTargetFindingQuery(FindingCriteriaDTO critDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end) {
          final HashMap params = new HashMap();
          SNPFrequencyFindingCriteriaDTO findingCritDTO = (SNPFrequencyFindingCriteriaDTO) critDTO;
-         /* 1. Include Annotation Criteria in TargetFinding query   */
+
+        /* 1. Include Annotation Criteria in TargetFinding query   */
          StringBuffer snpAnnotJoin = new StringBuffer("");
          StringBuffer snpAnnotCond = new StringBuffer("");
-/*       if (snpAnnotationIDs != null)
-         if (snpAnnotationIDs.size() > 0) {
-            snpAnnotJoin = "LEFT JOIN FETCH sf.snpAnnotation ";
-            snpAnnotCond = " sf.snpAnnotation.id IN (:snpAnnotationIDs) AND ";
-            params.put("snpAnnotationIDs", snpAnnotationIDs);
+         if (snpAnnotationIDs != null) {
+            appendAnnotationCriteriaHQL(snpAnnotationIDs, snpAnnotJoin, snpAnnotCond, params);
          }
-*/       appendAnnotationCriteriaHQL(snpAnnotationIDs, snpAnnotJoin, snpAnnotCond, params);
-
-         /*  2. Handle SNPFrequencyFinding Attributes Criteria itself  and populate targetHQL/params */
-         addSNPFrequencyFindingAttriuteCrit(findingCritDTO, targetHQL, params);
 
          /*  3. Handle population & Study criteria  */
          String populationJoin = "";
@@ -77,21 +79,24 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
          List<Population> populationList = handlePopulationCriteria(findingCritDTO, session);
          if (populationList.size() > 0) {
             populationJoin = " LEFT JOIN FETCH " + TARGET_FINDING_ALIAS + ".population ";
-            populationCond =  TARGET_FINDING_ALIAS + ".population IN (:populationList) ";
+            populationCond =  TARGET_FINDING_ALIAS + ".population IN (:populationList) AND ";
             params.put("populationList", populationList);
          }
 
-/*
-         /*  4. If no criteria is resulted in any condition to be filtered
-            (or if no criteria is specified), return empty list
-         if ( (snpAnnotationIDs.size() < 1) && (populationList.size() < 1) &&
-                (params.size() < 1) )
-            return new ArrayList<SNPFrequencyFinding>();
-*/
-
          String hql  = MessageFormat.format(targetHQL.toString(), new Object[] {
                             snpAnnotJoin.toString(), populationJoin, snpAnnotCond.toString(), populationCond });
-         String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), "AND");
+
+//   /*      /* we need to add AND before adding SNPFrequencyFindingAttriuteCrit.  But prior ot that make
+//            sure there was no trailing AND already */
+//         String tempHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), "AND");
+//
+//*/
+          StringBuffer formattedTargetHQL = new StringBuffer(hql);
+         /*  2. Handle SNPFrequencyFinding Attributes Criteria itself  and populate targetHQL/params */
+         addSNPFrequencyFindingAttriuteCrit(findingCritDTO, formattedTargetHQL, params);
+
+         String andRemovedHQL = HQLHelper.removeTrailingToken(new StringBuffer(formattedTargetHQL), "AND");
+         String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(andRemovedHQL), "WHERE");
          Query q = session.createQuery(finalHQL);
          HQLHelper.setParamsOnQuery(params, q);
          q.setFirstResult(start);
@@ -143,12 +148,17 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
             return false;
     }
     private void addSNPFrequencyFindingAttriuteCrit(SNPFrequencyFindingCriteriaDTO crit, StringBuffer hql, HashMap params) {
+
         Float hardyWeinbergPValue  = crit.getHardyWeinbergPValue();
+        ArithematicOperator hardyWeinbergPValueOperator = crit.getHardyWeinbergPValueOperator();
+
+        Float minorAlleleFreq = crit.getMinorAlleleFrequency();
+        ArithematicOperator minorAlleleOperator = crit.getMinorAlleleOperator();
+
+        Double completionRate = crit.getCompletionRate();
+        ArithematicOperator completeRateOperator = crit.getCompleteRateOperator();
+
         Integer heterCount = crit.getHeterozygoteCount();
-
-        // TODO : uncomment below after minorAlleleFrequency is fianlized with DB
-        //Float minorAlleleFreq = crit.getMinorAlleleFrequency();
-
         Integer missingAlleleCnt = crit.getMissingAlleleCount();
         Integer missingGenotypeCnt = crit.getMissingGenotypeCount();
         String otherAllele = crit.getOtherAllele();
@@ -157,8 +167,6 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         String referenceAllele = crit.getReferenceAllele();
         Integer referenceAlleleCnt = crit.getReferenceAlleleCount();
         Integer referenceHomogzoteCnt = crit.getReferenceHomogyzoteCount();
-        Double completionRate = crit.getCompletionRate();
-        ArithematicOperator completeRateOperator = crit.getCompleteRateOperator();
 
 
         if (completionRate != null) {
@@ -171,22 +179,27 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         }
 
         if (hardyWeinbergPValue != null) {
-            hql.append( TARGET_FINDING_ALIAS + ".hardyWeinbergPValue = :pValue AND ");
-            params.put("pValue", hardyWeinbergPValue);
+            if (hardyWeinbergPValueOperator == null) hardyWeinbergPValueOperator = ArithematicOperator.EQ; // default
+            String clause =  TARGET_FINDING_ALIAS + ".hardyWeinbergPValue {0} :hardyWeinbergPValue AND ";
+            String condition = HQLHelper.prepareCondition(hardyWeinbergPValueOperator);
+            String formattedClause = MessageFormat.format(clause, new Object[] {condition} );
+            hql.append(formattedClause);
+            params.put("hardyWeinbergPValue", hardyWeinbergPValue);
         }
+
+        if (minorAlleleFreq != null) {
+            if (minorAlleleOperator == null) minorAlleleOperator = ArithematicOperator.EQ; // default
+            String clause =  TARGET_FINDING_ALIAS + ".minorAlleleFrequency  {0} :minorAlleleFrequency  AND ";
+            String condition = HQLHelper.prepareCondition(minorAlleleOperator);
+            String formattedClause = MessageFormat.format(clause, new Object[] {condition} );
+            hql.append(formattedClause);
+            params.put("minorAlleleFrequency", minorAlleleFreq);
+        }
+
         if (heterCount != null) {
            hql.append( TARGET_FINDING_ALIAS + ".heterozygoteCount = :heterCount AND ");
            params.put("heterCount", heterCount);
         }
-
-        // TODO : uncomment below after minorAlleleFrequency is fianlized with DB
-        /*
-        if (minorAlleleFreq != null) {
-            hql.append(" sf.minorAlleleFrequency = :minorAlleleFreq AND ");
-            params.put("minorAlleleFreq", minorAlleleFreq);
-        }
-        */
-
 
         if (missingAlleleCnt != null) {
             hql.append( TARGET_FINDING_ALIAS + ".missingAlleleCount = :missingAlleleCnt AND ");
@@ -224,18 +237,26 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
     }
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
 
-        /* initialize GeneBioMarkers Collection associated with SNPAnnotation objects corresponding
-           to SNPFrequecyFindings
-        */
-        List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
+        /* first initialize SNPAnnotations */
+        Collection<String> snpAnnotsIDs = new ArrayList<String>();
+        Collection<Long> populationIDs = new ArrayList<Long>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
-           SNPFrequencyFinding finding = (SNPFrequencyFinding) iterator.next();
-           gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
+                SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
+                snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
+                populationIDs.add(finding.getPopulation().getId());
         }
-        Hibernate.initialize(gbObjs);
-    }
+        if(snpAnnotsIDs.size() >0) {
+            Criteria snpAnnotcrit = session.createCriteria(SNPAnnotation.class).
+            setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
+            add(Restrictions.in("id", snpAnnotsIDs));
+            snpAnnotcrit.list();
+        }
 
-    protected Boolean ifFindingCriteriaSpecified(SNPFrequencyFindingCriteriaDTO crit) {
-        return null;
+        /* Second initialize Population */
+        if (populationIDs.size() > 0) {
+            Criteria populationCrit = session.createCriteria(Population.class).
+                                add(Restrictions.in("id", populationIDs));
+            populationCrit.list();
+        }
     }
 }

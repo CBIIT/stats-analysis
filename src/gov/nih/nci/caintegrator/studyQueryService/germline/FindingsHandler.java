@@ -44,14 +44,6 @@ abstract public class FindingsHandler {
            snpAnnotationIDs = SNPAnnotationCriteriaHandler.handle(annotCrit, session);
          }
 
-         if (snpAnnotationIDs != null) {
-            System.out.print("SNP Annotations Retrieved: " + snpAnnotationIDs.size());
-            System.out.println(snpAnnotationIDs);
-         }
-         else {
-             System.out.println("No Annotation Criteria was specified ");
-         }
-
          /* 2.  Apply all other criteria mentioned in the query and return as concrete type findings */
          Collection<? extends Finding> findings =
                  getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
@@ -88,6 +80,12 @@ abstract public class FindingsHandler {
                 snpAnnotJoin.append(" LEFT JOIN FETCH " + TARGET_FINDING_ALIAS +  ".snpAnnotation ");
                 snpAnnotCond.append(" (0 != 0) AND ");
             }
+        } else {
+            /* no AnnotationCriteria was mentioned at all in the initial query DTO.  But we still need
+              to retrieve SNPAnnotations for the retrieved Findings  So just specify LEFT JOIN FETCH
+              so that outer-join will be used*/
+            snpAnnotJoin.append(" LEFT JOIN FETCH " + TARGET_FINDING_ALIAS +  ".snpAnnotation ");
+            /* keep snpAnnotCond as emppty so that it does not have any effect */
         }
     }
 }

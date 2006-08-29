@@ -46,13 +46,13 @@
                  update="false" />     
                  
         <!-- minorAlleleFrequency -->        
-     <!--  TODO : RAM  <property name="minorAlleleFrequency" 
-                 type="java.lang.Float" 
+        <property name="minorAlleleFrequency"
+                 type="java.lang.Float"
                  column="MINOR_ALLELE_FREQ" 
                  insert="false" 
                  update="false" />
-                 -->
-       <!-- missingAlleleCount -->                 
+
+       <!-- missingAlleleCount -->
        <property name="missingAlleleCount" 
                  type="java.lang.Integer" 
                  column="MISSING_ALLELE_COUNT" 
@@ -113,10 +113,10 @@
       
                   
     <!-- here is for m-1 relationships -->  
-      <many-to-one name="snpAnnotation" lazy="false" class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation"
+      <many-to-one name="snpAnnotation"  class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation"
                    column="SNPANNO_ID" />
 
-      <many-to-one name="population" lazy="false" class="gov.nih.nci.caintegrator.domain.study.bean.Population"
+      <many-to-one name="population"  class="gov.nih.nci.caintegrator.domain.study.bean.Population"
                    column="POPULATION_ID" />
      
 
