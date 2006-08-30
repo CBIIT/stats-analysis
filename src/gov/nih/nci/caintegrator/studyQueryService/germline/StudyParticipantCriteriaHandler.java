@@ -40,7 +40,7 @@ public class StudyParticipantCriteriaHandler {
      */
 
     public static List<String> handle(StudyParticipantCriteria spCrit, Session session) {
-        if (spCrit == null) return new ArrayList<String>();
+        if (spCrit == null) return null; // indicating that this crit can be ignored in the calling method
         HashMap params = new HashMap();  // to hold HQL Parameters
 
         StringBuffer spHQL = new StringBuffer("SELECT sm.id FROM Specimen sm  " +
@@ -92,6 +92,85 @@ public class StudyParticipantCriteriaHandler {
         System.out.println("specimenIDs "+ specimenIDs.size()  +" retrievd from StudyParticipantCriteria: " +specimenIDs.toString());
         return specimenIDs;
     }
+
+    /** This method parses StudyParticipantCriteria and retrieves Specimens based on
+     *  this criteria.  It returns null if no criteria is mentioned within StudyParticipantCriteria
+     * related to Specimen objects.
+     *
+     * @param spCrit
+     * @param session
+     * @return  List of Specimens
+     */
+
+    public static List<String> retrieveSpecimens(StudyParticipantCriteria spCrit, Session session) {
+        if (spCrit == null) return null; // indicating that this crit can be ignored in the calling method
+        HashMap params = new HashMap();  // to hold HQL Parameters
+
+        StringBuffer spHQL = new StringBuffer("SELECT sm.id FROM Specimen sm  " +
+                                               " JOIN sm.studyParticipant sp {0} {1} {2} WHERE ");
+
+
+        /* 1. Handle the StudyParticipant Attributes Criteria itself */
+        boolean hqlAppended = handleStudyPartcioantAttributeCriteria(spCrit, spHQL, params);
+
+        /* 2.  Handle StudyCriteira if specified */
+        StringBuffer studyJoin = new StringBuffer("");
+        StudyCriteria studyCrit = spCrit.getStudyCriteria();
+        if (studyCrit != null) {
+            studyJoin = handleStudyCriteria(studyCrit , spHQL, params);
+        }
+
+        /* 3.  Handle Population Criteria */
+        StringBuffer populationJoin  = new StringBuffer("");
+        PopulationCriteria popCrit = spCrit.getPopulationCriteria();
+        if (popCrit != null) {
+            populationJoin  = handlePopulationCriteria(popCrit, spHQL, params);
+        }
+
+        /* 4. Handle AnalysisGroupCriteria  */
+        StringBuffer analysisGroupJoin = new StringBuffer("");
+        AnalysisGroupCriteria groupCrit = spCrit.getAnalysisGroupCriteria();
+        if (groupCrit != null) {
+            analysisGroupJoin = handleAnalysisGroupCriteria(groupCrit, spHQL, params);
+        }
+        /* 5. now substitute the {0} & {1} parameter studyJoin & populationJoin */
+        String tmp = spHQL.toString();
+        spHQL = new StringBuffer(MessageFormat.format(tmp, new Object[] {
+                                        studyJoin, populationJoin, analysisGroupJoin}));
+
+        /* 6. Do some HouseKeeping tasks */
+        String tmpHSQL = HQLHelper.removeTrailingToken(spHQL, "AND");
+        String finalHSQL = HQLHelper.removeTrailingToken(new StringBuffer(tmpHSQL), "OR");
+
+        /* 7.  Execute total HQL to retrive Specimens */
+        // first check if every condition is empty,  If it is return no specimenIDs
+        if (!hqlAppended  && studyJoin.length() < 1 && populationJoin.length() < 1
+                && analysisGroupJoin.length() < 1 )
+            return new ArrayList<String>();
+
+        Query q = session.createQuery(finalHSQL);
+        HQLHelper.setParamsOnQuery(params, q);
+        List<String> specimenIDs = q.list();
+        System.out.println("specimens found: "+ specimenIDs.size()  + specimenIDs.toString());
+        return specimenIDs;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static boolean handleStudyPartcioantAttributeCriteria(StudyParticipantCriteria crit, StringBuffer spHQL, HashMap params) {
         Collection<String> genderCodes = crit.getAdministrativeGenderCodeCollection();
@@ -198,11 +277,11 @@ public class StudyParticipantCriteriaHandler {
 
         StringBuffer populationJoin = new StringBuffer("");
         if (popCrit != null) {
-            String popName = popCrit.getName();
-            if (popName != null) {
+            Collection<String> popNames = popCrit.getNames();
+            if (popNames != null && popNames.size() > 0) {
                 populationJoin.append(" JOIN sp.population ");
-                spHQL.append("sp.population.name = :popName AND ");
-                params.put("popName", popName);
+                spHQL.append("sp.population.name IN (:popNames) AND ");
+                params.put("popNames", popNames);
             }
         }
         return populationJoin;

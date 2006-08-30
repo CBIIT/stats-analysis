@@ -114,7 +114,7 @@ public class GenotypeFindingTest extends TestCase {
         //geneSymbols.add(new String("USP48"));
         //geneSymbols.add(new String("HSPG2"));
         geneSymbols.add(new String("MET"));
-      
+
 
 
         //geneSymbols.add(new String("blimp"));
@@ -208,419 +208,7 @@ public class GenotypeFindingTest extends TestCase {
         geneSymbols.add("CCRL2");
         geneSymbols.add("CHRM1");
 
-        CHRM2
-        ARID4A
-        ARNT
-        ARNT2
-        ARNTL2
-        ARX
-        ASCL1
-        ATBF1
-        ATF3
-        ATF6
-        ATF7
-        ATOH1
-        ATRX
-        BACH1
-        BARHL1
-        BARX1
-        BARX2
-        BATF
-        BCL6
-        BHLHB2
-        BHLHB3
-        BNC1
-        BRD8
-        BTEB1
-        BTG2
-        C10orf48
-        C16orf7
-        C20orf17
-        CALML5
-        CART1
-        CBFA2T2
-        CBFA2T3
-        CBL
-        CCRN4L
-        CDX1
-        CDX2
-        CEBPB
-        CITED1
-        CITED2
-        CKLFSF4
-        CLOCK
-        CNOT7
-        CREB1
-        CREB3L1
-        CREBBP
-        CREBL2
-        CRX
-        CSDA
-        CTCF
-        CUTL2
-        DDIT3
-        DLX2
-        DLX3
-        DLX4
-        DLX5
-        DLX6
-        DMRT1
-        DMRT2
-        DMRT3
-        DMRTA1
-        DMRTC2
-        DMTF1
-        DSCR1
-        DSIPI
-        DUX1
-        E2F1
-        E2F3
-        E2F4
-        E2F6
-        E4F1
-        EGR4
-        EHF
-        ELF1
-        ELF2
-        ELF3
-        ELF5
-        ELK1
-        ELK4
-        EMX1
-        EMX2
-        EN2
-        ENO1
-        EOMES
-        EP300
-        EPAS1
-        ERG
-        ESR2
-        ESRRA
-        ESRRB
-        ESX1L
-        ETS1
-        ETS2
-        ETV1
-        ETV2
-        ETV5
-        ETV6
-        ETV7
-        EVX1
-        FEV
-        FLI1
-        FLJ11011
-        FLJ12895
-        FLJ20626
-        FLJ23614
-        FLJ25169
-        FLJ25680
-        FLJ30678
-        FLJ37970
-        FMNL2
-        FOSL1
-        FOSL2
-        FOXA1
-        FOXA2
-        FOXA3
-        FOXC2
-        FOXD1
-        FOXD2
-        FOXD3
-        FOXD4L1
-        FOXE1
-        FOXE3
-        FOXF1
-        FOXG1B
-        PARVB
-        PARVG
-        PFN1
-        PIP
-        PLEC1
-        PLEKHH2
-        PLS1
-        PLS3
-        PTK9L
-        RDX
-        SCIN
-        SMTN
-        SNTA1
-        SNTB1
-        SNTG2
-        SORBS1
-        SPTA1
-        SPTB
-        SPTBN1
-        SPTBN5
-        SVIL
-        SYNE1
-        TAGLN
-        TLN1
-        TMOD1
-        TMOD3
-        TMOD4
-        TMSB10
-        TMSNB
-        TNNI1
-        TNNI3
-        TPM1
-        TPM2
-        TPM3
-        VASP
-        VCL
-        VILL
-        WASF1
-        WASF2
-        WASL
-        WDR1
-        YWHAH
-        ARP3BETA
-        FLNA
-        FSCN3
-        ZNF6
-        ZNF606
-        ZNF623
-        ZNF647
-        ZNF7
-        ZNF71
-        ZNF74
-        ZNF77
-        ZNF79
-        ZNF8
-        ZNF83
-        ZNF84
-        ZNF90
-        ZNF91
-        ZNF92
-        ZNFN1A2
-        ZNRD1
-        ZRF1
-        ZXDB
-        ZZZ3
-        ATRX
-        DDX11
-        RAD54B
-        RECQL
-        RECQL4
-        RECQL5
-        RUVBL1
-        WRN
-        HMGA1
-        HMGA2
-        ACTL6A
-        ARID4B
-        ASF1A
-        CBX1
-        CBX3
-        CBX6
-        CBX7
-        CDY1
-        CDY2
-        CDYL
-        CDYL2
-        CHAF1A
-        CHAF1B
-        CHD1
-        CHD3
-        CHD4
-        CHD5
-        CHD6
-        EZH1
-        HSMPP8
-        KLHDC3
-        MGC10561
-        MPO
-        MYST1
-        NCOA6
-        NSBP1
-        PB1
-        SMARCC2
-        SMC1L1
-        SUV39H1
-        VCX
-        VCX3
-        ANKRD17
-        BRCA1
-        DDB2
-        ERCC1
-        ERCC3
-        FEN1
-        GTF2H3
-        JTV1
-        MPG
-        MSH4
-        MSH5
-        MSH6
-        N4BP2
-        OGG1
-        PMS2L4
-        PMS2L9
-        POLH
-        POLQ
-        RAD1
-        RAD18
-        RAD51C
-        RAD51L3
-        REV1L
-        XPA
-        XPC
-        XRCC1
-        XRCC2
-        ORC2L
-        ORC4L
-        ORC5L
-        CSDA
-        FEN1
-        G22P1
-        HLF
-        HNRPDL
-        IFI16
-        MTERF
-        PIR51
-        PNKP
-        RBMS1
-        SATB1
-        XRCC5
-        ZNF638
-        ZBP1
-        MBD2
-        MBD4
-        MLH3
-        BRCA2
-        ERCC5
-        HNRPDL
-        IGHMBP2
-        KHDRBS1
-        LRPPRC
-        PC4
-        PCBP1
-        PIR51
-        POLG2
-        PURA
-        RPA1
-        RPA2
-        RPA3
-        SMUG1
-        SSBP2
-        SSBP4
-        TAF15
-        TREX1
-        XPC
-        ADNP
-        AF5Q31
-        AHR
-        AIRE
-        ALX3
-        ANKRD30A
-        AP2E
-        KIF5C
-        KIF9
-        KIFC1
-        KLC2
-        KNS2
-        KNSL7
-        LOC84643
-        MYH1
-        MYH11
-        MYH13
-        MYH14
-        MYH15
-        MYH3
-        MYH4
-        MYH7B
-        MYH8
-        MYH9
-        MYO15A
-        MYO15B
-        MYO18B
-        MYO1B
-        MYO1C
-        MYO1D
-        MYO1F
-        MYO3A
-        MYO5A
-        MYO5B
-        MYO5C
-        MYO6
-        MYO9A
-        MYO9B
-        MYR8
-        OPA1
-        PLEKHH1
-        APPBP2
-        CENPE
-        CSPG6
-        DNAH12
-        DNAH14
-        DNAH3
-        DNAH5
-        DNAH6
-        DNAH8
-        DNAH9
-        DNAL4
-        DNALI1
-        DNCH1
-        DNCL1
-        DNCL2A
-        DNCL2B
-        Dlc2
-        FLJ32752
-        FLJ40427
-        KIF13B
-        KIF1B
-        KIF22
-        KIF2C
-        KIF3B
-        KIF4A
-        KIF5B
-        KLC2
-        KLC2L
-        KNS2
-        KNSL8
-        NPHP3
-        TCTEL1
-        ABLIM1
-        ABLIM2
-        ABLIM3
-        ACTN2
-        ACTN3
-        ACTN4
-        ADD2
-        ANLN
-        AVIL
-        BCL7B
-        BIRC4
-        CALD1
-        CAPZA1
-        CAPZA3
-        CFL1
-        CFL2
-        CFLP1
-        CLMN
-        CNN1
-        CORO1A
-        CORO1B
-        CORO1C
-        CORO2B
-        DAAM1
-        DAAM2
-        DBNL
-        DIAPH1
-        DIAPH3
-        DST
-        DSTN
-        EPB41
-        EPB41L1
-        EPB41L2
-        FHOD1
-        FHOD3
-        FLII
-        FLNA
-        FLNB
-
 */
-
-
-
         annotCrit.setGeneSymbols(geneSymbols);
 
     }
@@ -639,7 +227,7 @@ public class GenotypeFindingTest extends TestCase {
         //spCrit.setAgeAtDiagnosis(45);
         //spCrit.setAgeAtEnrollment(2);
         //spCrit.setDaysOffStudy(100);
-        spCrit.setDaysOnStudy(999);
+        //spCrit.setDaysOnStudy(999);
         //spCrit.setSurvivalStatus(Boolean.TRUE);
         //spCrit.setOffStudy(Boolean.FALSE);
 
@@ -683,21 +271,23 @@ public class GenotypeFindingTest extends TestCase {
 
     protected void setUpStudyCriteria() {
         StudyCriteria studyCrit = new StudyCriteria();
-        studyCrit.setName("A");
-        studyCrit.setSponsorStudyIdentifier("NIH");
+        studyCrit.setName("CGEMS Prostate Scan 1");
+        //studyCrit.setSponsorStudyIdentifier("NIH");
         spCrit.setStudyCriteria(studyCrit);
     }
 
     protected void setUpAnalysisGroupCriteria() {
         AnalysisGroupCriteria crit = new AnalysisGroupCriteria();
-        crit.setNames(new String[] {"control"});
+        crit.setNames(new String[] {"control", "early", "advanced"});
         //"early", "advanced"
         spCrit.setAnalysisGroupCriteria(crit);
     }
 
      protected void setUpPopulationCriteria() {
-        PopulationCriteria popCrit = new PopulationCriteria();
-        popCrit.setName("CASE_ADVANCED");
+        Collection<String> names = new ArrayList<String>();
+        names.add("CASE_ADVANCED");
+        names.add("CASE_EARLY");
+        PopulationCriteria popCrit = new PopulationCriteria(names);
         spCrit.setPopulationCriteria(popCrit);
      }
 
@@ -705,18 +295,18 @@ public class GenotypeFindingTest extends TestCase {
         // 1. setup Annotation Criteria
         //setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
-        //setUpGeneBiomarkerCrit();
-        //setUpPopulationCriteria();
+        setUpGeneBiomarkerCrit();
+
 
         // 2. setup StudyParticipant Criteria
         //setUpStudyParticipantCrit();
         //setUpStudyParticipantAttributesCriteria();
-
-
-        //setUpAnalysisGroupCriteria();
+        setUpPopulationCriteria();
+   //     setUpStudyCriteria();
+   //     setUpAnalysisGroupCriteria();
 
         // 3. set up Genotype Crit itself
-        //setUpGenotypeCrit();
+        setUpGenotypeCrit();
 
         // 4. execute search
         executeGenotypeFindingSearch(0, 500);

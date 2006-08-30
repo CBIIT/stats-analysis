@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.study;
 
+import java.util.Collection;
+
 /**
  * User: Ram Bhattaru
  * Date: Jul 3, 2006
@@ -15,21 +17,17 @@ public class PopulationCriteria {
 	/**
 	 * A textual identifier for the study population
 	 */
-	private String name;
+	private Collection<String> names;
 
-    public PopulationCriteria() {
+    public PopulationCriteria(Collection<String> names) {
+        this.names = names;
     }
 
-    public PopulationCriteria(String name) {
-        this.name = name;
+    public Collection<String> getNames() {
+        return names;
     }
 
-    public String getName() {
-        return name;
+    public void setNames(Collection<String> names) {
+        this.names = names;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }

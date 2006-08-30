@@ -32,12 +32,12 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
        //setUpSNPPhysicalPositionCrit();
-       setUpDBSnpCrit();
+       //setUpDBSnpCrit();
        // setUpPanelCrit();
        setUpGeneBiomarkerCrit();
 
-        //freqDTO.setMinorAlleleFrequency(new Float(3.0), ArithematicOperator.LE);
-         freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
+        freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
+        // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
         //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
         executeSNPFrequencyFindingSearch(0, 501);
    }

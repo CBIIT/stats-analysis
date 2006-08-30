@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import org.hibernate.Session;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -23,25 +24,32 @@ public class SubjectSearchHandler {
     public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit, int fromIndex, int toIndex) {
        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
        session.beginTransaction();
-       List<String> specimenIDs = StudyParticipantCriteriaHandler.handle(spCrit, session);
-       /*StringBuffer hql = new StringBuffer(
-               " SELECT StudyParticipant sp JOIN sp.specimenCollection " +
-               " WHERE sp.specimenCollection.specimenIdentifier IN (:specimenIDs) ");
-       */
-        if (specimenIDs.size() < 1) {
+       List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
+
+       Criteria crit = null;
+
+       if (specimenIDs == null) {
+            /* meanse either StudyParticipantCriteria  is null or no StudyParticipantCriteria
+                attributes are mentioned.  So ignore StudyParticipantCriteria and return all StudyParticipant* */
+            crit = session.createCriteria(StudyParticipant.class).
+                            setFetchMode("population", FetchMode.EAGER);
+       }
+       else if (specimenIDs.size() == 0) {
+            /* means StudyParticipantCriteria did not select and Specimens  Hence return
+                no StudyParticipants */
             session.close();
             return new ArrayList<StudyParticipant>();
-        }
-        Criteria crit = session.createCriteria(StudyParticipant.class).createAlias("specimenCollection", "specimens").
-                                               add(Restrictions.in("specimens.specimenIdentifier", specimenIDs));
+       }
+        /*  means  specimens.size() > 0 so retrieve StudyPartipants beased on the Specimens */
+        crit = session.createCriteria(StudyParticipant.class).
+                                createAlias("specimenCollection", "specimens").
+                                setFetchMode("population", FetchMode.EAGER).
+                                add(Restrictions.in("specimens.specimenIdentifier", specimenIDs));
 
-
-       //Criteria crit = session.createCriteria(hql.toString());
        crit.setFirstResult(fromIndex);
        crit.setMaxResults(toIndex);
        Collection<StudyParticipant> studySubjects = crit.list();
        session.close();
        return studySubjects;
     }
-
 }

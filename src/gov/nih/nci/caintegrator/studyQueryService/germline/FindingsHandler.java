@@ -63,7 +63,7 @@ abstract public class FindingsHandler {
          return snpAnnotationObjs;
      }
 
-    protected static int IN_PARAMETERS  = 50;
+    protected static int IN_PARAMETERS  = 100;
 
     protected static void appendAnnotationCriteriaHQL(Collection<String> snpAnnotationIDs, StringBuffer snpAnnotJoin,
                                                    StringBuffer snpAnnotCond, HashMap params) {

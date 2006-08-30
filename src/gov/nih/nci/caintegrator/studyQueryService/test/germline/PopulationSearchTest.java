@@ -7,6 +7,7 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -19,8 +20,10 @@ import junit.framework.TestSuite;
 public class PopulationSearchTest extends GenotypeFindingTest {
     PopulationCriteria popCrit = null;
     public void testPopulationSearch() {
-        popCrit = new PopulationCriteria();
-        popCrit.setName("ear"); // this should bring back object with name="CASE_EARLY"
+        Collection names = new ArrayList<String>();
+        names.add("CASE_EARLY"); // this should bring back object with name="CASE_EARLY"
+        names.add("CEPH");
+        popCrit = new PopulationCriteria(names);
         executeSearch();
     }
 
