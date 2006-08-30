@@ -6,8 +6,10 @@ import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
@@ -61,7 +63,10 @@ public class FindingsManager {
     throws Exception {
         return ObjectQueryHandler.getSNPAssociationAnalysisObjects(assocCrit);
     }
-
+    public static Collection<SNPAnalysisGroup> getSNPAnalysisGroups(AnalysisGroupCriteria   analGrpCrit)
+    throws Exception {
+        return ObjectQueryHandler.getAnalysisGroups(analGrpCrit);
+    }
     public static List<String> getChromosomes()
     throws Exception {
         return ObjectQueryHandler.getChromosomes();

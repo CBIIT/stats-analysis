@@ -4,12 +4,14 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 
 
 import java.util.*;
@@ -80,12 +82,14 @@ public class ObjectQueryHandler {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
+/*
         HashMap params = new HashMap();
         StringBuffer populationCritHQL = new StringBuffer(" FROM Population p " );
+*/
         Criteria crit = session.createCriteria(Population.class);
-        String name = populationCrit.getName();
-        if (name != null && name.length() > 0) {
-            crit.add(Restrictions.ilike("name",name, MatchMode.ANYWHERE ));
+        Collection names = populationCrit.getNames();
+        if (names != null && names.size() > 0) {
+            crit.add(Restrictions.in("name", names ));
         }
         List<Population> popObjs = crit.list();
 /*
@@ -100,6 +104,21 @@ public class ObjectQueryHandler {
 */
         session.close();
         return popObjs;
+    }
+
+    public static Collection<SNPAnalysisGroup> getAnalysisGroups(AnalysisGroupCriteria analGrpCrit) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(SNPAnalysisGroup.class);
+
+        if (analGrpCrit != null) {
+            String[] names = analGrpCrit.getNames();
+            if (names != null && names.length > 0)
+                crit.add(Restrictions.in("name", names));
+        }
+        Collection<SNPAnalysisGroup> groups = crit.list();
+        session.close();
+        return groups;
     }
 
     public static Collection<SNPAssociationAnalysis> getSNPAssociationAnalysisObjects(SNPAssociationAnalysisCriteria crit) {
