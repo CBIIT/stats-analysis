@@ -23,8 +23,24 @@ import org.hibernate.criterion.Restrictions;
  */
 public class SNPFrequencyFindingHandler extends FindingsHandler {
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
-        // TODO: implement this
-        return null;
+
+        List<SNPFrequencyFinding>  frequencyFindings = Collections.synchronizedList(
+                                                   new ArrayList<SNPFrequencyFinding>());
+        int fromIndex = 0;
+        int toIndex = fromIndex + BATCH_OBJECT_INCREMENT;
+        Collection batchFindings = new ArrayList<SNPFrequencyFinding>();
+        do {
+            batchFindings =
+                    getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
+            frequencyFindings.addAll(batchFindings);
+            fromIndex =  toIndex;
+            toIndex = fromIndex + BATCH_OBJECT_INCREMENT;;
+            System.out.println("Start Index:"+ fromIndex + " End Index:" + toIndex +
+                    " Findings Retrieved: " + frequencyFindings.size());
+        }  while(batchFindings.size() > BATCH_OBJECT_INCREMENT);
+
+        System.out.println("TOTAL frequencyFindings retrieved: " + frequencyFindings.size());
+        return frequencyFindings;
     }
 
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, int startIndex, int endIndex) {

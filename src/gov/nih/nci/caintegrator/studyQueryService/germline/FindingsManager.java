@@ -31,6 +31,11 @@ public class FindingsManager {
                 findingCritDTO, fromIndex, toIndex);
     }
 
+    public static Collection<? extends Finding> getFindingsForFTP(FindingCriteriaDTO findingCritDTO)
+    throws Exception {
+        return findingCritDTO.getHandler().getFindingsForFTP(findingCritDTO);
+    }
+
     public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit, int fromIndex, int toIndex)  {
         return SubjectSearchHandler.getStudySubjects(spCrit, fromIndex, toIndex);
     }

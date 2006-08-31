@@ -26,6 +26,26 @@ import org.hibernate.criterion.Restrictions;
  */
 
 public class SNPAssociationFindingsHandler extends FindingsHandler {
+    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
+        List<SNPAssociationFinding>  associationFindings = Collections.synchronizedList(
+                                                   new ArrayList<SNPAssociationFinding>());
+        int fromIndex = 0;
+        int toIndex = fromIndex + BATCH_OBJECT_INCREMENT;
+        Collection batchFindings = new ArrayList<SNPAssociationFinding>();
+        do {
+            batchFindings =
+                    getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
+            associationFindings.addAll(batchFindings);
+            fromIndex =  toIndex;
+            toIndex = fromIndex + BATCH_OBJECT_INCREMENT;;
+            System.out.println("Start Index:"+ fromIndex + " End Index:" + toIndex +
+                    " Findings Retrieved: " + associationFindings.size());
+        }  while(batchFindings.size() > BATCH_OBJECT_INCREMENT);
+
+        System.out.println("TOTAL associationFindings retrieved: " + associationFindings.size());
+        return associationFindings;
+    }
+
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,  Session session, int startIndex, int endIndex) {
         List<SNPAssociationFinding>  snpAssociationFindings =
                             Collections.synchronizedList(new ArrayList<SNPAssociationFinding>());

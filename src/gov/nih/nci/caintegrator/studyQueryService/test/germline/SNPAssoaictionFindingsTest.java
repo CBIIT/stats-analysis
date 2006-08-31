@@ -36,10 +36,33 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
         //setSNPAssociationGroupCriteria();
 
         setSNPFindingCriteria();
-        executeSNPFrequencyFindingSearch(0, 501);
+        executeSNPAssoaictionFindingsSearch(0, 501);
+    }
+    public void testFTPSNPAssocAnalysisFindingCriteriaDTO() {
+        // 1. setup Annotation Criteria
+       //setUpSNPPhysicalPositionCrit();
+        //setUpDBSnpCrit();
+        //setUpPanelCrit();
+        setUpGeneBiomarkerCrit();
+
+        //setSNPAssociationAnalysisCriteria();
+        //setSNPAssociationGroupCriteria();
+
+        setSNPFindingCriteria();
+        executeFTPSNPAssoaictionFindingsSearch();
+    }
+    private void executeFTPSNPAssoaictionFindingsSearch() {
+                try {
+                    Long t1 = System.currentTimeMillis();
+                    Collection<? extends Finding> findings = FindingsManager.getFindingsForFTP(safDTO);
+                    System.out.println("RESULTS COUNT: " + findings.size());
+                } catch (Throwable t)  {
+                        System.out.println("CGEMS Exception: ");
+                        t.printStackTrace();
+                }
     }
 
-    private void executeSNPFrequencyFindingSearch(int startIndex, int endIndex) {
+    private void executeSNPAssoaictionFindingsSearch(int startIndex, int endIndex) {
             try {
                 Long t1 = System.currentTimeMillis();
                 Collection<? extends Finding> findings = FindingsManager.getFindings(safDTO, startIndex, endIndex);

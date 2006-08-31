@@ -23,7 +23,25 @@ import org.hibernate.criterion.Restrictions;
  * Time:   3:08:00 PM
  */
 public class GenotypeFindingsHandler extends FindingsHandler {
+    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
+                                                          final Session session) {
+        List<GenotypeFinding>  genotypeFindings = Collections.synchronizedList(
+                                                   new ArrayList<GenotypeFinding>());
+        int fromIndex = 0;
+        int toIndex = fromIndex + BATCH_OBJECT_INCREMENT;
+        Collection batchFindings = new ArrayList<GenotypeFinding>();
+        do {
+            batchFindings =
+                    getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
+            genotypeFindings.addAll(batchFindings);
+            fromIndex =  toIndex;
+            toIndex = fromIndex + BATCH_OBJECT_INCREMENT;;
+            System.out.println("Start Index:"+ fromIndex + " End Index:" + toIndex +
+                    " Findings Retrieved: " + genotypeFindings.size());
+        }  while(batchFindings.size() > BATCH_OBJECT_INCREMENT);
 
+        return genotypeFindings;
+    }
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
                                                           final Session session, final int startIndex, final int endIndex) {
 
@@ -49,8 +67,8 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                   Collection<GenotypeFinding> batchFindings = executeTargetFindingQuery(
                           critDTO, values, session, hql, startIndex, endIndex);
                   genotypeFindings.addAll(batchFindings);
-                  if (genotypeFindings.size() > 501)
-                      return genotypeFindings.subList(0, 501);
+                  if (genotypeFindings.size() > BATCH_OBJECT_INCREMENT + 1)
+                      return genotypeFindings.subList(0, BATCH_OBJECT_INCREMENT + 1);
               }
           }  else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */
              Collection<GenotypeFinding> findings = executeTargetFindingQuery(
@@ -102,8 +120,8 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                      params.put("specimenIDs", values );
                      Collection<GenotypeFinding> findings = executeSplittedFindingQuery(session, hql, params, snpAnnotJoin, snpAnnotCond, start, end);
                      genotypeFindings.addAll(findings);
-                     if (genotypeFindings.size() > 501)
-                      return genotypeFindings.subList(0, 501);
+                     if (genotypeFindings.size() > (BATCH_OBJECT_INCREMENT + 1))
+                      return genotypeFindings.subList(0, (BATCH_OBJECT_INCREMENT + 1));
                   }
 
             } else {  /* specimenIDs == null.  Meaning that no StudyParticipantCriteria attributes
@@ -167,8 +185,16 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                 snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
         }
         if (snpAnnotsIDs.size() > 0) {
-            Criteria crit = session.createCriteria(SNPAnnotation.class).add(Restrictions.in("id", snpAnnotsIDs));
-            crit.list();
+              ArrayList arrayIDs = new ArrayList(snpAnnotsIDs );
+              for (int i = 0; i < arrayIDs.size();) {
+                  Collection values = new ArrayList();
+                  int begIndex = i;
+                  i += IN_PARAMETERS ;
+                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                  Criteria crit = session.createCriteria(SNPAnnotation.class).add(Restrictions.in("id", values));
+                  crit.list();
+              }
         }
 
         /* 2. initialize Specimens along with associated StudyParticipants */
@@ -178,9 +204,17 @@ public class GenotypeFindingsHandler extends FindingsHandler {
             specimenIDs.add(finding.getSpecimen().getId());
         }
         if (specimenIDs.size() > 0)  {
-            Criteria specimenCrit = session.createCriteria(Specimen.class).setFetchMode("studyParticipant", FetchMode.EAGER)
-                                    .add(Restrictions.in("id", specimenIDs));
-            specimenCrit .list();
+            ArrayList arrayIDs = new ArrayList(specimenIDs );
+            for (int i = 0; i < arrayIDs.size();) {
+                Collection values = new ArrayList();
+                int begIndex = i;
+                i += IN_PARAMETERS ;
+                int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+                values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                Criteria specimenCrit = session.createCriteria(Specimen.class).setFetchMode("studyParticipant", FetchMode.EAGER)
+                                    .add(Restrictions.in("id", values));
+                specimenCrit .list();
+            }
         }
     }
 }

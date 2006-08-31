@@ -14,6 +14,7 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
+import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
 import java.util.ArrayList;
@@ -285,7 +286,7 @@ public class GenotypeFindingTest extends TestCase {
 
      protected void setUpPopulationCriteria() {
         Collection<String> names = new ArrayList<String>();
-        names.add("CASE_ADVANCED");
+        //names.add("CASE_ADVANCED");
         names.add("CASE_EARLY");
         PopulationCriteria popCrit = new PopulationCriteria(names);
         spCrit.setPopulationCriteria(popCrit);
@@ -311,6 +312,39 @@ public class GenotypeFindingTest extends TestCase {
         // 4. execute search
         executeGenotypeFindingSearch(0, 500);
     }
+    public void testFTPGenotypeFindingCriteriaDTO() {
+        // 1. setup Annotation Criteria
+        //setUpSNPPhysicalPositionCrit();
+        //setUpDBSnpCrit();
+        setUpGeneBiomarkerCrit();
+
+
+        // 2. setup StudyParticipant Criteria
+        //setUpStudyParticipantCrit();
+        //setUpStudyParticipantAttributesCriteria();
+        setUpPopulationCriteria();
+        setUpStudyCriteria();
+   //     setUpAnalysisGroupCriteria();
+
+        // 3. set up Genotype Crit itself
+        //setUpGenotypeCrit();
+
+        // 4. execute search
+        executeFTPGenotypeFindingSearch();
+    }
+
+    private void executeFTPGenotypeFindingSearch() {
+         try {
+             Collection<? extends Finding> findings =
+                  FindingsManager.getFindingsForFTP(gfDTO);
+
+             System.out.println("RESULTS COUNT: " + findings.size());
+         } catch (Throwable t)  {
+           System.out.println("CGEMS Exception: ");
+           t.printStackTrace();
+       }
+    }
+
 
     private void executeGenotypeFindingSearch(int startIndex, int endIndex) {
        try {

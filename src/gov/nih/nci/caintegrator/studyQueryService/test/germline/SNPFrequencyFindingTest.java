@@ -58,6 +58,31 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
         executeSNPFrequencyFindingSearch(0, 501);
    }
 
+    public void testFTPSNPFrequencyFindingCriteriaDTO() {
+        // 1. setup Annotation Criteria
+       //setUpSNPPhysicalPositionCrit();
+       //setUpDBSnpCrit();
+       // setUpPanelCrit();
+
+       // setUpGeneBiomarkerCrit();
+
+        //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
+        freqDTO.setPopulationNames(new String[] {"CASE_EARLY", "CASE_ADVANCED"});
+
+        // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
+        //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
+        executeFTPSNPFrequencyFindingSearch();
+   }
+
+    private void executeFTPSNPFrequencyFindingSearch() {
+           try {
+               Collection<? extends Finding> findings = FindingsManager.getFindingsForFTP(freqDTO);
+               System.out.println("RESULTS COUNT: " + findings.size());
+           } catch (Throwable t)  {
+                System.out.println("CGEMS Ex   ception: ");
+                t.printStackTrace();
+            }
+    }
     private void executeSNPFrequencyFindingSearch(int startIndex, int endIndex) {
            try {
                Collection<? extends Finding> findings = FindingsManager.getFindings(freqDTO, startIndex, endIndex);
