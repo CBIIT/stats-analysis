@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.study;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  * User: Ram Bhattaru
@@ -18,6 +19,14 @@ public class PopulationCriteria {
 	 * A textual identifier for the study population
 	 */
 	private Collection<String> names;
+
+    public PopulationCriteria() {
+        names = new ArrayList<String>();
+    }
+
+    public void addNames(Collection<String> names) {
+        this.names.addAll(names);
+    }
 
     public PopulationCriteria(Collection<String> names) {
         this.names = names;
