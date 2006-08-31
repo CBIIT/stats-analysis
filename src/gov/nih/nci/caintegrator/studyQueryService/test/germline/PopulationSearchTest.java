@@ -20,16 +20,17 @@ import junit.framework.TestSuite;
 public class PopulationSearchTest extends GenotypeFindingTest {
     PopulationCriteria popCrit = null;
     public void testPopulationSearch() {
-/*
+
         Collection names = new ArrayList<String>();
         names.add("CASE_EARLY"); // this should bring back object with name="CASE_EARLY"
         names.add("CEPH");
         popCrit = new PopulationCriteria(names);
-*/
-       popCrit = new PopulationCriteria();
-        Collection<String> names = new ArrayList();
+
+     /*  Collection<String> names = new ArrayList();
+
+       popCrit = new PopulationCriteria(names);
         //names.add("CEPH");
-        //popCrit.addNames(names);
+        //popCrit.addNames(names);*/
         executeSearch();
     }
 

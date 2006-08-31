@@ -18,8 +18,8 @@ public class SubjectSearchTest extends GenotypeFindingTest {
 
     public void testSubjectSearch() {
         //setUpStudyParticipantAttributesCriteria();
-        setUpPopulationCriteria();
-        setUpAnalysisGroupCriteria();
+        //setUpPopulationCriteria();
+        //setUpAnalysisGroupCriteria();
         executeSearch();
     }
 

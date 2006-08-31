@@ -302,11 +302,11 @@ public class GenotypeFindingTest extends TestCase {
         //setUpStudyParticipantCrit();
         //setUpStudyParticipantAttributesCriteria();
         setUpPopulationCriteria();
-   //     setUpStudyCriteria();
+        setUpStudyCriteria();
    //     setUpAnalysisGroupCriteria();
 
         // 3. set up Genotype Crit itself
-        setUpGenotypeCrit();
+        //setUpGenotypeCrit();
 
         // 4. execute search
         executeGenotypeFindingSearch(0, 500);

@@ -142,11 +142,11 @@ public class StudyParticipantCriteriaHandler {
         String tmpHSQL = HQLHelper.removeTrailingToken(spHQL, "AND");
         String finalHSQL = HQLHelper.removeTrailingToken(new StringBuffer(tmpHSQL), "OR");
 
-        /* 7.  Execute total HQL to retrive Specimens */
-        // first check if every condition is empty,  If it is return no specimenIDs
+        /* 7.  Execute total HQL to retrive Specimens.  First check if every condition is empty meaning no criteria mentioned hence as good as
+        spCrit = null */
         if (!hqlAppended  && studyJoin.length() < 1 && populationJoin.length() < 1
                 && analysisGroupJoin.length() < 1 )
-            return new ArrayList<String>();
+            return null;
 
         Query q = session.createQuery(finalHSQL);
         HQLHelper.setParamsOnQuery(params, q);
