@@ -7,11 +7,14 @@ import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -23,20 +26,33 @@ import junit.framework.TestSuite;
  */
 public class SNPFrequencyFindingTest extends GenotypeFindingTest {
     private SNPFrequencyFindingCriteriaDTO  freqDTO;
+     protected StudyParticipantCriteria spCrit;
     protected void setUp() throws Exception {
         annotCrit = new AnnotationCriteria();
         freqDTO = new SNPFrequencyFindingCriteriaDTO();
         freqDTO.setAnnotationCriteria(annotCrit);
+        spCrit = new StudyParticipantCriteria();
 
     }
+    protected void setUpPopulationCriteria() {
+        Collection<String> names = new ArrayList<String>();
+        //names.add("CASE_ADVANCED");
+        names.add("CASE_EARLY");
+        PopulationCriteria popCrit = new PopulationCriteria(names);
+        spCrit.setPopulationCriteria(popCrit);
+     }
+
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
        //setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
        // setUpPanelCrit();
-       setUpGeneBiomarkerCrit();
+
+       // setUpGeneBiomarkerCrit();
 
         freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
+        freqDTO.setPopulationNames(new String[] {"CASE_EARLY"});
+
         // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
         //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
         executeSNPFrequencyFindingSearch(0, 501);

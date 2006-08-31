@@ -22,6 +22,10 @@ import org.hibernate.criterion.Restrictions;
  * Time:   5:52:11 PM
  */
 public class SNPFrequencyFindingHandler extends FindingsHandler {
+    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
+        // TODO: implement this
+        return null;
+    }
 
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, int startIndex, int endIndex) {
 
@@ -105,19 +109,19 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
          return findings;
        }
     private List<Population> handlePopulationCriteria(SNPFrequencyFindingCriteriaDTO findingCritDTO, Session session) {
-        String populationName = findingCritDTO.getPopulationName();
+        String[] populationNames = findingCritDTO.getPopulationNames();
         String studyName = findingCritDTO.getStudyName();
         String sponsorIdentifier = findingCritDTO.getSponsorStudyIdentifier();
 
-        if ((populationName == null || populationName.length() < 1) &&
+        if ((populationNames == null || populationNames.length < 1) &&
                 (studyName == null || studyName.length() < 1) &&
                 (sponsorIdentifier == null || sponsorIdentifier.length() < 1) ) {
             return new ArrayList<Population>();
         }
 
         Criteria popCrit = session.createCriteria(Population.class);
-        if (populationName != null && populationName.length() > 0) {
-            popCrit.add(Restrictions.eq("name", populationName));
+        if (populationNames != null && populationNames.length > 0) {
+            popCrit.add(Restrictions.in("name", populationNames));
         }
         boolean appendStudy = isAddStudyCriteria(findingCritDTO);
         if (appendStudy) {

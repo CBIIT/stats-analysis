@@ -61,18 +61,18 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
 	 private String referenceAllele;
 	 private Integer referenceAlleleCount;
 	 private Integer referenceHomogyzoteCount;
-     private String populationName;
+     private String[] populationNames;
      private String studyName;
      private String sponsorStudyIdentifier;
 
      public SNPFrequencyFindingCriteriaDTO(){ }
 
-     public String getPopulationName() {
-        return populationName;
+     public String[] getPopulationNames() {
+        return populationNames;
      }
 
-     public void setPopulationName(String populationName) {
-        this.populationName = populationName;
+     public void setPopulationNames(String[] populationNames) {
+        this.populationNames = populationNames;
      }
 
      public String getStudyName() {
