@@ -174,7 +174,7 @@ public class KaplanMeierDataController {
 			logger.error("gov.nih.nci.nautilus.ui.struts.form.quicksearch.noRecord");
 			// throw new exception
 		}
-		populateStoredDataforSamplePlot();
+		populateStoredDataforSamplePlot(g1,g2);
 
 	}
 	
@@ -222,9 +222,30 @@ public class KaplanMeierDataController {
 	 *
 	 */
 	private void populateStoredDataforSamplePlot() {
+		/*
 		storedData = new KaplanMeierStoredData();
 		storedData.setSamplePlot1Label("Samples Of Interest");
 		storedData.setSamplePlot2Label("Rest of Samples");
+		NumberFormat numberFormatter;
+		numberFormatter = NumberFormat.getNumberInstance();
+		numberFormatter.setMaximumFractionDigits(5);
+		Collection<KaplanMeierSampleInfo> sampleList1 = kaplanMeier.getSampleList1();
+		Collection<KaplanMeierSampleInfo> sampleList2 = kaplanMeier.getSampleList2();
+		storedData.setPlotPointSeriesCollection(plotPointSeriesSetCollection);
+		storedData.setSampleList1(sampleList1);
+		storedData.setSampleList2(sampleList2);
+		storedData.setSampleList1Count(getSampleCount(sampleList1));
+		storedData.setSampleList2Count(getSampleCount(sampleList2));
+		storedData.setSampleList1VsSampleList2(new Double(kaplanMeier.getLogRankPValue(sampleList1,sampleList2)));
+		storedData.setNumberOfPlots(getNumberOfPlots());
+		*/
+		populateStoredDataforSamplePlot("Samples Of Interest","Rest of Samples" );
+	}
+	
+	private void populateStoredDataforSamplePlot(String g1,String g2)	{
+		storedData = new KaplanMeierStoredData();
+		storedData.setSamplePlot1Label(g1);
+		storedData.setSamplePlot2Label(g2);
 		NumberFormat numberFormatter;
 		numberFormatter = NumberFormat.getNumberInstance();
 		numberFormatter.setMaximumFractionDigits(5);
