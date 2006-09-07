@@ -93,12 +93,20 @@ public class SecurityManager {
 	private static Logger logger = Logger.getLogger(SecurityManager.class);
 	private static AuthorizationManager authorizationManager;
 	private static UserProvisioningManager userProvisioningManager;
+	private static String application = "caIntegrator" ;
 	
 	private SecurityManager(){}
-		
+	private SecurityManager(String app){application = app ;}
 	public static SecurityManager getInstance(){
 		if( instance == null){
 			instance = new SecurityManager();
+		}
+		return instance;
+	}
+	
+	public static SecurityManager getInstance(String app){
+		if( instance == null){
+			instance = new SecurityManager(app);
 		}
 		return instance;
 	}
@@ -256,7 +264,7 @@ public class SecurityManager {
 	            /**
 	    		 * TODO get application Ccontext from system properties
 	    		 */
-	            am = SecurityServiceProvider.getAuthenticationManager("rembrandt");
+	            am = SecurityServiceProvider.getAuthenticationManager(application);
 	            loggedIn = am.login(username, password);
 
 	        } catch (CSException e) {
@@ -267,25 +275,22 @@ public class SecurityManager {
 	}
 	private static AuthorizationManager getAuthorizationManager() throws CSException{
 		if(authorizationManager==null) {
-			authorizationManager = SecurityServiceProvider.getAuthorizationManager("rembrandt");
+			authorizationManager = SecurityServiceProvider.getAuthorizationManager(application);
 		}
 		return authorizationManager;
-	}
-	
+	}	
 	private User getUser(String loginName){
 		if(authorizationManager!=null) {
 			return authorizationManager.getUser(loginName);
 		}else {
 			return null;
 		}
-	}
+	}	
 	private static UserProvisioningManager getUserProvisioningManager() throws CSException{
 		if(userProvisioningManager==null) {
-			userProvisioningManager = SecurityServiceProvider.getUserProvisioningManager("rembrandt");
+			userProvisioningManager = SecurityServiceProvider.getUserProvisioningManager(application +
+					"");
 		}
 		return userProvisioningManager;
-	}
-	
-	
-	
+	}	
 }
