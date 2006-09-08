@@ -76,7 +76,24 @@ public class FindingsManager {
     throws Exception {
         return ObjectQueryHandler.getChromosomes();
     }
+
+    public static Collection<String> getGenotypeFindingQCStatus() {
+        return ObjectQueryHandler.getAllQCStatus();
+    }
     
+    public static Collection<String> getCaseControlStatus() {
+        return ObjectQueryHandler.getCaseControlStatus();
+    }
+
+    public static Collection<Integer> getAgeLowerLimitValues() {
+        return ObjectQueryHandler.getAgeLowerLimitValues();
+    }
+
+    public static Collection<Integer> getAgeUpperLimitValues() {
+        return ObjectQueryHandler.getAgeUpperLimitValues();
+    }
+
+
     /**
      * This method posts the Findings to an FTP site that is configured during application start up
      * @param email

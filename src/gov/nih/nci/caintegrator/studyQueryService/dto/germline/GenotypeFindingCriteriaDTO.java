@@ -16,7 +16,7 @@ import gov.nih.nci.caintegrator.util.ArithematicOperator;
 public class GenotypeFindingCriteriaDTO extends FindingCriteriaDTO {
 
     private Float qualityScore;
-    private String status;
+    private String qcStatus;
     public ArithematicOperator operatorType = ArithematicOperator.EQ; //default
     public StudyParticipantCriteria StudyParticipantCriteria;
 
@@ -36,8 +36,12 @@ public class GenotypeFindingCriteriaDTO extends FindingCriteriaDTO {
         return qualityScore;
     }
 
-    public String getStatus() {
-        return status;
+    public String getQCStatus() {
+        return qcStatus;
+    }
+
+    public void setQcStatus(String qcStatus) {
+        this.qcStatus = qcStatus;
     }
 
     public ArithematicOperator getOperatorType() {

@@ -1,15 +1,14 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
-import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
+import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 
@@ -22,7 +21,7 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 
 /**
  * Author: Ram Bhattaru
@@ -32,6 +31,12 @@ import org.hibernate.criterion.MatchMode;
 
 public class ObjectQueryHandler {
     private static List<String> CHROMOSOME_LIST = null;
+    private static Set<String> qcStatusValues = null;
+    private static Set<String> caseControlStatus = null;
+    private static Set<Integer> ageLowerLimits = null;
+    private static Set<Integer> ageUpperLimits = null;
+
+
 
     public static Collection<Study> getStudyObjects(StudyCriteria studyCrit) {
         if (studyCrit == null) return new ArrayList<Study>();
@@ -119,6 +124,75 @@ public class ObjectQueryHandler {
         Collection<SNPAnalysisGroup> groups = crit.list();
         session.close();
         return groups;
+    }
+
+
+    public static Collection<Integer> getAgeLowerLimitValues() {
+       if (ageLowerLimits == null) {
+           ageLowerLimits = new HashSet<Integer>();
+           Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+           session.beginTransaction();
+
+            Criteria crit = session.createCriteria(StudyParticipant.class);
+            crit.setProjection(Projections.property("ageAtEnrollment.minValue"));
+            Collection<Integer> statusValues =  crit.list() ;
+            session.close();
+            ageLowerLimits.addAll(statusValues);
+       }
+       return ageLowerLimits;
+   }
+
+    public static Collection<Integer> getAgeUpperLimitValues() {
+       if (ageUpperLimits == null) {
+           ageUpperLimits  = new HashSet<Integer>();
+           Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+           session.beginTransaction();
+
+            Criteria crit = session.createCriteria(StudyParticipant.class);
+            crit.setProjection(Projections.property("ageAtEnrollment.maxValue"));
+            Collection<Integer> statusValues =  crit.list() ;
+            session.close();
+            ageUpperLimits.addAll(statusValues);
+       }
+       return ageUpperLimits ;
+   }
+
+    public static Collection<String> getCaseControlStatus() {
+       if (caseControlStatus == null) {
+           caseControlStatus = new HashSet<String>();
+           Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+           session.beginTransaction();
+
+            Criteria crit = session.createCriteria(StudyParticipant.class);
+            crit.setProjection(
+                        Projections.property("caseControlStatus"));
+            Collection<String> statusValues =  crit.list() ;
+            session.close();
+            caseControlStatus.addAll(statusValues);
+       }
+       return caseControlStatus;
+   }
+
+
+     public static Collection<String> getAllQCStatus() {
+        if (qcStatusValues == null) {
+            qcStatusValues = new HashSet<String>();
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+/*
+            Criteria crit = session.createCriteria(GenotypeFinding.class);
+            crit.setProjection(
+                        Projections.property("status"));
+            Collection<String> statusValues =  crit.list() ;
+*/
+
+            String hql = "SELECT g.status FROM GenotypeFinding g ";
+            Query q = session.createQuery(hql);
+            Collection<String> values = q.list();
+            session.close();
+            qcStatusValues.addAll(values);
+        }
+        return qcStatusValues;
     }
 
     public static Collection<SNPAssociationAnalysis> getSNPAssociationAnalysisObjects(SNPAssociationAnalysisCriteria crit) {

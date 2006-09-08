@@ -158,7 +158,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
 
     private void addGenoTypeAttributeCriteria(GenotypeFindingCriteriaDTO crit, StringBuffer hql, HashMap params) {
         Float score = crit.getQualityScore();
-        String status = crit.getStatus();
+        String status = crit.getQCStatus();
         ArithematicOperator oper =
            (crit.getOperatorType() == null) ? ArithematicOperator.EQ : crit.getOperatorType();
 

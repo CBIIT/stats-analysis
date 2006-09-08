@@ -17,10 +17,22 @@ import junit.framework.TestSuite;
 public class SubjectSearchTest extends GenotypeFindingTest {
 
     public void testSubjectSearch() {
-        setUpStudyParticipantAttributesCriteria();
+        //setUpStudyParticipantAttributesCriteria();
         //setUpPopulationCriteria();
         //setUpAnalysisGroupCriteria();
-        executeSearch();
+        //executeSearch();
+
+        //Collection<String> caseStatus = FindingsManager.getGenotypeFindingQCStatus();
+        //System.out.println("Case Status: " + caseStatus);
+
+        //FindingsManager.getCaseControlStatus();
+
+        Collection<Integer> upperRangeLimits = FindingsManager.getAgeUpperLimitValues();
+        System.out.println("Age UpperLimits: " + upperRangeLimits);
+
+        Collection<Integer> lowerRangeLimits = FindingsManager.getAgeLowerLimitValues();
+        System.out.println("Age LowerLimits: " + lowerRangeLimits );
+
     }
 
     private void executeSearch() {
@@ -36,6 +48,7 @@ public class SubjectSearchTest extends GenotypeFindingTest {
                 System.out.println("AFFECTION STATUS: (PLEASE CONFIRM THIS -): " + subject.getSurvivalStatus());
                 System.out.println("FAMILY HISTORY: " + subject.getFamilyHistory());
                 System.out.println("Population Name: "+ subject.getPopulation().getName());
+                System.out.println("Enroll Age:" + subject.getAgeAtEnrollment().getAbsoluteValue());
             }
         } catch (Throwable t)  {
            System.out.println("CGEMS Exception in getting Study Subjects: " + t.toString());

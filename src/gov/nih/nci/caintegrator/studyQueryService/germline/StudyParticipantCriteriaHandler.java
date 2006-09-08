@@ -199,17 +199,17 @@ public class StudyParticipantCriteriaHandler {
         }
 
         NumericMeasurement ageAtEnroll = new NumericMeasurement();
-        ageAtEnroll.setMinValue(new Double(lowerAgeLimit.doubleValue()));
-        ageAtEnroll.setMaxValue(new Double(upperAgeLimit.doubleValue()));
 
-        if (ageAtEnroll.getMinValue() != null) {
+        if (lowerAgeLimit != null) {
            //spHQL.append(" (sp.ageAtEnrollment.minValue >= :minValue AND sp.ageAtEnrollment.maxValue <= :maxValue ) AND ");
+           ageAtEnroll.setMinValue(new Double(lowerAgeLimit.doubleValue()));
            spHQL.append(" sp.ageAtEnrollment.minValue >= :minValue AND ");
            params.put("minValue", ageAtEnroll.getMinValue());
            hqlAppended = true;
         }
 
-        if (ageAtEnroll.getMaxValue() != null) {
+        if (upperAgeLimit != null) {
+            ageAtEnroll.setMaxValue(new Double(upperAgeLimit.doubleValue()));
             spHQL.append(" sp.ageAtEnrollment.maxValue <= :maxValue AND ");
             params.put("maxValue", ageAtEnroll.getMaxValue());
             hqlAppended = true;

@@ -45,6 +45,7 @@ public class GenotypeFindingTest extends TestCase {
     }
     private void setUpGenotypeCrit() {
         gfDTO.setQualityScore(new Float(0.50), ArithematicOperator.LT);
+        gfDTO.setQcStatus("QC-");
     }
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
@@ -224,37 +225,25 @@ public class GenotypeFindingTest extends TestCase {
    }
 
     protected void setUpStudyParticipantAttributesCriteria() {
-        //spCrit.setAgeAtDeath(85);
-        //spCrit.setAgeAtDiagnosis(45);
-        //spCrit.setAgeAtEnrollment(2);
+        //spCrit.setLowerAgeLimit(55);
+        spCrit.setUpperAgeLimit(60);
+        Collection fhs = new ArrayList<String>();
+        //fhs.add("YeS");
+        fhs.add("nO");
+        spCrit.setFamilyHistoryCollection(fhs);
+
         //spCrit.setDaysOffStudy(100);
         //spCrit.setDaysOnStudy(999);
         //spCrit.setSurvivalStatus(Boolean.TRUE);
         //spCrit.setOffStudy(Boolean.FALSE);
 
         // set collections
-        Collection ca = new ArrayList();
-        ca.add("MALE");
-        spCrit.setAdministrativeGenderCodeCollection(ca);
-
-        Collection ce = new ArrayList();
-        ce.add("CAUCASIAN");
-        spCrit.setEthnicGroupCodeCollection(ce);
-
-/*
-        Collection cf = new ArrayList();
-        cf.add("Chelestrol");
-        spCrit.setFamilyHistoryCollection(cf);
-*/
 
 /*
         Collection ci = new ArrayList();
         ci.add("NCICB");
         spCrit.setInstitutionNameCollection(ci);
 
-        Collection cr = new ArrayList();
-        cr.add("Hispanic");
-        spCrit.setRaceCodeCollection(cr);
 
         Collection cs = new ArrayList();
         cs.add("1");
@@ -307,7 +296,7 @@ public class GenotypeFindingTest extends TestCase {
    //     setUpAnalysisGroupCriteria();
 
         // 3. set up Genotype Crit itself
-        //setUpGenotypeCrit();
+        setUpGenotypeCrit();
 
         // 4. execute search
         executeGenotypeFindingSearch(0, 500);
