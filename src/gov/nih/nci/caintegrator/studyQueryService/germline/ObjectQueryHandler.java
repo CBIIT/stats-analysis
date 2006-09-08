@@ -186,8 +186,8 @@ public class ObjectQueryHandler {
             Collection<String> statusValues =  crit.list() ;
 */
 
-            String hql = "SELECT g.status FROM GenotypeFinding g ";
-            Query q = session.createQuery(hql);
+            String sql = "SELECT GENETYPE_STATUS FROM GENOTYPE_STATUS_LU ";
+            Query q = session.createSQLQuery(sql);
             Collection<String> values = q.list();
             session.close();
             qcStatusValues.addAll(values);
