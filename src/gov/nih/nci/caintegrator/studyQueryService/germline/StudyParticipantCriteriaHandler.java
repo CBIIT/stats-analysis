@@ -7,12 +7,9 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCrit
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.domain.study.bean.Specimen;
+import gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement;
 
-import java.util.List;
-
-import java.util.HashMap;
-import java.util.Collection;
-import java.util.ArrayList;
+import java.util.*;
 import java.text.MessageFormat;
 
 import org.hibernate.Session;
@@ -174,9 +171,13 @@ public class StudyParticipantCriteriaHandler {
 
     public static boolean handleStudyPartcioantAttributeCriteria(StudyParticipantCriteria crit, StringBuffer spHQL, HashMap params) {
         Collection<String> genderCodes = crit.getAdministrativeGenderCodeCollection();
+/*
         Integer ageAtDeath = crit.getAgeAtDeath();
         Integer ageAtDiagnosis = crit.getAgeAtDiagnosis();
         Integer ageAtEnrol = crit.getAgeAtEnrollment();
+*/
+        Integer lowerAgeLimit = crit.getLowerAgeLimit();
+        Integer upperAgeLimit = crit.getUpperAgeLimit();
         Integer daysOffStudy = crit.getDaysOffStudy();
         Integer daysOnStudy = crit.getDaysOnStudy();
         Boolean offStudy = crit.getOffStudy();
@@ -189,26 +190,28 @@ public class StudyParticipantCriteriaHandler {
         Collection<String> studySubjectIdentifiers = crit.getStudySubjectIdentifierCollection();
 
         boolean hqlAppended = false;
+
         /* add StudyPartcipant attributes crit itself */
         if (genderCodes != null) {
             spHQL.append(" sp.administrativeGenderCode IN (:genderCodes) AND ");
             params.put("genderCodes", genderCodes);
             hqlAppended = true;
         }
-        if (ageAtDeath != null) {
-            spHQL.append(" sp.ageAtDeath = :ageAtDeath AND ");
-            params.put("ageAtDeath", ageAtDeath );
-            hqlAppended = true;
-        }
-        if (ageAtDiagnosis != null) {
-            spHQL.append(" sp.ageAtDiagnosis = :ageAtDiagnosis AND ");
-            params.put("ageAtDiagnosis", ageAtDiagnosis );
-            hqlAppended = true;
+
+        NumericMeasurement ageAtEnroll = new NumericMeasurement();
+        ageAtEnroll.setMinValue(new Double(lowerAgeLimit.doubleValue()));
+        ageAtEnroll.setMaxValue(new Double(upperAgeLimit.doubleValue()));
+
+        if (ageAtEnroll.getMinValue() != null) {
+           //spHQL.append(" (sp.ageAtEnrollment.minValue >= :minValue AND sp.ageAtEnrollment.maxValue <= :maxValue ) AND ");
+           spHQL.append(" sp.ageAtEnrollment.minValue >= :minValue AND ");
+           params.put("minValue", ageAtEnroll.getMinValue());
+           hqlAppended = true;
         }
 
-        if (ageAtEnrol != null) {
-            spHQL.append(" sp.ageAtEnrollment = :ageAtEnrol AND ");
-            params.put("ageAtEnrol", ageAtEnrol );
+        if (ageAtEnroll.getMaxValue() != null) {
+            spHQL.append(" sp.ageAtEnrollment.maxValue <= :maxValue AND ");
+            params.put("maxValue", ageAtEnroll.getMaxValue());
             hqlAppended = true;
         }
 
@@ -230,9 +233,11 @@ public class StudyParticipantCriteriaHandler {
             hqlAppended = true;
         }
 
+
         if (familyHistories != null) {
-            spHQL.append(" sp.familyHistory IN (:familyHistories) AND ");
-            params.put("familyHistories", familyHistories );
+            Collection upperCaseValues = HQLHelper.convertToUpperCaseCollection(familyHistories);
+            spHQL.append(" UPPER(sp.familyHistory) IN (:upperCaseValues) AND ");
+            params.put("upperCaseValues", upperCaseValues );
             hqlAppended = true;
         }
 
@@ -272,6 +277,7 @@ public class StudyParticipantCriteriaHandler {
 
         return hqlAppended;
     }
+
 
     public static StringBuffer handlePopulationCriteria(PopulationCriteria popCrit, StringBuffer spHQL, HashMap params) {
 

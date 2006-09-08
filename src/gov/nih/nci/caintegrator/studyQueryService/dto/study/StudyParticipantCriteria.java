@@ -11,19 +11,20 @@ import java.util.Collection;
  * Date: Jul 3, 2006
  * Time: 5:21:49 PM
 */
-/**
- * The treatment arm and other specifics regarding the participation of the
- * Subject to a particular Study.
- */
+
 public class StudyParticipantCriteria {
     private PopulationCriteria populationCriteria;
     private StudyCriteria studyCriteria;
     private AnalysisGroupCriteria analysisGroupCriteria;
     private Collection<String> administrativeGenderCodeCollection;
+/*
 	private Integer ageAtDeath;
 	private Integer ageAtDiagnosis;
-	private Integer ageAtEnrollment;
-	private Integer daysOffStudy;
+*/
+	private Integer lowerAgeLimit;
+    private Integer upperAgeLimit;
+
+    private Integer daysOffStudy;
 	private Integer daysOnStudy;
 	private Collection<String> ethnicGroupCodeCollection;
 	private Collection<String> familyHistoryCollection;
@@ -59,28 +60,20 @@ public class StudyParticipantCriteria {
     }
 
 
-    public Integer getAgeAtDeath() {
-        return ageAtDeath;
+    public Integer getLowerAgeLimit() {
+        return lowerAgeLimit;
     }
 
-    public void setAgeAtDeath(Integer ageAtDeath) {
-        this.ageAtDeath = ageAtDeath;
+    public void setLowerAgeLimit(Integer lowerAgeLimit) {
+        this.lowerAgeLimit = lowerAgeLimit;
     }
 
-    public Integer getAgeAtDiagnosis() {
-        return ageAtDiagnosis;
+    public Integer getUpperAgeLimit() {
+        return upperAgeLimit;
     }
 
-    public void setAgeAtDiagnosis(Integer ageAtDiagnosis) {
-        this.ageAtDiagnosis = ageAtDiagnosis;
-    }
-
-    public Integer getAgeAtEnrollment() {
-        return ageAtEnrollment;
-    }
-
-    public void setAgeAtEnrollment(Integer ageAtEnrollment) {
-        this.ageAtEnrollment = ageAtEnrollment;
+    public void setUpperAgeLimit(Integer upperAgeLimit) {
+        this.upperAgeLimit = upperAgeLimit;
     }
 
     public Integer getDaysOffStudy() {

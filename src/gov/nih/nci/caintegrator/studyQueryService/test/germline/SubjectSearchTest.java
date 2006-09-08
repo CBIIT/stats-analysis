@@ -17,7 +17,7 @@ import junit.framework.TestSuite;
 public class SubjectSearchTest extends GenotypeFindingTest {
 
     public void testSubjectSearch() {
-        //setUpStudyParticipantAttributesCriteria();
+        setUpStudyParticipantAttributesCriteria();
         //setUpPopulationCriteria();
         //setUpAnalysisGroupCriteria();
         executeSearch();

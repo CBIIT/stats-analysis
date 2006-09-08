@@ -118,4 +118,23 @@ public class HQLHelper {
 
          return condition;
     }
+
+    public static Collection<String> convertToUpperCaseCollection(Collection<String> collectionToBeConverted) { 
+         Collection convertCaseValues = new ArrayList<String>(collectionToBeConverted.size());
+         for (Iterator<String> iterator = collectionToBeConverted.iterator(); iterator.hasNext();) {
+             String s =  iterator.next();
+             convertCaseValues.add(s.toUpperCase());
+         }
+         return convertCaseValues;
+     }
+
+     public static Collection<String> convertToLowerCaseCollection(Collection<String> collectionToBeConverted) {
+         Collection convertCaseValues = new ArrayList<String>(collectionToBeConverted.size());
+         for (Iterator<String> iterator = collectionToBeConverted.iterator(); iterator.hasNext();) {
+             String s =  iterator.next();
+             convertCaseValues.add(s.toLowerCase());
+         }
+         return convertCaseValues;
+     }
+
 }
