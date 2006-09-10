@@ -9,8 +9,8 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.annotation;
 public class PhysicalPositionCriteria {
 
 	private String chromosome;
-	private Integer endPosition;
-	private Integer startPosition;
+	private Long endPosition;
+	private Long startPosition;
 
 	public PhysicalPositionCriteria(){}
 
@@ -22,19 +22,19 @@ public class PhysicalPositionCriteria {
         this.chromosome = chromosome;
     }
 
-    public Integer getEndPosition() {
+    public Long getEndPosition() {
         return endPosition;
     }
 
-    public void setEndPosition(Integer endPosition) {
+    public void setEndPosition(Long endPosition) {
         this.endPosition = endPosition;
     }
 
-    public Integer getStartPosition() {
+    public Long getStartPosition() {
         return startPosition;
     }
 
-    public void setStartPosition(Integer startPosition) {
+    public void setStartPosition(Long startPosition) {
         this.startPosition = startPosition;
     }
 

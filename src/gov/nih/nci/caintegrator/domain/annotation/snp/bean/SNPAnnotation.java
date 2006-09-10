@@ -32,17 +32,17 @@ public  class SNPAnnotation
    * 
    */
 
-    private java.lang.Integer chromosomeLocation;
+    private java.lang.Long chromosomeLocation;
     /**
    * offset in number of bases of the mapped location of the SNP relative to the reference nucleotide sequence 
    * of the chromosome 
    * 
    */
 
-	public  java.lang.Integer getChromosomeLocation(){
+	public  java.lang.Long getChromosomeLocation(){
         return chromosomeLocation;
     }
-    public void setChromosomeLocation( java.lang.Integer chromosomeLocation){
+    public void setChromosomeLocation( java.lang.Long chromosomeLocation){
         this.chromosomeLocation = chromosomeLocation;
     }
 	

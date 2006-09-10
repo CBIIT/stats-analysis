@@ -19,12 +19,12 @@ public class AnnotationCriteria {
     private Collection<String> geneSymbols;
     private gov.nih.nci.caintegrator.studyQueryService.dto.germline.OperatorType operatorType;
     private gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria panelCriteria;
-    private PhysicalPositionCriteria physicalPositionCriteria;
+    private gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria physicalPositionCriteria;
     private Collection<String> snpIdentifiers;
 
     public AnnotationCriteria(){ }
 
-    public CytobandCriteria getCytobandCriteria() {
+    public gov.nih.nci.caintegrator.studyQueryService.dto.annotation.CytobandCriteria getCytobandCriteria() {
         return cytobandCriteria;
     }
 
@@ -83,7 +83,7 @@ public class AnnotationCriteria {
         this.panelCriteria = panelCriteria;
     }
 
-    public PhysicalPositionCriteria getPhysicalPositionCriteria() {
+    public gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria getPhysicalPositionCriteria() {
         return physicalPositionCriteria;
     }
 

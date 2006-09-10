@@ -179,7 +179,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
 
         /* 1. initialize SNPAnnotations */
-        Collection<String> snpAnnotsIDs = new ArrayList<String>();
+        Collection<String> snpAnnotsIDs = new HashSet<String>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                 GenotypeFinding finding =  (GenotypeFinding) iterator.next();
                 snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
@@ -198,7 +198,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         }
 
         /* 2. initialize Specimens along with associated StudyParticipants */
-        Collection<String> specimenIDs = new ArrayList<String>();
+        Collection<String> specimenIDs = new HashSet<String>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
             GenotypeFinding finding =  (GenotypeFinding) iterator.next();
             specimenIDs.add(finding.getSpecimen().getId());

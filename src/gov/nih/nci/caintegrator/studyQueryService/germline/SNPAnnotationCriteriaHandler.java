@@ -113,7 +113,7 @@ public class SNPAnnotationCriteriaHandler {
         String finalWithoutWhereHQL = HQLHelper.removeTrailingToken(new StringBuffer(finalWithWhereHSQL), "WHERE");
 
         /* 6  Include PanelCritera */
-        String panelBasedSNPAnnotCrit = includePanelCriteriaInHSQL(panelCrit, params);
+        String panelBasedSNPAnnotCrit = handlePanelCriteria(panelCrit, params);
         String finalHQL = new String("");
         if (panelBasedSNPAnnotCrit.length() > 0 ) {
             /* implies that there is already at least one other criteria (such as PhysicalPosition,
@@ -161,8 +161,8 @@ public class SNPAnnotationCriteriaHandler {
         */
         if (poistionCrit != null) {
           String chromosome = poistionCrit.getChromosome();
-          Integer startPos = poistionCrit.getStartPosition();
-          Integer endPos = poistionCrit.getEndPosition();
+          Long startPos = poistionCrit.getStartPosition();
+          Long endPos = poistionCrit.getEndPosition();
           if ((chromosome != null)) criteriaPresent = true;
         }
 
@@ -180,8 +180,8 @@ public class SNPAnnotationCriteriaHandler {
 
     private static void handlePositionCriteria(PhysicalPositionCriteria poistionCrit, StringBuffer snpAnnotHSQL, HashMap params) {
         String chromosome = poistionCrit.getChromosome();
-        Integer startPos = poistionCrit.getStartPosition();
-        Integer endPos = poistionCrit.getEndPosition();
+        Long startPos = poistionCrit.getStartPosition();
+        Long endPos = poistionCrit.getEndPosition();
 
         if ((chromosome == null) || (startPos == null) || (endPos == null) )
              throw new RuntimeException("Chromosme, StartPosition, EndPosition are required ");
@@ -199,7 +199,7 @@ public class SNPAnnotationCriteriaHandler {
      * @param params
      * @return hql containg panelCriteria (or empty string if no PanelCrit is specified)
      */
-    private static String includePanelCriteriaInHSQL(PanelCriteria panelCrit,  HashMap params ) {
+    private static String handlePanelCriteria(PanelCriteria panelCrit,  HashMap params ) {
 
             StringBuffer emptyBuffer = new StringBuffer("");
             if (panelCrit == null) return emptyBuffer.toString();

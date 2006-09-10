@@ -27,7 +27,7 @@
        
         <!-- chromosomeLocation -->        
        <property name="chromosomeLocation" 
-                 type="java.lang.Integer"
+                 type="java.lang.Long"
                  column="PHYSICAL_LOCATION" 
                  insert="false" 
                  update="false" />

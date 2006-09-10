@@ -17,13 +17,8 @@ public class StudyParticipantCriteria {
     private StudyCriteria studyCriteria;
     private AnalysisGroupCriteria analysisGroupCriteria;
     private Collection<String> administrativeGenderCodeCollection;
-/*
-	private Integer ageAtDeath;
-	private Integer ageAtDiagnosis;
-*/
 	private Integer lowerAgeLimit;
     private Integer upperAgeLimit;
-
     private Integer daysOffStudy;
 	private Integer daysOnStudy;
 	private Collection<String> ethnicGroupCodeCollection;
