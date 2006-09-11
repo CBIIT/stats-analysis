@@ -56,8 +56,8 @@ public class GenotypeFindingTest extends TestCase {
 
 */
         ppc.setChromosome("X");
-        ppc.setStartPosition(new Integer(1));  // 76065158
-        ppc.setEndPosition(new Integer(1000000000));    // should give 4 GenotypeFindings
+        ppc.setStartPosition(new Long(1));  // 76065158
+        ppc.setEndPosition(new Long(1000000000));    // should give 4 GenotypeFindings
 
         /*
         ppc.setChromosome("X");
