@@ -31,6 +31,7 @@
 			</classpath>
 		</javac>
 		<jar jarfile="caintegrator-spec.jar">
+			<fileset dir="${build.source.dir}"/>
 			<fileset dir="${build.classes.dir}"/>
 			<fileset dir="${build.deploy.lib.dir}">
 				<include name="*.jar"/>
