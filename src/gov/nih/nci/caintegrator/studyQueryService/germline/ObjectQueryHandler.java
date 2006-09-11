@@ -33,8 +33,8 @@ public class ObjectQueryHandler {
     private static List<String> CHROMOSOME_LIST = null;
     private static Set<String> qcStatusValues = null;
     private static Set<String> caseControlStatus = null;
-    private static Set<Integer> ageLowerLimits = null;
-    private static Set<Integer> ageUpperLimits = null;
+    private static Set<Double> ageLowerLimits = null;
+    private static Set<Double> ageUpperLimits = null;
 
 
 
@@ -127,30 +127,30 @@ public class ObjectQueryHandler {
     }
 
 
-    public static Collection<Integer> getAgeLowerLimitValues() {
+    public static Collection<Double> getAgeLowerLimitValues() {
        if (ageLowerLimits == null) {
-           ageLowerLimits = new HashSet<Integer>();
+           ageLowerLimits = new HashSet<Double>();
            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
            session.beginTransaction();
 
             Criteria crit = session.createCriteria(StudyParticipant.class);
             crit.setProjection(Projections.property("ageAtEnrollment.minValue"));
-            Collection<Integer> statusValues =  crit.list() ;
+            Collection<Double> statusValues =  crit.list() ;
             session.close();
             ageLowerLimits.addAll(statusValues);
        }
        return ageLowerLimits;
    }
 
-    public static Collection<Integer> getAgeUpperLimitValues() {
+    public static Collection<Double> getAgeUpperLimitValues() {
        if (ageUpperLimits == null) {
-           ageUpperLimits  = new HashSet<Integer>();
+           ageUpperLimits  = new HashSet<Double>();
            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
            session.beginTransaction();
 
             Criteria crit = session.createCriteria(StudyParticipant.class);
             crit.setProjection(Projections.property("ageAtEnrollment.maxValue"));
-            Collection<Integer> statusValues =  crit.list() ;
+            Collection<Double> statusValues =  crit.list() ;
             session.close();
             ageUpperLimits.addAll(statusValues);
        }

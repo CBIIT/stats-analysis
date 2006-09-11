@@ -22,15 +22,15 @@ public class SubjectSearchTest extends GenotypeFindingTest {
         //setUpAnalysisGroupCriteria();
         //executeSearch();
 
-        //Collection<String> caseStatus = FindingsManager.getGenotypeFindingQCStatus();
-        //System.out.println("Case Status: " + caseStatus);
+        Collection<String> caseStatus = FindingsManager.getGenotypeFindingQCStatus();
+        System.out.println("Case Status: " + caseStatus);
 
         //FindingsManager.getCaseControlStatus();
 
-        Collection<Integer> upperRangeLimits = FindingsManager.getAgeUpperLimitValues();
+        Collection<Double> upperRangeLimits = FindingsManager.getAgeUpperLimitValues();
         System.out.println("Age UpperLimits: " + upperRangeLimits);
 
-        Collection<Integer> lowerRangeLimits = FindingsManager.getAgeLowerLimitValues();
+        Collection<Double> lowerRangeLimits = FindingsManager.getAgeLowerLimitValues();
         System.out.println("Age LowerLimits: " + lowerRangeLimits );
 
     }
