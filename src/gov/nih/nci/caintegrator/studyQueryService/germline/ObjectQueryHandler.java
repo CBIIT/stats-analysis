@@ -15,6 +15,7 @@ import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 
 import java.util.*;
 import java.text.MessageFormat;
+import java.math.BigDecimal;
 
 import org.hibernate.Session;
 import org.hibernate.Query;
@@ -22,6 +23,8 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Projections;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.CollectionUtils;
 
 /**
  * Author: Ram Bhattaru
@@ -33,10 +36,9 @@ public class ObjectQueryHandler {
     private static List<String> CHROMOSOME_LIST = null;
     private static Set<String> qcStatusValues = null;
     private static Set<String> caseControlStatus = null;
-    private static Set<Double> ageLowerLimits = null;
-    private static Set<Double> ageUpperLimits = null;
-
-
+    private static Set<Integer> ageLowerLimits = null;
+    private static Set<Integer> ageUpperLimits = null;
+    private static Set<Study> allStudyObjects = null;
 
     public static Collection<Study> getStudyObjects(StudyCriteria studyCrit) {
         if (studyCrit == null) return new ArrayList<Study>();
@@ -46,21 +48,41 @@ public class ObjectQueryHandler {
 
         HashMap params = new HashMap();
         String studyCritHQL = " FROM Study s WHERE {0} {1} ";
+        StringBuffer sponsorJoin = new StringBuffer("");
         StringBuffer studyNameJoin = new StringBuffer("");
         String studyName = studyCrit.getName();
         String sponsorStudyIdentifier = studyCrit.getSponsorStudyIdentifier();
+
+        if (studyName == null && sponsorStudyIdentifier == null) {
+            if (allStudyObjects == null) {
+                allStudyObjects = new HashSet<Study>();
+                List<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
+                allStudyObjects.addAll(studyObjs);
+                session.close();
+                return allStudyObjects;
+            }
+            else {
+                session.close();
+                return allStudyObjects;
+            }
+        }
 
         if ((studyName != null) && (studyName.length() > 0)) {
            studyNameJoin.append(" s.name = :studyName  AND ");
            params.put("studyName", studyName);
         }
 
-        StringBuffer sponsorJoin = new StringBuffer("");
         if ((sponsorStudyIdentifier != null) && (sponsorStudyIdentifier.length() > 0))  {
              sponsorJoin .append(" s.sponsorStudyIdentifier = :sponsorStudyIdentifier ");
              params.put("sponsorStudyIdentifier", sponsorStudyIdentifier);
         }
 
+        List<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
+        session.close();
+        return studyObjs;
+    }
+
+    private static List<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {
         String hql = MessageFormat.format(studyCritHQL, new Object[] {
                             studyNameJoin, sponsorJoin});
 
@@ -69,7 +91,6 @@ public class ObjectQueryHandler {
         Query studyQuery = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, studyQuery );
         List<Study> studyObjs = studyQuery.list();
-        session.close();
         return studyObjs;
     }
 
@@ -127,32 +148,57 @@ public class ObjectQueryHandler {
     }
 
 
-    public static Collection<Double> getAgeLowerLimitValues() {
-       if (ageLowerLimits == null) {
-           ageLowerLimits = new HashSet<Double>();
+    public static Collection<Integer> getAgeLowerLimitValues() {
+        System.out.println("HOT DEPLOYMENT");
+        if (ageLowerLimits == null) {
+           ageLowerLimits = new HashSet<Integer>();
            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
            session.beginTransaction();
 
+            String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU ";
+
+/*
             Criteria crit = session.createCriteria(StudyParticipant.class);
-            crit.setProjection(Projections.property("ageAtEnrollment.minValue"));
+            crit.setProjection(Projections.distinct(
+                    Projections.property("ageAtEnrollment.minValue")));
             Collection<Double> statusValues =  crit.list() ;
+*/
+
+            Query q = session.createSQLQuery(sql);
+            Collection<BigDecimal> minValues = q.list();
+            Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
             session.close();
-            ageLowerLimits.addAll(statusValues);
+            ageLowerLimits.addAll(intValues);
        }
        return ageLowerLimits;
    }
-
-    public static Collection<Double> getAgeUpperLimitValues() {
+   public static class IntegerTransformer implements Transformer {
+       public Object transform(Object object) {
+           if (object instanceof BigDecimal) {
+               BigDecimal bdObject = (BigDecimal) object;
+               return new Integer(bdObject.intValue());
+           } else {
+               return object;
+           }
+       }
+   }
+    public static Collection<Integer> getAgeUpperLimitValues() {
        if (ageUpperLimits == null) {
-           ageUpperLimits  = new HashSet<Double>();
+           ageUpperLimits  = new HashSet<Integer>();
            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
            session.beginTransaction();
-
+           String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU ";
+/*
             Criteria crit = session.createCriteria(StudyParticipant.class);
-            crit.setProjection(Projections.property("ageAtEnrollment.maxValue"));
+            crit.setProjection(Projections.distinct(
+                        Projections.property("ageAtEnrollment.maxValue")));
             Collection<Double> statusValues =  crit.list() ;
-            session.close();
-            ageUpperLimits.addAll(statusValues);
+*/
+           Query q = session.createSQLQuery(sql);
+           Collection<BigDecimal> minValues = q.list();
+           Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
+           session.close();
+           ageUpperLimits.addAll(intValues);
        }
        return ageUpperLimits ;
    }
@@ -162,11 +208,15 @@ public class ObjectQueryHandler {
            caseControlStatus = new HashSet<String>();
            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
            session.beginTransaction();
-
+            String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT ";
+/*
             Criteria crit = session.createCriteria(StudyParticipant.class);
             crit.setProjection(
                         Projections.property("caseControlStatus"));
             Collection<String> statusValues =  crit.list() ;
+*/
+            Query q = session.createSQLQuery(sql);
+            List<String> statusValues = q.list();
             session.close();
             caseControlStatus.addAll(statusValues);
        }
@@ -179,6 +229,7 @@ public class ObjectQueryHandler {
             qcStatusValues = new HashSet<String>();
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
+
 /*
             Criteria crit = session.createCriteria(GenotypeFinding.class);
             crit.setProjection(

@@ -85,11 +85,11 @@ public class FindingsManager {
         return ObjectQueryHandler.getCaseControlStatus();
     }
 
-    public static Collection<Double> getAgeLowerLimitValues() {
+    public static Collection<Integer> getAgeLowerLimitValues() {
         return ObjectQueryHandler.getAgeLowerLimitValues();
     }
 
-    public static Collection<Double> getAgeUpperLimitValues() {
+    public static Collection<Integer> getAgeUpperLimitValues() {
         return ObjectQueryHandler.getAgeUpperLimitValues();
     }
 
