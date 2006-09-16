@@ -60,7 +60,7 @@ public class SubjectSearchHandler {
                          executeBatchSearch(crit, session, values, fromIndex, toIndex);
                  subjects.addAll(sps);
                  if (subjects.size() > 501)
-                    return subjects.subList(0, 501);
+                    return subjects.subList(0, 500);
                }
         }
         return subjects;
@@ -68,7 +68,7 @@ public class SubjectSearchHandler {
 
     private static Collection<StudyParticipant> executeBatchSearch(Criteria crit, Session session, List<String> specimenIDs, int fromIndex, int toIndex) {
         crit.setFirstResult(fromIndex);
-        crit.setMaxResults(toIndex);
+        crit.setMaxResults(toIndex - fromIndex);
         Collection<StudyParticipant> studySubjects = crit.list();
         return studySubjects;
     }

@@ -69,8 +69,8 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
                 Collection<SNPFrequencyFinding> batchFindings = executeTargetFindingQuery(
                         critDTO, values, session, hql, startIndex, endIndex);
                 snpFrequencyFindings .addAll(batchFindings);
-                if (snpFrequencyFindings.size() > 501)
-                    return snpFrequencyFindings.subList(0, 501);
+                if (snpFrequencyFindings.size() > (BATCH_OBJECT_INCREMENT + 1))
+                    return snpFrequencyFindings.subList(0, BATCH_OBJECT_INCREMENT);
             }
         }
         else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */
@@ -120,7 +120,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
          Query q = session.createQuery(finalHQL);
          HQLHelper.setParamsOnQuery(params, q);
          q.setFirstResult(start);
-         q.setMaxResults(end);
+         q.setMaxResults(end - start);
          List<SNPFrequencyFinding> findings = q.list();
          return findings;
        }

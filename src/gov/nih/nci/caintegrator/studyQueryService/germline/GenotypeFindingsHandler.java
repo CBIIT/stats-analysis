@@ -68,7 +68,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                           critDTO, values, session, hql, startIndex, endIndex);
                   genotypeFindings.addAll(batchFindings);
                   if (genotypeFindings.size() > BATCH_OBJECT_INCREMENT + 1)
-                      return genotypeFindings.subList(0, BATCH_OBJECT_INCREMENT + 1);
+                      return genotypeFindings.subList(startIndex, BATCH_OBJECT_INCREMENT + 1);
               }
           }  else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */
              Collection<GenotypeFinding> findings = executeTargetFindingQuery(
@@ -121,7 +121,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                      Collection<GenotypeFinding> findings = executeSplittedFindingQuery(session, hql, params, snpAnnotJoin, snpAnnotCond, start, end);
                      genotypeFindings.addAll(findings);
                      if (genotypeFindings.size() > (BATCH_OBJECT_INCREMENT + 1))
-                      return genotypeFindings.subList(0, (BATCH_OBJECT_INCREMENT + 1));
+                      return genotypeFindings.subList(start, BATCH_OBJECT_INCREMENT);
                   }
 
             } else {  /* specimenIDs == null.  Meaning that no StudyParticipantCriteria attributes
@@ -151,7 +151,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
          Query q = session.createQuery(finalHQL);
          HQLHelper.setParamsOnQuery(params, q);
          q.setFirstResult(start);
-         q.setMaxResults(end);
+         q.setMaxResults(end - start);
          List<GenotypeFinding> findings = q.list();
          return findings;
     }

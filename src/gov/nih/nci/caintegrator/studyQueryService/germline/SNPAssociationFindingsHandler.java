@@ -40,7 +40,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             toIndex = fromIndex + BATCH_OBJECT_INCREMENT;;
             System.out.println("Start Index:"+ fromIndex + " End Index:" + toIndex +
                     " Findings Retrieved: " + associationFindings.size());
-        }  while(batchFindings.size() > BATCH_OBJECT_INCREMENT);
+        }  while(batchFindings.size() >= BATCH_OBJECT_INCREMENT);
 
         System.out.println("TOTAL associationFindings retrieved: " + associationFindings.size());
         return associationFindings;
@@ -74,8 +74,8 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 values.addAll(arrayIDs.subList(begIndex,  lastIndex));
                 Collection<SNPAssociationFinding> batchFindings = executeTargetFindingQuery(findingCritDTO, values, session, hql, startIndex, endIndex);
                 snpAssociationFindings.addAll(batchFindings);
-                if (snpAssociationFindings.size() > 501)
-                    return snpAssociationFindings.subList(0, 501);
+                if (snpAssociationFindings.size() > (BATCH_OBJECT_INCREMENT + 1))
+                    return snpAssociationFindings.subList(0, BATCH_OBJECT_INCREMENT);
             }
         } else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */
              Collection<SNPAssociationFinding> findings = executeTargetFindingQuery(
@@ -120,7 +120,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         Query q = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, q);
         q.setFirstResult(start);
-        q.setMaxResults(end);
+        q.setMaxResults(end - start);
         Iterator triplets = q.list().iterator();
         while(triplets.hasNext()) {
             Object[] triplet = (Object[]) triplets.next();
