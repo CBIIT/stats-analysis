@@ -105,9 +105,9 @@ public class FTestFinding extends AnalysisFinding{
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getNumResultEntries()
 	 */
-	//public int getNumResultEntries() {
-		//return myResults.getNumResultEntries();
-	//}
+	public int getNumResultEntries() {
+		return myResults.getNumResultEntries();
+	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getResultEntries()
