@@ -163,7 +163,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
            (crit.getOperatorType() == null) ? ArithematicOperator.EQ : crit.getOperatorType();
 
         if (status != null) {
-           hql.append(TARGET_FINDING_ALIAS + "status = :status AND ");
+           hql.append(TARGET_FINDING_ALIAS + ".status = :status AND ");
            params.put("status", status);
         }
 
