@@ -60,7 +60,7 @@ public class SubjectSearchHandler {
                          executeBatchSearch(crit, session, values, fromIndex, toIndex);
                  subjects.addAll(sps);
                  if (subjects.size() > 501)
-                    return subjects.subList(0, 500);
+                    return subjects.subList(0, 501);
                }
         }
         return subjects;
