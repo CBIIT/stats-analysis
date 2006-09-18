@@ -27,10 +27,10 @@ public class SubjectSearchTest extends GenotypeFindingTest {
 
         //FindingsManager.getCaseControlStatus();
 
-        Collection<Double> upperRangeLimits = FindingsManager.getAgeUpperLimitValues();
+        Collection<Integer> upperRangeLimits = FindingsManager.getAgeUpperLimitValues();
         System.out.println("Age UpperLimits: " + upperRangeLimits);
 
-        Collection<Double> lowerRangeLimits = FindingsManager.getAgeLowerLimitValues();
+        Collection<Integer> lowerRangeLimits = FindingsManager.getAgeLowerLimitValues();
         System.out.println("Age LowerLimits: " + lowerRangeLimits );
 
     }
