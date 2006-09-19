@@ -119,7 +119,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         /* 6. Now execute the final TargetFinding query and return results  */
         Query q = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, q);
-        q.setFirstResult(start);
+        q.setFirstResult(0);
         q.setMaxResults(end - start);
         Iterator triplets = q.list().iterator();
         while(triplets.hasNext()) {
