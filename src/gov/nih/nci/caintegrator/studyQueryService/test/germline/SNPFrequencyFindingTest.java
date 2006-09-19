@@ -48,14 +48,14 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
        //setUpDBSnpCrit();
        // setUpPanelCrit();
 
-       // setUpGeneBiomarkerCrit();
+        setUpGeneBiomarkerCrit();
 
-        freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
+        //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
         freqDTO.setPopulationNames(new String[] {"CASE_EARLY"});
 
         // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
         //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
-        executeSNPFrequencyFindingSearch(0, 501);
+        executeSNPFrequencyFindingSearch(1, 11);
    }
 
     public void testFTPSNPFrequencyFindingCriteriaDTO() {

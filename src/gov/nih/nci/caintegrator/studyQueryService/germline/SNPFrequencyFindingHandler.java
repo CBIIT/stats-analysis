@@ -69,8 +69,8 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
                 Collection<SNPFrequencyFinding> batchFindings = executeTargetFindingQuery(
                         critDTO, values, session, hql, startIndex, endIndex);
                 snpFrequencyFindings .addAll(batchFindings);
-                if (snpFrequencyFindings.size() > (BATCH_OBJECT_INCREMENT + 1))
-                    return snpFrequencyFindings.subList(0, BATCH_OBJECT_INCREMENT + 1);
+                if (snpFrequencyFindings.size() >= (endIndex - startIndex + 1) )
+                      return snpFrequencyFindings.subList(0, (endIndex - startIndex ));
             }
         }
         else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */

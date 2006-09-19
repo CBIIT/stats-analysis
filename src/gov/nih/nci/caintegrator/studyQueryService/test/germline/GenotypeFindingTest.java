@@ -44,8 +44,8 @@ public class GenotypeFindingTest extends TestCase {
         gfDTO.setStudyParticipantCriteria(spCrit);
     }
     private void setUpGenotypeCrit() {
-        gfDTO.setQualityScore(new Float(0.50), ArithematicOperator.LT);
-        gfDTO.setQcStatus("QC-");
+        //gfDTO.setQualityScore(new Float(0.50), ArithematicOperator.LT);
+        gfDTO.setQcStatus("QC+");
     }
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
@@ -276,7 +276,7 @@ public class GenotypeFindingTest extends TestCase {
      protected void setUpPopulationCriteria() {
         Collection<String> names = new ArrayList<String>();
         //names.add("CASE_ADVANCED");
-        names.add("CASE_EARLY");
+        names.add("CONTROL");
         PopulationCriteria popCrit = new PopulationCriteria(names);
         spCrit.setPopulationCriteria(popCrit);
      }
@@ -299,7 +299,7 @@ public class GenotypeFindingTest extends TestCase {
         setUpGenotypeCrit();
 
         // 4. execute search
-        executeGenotypeFindingSearch(0, 500);
+        executeGenotypeFindingSearch(0, 501);
     }
     public void testFTPGenotypeFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
@@ -358,7 +358,8 @@ public class GenotypeFindingTest extends TestCase {
                System.out.println("Normalized Y-intensity: " + finding.getNormalizedYIntensity() );
                System.out.println("Raw X-intensity: " + finding.getRawXIntensity() );
                System.out.println("Raw Y-intensity: " + finding.getRawYIntensity() );
-               printSNPAnnotation(finding.getSnpAnnotation());
+               //printSNPAnnotation(finding.getSnpAnnotation());
+               //System.out.println("DE-ID: " + finding.getSpecimen().getStudyParticipant().getId());
            }
 
        } catch (Throwable t)  {
