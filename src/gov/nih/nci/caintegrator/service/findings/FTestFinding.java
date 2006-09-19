@@ -7,6 +7,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
 import gov.nih.nci.caintegrator.dto.de.SampleIDDE;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,7 @@ import java.util.Map;
 * 
 */
 
-public class FTestFinding extends AnalysisFinding{
+public class FTestFinding extends AnalysisFinding implements ReporterBasedFinding {
 	/**
 	 * 
 	 */
@@ -113,10 +114,12 @@ public class FTestFinding extends AnalysisFinding{
 		return myResults.getResultEntries();
 	}
 
+
 	/**
 	 * @param myResults The myResults to set.
 	 */
 	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
+		setAnalysisResult(results);
 		this.myResults = (FTestResult)results;
 	}
 
@@ -140,6 +143,16 @@ public class FTestFinding extends AnalysisFinding{
 
 	public void setReporterAnnotationsMap(Map reporterResultsetMap) {
 		this.reporterAnnotationsMap = reporterResultsetMap;
+	}
+
+	public List<String> getReporterIds() {
+	  List<String> idList = new ArrayList<String>();
+	  
+	  for (FTestResultEntry re : getResultEntries()) {
+	    idList.add(re.getReporterId());
+	  }
+	  
+	  return idList;
 	}
 
 	

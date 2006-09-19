@@ -109,6 +109,7 @@ public class PrincipalComponentAnalysisFinding extends AnalysisFinding {
 	 */
 	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
 		this.pcaResults = (PrincipalComponentAnalysisResult)results;
+		setAnalysisResult(results);
 	}
 
 	/* (non-Javadoc)

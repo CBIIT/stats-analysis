@@ -72,7 +72,7 @@ import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 * 
 */
 
-public class ClassComparisonFinding extends AnalysisFinding{
+public class ClassComparisonFinding extends AnalysisFinding implements ReporterBasedFinding{
 	/**
 	 * 
 	 */
@@ -85,6 +85,7 @@ public class ClassComparisonFinding extends AnalysisFinding{
 		super(session, task, status);
 		setAnalysisResult(result);
 	}
+	
 	
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#arePvaluesAdjusted()
@@ -126,6 +127,7 @@ public class ClassComparisonFinding extends AnalysisFinding{
 	 */
 	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
 		this.myResults = (ClassComparisonResult)results;
+		setAnalysisResult(results);
 	}
 
 	/**
@@ -148,6 +150,16 @@ public class ClassComparisonFinding extends AnalysisFinding{
 
 	public void setReporterAnnotationsMap(Map reporterResultsetMap) {
 		this.reporterAnnotationsMap = reporterResultsetMap;
+	}
+
+	public List<String> getReporterIds() {
+		List<String> idList = new ArrayList<String>();
+		
+		for (ClassComparisonResultEntry entry : getResultEntries()) {
+		  idList.add(entry.getReporterId());
+		}
+		
+		return idList;
 	}
 
 	

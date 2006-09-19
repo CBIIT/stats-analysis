@@ -69,7 +69,13 @@ public abstract class AnalysisFinding extends Finding {
 		super(session, task, status);
 	}
 	
+	
 	public void setAnalysisResult(AnalysisResult result) {
 		this.analysisResult = result;
 	}
+	
+	public AnalysisResult getAnalysisResult() {
+	  return analysisResult;
+	}
+	
 }
