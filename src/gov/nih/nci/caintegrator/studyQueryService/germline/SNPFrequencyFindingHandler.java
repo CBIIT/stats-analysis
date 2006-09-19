@@ -40,7 +40,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         }  while(batchFindings.size() > BATCH_OBJECT_INCREMENT);
 
         System.out.println("TOTAL frequencyFindings retrieved: " + frequencyFindings.size());
-        return frequencyFindings;
+        return frequencyFindings;  
     }
 
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, int startIndex, int endIndex) {

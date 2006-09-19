@@ -103,8 +103,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
             if (specimenIDs != null && specimenIDs.size() == 0) {
                 /* means StudyParticipantCriteria did not select and Specimens  Hence return
                    no GenotypeFindings */
-                session.close();
-                return new ArrayList<GenotypeFinding>();
+                 return new ArrayList<GenotypeFinding>();
             }
             else if (specimenIDs != null && specimenIDs.size() > 0) {
                 /*  means  specimens.size() > 0.  So include this clause in findings criteria */
