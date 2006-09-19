@@ -59,10 +59,13 @@ public class SubjectSearchHandler {
                  Collection<StudyParticipant> sps =
                          executeBatchSearch(crit, session, values, fromIndex, toIndex);
                  subjects.addAll(sps);
-                 if (subjects.size() > 501)
+                 if (subjects.size() > 501)  {
+                    session.close();
                     return subjects.subList(0, 501);
+                 }
                }
         }
+        session.close();
         return subjects;
     }
 
