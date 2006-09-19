@@ -1,18 +1,15 @@
 package gov.nih.nci.caintegrator.service.findings;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import gov.nih.nci.caintegrator.analysis.messaging.AnalysisResult;
-import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult;
-import gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResultEntry;
 import gov.nih.nci.caintegrator.analysis.messaging.FTestResult;
 import gov.nih.nci.caintegrator.analysis.messaging.FTestResultEntry;
 import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
 import gov.nih.nci.caintegrator.dto.de.SampleIDDE;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -83,7 +80,7 @@ public class FTestFinding extends AnalysisFinding{
 	private Collection<SampleIDDE> samplesNotFound;
 	private Map reporterAnnotationsMap;
 	
-	public FTestFinding(String session, String task, FindingStatus status, ClassComparisonResult result) {
+	public FTestFinding(String session, String task, FindingStatus status, FTestResult result) {
 		super(session, task, status);
 		setAnalysisResult(result);
 	}
