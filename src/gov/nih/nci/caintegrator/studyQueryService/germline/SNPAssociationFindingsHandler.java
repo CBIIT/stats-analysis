@@ -25,7 +25,9 @@ import org.hibernate.criterion.Restrictions;
  * Time:   2:20:11 PM
  */
 
-public class SNPAssociationFindingsHandler extends FindingsHandler {
+public class SNPAssociationFindingsHandler extends FindingsHandler
+{
+	
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
         List<SNPAssociationFinding>  associationFindings = Collections.synchronizedList(
                                                    new ArrayList<SNPAssociationFinding>());
@@ -63,9 +65,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                               " WHERE {2} {3} {4} "
                             );
 
-        if (snpAnnotationIDs != null && snpAnnotationIDs.size() > 0) {
+        if (snpAnnotationIDs != null && snpAnnotationIDs.size() > 0)
+        {
             ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
-            for (int i = 0; i < arrayIDs.size();) {
+            for (int i = critDTO.getIndex(); i < arrayIDs.size();) {
                 StringBuffer hql = new StringBuffer("").append(targetHQL);
                 Collection values = new ArrayList();
                 int begIndex = i;
@@ -75,11 +78,14 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 Collection<SNPAssociationFinding> batchFindings = executeTargetFindingQuery(findingCritDTO, values, session, hql, startIndex, endIndex);
                 snpAssociationFindings.addAll(batchFindings);
                 if (snpAssociationFindings.size() >= (endIndex - startIndex + 1))
-                      return snpAssociationFindings.subList(0, (endIndex - startIndex));
+                {
+                	critDTO.setIndex(lastIndex);
+                    return snpAssociationFindings;
+                }
             }
         } else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */
              Collection<SNPAssociationFinding> findings = executeTargetFindingQuery(
-                    critDTO, null, session, targetHQL, startIndex, endIndex);
+                    critDTO, session, targetHQL, startIndex, endIndex);
               snpAssociationFindings.addAll(findings);
         }
         return snpAssociationFindings;
@@ -120,6 +126,55 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         Query q = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, q);
         q.setFirstResult(0);
+        q.setMaxResults(end - start);
+        Iterator triplets = q.list().iterator();
+        while(triplets.hasNext()) {
+            Object[] triplet = (Object[]) triplets.next();
+            SNPAssociationFinding finding = (SNPAssociationFinding) triplet[0];
+            SNPAnnotation snpAnnot = (SNPAnnotation) triplet[1];
+            finding.setSnpAnnotation(snpAnnot);
+            SNPAssociationAnalysis analysis = (SNPAssociationAnalysis) triplet[2];
+            finding.setSnpAssociationAnalysis(analysis);
+            snpAssociationFindings.add(finding);
+        }
+
+        return snpAssociationFindings ;
+    }
+    
+    protected Collection<SNPAssociationFinding> executeTargetFindingQuery(FindingCriteriaDTO critDTO, Session session, StringBuffer targetHQL, int start, int end) {
+
+        SNPAssociationFindingCriteriaDTO  findingCritDTO= (SNPAssociationFindingCriteriaDTO) critDTO;
+        Collection<SNPAssociationFinding>  snpAssociationFindings =
+                                    new ArrayList<SNPAssociationFinding>();
+
+        final HashMap params = new HashMap();
+
+        /* 1.  Include SNPAssociationFinding attribute criteria in  TargetFinding query */
+        StringBuffer myAttributeHql = handleMyOwnAttributeCriteria(findingCritDTO, params);
+
+        /* 2. Include HQL to handle Annotation Criteria to snpAnnotJoin & snpAnnotCond */
+        StringBuffer snpAnnotJoin = new StringBuffer("");
+        StringBuffer snpAnnotCond = new StringBuffer("");
+
+        /* 3. Include SNPAnalysisGroup Criteria in TargetFinding query by converting and adding to AnalysisGroupCriteria */
+        handleAnalysisGroupCriteria(findingCritDTO, session);
+
+        /* 4. Include SNPAssociationAnalysisCriteria Criteria in TargetFinding query */
+        HashMap h = applySnpassociationAnalysisCriteria(findingCritDTO, params, targetHQL);
+        String analysisJoin = (String) h.get("ANALYSIS_JOIN");
+        String analysisCondition = h.get("ANALYSIS_COND").toString();
+
+        /* 5. Assemble the Query with all criteria conditions together */
+        String tmpHQL = MessageFormat.format(targetHQL.toString(), new Object[] {
+                 snpAnnotJoin.toString(), analysisJoin, myAttributeHql, snpAnnotCond.toString(), analysisCondition});
+        String hql= HQLHelper.removeTrailingToken(new StringBuffer(tmpHQL), " AND");
+        String noORHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), " OR");
+        String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(noORHQL), "WHERE");
+
+        /* 6. Now execute the final TargetFinding query and return results  */
+        Query q = session.createQuery(finalHQL);
+        HQLHelper.setParamsOnQuery(params, q);
+        q.setFirstResult(start);
         q.setMaxResults(end - start);
         Iterator triplets = q.list().iterator();
         while(triplets.hasNext()) {
