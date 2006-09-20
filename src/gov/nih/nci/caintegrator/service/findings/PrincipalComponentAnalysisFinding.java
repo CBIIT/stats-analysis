@@ -108,8 +108,8 @@ public class PrincipalComponentAnalysisFinding extends AnalysisFinding {
 	 * @param myResults The myResults to set.
 	 */
 	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
+		super.setAnalysisResult(results);
 		this.pcaResults = (PrincipalComponentAnalysisResult)results;
-		setAnalysisResult(results);
 	}
 
 	/* (non-Javadoc)

@@ -119,7 +119,7 @@ public class FTestFinding extends AnalysisFinding implements ReporterBasedFindin
 	 * @param myResults The myResults to set.
 	 */
 	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
-		setAnalysisResult(results);
+		super.setAnalysisResult(results);
 		this.myResults = (FTestResult)results;
 	}
 

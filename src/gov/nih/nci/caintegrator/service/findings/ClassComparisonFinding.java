@@ -126,8 +126,8 @@ public class ClassComparisonFinding extends AnalysisFinding implements ReporterB
 	 * @param myResults The myResults to set.
 	 */
 	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
-		this.myResults = (ClassComparisonResult)results;
-		setAnalysisResult(results);
+		super.setAnalysisResult(results);
+		this.myResults = (ClassComparisonResult)results;	
 	}
 
 	/**
