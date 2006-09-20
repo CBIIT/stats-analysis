@@ -149,7 +149,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
          String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "WHERE");
          Query q = session.createQuery(finalHQL);
          HQLHelper.setParamsOnQuery(params, q);
-         q.setFirstResult(start);
+         q.setFirstResult(0);
          q.setMaxResults(end - start);
          List<GenotypeFinding> findings = q.list();
          return findings;

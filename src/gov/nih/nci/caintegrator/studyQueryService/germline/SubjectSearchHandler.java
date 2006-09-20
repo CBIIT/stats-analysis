@@ -33,6 +33,8 @@ public class SubjectSearchHandler {
               attributes are mentioned.  So ignore StudyParticipantCriteria and return all StudyParticipant* */
            crit = session.createCriteria(StudyParticipant.class).
                             setFetchMode("population", FetchMode.EAGER);
+           crit.setFirstResult(fromIndex);
+           crit.setMaxResults(toIndex - fromIndex);
            subjects = crit.list();
        }
        else if (specimenIDs.size() == 0) {
@@ -52,16 +54,17 @@ public class SubjectSearchHandler {
                  i += FindingsHandler.IN_PARAMETERS ;
                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                 System.out.println("Specimen IDS: " + values);
                  crit = session.createCriteria(StudyParticipant.class).
                                    createAlias("specimenCollection", "specimens").
                                    setFetchMode("population", FetchMode.EAGER).
                                    add(Restrictions.in("specimens.specimenIdentifier", values));
                  Collection<StudyParticipant> sps =
-                         executeBatchSearch(crit, session, values, fromIndex, toIndex);
+                         executeBatchSearch(crit, fromIndex, toIndex);
                  subjects.addAll(sps);
-                 if (subjects.size() > 501)  {
+                 if (subjects.size() >= (toIndex - fromIndex + 1))  {
                     session.close();
-                    return subjects.subList(0, 501);
+                    return subjects.subList(0, (toIndex - fromIndex ));
                  }
                }
         }
@@ -69,8 +72,8 @@ public class SubjectSearchHandler {
         return subjects;
     }
 
-    private static Collection<StudyParticipant> executeBatchSearch(Criteria crit, Session session, List<String> specimenIDs, int fromIndex, int toIndex) {
-        crit.setFirstResult(fromIndex);
+    private static Collection<StudyParticipant> executeBatchSearch(Criteria crit,int fromIndex, int toIndex) {
+        crit.setFirstResult(0);
         crit.setMaxResults(toIndex - fromIndex);
         Collection<StudyParticipant> studySubjects = crit.list();
         return studySubjects;
