@@ -154,6 +154,14 @@ public class FTestFinding extends AnalysisFinding implements ReporterBasedFindin
 	  
 	  return idList;
 	}
+	
+	public List<String> getGroupNames() {
+	  List<String> groupNames = new ArrayList<String>();
+	  for(SampleGroup sg : myResults.getSampleGroups())	{
+		  groupNames.add(sg.getGroupName());
+	  }
+	  return groupNames;
+	}
 
 	
 }
