@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
 
 /**
  * Author: Ram Bhattaru
@@ -20,6 +21,9 @@ import org.hibernate.criterion.Restrictions;
  * Time:   10:13:15 AM
  */
 public class SubjectSearchHandler {
+    public static void populateStudySubjects(StudyParticipantCriteria spCrit, ArrayList toBePopulated) {
+
+    }
 
     public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit, int fromIndex, int toIndex) {
        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -27,7 +31,7 @@ public class SubjectSearchHandler {
        List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
        List<StudyParticipant> subjects = new ArrayList<StudyParticipant>();
        Criteria crit = null;
-
+       int count = 0;
        if (specimenIDs == null) {
            /* meanse either StudyParticipantCriteria  is null or no StudyParticipantCriteria
               attributes are mentioned.  So ignore StudyParticipantCriteria and return all StudyParticipant* */
@@ -54,7 +58,9 @@ public class SubjectSearchHandler {
                  i += FindingsHandler.IN_PARAMETERS ;
                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                 System.out.println("VALUES: " + values);
                  System.out.println("Specimen IDS: " + values);
+
                  crit = session.createCriteria(StudyParticipant.class).
                                    createAlias("specimenCollection", "specimens").
                                    setFetchMode("population", FetchMode.EAGER).
@@ -71,9 +77,67 @@ public class SubjectSearchHandler {
         session.close();
         return subjects;
     }
+    public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit, int iteration, int fromIndex, int toIndex) {
+       Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+       session.beginTransaction();
+       List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
+       List<StudyParticipant> subjects = new ArrayList<StudyParticipant>();
+       Criteria crit = null;
+       int count = 0;
+       if (specimenIDs == null) {
+           /* meanse either StudyParticipantCriteria  is null or no StudyParticipantCriteria
+              attributes are mentioned.  So ignore StudyParticipantCriteria and return all StudyParticipant* */
+           crit = session.createCriteria(StudyParticipant.class).
+                            setFetchMode("population", FetchMode.EAGER);
+           crit.setFirstResult(fromIndex);
+           crit.setMaxResults(toIndex - fromIndex);
+           subjects = crit.list();
+       }
+       else if (specimenIDs.size() == 0) {
+            /* means StudyParticipantCriteria did not select and Specimens  Hence return
+                no StudyParticipants */
+            session.close();
+            return subjects;
+       }
+        /*  means  specimens.size() > 0 so retrieve StudyPartipants beased on the Specimens */
+       else  if (specimenIDs != null && specimenIDs.size() > 0) {
 
+             ArrayList<String> arrayIDs = new ArrayList<String>(specimenIDs);
+             for (int i = 0; i < arrayIDs.size();) {
+                //StringBuffer hql = new StringBuffer("").append(targetHQL);
+                 List<String> values = new ArrayList<String>();
+                 int begIndex = i;
+                 i += FindingsHandler.IN_PARAMETERS ;
+                 int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+                 values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                 System.out.println("VALUES: " + values);
+                 System.out.println("Specimen IDS: " + values);
+
+                 crit = session.createCriteria(StudyParticipant.class).
+                                   createAlias("specimenCollection", "specimens").
+                                   setFetchMode("population", FetchMode.EAGER).
+                                   add(Restrictions.in("specimens.specimenIdentifier", values));
+                 if (iteration == 1) {
+                     fromIndex = fromIndex;
+                     toIndex = toIndex;
+                 }
+                 else if (iteration == 1) {
+                     
+                 }
+                 Collection<StudyParticipant> sps =
+                         executeBatchSearch(crit, fromIndex, toIndex);
+                 subjects.addAll(sps);
+                 if (subjects.size() >= (toIndex - fromIndex + 1))  {
+                    session.close();
+                    return subjects.subList(0, (toIndex - fromIndex ));
+                 }
+               }
+        }
+        session.close();
+        return subjects;
+    }
     private static Collection<StudyParticipant> executeBatchSearch(Criteria crit,int fromIndex, int toIndex) {
-        crit.setFirstResult(0);
+        crit.setFirstResult(fromIndex);
         crit.setMaxResults(toIndex - fromIndex);
         Collection<StudyParticipant> studySubjects = crit.list();
         return studySubjects;

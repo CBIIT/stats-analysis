@@ -279,4 +279,8 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
             populationCrit.list();
         }
     }
+
+    protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, ArrayList toBePopulated) {
+        //TODO;
+    }
 }

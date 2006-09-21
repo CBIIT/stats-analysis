@@ -22,6 +22,8 @@ abstract public class FindingsHandler {
                                                                     Set<String> snpAnnotationIDs, Session session, int start, int end);
      protected abstract Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO,
                                                                    Set<String> snpAnnotationIDs, Session session);
+     protected abstract void sendMyFindings(FindingCriteriaDTO critDTO,
+                                            Set<String> snpAnnotationIDs, Session session, ArrayList toBePopulated);
 
      protected abstract void initializeProxies(Collection<? extends Finding> findings, Session session);
      protected abstract Collection<? extends Finding> executeTargetFindingQuery(FindingCriteriaDTO findingCritDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end);
@@ -77,6 +79,28 @@ abstract public class FindingsHandler {
          session.close();
          return findings;
      }
+
+     public void populateFindings(FindingCriteriaDTO critDTO, ArrayList toBePopulated)
+     throws Exception {
+
+        Set<String> snpAnnotationIDs = new HashSet<String>();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        /* 1. Handle AnnotationCriteria which will bring back SNPs */
+        AnnotationCriteria annotCrit = critDTO.getAnnotationCriteria();
+        if (annotCrit != null) {
+          snpAnnotationIDs = SNPAnnotationCriteriaHandler.handle(annotCrit, session);
+        }
+
+        /* 2.  Apply all other criteria mentioned in the query and populate concrete type findings
+               after initialzing the proxies as well */
+        sendMyFindings(critDTO, snpAnnotationIDs, session, toBePopulated);
+
+        session.close();
+    }
+
+
 
      public static List<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
      throws Exception {

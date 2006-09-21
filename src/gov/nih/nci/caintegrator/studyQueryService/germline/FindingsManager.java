@@ -18,6 +18,7 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCrite
 
 import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * User: Ram Bhattaru
@@ -29,6 +30,11 @@ public class FindingsManager {
     throws Exception {
         return findingCritDTO.getHandler().getFindings(
                 findingCritDTO, fromIndex, toIndex);
+    }
+
+    public static void populateFindings(FindingCriteriaDTO findingCritDTO, ArrayList toBePopulated)
+    throws Exception {
+        findingCritDTO.getHandler().populateFindings(findingCritDTO, toBePopulated);
     }
 
     public static Collection<? extends Finding> getFindingsForFTP(FindingCriteriaDTO findingCritDTO)
@@ -80,7 +86,7 @@ public class FindingsManager {
     public static Collection<String> getGenotypeFindingQCStatus() {
         return ObjectQueryHandler.getAllQCStatus();
     }
-    
+
     public static Collection<String> getCaseControlStatus() {
         return ObjectQueryHandler.getCaseControlStatus();
     }
@@ -104,7 +110,7 @@ public class FindingsManager {
      */
     public static void getFindingsViaFTP(String email, FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
     throws Exception {
-        
+
     }
 
 
