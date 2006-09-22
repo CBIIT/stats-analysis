@@ -32,7 +32,7 @@ public class FindingsManager {
                 findingCritDTO, fromIndex, toIndex);
     }
 
-    public static void populateFindings(FindingCriteriaDTO findingCritDTO, ArrayList toBePopulated)
+    public static void populateFindings(FindingCriteriaDTO findingCritDTO, List toBePopulated)
     throws Exception {
         findingCritDTO.getHandler().populateFindings(findingCritDTO, toBePopulated);
     }

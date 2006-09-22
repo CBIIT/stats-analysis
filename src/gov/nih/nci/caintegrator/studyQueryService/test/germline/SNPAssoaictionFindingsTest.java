@@ -6,37 +6,40 @@ import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.*;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
+import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Author: Ram Bhattaru
  * Date:   Jul 21, 2006
  * Time:   4:38:44 PM
  */
-public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
+public class SNPAssoaictionFindingsTest extends CGEMSTest {
     private SNPAssociationFindingCriteriaDTO safDTO;
 
-    protected void setUp() throws Exception {
-        annotCrit = new AnnotationCriteria();
+    public void setUp() throws Exception {
+        super.setUp();
         safDTO = new  SNPAssociationFindingCriteriaDTO();
         safDTO.setAnnotationCriteria(annotCrit);
     }
+    public void testAll() {
+        super.testAll();
+    }
+
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-       //setUpSNPPhysicalPositionCrit();
+       setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
         //setUpPanelCrit();
-        setUpGeneBiomarkerCrit();
+        //setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
 
-        setSNPFindingCriteria();
-        executeSNPAssoaictionFindingsSearch(0, 501);
+        //setSNPFindingCriteria();
+        //executeSNPAssoaictionFindingsSearch(500, 1000);
     }
     public void testFTPSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
@@ -62,11 +65,11 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
                 }
     }
 
-    private void executeSNPAssoaictionFindingsSearch(int startIndex, int endIndex) {
+    public Collection executeSearch(int startIndex, int endIndex) {
             try {
                 Long t1 = System.currentTimeMillis();
                 Collection<? extends Finding> findings = FindingsManager.getFindings(safDTO, startIndex, endIndex);
-                System.out.println("RESULTS COUNT: " + findings.size());
+                /*System.out.println("RESULTS COUNT: " + findings.size());
                 for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                     SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
 
@@ -86,11 +89,13 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
                     }
                  }
                  Long t2 = System.currentTimeMillis();
-                System.out.println("Time Taken: " + (t2 - t1) + " ms" );
+                System.out.println("Time Taken: " + (t2 - t1) + " ms" );*/
+                return findings;
             } catch (Throwable t)  {
                 System.out.println("CGEMS Exception: ");
                 t.printStackTrace();
             }
+        return null;
     }
 
     private void setSNPAssociationGroupCriteria() {
@@ -102,7 +107,7 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
 
     private void setSNPFindingCriteria() {
         safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
-        //safDTO.setRank(new Integer(7), ArithematicOperator.LT);
+        safDTO.setRank(new Integer(7), ArithematicOperator.LT);
     }
 
     private void setSNPAssociationAnalysisCriteria() {
@@ -124,4 +129,51 @@ public class SNPAssoaictionFindingsTest extends GenotypeFindingTest {
         safDTO.setSnpAssociationAnalysisCriteriaCollection(analysisCrits);
      }
 
+    public void testPopulateFindings() {
+        //setUpSNPPhysicalPositionCrit();
+        setSNPFindingCriteria();
+        try {
+             HashSet actualBatchFindings = new HashSet();
+             final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
+             new Thread(new Runnable() {
+                 public void run() {
+                     try {
+                        FindingsManager.populateFindings(safDTO, findingsToBePopulated);
+                     } catch(Throwable t) {
+                         t.printStackTrace();
+                         System.out.println("Error from FindingsManager.populateFindings call: ");
+                     }
+                 }
+                       }
+            ).start();
+
+            boolean sleep = true;
+            int count = 1;
+            do {
+                synchronized(findingsToBePopulated) {
+                    if (findingsToBePopulated.size() > 0) {
+                         actualBatchFindings  = (HashSet) findingsToBePopulated.remove(0);
+                         for (Iterator iterator = actualBatchFindings.iterator(); iterator.hasNext();) {
+                            SNPAssociationFinding sf =  (SNPAssociationFinding) iterator.next();
+                            System.out.print("ID: " + sf.getId());
+                            System.out.print("  pValue" + sf.getPvalue() + "\n\n");
+                         }
+                         System.out.println("WRITTEN BATCH: " + count++ + " SIZE: " +
+                                                           actualBatchFindings.size() + "\n\n");
+                         if (actualBatchFindings.size() == 0) {
+                            /* means no more to results are coming.  Finished */
+                             break;
+                         }
+                     }
+                 }
+                 Thread.currentThread().sleep(10);
+
+             }  while(true);
+
+            System.out.println("ALL RESULTS WERE SENT OUT: ");
+
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
 }

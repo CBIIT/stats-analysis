@@ -25,29 +25,8 @@ import org.hibernate.criterion.Restrictions;
  * Time:   2:20:11 PM
  */
 
-public class SNPAssociationFindingsHandler extends FindingsHandler
-{
+public class SNPAssociationFindingsHandler extends FindingsHandler {
 	
-    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
-        List<SNPAssociationFinding>  associationFindings = Collections.synchronizedList(
-                                                   new ArrayList<SNPAssociationFinding>());
-        int fromIndex = 0;
-        int toIndex = fromIndex + BATCH_OBJECT_INCREMENT;
-        Collection batchFindings = new ArrayList<SNPAssociationFinding>();
-        do {
-            batchFindings =
-                    getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
-            associationFindings.addAll(batchFindings);
-            fromIndex =  toIndex;
-            toIndex = fromIndex + BATCH_OBJECT_INCREMENT;;
-            System.out.println("Start Index:"+ fromIndex + " End Index:" + toIndex +
-                    " Findings Retrieved: " + associationFindings.size());
-        }  while(batchFindings.size() >= BATCH_OBJECT_INCREMENT);
-
-        System.out.println("TOTAL associationFindings retrieved: " + associationFindings.size());
-        return associationFindings;
-    }
-
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,  Session session, int startIndex, int endIndex) {
         List<SNPAssociationFinding>  snpAssociationFindings =
                             Collections.synchronizedList(new ArrayList<SNPAssociationFinding>());
@@ -345,7 +324,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler
     }
 
      protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
-                                   Session session, ArrayList toBePopulated) {
+                                   Session session, List toBePopulated) {
 
         /* if AnnotationCriteria results in no SNPs then return no findings */
           if (snpAnnotationIDs != null && snpAnnotationIDs.size() == 0)
@@ -372,9 +351,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler
     private void handleFindingsWithAnnotationCriteria(
                                 Set<String> snpAnnotationIDs, StringBuffer targetHQL,
                                 SNPAssociationFindingCriteriaDTO findingCritDTO,
-                                Session session, ArrayList toBePopulated) {
+                                Session session, List toBePopulated) {
 
-
+        System.out.println("SNP ANNOTATION IDS: " + snpAnnotationIDs);
+        List<SNPAssociationFinding>  snpAssociationFindings = new ArrayList<SNPAssociationFinding>();
         ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
         for (int i = 0; i < arrayIDs.size();) {
              StringBuffer hql = new StringBuffer("").append(targetHQL);
@@ -384,36 +364,50 @@ public class SNPAssociationFindingsHandler extends FindingsHandler
              int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
              values.addAll(arrayIDs.subList(begIndex,  lastIndex));
 
+            //System.out.println("handleFindingsWithAnnotationCriteria() called: ");
              /* send -1 for start & end index to indicate these values not to be included
                 in the final Hibernate Query */
              Collection<SNPAssociationFinding> currentFindings =
                                         executeTargetFindingQuery(findingCritDTO, values, session, hql, -1, -1);
              initializeProxies(currentFindings, session);
+             System.out.println("Current Findings Retrieved from IN clause: " + currentFindings.size());
+
 
              /* convert these  currentFindings in to a List for convenience */
-             List<SNPAssociationFinding>  snpAssociationFindings = new ArrayList<SNPAssociationFinding>();
+             //snpAssociationFindings = new ArrayList<SNPAssociationFinding>();
              snpAssociationFindings.addAll(currentFindings );
 
              while (snpAssociationFindings.size() >= BATCH_OBJECT_INCREMENT )  {
+                 System.out.println("SNPFindings Ready To Be written: " + snpAssociationFindings.size());
                  populateCurrentResultSet(snpAssociationFindings, toBePopulated);
              }
         }
+        /* Now write remaining findings i.e. less than 500 in one call */
+        if (snpAssociationFindings != null)
+            populateCurrentResultSet(snpAssociationFindings, toBePopulated);
+
+        /* Finally after all the results were written, write an empty Object (HashSet of size=0
+          to indicate the caller that all results were written */
+         populateCurrentResultSet(new ArrayList<SNPAssociationFinding>(), toBePopulated);
+
     }
 
-    private void populateCurrentResultSet(List<SNPAssociationFinding> snpAssociationFindings, ArrayList toBePopulated) {
-
+    private void populateCurrentResultSet(List<SNPAssociationFinding> snpAssociationFindings, List toBePopulated) {
+        System.out.println("populateCurrentResultSet() called: ");
         /*  1. Remove the first 500 objects and add it to a new HashSet */
         HashSet<SNPAssociationFinding> toBeSent = new HashSet<SNPAssociationFinding>();
 
-        for (int index = 0;  (index <= snpAssociationFindings.size()) && (index <= BATCH_OBJECT_INCREMENT); index++) {
-            SNPAssociationFinding f =  snpAssociationFindings.get(index);
+        for (int index = 0;  (index < snpAssociationFindings.size()) && (index <= BATCH_OBJECT_INCREMENT); index++) {
+            SNPAssociationFinding f =  snpAssociationFindings.remove(index);
             toBeSent.add(f);
         }
 
+
         /* 2. Add results to toBePopulated after making sure it is empty */
-        while (true) {
+         do {
             synchronized(toBePopulated) {
-                 if (toBePopulated.size() == 0)  {
+                   System.out.println("toBePopulated is ready: ");
+                   if (toBePopulated.size() == 0)  {
                        toBePopulated.add(toBeSent);
                        break;
                    }
@@ -423,10 +417,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler
             } catch (InterruptedException e) {
                    e.printStackTrace(); // no big deal
             }
-         }
+         } while (true);
     }
 
-    private void handleFindingsWithoutAnnotationCriteria(FindingCriteriaDTO critDTO, Session session, StringBuffer targetHQL, ArrayList toBePopulated) {
+    private void handleFindingsWithoutAnnotationCriteria(FindingCriteriaDTO critDTO, Session session, StringBuffer targetHQL, List toBePopulated) {
         Collection<SNPAssociationFinding> findings ;
 
         int start = 0;
@@ -434,8 +428,9 @@ public class SNPAssociationFindingsHandler extends FindingsHandler
         do {
             findings =  executeTargetFindingQuery(
                       critDTO, null, session, targetHQL, start, end);
-
             initializeProxies(findings, session);
+            HashSet<SNPAssociationFinding> toBeSent = new HashSet<SNPAssociationFinding>();
+            toBeSent.addAll(findings);
 
             /*  Add results to toBePopulated after making sure it is empty */
             while (true) {
@@ -455,5 +450,29 @@ public class SNPAssociationFindingsHandler extends FindingsHandler
              end += BATCH_OBJECT_INCREMENT;;
 
         }  while(findings.size() < BATCH_OBJECT_INCREMENT );
+
+        /* send empty data object to let the client know that no more results are present */
+
     }
+
+    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
+        List<SNPAssociationFinding>  associationFindings = Collections.synchronizedList(
+                                                   new ArrayList<SNPAssociationFinding>());
+        int fromIndex = 0;
+        int toIndex = fromIndex + BATCH_OBJECT_INCREMENT;
+        Collection batchFindings = new ArrayList<SNPAssociationFinding>();
+        do {
+            batchFindings =
+                    getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
+            associationFindings.addAll(batchFindings);
+            fromIndex =  toIndex;
+            toIndex = fromIndex + BATCH_OBJECT_INCREMENT;;
+            System.out.println("Start Index:"+ fromIndex + " End Index:" + toIndex +
+                    " Findings Retrieved: " + associationFindings.size());
+        }  while(batchFindings.size() >= BATCH_OBJECT_INCREMENT);
+
+        System.out.println("TOTAL associationFindings retrieved: " + associationFindings.size());
+        return associationFindings;
+    }
+
 }

@@ -21,7 +21,7 @@ public class SNPAssociationAnalysisGroupTest extends GenotypeFindingTest {
 
     private AnalysisGroupCriteria  assocCrit ;
 
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         assocCrit = new AnalysisGroupCriteria ();
     }
 

@@ -18,7 +18,7 @@ public class StudyCriteriaTest extends GenotypeFindingTest {
 
     private StudyCriteria studyCrit ;
 
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         studyCrit = new StudyCriteria();
     }
 

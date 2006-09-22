@@ -217,7 +217,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         }
     }
 
-    protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, ArrayList toBePopulated) {
-        //TODO
+    protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, List toBePopulated) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

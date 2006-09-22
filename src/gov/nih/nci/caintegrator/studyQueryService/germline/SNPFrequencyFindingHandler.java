@@ -280,7 +280,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         }
     }
 
-    protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, ArrayList toBePopulated) {
+    protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, List toBePopulated) {
         //TODO;
     }
 }

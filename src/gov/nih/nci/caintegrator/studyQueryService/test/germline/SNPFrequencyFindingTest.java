@@ -15,6 +15,7 @@ import gov.nih.nci.caintegrator.util.ArithematicOperator;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -24,16 +25,18 @@ import junit.framework.TestSuite;
  * Date:   Jul 19, 2006
  * Time:   6:49:07 PM
  */
-public class SNPFrequencyFindingTest extends GenotypeFindingTest {
+public class SNPFrequencyFindingTest extends CGEMSTest {
     private SNPFrequencyFindingCriteriaDTO  freqDTO;
      protected StudyParticipantCriteria spCrit;
-    protected void setUp() throws Exception {
-        annotCrit = new AnnotationCriteria();
+    public void setUp() throws Exception {
+        super.setUp();
         freqDTO = new SNPFrequencyFindingCriteriaDTO();
         freqDTO.setAnnotationCriteria(annotCrit);
-        spCrit = new StudyParticipantCriteria();
-
     }
+    public void testAll() {
+        super.testAll();
+    }
+
     protected void setUpPopulationCriteria() {
         Collection<String> names = new ArrayList<String>();
         //names.add("CASE_ADVANCED");
@@ -55,7 +58,7 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
 
         // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
         //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
-        executeSNPFrequencyFindingSearch(1, 11);
+        //executeSNPFrequencyFindingSearch(1, 11);
    }
 
     public void testFTPSNPFrequencyFindingCriteriaDTO() {
@@ -83,10 +86,10 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
                 t.printStackTrace();
             }
     }
-    private void executeSNPFrequencyFindingSearch(int startIndex, int endIndex) {
+    public Collection executeSearch(int startIndex, int endIndex) {
            try {
-               Collection<? extends Finding> findings = FindingsManager.getFindings(freqDTO, startIndex, endIndex);
-               System.out.println("RESULTS COUNT: " + findings.size());
+               Collection findings = FindingsManager.getFindings(freqDTO, startIndex, endIndex);
+               /*System.out.println("RESULTS COUNT: " + findings.size());
                for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                    SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
                    System.out.println("Completion Rate: " + finding.getCompletionRate());
@@ -99,11 +102,13 @@ public class SNPFrequencyFindingTest extends GenotypeFindingTest {
                    System.out.println("MinorAlleleFrequency : " + finding.getMinorAlleleFrequency());
                    printSNPAnnotation(finding.getSnpAnnotation());
                    printPopulation(finding.getPopulation());
-               }
-               } catch (Throwable t)  {
-             System.out.println("CGEMS Ex   ception: ");
-             t.printStackTrace();
-           }
+               }*/
+               return findings;
+              } catch (Throwable t)  {
+               System.out.println("CGEMS Ex   ception: ");
+               t.printStackTrace();
+              }
+        return null;
     }
     protected void printSNPAnnotation(SNPAnnotation annot) {
         super.printSNPAnnotation(annot);

@@ -23,7 +23,7 @@ abstract public class FindingsHandler {
      protected abstract Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO,
                                                                    Set<String> snpAnnotationIDs, Session session);
      protected abstract void sendMyFindings(FindingCriteriaDTO critDTO,
-                                            Set<String> snpAnnotationIDs, Session session, ArrayList toBePopulated);
+                                            Set<String> snpAnnotationIDs, Session session, List toBePopulated);
 
      protected abstract void initializeProxies(Collection<? extends Finding> findings, Session session);
      protected abstract Collection<? extends Finding> executeTargetFindingQuery(FindingCriteriaDTO findingCritDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end);
@@ -80,7 +80,7 @@ abstract public class FindingsHandler {
          return findings;
      }
 
-     public void populateFindings(FindingCriteriaDTO critDTO, ArrayList toBePopulated)
+     public void populateFindings(FindingCriteriaDTO critDTO, List toBePopulated)
      throws Exception {
 
         Set<String> snpAnnotationIDs = new HashSet<String>();

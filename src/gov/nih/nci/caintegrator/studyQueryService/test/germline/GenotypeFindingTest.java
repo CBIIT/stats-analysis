@@ -20,6 +20,7 @@ import gov.nih.nci.caintegrator.util.ArithematicOperator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -31,18 +32,25 @@ import junit.framework.TestSuite;
  * Time:   5:53:05 PM
  */
 
-public class GenotypeFindingTest extends TestCase {
-    protected AnnotationCriteria annotCrit;
+public class GenotypeFindingTest extends CGEMSTest {
+   // protected AnnotationCriteria annotCrit;
     private GenotypeFindingCriteriaDTO gfDTO;
-    protected StudyParticipantCriteria spCrit;
+   // protected static int TOTAL_FINDINGS = 0;
 
-    protected void setUp() throws Exception {
+
+    public void setUp() throws Exception {
+        super.setUp();
         gfDTO = new GenotypeFindingCriteriaDTO();
-        annotCrit = new AnnotationCriteria();
         gfDTO.setAnnotationCriteria(annotCrit);
-        spCrit = new StudyParticipantCriteria();
         gfDTO.setStudyParticipantCriteria(spCrit);
     }
+
+    public void testAll() {
+        super.testAll();
+    }
+
+
+
     private void setUpGenotypeCrit() {
         //gfDTO.setQualityScore(new Float(0.50), ArithematicOperator.LT);
         gfDTO.setQcStatus("QC+");
@@ -55,9 +63,9 @@ public class GenotypeFindingTest extends TestCase {
         ppc.setEndPosition(new Integer(76075000));    // should give 4 GenotypeFindings
 
 */
-        ppc.setChromosome("X");
-        ppc.setStartPosition(new Long(1));  // 76065158
-        ppc.setEndPosition(new Long(1000000000));    // should give 4 GenotypeFindings
+        ppc.setChromosome("8");
+        ppc.setStartPosition(new Long(76065000));  // 76065158
+        ppc.setEndPosition(new Long(96100000));    // should give 4 GenotypeFindings
 
         /*
         ppc.setChromosome("X");
@@ -224,40 +232,6 @@ public class GenotypeFindingTest extends TestCase {
         //setUpStudyParticipantAttributesCriteria();
    }
 
-    protected void setUpStudyParticipantAttributesCriteria() {
-        //spCrit.setLowerAgeLimit(55);
-        spCrit.setUpperAgeLimit(60);
-        Collection fhs = new ArrayList<String>();
-        //fhs.add("YeS");
-        fhs.add("nO");
-        spCrit.setFamilyHistoryCollection(fhs);
-
-        //spCrit.setDaysOffStudy(100);
-        //spCrit.setDaysOnStudy(999);
-        //spCrit.setSurvivalStatus(Boolean.TRUE);
-        //spCrit.setOffStudy(Boolean.FALSE);
-
-        // set collections
-
-/*
-        Collection ci = new ArrayList();
-        ci.add("NCICB");
-        spCrit.setInstitutionNameCollection(ci);
-
-
-        Collection cs = new ArrayList();
-        cs.add("1");
-        cs.add("2");
-        cs.add("3");
-        cs.add("4");
-        cs.add("5");
-        cs.add("6");
-        cs.add("7");
-        cs.add("8");
-        cs.add("9");cs.add("10");
-        spCrit.setStudySubjectIdentifierCollection (cs);
-*/
-    }
 
     protected void setUpStudyCriteria() {
         StudyCriteria studyCrit = new StudyCriteria();
@@ -266,20 +240,7 @@ public class GenotypeFindingTest extends TestCase {
         spCrit.setStudyCriteria(studyCrit);
     }
 
-    protected void setUpAnalysisGroupCriteria() {
-        AnalysisGroupCriteria crit = new AnalysisGroupCriteria();
-        crit.setNames(new String[] {"control", "early", "advanced"});
-        //"early", "advanced"
-        spCrit.setAnalysisGroupCriteria(crit);
-    }
 
-     protected void setUpPopulationCriteria() {
-        Collection<String> names = new ArrayList<String>();
-        //names.add("CASE_ADVANCED");
-        names.add("CONTROL");
-        PopulationCriteria popCrit = new PopulationCriteria(names);
-        spCrit.setPopulationCriteria(popCrit);
-     }
 
     public void testGenotypeFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
@@ -368,36 +329,22 @@ public class GenotypeFindingTest extends TestCase {
        }
     }
 
-    protected void printSNPAnnotation(SNPAnnotation annot) {
-        System.out.println("              SNPAnnotation ID:    " + annot.getId());
-        System.out.println("              Chromosome:          " + annot.getChromosomeName());
-        System.out.println("              Chromosome Location: " + annot.getChromosomeLocation());
-
-
-        System.out.println("              DbsnpId:             " + annot.getDbsnpId());
-    }
-
-    protected void printSpecimen(DNASpecimen s) {
-        System.out.println(s );
-    }
-
-    private void executeSearch() {
-       int startIndex = 0;
-       int endIndex = 100;
+    protected Collection executeSearch(int start, int end) {
        try {
         Collection<? extends Finding> findings =
-                FindingsManager.getFindings(gfDTO, startIndex, endIndex);
+                FindingsManager.getFindings(gfDTO, start, end);
         System.out.println("RESULTS COUNT: " + findings.size());
 
-           for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
+           /*for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                SpecimenBasedMolecularFinding finding =  (SpecimenBasedMolecularFinding)iterator.next();
                System.out.println("Specimen ID: " + finding.getSpecimen().getId());
-           }
-
+           }*/
+         return findings;
        } catch (Throwable t)  {
            System.out.println("CGEMS Exception: ");
            t.printStackTrace();
        }
+        return null;
     }
 
     public static Test suite() {
