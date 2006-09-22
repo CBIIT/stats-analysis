@@ -23,7 +23,7 @@ import org.hibernate.criterion.Restrictions;
  * Time:   3:08:00 PM
  */
 public class GenotypeFindingsHandler extends FindingsHandler {
-    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
+    /*protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
                                                           final Session session) {
         List<GenotypeFinding>  genotypeFindings = Collections.synchronizedList(
                                                    new ArrayList<GenotypeFinding>());
@@ -41,7 +41,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         }  while(batchFindings.size() > BATCH_OBJECT_INCREMENT);
 
         return genotypeFindings;
-    }
+    }*/
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
                                                           final Session session, final int startIndex, final int endIndex) {
 

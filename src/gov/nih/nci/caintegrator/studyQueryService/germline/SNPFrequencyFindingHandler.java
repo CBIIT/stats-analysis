@@ -22,7 +22,7 @@ import org.hibernate.criterion.Restrictions;
  * Time:   5:52:11 PM
  */
 public class SNPFrequencyFindingHandler extends FindingsHandler {
-    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
+    /*protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
 
         List<SNPFrequencyFinding>  frequencyFindings = Collections.synchronizedList(
                                                    new ArrayList<SNPFrequencyFinding>());
@@ -41,7 +41,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
 
         System.out.println("TOTAL frequencyFindings retrieved: " + frequencyFindings.size());
         return frequencyFindings;  
-    }
+    }*/
 
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, int startIndex, int endIndex) {
 

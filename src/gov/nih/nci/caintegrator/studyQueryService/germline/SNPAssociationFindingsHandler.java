@@ -125,7 +125,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             // do not use these indexes.  Just retrieve everything
         }
         else { // set the index values
-            q.setFirstResult(0);
+            q.setFirstResult(start); //RAM: 09/22/06 changed back to original before ftp bug
             q.setMaxResults(end - start);
         }
         Iterator triplets = q.list().iterator();
@@ -369,7 +369,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                 in the final Hibernate Query */
              Collection<SNPAssociationFinding> currentFindings =
                                         executeTargetFindingQuery(findingCritDTO, values, session, hql, -1, -1);
-             initializeProxies(currentFindings, session);
+             //initializeProxies(currentFindings, session);
              System.out.println("Current Findings Retrieved from IN clause: " + currentFindings.size());
 
 
@@ -393,12 +393,13 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
     }
 
     private void populateCurrentResultSet(List<SNPAssociationFinding> snpAssociationFindings, List toBePopulated) {
-        System.out.println("populateCurrentResultSet() called: ");
         /*  1. Remove the first 500 objects and add it to a new HashSet */
         HashSet<SNPAssociationFinding> toBeSent = new HashSet<SNPAssociationFinding>();
 
-        for (int index = 0;  (index < snpAssociationFindings.size()) && (index <= BATCH_OBJECT_INCREMENT); index++) {
-            SNPAssociationFinding f =  snpAssociationFindings.remove(index);
+        int size = snpAssociationFindings.size();
+        //for (int index = 0;  (toBeSent.size() < size) && (index <= BATCH_OBJECT_INCREMENT); index++) {
+        for (int index = 0;  (index < size) && (index <= BATCH_OBJECT_INCREMENT); index++) {
+            SNPAssociationFinding f =  snpAssociationFindings.remove(0);
             toBeSent.add(f);
         }
 
@@ -406,7 +407,6 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         /* 2. Add results to toBePopulated after making sure it is empty */
          do {
             synchronized(toBePopulated) {
-                   System.out.println("toBePopulated is ready: ");
                    if (toBePopulated.size() == 0)  {
                        toBePopulated.add(toBeSent);
                        break;
@@ -425,18 +425,22 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
         int start = 0;
         int end = FindingsHandler.BATCH_OBJECT_INCREMENT ;  // 500 for now
+        HashSet<SNPAssociationFinding> toBeSent = null;
         do {
             findings =  executeTargetFindingQuery(
                       critDTO, null, session, targetHQL, start, end);
             initializeProxies(findings, session);
-            HashSet<SNPAssociationFinding> toBeSent = new HashSet<SNPAssociationFinding>();
+
+            toBeSent = new HashSet<SNPAssociationFinding>();
             toBeSent.addAll(findings);
 
-            /*  Add results to toBePopulated after making sure it is empty */
+
+/*
+            //Add results to toBePopulated after making sure it is empty
             while (true) {
                 synchronized(toBePopulated) {
                    if (toBePopulated.size() == 0)  {
-                      toBePopulated.add(findings);
+                      toBePopulated.add(toBeSent);
                       break;
                    }
                 }
@@ -446,16 +450,44 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                        e.printStackTrace(); // no big deal
                 }
              }
-             start += BATCH_OBJECT_INCREMENT;
-             end += BATCH_OBJECT_INCREMENT;;
 
-        }  while(findings.size() < BATCH_OBJECT_INCREMENT );
+*/
+
+            process(toBePopulated,  toBeSent);
+            start += BATCH_OBJECT_INCREMENT;
+            end += BATCH_OBJECT_INCREMENT;;
+
+        }  while(findings.size() >= BATCH_OBJECT_INCREMENT );
+
+      /*  // commit any remaining results
+        if (toBeSent != null && toBeSent.size() > 0)
+            process(toBePopulated, toBeSent);*/
 
         /* send empty data object to let the client know that no more results are present */
-
+        process(toBePopulated, new HashSet<SNPAssociationFinding>());
     }
 
-    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
+
+    private void process(List toBePopulated, HashSet<SNPAssociationFinding> toBeSent) {
+
+        /*  Add results to toBePopulated after making sure it is empty */
+        while (true) {
+            synchronized(toBePopulated) {
+               if (toBePopulated.size() == 0)  {
+                  toBePopulated.add(toBeSent);
+                  break;
+               }
+            }
+            try {
+                 Thread.currentThread().sleep(10);
+            } catch (InterruptedException e) {
+                   e.printStackTrace(); // no big deal
+            }
+         }
+         return;
+    }
+
+   /* protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
         List<SNPAssociationFinding>  associationFindings = Collections.synchronizedList(
                                                    new ArrayList<SNPAssociationFinding>());
         int fromIndex = 0;
@@ -473,6 +505,6 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
         System.out.println("TOTAL associationFindings retrieved: " + associationFindings.size());
         return associationFindings;
-    }
+    }*/
 
 }

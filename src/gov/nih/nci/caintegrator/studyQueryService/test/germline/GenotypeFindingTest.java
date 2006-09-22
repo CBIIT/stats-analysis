@@ -262,38 +262,8 @@ public class GenotypeFindingTest extends CGEMSTest {
         // 4. execute search
         executeGenotypeFindingSearch(0, 501);
     }
-    public void testFTPGenotypeFindingCriteriaDTO() {
-        // 1. setup Annotation Criteria
-        //setUpSNPPhysicalPositionCrit();
-        //setUpDBSnpCrit();
-        setUpGeneBiomarkerCrit();
 
 
-        // 2. setup StudyParticipant Criteria
-        //setUpStudyParticipantCrit();
-        //setUpStudyParticipantAttributesCriteria();
-        setUpPopulationCriteria();
-        setUpStudyCriteria();
-   //     setUpAnalysisGroupCriteria();
-
-        // 3. set up Genotype Crit itself
-        //setUpGenotypeCrit();
-
-        // 4. execute search
-        executeFTPGenotypeFindingSearch();
-    }
-
-    private void executeFTPGenotypeFindingSearch() {
-         try {
-             Collection<? extends Finding> findings =
-                  FindingsManager.getFindingsForFTP(gfDTO);
-
-             System.out.println("RESULTS COUNT: " + findings.size());
-         } catch (Throwable t)  {
-           System.out.println("CGEMS Exception: ");
-           t.printStackTrace();
-       }
-    }
 
 
     private void executeGenotypeFindingSearch(int startIndex, int endIndex) {

@@ -41,29 +41,8 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
         //setSNPFindingCriteria();
         //executeSNPAssoaictionFindingsSearch(500, 1000);
     }
-    public void testFTPSNPAssocAnalysisFindingCriteriaDTO() {
-        // 1. setup Annotation Criteria
-       //setUpSNPPhysicalPositionCrit();
-        //setUpDBSnpCrit();
-        //setUpPanelCrit();
-        setUpGeneBiomarkerCrit();
 
-        //setSNPAssociationAnalysisCriteria();
-        //setSNPAssociationGroupCriteria();
 
-        setSNPFindingCriteria();
-        executeFTPSNPAssoaictionFindingsSearch();
-    }
-    private void executeFTPSNPAssoaictionFindingsSearch() {
-                try {
-                    Long t1 = System.currentTimeMillis();
-                    Collection<? extends Finding> findings = FindingsManager.getFindingsForFTP(safDTO);
-                    System.out.println("RESULTS COUNT: " + findings.size());
-                } catch (Throwable t)  {
-                        System.out.println("CGEMS Exception: ");
-                        t.printStackTrace();
-                }
-    }
 
     public Collection executeSearch(int startIndex, int endIndex) {
             try {
@@ -106,8 +85,8 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
     }
 
     private void setSNPFindingCriteria() {
-        safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
-        safDTO.setRank(new Integer(7), ArithematicOperator.LT);
+        //safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
+        safDTO.setRank(new Integer(800), ArithematicOperator.LT);
     }
 
     private void setSNPAssociationAnalysisCriteria() {
@@ -130,7 +109,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
      }
 
     public void testPopulateFindings() {
-        //setUpSNPPhysicalPositionCrit();
+        setUpSNPPhysicalPositionCrit();
         setSNPFindingCriteria();
         try {
              HashSet actualBatchFindings = new HashSet();
@@ -149,6 +128,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
             boolean sleep = true;
             int count = 1;
+            int noOfResults = 0;
             do {
                 synchronized(findingsToBePopulated) {
                     if (findingsToBePopulated.size() > 0) {
@@ -158,8 +138,9 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
                             System.out.print("ID: " + sf.getId());
                             System.out.print("  pValue" + sf.getPvalue() + "\n\n");
                          }
+                         noOfResults += actualBatchFindings.size();
                          System.out.println("WRITTEN BATCH: " + count++ + " SIZE: " +
-                                                           actualBatchFindings.size() + "\n\n");
+                                                          actualBatchFindings.size() + "\n\n");
                          if (actualBatchFindings.size() == 0) {
                             /* means no more to results are coming.  Finished */
                              break;
@@ -170,7 +151,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
              }  while(true);
 
-            System.out.println("ALL RESULTS WERE SENT OUT: ");
+            System.out.println("ALL RESULTS WERE RECEIVED TOTAL: " + noOfResults);
 
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
