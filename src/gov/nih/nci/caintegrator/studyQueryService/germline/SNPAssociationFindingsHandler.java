@@ -353,7 +353,6 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                                 SNPAssociationFindingCriteriaDTO findingCritDTO,
                                 Session session, List toBePopulated) {
 
-        System.out.println("SNP ANNOTATION IDS: " + snpAnnotationIDs);
         List<SNPAssociationFinding>  snpAssociationFindings = new ArrayList<SNPAssociationFinding>();
         ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
         for (int i = 0; i < arrayIDs.size();) {
@@ -364,21 +363,16 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
              int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
              values.addAll(arrayIDs.subList(begIndex,  lastIndex));
 
-            //System.out.println("handleFindingsWithAnnotationCriteria() called: ");
              /* send -1 for start & end index to indicate these values not to be included
                 in the final Hibernate Query */
              Collection<SNPAssociationFinding> currentFindings =
                                         executeTargetFindingQuery(findingCritDTO, values, session, hql, -1, -1);
-             //initializeProxies(currentFindings, session);
-             System.out.println("Current Findings Retrieved from IN clause: " + currentFindings.size());
-
+             initializeProxies(currentFindings, session);
 
              /* convert these  currentFindings in to a List for convenience */
-             //snpAssociationFindings = new ArrayList<SNPAssociationFinding>();
              snpAssociationFindings.addAll(currentFindings );
 
              while (snpAssociationFindings.size() >= BATCH_OBJECT_INCREMENT )  {
-                 System.out.println("SNPFindings Ready To Be written: " + snpAssociationFindings.size());
                  populateCurrentResultSet(snpAssociationFindings, toBePopulated);
              }
         }
@@ -458,10 +452,6 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             end += BATCH_OBJECT_INCREMENT;;
 
         }  while(findings.size() >= BATCH_OBJECT_INCREMENT );
-
-      /*  // commit any remaining results
-        if (toBeSent != null && toBeSent.size() > 0)
-            process(toBePopulated, toBeSent);*/
 
         /* send empty data object to let the client know that no more results are present */
         process(toBePopulated, new HashSet<SNPAssociationFinding>());
