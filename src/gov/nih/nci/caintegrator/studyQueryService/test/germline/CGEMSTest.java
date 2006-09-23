@@ -43,7 +43,7 @@ public abstract class CGEMSTest extends TestCase {
 */
         ppc.setChromosome("7");
         ppc.setStartPosition(new Long(40000000 ));
-        ppc.setEndPosition(new Long(45000000));
+        ppc.setEndPosition(new Long(55000000));
 
         /*
         ppc.setChromosome("X");

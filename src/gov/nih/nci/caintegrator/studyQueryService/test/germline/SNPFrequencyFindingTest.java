@@ -5,6 +5,7 @@ import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFr
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
@@ -12,10 +13,7 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -47,27 +45,79 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
 
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-       //setUpSNPPhysicalPositionCrit();
+       setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
        // setUpPanelCrit();
 
-        setUpGeneBiomarkerCrit();
+        //setUpGeneBiomarkerCrit();
 
         //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
-        freqDTO.setPopulationNames(new String[] {"CASE_EARLY"});
+        freqDTO.setPopulationNames(new String[] {"CONTROL"});
 
         // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
         //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
-        //executeSNPFrequencyFindingSearch(1, 11);
+        executeSearch(0, 1500);
    }
 
-  
+    public void testPopulateFindings() {
+        //setUpSNPPhysicalPositionCrit();
+        freqDTO.setPopulationNames(new String[] {"CONTROL"});
+        freqDTO.setHardyWeinbergPValue(new Float(1.0), ArithematicOperator.GE);
+        //setUpGeneBiomarkerCrit();
+        //setSNPFindingCriteria();
+        try {
+             HashSet actualBatchFindings = new HashSet();
+             final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
+             new Thread(new Runnable() {
+                 public void run() {
+                     try {
+                        FindingsManager.populateFindings(freqDTO, findingsToBePopulated);
+                     } catch(Throwable t) {
+                         t.printStackTrace();
+                         System.out.println("Error from FindingsManager.populateFindings call: ");
+                     }
+                 }
+                       }
+            ).start();
+
+            boolean sleep = true;
+            int count = 1;
+            int noOfResults = 0;
+            do {
+                synchronized(findingsToBePopulated) {
+                    if (findingsToBePopulated.size() > 0) {
+                         actualBatchFindings  = (HashSet) findingsToBePopulated.remove(0);
+                         for (Iterator iterator = actualBatchFindings.iterator(); iterator.hasNext();) {
+                             SNPFrequencyFinding sf =  (SNPFrequencyFinding) iterator.next();
+                             System.out.print("ID: " + sf.getId());
+                             System.out.print("  HardyWeinbergPValue" + sf.getHardyWeinbergPValue()) ;
+
+                         }
+                         noOfResults += actualBatchFindings.size();
+                         System.out.println("WRITTEN BATCH: " + count++ + " SIZE: " +
+                                                          actualBatchFindings.size() + "\n\n");
+                         if (actualBatchFindings.size() == 0) {
+                            /* means no more to results are coming.  Finished */
+                             break;
+                         }
+                     }
+                 }
+                 Thread.currentThread().sleep(10);
+
+             }  while(true);
+
+            System.out.println("ALL RESULTS WERE RECEIVED TOTAL: " + noOfResults);
+
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
 
 
     public Collection executeSearch(int startIndex, int endIndex) {
            try {
                Collection findings = FindingsManager.getFindings(freqDTO, startIndex, endIndex);
-               /*System.out.println("RESULTS COUNT: " + findings.size());
+               System.out.println("RESULTS COUNT: " + findings.size());
                for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                    SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
                    System.out.println("Completion Rate: " + finding.getCompletionRate());
@@ -80,10 +130,10 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
                    System.out.println("MinorAlleleFrequency : " + finding.getMinorAlleleFrequency());
                    printSNPAnnotation(finding.getSnpAnnotation());
                    printPopulation(finding.getPopulation());
-               }*/
+               }
                return findings;
               } catch (Throwable t)  {
-               System.out.println("CGEMS Ex   ception: ");
+               System.out.println("CGEMS Exception: ");
                t.printStackTrace();
               }
         return null;

@@ -125,7 +125,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             // do not use these indexes.  Just retrieve everything
         }
         else { // set the index values
-            q.setFirstResult(start); //RAM: 09/22/06 changed back to original before ftp bug
+            q.setFirstResult(0); //RAM: 09/22/06 changed back to original before ftp bug
             q.setMaxResults(end - start);
         }
         Iterator triplets = q.list().iterator();
@@ -141,7 +141,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
         return snpAssociationFindings ;
     }
-    
+
     protected Collection<SNPAssociationFinding> executeTargetFindingQuery(FindingCriteriaDTO critDTO, Session session, StringBuffer targetHQL, int start, int end) {
 
         SNPAssociationFindingCriteriaDTO  findingCritDTO= (SNPAssociationFindingCriteriaDTO) critDTO;
@@ -175,7 +175,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         /* 6. Now execute the final TargetFinding query and return results  */
         Query q = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, q);
-        q.setFirstResult(start);
+        q.setFirstResult(0);
         q.setMaxResults(end - start);
         Iterator triplets = q.list().iterator();
         while(triplets.hasNext()) {
@@ -348,12 +348,19 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         return ;
     }
 
+    protected List<? extends Finding> getConcreteTypedFindingList() {
+        return new ArrayList<SNPAssociationFinding>();
+    }
+    protected Set<? extends Finding> getConcreteTypedFindingSet() {
+        return new HashSet<SNPAssociationFinding>();
+    }
+
     private void handleFindingsWithAnnotationCriteria(
                                 Set<String> snpAnnotationIDs, StringBuffer targetHQL,
-                                SNPAssociationFindingCriteriaDTO findingCritDTO,
+                                FindingCriteriaDTO findingCritDTO,
                                 Session session, List toBePopulated) {
-
-        List<SNPAssociationFinding>  snpAssociationFindings = new ArrayList<SNPAssociationFinding>();
+        getConcreteTypedFindingList();
+        List  snpAssociationFindings = getConcreteTypedFindingList();
         ArrayList arrayIDs = new ArrayList(snpAnnotationIDs);
         for (int i = 0; i < arrayIDs.size();) {
              StringBuffer hql = new StringBuffer("").append(targetHQL);
@@ -365,8 +372,8 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
              /* send -1 for start & end index to indicate these values not to be included
                 in the final Hibernate Query */
-             Collection<SNPAssociationFinding> currentFindings =
-                                        executeTargetFindingQuery(findingCritDTO, values, session, hql, -1, -1);
+             Collection<? extends Finding> currentFindings =
+                                        executeQueryForPopulating(findingCritDTO, values, session, hql, -1, -1);
              initializeProxies(currentFindings, session);
 
              /* convert these  currentFindings in to a List for convenience */
@@ -382,71 +389,26 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
         /* Finally after all the results were written, write an empty Object (HashSet of size=0
           to indicate the caller that all results were written */
-         populateCurrentResultSet(new ArrayList<SNPAssociationFinding>(), toBePopulated);
+         populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated);
 
     }
 
-    private void populateCurrentResultSet(List<SNPAssociationFinding> snpAssociationFindings, List toBePopulated) {
-        /*  1. Remove the first 500 objects and add it to a new HashSet */
-        HashSet<SNPAssociationFinding> toBeSent = new HashSet<SNPAssociationFinding>();
-
-        int size = snpAssociationFindings.size();
-        //for (int index = 0;  (toBeSent.size() < size) && (index <= BATCH_OBJECT_INCREMENT); index++) {
-        for (int index = 0;  (index < size) && (index <= BATCH_OBJECT_INCREMENT); index++) {
-            SNPAssociationFinding f =  snpAssociationFindings.remove(0);
-            toBeSent.add(f);
-        }
 
 
-        /* 2. Add results to toBePopulated after making sure it is empty */
-         do {
-            synchronized(toBePopulated) {
-                   if (toBePopulated.size() == 0)  {
-                       toBePopulated.add(toBeSent);
-                       break;
-                   }
-            }
-            try {
-                 Thread.currentThread().sleep(10);
-            } catch (InterruptedException e) {
-                   e.printStackTrace(); // no big deal
-            }
-         } while (true);
-    }
-
-    private void handleFindingsWithoutAnnotationCriteria(FindingCriteriaDTO critDTO, Session session, StringBuffer targetHQL, List toBePopulated) {
-        Collection<SNPAssociationFinding> findings ;
+    protected void handleFindingsWithoutAnnotationCriteria(FindingCriteriaDTO critDTO,
+                        Session session, StringBuffer targetHQL, List toBePopulated) {
+        Collection findings = null;
 
         int start = 0;
         int end = FindingsHandler.BATCH_OBJECT_INCREMENT ;  // 500 for now
-        HashSet<SNPAssociationFinding> toBeSent = null;
+        Set toBeSent = null;
         do {
-            findings =  executeTargetFindingQuery(
+            findings =  executeQueryForPopulating(
                       critDTO, null, session, targetHQL, start, end);
             initializeProxies(findings, session);
 
             toBeSent = new HashSet<SNPAssociationFinding>();
             toBeSent.addAll(findings);
-
-
-/*
-            //Add results to toBePopulated after making sure it is empty
-            while (true) {
-                synchronized(toBePopulated) {
-                   if (toBePopulated.size() == 0)  {
-                      toBePopulated.add(toBeSent);
-                      break;
-                   }
-                }
-                try {
-                     Thread.currentThread().sleep(10);
-                } catch (InterruptedException e) {
-                       e.printStackTrace(); // no big deal
-                }
-             }
-
-*/
-
             process(toBePopulated,  toBeSent);
             start += BATCH_OBJECT_INCREMENT;
             end += BATCH_OBJECT_INCREMENT;;
@@ -454,47 +416,81 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         }  while(findings.size() >= BATCH_OBJECT_INCREMENT );
 
         /* send empty data object to let the client know that no more results are present */
-        process(toBePopulated, new HashSet<SNPAssociationFinding>());
+        process(toBePopulated, getConcreteTypedFindingSet());
     }
 
 
-    private void process(List toBePopulated, HashSet<SNPAssociationFinding> toBeSent) {
 
-        /*  Add results to toBePopulated after making sure it is empty */
-        while (true) {
-            synchronized(toBePopulated) {
-               if (toBePopulated.size() == 0)  {
-                  toBePopulated.add(toBeSent);
-                  break;
-               }
-            }
-            try {
-                 Thread.currentThread().sleep(10);
-            } catch (InterruptedException e) {
-                   e.printStackTrace(); // no big deal
-            }
-         }
-         return;
+    /**
+     *
+     * @param critDTO
+     * @param snpAnnotationIDs
+     * @param session
+     * @param targetHQL
+     * @param start This is the start index.  A value of -1 represents not to use this param
+     * in the actual query to Hibernate
+     * @param end This is the end Index. A value of -1 represents not to use this param
+     * in the actual query to Hibernate
+     * @return  Collection of SNPAssociationFindings
+     */
+    protected Collection<? extends Finding> executeQueryForPopulating(FindingCriteriaDTO critDTO,
+                            Collection<String> snpAnnotationIDs,
+                            Session session, StringBuffer targetHQL
+                            ,int start, int end
+                            ) {
+
+        SNPAssociationFindingCriteriaDTO  findingCritDTO= (SNPAssociationFindingCriteriaDTO) critDTO;
+        Collection<SNPAssociationFinding>  snpAssociationFindings =
+                                    new ArrayList<SNPAssociationFinding>();
+
+        final HashMap params = new HashMap();
+
+        /* 1.  Include SNPAssociationFinding attribute criteria in  TargetFinding query */
+        StringBuffer myAttributeHql = handleMyOwnAttributeCriteria(findingCritDTO, params);
+
+        /* 2. Include HQL to handle Annotation Criteria to snpAnnotJoin & snpAnnotCond */
+        StringBuffer snpAnnotJoin = new StringBuffer("");
+        StringBuffer snpAnnotCond = new StringBuffer("");
+        appendAnnotationCriteriaHQL(snpAnnotationIDs, snpAnnotJoin, snpAnnotCond, params);
+
+        /* 3. Include SNPAnalysisGroup Criteria in TargetFinding query by converting and adding to AnalysisGroupCriteria */
+        handleAnalysisGroupCriteria(findingCritDTO, session);
+
+        /* 4. Include SNPAssociationAnalysisCriteria Criteria in TargetFinding query */
+        HashMap h = applySnpassociationAnalysisCriteria(findingCritDTO, params, targetHQL);
+        String analysisJoin = (String) h.get("ANALYSIS_JOIN");
+        String analysisCondition = h.get("ANALYSIS_COND").toString();
+
+        /* 5. Assemble the Query with all criteria conditions together */
+        String tmpHQL = MessageFormat.format(targetHQL.toString(), new Object[] {
+                 snpAnnotJoin.toString(), analysisJoin, myAttributeHql, snpAnnotCond.toString(), analysisCondition});
+        String hql= HQLHelper.removeTrailingToken(new StringBuffer(tmpHQL), " AND");
+        String noORHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), " OR");
+        String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(noORHQL), "WHERE");
+
+        /* 6. Now execute the final TargetFinding query and return results  */
+        Query q = session.createQuery(finalHQL);
+        HQLHelper.setParamsOnQuery(params, q);
+
+        if (start == -1 || end == -1) {
+            // do not use these indexes.  Just retrieve everything
+        }
+        else { // set the index values
+            q.setFirstResult(start); //RAM: 09/22/06 changed back to original before ftp bug
+            q.setMaxResults(end - start);
+        }
+        Iterator triplets = q.list().iterator();
+        while(triplets.hasNext()) {
+            Object[] triplet = (Object[]) triplets.next();
+            SNPAssociationFinding finding = (SNPAssociationFinding) triplet[0];
+            SNPAnnotation snpAnnot = (SNPAnnotation) triplet[1];
+            finding.setSnpAnnotation(snpAnnot);
+            SNPAssociationAnalysis analysis = (SNPAssociationAnalysis) triplet[2];
+            finding.setSnpAssociationAnalysis(analysis);
+            snpAssociationFindings.add(finding);
+        }
+
+        return snpAssociationFindings ;
     }
-
-   /* protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session) {
-        List<SNPAssociationFinding>  associationFindings = Collections.synchronizedList(
-                                                   new ArrayList<SNPAssociationFinding>());
-        int fromIndex = 0;
-        int toIndex = fromIndex + BATCH_OBJECT_INCREMENT;
-        Collection batchFindings = new ArrayList<SNPAssociationFinding>();
-        do {
-            batchFindings =
-                    getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
-            associationFindings.addAll(batchFindings);
-            fromIndex =  toIndex;
-            toIndex = fromIndex + BATCH_OBJECT_INCREMENT;;
-            System.out.println("Start Index:"+ fromIndex + " End Index:" + toIndex +
-                    " Findings Retrieved: " + associationFindings.size());
-        }  while(batchFindings.size() >= BATCH_OBJECT_INCREMENT);
-
-        System.out.println("TOTAL associationFindings retrieved: " + associationFindings.size());
-        return associationFindings;
-    }*/
 
 }

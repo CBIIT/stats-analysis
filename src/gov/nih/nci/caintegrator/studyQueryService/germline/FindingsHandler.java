@@ -17,38 +17,21 @@ import org.hibernate.Session;
  */
 abstract public class FindingsHandler {
      public static final int BATCH_OBJECT_INCREMENT = 500;
+     protected static int IN_PARAMETERS  = 100;
+
      protected static final String TARGET_FINDING_ALIAS = " finding";
      protected abstract Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO,
                                                                     Set<String> snpAnnotationIDs, Session session, int start, int end);
-     /*protected abstract Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO,
-                                                                   Set<String> snpAnnotationIDs, Session session);*/
      protected abstract void sendMyFindings(FindingCriteriaDTO critDTO,
                                             Set<String> snpAnnotationIDs, Session session, List toBePopulated);
 
      protected abstract void initializeProxies(Collection<? extends Finding> findings, Session session);
      protected abstract Collection<? extends Finding> executeTargetFindingQuery(FindingCriteriaDTO findingCritDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end);
+     protected abstract List<? extends Finding> getConcreteTypedFindingList() ;
 
-//    public Collection<? extends Finding> getFindingsForFTP(FindingCriteriaDTO critDTO)
-//            throws Exception {
-//        Set<String> snpAnnotationIDs = new HashSet<String>();
-//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//        session.beginTransaction();
-//
-//        /* 1. Handle AnnotationCriteria which will bring back SNPs */
-//        AnnotationCriteria annotCrit = critDTO.getAnnotationCriteria();
-//        if (annotCrit != null) {
-//            snpAnnotationIDs = SNPAnnotationCriteriaHandler.handle(annotCrit, session);
-//        }
-//
-//        /* 2.  Apply all other criteria mentioned in the query and return as concrete type findings */
-//        Collection<? extends Finding> findings =
-//                getMyFindings(critDTO, snpAnnotationIDs, session);
-//        initializeProxies(findings, session);
-//
-//        session.close();
-//        return findings;
-//
-//    }
+    protected abstract Set<? extends Finding> getConcreteTypedFindingSet() ;
+
+
     public Collection<? extends Finding> getFindings(FindingCriteriaDTO critDTO, int fromIndex, int toIndex)
             throws Exception {
 
@@ -71,15 +54,6 @@ abstract public class FindingsHandler {
         return findings;
     }
 
-    public final static Boolean isAnyCriteriaSpecified(AnnotationCriteria annotCrit) {
-         boolean annotCritPresent = false;
-         if (SNPAnnotationCriteriaHandler.isAnnotationCriteriaPresent(annotCrit) )
-            annotCritPresent = true;
-         //if (crit)
-          return null;
-     }
-
-
     public void populateFindings(FindingCriteriaDTO critDTO, List toBePopulated)
      throws Exception {
 
@@ -96,10 +70,54 @@ abstract public class FindingsHandler {
         /* 2.  Apply all other criteria mentioned in the query and populate concrete type findings
                after initialzing the proxies as well */
         sendMyFindings(critDTO, snpAnnotationIDs, session, toBePopulated);
-
         session.close();
     }
 
+    protected void populateCurrentResultSet(List<? extends Finding> snpAssociationFindings, List toBePopulated) {
+        /*  1. Remove the first 500 objects and add it to a new HashSet */
+        Set toBeSent = getConcreteTypedFindingSet();
+
+        int size = snpAssociationFindings.size();
+        //for (int index = 0;  (toBeSent.size() < size) && (index <= BATCH_OBJECT_INCREMENT); index++) {
+        for (int index = 0;  (index < size) && (index <= BATCH_OBJECT_INCREMENT); index++) {
+            Finding f =  snpAssociationFindings.remove(0);
+            toBeSent.add(f);
+        }
+
+
+        /* 2. Add results to toBePopulated after making sure it is empty */
+         do {
+            synchronized(toBePopulated) {
+                   if (toBePopulated.size() == 0)  {
+                       toBePopulated.add(toBeSent);
+                       break;
+                   }
+            }
+            try {
+                 Thread.currentThread().sleep(10);
+            } catch (InterruptedException e) {
+                   e.printStackTrace(); // no big deal
+            }
+         } while (true);
+    }
+    protected void process(List toBePopulated, Set toBeSent) {
+
+        /*  Add results to toBePopulated after making sure it is empty */
+        while (true) {
+            synchronized(toBePopulated) {
+               if (toBePopulated.size() == 0)  {
+                  toBePopulated.add(toBeSent);
+                  break;
+               }
+            }
+            try {
+                 Thread.currentThread().sleep(10);
+            } catch (InterruptedException e) {
+                   e.printStackTrace(); // no big deal
+            }
+         }
+         return;
+    }
 
 
      public static List<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
@@ -111,8 +129,6 @@ abstract public class FindingsHandler {
          session.close();
          return snpAnnotationObjs;
      }
-
-    protected static int IN_PARAMETERS  = 100;
 
     protected static void appendAnnotationCriteriaHQL(Collection<String> snpAnnotationIDs, StringBuffer snpAnnotJoin,
                                                    StringBuffer snpAnnotCond, HashMap params) {

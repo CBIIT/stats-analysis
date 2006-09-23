@@ -23,6 +23,14 @@ import org.hibernate.criterion.Restrictions;
  * Time:   3:08:00 PM
  */
 public class GenotypeFindingsHandler extends FindingsHandler {
+    protected List<? extends Finding> getConcreteTypedFindingList() {
+        return new ArrayList<GenotypeFinding>();
+    }
+
+    protected Set<? extends Finding> getConcreteTypedFindingSet() {
+        return new HashSet<GenotypeFinding>();
+    }
+
     /*protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
                                                           final Session session) {
         List<GenotypeFinding>  genotypeFindings = Collections.synchronizedList(

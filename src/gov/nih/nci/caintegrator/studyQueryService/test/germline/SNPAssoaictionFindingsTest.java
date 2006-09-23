@@ -33,13 +33,13 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
        setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
         //setUpPanelCrit();
-        //setUpGeneBiomarkerCrit();
+        setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
 
         //setSNPFindingCriteria();
-        //executeSNPAssoaictionFindingsSearch(500, 1000);
+        executeSearch(0, 501);
     }
 
 
@@ -48,7 +48,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
             try {
                 Long t1 = System.currentTimeMillis();
                 Collection<? extends Finding> findings = FindingsManager.getFindings(safDTO, startIndex, endIndex);
-                /*System.out.println("RESULTS COUNT: " + findings.size());
+                System.out.println("RESULTS COUNT: " + findings.size());
                 for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                     SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
 
@@ -68,7 +68,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
                     }
                  }
                  Long t2 = System.currentTimeMillis();
-                System.out.println("Time Taken: " + (t2 - t1) + " ms" );*/
+                System.out.println("Time Taken: " + (t2 - t1) + " ms" );
                 return findings;
             } catch (Throwable t)  {
                 System.out.println("CGEMS Exception: ");
@@ -86,7 +86,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
     private void setSNPFindingCriteria() {
         //safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
-        safDTO.setRank(new Integer(800), ArithematicOperator.LT);
+        safDTO.setRank(new Integer(400), ArithematicOperator.LT);
     }
 
     private void setSNPAssociationAnalysisCriteria() {
@@ -110,6 +110,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
     public void testPopulateFindings() {
         setUpSNPPhysicalPositionCrit();
+        //setUpGeneBiomarkerCrit();
         setSNPFindingCriteria();
         try {
              HashSet actualBatchFindings = new HashSet();
