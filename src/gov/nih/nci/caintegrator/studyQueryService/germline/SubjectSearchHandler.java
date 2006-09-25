@@ -26,7 +26,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
         return new ArrayList<StudyParticipant>();
     }
 
-    public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
+    public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
                                                             int fromIndex, int toIndex) {
        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
        session.beginTransaction();
@@ -54,14 +54,11 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
        else  if (specimenIDs != null && specimenIDs.size() > 0) {
              ArrayList<String> arrayIDs = new ArrayList<String>(specimenIDs);
              for (int i = 0; i < arrayIDs.size();) {
-                //StringBuffer hql = new StringBuffer("").append(targetHQL);
                  List<String> values = new ArrayList<String>();
                  int begIndex = i;
                  i += BatchFindingsHandler.IN_PARAMETERS ;
                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
-
-                 System.out.println("Specimen IDS: " + values);
                  crit = session.createCriteria(StudyParticipant.class).
                                    createAlias("specimenCollection", "specimens").
                                    setFetchMode("population", FetchMode.EAGER).
@@ -88,7 +85,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
         return subjects;
     }
 
-    protected void sendMyFindings(StudyParticipantCriteria spCrit, List toBePopulated) {
+    public void populateFindings(StudyParticipantCriteria spCrit, List toBePopulated) {
        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
        session.beginTransaction();
        List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
@@ -123,30 +120,28 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
             i += BatchFindingsHandler.IN_PARAMETERS ;
             int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
             values.addAll(arrayIDs.subList(begIndex,  lastIndex));
-            System.out.println("Specimen IDS: " + values);
-
             Criteria crit  = session.createCriteria(StudyParticipant.class).
                               createAlias("specimenCollection", "specimens").
                               setFetchMode("population", FetchMode.EAGER).
                               add(Restrictions.in("specimens.specimenIdentifier", values));
 
-            Collection<StudyParticipant> currentFindings = executeBatchSearch(crit, -1, -1);
+            Collection<StudyParticipant> currentFindings = executeBatchSearch(
+                                                                    crit, -1, -1);
 
             /* convert these  currentFindings in to a List for convenience */
             subjects.addAll(currentFindings );
 
             while (subjects.size() >= BatchFindingsHandler.BATCH_OBJECT_INCREMENT )
                  populateCurrentResultSet(subjects, toBePopulated);
+         }
+         /* Now write remaining findings i.e. less than 500 in one call */
+         if (subjects != null)
+             populateCurrentResultSet(subjects, toBePopulated);
 
-            /* Now write remaining findings i.e. less than 500 in one call */
-            if (subjects != null)
-               populateCurrentResultSet(subjects, toBePopulated);
-
-             /* Finally after all the results were written, write an empty Object (HashSet of size=0
+          /* Finally after all the results were written, write an empty Object (HashSet of size=0
              to indicate the caller that all results were written */
-             populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated);
+          populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated);
 
-          }
           return;
     }
 

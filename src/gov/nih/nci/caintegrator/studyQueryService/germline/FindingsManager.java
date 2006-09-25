@@ -37,14 +37,17 @@ public class FindingsManager {
         findingCritDTO.getHandler().populateFindings(findingCritDTO, toBePopulated);
     }
 
-  /*  public static Collection<? extends Finding> getFindingsForFTP(FindingCriteriaDTO findingCritDTO)
-    throws Exception {
-        return findingCritDTO.getHandler().getFindingsForFTP(findingCritDTO);
-    }*/
-
-    public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit, int fromIndex, int toIndex)  {
-        return SubjectSearchHandler.getStudySubjects(spCrit, fromIndex, toIndex);
+    public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
+                                                      int fromIndex, int toIndex)  {
+        SubjectSearchHandler handler = new SubjectSearchHandler();
+        return handler.getStudySubjects(spCrit, fromIndex, toIndex);
     }
+
+    public static void populateStudySubjects(StudyParticipantCriteria spCrit,List toBePopulated ) {
+       SubjectSearchHandler handler = new SubjectSearchHandler();
+       handler.populateFindings(spCrit, toBePopulated);
+    }
+
 
     public static Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
     throws Exception {
