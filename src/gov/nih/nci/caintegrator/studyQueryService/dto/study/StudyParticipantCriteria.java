@@ -158,4 +158,12 @@ public class StudyParticipantCriteria {
     public void setAnalysisGroupCriteria(AnalysisGroupCriteria analysisGroupCriteria) {
         this.analysisGroupCriteria = analysisGroupCriteria;
     }
+
+	@Override
+	public String toString()
+	{
+		String str = "Subject study search\n";
+		
+		return str;
+	}
 }
