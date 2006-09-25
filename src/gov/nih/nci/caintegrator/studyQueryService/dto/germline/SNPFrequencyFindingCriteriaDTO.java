@@ -182,10 +182,18 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
  		
  		if (studyName != null)
  			str = str + "Study name " + studyName + "\n";
+ 		if ((populationNames != null) && (populationNames.length > 0))
+ 		{
+ 			str = str + "Populations:\n";
+ 			for(int i=0; i < populationNames.length; i++)
+ 				str = str + populationNames[i] + "\n";
+ 		}
  		if (hardyWeinbergPValue != null)
- 			str = str + "hardyWeinbergPValue " + hardyWeinbergPValue + "\n";
+ 			str = str + "Hardy Weinberg pValue " + hardyWeinbergPValueOperator + " " + hardyWeinbergPValue + "\n";
+ 		if (minorAlleleFrequency != null)
+ 			str = str + "Minor Allele Frequency " + minorAlleleOperator + " " + minorAlleleFrequency + "\n";
  		if (completionRate != null)
- 			str = str + "completionRate " + completionRate + "\n";
+ 			str = str + "Completion Rate " + completeRateOperator + " " + completionRate + "\n";
  		
  		str = str + super.toString();
  		

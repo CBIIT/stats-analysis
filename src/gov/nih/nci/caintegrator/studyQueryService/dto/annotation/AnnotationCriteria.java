@@ -102,14 +102,26 @@ public class AnnotationCriteria {
 	@Override
 	public String toString()
 	{
-		String str = "Annotation\n";
+		String str = "SNP Annotation Criteria\n";
+		
+		if (physicalPositionCriteria != null)
+			str = str + physicalPositionCriteria.toString();
 		
 		if ((geneSymbols != null) && (geneSymbols.size() > 0))
 		{
-			str = str + "HUGO Gene Symbols\n";
+			str = str + "HUGO Gene Symbols:\n";
 			for (String gene : geneSymbols)
 			{
 				str = str + gene + "\n";
+			}
+		}
+		
+		if ((snpIdentifiers != null) && (snpIdentifiers.size() > 0))
+		{
+			str = str + "SNP Identifiers:\n";
+			for (String snp : snpIdentifiers)
+			{
+				str = str + snp + "\n";
 			}
 		}
 		

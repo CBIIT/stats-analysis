@@ -39,4 +39,21 @@ public class PopulationCriteria {
     public void setNames(Collection<String> names) {
         this.names = names;
     }
+
+	@Override
+	public String toString()
+	{
+		String str = "Population Criteria\n";
+		
+		if ((names != null) && (names.size() > 0))
+		{
+			str = str + "Populations:\n";
+			for (String name : names)
+			{
+				str = str + name + "\n";
+			}
+		}
+		
+		return str;
+	}
 }

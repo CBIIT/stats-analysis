@@ -22,7 +22,7 @@ public class AnalysisGroupCriteria {
 	@Override
 	public String toString()
 	{
-		String str = "AnalysisGroup\n";
+		String str = "Analysis Groups\n";
 		
 		if ((names != null) && (names.length > 0))
 		{

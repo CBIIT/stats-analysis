@@ -39,5 +39,16 @@ public class StudyCriteria {
     public void setSponsorStudyIdentifier(String sponsorStudyIdentifier) {
         this.sponsorStudyIdentifier = sponsorStudyIdentifier;
     }
+    
+    @Override
+	public String toString()
+    {
+		String str = "Study Criteria\n";
+		
+		if (name != null)
+			str = str + "Study Name: " + name + "\n";
+		
+		return str;
+	}
 
 }

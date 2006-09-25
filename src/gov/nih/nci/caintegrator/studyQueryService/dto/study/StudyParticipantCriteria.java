@@ -162,7 +162,36 @@ public class StudyParticipantCriteria {
 	@Override
 	public String toString()
 	{
-		String str = "Subject study search\n";
+		String str = "Subject search\n";
+		
+		if (studyCriteria != null)
+			str = str + studyCriteria.toString();
+		if (populationCriteria != null)
+			str = str + populationCriteria.toString();
+		if (analysisGroupCriteria != null)
+			str = str + analysisGroupCriteria.toString();
+		if (lowerAgeLimit != null)
+			str = str + "Lower Age Limit: " + lowerAgeLimit + "\n";
+		if (upperAgeLimit != null)
+			str = str + "Upper Age Limit: " + upperAgeLimit + "\n";
+		if (caseControlStatus != null)
+			str = str + "Case Control Status: " + caseControlStatus + "\n";
+		if ((administrativeGenderCodeCollection != null) && (administrativeGenderCodeCollection.size() > 0))
+		{
+			str = str + "Gender:\n";
+			for (String gender : administrativeGenderCodeCollection)
+			{
+				str = str + gender + "\n";
+			}
+		}
+		if ((familyHistoryCollection != null) && (familyHistoryCollection.size() > 0))
+		{
+			str = str + "Family History:\n";
+			for (String history : familyHistoryCollection)
+			{
+				str = str + history + "\n";
+			}
+		}
 		
 		return str;
 	}

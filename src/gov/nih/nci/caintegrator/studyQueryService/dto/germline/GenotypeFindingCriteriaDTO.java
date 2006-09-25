@@ -72,4 +72,21 @@ public class GenotypeFindingCriteriaDTO extends FindingCriteriaDTO {
         return new GenotypeFindingsHandler();
     }
 
+	@Override
+	public String toString()
+	{
+		String str = "Genotype Findings search\n";
+		
+		if (qualityScore != null)
+			str = str + "Quality Score: " + qualityScore + "\n";
+		if (qcStatus != null)
+			str = str + "QC Status: " + qcStatus + "\n";
+		if (StudyParticipantCriteria != null)
+			str = str + StudyParticipantCriteria.toString();
+		
+		str = str + super.toString();
+		
+		return str;
+	}
+
 }

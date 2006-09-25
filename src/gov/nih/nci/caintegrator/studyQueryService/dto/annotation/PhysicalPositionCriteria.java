@@ -38,4 +38,19 @@ public class PhysicalPositionCriteria {
         this.startPosition = startPosition;
     }
 
+	@Override
+	public String toString()
+	{
+		String str = "Physical Position Criteria\n";
+		
+		if (chromosome != null)
+			str = str + "Chromosome: " + chromosome + "\n";
+		if (startPosition != null)
+			str = str + "start: " + startPosition + " (bp)\n";
+		if (endPosition != null)
+			str = str + "end: " + endPosition + " (bp)\n";
+		
+		return str;
+	}
+
 }
