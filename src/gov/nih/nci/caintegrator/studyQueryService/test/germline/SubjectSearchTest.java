@@ -23,10 +23,10 @@ public class SubjectSearchTest extends CGEMSTest {
     }
     public void testSubjectSearch() {
         //setUpStudyParticipantAttributesCriteria();
-        setUpPopulationCriteria();
+        //setUpPopulationCriteria();
         //setUpAnalysisGroupCriteria();
-        //Collection findingsFound = executeSearch(1000, 1500);
-        testAll();
+        executeSearch(0,501);
+        //testAll();
         //System.out.println("Findings Found: " + findingsFound);
 
         /*Collection<String> caseStatus = FindingsManager.getGenotypeFindingQCStatus();
@@ -43,7 +43,7 @@ public class SubjectSearchTest extends CGEMSTest {
 
 */
 
-        ArrayList l = (ArrayList) Collections.synchronizedList(new ArrayList());
+
 
     }
 
@@ -52,7 +52,7 @@ public class SubjectSearchTest extends CGEMSTest {
         try {
             Collection<StudyParticipant> subjects = FindingsManager.getStudySubjects(spCrit, start, end );
             System.out.println("Number of Subjects Retrieved: " + subjects.size());
-            /*for (Iterator<StudyParticipant> iterator = subjects.iterator(); iterator.hasNext();) {
+            for (Iterator<StudyParticipant> iterator = subjects.iterator(); iterator.hasNext();) {
                 StudyParticipant subject =  iterator.next();
                 System.out.println("STUDY PARTICIPANT DE_IDENTIFIER ID: " +
                                     subject.getStudySubjectIdentifier());
@@ -63,7 +63,7 @@ public class SubjectSearchTest extends CGEMSTest {
                 System.out.println("Population Name: "+ subject.getPopulation().getName());
                 if (subject.getAgeAtEnrollment() != null)
                     System.out.println("Enroll Age:" + subject.getAgeAtEnrollment().getAbsoluteValue());
-            }*/
+            }
             return subjects;
         } catch (Throwable t)  {
            System.out.println("CGEMS Exception in getting Study Subjects: " + t.toString());
@@ -71,6 +71,10 @@ public class SubjectSearchTest extends CGEMSTest {
        }
         return null;
     }
+
+
+
+    
 
     public static Test suite() {
         TestSuite suit =  new TestSuite();

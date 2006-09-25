@@ -33,12 +33,12 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
        setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
         //setUpPanelCrit();
-        setUpGeneBiomarkerCrit();
+        //setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
 
-        //setSNPFindingCriteria();
+        setSNPFindingCriteria();
         executeSearch(0, 501);
     }
 
@@ -86,7 +86,8 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
     private void setSNPFindingCriteria() {
         //safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
-        safDTO.setRank(new Integer(400), ArithematicOperator.LT);
+        safDTO.setRank(new Integer(200), ArithematicOperator.LE);
+
     }
 
     private void setSNPAssociationAnalysisCriteria() {

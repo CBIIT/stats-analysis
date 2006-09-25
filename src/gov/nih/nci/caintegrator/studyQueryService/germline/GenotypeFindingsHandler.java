@@ -27,29 +27,10 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         return new ArrayList<GenotypeFinding>();
     }
 
-    protected Set<? extends Finding> getConcreteTypedFindingSet() {
+    protected Set getConcreteTypedFindingSet() {
         return new HashSet<GenotypeFinding>();
     }
 
-    /*protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
-                                                          final Session session) {
-        List<GenotypeFinding>  genotypeFindings = Collections.synchronizedList(
-                                                   new ArrayList<GenotypeFinding>());
-        int fromIndex = 0;
-        int toIndex = fromIndex + BATCH_OBJECT_INCREMENT;
-        Collection batchFindings = new ArrayList<GenotypeFinding>();
-        do {
-            batchFindings =
-                    getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
-            genotypeFindings.addAll(batchFindings);
-            fromIndex =  toIndex;
-            toIndex = fromIndex + BATCH_OBJECT_INCREMENT;;
-            System.out.println("Start Index:"+ fromIndex + " End Index:" + toIndex +
-                    " Findings Retrieved: " + genotypeFindings.size());
-        }  while(batchFindings.size() > BATCH_OBJECT_INCREMENT);
-
-        return genotypeFindings;
-    }*/
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
                                                           final Session session, final int startIndex, final int endIndex) {
 
@@ -69,17 +50,18 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                   StringBuffer hql = new StringBuffer("").append(targetHQL);
                   Collection values = new ArrayList();
                   int begIndex = i;
-                  i += IN_PARAMETERS ;
+                  i += BatchFindingsHandler.IN_PARAMETERS ;
                   int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                   values.addAll(arrayIDs.subList(begIndex,  lastIndex));
-                  Collection<GenotypeFinding> batchFindings = executeTargetFindingQuery(
+                  Collection<GenotypeFinding> batchFindings =
+                          executeAnnotationQueryForFindingSets(
                           critDTO, values, session, hql, startIndex, endIndex);
                   genotypeFindings.addAll(batchFindings);
                   if (genotypeFindings.size() >= (endIndex - startIndex + 1))
                       return genotypeFindings.subList(0, (endIndex - startIndex));
               }
           }  else { /* means no AnnotationCriteria was specified in the FindingCriteriaDTO  */
-             Collection<GenotypeFinding> findings = executeTargetFindingQuery(
+             Collection<GenotypeFinding> findings = executeAnnotationQueryForFindingSets(
                     critDTO, null, session, targetHQL, startIndex, endIndex);
               genotypeFindings.addAll(findings);
         }
@@ -87,7 +69,13 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         return genotypeFindings;
     }
 
-    protected Collection<GenotypeFinding> executeTargetFindingQuery(FindingCriteriaDTO critDTO, Collection<String> snpAnnotationIDs, Session session, StringBuffer targetHQL, int start, int end) {
+    protected Collection<? extends Finding> executeQueryForFindingSets(FindingCriteriaDTO findingCritDTO, Session session, StringBuffer targetHQL, int start, int end) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    protected Collection<GenotypeFinding> executeAnnotationQueryForFindingSets(
+            FindingCriteriaDTO critDTO, Collection<String> snpAnnotationIDs,
+            Session session, StringBuffer targetHQL, int start, int end) {
         GenotypeFindingCriteriaDTO findingCritDTO = (GenotypeFindingCriteriaDTO) critDTO;
         HashMap params = new HashMap();
 
@@ -121,11 +109,12 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                      StringBuffer hql = new StringBuffer("").append(targetHQL);
                      Collection values = new ArrayList();
                      int begIndex = i;
-                     i += IN_PARAMETERS ;
+                     i += BatchFindingsHandler.IN_PARAMETERS ;
                      int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                      values.addAll(arrayIDs.subList(begIndex,  lastIndex));
                      params.put("specimenIDs", values );
-                     Collection<GenotypeFinding> findings = executeSplittedFindingQuery(session, hql, params, snpAnnotJoin, snpAnnotCond, start, end);
+                     Collection<GenotypeFinding> findings = executeSplittedFindingQuery(
+                             session, hql, params, snpAnnotJoin, snpAnnotCond, 0, end);
                      genotypeFindings.addAll(findings);
                      if (genotypeFindings.size() >= (end - start + 1) )
                       return genotypeFindings.subList(0, (end - start ));
@@ -157,7 +146,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
          String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "WHERE");
          Query q = session.createQuery(finalHQL);
          HQLHelper.setParamsOnQuery(params, q);
-         q.setFirstResult(0);
+         q.setFirstResult(start);
          q.setMaxResults(end - start);
          List<GenotypeFinding> findings = q.list();
          return findings;
@@ -196,7 +185,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
               for (int i = 0; i < arrayIDs.size();) {
                   Collection values = new ArrayList();
                   int begIndex = i;
-                  i += IN_PARAMETERS ;
+                  i += BatchFindingsHandler.IN_PARAMETERS ;
                   int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                   values.addAll(arrayIDs.subList(begIndex,  lastIndex));
                   Criteria crit = session.createCriteria(SNPAnnotation.class).add(Restrictions.in("id", values));
@@ -215,7 +204,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
             for (int i = 0; i < arrayIDs.size();) {
                 Collection values = new ArrayList();
                 int begIndex = i;
-                i += IN_PARAMETERS ;
+                i += BatchFindingsHandler.IN_PARAMETERS ;
                 int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                 values.addAll(arrayIDs.subList(begIndex,  lastIndex));
                 Criteria specimenCrit = session.createCriteria(Specimen.class).setFetchMode("studyParticipant", FetchMode.EAGER)

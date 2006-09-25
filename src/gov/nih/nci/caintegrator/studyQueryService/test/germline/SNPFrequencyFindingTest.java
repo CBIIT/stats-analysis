@@ -45,28 +45,28 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
 
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-       setUpSNPPhysicalPositionCrit();
+       //setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
        // setUpPanelCrit();
 
-        //setUpGeneBiomarkerCrit();
+        setUpGeneBiomarkerCrit();
 
         //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
-        freqDTO.setPopulationNames(new String[] {"CONTROL"});
+        //freqDTO.setPopulationNames(new String[] {"CONTROL"});
 
         // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
         //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
-        executeSearch(0, 1500);
+        executeSearch(0, 501);
    }
 
     public void testPopulateFindings() {
         //setUpSNPPhysicalPositionCrit();
-        freqDTO.setPopulationNames(new String[] {"CONTROL"});
-        freqDTO.setHardyWeinbergPValue(new Float(1.0), ArithematicOperator.GE);
+        freqDTO.setPopulationNames(new String[] {"CEPH"});
+        freqDTO.setHardyWeinbergPValue(new Float(0.0011), ArithematicOperator.LE);
         //setUpGeneBiomarkerCrit();
         //setSNPFindingCriteria();
         try {
-             HashSet actualBatchFindings = new HashSet();
+             HashSet<SNPFrequencyFinding> actualBatchFindings = null;
              final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
              new Thread(new Runnable() {
                  public void run() {
@@ -86,12 +86,11 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
             do {
                 synchronized(findingsToBePopulated) {
                     if (findingsToBePopulated.size() > 0) {
-                         actualBatchFindings  = (HashSet) findingsToBePopulated.remove(0);
-                         for (Iterator iterator = actualBatchFindings.iterator(); iterator.hasNext();) {
-                             SNPFrequencyFinding sf =  (SNPFrequencyFinding) iterator.next();
+                         actualBatchFindings  = (HashSet<SNPFrequencyFinding>)findingsToBePopulated.remove(0);
+                         for (Iterator<SNPFrequencyFinding> iterator = actualBatchFindings.iterator(); iterator.hasNext();) {
+                             SNPFrequencyFinding sf = iterator.next();
                              System.out.print("ID: " + sf.getId());
                              System.out.print("  HardyWeinbergPValue" + sf.getHardyWeinbergPValue()) ;
-
                          }
                          noOfResults += actualBatchFindings.size();
                          System.out.println("WRITTEN BATCH: " + count++ + " SIZE: " +

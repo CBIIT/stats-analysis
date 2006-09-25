@@ -1,8 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
 import junit.framework.TestCase;
-import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
-import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
+import gov.nih.nci.caintegrator.studyQueryService.germline.BatchFindingsHandler;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
@@ -14,7 +13,6 @@ import gov.nih.nci.caintegrator.domain.study.bean.DNASpecimen;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Collections;
 
 /**
  * Author: Ram Bhattaru
@@ -213,7 +211,7 @@ public abstract class CGEMSTest extends TestCase {
         Collection allFindings = new HashSet();
         int findingsFound = 0;
         int start = 0;
-        int end = FindingsHandler.BATCH_OBJECT_INCREMENT + 1;
+        int end = BatchFindingsHandler.BATCH_OBJECT_INCREMENT + 1;
         Collection findings = null;
         do {
             findings = executeSearch(start, end);
@@ -229,9 +227,9 @@ public abstract class CGEMSTest extends TestCase {
             System.out.println("\n\n ***** Findings Found For Start:" + start + " And End:" + end
                                     + "  = " + findings.size() + " ***** \n\n");
             //TOTAL_FINDINGS += findingsFound;
-            start += FindingsHandler.BATCH_OBJECT_INCREMENT;
-            end += FindingsHandler.BATCH_OBJECT_INCREMENT;;
-        } while(findings.size() > (FindingsHandler.BATCH_OBJECT_INCREMENT ));
+            start += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;
+            end += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;;
+        } while(findings.size() > (BatchFindingsHandler.BATCH_OBJECT_INCREMENT ));
         System.out.println("TOTAL UNIQUE FINDINGS FOUND: " + allFindings.size());
     }
     protected void printSNPAnnotation(SNPAnnotation annot) {
