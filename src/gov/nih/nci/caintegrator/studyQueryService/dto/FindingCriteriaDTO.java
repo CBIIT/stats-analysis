@@ -33,4 +33,15 @@ public abstract class FindingCriteriaDTO {
 		this.index = index;
 	}
 
+	@Override
+	public String toString()
+	{
+		String str = new String();
+		
+		if (AnnotationCriteria != null)
+			str = str + AnnotationCriteria.toString();
+		
+		return str;
+	}
+
 }

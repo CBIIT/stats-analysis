@@ -18,4 +18,20 @@ public class AnalysisGroupCriteria {
     public void setNames(String[] names) {
         this.names = names;
     }
+
+	@Override
+	public String toString()
+	{
+		String str = "AnalysisGroup\n";
+		
+		if ((names != null) && (names.length > 0))
+		{
+			for (String name : names)
+			{
+				str = str + name + "\n";
+			}
+		}
+			
+		return str;
+	}
 }

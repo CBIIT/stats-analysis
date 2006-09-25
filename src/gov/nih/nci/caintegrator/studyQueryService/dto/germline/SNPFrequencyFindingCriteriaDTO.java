@@ -174,4 +174,21 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
      public FindingsHandler getHandler() {
         return new SNPFrequencyFindingHandler();
      }
+     
+     @Override
+ 	public String toString()
+ 	{	
+ 		String str = "SNP Population Frequency search\n";
+ 		
+ 		if (studyName != null)
+ 			str = str + "Study name " + studyName + "\n";
+ 		if (hardyWeinbergPValue != null)
+ 			str = str + "hardyWeinbergPValue " + hardyWeinbergPValue + "\n";
+ 		if (completionRate != null)
+ 			str = str + "completionRate " + completionRate + "\n";
+ 		
+ 		str = str + super.toString();
+ 		
+ 		return str;
+ 	}
 }

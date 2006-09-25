@@ -99,5 +99,22 @@ public class AnnotationCriteria {
         this.snpIdentifiers = snpIdentifiers;
     }
 
+	@Override
+	public String toString()
+	{
+		String str = "Annotation\n";
+		
+		if ((geneSymbols != null) && (geneSymbols.size() > 0))
+		{
+			str = str + "HUGO Gene Symbols\n";
+			for (String gene : geneSymbols)
+			{
+				str = str + gene + "\n";
+			}
+		}
+		
+		return str;
+	}
+
 
 }

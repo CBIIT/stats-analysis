@@ -73,4 +73,21 @@ public class SNPAssociationFindingCriteriaDTO extends FindingCriteriaDTO {
         return new SNPAssociationFindingsHandler();
     }
 
+	@Override
+	public String toString()
+	{	
+		String str = "SNP Associations search\n";
+		
+		if (pValue != null)
+			str = str + "pValue <= " + pValue + "\n";
+		if (rank != null)
+			str = str + "rank <= " + rank + "\n";
+		if (analysisGroupCriteria != null)
+			str = str + analysisGroupCriteria.toString();
+		
+		str = str + super.toString();
+		
+		return str;
+	}
+
 }
