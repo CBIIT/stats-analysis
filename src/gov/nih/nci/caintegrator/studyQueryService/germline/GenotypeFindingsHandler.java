@@ -5,10 +5,12 @@ import gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeF
 import gov.nih.nci.caintegrator.domain.study.bean.Specimen;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
+import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.GenotypeFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 import gov.nih.nci.caintegrator.util.HQLHelper;
+import gov.nih.nci.caintegrator.util.HibernateUtil;
 
 import java.util.*;
 import java.text.MessageFormat;
@@ -149,7 +151,10 @@ public class GenotypeFindingsHandler extends FindingsHandler {
          q.setFirstResult(start);
          q.setMaxResults(end - start);
          List<GenotypeFinding> findings = q.list();
-         return findings;
+         HashSet<GenotypeFinding> results = new HashSet<GenotypeFinding>();
+         results.addAll(findings);
+         session.clear();
+         return results;
     }
 
     private void addGenoTypeAttributeCriteria(GenotypeFindingCriteriaDTO crit, StringBuffer hql, HashMap params) {
@@ -215,6 +220,95 @@ public class GenotypeFindingsHandler extends FindingsHandler {
     }
 
     protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs, Session session, List toBePopulated) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        /*  DO nothing here as populateFindings method iself is overridden here to handle
+            annotations along with main query */
     }
+
+    protected HashSet<GenotypeFinding> executeBatchSearch(FindingCriteriaDTO critDTO, Session session, int start, int end)
+    throws Exception {
+        GenotypeFindingCriteriaDTO findingCritDTO = (GenotypeFindingCriteriaDTO) critDTO;
+
+        HashMap params = new HashMap();
+
+        /* 1. get HQL to include Annotation Criteria in the final query */
+        AnnotationCriteria annotCrit = critDTO.getAnnotationCriteria();
+        StringBuffer annotHQL = new StringBuffer();
+        if (annotCrit != null) {
+            annotHQL = SNPAnnotationCriteriaHandler.getAnnotHQLWithParams(annotCrit, params);
+            if (annotHQL.indexOf(" WHERE ") == -1) {
+            /* means no WHERE clause at all which means selecting entire table.  So return no anotations
+             so that the annotaiton clause does not need to be included in final Finding HQL */
+            annotHQL = new StringBuffer("");
+           }
+        }
+
+        /* 2. get HQL to include StudyParticipantCriteria in the final query */
+        StringBuffer specimenHQL = new StringBuffer();
+        StudyParticipantCriteria spCrit = findingCritDTO.getStudyParticipantCriteria();
+        if (spCrit != null) {
+            specimenHQL = StudyParticipantCriteriaHandler.getSpecimenHQLWithParams(
+                    spCrit, session, params);
+            if (specimenHQL == null) // exclude specimen criteria from final query
+                specimenHQL = new StringBuffer();
+        }
+
+        StringBuffer targetHQL = new StringBuffer(
+                " FROM GenotypeFinding " + TARGET_FINDING_ALIAS + " WHERE {1} ") ;
+
+        /* 3. Handle GenoType Attributes Criteria itself  and populate targetHQL/params */
+        StringBuffer selfHQL = new StringBuffer("");
+        addGenoTypeAttributeCriteria(findingCritDTO, selfHQL, params);
+        targetHQL.append(selfHQL);
+
+
+        if (annotHQL.length() > 0) {
+            targetHQL.append(" " + TARGET_FINDING_ALIAS +
+                    ".snpAnnotation.id IN (SELECT s.id " + annotHQL.toString() + " )" );
+            targetHQL.append(annotHQL);
+            targetHQL.append( " AND ");
+        }
+
+        if (specimenHQL.length() > 0) {
+            targetHQL.append(" " + TARGET_FINDING_ALIAS +
+                    ".specimen.id IN ( " + specimenHQL.toString() + " )" );
+            targetHQL.append(annotHQL);
+            //targetHQL.append( " AND ");
+        }
+
+        Query q = session.createQuery(targetHQL.toString());
+        q.setFirstResult(start);
+        q.setMaxResults(end - start);
+        HQLHelper.setParamsOnQuery(params, q);
+        List<GenotypeFinding> genotypeObjs =  q.list();
+
+        HashSet<GenotypeFinding> findingsSet = new HashSet<GenotypeFinding>();
+        findingsSet.addAll(genotypeObjs);
+        session.clear();
+        return findingsSet;
+    }
+     public void populateFindings(FindingCriteriaDTO critDTO, List toBePopulated)
+     throws Exception {
+         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+         session.beginTransaction();
+
+         Collection findings = null;
+         int start = 0;
+         int end = BatchFindingsHandler.BATCH_OBJECT_INCREMENT ;
+         do {
+             findings =  executeBatchSearch(critDTO, session, start, end);
+             Set toBeSent = new HashSet<GenotypeFinding>();
+             toBeSent.addAll(findings);
+             process(toBePopulated,  toBeSent);
+             start += BatchFindingsHandler.BATCH_OBJECT_INCREMENT ;
+             end += BatchFindingsHandler.BATCH_OBJECT_INCREMENT ;
+         }  while(findings.size() >= BatchFindingsHandler.BATCH_OBJECT_INCREMENT  );
+
+         /* send empty data object to let the client know that no more results are present */
+         process(toBePopulated, new HashSet<GenotypeFinding>());
+         if (session.isOpen())
+            session.close();
+
+       }
+
 }
+

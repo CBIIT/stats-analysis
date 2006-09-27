@@ -40,7 +40,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         //names.add("CASE_ADVANCED");
         names.add("CASE_EARLY");
         PopulationCriteria popCrit = new PopulationCriteria(names);
-        spCrit.setPopulationCriteria(popCrit);
+        spCrit.setPopulationCriteria(popCrit);     
      }
 
     public void testSNPFrequencyFindingCriteriaDTO() {
@@ -102,7 +102,11 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
                      }
                  }
                  Thread.currentThread().sleep(10);
-
+                for (Iterator iterator = findingsToBePopulated.iterator(); iterator.hasNext();) {
+                    Object toBeGCed = iterator.next();
+                    toBeGCed = null;
+                }
+                actualBatchFindings = null;
              }  while(true);
 
             System.out.println("ALL RESULTS WERE RECEIVED TOTAL: " + noOfResults);

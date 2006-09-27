@@ -103,6 +103,12 @@ public class SubjectSearchTest extends CGEMSTest {
                         }
                     }
                     Thread.currentThread().sleep(10);
+                    for (Iterator iterator = findingsToBePopulated.iterator(); iterator.hasNext();) {
+                        Object toBeGCed = iterator.next();
+                        toBeGCed = null;
+                    }
+
+                    actualBatchFindings = null;
              }  while(true);
 
             System.out.println("ALL RESULTS WERE RECEIVED TOTAL: " + noOfResults);

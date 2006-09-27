@@ -110,9 +110,9 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
      }
 
     public void testPopulateFindings() {
-        setUpSNPPhysicalPositionCrit();
+        //setUpSNPPhysicalPositionCrit();
         //setUpGeneBiomarkerCrit();
-        setSNPFindingCriteria();
+        //setSNPFindingCriteria();
         try {
              HashSet actualBatchFindings = new HashSet();
              final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
@@ -131,14 +131,25 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
             boolean sleep = true;
             int count = 1;
             int noOfResults = 0;
+            boolean run = true;
+
             do {
+
                 synchronized(findingsToBePopulated) {
+
                     if (findingsToBePopulated.size() > 0) {
+                        run = true;
                          actualBatchFindings  = (HashSet) findingsToBePopulated.remove(0);
                          for (Iterator iterator = actualBatchFindings.iterator(); iterator.hasNext();) {
-                            SNPAssociationFinding sf =  (SNPAssociationFinding) iterator.next();
-                            System.out.print("ID: " + sf.getId());
-                            System.out.print("  pValue" + sf.getPvalue() + "\n\n");
+                            SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
+                                    System.out.println("ID: " + finding.getId());
+                                    System.out.println("pValue" + finding.getPvalue());
+                                    System.out.println("Rank" + finding.getRank());
+                                    System.out.println("DBSNP ID: " + finding.getSnpAnnotation().getDbsnpId());
+                                    System.out.println("Analysis Name: " + finding.getSnpAssociationAnalysis().getName());
+                                    System.out.println("Physical Position: " + finding.getSnpAnnotation().getChromosomeLocation());
+                                    System.out.println("Chromosome: " + finding.getSnpAnnotation().getChromosomeName());
+                                    System.out.print("Associated Genes: "  );
                          }
                          noOfResults += actualBatchFindings.size();
                          System.out.println("WRITTEN BATCH: " + count++ + " SIZE: " +
@@ -149,7 +160,13 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
                          }
                      }
                  }
-                 Thread.currentThread().sleep(10);
+                Thread.currentThread().sleep(10);
+                for (Iterator iterator = findingsToBePopulated.iterator(); iterator.hasNext();) {
+                   Object toBeGCed = iterator.next();
+                   toBeGCed = null;
+                }
+
+                actualBatchFindings = null;
 
              }  while(true);
 

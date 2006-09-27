@@ -64,18 +64,32 @@ public class SNPAnnotationCriteriaHandler {
     public static List<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit,  Session session)
     throws Exception {
 
-        List<SNPAnnotation> annotObjs = new ArrayList<SNPAnnotation>();
         if (annotCrit == null) throw new Exception ("Annotation criteria can not be null");
 
+        HashMap params = new HashMap();
+        StringBuffer finalHQL = getAnnotHQLWithParams(annotCrit, params);
+
+        if (finalHQL.indexOf(" WHERE ") == -1) {
+            /* means no WHERE clause at all which means selecting entire table.  So return no anotations
+             so that the annotaiton clause does not need to be included in final Finding HQL */
+            /* TODO: this way of returning "null" in general is a bad parctice.  This is done as
+               temporary fix.  It will be re-factored later --  Ram 08/23/06
+            */
+            return null;
+        }
+
+        Query q = session.createQuery(finalHQL.toString());
+        HQLHelper.setParamsOnQuery(params, q);
+        List<SNPAnnotation> annotObjs =  q.list();
+        return annotObjs;
+    }
+
+    public static StringBuffer getAnnotHQLWithParams(AnnotationCriteria annotCrit, HashMap params) throws Exception {
         PhysicalPositionCriteria poistionCrit = annotCrit.getPhysicalPositionCriteria();
         Collection<String> dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
         Collection<String> geneSymbols = annotCrit.getGeneSymbols();
 
-        HashMap params = new HashMap();  // used to hold HQL parameters
-
         PanelCriteria panelCrit = annotCrit.getPanelCriteria();
-        /* at least one other annotation should be specified when panelCriteria
-           is specified in the AnnotationCriteria.  Otherwise throw an exception */
         if ((panelCrit != null) && (poistionCrit == null && dbSNPIdentifiers == null) )
           throw new Exception("At least one other annotation should be specified with panelCriteria ");
 
@@ -117,9 +131,9 @@ public class SNPAnnotationCriteriaHandler {
         String finalHQL = new String("");
         if (panelBasedSNPAnnotCrit.length() > 0 ) {
             /* implies that there is already at least one other criteria (such as PhysicalPosition,
-               dbSNPIdentifiers etc) was metnioned and at the samtime there is also hql for PanelCrit
-               is included.  So add panel criteria to the above SNPAnnotation criteria as subselect with
-               preciding OR operator */
+         dbSNPIdentifiers etc) was metnioned and at the samtime there is also hql for PanelCrit
+         is included.  So add panel criteria to the above SNPAnnotation criteria as subselect with
+         preciding OR operator */
             finalHQL = new StringBuffer(finalWithoutWhereHQL).append(" OR ").append(panelBasedSNPAnnotCrit).toString();
         } else {
             finalHQL = new StringBuffer(finalWithoutWhereHQL).toString();
@@ -132,49 +146,7 @@ public class SNPAnnotationCriteriaHandler {
         else {
            panelBasedSNPAnnotCrit.append(finalHQL);
         }
-*/
-        if (finalHQL.indexOf(" WHERE ") == -1) {
-            /* means no WHERE clause at all which means selecting entire table.  So return no anotations
-             so that the annotaiton clause does not need to be included in final Finding HQL */
-            /* TODO: this way of returning "null" in general is a bad parctice.  This is done as
-               temporary fix.  It will be re-factored later --  Ram 08/23/06
-            */
-            return null;
-        }
-        Query q = session.createQuery(finalHQL.toString());
-        HQLHelper.setParamsOnQuery(params, q);
-        annotObjs =  q.list();
-        return annotObjs;
-    }
-
-    public static Boolean isAnnotationCriteriaPresent(AnnotationCriteria annotCrit) {
-        boolean criteriaPresent = false;
-
-        PhysicalPositionCriteria poistionCrit = annotCrit.getPhysicalPositionCriteria();
-        Collection<String> dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
-        Collection<String> geneSymbols = annotCrit.getGeneSymbols();
-        PanelCriteria panelCrit = annotCrit.getPanelCriteria();
-        /* TODO: when the following are implemented in  the next release pl take care of the below:
-        String[] geneOntology = annotCrit.getGeneOntology();
-        String[] genePathways = annotCrit.getGenePathways();
-        CytobandCriteria cytobandCriteria = annotCrit.CytobandCriteria();
-        */
-        if (poistionCrit != null) {
-          String chromosome = poistionCrit.getChromosome();
-          Long startPos = poistionCrit.getStartPosition();
-          Long endPos = poistionCrit.getEndPosition();
-          if ((chromosome != null)) criteriaPresent = true;
-        }
-
-        if (dbSNPIdentifiers !=  null && dbSNPIdentifiers.size() > 0) criteriaPresent = true;
-        if (geneSymbols != null && geneSymbols.size() > 0) criteriaPresent = true;
-        if (panelCrit != null) {
-            String name = panelCrit.getName();
-            String version = panelCrit.getVersion();
-            if (name != null || version != null) criteriaPresent = true;
-        }
-
-        return new Boolean(criteriaPresent);
+*/      return new StringBuffer(finalHQL);
     }
 
 

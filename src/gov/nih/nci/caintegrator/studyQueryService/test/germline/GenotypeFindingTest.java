@@ -17,10 +17,7 @@ import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -252,8 +249,8 @@ public class GenotypeFindingTest extends CGEMSTest {
         // 2. setup StudyParticipant Criteria
         //setUpStudyParticipantCrit();
         //setUpStudyParticipantAttributesCriteria();
-        setUpPopulationCriteria();
-        setUpStudyCriteria();
+        //setUpPopulationCriteria();
+        //setUpStudyCriteria();
    //     setUpAnalysisGroupCriteria();
 
         // 3. set up Genotype Crit itself
@@ -327,4 +324,60 @@ public class GenotypeFindingTest extends CGEMSTest {
         junit.textui.TestRunner.run(suite());
 
     }
+
+        public void testPopulateFindings() {
+
+        try {
+             HashSet actualBatchFindings = new HashSet();
+             final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
+             new Thread(new Runnable() {
+                 public void run() {
+                     try {
+                        FindingsManager.populateFindings(gfDTO, findingsToBePopulated);
+                     } catch(Throwable t) {
+                         t.printStackTrace();
+                         System.out.println("Error from FindingsManager.populateFindings call: ");
+                     }
+                 }
+                       }
+            ).start();
+
+            boolean sleep = true;
+            int count = 1;
+            int noOfResults = 0;
+            do {
+                synchronized(findingsToBePopulated) {
+                    if (findingsToBePopulated.size() > 0) {
+                         actualBatchFindings  = (HashSet) findingsToBePopulated.remove(0);
+                         for (Iterator iterator = actualBatchFindings.iterator(); iterator.hasNext();) {
+                            GenotypeFinding gf =  (GenotypeFinding) iterator.next();
+                            System.out.print("ID: " + gf.getId());
+                            System.out.println("QualityScore: " + gf.getQualityScore());
+                            System.out.println("QC Status:       " + gf.getStatus());
+
+                         }
+                         noOfResults += actualBatchFindings.size();
+                         System.out.println("WRITTEN BATCH: " + count++ + " SIZE: " +
+                                                          actualBatchFindings.size() + "\n\n");
+                         if (actualBatchFindings.size() == 0) {
+                            /* means no more to results are coming.  Finished */
+                             break;
+                         }
+                     }
+                 }
+                 Thread.currentThread().sleep(10);
+                 for (Iterator iterator = findingsToBePopulated.iterator(); iterator.hasNext();) {
+                    Object toBeGCed = iterator.next();
+                    toBeGCed = null;
+                 }
+                 actualBatchFindings = null;
+
+             }  while(true);
+
+            System.out.println("ALL RESULTS WERE RECEIVED TOTAL: " + noOfResults);
+
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+     }
 }

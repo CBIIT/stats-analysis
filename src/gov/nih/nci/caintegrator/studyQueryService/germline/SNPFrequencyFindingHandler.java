@@ -120,7 +120,10 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
             q.setMaxResults(end - start);
         }
          List<SNPFrequencyFinding> findings = q.list();
-         return findings;
+         HashSet<SNPFrequencyFinding> results = new HashSet<SNPFrequencyFinding>();
+         results.addAll(findings);
+         session.clear();
+         return results;
     }
     protected Collection<SNPFrequencyFinding> executeQueryForFindingSets(
                     FindingCriteriaDTO critDTO,
@@ -165,7 +168,10 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
             q.setMaxResults(end - start);
         }
          List<SNPFrequencyFinding> findings = q.list();
-         return findings;
+         HashSet<SNPFrequencyFinding> results = new HashSet<SNPFrequencyFinding>();
+         results.addAll(findings);
+         session.clear();
+         return results;
     }
 
     private List<Population> handlePopulationCriteria(SNPFrequencyFindingCriteriaDTO findingCritDTO, Session session) {
@@ -475,7 +481,10 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
             q.setMaxResults(end - start);
         }
         List<SNPFrequencyFinding> findings = q.list();
-        return findings;
+        HashSet<SNPFrequencyFinding> results = new HashSet<SNPFrequencyFinding>();
+        results.addAll(findings);
+        session.clear();
+        return results;
     }
 
 

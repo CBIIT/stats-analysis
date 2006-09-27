@@ -321,12 +321,13 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
     }
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
-        List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
+     /*   List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
            gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
         }
         Hibernate.initialize(gbObjs);
+        gbObjs = null;*/
     }
 
      protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
@@ -449,7 +450,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         Collection<SNPAssociationFinding>  snpAssociationFindings =
                                     new ArrayList<SNPAssociationFinding>();
 
-        final HashMap params = new HashMap();
+         HashMap params = new HashMap();
 
         /* 1.  Include SNPAssociationFinding attribute criteria in  TargetFinding query */
         StringBuffer myAttributeHql = handleMyOwnAttributeCriteria(findingCritDTO, params);
@@ -477,7 +478,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         /* 6. Now execute the final TargetFinding query and return results  */
         Query q = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, q);
-
+        System.out.println(" Final HQL: " + finalHQL);
         if (start == -1 || end == -1) {
             // do not use these indexes.  Just retrieve everything
         }
@@ -485,7 +486,8 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             q.setFirstResult(start);
             q.setMaxResults(end - start);
         }
-        Iterator triplets = q.list().iterator();
+        List l = q.list();
+        Iterator triplets = l.iterator();
         while(triplets.hasNext()) {
             Object[] triplet = (Object[]) triplets.next();
             SNPAssociationFinding finding = (SNPAssociationFinding) triplet[0];
@@ -496,6 +498,11 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             snpAssociationFindings.add(finding);
         }
 
+        for (int i = 0; i < l.size(); i++) {
+            l.set(i,null);
+
+        }
+       session.clear();
         return snpAssociationFindings ;
     }
 

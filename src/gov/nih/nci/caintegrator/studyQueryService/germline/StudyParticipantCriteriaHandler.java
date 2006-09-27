@@ -103,56 +103,105 @@ public class StudyParticipantCriteriaHandler {
         if (spCrit == null) return null; // indicating that this crit can be ignored in the calling method
         HashMap params = new HashMap();  // to hold HQL Parameters
 
-        StringBuffer spHQL = new StringBuffer("SELECT sm.id FROM Specimen sm  " +
-                                               " JOIN sm.studyParticipant sp {0} {1} {2} WHERE ");
+//        StringBuffer spHQL = new StringBuffer("SELECT sm.id FROM Specimen sm  " +
+//                                               " JOIN sm.studyParticipant sp {0} {1} {2} WHERE ");
+//
+//
+//        /* 1. Handle the StudyParticipant Attributes Criteria itself */
+//        boolean hqlAppended = handleStudyPartcioantAttributeCriteria(spCrit, spHQL, params);
+//
+//        /* 2.  Handle StudyCriteira if specified */
+//        StringBuffer studyJoin = new StringBuffer("");
+//        StudyCriteria studyCrit = spCrit.getStudyCriteria();
+//        if (studyCrit != null) {
+//            studyJoin = handleStudyCriteria(studyCrit , spHQL, params);
+//        }
+//
+//        /* 3.  Handle Population Criteria */
+//        StringBuffer populationJoin  = new StringBuffer("");
+//        PopulationCriteria popCrit = spCrit.getPopulationCriteria();
+//        if (popCrit != null) {
+//            populationJoin  = handlePopulationCriteria(popCrit, spHQL, params);
+//        }
+//
+//        /* 4. Handle AnalysisGroupCriteria  */
+//        StringBuffer analysisGroupJoin = new StringBuffer("");
+//        AnalysisGroupCriteria groupCrit = spCrit.getAnalysisGroupCriteria();
+//        if (groupCrit != null) {
+//            analysisGroupJoin = handleAnalysisGroupCriteria(groupCrit, spHQL, params);
+//        }
+//        /* 5. now substitute the {0} & {1} parameter studyJoin & populationJoin */
+//        String tmp = spHQL.toString();
+//        spHQL = new StringBuffer(MessageFormat.format(tmp, new Object[] {
+//                                        studyJoin, populationJoin, analysisGroupJoin}));
+//
+//        /* 6. Do some HouseKeeping tasks */
+//        String tmpHSQL = HQLHelper.removeTrailingToken(spHQL, "AND");
+//        String finalHSQL = HQLHelper.removeTrailingToken(new StringBuffer(tmpHSQL), "OR");
 
-
-        /* 1. Handle the StudyParticipant Attributes Criteria itself */
-        boolean hqlAppended = handleStudyPartcioantAttributeCriteria(spCrit, spHQL, params);
-
-        /* 2.  Handle StudyCriteira if specified */
-        StringBuffer studyJoin = new StringBuffer("");
-        StudyCriteria studyCrit = spCrit.getStudyCriteria();
-        if (studyCrit != null) {
-            studyJoin = handleStudyCriteria(studyCrit , spHQL, params);
+        /* 7.  Execute total HQL to retrive Specimens.
+              First check if every condition is empty meaning no criteria
+              mentioned hence as good as spCrit = null */
+//        if (!hqlAppended  && studyJoin.length() < 1 && populationJoin.length() < 1
+//                && analysisGroupJoin.length() < 1 )
+//            return null;
+        StringBuffer hql = getSpecimenHQLWithParams(spCrit, session, params);
+        List<String> specimenIDs = null;
+        if (hql != null) {
+            Query q = session.createQuery(hql.toString());
+            HQLHelper.setParamsOnQuery(params, q);
+            specimenIDs = q.list();
+            System.out.println("specimens found: "+ specimenIDs.size()  + specimenIDs.toString());
         }
-
-        /* 3.  Handle Population Criteria */
-        StringBuffer populationJoin  = new StringBuffer("");
-        PopulationCriteria popCrit = spCrit.getPopulationCriteria();
-        if (popCrit != null) {
-            populationJoin  = handlePopulationCriteria(popCrit, spHQL, params);
-        }
-
-        /* 4. Handle AnalysisGroupCriteria  */
-        StringBuffer analysisGroupJoin = new StringBuffer("");
-        AnalysisGroupCriteria groupCrit = spCrit.getAnalysisGroupCriteria();
-        if (groupCrit != null) {
-            analysisGroupJoin = handleAnalysisGroupCriteria(groupCrit, spHQL, params);
-        }
-        /* 5. now substitute the {0} & {1} parameter studyJoin & populationJoin */
-        String tmp = spHQL.toString();
-        spHQL = new StringBuffer(MessageFormat.format(tmp, new Object[] {
-                                        studyJoin, populationJoin, analysisGroupJoin}));
-
-        /* 6. Do some HouseKeeping tasks */
-        String tmpHSQL = HQLHelper.removeTrailingToken(spHQL, "AND");
-        String finalHSQL = HQLHelper.removeTrailingToken(new StringBuffer(tmpHSQL), "OR");
-
-        /* 7.  Execute total HQL to retrive Specimens.  First check if every condition is empty meaning no criteria mentioned hence as good as
-        spCrit = null */
-        if (!hqlAppended  && studyJoin.length() < 1 && populationJoin.length() < 1
-                && analysisGroupJoin.length() < 1 )
-            return null;
-
-        Query q = session.createQuery(finalHSQL);
-        HQLHelper.setParamsOnQuery(params, q);
-        List<String> specimenIDs = q.list();
-        System.out.println("specimens found: "+ specimenIDs.size()  + specimenIDs.toString());
+        // TODO: fix null condition here
         return specimenIDs;
     }
 
+    public static StringBuffer getSpecimenHQLWithParams(StudyParticipantCriteria spCrit, Session session, HashMap params) {
 
+            StringBuffer spHQL = new StringBuffer("SELECT sm.id FROM Specimen sm  " +
+                                                       " JOIN sm.studyParticipant sp {0} {1} {2} WHERE ");
+
+            /* 1. Handle the StudyParticipant Attributes Criteria itself */
+            boolean hqlAppended = handleStudyPartcioantAttributeCriteria(spCrit, spHQL, params);
+
+            /* 2.  Handle StudyCriteira if specified */
+            StringBuffer studyJoin = new StringBuffer("");
+            StudyCriteria studyCrit = spCrit.getStudyCriteria();
+            if (studyCrit != null) {
+                studyJoin = handleStudyCriteria(studyCrit , spHQL, params);
+            }
+
+            /* 3.  Handle Population Criteria */
+            StringBuffer populationJoin  = new StringBuffer("");
+            PopulationCriteria popCrit = spCrit.getPopulationCriteria();
+            if (popCrit != null) {
+                populationJoin  = handlePopulationCriteria(popCrit, spHQL, params);
+            }
+
+            /* 4. Handle AnalysisGroupCriteria  */
+            StringBuffer analysisGroupJoin = new StringBuffer("");
+            AnalysisGroupCriteria groupCrit = spCrit.getAnalysisGroupCriteria();
+            if (groupCrit != null) {
+                analysisGroupJoin = handleAnalysisGroupCriteria(groupCrit, spHQL, params);
+            }
+            /* 5. now substitute the {0} & {1} parameter studyJoin & populationJoin */
+            String tmp = spHQL.toString();
+            spHQL = new StringBuffer(MessageFormat.format(tmp, new Object[] {
+                                            studyJoin, populationJoin, analysisGroupJoin}));
+
+            /* 6. Do some HouseKeeping tasks */
+            String tmpHSQL = HQLHelper.removeTrailingToken(spHQL, "AND");
+            String finalHSQL = HQLHelper.removeTrailingToken(new StringBuffer(tmpHSQL), "OR");
+
+          /* 7.  Execute total HQL to retrive Specimens. First check if every condition is empty
+            meaning no criteria mentioned hence as good as spCrit = null */
+          if (!hqlAppended  && studyJoin.length() < 1 && populationJoin.length() < 1
+            && analysisGroupJoin.length() < 1 )
+            return null;
+
+          else return new StringBuffer(finalHSQL);
+    }
 
 
 
