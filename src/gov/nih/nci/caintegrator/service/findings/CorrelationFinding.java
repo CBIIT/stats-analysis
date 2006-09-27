@@ -22,10 +22,6 @@ public class CorrelationFinding extends AnalysisFinding{
     private static final long serialVersionUID = 1L;
     private CorrelationResult corrResults;
 
-    public CorrelationFinding(String session, String task, FindingStatus status, ClassComparisonResult result) {
-        super(session, task, status);
-        setAnalysisResult(result);
-    }
     
 	public CorrelationFinding(String session, String task, FindingStatus status, CorrelationResult result) {
 		super(session, task, status);
