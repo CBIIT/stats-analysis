@@ -30,7 +30,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-       setUpSNPPhysicalPositionCrit();
+       //setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
         //setUpPanelCrit();
         //setUpGeneBiomarkerCrit();

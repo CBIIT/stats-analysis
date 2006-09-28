@@ -48,6 +48,7 @@ abstract public class FindingsHandler extends BatchFindingsHandler {
         Collection<? extends Finding> findings =
                 getMyFindings(critDTO, snpAnnotationIDs, session, fromIndex, toIndex);
         initializeProxies(findings, session);
+        session.clear();
 
         session.close();
         return findings;

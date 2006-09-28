@@ -321,13 +321,13 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
     }
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
-     /*   List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
+        List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
            gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
         }
         Hibernate.initialize(gbObjs);
-        gbObjs = null;*/
+        gbObjs = null;
     }
 
      protected void sendMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
@@ -382,22 +382,22 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
              Collection<? extends Finding> currentFindings =
                                     executeQueryForPopulating(findingCritDTO, values,
                                       session, hql, -1, -1);
-             initializeProxies(currentFindings, session);
 
              /* convert these  currentFindings in to a List for convenience */
              snpAssociationFindings.addAll(currentFindings );
+             initializeProxies(snpAssociationFindings, session);
 
              while (snpAssociationFindings.size() >= BATCH_OBJECT_INCREMENT )
-                 populateCurrentResultSet(snpAssociationFindings, toBePopulated);
+                 populateCurrentResultSet(snpAssociationFindings, toBePopulated, session);
         }
 
         /* Now write remaining findings i.e. less than 500 in one call */
         if (snpAssociationFindings != null)
-            populateCurrentResultSet(snpAssociationFindings, toBePopulated);
+            populateCurrentResultSet(snpAssociationFindings, toBePopulated, session);
 
         /* Finally after all the results were written, write an empty Object (HashSet of size=0
           to indicate the caller that all results were written */
-         populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated);
+         populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated, session);
     }
 
     protected void sendFindingsWithoutAnnotationCriteria(FindingCriteriaDTO critDTO,
@@ -416,14 +416,14 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
             toBeSent = new HashSet<SNPAssociationFinding>();
             toBeSent.addAll(findings);
-            process(toBePopulated,  toBeSent);
+            process(toBePopulated,  toBeSent, session);
             start += BATCH_OBJECT_INCREMENT;
             end += BATCH_OBJECT_INCREMENT;;
 
         }  while(findings.size() >= BATCH_OBJECT_INCREMENT );
 
         /* send empty data object to let the client know that no more results are present */
-        process(toBePopulated, getConcreteTypedFindingSet());
+        process(toBePopulated, getConcreteTypedFindingSet(),session);
     }
 
 
@@ -498,11 +498,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             snpAssociationFindings.add(finding);
         }
 
-        for (int i = 0; i < l.size(); i++) {
+     /*   for (int i = 0; i < l.size(); i++) {
             l.set(i,null);
 
-        }
-       session.clear();
+        }*/
         return snpAssociationFindings ;
     }
 

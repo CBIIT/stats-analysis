@@ -62,7 +62,7 @@ public class GenotypeFindingTest extends CGEMSTest {
 */
         ppc.setChromosome("8");
         ppc.setStartPosition(new Long(76065000));  // 76065158
-        ppc.setEndPosition(new Long(96100000));    // should give 4 GenotypeFindings
+        ppc.setEndPosition(new Long(76080000));    // should give 4 GenotypeFindings
 
         /*
         ppc.setChromosome("X");
@@ -241,9 +241,9 @@ public class GenotypeFindingTest extends CGEMSTest {
 
     public void testGenotypeFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        //setUpSNPPhysicalPositionCrit();
+        setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
-        setUpGeneBiomarkerCrit();
+        //setUpGeneBiomarkerCrit();
 
 
         // 2. setup StudyParticipant Criteria

@@ -153,7 +153,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
          List<GenotypeFinding> findings = q.list();
          HashSet<GenotypeFinding> results = new HashSet<GenotypeFinding>();
          results.addAll(findings);
-         session.clear();
+
          return results;
     }
 
@@ -214,7 +214,8 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                 values.addAll(arrayIDs.subList(begIndex,  lastIndex));
                 Criteria specimenCrit = session.createCriteria(Specimen.class).setFetchMode("studyParticipant", FetchMode.EAGER)
                                     .add(Restrictions.in("id", values));
-                specimenCrit .list();
+                List list = specimenCrit .list();
+                System.out.println("Length: " + list.size());
             }
         }
     }
@@ -283,7 +284,6 @@ public class GenotypeFindingsHandler extends FindingsHandler {
 
         HashSet<GenotypeFinding> findingsSet = new HashSet<GenotypeFinding>();
         findingsSet.addAll(genotypeObjs);
-        session.clear();
         return findingsSet;
     }
      public void populateFindings(FindingCriteriaDTO critDTO, List toBePopulated)
@@ -296,17 +296,18 @@ public class GenotypeFindingsHandler extends FindingsHandler {
          int end = BatchFindingsHandler.BATCH_OBJECT_INCREMENT ;
          do {
              findings =  executeBatchSearch(critDTO, session, start, end);
+             initializeProxies(findings, session);
              Set toBeSent = new HashSet<GenotypeFinding>();
              toBeSent.addAll(findings);
-             process(toBePopulated,  toBeSent);
+             process(toBePopulated,  toBeSent, session);
              start += BatchFindingsHandler.BATCH_OBJECT_INCREMENT ;
              end += BatchFindingsHandler.BATCH_OBJECT_INCREMENT ;
          }  while(findings.size() >= BatchFindingsHandler.BATCH_OBJECT_INCREMENT  );
 
          /* send empty data object to let the client know that no more results are present */
-         process(toBePopulated, new HashSet<GenotypeFinding>());
+         process(toBePopulated, new HashSet<GenotypeFinding>(), session);
          if (session.isOpen())
-            session.clear();
+            session.close();
 
        }
 

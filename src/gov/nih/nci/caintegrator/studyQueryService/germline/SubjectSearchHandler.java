@@ -101,7 +101,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
        else if (specimenIDs.size() == 0) {
             session.close();
             /* send empty data object to let the client know that no more results are present */
-            process(toBePopulated, new HashSet<StudyParticipant>());
+            process(toBePopulated, new HashSet<StudyParticipant>(), session);
             return ;
        }
         /*  means  specimens.size() > 0 so retrieve StudyPartipants beased on the Specimens */
@@ -132,15 +132,15 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
             subjects.addAll(currentFindings );
 
             while (subjects.size() >= BatchFindingsHandler.BATCH_OBJECT_INCREMENT )
-                 populateCurrentResultSet(subjects, toBePopulated);
+                 populateCurrentResultSet(subjects, toBePopulated, session);
          }
          /* Now write remaining findings i.e. less than 500 in one call */
          if (subjects != null)
-             populateCurrentResultSet(subjects, toBePopulated);
+             populateCurrentResultSet(subjects, toBePopulated, session);
 
           /* Finally after all the results were written, write an empty Object (HashSet of size=0
              to indicate the caller that all results were written */
-          populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated);
+          populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated, session);
 
           return;
     }
@@ -157,14 +157,14 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
              findings =  executeBatchSearch(crit, start, end);
              Set toBeSent = new HashSet<StudyParticipant>();
              toBeSent.addAll(findings);
-             process(toBePopulated,  toBeSent);
+             process(toBePopulated,  toBeSent, session);
              start += BatchFindingsHandler.BATCH_OBJECT_INCREMENT ;
              end += BatchFindingsHandler.BATCH_OBJECT_INCREMENT ;
 
          }  while(findings.size() >= BatchFindingsHandler.BATCH_OBJECT_INCREMENT  );
 
          /* send empty data object to let the client know that no more results are present */
-         process(toBePopulated, new HashSet<StudyParticipant>());
+         process(toBePopulated, new HashSet<StudyParticipant>(), session);
     }
 
     private static Collection<StudyParticipant> executeBatchSearch(Criteria crit, int start, int end) {

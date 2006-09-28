@@ -49,20 +49,20 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
        //setUpDBSnpCrit();
        // setUpPanelCrit();
 
-        setUpGeneBiomarkerCrit();
+        //setUpGeneBiomarkerCrit();
 
         //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
         //freqDTO.setPopulationNames(new String[] {"CONTROL"});
 
         // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
-        //freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
+        freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
         executeSearch(0, 501);
    }
 
     public void testPopulateFindings() {
-        //setUpSNPPhysicalPositionCrit();
-        freqDTO.setPopulationNames(new String[] {"CEPH"});
-        freqDTO.setHardyWeinbergPValue(new Float(0.0011), ArithematicOperator.LE);
+        setUpSNPPhysicalPositionCrit();
+        //freqDTO.setPopulationNames(new String[] {"CEPH"});
+        //freqDTO.setHardyWeinbergPValue(new Float(0.0011), ArithematicOperator.LE);
         //setUpGeneBiomarkerCrit();
         //setSNPFindingCriteria();
         try {

@@ -5,6 +5,8 @@ import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Session;
+
 /**
  * Author: Ram Bhattaru
  * Date:   Sep 25, 2006
@@ -31,7 +33,7 @@ abstract public class BatchFindingsHandler {
     protected abstract Set getConcreteTypedFindingSet() ;
     protected abstract List getConcreteTypedFindingList() ;
 
-    final protected void populateCurrentResultSet(List findings, List toBePopulated) {
+    final protected void populateCurrentResultSet(List findings, List toBePopulated, Session session) {
 
          /*  1. Remove the first 500 objects and add it to a new HashSet */
          Set toBeSent = getConcreteTypedFindingSet();
@@ -46,7 +48,8 @@ abstract public class BatchFindingsHandler {
             synchronized(toBePopulated) {
                    if (toBePopulated.size() == 0)  {
                        toBePopulated.add(toBeSent);
-                        break;
+                       session.clear();
+                       break;
                    }
             }
             try {
@@ -57,12 +60,13 @@ abstract public class BatchFindingsHandler {
          } while (true);
        }
 
-    final protected  void process(List toBePopulated, Set toBeSent) {
+    final protected  void process(List toBePopulated, Set toBeSent, Session session) {
          /*  Add results to toBePopulated after making sure it is empty */
          while (true) {
              synchronized(toBePopulated) {
                  if (toBePopulated.size() == 0)  {
                      toBePopulated.add(toBeSent);
+                     session.clear();
                      break;
                  }
              }

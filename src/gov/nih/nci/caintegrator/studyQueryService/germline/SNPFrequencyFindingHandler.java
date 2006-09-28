@@ -122,7 +122,8 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
          List<SNPFrequencyFinding> findings = q.list();
          HashSet<SNPFrequencyFinding> results = new HashSet<SNPFrequencyFinding>();
          results.addAll(findings);
-         session.clear();
+         //initializeProxies(findings, session);
+         //session.flush();
          return results;
     }
     protected Collection<SNPFrequencyFinding> executeQueryForFindingSets(
@@ -170,7 +171,8 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
          List<SNPFrequencyFinding> findings = q.list();
          HashSet<SNPFrequencyFinding> results = new HashSet<SNPFrequencyFinding>();
          results.addAll(findings);
-         session.clear();
+         //initializeProxies(findings, session);
+         //session.flush();
          return results;
     }
 
@@ -399,24 +401,24 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
               /* send -1 for start & end index to indicate these values not to be included
                  in the final Hibernate Query */
               Collection<? extends Finding> currentFindings =
-                           executeQueryForPopulating(findingCritDTO, session, params, targetHQL,
+                           executeBatchSearch(findingCritDTO, session, params, targetHQL,
                                                 snpAnnotJoin, snpAnnotCond, -1, -1);
 
-              initializeProxies(currentFindings, session);
 
               /* convert these  currentFindings in to a List for convenience */
               snpFrequencyFindings.addAll(currentFindings );
+              initializeProxies(snpFrequencyFindings, session);
 
               while (snpFrequencyFindings.size() >= BATCH_OBJECT_INCREMENT )
-                  populateCurrentResultSet(snpFrequencyFindings, toBePopulated);
+                  populateCurrentResultSet(snpFrequencyFindings, toBePopulated, session);
          }
          /* Now write remaining findings i.e. less than 500 in one call */
          if (snpFrequencyFindings != null)
-             populateCurrentResultSet(snpFrequencyFindings, toBePopulated);
+             populateCurrentResultSet(snpFrequencyFindings, toBePopulated, session);
 
          /* Finally after all the results were written, write an empty Object (HashSet of size=0
            to indicate the caller that all results were written */
-          populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated);
+          populateCurrentResultSet(getConcreteTypedFindingList(), toBePopulated, session);
      }
 
     private void sendFindingsWithoutAnnotationCriteria(
@@ -431,26 +433,26 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         int end = BATCH_OBJECT_INCREMENT ;
         Set toBeSent = null;
         do {
-            findings =  executeQueryForPopulating(
+            findings =  executeBatchSearch(
                       findingCritDTO, session, params, targetHQL,
                                     snpAnnotJoin, snpAnnotCond, start, end);
             initializeProxies(findings, session);
 
             toBeSent = new HashSet<SNPFrequencyFinding>();
             toBeSent.addAll(findings);
-            process(toBePopulated,  toBeSent);
+            process(toBePopulated,  toBeSent, session);
             start += BATCH_OBJECT_INCREMENT;
             end += BATCH_OBJECT_INCREMENT;;
 
         }  while(findings.size() >= BATCH_OBJECT_INCREMENT );
 
         /* send empty data object to let the client know that no more results are present */
-        process(toBePopulated, getConcreteTypedFindingSet());
+        process(toBePopulated, getConcreteTypedFindingSet(),session);
 
     }
 
 
-    private Collection<SNPFrequencyFinding> executeQueryForPopulating(SNPFrequencyFindingCriteriaDTO findingCritDTO, Session session, HashMap params, StringBuffer targetHQL, StringBuffer snpAnnotJoin, StringBuffer snpAnnotCond, int start, int end) {
+    private Collection<SNPFrequencyFinding> executeBatchSearch(SNPFrequencyFindingCriteriaDTO findingCritDTO, Session session, HashMap params, StringBuffer targetHQL, StringBuffer snpAnnotJoin, StringBuffer snpAnnotCond, int start, int end) {
 
         String populationJoin = "";
         String populationCond = "";
@@ -483,7 +485,8 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         List<SNPFrequencyFinding> findings = q.list();
         HashSet<SNPFrequencyFinding> results = new HashSet<SNPFrequencyFinding>();
         results.addAll(findings);
-        session.clear();
+        /*initializeProxies(findings, session);
+        session.clear();*/
         return results;
     }
 
