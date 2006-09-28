@@ -306,7 +306,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
          /* send empty data object to let the client know that no more results are present */
          process(toBePopulated, new HashSet<GenotypeFinding>());
          if (session.isOpen())
-            session.close();
+            session.clear();
 
        }
 
