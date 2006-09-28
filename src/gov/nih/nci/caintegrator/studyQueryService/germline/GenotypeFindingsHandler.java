@@ -254,7 +254,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         }
 
         StringBuffer targetHQL = new StringBuffer(
-                " FROM GenotypeFinding " + TARGET_FINDING_ALIAS + " WHERE {1} ") ;
+                " FROM GenotypeFinding " + TARGET_FINDING_ALIAS + " WHERE  ") ;
 
         /* 3. Handle GenoType Attributes Criteria itself  and populate targetHQL/params */
         StringBuffer selfHQL = new StringBuffer("");
@@ -263,20 +263,30 @@ public class GenotypeFindingsHandler extends FindingsHandler {
 
 
         if (annotHQL.length() > 0) {
-            targetHQL.append(" " + TARGET_FINDING_ALIAS +
-                    ".snpAnnotation.id IN (SELECT s.id " + annotHQL.toString() + " )" );
-            targetHQL.append(annotHQL);
+            String annotCond = TARGET_FINDING_ALIAS + ".snpAnnotation.id IN (SELECT s.id {0} )";
+            String annotAddedCond = MessageFormat.format(annotCond, new Object[] {annotHQL});
+            //targetHQL.append(" " + TARGET_FINDING_ALIAS + ".snpAnnotation.id IN (SELECT s.id {0} )" );
+            targetHQL.append(annotAddedCond);
             targetHQL.append( " AND ");
         }
 
         if (specimenHQL.length() > 0) {
+
+            String specimenCond = TARGET_FINDING_ALIAS + ".specimen.id IN ( {0} )";
+            String specimenAddedCond = MessageFormat.format(specimenCond, new Object[] {specimenHQL});
+            targetHQL.append(specimenAddedCond);
+
+/*
             targetHQL.append(" " + TARGET_FINDING_ALIAS +
                     ".specimen.id IN ( " + specimenHQL.toString() + " )" );
             targetHQL.append(annotHQL);
+*/
             //targetHQL.append( " AND ");
         }
+        String targetHQLWhereRemoved = HQLHelper.removeTrailingToken(targetHQL, "WHERE");
+        String targetHQLANDRemoved = HQLHelper.removeTrailingToken(new StringBuffer(targetHQLWhereRemoved), "AND");
 
-        Query q = session.createQuery(targetHQL.toString());
+        Query q = session.createQuery(targetHQLANDRemoved);
         q.setFirstResult(start);
         q.setMaxResults(end - start);
         HQLHelper.setParamsOnQuery(params, q);

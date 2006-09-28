@@ -326,7 +326,9 @@ public class GenotypeFindingTest extends CGEMSTest {
     }
 
         public void testPopulateFindings() {
-
+        setUpSNPPhysicalPositionCrit();
+        //setUpPopulationCriteria();
+        setUpGenotypeCrit();
         try {
              HashSet actualBatchFindings = new HashSet();
              final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
