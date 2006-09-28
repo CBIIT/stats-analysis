@@ -214,8 +214,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                 values.addAll(arrayIDs.subList(begIndex,  lastIndex));
                 Criteria specimenCrit = session.createCriteria(Specimen.class).setFetchMode("studyParticipant", FetchMode.EAGER)
                                     .add(Restrictions.in("id", values));
-                List list = specimenCrit .list();
-                System.out.println("Length: " + list.size());
+                specimenCrit .list();
             }
         }
     }
