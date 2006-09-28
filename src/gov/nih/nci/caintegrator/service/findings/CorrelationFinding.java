@@ -27,6 +27,12 @@ public class CorrelationFinding extends AnalysisFinding{
 		super(session, task, status);
 		setAnalysisResult(result);
 	}
+	
+	public CorrelationFinding(String session, String task, FindingStatus status) {
+		super(session, task, status);
+	}
+	
+	
 	/**
 	 * @param myResults The myResults to set.
 	 */
