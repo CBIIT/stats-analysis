@@ -171,6 +171,9 @@ public class SecurityManager {
 			 * DBauer
 			 */
 			Set protectionElements;
+			String emailAddress = user.getEmailId();;
+			String firstName = user.getFirstName();;
+			String lastName = user.getLastName();;
 			Set<Group> groups;
 			try {
 				protectionElements = userProvisioningManager.getProtectionElementPrivilegeContextForUser(user.getUserId().toString());
@@ -210,7 +213,7 @@ public class SecurityManager {
 					 * snap judgments about the user after they are logged in
 					 */
 					UserRole role = getUserRole(groups);
-					credentials = new UserCredentials(userName, role, institutes);
+					credentials = new UserCredentials(emailAddress,firstName,institutes,lastName,role,userName);
 				}catch(NullPointerException npe) {
 					logger.error("Security Objects are null.") ;
 					throw new AuthenticationException("Some SecurityObjects are null");

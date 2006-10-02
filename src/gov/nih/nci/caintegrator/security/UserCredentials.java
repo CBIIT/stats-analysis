@@ -86,6 +86,9 @@ public class UserCredentials {
 
 	private String userName;
 	private UserRole role;
+	private String emailAddress;
+	private String firstName;
+	private String lastName;
 	private Collection<InstitutionDE> institutes;
 	private boolean authenticated = false;
 	
@@ -108,6 +111,42 @@ public class UserCredentials {
 	}
 
 	/**
+	 * This constructor is protected so that once the Credentials have been
+	 * set by the SecurityManager, they can not be modified.
+	 * @param emailAddress
+	 * @param firstName
+	 * @param institutes
+	 * @param lastName
+	 * @param role
+	 * @param userName
+	 */
+	protected UserCredentials(String emailAddress, String firstName, Collection<InstitutionDE> institutes, String lastName, UserRole role, String userName) {
+		this.emailAddress = emailAddress;
+		this.firstName = firstName;
+		this.institutes = institutes;
+		this.lastName = lastName;
+		this.role = role;
+		this.userName = userName;
+		if(role!=null) {
+			authenticated = true;
+		}
+	}
+	/**
+	 * This constructor is protected so that once the Credentials have been
+	 * set by the SecurityManager, they can not be modified.
+	 * @param userName
+	 * @param role
+	 * @param institutes
+	 */
+	protected UserCredentials(String userName, UserRole role, Collection<InstitutionDE> allowableData) {
+		this.userName = userName;
+		this.role = role;
+		this.institutes = allowableData;
+		if(role!=null) {
+			authenticated = true;
+		}
+	}
+	/**
 	 * The institutes whose data the user is allowed to see
 	 * @return
 	 */
@@ -129,21 +168,7 @@ public class UserCredentials {
 		return userName;
 	}
 
-	/**
-	 * This constructor is protected so that once the Credentials have been
-	 * set by the SecurityManager, they can not be modified.
-	 * @param userName
-	 * @param role
-	 * @param institutes
-	 */
-	protected UserCredentials(String userName, UserRole role, Collection<InstitutionDE> allowableData) {
-		this.userName = userName;
-		this.role = role;
-		this.institutes = allowableData;
-		if(role!=null) {
-			authenticated = true;
-		}
-	}
+
 	
 	/**
 	 * Checks to see if these credential have been authenticated
@@ -155,6 +180,39 @@ public class UserCredentials {
 	
 	private void setAuthenticated(boolean auth) {
 		this.authenticated = auth;
+	}
+
+	/**
+	 * @param emailAddress The emailAddress to set.
+	 */
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	/**
+	 * @param firstName The firstName to set.
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * @param lastName The lastName to set.
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
 	}
 	
 
