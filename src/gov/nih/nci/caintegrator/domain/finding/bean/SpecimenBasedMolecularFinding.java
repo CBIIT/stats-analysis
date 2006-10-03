@@ -15,7 +15,7 @@ import java.util.*;
    * 
    */
 
-public  class SpecimenBasedMolecularFinding 
+public  class SpecimenBasedMolecularFinding extends Finding
    // extends gov.nih.nci.caintegrator.domain.finding.bean.Finding
 
 
