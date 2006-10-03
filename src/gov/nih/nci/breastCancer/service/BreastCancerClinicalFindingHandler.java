@@ -56,7 +56,7 @@ package gov.nih.nci.breastCancer.service;
  *    OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-
+  
 import gov.nih.nci.breastCancer.dto.BreastCancerClinicalFindingCriteria;
 import gov.nih.nci.breastCancer.dto.ClinicalFindingCriteria;
 import gov.nih.nci.caintegrator.domain.finding.clinical.breastCancer.bean.BreastCancerClinicalFinding;
@@ -332,9 +332,12 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
 }
 
 /**
- * $Id: BreastCancerClinicalFindingHandler.java,v 1.4 2006-08-17 18:05:09 georgeda Exp $
+ * $Id: BreastCancerClinicalFindingHandler.java,v 1.5 2006-10-03 20:31:06 zhangd Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/08/17 18:05:09  georgeda
+ * Removed unneeded import
+ *
  * Revision 1.3  2006/08/15 19:48:18  georgeda
  * More cleanup
  *

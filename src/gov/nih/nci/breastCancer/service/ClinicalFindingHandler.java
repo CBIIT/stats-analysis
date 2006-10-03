@@ -135,7 +135,7 @@ public abstract class ClinicalFindingHandler
             Query theQuery = theSession.createQuery(theHQL.toString());
             HQLHelper.setParamsOnQuery(theParams, theQuery);
 
-            logger.info("HQL: " + theHQL.toString());
+            logger.info("HQL*********: " + theHQL.toString());
             long theStartTime = System.currentTimeMillis();
             Collection objs = theQuery.list();
             long theElapsedTime = System.currentTimeMillis() - theStartTime;
@@ -158,9 +158,12 @@ public abstract class ClinicalFindingHandler
 }
 
 /**
- * $Id: ClinicalFindingHandler.java,v 1.2 2006-08-17 19:25:40 georgeda Exp $
+ * $Id: ClinicalFindingHandler.java,v 1.3 2006-10-03 20:31:31 zhangd Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.2  2006/08/17 19:25:40  georgeda
+ * Added logging
+ *
  * Revision 1.1  2006/08/14 16:59:40  georgeda
  * Initial revision
  *

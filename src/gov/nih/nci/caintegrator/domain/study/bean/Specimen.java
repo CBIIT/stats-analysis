@@ -49,6 +49,10 @@ public  class Specimen
     }
 	
 	   
+    private String timecourse_name;
+    
+    
+    
     /**
    * Unique identifier for the instance of Specimen.
    */
@@ -261,23 +265,29 @@ public  class Specimen
    * 
    */
 
-    private gov.nih.nci.caintegrator.domain.study.bean.TimeCourse timeCourse;
+   // private gov.nih.nci.caintegrator.domain.study.bean.TimeCourse timeCourse;
       /**
    * An ordered list of times at which events and activities are planned to occur during a clinical trial. 
    * 
    */
 
-    public gov.nih.nci.caintegrator.domain.study.bean.TimeCourse getTimeCourse(){
-        return timeCourse;			
-    }
+    //public gov.nih.nci.caintegrator.domain.study.bean.TimeCourse getTimeCourse(){
+    //    return timeCourse;			
+   // }
 
 	      
 	               
 	   
 
-    public void setTimeCourse(gov.nih.nci.caintegrator.domain.study.bean.TimeCourse timeCourse){
-        this.timeCourse = timeCourse;
-    }	
+   // public void setTimeCourse(gov.nih.nci.caintegrator.domain.study.bean.TimeCourse timeCourse){
+       // this.timeCourse = timeCourse;
+   // }
+	public String getTimecourse_name() {
+		return timecourse_name;
+	}
+	public void setTimecourse_name(String timecourse_name) {
+		this.timecourse_name = timecourse_name;
+	}	
 	   
 	   
 	

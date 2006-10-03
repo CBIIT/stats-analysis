@@ -222,6 +222,9 @@ public class StudyParticipantHandler
             theANDString = " AND ";
         }
 
+        
+        
+        
         logger.debug("Exiting handleCriteria");
 
         return theHQL;
@@ -277,9 +280,12 @@ public class StudyParticipantHandler
 }
 
 /**
- * $Id: StudyParticipantHandler.java,v 1.3 2006-08-17 19:25:57 georgeda Exp $
+ * $Id: StudyParticipantHandler.java,v 1.4 2006-10-03 20:35:08 zhangd Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.3  2006/08/17 19:25:57  georgeda
+ * Cleanup age handling
+ *
  * Revision 1.2  2006/08/14 20:14:57  georgeda
  * Finished fleshing out mappings from DTO to DB and back
  *

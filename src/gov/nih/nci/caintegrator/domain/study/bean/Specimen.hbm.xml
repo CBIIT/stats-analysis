@@ -48,6 +48,12 @@
                  insert="false" 
                  update="false" />             
    
+      <!-- timePoint -->    
+      <property name="timePoint" 
+                 type="java.lang.String" 
+                 column="TIMECOURSE_NAME" 
+                 insert="false" 
+                 update="false" />    
    
      
     <!--  m-1 relationship -->
@@ -57,10 +63,10 @@
                 column="PARTICIPANT_DID" />
     
     <!--  1-1 relationship -->
-    <many-to-one name="timeCourse"
+  <!--  <many-to-one name="timeCourse"
             class="gov.nih.nci.caintegrator.domain.study.bean.TimeCourse"
             column="TIMECOURSE_ID"/>
-
+ -->
    
     <!-- Specimen has a sub-class called DNASpecimen -->  
        

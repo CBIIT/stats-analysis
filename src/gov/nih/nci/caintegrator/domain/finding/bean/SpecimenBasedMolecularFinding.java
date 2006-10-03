@@ -16,7 +16,7 @@ import java.util.*;
    */
 
 public  class SpecimenBasedMolecularFinding 
-    extends gov.nih.nci.caintegrator.domain.finding.bean.Finding
+   // extends gov.nih.nci.caintegrator.domain.finding.bean.Finding
 
 
 	implements java.io.Serializable 
