@@ -71,7 +71,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	                                   createAlias("specimenCollection", "specimens").
 	                                   setFetchMode("population", FetchMode.EAGER).
 	                                   add(Restrictions.in("specimens.specimenIdentifier", values));
-	                 crit.uniqueResult();
+	                 //crit.uniqueResult();
 	                 crit.setFirstResult(0);
 	                 crit.setMaxResults(toIndex - fromIndex);
 	                 Collection<StudyParticipant> studySubjects = crit.list();
