@@ -28,7 +28,8 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
         return new ArrayList<StudyParticipant>();
     }
 
-    public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
+    @SuppressWarnings("unchecked")
+	public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
                                                             int fromIndex, int toIndex) {
 
 	try {
@@ -47,7 +48,9 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	                            setFetchMode("population", FetchMode.EAGER);
 	           crit.setFirstResult(fromIndex);
 	           crit.setMaxResults(toIndex - fromIndex);
-	           subjects = crit.list();
+	           List<StudyParticipant> list = crit.list();
+	           subjectsSet.addAll(list);
+	           subjects.addAll(subjectsSet);
 	       }
 	       else if (specimenIDs.size() == 0) {
 	            /* means StudyParticipantCriteria did not select and Specimens  Hence return
@@ -68,7 +71,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	                                   createAlias("specimenCollection", "specimens").
 	                                   setFetchMode("population", FetchMode.EAGER).
 	                                   add(Restrictions.in("specimens.specimenIdentifier", values));
-	
+	                 crit.uniqueResult();
 	                 crit.setFirstResult(0);
 	                 crit.setMaxResults(toIndex - fromIndex);
 	                 Collection<StudyParticipant> studySubjects = crit.list();
