@@ -49,7 +49,7 @@ public  class Specimen
     }
 	
 	   
-    private String timecourse_name;
+    private String timePoint;
     
     
     
@@ -282,11 +282,11 @@ public  class Specimen
    // public void setTimeCourse(gov.nih.nci.caintegrator.domain.study.bean.TimeCourse timeCourse){
        // this.timeCourse = timeCourse;
    // }
-	public String getTimecourse_name() {
-		return timecourse_name;
+	public String getTimePoint() {
+		return timePoint;
 	}
-	public void setTimecourse_name(String timecourse_name) {
-		this.timecourse_name = timecourse_name;
+	public void setTimePoint(String timePoint) {
+		this.timePoint = timePoint;
 	}	
 	   
 	   
