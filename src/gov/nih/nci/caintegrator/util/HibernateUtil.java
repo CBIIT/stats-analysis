@@ -1,5 +1,21 @@
 package gov.nih.nci.caintegrator.util;
 
+
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.*;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
+import gov.nih.nci.caintegrator.domain.annotation.protein.bean.ProteinBiomarker;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.*;
+import gov.nih.nci.caintegrator.domain.finding.bean.SpecimenBasedMolecularFinding;
+import gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding;
+import gov.nih.nci.caintegrator.domain.finding.clinical.breastCancer.bean.BreastCancerClinicalFinding;
+import gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.IHCFinding;
+import gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.LevelOfExpressionIHCFinding;
+import gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding;
+import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
+import gov.nih.nci.caintegrator.domain.study.bean.*;
+
+import org.hibernate.*;
+
 /**
  *
  *<!-- LICENSE_TEXT_START -->
@@ -111,6 +127,52 @@ import org.jdom.input.SAXBuilder;
 public class HibernateUtil {
     private final static ThreadLocal threadSession = new ThreadLocal();
     private final static ThreadLocal threadTransaction = new ThreadLocal();
+
+
+    static {
+        try {
+            // Create the SessionFactory from hibernate.cfg.xml
+            Configuration c= new Configuration();
+            sessionFactory = c.
+                                addClass(GenotypeFinding.class).
+                                addClass(SNPAssay.class).
+                                addClass(SNPPanel.class).
+                                addClass(SNPAnnotation.class).
+                                addClass(SNPAnalysisGroup.class).
+                                addClass(Histology.class).
+                                addClass(Population.class).
+                                addClass(SNPAssociationAnalysis.class).
+                                addClass(SNPAssociationFinding.class).
+                                addClass(SNPFrequencyFinding.class).                               
+                                addClass(Study.class).
+                                addClass(StudyParticipant.class).
+                                addClass(TimeCourse.class).
+                                addClass(Activity.class).
+                                addClass(GeneBiomarker.class).
+                                addClass(ProteinBiomarker.class).
+                                addClass(ClinicalFinding.class).
+                                addClass(BreastCancerClinicalFinding.class).
+                                addClass(SpecimenBasedMolecularFinding.class).
+                                addClass(Specimen.class).
+                                addClass(IHCFinding.class).
+                                addClass(LevelOfExpressionIHCFinding.class).                                
+                                addClass(Agent.class).
+                                addClass(Procedure.class).
+                                addClass(SubstanceAdministration.class).
+                                addClass(Surgery.class).
+                                configure().
+                                buildSessionFactory();
+
+
+
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+            // Make sure you log the exception, as it might be swallowed
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
 	private static Hashtable dbSessionFactories;
 	  
 	/**
@@ -175,6 +237,7 @@ public class HibernateUtil {
             e.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
+
         }
         return configDoc;
 	}
