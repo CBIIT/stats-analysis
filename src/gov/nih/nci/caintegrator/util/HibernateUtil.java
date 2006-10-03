@@ -125,6 +125,7 @@ import org.jdom.input.SAXBuilder;
  * DataBaseSessionFactory for caIntegrator based applications.
  */
 public class HibernateUtil {
+	private static final SessionFactory sessionFactory;	   
     private final static ThreadLocal threadSession = new ThreadLocal();
     private final static ThreadLocal threadTransaction = new ThreadLocal();
 
