@@ -91,7 +91,6 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
     }
 
     public void populateFindings(StudyParticipantCriteria spCrit, List toBePopulated) {
-	try {
 		   Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
 	       session.beginTransaction();
@@ -116,11 +115,6 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	            sendFindingsWithAnnotationCriteria(specimenIDs, session, toBePopulated);
 	       }
 	       session.close();
-	} catch (HibernateException e) {
-		logger.error(e);
-	} catch (Exception e) {
-		logger.error(e);
-	}
     }
     private void sendFindingsWithAnnotationCriteria(Collection<String> specimenIDs,
                                                     Session session, List toBePopulated) {

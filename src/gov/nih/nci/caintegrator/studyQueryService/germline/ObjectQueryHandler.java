@@ -50,7 +50,6 @@ public class ObjectQueryHandler {
 
     public static Collection<Study> getStudyObjects(StudyCriteria studyCrit) {
         if (studyCrit == null) return new ArrayList<Study>();
-		try {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			
 	        session.beginTransaction();
@@ -89,12 +88,6 @@ public class ObjectQueryHandler {
 	        List<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
 	        session.close();
 	        return studyObjs;
-		} catch (HibernateException e) {
-			logger.error(e);
-		} catch (Exception e) {
-			logger.error(e);
-		}
-		return null;
     }
 
     private static List<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {

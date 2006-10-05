@@ -110,7 +110,7 @@ public class HibernateUtil {
 		 }
 	}
 	
-	public static SessionFactory getSessionFactory() throws Exception{
+	public static SessionFactory getSessionFactory() {
 		SessionFactory sf = null;
 		String applicationContextName = "cgems";
 		 sf = (SessionFactory)dbSessionFactories.get(applicationContextName);
@@ -119,7 +119,7 @@ public class HibernateUtil {
 		 }
 		
 		 if(sf==null){
-		 	throw new Exception("Could not initialize session factory");
+	            throw new ExceptionInInitializerError("Could not initialize session factory");
 		 }
 		return sf;
 	}
