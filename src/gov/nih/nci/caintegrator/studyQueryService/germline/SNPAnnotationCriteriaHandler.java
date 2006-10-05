@@ -98,7 +98,7 @@ public class SNPAnnotationCriteriaHandler {
         StringBuffer snpAnnotHSQL = new StringBuffer(annotHSQL);
         String geneSymbolCond = "";
         if (geneSymbols != null && geneSymbols.size() > 0) {
-            geneSymbolCond = " s.geneBiomarkerCollection.hugoGeneSymbol IN (:geneSymbols) OR ";
+            geneSymbolCond = " s.geneBiomarkerCollection.hugoGeneSymbol IN (:geneSymbols) AND ";
             params.put("geneSymbols", geneSymbols);
         }
 
@@ -115,7 +115,7 @@ public class SNPAnnotationCriteriaHandler {
         /* 4 Handle SNPIdentifiers */
         dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
         if (dbSNPIdentifiers !=  null && dbSNPIdentifiers.size() > 0) {
-            String tmp = new String(" s.dbsnpId IN (:dbSnps ) OR ");
+            String tmp = new String(" s.dbsnpId IN (:dbSnps ) AND ");
             params.put("dbSnps", dbSNPIdentifiers);
             snpAnnotHSQL.append(tmp);
         }
@@ -134,7 +134,7 @@ public class SNPAnnotationCriteriaHandler {
          dbSNPIdentifiers etc) was metnioned and at the samtime there is also hql for PanelCrit
          is included.  So add panel criteria to the above SNPAnnotation criteria as subselect with
          preciding OR operator */
-            finalHQL = new StringBuffer(finalWithoutWhereHQL).append(" OR ").append(panelBasedSNPAnnotCrit).toString();
+            finalHQL = new StringBuffer(finalWithoutWhereHQL).append(" AND ").append(panelBasedSNPAnnotCrit).toString();
         } else {
             finalHQL = new StringBuffer(finalWithoutWhereHQL).toString();
         }
