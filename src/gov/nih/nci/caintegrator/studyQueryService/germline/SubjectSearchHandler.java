@@ -28,19 +28,16 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
         return new ArrayList<StudyParticipant>();
     }
 
-    @SuppressWarnings("unchecked")
+
 	public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
                                                             int fromIndex, int toIndex) {
-
-	try {
 		   Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-	
 	       session.beginTransaction();
 	       List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
 	       List<StudyParticipant> subjects = new ArrayList<StudyParticipant>();
 	       HashSet<StudyParticipant> subjectsSet = new HashSet<StudyParticipant>();
 	       Criteria crit = null;
-	
+
 	       if (specimenIDs == null) {
 	           /* meanse either StudyParticipantCriteria  is null or no StudyParticipantCriteria
 	              attributes are mentioned.  So ignore StudyParticipantCriteria and return all StudyParticipant* */
@@ -84,34 +81,28 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	                    return subjects.subList(0, (toIndex - fromIndex ));
 	                 }
 	               }
-	
+
 	               /* means each time it never gotten more than 500 results.  So add to final results */
 	               subjects.addAll(subjectsSet);
 	        }
 	        if (session.isOpen())
 	            session.close();
 	        return subjects;
-	} catch (HibernateException e) {
-		logger.error(e);
-	} catch (Exception e) {
-		logger.error(e);
-	}
-	return null;
     }
 
     public void populateFindings(StudyParticipantCriteria spCrit, List toBePopulated) {
 	try {
 		   Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		
+
 	       session.beginTransaction();
 	       List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
-	
+
 	       /* if (specimenIDs == null) either StudyParticipantCriteria  is null or no StudyParticipantCriteria
 	          attributes are mentioned.  So ignore StudyParticipantCriteria and return all subjects */
 	       if (specimenIDs == null) {
 	           sendFindingsWithoutAnnotationCriteria(session, toBePopulated);
 	       }
-	
+
 	       /* if (specimenIDs.size() == 0) means that the StudyParticipantCriteria did not select
 	           and Specimens  Hence return no StudyParticipants */
 	       else if (specimenIDs.size() == 0) {
@@ -134,6 +125,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
     private void sendFindingsWithAnnotationCriteria(Collection<String> specimenIDs,
                                                     Session session, List toBePopulated) {
         List<StudyParticipant> subjects = new ArrayList<StudyParticipant>();
+        HashSet<StudyParticipant> subjectsSet = new HashSet<StudyParticipant>();
         ArrayList<String> arrayIDs = new ArrayList<String>(specimenIDs);
         for (int i = 0; i < arrayIDs.size();) {
             List<String> values = new ArrayList<String>();
@@ -150,7 +142,13 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
                                                                     crit, -1, -1);
 
             /* convert these  currentFindings in to a List for convenience */
-            subjects.addAll(currentFindings );
+            for (Iterator<StudyParticipant> iterator = currentFindings.iterator(); iterator.hasNext();) {
+                StudyParticipant studyParticipant =  iterator.next();
+                if (! subjectsSet.contains(studyParticipant)) {
+                    subjectsSet.add(studyParticipant);
+                    subjects.add(studyParticipant);
+                }
+            }
 
             while (subjects.size() >= BatchFindingsHandler.BATCH_OBJECT_INCREMENT )
                  populateCurrentResultSet(subjects, toBePopulated, session);
