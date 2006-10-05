@@ -84,6 +84,15 @@ public class SNPAssociationFindingCriteriaDTO extends FindingCriteriaDTO {
 			str = str + "rank <= " + rank + "\n";
 		if (analysisGroupCriteria != null)
 			str = str + analysisGroupCriteria.toString();
+		if (snpAssociationAnalysisCriteriaCollection != null)
+		{
+			str = str + "Analysis:\n";
+			for(SNPAssociationAnalysisCriteria analysis : snpAssociationAnalysisCriteriaCollection)
+			{
+				if (analysis != null)
+					str = str + analysis.getName() + "\n";
+			}
+		}
 		
 		str = str + super.toString();
 		
