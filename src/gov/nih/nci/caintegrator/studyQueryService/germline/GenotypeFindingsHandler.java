@@ -204,6 +204,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
             GenotypeFinding finding =  (GenotypeFinding) iterator.next();
             specimenIDs.add(finding.getSpecimen().getId());
         }
+        
         if (specimenIDs.size() > 0)  {
             ArrayList arrayIDs = new ArrayList(specimenIDs );
             for (int i = 0; i < arrayIDs.size();) {
@@ -212,8 +213,10 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                 i += BatchFindingsHandler.IN_PARAMETERS ;
                 int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                 values.addAll(arrayIDs.subList(begIndex,  lastIndex));
-                Criteria specimenCrit = session.createCriteria(Specimen.class).setFetchMode("studyParticipant", FetchMode.EAGER)
-                                    .add(Restrictions.in("id", values));
+                Criteria specimenCrit = session.createCriteria(Specimen.class)
+                                        .add(Restrictions.in("id", values))
+                                        .setFetchMode("studyParticipant", FetchMode.EAGER);
+
                 specimenCrit .list();
             }
         }
