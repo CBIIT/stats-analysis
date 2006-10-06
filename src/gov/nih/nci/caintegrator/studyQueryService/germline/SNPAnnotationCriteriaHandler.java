@@ -157,7 +157,7 @@ public class SNPAnnotationCriteriaHandler {
 
         if ((chromosome == null) || (startPos == null) || (endPos == null) )
              throw new RuntimeException("Chromosme, StartPosition, EndPosition are required ");
-        String tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end )) OR ");
+        String tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end )) AND ");
         params.put("chr", chromosome);
         params.put("start", startPos);
         params.put("end", endPos);
