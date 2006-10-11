@@ -87,7 +87,8 @@ public class SNPAnnotationCriteriaHandler {
     public static StringBuffer getAnnotHQLWithParams(AnnotationCriteria annotCrit, HashMap params) throws Exception {
         PhysicalPositionCriteria poistionCrit = annotCrit.getPhysicalPositionCriteria();
         Collection<String> dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
-        Collection<String> geneSymbols = annotCrit.getGeneSymbols();
+        Collection<String> geneSymbols = HQLHelper.trimCollection(
+                                  annotCrit.getGeneSymbols());
 
         PanelCriteria panelCrit = annotCrit.getPanelCriteria();
         if ((panelCrit != null) && (poistionCrit == null && dbSNPIdentifiers == null) )

@@ -129,12 +129,21 @@ public class HQLHelper {
      }
 
      public static Collection<String> convertToLowerCaseCollection(Collection<String> collectionToBeConverted) {
-         Collection convertCaseValues = new ArrayList<String>(collectionToBeConverted.size());
+         Collection trimmedValues = new ArrayList<String>(collectionToBeConverted.size());
          for (Iterator<String> iterator = collectionToBeConverted.iterator(); iterator.hasNext();) {
              String s =  iterator.next();
-             convertCaseValues.add(s.toLowerCase());
+             trimmedValues.add(s.toLowerCase());
          }
-         return convertCaseValues;
+         return trimmedValues;
+     }
+
+     public static Collection<String> trimCollection(Collection<String> collectionToBeConverted) {
+        Collection convertCaseValues = new ArrayList<String>(collectionToBeConverted.size());
+        for (Iterator<String> iterator = collectionToBeConverted.iterator(); iterator.hasNext();) {
+            String s =  iterator.next();
+            convertCaseValues.add(s.trim());
+        }
+        return convertCaseValues;
      }
 
 }
