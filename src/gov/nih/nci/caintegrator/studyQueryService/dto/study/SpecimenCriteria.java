@@ -10,7 +10,10 @@ public class SpecimenCriteria {
 	private Set<String> timeCourseCollection;
 	private String collectionMethod;
 	private String materialType ;
-	private String specimenIdentifier;
+	private Set<String> specimenIdentifierCollection;
+	private Set<String> patientIdentifierCollection;
+	
+	
 	
 	 public SpecimenHandler getHandler()
 	    {
@@ -38,19 +41,44 @@ public class SpecimenCriteria {
 	public void setMaterialType(String materialType) {
 		this.materialType = materialType;
 	}
-	public String getSpecimenIdentifier() {
-		return specimenIdentifier;
-	}
-	public void setSpecimenIdentifier(String specimenIdentifier) {
-		this.specimenIdentifier = specimenIdentifier;
-	}
+	
 	public Set<String> getTimeCourseCollection() {
 		return timeCourseCollection;
 	}
 	public void setTimeCourseCollection(Set<String> timeCourseCollection) {
 		this.timeCourseCollection = timeCourseCollection;
 	}
+
+	public Set<String> getPatientIdentifierCollection() {
+		return patientIdentifierCollection;
+	}
+
+	public void setPatientIdentifierCollection(
+			Set<String> patientIdentifierCollection) {
+		this.patientIdentifierCollection = patientIdentifierCollection;
+	}
+
+
+	public Set<String> getSpecimenIdentifierCollection() {
+		return specimenIdentifierCollection;
+	}
+
+
+
+
+	public void setSpecimenIdentifierCollection(
+			Set<String> specimenIdentifierCollection) {
+		this.specimenIdentifierCollection = specimenIdentifierCollection;
+	}
+
 	
+
+
+
+
+
+
+
 	
 	
 	
