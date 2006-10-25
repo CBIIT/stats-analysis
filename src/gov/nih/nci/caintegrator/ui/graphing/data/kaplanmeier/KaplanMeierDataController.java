@@ -104,6 +104,13 @@ public class KaplanMeierDataController {
 
 	public KaplanMeierDataController(double _upFold, double _downFold, String _geneName,
 			KaplanMeierSampleInfo[] samples, String plotType) {
+		this(_upFold, _downFold, _geneName, samples, plotType, "");
+	}
+	public KaplanMeierDataController(double _upFold, double _downFold, String _geneName,
+			KaplanMeierSampleInfo[] samples, String plotType, String cName) {
+		
+		String lbl = (cName != null && cName != "") ? cName : "All Samples";
+		
 		final DecimalFormat decimalFormat = new DecimalFormat("0.0");	
 		geneSymbol = _geneName;
 		setPlotType(plotType);
@@ -116,7 +123,7 @@ public class KaplanMeierDataController {
 						this.getDownFold());
 				// All Sample Series
 				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.ALL_SAMPLES,
-						"All Samples ", Color.BLUE));
+						lbl, Color.BLUE));
 				// UpRegulated Samples Series
 				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.UPREGULATED,
 						geneSymbol + getUpLabel() + " >= " + decimalFormat.format(upFold) + "X ",Color.RED));
@@ -134,7 +141,7 @@ public class KaplanMeierDataController {
 						this.getDownFold());
 				// All Sample Series
 				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.ALL_SAMPLES,
-						"All Samples ", Color.BLUE));
+						lbl, Color.BLUE));
 				// UpRegulated Samples Series
 				plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.UPREGULATED,
 						geneSymbol + getUpLabel() + " >= " + decimalFormat.format(upFold) + " copies ",Color.RED));
