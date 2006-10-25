@@ -36,10 +36,26 @@ public class SpecimenHandler {
             
         	 if (theCriteria.getTimeCourseCollection() != null && theCriteria.getTimeCourseCollection().size() > 0) {
         		 theHQL.append(theANDString + " s.timePoint IN (:s_timePoint) ");
-                 inParams.put("s_timePoint", theCriteria.getTimeCourseCollection());
+                 inParams.put("s_timePoint", theCriteria.getTimeCourseCollection());                 
+                 theANDString = " AND ";
+            }
+        	 
+        	 if (theCriteria.getPatientIdentifierCollection() != null && theCriteria.getPatientIdentifierCollection().size() > 0) {
+        		 theHQL.append(theANDString + " s.patientDID IN (:s_patientDID) ");
+                 inParams.put("s_patientDID", theCriteria.getPatientIdentifierCollection());
+                 theANDString = " AND ";
             
             }
-        }        
+        	 
+        	 if (theCriteria.getSpecimenIdentifierCollection() != null && theCriteria.getSpecimenIdentifierCollection().size() > 0) {
+        		 theHQL.append(theANDString + " s.specimenIdentifier IN (:s_specimenIdentifier) ");
+                 inParams.put("s_specimenIdentifier", theCriteria.getSpecimenIdentifierCollection());
+            
+            }
+        	 
+        	 
+        }  
+        
       
         return theHQL;
     }	
