@@ -51,6 +51,8 @@ public  class Specimen
 	   
     private String timePoint;
     
+    private String patientDID;
+    
     
     
     /**
@@ -287,6 +289,12 @@ public  class Specimen
 	}
 	public void setTimePoint(String timePoint) {
 		this.timePoint = timePoint;
+	}
+	public String getPatientDID() {
+		return patientDID;
+	}
+	public void setPatientDID(String patientDID) {
+		this.patientDID = patientDID;
 	}	
 	   
 	   
