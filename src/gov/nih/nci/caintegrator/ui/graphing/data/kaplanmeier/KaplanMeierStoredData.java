@@ -517,7 +517,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 	 * @param sampleList1VsSampleList2 The sampleList1VsSampleList2 to set.
 	 */
 	public void setSampleList1VsSampleList2(Double sampleList1VsSampleList2) {
-		this.sampleList1VsSampleList2 = sampleList1VsSampleList2;
+		this.sampleList1VsSampleList2 = new Double(resultFormat.format(sampleList1VsSampleList2));
 	}
 
 	/**
