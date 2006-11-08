@@ -133,6 +133,7 @@
 					<filter token="INCLUDE_PACKAGE" value="${include_package}"/>
 					<filter token="EXCLUDE_PACKAGE" value="${exclude_package}"/>
 					<filter token="EXCLUDE_NAME" value="${exclude_name}"/>
+					<filter token="ROLE_EXCLUDE_NAME" value="${role_exclude_name}"/>
 					<filter token="CACHE_PATH" value="${cachepath}"/>
 					<filter token="WEBSERVICENAME" value="${webservice_name}"/>
 					<filter token="DEPLOYWSDD" value="${file.wsdd.deploy}"/>
@@ -202,6 +203,82 @@
 <!--***********************************************************************
 	*** FINALLY!  THE TARGETS (in alphabetical order)
 	*********************************************************************** -->
+	<target name="add-hbm"
+				depends="-copy-hbm,-remove-dot-bean"
+				description="copeis all the hbm files from caintegrator-spec src folder, put them into caintegrator-spec cacoretoolkit custom cgom folder, then remove .bean from them">
+		</target>
+		
+		<target name="-copy-hbm">	
+			
+			<copy overwrite="true" todir="${dir.src.custom.hbm}">
+				
+				<fileset dir="..${dir.analysis.snp.bean.hbm}">			
+				   <include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.annotation.gene.bean.hbm}">		
+				  <include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.annotation.protein.bean.hbm}">				
+				  <include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.annotation.snp.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.common.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.finding.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.finding.clinical.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.finding.clinical.breastCancer.bean.hbm}">				
+					 <include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.finding.protein.ihc.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.finding.variation.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.finding.variation.germline.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>			
+				
+				<fileset dir="..${dir.finding.variation.snpFrequency.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>
+				
+				<fileset dir="..${dir.finding.variation.somaticMutation.bean.hbm}">				
+					<include name="*.xml"/>					
+				</fileset>
+				
+				
+				<fileset dir="..${dir.study.bean.hbm}">				
+					 <include name="*.xml"/>			
+				</fileset>
+				
+			</copy>
+		</target>
+		
+		<target name="-remove-dot-bean"				
+				description="remove .bean from hbm files in caintegrator-spec cacoretoolkit custom cgom folder">	
+			   <replace dir="${dir.src.custom.hbm}" token=".bean" value="">
+			      <include name="*.xml"/>
+			   </replace>
+		</target>	
+	
 	
 	<target name="build-artifacts"
 		depends="-build-artifacts.main,-build-artifacts.custom"
@@ -247,7 +324,8 @@
 		depends="-build-system.main,-build-system.custom"
 		description="Runs entire SDK code generation process"/>
 
-	<target name="-build-system.main" depends="install-tomcat,build-schema,compile-framework,build-beans,build-orm,build-artifacts,package-system,deploy-server" unless="build-system.main.ignore"/>
+<!--	<target name="-build-system.main" depends="install-tomcat,build-schema,compile-framework,build-beans,build-orm,build-artifacts,package-system,deploy-server" unless="build-system.main.ignore"/> -->
+	<target name="-build-system.main" depends="compile-framework,build-orm,build-artifacts,package-system,deploy-server" unless="build-system.main.ignore"/>
 
 	<target name="clean" 
 		depends="-clean.main,-clean.custom"
@@ -328,6 +406,7 @@
 		<copy todir="${dir.output.project.orm}" overwrite="yes" failonerror="false">
 			<fileset dir="${dir.src.custom.orm}">
 				<include name="**/*.hbm.xml" />
+				<include name="**/hibernate.properties" />			
 			</fileset>
 		</copy>
 		<copy todir="${dir.output.project.conf}" overwrite="yes" failonerror="false">
@@ -523,8 +602,10 @@
 		depends="-deploy-server.main,-deploy-server.custom"
 		description="Deploys system to J2EE container"/>
 	
-	<target name="-deploy-server.main" depends="copy-server-file,start-container" unless="deploy-server.main.ignore">
-		
+	<!--<target name="-deploy-server.main" depends="copy-server-file,start-container" unless="deploy-server.main.ignore">
+	-->
+	<target name="-deploy-server.main" depends="copy-server-file" unless="deploy-server.main.ignore">
+
 	</target>	
 
 	<target name="deployWS" 
@@ -641,11 +722,12 @@
 	
 	<target name="-generate-beans.main" depends="init-project,jetc" unless="generate-beans.main.ignore">
 		<SDKecho message="Generating Java beans from model"/> 
-<!--		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beangeneration}"/>
+		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beangeneration}"/>
 		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beanimplgeneration}"/>
 		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beanwsgeneration}"/>
-		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beanwsimplgeneration}"/> -->
+		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beanwsimplgeneration}"/>
 		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.pojogeneration}"/>
+		
 	</target>
 
 	<target name="generate-cache" 
@@ -874,6 +956,7 @@
 				<include name="cacoreBeans.properties"/>
 				<include name="CORESystem.properties"/>
 				<include name="ehcache.xml"/>
+				<include name="remoteService.xml"/>
 			</fileset>
 		</jar>
 

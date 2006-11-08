@@ -1,5 +1,5 @@
 <?xml version="1.0"  encoding="windows-1252"?>
-<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2006-08-08 13:23:20">
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2006-09-28 10:07:28">
 	<XMI.header>
 		<XMI.documentation>
 			<XMI.exporter>Enterprise Architect</XMI.exporter>
@@ -29713,7 +29713,7 @@ DO we neec start &amp; end postions, Chromsome, Cytoband at all in GeneAnnotatio
 																						<UML:TaggedValue tag="package_name" value="study"/>
 																						<UML:TaggedValue tag="complexity" value="1"/>
 																						<UML:TaggedValue tag="status" value="Proposed"/>
-																						<UML:TaggedValue tag="eventflags" value="LNK=267c;ATT=4ce0;"/>
+																						<UML:TaggedValue tag="eventflags" value="LNK=267c;ATT=8dd7;"/>
 																						<UML:TaggedValue tag="style" value="BackColor=8454143;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 																						<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={5B53377A-F2DA-47d5-9B64-257ED1328399}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={46994BC5-16F8-4f58-9F70-230B298DC0DE}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={23F4AD68-1CC1-4e1c-9E4E-4B2647483044}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={46994BC5-16F8-4f58-9F70-230B298DC0DE}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																					</UML:ModelElement.taggedValue>
@@ -29795,11 +29795,11 @@ DO we neec start &amp; end postions, Chromsome, Cytoband at all in GeneAnnotatio
 																								<UML:Expression/>
 																							</UML:Attribute.initialValue>
 																							<UML:StructuralFeature.type>
-																								<Foundation.Core.Classifier xmi.idref="EAID_AA29AB21_DF86_4fb0_AB92_DA9DE305778C"/>
+																								<Foundation.Core.Classifier xmi.idref="EAID_A0A27478_8056_4ec5_91E6_15922FC6A71F"/>
 																							</UML:StructuralFeature.type>
 																							<UML:ModelElement.taggedValue>
 																								<UML:TaggedValue tag="description" value="Unique identifier for the instance of Agent"/>
-																								<UML:TaggedValue tag="type" value="String"/>
+																								<UML:TaggedValue tag="type" value="Long"/>
 																								<UML:TaggedValue tag="derived" value="0"/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
@@ -30140,7 +30140,7 @@ NOTE: Includes 110 Values."/>
 																						<UML:TaggedValue tag="package_name" value="study"/>
 																						<UML:TaggedValue tag="complexity" value="1"/>
 																						<UML:TaggedValue tag="status" value="Proposed"/>
-																						<UML:TaggedValue tag="eventflags" value="LNK=9fd2;ATT=a9f2;"/>
+																						<UML:TaggedValue tag="eventflags" value="ATT=a9f2;LNK=29b4;"/>
 																						<UML:TaggedValue tag="style" value="BackColor=8454143;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 																						<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={7B535157-0AB5-4a3e-B2FC-73F7D30C9030}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={8ADFAF40-F05D-4715-8A30-56F524450F13}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={CCFC7BC3-3B3A-45c0-9D1B-996BAD02C230}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={8ADFAF40-F05D-4715-8A30-56F524450F13}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																					</UML:ModelElement.taggedValue>
@@ -30422,11 +30422,11 @@ NOTE: Also maps to Treatment Phase End Date 2187546, Dose Modification End Date 
 																						<UML:TaggedValue tag="virtualInheritance" value="0"/>
 																					</UML:ModelElement.taggedValue>
 																					<UML:Association.connection>
-																						<UML:AssociationEnd visibility="public" multiplicity="0..*" name="studyParticipantCollection" aggregation="none" isOrdered="false" isNavigable="true" type="EAID_334E9B90_EE53_4b78_B771_B0458FB7FB54">
+																						<UML:AssociationEnd visibility="public" multiplicity="1" name="studyParticipant" aggregation="none" isOrdered="false" isNavigable="true" type="EAID_334E9B90_EE53_4b78_B771_B0458FB7FB54">
 																							<UML:AssociationEnd.multiplicity>
 																								<UML:Multiplicity>
 																									<UML:Multiplicity.range>
-																										<UML:MultiplicityRange lower="0" upper="-1"/>
+																										<UML:MultiplicityRange lower="0" upper="1"/>
 																									</UML:Multiplicity.range>
 																								</UML:Multiplicity>
 																							</UML:AssociationEnd.multiplicity>
@@ -30500,6 +30500,61 @@ NOTE: Also maps to Treatment Phase End Date 2187546, Dose Modification End Date 
 																								<UML:TaggedValue tag="duplicates" value="0"/>
 																								<UML:TaggedValue tag="ea_guid" value="{DB6962A9-0F7A-445b-9E91-FF1C7679475F}"/>
 																								<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																							</UML:ModelElement.taggedValue>
+																						</UML:Attribute>
+																						<UML:Attribute name="procedureType" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																							<UML:StructuralFeature.multiplicity>
+																								<UML:Multiplicity>
+																									<UML:Multiplicity.range>
+																										<UML:MultiplicityRange lower="1" upper="1"/>
+																									</UML:Multiplicity.range>
+																								</UML:Multiplicity>
+																							</UML:StructuralFeature.multiplicity>
+																							<UML:Attribute.initialValue>
+																								<UML:Expression/>
+																							</UML:Attribute.initialValue>
+																							<UML:StructuralFeature.type>
+																								<Foundation.Core.Classifier xmi.idref="EAID_AA29AB21_DF86_4fb0_AB92_DA9DE305778C"/>
+																							</UML:StructuralFeature.type>
+																							<UML:ModelElement.taggedValue>
+																								<UML:TaggedValue tag="type" value="String"/>
+																								<UML:TaggedValue tag="derived" value="0"/>
+																								<UML:TaggedValue tag="containment" value="Not Specified"/>
+																								<UML:TaggedValue tag="ordered" value="0"/>
+																								<UML:TaggedValue tag="collection" value="false"/>
+																								<UML:TaggedValue tag="position" value="1"/>
+																								<UML:TaggedValue tag="lowerBound" value="1"/>
+																								<UML:TaggedValue tag="upperBound" value="1"/>
+																								<UML:TaggedValue tag="duplicates" value="0"/>
+																								<UML:TaggedValue tag="ea_guid" value="{199A3941-9889-46d4-9ADA-D9343FA63C73}"/>
+																								<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																							</UML:ModelElement.taggedValue>
+																						</UML:Attribute>
+																						<UML:Attribute name="procedureName" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																							<UML:StructuralFeature.multiplicity>
+																								<UML:Multiplicity>
+																									<UML:Multiplicity.range>
+																										<UML:MultiplicityRange lower="1" upper="1"/>
+																									</UML:Multiplicity.range>
+																								</UML:Multiplicity>
+																							</UML:StructuralFeature.multiplicity>
+																							<UML:Attribute.initialValue>
+																								<UML:Expression/>
+																							</UML:Attribute.initialValue>
+																							<UML:StructuralFeature.type>
+																								<Foundation.Core.Classifier xmi.idref="EAID_AA29AB21_DF86_4fb0_AB92_DA9DE305778C"/>
+																							</UML:StructuralFeature.type>
+																							<UML:ModelElement.taggedValue>
+																								<UML:TaggedValue tag="type" value="String"/>
+																								<UML:TaggedValue tag="derived" value="0"/>
+																								<UML:TaggedValue tag="containment" value="Not Specified"/>
+																								<UML:TaggedValue tag="ordered" value="0"/>
+																								<UML:TaggedValue tag="collection" value="false"/>
+																								<UML:TaggedValue tag="position" value="2"/>
+																								<UML:TaggedValue tag="lowerBound" value="1"/>
+																								<UML:TaggedValue tag="upperBound" value="1"/>
+																								<UML:TaggedValue tag="duplicates" value="0"/>
+																								<UML:TaggedValue tag="ea_guid" value="{6E53C30D-7759-4ffa-9A24-9B5ECA06120C}"/>
 																							</UML:ModelElement.taggedValue>
 																						</UML:Attribute>
 																					</UML:Classifier.feature>
@@ -31060,7 +31115,7 @@ NOTE: Can be a sample of a collection or biopsy. (arc relationship)"/>
 																						<UML:TaggedValue tag="package_name" value="study"/>
 																						<UML:TaggedValue tag="complexity" value="1"/>
 																						<UML:TaggedValue tag="status" value="Proposed"/>
-																						<UML:TaggedValue tag="eventflags" value="OPN=0a3c;ATT=6ad6;LNK=96a9;"/>
+																						<UML:TaggedValue tag="eventflags" value="OPN=0a3c;ATT=7a6f;LNK=29b4;"/>
 																						<UML:TaggedValue tag="style" value="BackColor=14271444;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 																						<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={48721935-C80E-4b3e-9A04-3D8392DF4471}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={334E9B90-EE53-4b78-B771-B0458FB7FB54}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																					</UML:ModelElement.taggedValue>
@@ -31116,7 +31171,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="2"/>
+																								<UML:TaggedValue tag="position" value="1"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31149,7 +31204,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="precision" value="0"/>
 																								<UML:TaggedValue tag="scale" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="3"/>
+																								<UML:TaggedValue tag="position" value="2"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31178,7 +31233,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="4"/>
+																								<UML:TaggedValue tag="position" value="3"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31207,7 +31262,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="5"/>
+																								<UML:TaggedValue tag="position" value="4"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31237,7 +31292,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="6"/>
+																								<UML:TaggedValue tag="position" value="5"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31266,7 +31321,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="7"/>
+																								<UML:TaggedValue tag="position" value="6"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31295,7 +31350,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="8"/>
+																								<UML:TaggedValue tag="position" value="7"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31324,7 +31379,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="9"/>
+																								<UML:TaggedValue tag="position" value="8"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31353,7 +31408,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="10"/>
+																								<UML:TaggedValue tag="position" value="9"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31386,7 +31441,7 @@ Values include: Female, Male, Unknown."/>
 																								<UML:TaggedValue tag="precision" value="0"/>
 																								<UML:TaggedValue tag="scale" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="11"/>
+																								<UML:TaggedValue tag="position" value="10"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -31407,16 +31462,16 @@ Values include: Female, Male, Unknown."/>
 																								<UML:Expression/>
 																							</UML:Attribute.initialValue>
 																							<UML:StructuralFeature.type>
-																								<Foundation.Core.Classifier xmi.idref="EAID_5252D4E2_9FA9_4db2_9446_C05BF9EAB075"/>
+																								<Foundation.Core.Classifier xmi.idref="EAID_AA29AB21_DF86_4fb0_AB92_DA9DE305778C"/>
 																							</UML:StructuralFeature.type>
 																							<UML:ModelElement.taggedValue>
 																								<UML:TaggedValue tag="description" value="Indicates whether a patient is surviving."/>
-																								<UML:TaggedValue tag="type" value="Boolean"/>
+																								<UML:TaggedValue tag="type" value="String"/>
 																								<UML:TaggedValue tag="derived" value="0"/>
 																								<UML:TaggedValue tag="containment" value="Not Specified"/>
 																								<UML:TaggedValue tag="ordered" value="0"/>
 																								<UML:TaggedValue tag="collection" value="false"/>
-																								<UML:TaggedValue tag="position" value="12"/>
+																								<UML:TaggedValue tag="position" value="11"/>
 																								<UML:TaggedValue tag="lowerBound" value="1"/>
 																								<UML:TaggedValue tag="upperBound" value="1"/>
 																								<UML:TaggedValue tag="duplicates" value="0"/>
@@ -37282,7 +37337,7 @@ SNPs across the genome. "/>
 																						<UML:TaggedValue tag="version" value="1.0"/>
 																						<UML:TaggedValue tag="package" value="EAPK_363C6C46_E789_4ee9_BB3E_FD4D15AE6140"/>
 																						<UML:TaggedValue tag="date_created" value="2006-07-20 11:16:33"/>
-																						<UML:TaggedValue tag="date_modified" value="2006-07-21 12:38:10"/>
+																						<UML:TaggedValue tag="date_modified" value="2006-09-27 17:35:07"/>
 																						<UML:TaggedValue tag="gentype" value="Java"/>
 																						<UML:TaggedValue tag="tagged" value="0"/>
 																						<UML:TaggedValue tag="package_name" value="finding"/>
@@ -37294,6 +37349,36 @@ SNPs across the genome. "/>
 																						<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 																						<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={A1123AA2-EE79-49c4-8B0D-93C254DEA46C}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={3E865D33-0CB7-40ee-ABA8-61CFAF0302A2}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																					</UML:ModelElement.taggedValue>
+																					<UML:Classifier.feature>
+																						<UML:Attribute name="id" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																							<UML:StructuralFeature.multiplicity>
+																								<UML:Multiplicity>
+																									<UML:Multiplicity.range>
+																										<UML:MultiplicityRange lower="1" upper="1"/>
+																									</UML:Multiplicity.range>
+																								</UML:Multiplicity>
+																							</UML:StructuralFeature.multiplicity>
+																							<UML:Attribute.initialValue>
+																								<UML:Expression/>
+																							</UML:Attribute.initialValue>
+																							<UML:StructuralFeature.type>
+																								<Foundation.Core.Classifier xmi.idref="EAID_A0A27478_8056_4ec5_91E6_15922FC6A71F"/>
+																							</UML:StructuralFeature.type>
+																							<UML:ModelElement.taggedValue>
+																								<UML:TaggedValue tag="type" value="Long"/>
+																								<UML:TaggedValue tag="derived" value="0"/>
+																								<UML:TaggedValue tag="containment" value="Not Specified"/>
+																								<UML:TaggedValue tag="ordered" value="0"/>
+																								<UML:TaggedValue tag="collection" value="false"/>
+																								<UML:TaggedValue tag="position" value="0"/>
+																								<UML:TaggedValue tag="lowerBound" value="1"/>
+																								<UML:TaggedValue tag="upperBound" value="1"/>
+																								<UML:TaggedValue tag="duplicates" value="0"/>
+																								<UML:TaggedValue tag="ea_guid" value="{1235CD39-40D4-4b54-96C9-5B52C7B1D010}"/>
+																								<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																							</UML:ModelElement.taggedValue>
+																						</UML:Attribute>
+																					</UML:Classifier.feature>
 																					<UML:Namespace.ownedElement>
 																						<UML:Generalization child="EAID_44E611FB_8CD0_4244_8CF1_26FCCD72C4C7" parent="EAID_3E865D33_0CB7_40ee_ABA8_61CFAF0302A2" xmi.id="EAID_05EE7BBC_2A32_49a7_AFCE_3C1796EF2550" visibility="public">
 																							<UML:ModelElement.taggedValue>
@@ -38306,7 +38391,7 @@ http://members.aol.com/chrominfo/fishinfo.htm"/>
 																								<UML:TaggedValue tag="complexity" value="1"/>
 																								<UML:TaggedValue tag="status" value="Proposed"/>
 																								<UML:TaggedValue tag="eventflags" value="LNK=6257;ATT=0a41;"/>
-																								<UML:TaggedValue tag="$ea_attsclassified" value="{7F45A64A-3F56-46c1-AC56-EFE9880C1A0E},{84310E50-A3B9-4c9a-BA57-88AD605BE038},{0F27CDBB-A3A1-448a-8B0C-19928FB086B9},{7ACC513C-7F46-4550-8CCE-8ACC3B58D4B6},{B7E36B52-2CBC-478d-906E-6167D62248C9},{1682E7E3-77D8-4488-91FC-ED3A20D94224},{175CDF71-CD29-488b-A681-6FAE748746DA},{FBCACDA8-724F-4d53-82E3-146DB57B8831},{DE57F042-49DB-4701-8392-1D0B9BCE5655},{E3B4AA7E-98AC-4119-B51D-E60CA90B54C0}"/>
+																								<UML:TaggedValue tag="$ea_attsclassified" value="{7F45A64A-3F56-46c1-AC56-EFE9880C1A0E},{B2151AB1-91A1-4737-A234-98A4ECB84CB1},{B091F9B6-1DFC-4c81-ACA0-E30DC04C7E4B},{6ADE22B0-BD15-4a17-BB74-0099B35E8EF2},{C749B7EC-228A-4437-BBCE-A15335674402},{DEACE8EF-DCDA-47c0-920D-07B2184BF277},{801A9125-75F0-489d-B0A9-91D2ED4A1866},{0F3FCEE1-9813-4194-A97E-D36D5AF137FF},{84310E50-A3B9-4c9a-BA57-88AD605BE038},{0F27CDBB-A3A1-448a-8B0C-19928FB086B9},{7ACC513C-7F46-4550-8CCE-8ACC3B58D4B6},{B7E36B52-2CBC-478d-906E-6167D62248C9},{1682E7E3-77D8-4488-91FC-ED3A20D94224},{175CDF71-CD29-488b-A681-6FAE748746DA},{FBCACDA8-724F-4d53-82E3-146DB57B8831},{DE57F042-49DB-4701-8392-1D0B9BCE5655},{E3B4AA7E-98AC-4119-B51D-E60CA90B54C0}"/>
 																								<UML:TaggedValue tag="style" value="BackColor=8454143;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 																								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={59EC3565-74D1-4b4e-B701-B43E32B7700C}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={007CBABD-901A-4132-8B56-850F3648147A}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																							</UML:ModelElement.taggedValue>
@@ -38395,35 +38480,6 @@ http://members.aol.com/chrominfo/fishinfo.htm"/>
 																								<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={EA746E53-B2F3-431f-A8D6-6CE9DA5F1DC2}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={F38CFF6E-37F2-46ca-BE37-BB34AE56FCCA}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																							</UML:ModelElement.taggedValue>
 																							<UML:Classifier.feature>
-																								<UML:Attribute name="id" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
-																									<UML:StructuralFeature.multiplicity>
-																										<UML:Multiplicity>
-																											<UML:Multiplicity.range>
-																												<UML:MultiplicityRange lower="1" upper="1"/>
-																											</UML:Multiplicity.range>
-																										</UML:Multiplicity>
-																									</UML:StructuralFeature.multiplicity>
-																									<UML:Attribute.initialValue>
-																										<UML:Expression/>
-																									</UML:Attribute.initialValue>
-																									<UML:StructuralFeature.type>
-																										<Foundation.Core.Classifier xmi.idref="EAID_AA29AB21_DF86_4fb0_AB92_DA9DE305778C"/>
-																									</UML:StructuralFeature.type>
-																									<UML:ModelElement.taggedValue>
-																										<UML:TaggedValue tag="description" value="Unique identifier for the instance of ClinicalFinding."/>
-																										<UML:TaggedValue tag="type" value="String"/>
-																										<UML:TaggedValue tag="derived" value="0"/>
-																										<UML:TaggedValue tag="containment" value="Not Specified"/>
-																										<UML:TaggedValue tag="ordered" value="0"/>
-																										<UML:TaggedValue tag="collection" value="false"/>
-																										<UML:TaggedValue tag="position" value="0"/>
-																										<UML:TaggedValue tag="lowerBound" value="1"/>
-																										<UML:TaggedValue tag="upperBound" value="1"/>
-																										<UML:TaggedValue tag="duplicates" value="0"/>
-																										<UML:TaggedValue tag="ea_guid" value="{26DC12F2-BAED-407e-BF4A-6B64DF22E16C}"/>
-																										<UML:TaggedValue tag="styleex" value="volatile=0;"/>
-																									</UML:ModelElement.taggedValue>
-																								</UML:Attribute>
 																								<UML:Operation name="getClinicalAssessmentCollection" visibility="public" ownerScope="instance" isQuery="false" concurrency="sequential">
 																									<UML:ModelElement.taggedValue>
 																										<UML:TaggedValue tag="type" value="Collection"/>
@@ -38545,11 +38601,74 @@ http://members.aol.com/chrominfo/fishinfo.htm"/>
 																										<UML:TaggedValue tag="phase" value="1.0"/>
 																										<UML:TaggedValue tag="complexity" value="1"/>
 																										<UML:TaggedValue tag="status" value="Proposed"/>
-																										<UML:TaggedValue tag="eventflags" value="LNK=520c;ATT=6550;"/>
+																										<UML:TaggedValue tag="eventflags" value="LNK=520c;ATT=f2a4;"/>
 																										<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 																										<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={65486121-4E74-47bd-9C83-FD74C435A310}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={26F2497C-CE23-4a14-9422-0A3B8520B346}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																									</UML:ModelElement.taggedValue>
 																									<UML:Classifier.feature>
+																										<UML:Attribute name="chemo" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																											<UML:StructuralFeature.multiplicity>
+																												<UML:Multiplicity>
+																													<UML:Multiplicity.range>
+																														<UML:MultiplicityRange lower="1" upper="1"/>
+																													</UML:Multiplicity.range>
+																												</UML:Multiplicity>
+																											</UML:StructuralFeature.multiplicity>
+																											<UML:Attribute.initialValue>
+																												<UML:Expression/>
+																											</UML:Attribute.initialValue>
+																											<UML:StructuralFeature.type>
+																												<Foundation.Core.Classifier xmi.idref="EAID_007CBABD_901A_4132_8B56_850F3648147A"/>
+																											</UML:StructuralFeature.type>
+																											<UML:ModelElement.taggedValue>
+																												<UML:TaggedValue tag="description" value="Neo-Adjuvant Chemotherapy Regimen
+1=AC
+2=EC
+3=FEC
+4=FAC
+5=A
+6=AC?Td
+7=AC?Tp
+8=A?Td
+9=A?Tp
+12=AC ?TdH
+13=AC ? TpH
+14=FEC?Tp
+15=EC?Tp
+16=AC? TpTd 
+17= A?Tp ? C
+18=ACV?Tp
+19=AC?Td?Xeloda
+20=EC ?Tp? Carboplatin
+21=FEC?Tp?Abraxane
+22=AC?Td?Navelbine?Xeloda
+23=AC?Tp?Vinorelbine?Tarcena
+
+
+A=Adria
+C=Cytoxan
+E=Epirubicin
+F=5-Fu
+Td=Docetaxel
+Tp=Paclitaxel
+H=Herceptin
+V=Vanconycin
+TpTd =Crossover from Tp to Td or Td to Tp
+
+"/>
+																												<UML:TaggedValue tag="type" value="ClinicalAssessment"/>
+																												<UML:TaggedValue tag="derived" value="0"/>
+																												<UML:TaggedValue tag="containment" value="Not Specified"/>
+																												<UML:TaggedValue tag="ordered" value="0"/>
+																												<UML:TaggedValue tag="collection" value="false"/>
+																												<UML:TaggedValue tag="position" value="0"/>
+																												<UML:TaggedValue tag="lowerBound" value="1"/>
+																												<UML:TaggedValue tag="upperBound" value="1"/>
+																												<UML:TaggedValue tag="duplicates" value="0"/>
+																												<UML:TaggedValue tag="ea_guid" value="{DEACE8EF-DCDA-47c0-920D-07B2184BF277}"/>
+																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																											</UML:ModelElement.taggedValue>
+																										</UML:Attribute>
 																										<UML:Attribute name="clinicalResponse" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
 																											<UML:StructuralFeature.multiplicity>
 																												<UML:Multiplicity>
@@ -38573,7 +38692,7 @@ RECIST criteria
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="0"/>
+																												<UML:TaggedValue tag="position" value="1"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38611,11 +38730,41 @@ RECIST criteria
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="1"/>
+																												<UML:TaggedValue tag="position" value="2"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
 																												<UML:TaggedValue tag="ea_guid" value="{E3B4AA7E-98AC-4119-B51D-E60CA90B54C0}"/>
+																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																											</UML:ModelElement.taggedValue>
+																										</UML:Attribute>
+																										<UML:Attribute name="dcisOnly" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																											<UML:StructuralFeature.multiplicity>
+																												<UML:Multiplicity>
+																													<UML:Multiplicity.range>
+																														<UML:MultiplicityRange lower="1" upper="1"/>
+																													</UML:Multiplicity.range>
+																												</UML:Multiplicity>
+																											</UML:StructuralFeature.multiplicity>
+																											<UML:Attribute.initialValue>
+																												<UML:Expression/>
+																											</UML:Attribute.initialValue>
+																											<UML:StructuralFeature.type>
+																												<Foundation.Core.Classifier xmi.idref="EAID_007CBABD_901A_4132_8B56_850F3648147A"/>
+																											</UML:StructuralFeature.type>
+																											<UML:ModelElement.taggedValue>
+																												<UML:TaggedValue tag="description" value="DCIS only thing left following surgery
+1=Yes"/>
+																												<UML:TaggedValue tag="type" value="ClinicalAssessment"/>
+																												<UML:TaggedValue tag="derived" value="0"/>
+																												<UML:TaggedValue tag="containment" value="Not Specified"/>
+																												<UML:TaggedValue tag="ordered" value="0"/>
+																												<UML:TaggedValue tag="collection" value="false"/>
+																												<UML:TaggedValue tag="position" value="3"/>
+																												<UML:TaggedValue tag="lowerBound" value="1"/>
+																												<UML:TaggedValue tag="upperBound" value="1"/>
+																												<UML:TaggedValue tag="duplicates" value="0"/>
+																												<UML:TaggedValue tag="ea_guid" value="{0F3FCEE1-9813-4194-A97E-D36D5AF137FF}"/>
 																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
 																											</UML:ModelElement.taggedValue>
 																										</UML:Attribute>
@@ -38643,7 +38792,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="2"/>
+																												<UML:TaggedValue tag="position" value="4"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38672,7 +38821,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="3"/>
+																												<UML:TaggedValue tag="position" value="5"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38706,11 +38855,115 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="4"/>
+																												<UML:TaggedValue tag="position" value="6"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
 																												<UML:TaggedValue tag="ea_guid" value="{FBCACDA8-724F-4d53-82E3-146DB57B8831}"/>
+																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																											</UML:ModelElement.taggedValue>
+																										</UML:Attribute>
+																										<UML:Attribute name="herceptinReceived" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																											<UML:StructuralFeature.multiplicity>
+																												<UML:Multiplicity>
+																													<UML:Multiplicity.range>
+																														<UML:MultiplicityRange lower="1" upper="1"/>
+																													</UML:Multiplicity.range>
+																												</UML:Multiplicity>
+																											</UML:StructuralFeature.multiplicity>
+																											<UML:Attribute.initialValue>
+																												<UML:Expression/>
+																											</UML:Attribute.initialValue>
+																											<UML:StructuralFeature.type>
+																												<Foundation.Core.Classifier xmi.idref="EAID_007CBABD_901A_4132_8B56_850F3648147A"/>
+																											</UML:StructuralFeature.type>
+																											<UML:ModelElement.taggedValue>
+																												<UML:TaggedValue tag="description" value="Herceptin received
+1=Yes (Administered)
+0= Not administered
+blank = Administration unknown
+
+"/>
+																												<UML:TaggedValue tag="type" value="ClinicalAssessment"/>
+																												<UML:TaggedValue tag="derived" value="0"/>
+																												<UML:TaggedValue tag="containment" value="Not Specified"/>
+																												<UML:TaggedValue tag="ordered" value="0"/>
+																												<UML:TaggedValue tag="collection" value="false"/>
+																												<UML:TaggedValue tag="position" value="7"/>
+																												<UML:TaggedValue tag="lowerBound" value="1"/>
+																												<UML:TaggedValue tag="upperBound" value="1"/>
+																												<UML:TaggedValue tag="duplicates" value="0"/>
+																												<UML:TaggedValue tag="ea_guid" value="{B091F9B6-1DFC-4c81-ACA0-E30DC04C7E4B}"/>
+																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																											</UML:ModelElement.taggedValue>
+																										</UML:Attribute>
+																										<UML:Attribute name="histologicGradeOS" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																											<UML:StructuralFeature.multiplicity>
+																												<UML:Multiplicity>
+																													<UML:Multiplicity.range>
+																														<UML:MultiplicityRange lower="1" upper="1"/>
+																													</UML:Multiplicity.range>
+																												</UML:Multiplicity>
+																											</UML:StructuralFeature.multiplicity>
+																											<UML:Attribute.initialValue>
+																												<UML:Expression/>
+																											</UML:Attribute.initialValue>
+																											<UML:StructuralFeature.type>
+																												<Foundation.Core.Classifier xmi.idref="EAID_007CBABD_901A_4132_8B56_850F3648147A"/>
+																											</UML:StructuralFeature.type>
+																											<UML:ModelElement.taggedValue>
+																												<UML:TaggedValue tag="description" value="Combined Histologic Grade - On-study
+(According to SBR/Elston Classification)
+1=Grade I (low)
+2= Grade II (intermediate)
+3= Grade III (high)
+4= Indeterminate
+"/>
+																												<UML:TaggedValue tag="type" value="ClinicalAssessment"/>
+																												<UML:TaggedValue tag="derived" value="0"/>
+																												<UML:TaggedValue tag="containment" value="Not Specified"/>
+																												<UML:TaggedValue tag="ordered" value="0"/>
+																												<UML:TaggedValue tag="collection" value="false"/>
+																												<UML:TaggedValue tag="position" value="8"/>
+																												<UML:TaggedValue tag="lowerBound" value="1"/>
+																												<UML:TaggedValue tag="upperBound" value="1"/>
+																												<UML:TaggedValue tag="duplicates" value="0"/>
+																												<UML:TaggedValue tag="ea_guid" value="{6ADE22B0-BD15-4a17-BB74-0099B35E8EF2}"/>
+																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																											</UML:ModelElement.taggedValue>
+																										</UML:Attribute>
+																										<UML:Attribute name="histologicGradePS" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																											<UML:StructuralFeature.multiplicity>
+																												<UML:Multiplicity>
+																													<UML:Multiplicity.range>
+																														<UML:MultiplicityRange lower="1" upper="1"/>
+																													</UML:Multiplicity.range>
+																												</UML:Multiplicity>
+																											</UML:StructuralFeature.multiplicity>
+																											<UML:Attribute.initialValue>
+																												<UML:Expression/>
+																											</UML:Attribute.initialValue>
+																											<UML:StructuralFeature.type>
+																												<Foundation.Core.Classifier xmi.idref="EAID_007CBABD_901A_4132_8B56_850F3648147A"/>
+																											</UML:StructuralFeature.type>
+																											<UML:ModelElement.taggedValue>
+																												<UML:TaggedValue tag="description" value="Combined Histologic Grade -Post-Surgery
+(According to SBR/Elston Classification)
+1=Grade I (low)
+2= Grade II (intermediate)
+3= Grade III (high)
+4= Indeterminate
+"/>
+																												<UML:TaggedValue tag="type" value="ClinicalAssessment"/>
+																												<UML:TaggedValue tag="derived" value="0"/>
+																												<UML:TaggedValue tag="containment" value="Not Specified"/>
+																												<UML:TaggedValue tag="ordered" value="0"/>
+																												<UML:TaggedValue tag="collection" value="false"/>
+																												<UML:TaggedValue tag="position" value="9"/>
+																												<UML:TaggedValue tag="lowerBound" value="1"/>
+																												<UML:TaggedValue tag="upperBound" value="1"/>
+																												<UML:TaggedValue tag="duplicates" value="0"/>
+																												<UML:TaggedValue tag="ea_guid" value="{C749B7EC-228A-4437-BBCE-A15335674402}"/>
 																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
 																											</UML:ModelElement.taggedValue>
 																										</UML:Attribute>
@@ -38735,7 +38988,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="5"/>
+																												<UML:TaggedValue tag="position" value="10"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38764,7 +39017,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="6"/>
+																												<UML:TaggedValue tag="position" value="11"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38787,14 +39040,20 @@ Considered Allred Score; = 3 is positive
 																												<Foundation.Core.Classifier xmi.idref="EAID_007CBABD_901A_4132_8B56_850F3648147A"/>
 																											</UML:StructuralFeature.type>
 																											<UML:ModelElement.taggedValue>
-																												<UML:TaggedValue tag="description" value="The form and structure of a node
+																												<UML:TaggedValue tag="description" value="The form and structure of a node:
+1.  Single uni-centric mass with well-defined margin
+2.  Multi-lobulated mass with well-defined margin
+3.  Area enhancement with irregular margins - with nodularity  
+4.  Area enhancement with irregular margins - without nodularity
+5.  Septal spread; streaming
+
 "/>
 																												<UML:TaggedValue tag="type" value="ClinicalAssessment"/>
 																												<UML:TaggedValue tag="derived" value="0"/>
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="7"/>
+																												<UML:TaggedValue tag="position" value="12"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38823,7 +39082,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="8"/>
+																												<UML:TaggedValue tag="position" value="13"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38852,7 +39111,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="9"/>
+																												<UML:TaggedValue tag="position" value="14"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38881,7 +39140,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="10"/>
+																												<UML:TaggedValue tag="position" value="15"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38910,11 +39169,49 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="11"/>
+																												<UML:TaggedValue tag="position" value="16"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
 																												<UML:TaggedValue tag="ea_guid" value="{6E169BAA-EA6B-4d56-9E30-90294F60BEF9}"/>
+																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																											</UML:ModelElement.taggedValue>
+																										</UML:Attribute>
+																										<UML:Attribute name="pathologyStage" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																											<UML:StructuralFeature.multiplicity>
+																												<UML:Multiplicity>
+																													<UML:Multiplicity.range>
+																														<UML:MultiplicityRange lower="1" upper="1"/>
+																													</UML:Multiplicity.range>
+																												</UML:Multiplicity>
+																											</UML:StructuralFeature.multiplicity>
+																											<UML:Attribute.initialValue>
+																												<UML:Expression/>
+																											</UML:Attribute.initialValue>
+																											<UML:StructuralFeature.type>
+																												<Foundation.Core.Classifier xmi.idref="EAID_007CBABD_901A_4132_8B56_850F3648147A"/>
+																											</UML:StructuralFeature.type>
+																											<UML:ModelElement.taggedValue>
+																												<UML:TaggedValue tag="description" value="Pathology Assessment Staging
+1= Stage 0 (DCIS only)
+2= Stage I
+3= Stage IIA
+4=Stage IIB
+5= Stage IIIA
+6= Stage IIIB
+7=Stage IIIC
+8= Stage IV
+"/>
+																												<UML:TaggedValue tag="type" value="ClinicalAssessment"/>
+																												<UML:TaggedValue tag="derived" value="0"/>
+																												<UML:TaggedValue tag="containment" value="Not Specified"/>
+																												<UML:TaggedValue tag="ordered" value="0"/>
+																												<UML:TaggedValue tag="collection" value="false"/>
+																												<UML:TaggedValue tag="position" value="17"/>
+																												<UML:TaggedValue tag="lowerBound" value="1"/>
+																												<UML:TaggedValue tag="upperBound" value="1"/>
+																												<UML:TaggedValue tag="duplicates" value="0"/>
+																												<UML:TaggedValue tag="ea_guid" value="{801A9125-75F0-489d-B0A9-91D2ED4A1866}"/>
 																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
 																											</UML:ModelElement.taggedValue>
 																										</UML:Attribute>
@@ -38939,7 +39236,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="12"/>
+																												<UML:TaggedValue tag="position" value="18"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -38971,7 +39268,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="13"/>
+																												<UML:TaggedValue tag="position" value="19"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -39000,7 +39297,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="14"/>
+																												<UML:TaggedValue tag="position" value="20"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -39029,7 +39326,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="15"/>
+																												<UML:TaggedValue tag="position" value="21"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -39058,7 +39355,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="16"/>
+																												<UML:TaggedValue tag="position" value="22"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -39087,7 +39384,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="17"/>
+																												<UML:TaggedValue tag="position" value="23"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -39116,11 +39413,45 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="18"/>
+																												<UML:TaggedValue tag="position" value="24"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
 																												<UML:TaggedValue tag="ea_guid" value="{A0856645-812A-451c-8AAB-5A7623564068}"/>
+																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																											</UML:ModelElement.taggedValue>
+																										</UML:Attribute>
+																										<UML:Attribute name="tamoxifenReceived" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																											<UML:StructuralFeature.multiplicity>
+																												<UML:Multiplicity>
+																													<UML:Multiplicity.range>
+																														<UML:MultiplicityRange lower="1" upper="1"/>
+																													</UML:Multiplicity.range>
+																												</UML:Multiplicity>
+																											</UML:StructuralFeature.multiplicity>
+																											<UML:Attribute.initialValue>
+																												<UML:Expression/>
+																											</UML:Attribute.initialValue>
+																											<UML:StructuralFeature.type>
+																												<Foundation.Core.Classifier xmi.idref="EAID_007CBABD_901A_4132_8B56_850F3648147A"/>
+																											</UML:StructuralFeature.type>
+																											<UML:ModelElement.taggedValue>
+																												<UML:TaggedValue tag="description" value="Tamoxifen received
+1=Yes (Administered)
+0= Not administered
+blank = Administration unknown
+
+"/>
+																												<UML:TaggedValue tag="type" value="ClinicalAssessment"/>
+																												<UML:TaggedValue tag="derived" value="0"/>
+																												<UML:TaggedValue tag="containment" value="Not Specified"/>
+																												<UML:TaggedValue tag="ordered" value="0"/>
+																												<UML:TaggedValue tag="collection" value="false"/>
+																												<UML:TaggedValue tag="position" value="25"/>
+																												<UML:TaggedValue tag="lowerBound" value="1"/>
+																												<UML:TaggedValue tag="upperBound" value="1"/>
+																												<UML:TaggedValue tag="duplicates" value="0"/>
+																												<UML:TaggedValue tag="ea_guid" value="{B2151AB1-91A1-4737-A234-98A4ECB84CB1}"/>
 																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
 																											</UML:ModelElement.taggedValue>
 																										</UML:Attribute>
@@ -39145,7 +39476,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="containment" value="Not Specified"/>
 																												<UML:TaggedValue tag="ordered" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="19"/>
+																												<UML:TaggedValue tag="position" value="26"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42423,11 +42754,43 @@ Considered Allred Score; = 3 is positive
 																										<UML:TaggedValue tag="phase" value="1.0"/>
 																										<UML:TaggedValue tag="complexity" value="1"/>
 																										<UML:TaggedValue tag="status" value="Proposed"/>
-																										<UML:TaggedValue tag="eventflags" value="OPN=2649;LNK=ebf3;ATT=ab34;"/>
+																										<UML:TaggedValue tag="eventflags" value="LNK=ebf3;OPN=b2ec;ATT=0304;"/>
 																										<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 																										<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={F4115A7E-D5B7-4481-AEBA-9F22865A35F5}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={5B878A61-0AEA-402c-A864-897132DA3913}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																									</UML:ModelElement.taggedValue>
 																									<UML:Classifier.feature>
+																										<UML:Attribute name="completionRate" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
+																											<UML:StructuralFeature.multiplicity>
+																												<UML:Multiplicity>
+																													<UML:Multiplicity.range>
+																														<UML:MultiplicityRange lower="1" upper="1"/>
+																													</UML:Multiplicity.range>
+																												</UML:Multiplicity>
+																											</UML:StructuralFeature.multiplicity>
+																											<UML:Attribute.initialValue>
+																												<UML:Expression/>
+																											</UML:Attribute.initialValue>
+																											<UML:StructuralFeature.type>
+																												<Foundation.Core.Classifier xmi.idref="eaxmiid10"/>
+																											</UML:StructuralFeature.type>
+																											<UML:ModelElement.taggedValue>
+																												<UML:TaggedValue tag="description" value="The proportion of valid or non-missing genotypes for a given set of loci and samples.  The formula to calculate completion rate is defined as 1-missing rate."/>
+																												<UML:TaggedValue tag="type" value="Float"/>
+																												<UML:TaggedValue tag="derived" value="0"/>
+																												<UML:TaggedValue tag="containment" value="Not Specified"/>
+																												<UML:TaggedValue tag="length" value="0"/>
+																												<UML:TaggedValue tag="ordered" value="0"/>
+																												<UML:TaggedValue tag="precision" value="0"/>
+																												<UML:TaggedValue tag="scale" value="0"/>
+																												<UML:TaggedValue tag="collection" value="false"/>
+																												<UML:TaggedValue tag="position" value="0"/>
+																												<UML:TaggedValue tag="lowerBound" value="1"/>
+																												<UML:TaggedValue tag="upperBound" value="1"/>
+																												<UML:TaggedValue tag="duplicates" value="0"/>
+																												<UML:TaggedValue tag="ea_guid" value="{CE8CBBCA-83B5-47c1-83F9-FFF3A9DF4FCE}"/>
+																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
+																											</UML:ModelElement.taggedValue>
+																										</UML:Attribute>
 																										<UML:Attribute name="hardyWeinbergPValue" changeable="none" visibility="private" ownerScope="instance" targetScope="instance">
 																											<UML:StructuralFeature.multiplicity>
 																												<UML:Multiplicity>
@@ -42452,7 +42815,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="0"/>
+																												<UML:TaggedValue tag="position" value="1"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42484,7 +42847,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="1"/>
+																												<UML:TaggedValue tag="position" value="2"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42516,7 +42879,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="2"/>
+																												<UML:TaggedValue tag="position" value="3"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42548,7 +42911,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="3"/>
+																												<UML:TaggedValue tag="position" value="4"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42580,7 +42943,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="4"/>
+																												<UML:TaggedValue tag="position" value="5"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42612,7 +42975,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="5"/>
+																												<UML:TaggedValue tag="position" value="6"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42644,7 +43007,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="6"/>
+																												<UML:TaggedValue tag="position" value="7"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42676,7 +43039,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="7"/>
+																												<UML:TaggedValue tag="position" value="8"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42708,7 +43071,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="8"/>
+																												<UML:TaggedValue tag="position" value="9"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42740,7 +43103,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="9"/>
+																												<UML:TaggedValue tag="position" value="10"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42772,7 +43135,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="10"/>
+																												<UML:TaggedValue tag="position" value="11"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42804,7 +43167,7 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="precision" value="0"/>
 																												<UML:TaggedValue tag="scale" value="0"/>
 																												<UML:TaggedValue tag="collection" value="false"/>
-																												<UML:TaggedValue tag="position" value="11"/>
+																												<UML:TaggedValue tag="position" value="12"/>
 																												<UML:TaggedValue tag="lowerBound" value="1"/>
 																												<UML:TaggedValue tag="upperBound" value="1"/>
 																												<UML:TaggedValue tag="duplicates" value="0"/>
@@ -42812,45 +43175,6 @@ Considered Allred Score; = 3 is positive
 																												<UML:TaggedValue tag="styleex" value="volatile=0;"/>
 																											</UML:ModelElement.taggedValue>
 																										</UML:Attribute>
-																										<UML:Operation name="getPopulation" visibility="public" ownerScope="instance" isQuery="false" concurrency="sequential">
-																											<UML:ModelElement.taggedValue>
-																												<UML:TaggedValue tag="type" value="Population"/>
-																												<UML:TaggedValue tag="const" value="false"/>
-																												<UML:TaggedValue tag="synchronised" value="0"/>
-																												<UML:TaggedValue tag="concurrency" value="Sequential"/>
-																												<UML:TaggedValue tag="position" value="0"/>
-																												<UML:TaggedValue tag="returnarray" value="0"/>
-																												<UML:TaggedValue tag="pure" value="0"/>
-																												<UML:TaggedValue tag="ea_guid" value="{0650996E-C194-41cf-BEBF-968A17E971E9}"/>
-																												<UML:TaggedValue tag="Implements" value="FrequencyInterface.getPopulation" xmi.id="EAID_89F51DAD_F030_4794_9397_92398203BF20">
-																													<XMI.extension xmi.extender="Enterprise Architect 2.5">
-																														<UML:Comment name="Qualified name for the interface operation"/>
-																													</XMI.extension>
-																												</UML:TaggedValue>
-																												<UML:TaggedValue tag="ImplementsGuid" value="{759FB5AE-3FAD-41d4-8E2D-8096FD24ECFD}" xmi.id="EAID_C7BF509C_C2FE_44fd_A0D3_E883ED0C849A">
-																													<XMI.extension xmi.extender="Enterprise Architect 2.5">
-																														<UML:Comment name="Identifies the interface operation"/>
-																													</XMI.extension>
-																												</UML:TaggedValue>
-																											</UML:ModelElement.taggedValue>
-																											<UML:BehavioralFeature.parameter>
-																												<UML:Parameter kind="return" visibility="public">
-																													<UML:Parameter.type>
-																														<Foundation.Core.Classifier xmi.idref="EAID_06FF5D07_BECA_4879_A69C_E6B4C9356D37"/>
-																													</UML:Parameter.type>
-																													<UML:ModelElement.taggedValue>
-																														<UML:TaggedValue tag="pos" value="0"/>
-																														<UML:TaggedValue tag="type" value="Population"/>
-																														<UML:TaggedValue tag="const" value="0"/>
-																														<UML:TaggedValue tag="classifier" value="EAID_06FF5D07_BECA_4879_A69C_E6B4C9356D37"/>
-																														<UML:TaggedValue tag="ea_guid" value="{RETURNID-C194-41cf-BEBF-968A17E971E9}"/>
-																													</UML:ModelElement.taggedValue>
-																													<UML:Parameter.defaultValue>
-																														<UML:Expression/>
-																													</UML:Parameter.defaultValue>
-																												</UML:Parameter>
-																											</UML:BehavioralFeature.parameter>
-																										</UML:Operation>
 																									</UML:Classifier.feature>
 																								</UML:Class>
 																							</UML:Namespace.ownedElement>
@@ -45897,7 +46221,7 @@ Considered Allred Score; = 3 is positive
 														<UML:TaggedValue tag="phase" value="1.0"/>
 														<UML:TaggedValue tag="complexity" value="1"/>
 														<UML:TaggedValue tag="status" value="Proposed"/>
-														<UML:TaggedValue tag="$ea_attsclassified" value="{7E2DBEE2-9190-4f88-B1D4-96B7BF72937C},{C65092F7-56F8-4329-909D-C9987F94D46F}"/>
+														<UML:TaggedValue tag="$ea_attsclassified" value="{C65092F7-56F8-4329-909D-C9987F94D46F}"/>
 														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={C337F057-563C-4088-8CC0-4EAEFD19DE90}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={5252D4E2-9FA9-4db2-9446-C05BF9EAB075}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 													</UML:ModelElement.taggedValue>
@@ -45956,7 +46280,7 @@ Considered Allred Score; = 3 is positive
 														<UML:TaggedValue tag="phase" value="1.0"/>
 														<UML:TaggedValue tag="complexity" value="1"/>
 														<UML:TaggedValue tag="status" value="Proposed"/>
-														<UML:TaggedValue tag="$ea_attsclassified" value="{BD5BDF82-0A75-47ac-B08A-FE0FF6CD02EE},{E3C76B81-F197-4a4e-A834-99D8A7CA45F1},{B937A745-7974-41df-91E1-0BE3A060FD53},{316D6100-B931-4fe9-BE20-79E92ACEB687},{E31349D8-88F5-4c54-9D35-7260E91A8861},{F4365FE0-A947-4298-8CC0-5B886F03E8BD},{26910CA4-8CB4-440f-83A7-B2465102B180},{7F8D3F5F-6666-4e05-9F11-521930EF9C2F},{DBDD9A07-B547-4580-AB03-4F81DB7503E5},{7B5A81DA-C42B-4c88-96E8-7BC7E433EB41},{486ABA67-E04C-44c1-A83C-C744ED684E24},{E035FBDB-F255-457a-8F8C-743F992EF731},{32CAF3ED-66F3-4f28-AE83-CDF424980627},{118CE917-A736-450a-B1D8-01A7C701F183},{3CE8B268-E311-48b8-9CF2-396E062E8044},{43143548-073D-4b02-B0CC-60BC1D8879A3},{88EF6299-DF48-43a4-AC29-10DF705600C6},{DFC0C19A-FFFC-4835-9C44-E16F8C5806AF},{287E1EC0-60A5-409e-9830-A7E97A893378},{A1EF44E3-99FC-4e46-9FCD-F7717FF550BD},{FACEF1BD-13AD-4d28-85F1-66A18CB95B1D},{32A41F0D-564C-4a67-B6A4-DE1132FA9472},{C749BF26-04AD-42b9-8518-ED22139445CD},{518CB2E2-9AD1-491a-B663-6B41A57665B4},{D76540B2-A42B-4e02-B36E-EDFA358CE885},{411F528D-F570-4d18-B041-0C72FE010A37},{D5CBB12A-605B-41e0-A98E-2887C521BFE2},{4EBA29F7-2017-4c48-B002-0C9234869213},{8F76603B-3F03-4d81-A1AB-668B51CFDD36},{1A4AD8A4-0192-460b-97A7-C2504F259CE5},{A7E2F4AE-FC15-4f26-A496-B47F1C042E37},{39BEBADB-187F-47b9-B570-8AC6232ECE92},{DA4F4336-7351-4ba9-A2B8-FE3FD7BC4D95},{55C76A3F-EC2F-4144-98CC-6410C87E02AB},{A84303C8-FCC0-4018-BFEB-59034C1F85D0},{C34D3F0B-52C8-491b-9F09-5982F13410E2},{E1493930-3383-4ba8-9B5A-83848DD52570},{99A390EC-7B5C-4129-8BF3-086F480241C5},{814C0ABC-E502-4608-8106-02E23733495D},{45025A0E-71AF-4926-89D1-CE24F15F8716},{6E863CF3-E24D-4b47-9B49-A01BD7503BE3},{35EB86A8-1D5D-42a4-A022-02F729F14D0D},{F0AEEC61-3D21-4a69-A902-EE3A4C0E4AD7},{3E069F16-8B71-4732-9BDF-E2824828E35C},{0A0D36D8-4ADE-4303-A001-5493418F5D74},{DC148937-B156-4e7b-9C35-4B8A796A9B13},{CBFF1AA7-81A9-40d9-9745-714B35901333},{669B24E5-D7E6-49db-80D5-759BBDB3BBD3},{1BADAEAA-37ED-4782-84F6-A76BDAE64F51},{4F14D29A-A756-4d18-A23C-67BAFE87AD60},{ED84730B-267F-48fb-9BC5-FCD75C7F7FAE},{F7D60FC1-ABDC-4ca3-AB59-8DEBD69F4F76},{80F29B6D-7DA5-483a-8E6D-930239F98888},{CA9A8A25-074E-4e6c-A98A-7DFE023FAE1B},{EA59D1F6-6F3B-42a5-84E2-87EADFB43003},{09FF5DE2-CB6C-4c79-9A52-A87D789888A1},{31AA1294-C902-441f-8BC7-3FBC73261B29},{DCD2A0F1-A496-46cf-BDED-4B49D78FAE36},{05B25D11-8178-479b-BB83-07B5104D27A6},{D577A2DA-4E57-4770-9C99-3BB265068A6D},{1F3EEB3F-453C-49bb-84C7-2A1BE0294C64},{B8B6FFA2-395E-42c8-AF31-CA37D88E400A},{A20518AF-350B-429a-99FA-C73B7CE89A9A},{C7FCAD1E-A840-4aa6-92A5-4CCD8A007EDB},{64CCEAE8-5F23-475b-8D1B-04CEC635DC5D},{A2E0F949-9928-4173-8361-03D310B3AEB8},{CDFF5E38-C065-44db-81D1-2222C4890E5F},{D5C43F86-E779-4f41-A4FA-A4F1D100C035},{53C6E00B-C53F-4aeb-BD43-C655AA2B07DA},{15B2AD34-F2A6-4f16-AF2D-BD22918DCC7A},{04A7DE96-1ACE-4b4f-AA1E-54EAB6376C41},{CB7DD246-2DBA-4ea8-B325-3BB67066EC58},{26DC12F2-BAED-407e-BF4A-6B64DF22E16C},{990D0AFD-18E6-4109-8FDF-F15182E96189},{1747CA69-26CF-413c-9EA1-18A899A6FFA9},{F1E0B8A4-8424-449f-8F7D-14A69172CDBA},{CCC31CEA-2A3A-428a-A05F-6C13D2DED6CD},{58E8848D-7D5C-408f-BCE2-BFC0125C7914},{C591DD57-35A9-4e11-85E6-880DB3D3FA96},{473C0ABF-D7FC-4cdb-A4AB-C1018414FD72},{814F731F-2720-4e54-A434-54740F28545B},{AAE5AA7B-D265-4a11-A990-40F75B2C69E2},{8FC78C78-7537-4a23-B7F0-C498529FE237},{0DD267C1-A744-4384-AA8C-9EB5DFE8FC2F},{CED1C057-56B0-4d51-8EE4-A181EB61DC5B},{FEBDD67F-20C2-4f6d-B51B-D468C47F8414},{DC6897CB-0D87-4823-8D74-C87B1E2A7574},{BE8BB1A8-992C-4379-A618-2155603CEC24},{31469883-F4A1-4cec-BC02-10719D6B66F8},{7E1C0D25-BA82-43df-8935-CA1FCB7BAC9D},{FC8D89FF-F9F0-4cc3-BC91-EDEE5D4FBEFF},{F4A6B5F3-E547-4227-857D-F2A705B4C3AC},{21005F37-C534-4754-BA1F-FB4722A6B8DA},{0F170359-9B94-4b94-A7B3-6FF5B06D4693},{DBB9A74A-2B08-41d7-AE6B-7AB007CEC161},{17155FE2-949D-48a4-969B-7A304AB8FC70},{E085A23D-2CBC-4328-A54E-E334580A1DFA},{F92D4F20-3FE1-4806-B457-78964FD6AD98},{43F57781-3553-44e9-B78B-43A7F69B5002},{01A7EC8D-A453-4254-9D64-DDD5E7D391D0},{A035EE3D-CEE4-4531-874C-A8898A486FB8},{6944CF58-3E18-47be-B284-35AB18B90FF4},{CB009B2C-39C3-48db-A8A9-EF246ECD5513},{B1C27983-14F7-4b59-87E9-A85190B5FAE8},{F94E9FE2-5794-45d2-B114-DA9F096C216F},{EBDB4D93-B2C7-46df-ABCA-0C526A3C762D},{0C6D4174-4634-4355-A308-95C6040D52CE},{54053D3E-D802-440f-B838-AC32A3750CB8},{D20716C0-F149-45bd-901C-C9DDF256324A},{D6096866-7850-4164-A504-F440CB9B1C34},{1F7C10D6-01CE-4ee0-86F6-98A00A4701F9},{6B6660CD-EEF3-4c1d-9BEB-807F29299B9F},{8EBBE89C-3624-4b54-882F-FE50A9C45577},{48D20AE7-7B85-4feb-8A8E-E0AC5299EADD},{C8CAC2B8-3A0F-44c9-84D7-95EAC64D6868},{944521E6-33AB-435b-A844-A29CB38DE8A8},{471C7F73-3A0B-45db-B042-69758F9D8895},{7F1EEB6B-353F-4407-9DE8-D1E64E3545DF},{EEB41526-ED3A-4ca1-84E3-62E4CED165F6},{B50271CA-FE37-4e77-BC8C-049B78683A20},{1E6020AE-9663-4b3d-829A-43680F91C2D0},{59885D49-1657-487a-89EA-FE5DED5587B3},{9FCB49F0-3E10-45ea-87BB-40D6223494A3},{A7ADEE58-96B6-4ebc-A60A-3AEEA425E063},{8F4FFAFC-E4AD-464c-9A5E-DB464561FDBF},{EAC4C762-334A-46a2-9E0F-7758CA55E2C7},{671EBF66-E7E9-4759-BCD3-5254743BBB0E},{1F4A71CD-3844-40cb-AB16-C12042A40F83},{00BE1EED-E267-462a-B7E2-6B2FF866C82D},{C6BDD3AC-A18D-4dfd-9FB1-96A38DDBAB16},{753A17F8-C7FE-49ab-9ECD-E2A8DB859C0A},{9DCE01B0-D320-4905-8E82-0A7DEFF9BEA5},{FE5B8802-58CF-42ac-A2E6-C25649E888D3},{3D143882-7E58-4e93-AE22-646943E0528B},{CC23644C-84E7-49e3-A00A-2FA18794C9EE},{23B1E282-7E2E-438d-A1BC-E6CE74BCF981},{5D1ECD5B-9F6F-4a9f-B940-2DFE976219DD},{48D9D6DD-DDB3-43a9-B90B-263FEE0F11AD},{045EBBF4-ECA9-426e-BEC9-E0ACE4B2CACB},{1A946DF3-77AC-41c2-BBB7-3C0CD5E28C32},{3771AABA-F746-4af6-9414-744E55D4260E},{1B895920-9744-4501-9952-A4DBADC197C2},{AD4C8F61-8FAC-44ff-A8AC-AEA7A9A2049C},{F71A6A09-1CC3-48ce-80E5-2F9A5A437E11},{A0EA7C3F-A635-4a6a-8003-CCA0CDB61111},{1C9BE18A-C360-430c-91A5-0E31EE24A902},{5F0E5EBC-1A87-4965-85F0-4A0862C52C03},{8AA3DEE6-CFB7-4d24-A63A-4956844BF409},{F15039E5-DCBA-4c8d-98BC-A38FB0A230C1},{AEE32C59-CBBE-460d-B586-6B496A586362},{53DE1FC0-E2E2-4368-B04B-C794BBFC5E39},{871A4BE6-800E-49bc-AA16-846211684B09},{5E6034FD-2D56-4a3f-8F29-D43FAA4ACC8E},{27468EFD-24D8-487f-AB61-B05512926496},{B26819B8-6A13-4909-B6B4-AEAC10C79824},{D47A2037-382D-41a1-A516-46ECD114287B},{89D56DDD-BCE8-49dc-AF2F-79BAA0AD6389},{E6104509-B1D5-4f07-A525-528B58A2BB88},{AAC8BDD9-E55B-4c4f-BCD5-5637C56AED97},{0B116D72-3DC0-47f9-8644-43C589283AC8},{1010578A-1A3D-45d6-B4C0-46A0F1AC959B},{710EC8B6-6DE3-483e-8C1B-3E8FD46F9785},{48863DAB-9CBF-4a6a-A43A-93F0CFEC3A67},{2FEAC58A-B711-4567-B65E-B10233AB5440},{54B82D2B-A374-4db6-93E0-F53AAD886956},{C514B90A-FDA4-437f-9510-D04BCE078020},{62611264-3097-4b2f-814C-9992E17F4828},{0830E275-FBCF-47dc-A988-6FB15703781D},{9E31A838-7CE1-4df8-8B19-48EE4A6928C5},{7F20FCEE-C741-4331-A2D2-564C5C8F3D12},{C57AF11F-E8EB-4e24-808A-31B77933938B},{3B1D5C2E-7284-460b-95E9-43FE37C814A8},{42A32091-09E1-4bfa-9713-5F650623BD8F},{31F8A8E2-38D7-4da8-9674-965209C5C620},{DB595D0D-CC2B-4e63-9E61-C2E96D1FB1BC},{D64B3B84-1E8A-4c1d-B475-F79194305AED},{C6717DBB-30DB-470f-AEB7-D25FB6571C87},{ACD62EDE-39D7-4687-A3B3-0AE062210727},{23178C00-53AD-4d39-A11A-E8DB8CE1F9A0},{9BB69F28-B82B-4d42-A683-D4D181173CCB},{48988D93-01AA-4564-A67B-BD638293B821},{46AC8320-8C92-42dc-983D-076813926E2D},{D2E5B6C6-7E79-4e90-AC85-ED387A1A49BE},{645EB9D0-E48F-403a-831D-63CCE9C9C24D},{1F203D74-795F-4a4d-9778-7F11C3275E5C},{DAC0FAB6-7CA6-477f-8895-61E4894B929E},{43875C4D-7884-4091-B4B9-773C3869E17E},{6F8E1114-BC3E-4860-971F-184849FAAD0C},{8DB146C1-2FDD-46c1-9EBA-6F42FC0BA567},{5CA49154-8D93-427a-A67C-41954359FB1F},{74802467-3F35-4c37-B298-75C835E29AB0},{CF923D2A-30A9-4257-9F87-6F25D862CEC2},{B21657AB-762A-40cf-8253-9CC1A8553563},{CB4CA3A3-1CAA-4584-96AB-1A72B7DFFB4D},{B73D554C-9A0B-47b8-A08A-45CE02D7D450},{12CB7E3B-3679-48c6-887C-CCB9239EBD0B},{654F5423-42C7-4016-9A40-3CFBC570AA00},{4CC77915-D1F7-4e39-AB32-31E7526D8E49},{987C8BFD-17D5-4918-AD15-9B8D865DAAAC},{A9DA37EB-D911-4142-9259-016C63EA6CCD},{057DD432-70F1-4c0a-A94F-7C721EBEB76B},{B29464AF-526C-4a17-A236-56467E8B8063},{DDB437D0-35BC-40f6-8002-895FB2B0737E},{81FC3AE4-1E56-4058-9E09-A286C1D4C889},{12D62BE5-01E2-43fc-B7DA-6F8BB1A6CCD0},{17C3E1C1-86C6-480d-A331-4B00F4A0C727},{4286CA4C-D385-4d5f-94F4-44095B461917},{DC3443E4-8248-400f-9739-FFB40758DD64},{6E6A6F73-0BB6-4d69-BCA4-C24B88BDB2D6},{73182620-0C8D-416b-90AF-9A9EB0A4FD9F},{05655897-5BB6-4641-B492-D56589C20A86},{59AEBCF8-3376-43c4-8F10-0E7DA22FECE2},{2F6A1A9A-7E88-43f4-A6C4-E756DCB675D7},{A22D1A02-EBB5-412a-8EC7-D3DFE201A0D7},{50720A8C-0D08-4213-8AD8-5755381F878C},{2E91FAD4-01E7-4209-B48D-7188BC95BEED},{3D399319-495F-4b57-8EB6-8F518E0B252D},{DFFB4A34-3457-469a-9163-B9D11F6B9555},{F8B3C0DF-65B5-47b2-B774-DB35730E47B4},{40F79D6A-A4A0-4f9e-AD46-0E72CD1BF2F0},{EC5264E6-2813-4aa2-9A4A-C5943D8109A4}"/>
+														<UML:TaggedValue tag="$ea_attsclassified" value="{BD5BDF82-0A75-47ac-B08A-FE0FF6CD02EE},{E3C76B81-F197-4a4e-A834-99D8A7CA45F1},{B937A745-7974-41df-91E1-0BE3A060FD53},{316D6100-B931-4fe9-BE20-79E92ACEB687},{E31349D8-88F5-4c54-9D35-7260E91A8861},{F4365FE0-A947-4298-8CC0-5B886F03E8BD},{26910CA4-8CB4-440f-83A7-B2465102B180},{7F8D3F5F-6666-4e05-9F11-521930EF9C2F},{DBDD9A07-B547-4580-AB03-4F81DB7503E5},{7B5A81DA-C42B-4c88-96E8-7BC7E433EB41},{486ABA67-E04C-44c1-A83C-C744ED684E24},{E035FBDB-F255-457a-8F8C-743F992EF731},{32CAF3ED-66F3-4f28-AE83-CDF424980627},{118CE917-A736-450a-B1D8-01A7C701F183},{3CE8B268-E311-48b8-9CF2-396E062E8044},{43143548-073D-4b02-B0CC-60BC1D8879A3},{88EF6299-DF48-43a4-AC29-10DF705600C6},{7E2DBEE2-9190-4f88-B1D4-96B7BF72937C},{DFC0C19A-FFFC-4835-9C44-E16F8C5806AF},{287E1EC0-60A5-409e-9830-A7E97A893378},{A1EF44E3-99FC-4e46-9FCD-F7717FF550BD},{FACEF1BD-13AD-4d28-85F1-66A18CB95B1D},{32A41F0D-564C-4a67-B6A4-DE1132FA9472},{C749BF26-04AD-42b9-8518-ED22139445CD},{518CB2E2-9AD1-491a-B663-6B41A57665B4},{D76540B2-A42B-4e02-B36E-EDFA358CE885},{411F528D-F570-4d18-B041-0C72FE010A37},{D5CBB12A-605B-41e0-A98E-2887C521BFE2},{4EBA29F7-2017-4c48-B002-0C9234869213},{8F76603B-3F03-4d81-A1AB-668B51CFDD36},{1A4AD8A4-0192-460b-97A7-C2504F259CE5},{199A3941-9889-46d4-9ADA-D9343FA63C73},{A7E2F4AE-FC15-4f26-A496-B47F1C042E37},{39BEBADB-187F-47b9-B570-8AC6232ECE92},{6E53C30D-7759-4ffa-9A24-9B5ECA06120C},{DA4F4336-7351-4ba9-A2B8-FE3FD7BC4D95},{55C76A3F-EC2F-4144-98CC-6410C87E02AB},{A84303C8-FCC0-4018-BFEB-59034C1F85D0},{C34D3F0B-52C8-491b-9F09-5982F13410E2},{E1493930-3383-4ba8-9B5A-83848DD52570},{99A390EC-7B5C-4129-8BF3-086F480241C5},{814C0ABC-E502-4608-8106-02E23733495D},{45025A0E-71AF-4926-89D1-CE24F15F8716},{6E863CF3-E24D-4b47-9B49-A01BD7503BE3},{35EB86A8-1D5D-42a4-A022-02F729F14D0D},{F0AEEC61-3D21-4a69-A902-EE3A4C0E4AD7},{3E069F16-8B71-4732-9BDF-E2824828E35C},{0A0D36D8-4ADE-4303-A001-5493418F5D74},{DC148937-B156-4e7b-9C35-4B8A796A9B13},{CBFF1AA7-81A9-40d9-9745-714B35901333},{669B24E5-D7E6-49db-80D5-759BBDB3BBD3},{1BADAEAA-37ED-4782-84F6-A76BDAE64F51},{4F14D29A-A756-4d18-A23C-67BAFE87AD60},{ED84730B-267F-48fb-9BC5-FCD75C7F7FAE},{F7D60FC1-ABDC-4ca3-AB59-8DEBD69F4F76},{80F29B6D-7DA5-483a-8E6D-930239F98888},{CA9A8A25-074E-4e6c-A98A-7DFE023FAE1B},{EA59D1F6-6F3B-42a5-84E2-87EADFB43003},{09FF5DE2-CB6C-4c79-9A52-A87D789888A1},{31AA1294-C902-441f-8BC7-3FBC73261B29},{DCD2A0F1-A496-46cf-BDED-4B49D78FAE36},{05B25D11-8178-479b-BB83-07B5104D27A6},{D577A2DA-4E57-4770-9C99-3BB265068A6D},{1F3EEB3F-453C-49bb-84C7-2A1BE0294C64},{B8B6FFA2-395E-42c8-AF31-CA37D88E400A},{A20518AF-350B-429a-99FA-C73B7CE89A9A},{C7FCAD1E-A840-4aa6-92A5-4CCD8A007EDB},{64CCEAE8-5F23-475b-8D1B-04CEC635DC5D},{A2E0F949-9928-4173-8361-03D310B3AEB8},{CDFF5E38-C065-44db-81D1-2222C4890E5F},{D5C43F86-E779-4f41-A4FA-A4F1D100C035},{53C6E00B-C53F-4aeb-BD43-C655AA2B07DA},{15B2AD34-F2A6-4f16-AF2D-BD22918DCC7A},{04A7DE96-1ACE-4b4f-AA1E-54EAB6376C41},{CB7DD246-2DBA-4ea8-B325-3BB67066EC58},{990D0AFD-18E6-4109-8FDF-F15182E96189},{1747CA69-26CF-413c-9EA1-18A899A6FFA9},{F1E0B8A4-8424-449f-8F7D-14A69172CDBA},{CCC31CEA-2A3A-428a-A05F-6C13D2DED6CD},{58E8848D-7D5C-408f-BCE2-BFC0125C7914},{C591DD57-35A9-4e11-85E6-880DB3D3FA96},{473C0ABF-D7FC-4cdb-A4AB-C1018414FD72},{814F731F-2720-4e54-A434-54740F28545B},{AAE5AA7B-D265-4a11-A990-40F75B2C69E2},{8FC78C78-7537-4a23-B7F0-C498529FE237},{CED1C057-56B0-4d51-8EE4-A181EB61DC5B},{FEBDD67F-20C2-4f6d-B51B-D468C47F8414},{DC6897CB-0D87-4823-8D74-C87B1E2A7574},{BE8BB1A8-992C-4379-A618-2155603CEC24},{31469883-F4A1-4cec-BC02-10719D6B66F8},{7E1C0D25-BA82-43df-8935-CA1FCB7BAC9D},{FC8D89FF-F9F0-4cc3-BC91-EDEE5D4FBEFF},{F4A6B5F3-E547-4227-857D-F2A705B4C3AC},{21005F37-C534-4754-BA1F-FB4722A6B8DA},{0F170359-9B94-4b94-A7B3-6FF5B06D4693},{DBB9A74A-2B08-41d7-AE6B-7AB007CEC161},{17155FE2-949D-48a4-969B-7A304AB8FC70},{E085A23D-2CBC-4328-A54E-E334580A1DFA},{F92D4F20-3FE1-4806-B457-78964FD6AD98},{43F57781-3553-44e9-B78B-43A7F69B5002},{01A7EC8D-A453-4254-9D64-DDD5E7D391D0},{A035EE3D-CEE4-4531-874C-A8898A486FB8},{6944CF58-3E18-47be-B284-35AB18B90FF4},{CB009B2C-39C3-48db-A8A9-EF246ECD5513},{B1C27983-14F7-4b59-87E9-A85190B5FAE8},{F94E9FE2-5794-45d2-B114-DA9F096C216F},{EBDB4D93-B2C7-46df-ABCA-0C526A3C762D},{0C6D4174-4634-4355-A308-95C6040D52CE},{54053D3E-D802-440f-B838-AC32A3750CB8},{D20716C0-F149-45bd-901C-C9DDF256324A},{D6096866-7850-4164-A504-F440CB9B1C34},{1F7C10D6-01CE-4ee0-86F6-98A00A4701F9},{6B6660CD-EEF3-4c1d-9BEB-807F29299B9F},{8EBBE89C-3624-4b54-882F-FE50A9C45577},{48D20AE7-7B85-4feb-8A8E-E0AC5299EADD},{C8CAC2B8-3A0F-44c9-84D7-95EAC64D6868},{944521E6-33AB-435b-A844-A29CB38DE8A8},{471C7F73-3A0B-45db-B042-69758F9D8895},{7F1EEB6B-353F-4407-9DE8-D1E64E3545DF},{EEB41526-ED3A-4ca1-84E3-62E4CED165F6},{B50271CA-FE37-4e77-BC8C-049B78683A20},{1E6020AE-9663-4b3d-829A-43680F91C2D0},{59885D49-1657-487a-89EA-FE5DED5587B3},{9FCB49F0-3E10-45ea-87BB-40D6223494A3},{A7ADEE58-96B6-4ebc-A60A-3AEEA425E063},{8F4FFAFC-E4AD-464c-9A5E-DB464561FDBF},{EAC4C762-334A-46a2-9E0F-7758CA55E2C7},{671EBF66-E7E9-4759-BCD3-5254743BBB0E},{1F4A71CD-3844-40cb-AB16-C12042A40F83},{00BE1EED-E267-462a-B7E2-6B2FF866C82D},{C6BDD3AC-A18D-4dfd-9FB1-96A38DDBAB16},{753A17F8-C7FE-49ab-9ECD-E2A8DB859C0A},{9DCE01B0-D320-4905-8E82-0A7DEFF9BEA5},{FE5B8802-58CF-42ac-A2E6-C25649E888D3},{3D143882-7E58-4e93-AE22-646943E0528B},{CC23644C-84E7-49e3-A00A-2FA18794C9EE},{23B1E282-7E2E-438d-A1BC-E6CE74BCF981},{5D1ECD5B-9F6F-4a9f-B940-2DFE976219DD},{48D9D6DD-DDB3-43a9-B90B-263FEE0F11AD},{045EBBF4-ECA9-426e-BEC9-E0ACE4B2CACB},{1A946DF3-77AC-41c2-BBB7-3C0CD5E28C32},{3771AABA-F746-4af6-9414-744E55D4260E},{1B895920-9744-4501-9952-A4DBADC197C2},{AD4C8F61-8FAC-44ff-A8AC-AEA7A9A2049C},{F71A6A09-1CC3-48ce-80E5-2F9A5A437E11},{A0EA7C3F-A635-4a6a-8003-CCA0CDB61111},{1C9BE18A-C360-430c-91A5-0E31EE24A902},{5F0E5EBC-1A87-4965-85F0-4A0862C52C03},{8AA3DEE6-CFB7-4d24-A63A-4956844BF409},{F15039E5-DCBA-4c8d-98BC-A38FB0A230C1},{AEE32C59-CBBE-460d-B586-6B496A586362},{53DE1FC0-E2E2-4368-B04B-C794BBFC5E39},{871A4BE6-800E-49bc-AA16-846211684B09},{5E6034FD-2D56-4a3f-8F29-D43FAA4ACC8E},{27468EFD-24D8-487f-AB61-B05512926496},{B26819B8-6A13-4909-B6B4-AEAC10C79824},{D47A2037-382D-41a1-A516-46ECD114287B},{89D56DDD-BCE8-49dc-AF2F-79BAA0AD6389},{E6104509-B1D5-4f07-A525-528B58A2BB88},{AAC8BDD9-E55B-4c4f-BCD5-5637C56AED97},{0B116D72-3DC0-47f9-8644-43C589283AC8},{1010578A-1A3D-45d6-B4C0-46A0F1AC959B},{710EC8B6-6DE3-483e-8C1B-3E8FD46F9785},{48863DAB-9CBF-4a6a-A43A-93F0CFEC3A67},{2FEAC58A-B711-4567-B65E-B10233AB5440},{54B82D2B-A374-4db6-93E0-F53AAD886956},{C514B90A-FDA4-437f-9510-D04BCE078020},{62611264-3097-4b2f-814C-9992E17F4828},{0830E275-FBCF-47dc-A988-6FB15703781D},{9E31A838-7CE1-4df8-8B19-48EE4A6928C5},{7F20FCEE-C741-4331-A2D2-564C5C8F3D12},{C57AF11F-E8EB-4e24-808A-31B77933938B},{3B1D5C2E-7284-460b-95E9-43FE37C814A8},{42A32091-09E1-4bfa-9713-5F650623BD8F},{31F8A8E2-38D7-4da8-9674-965209C5C620},{DB595D0D-CC2B-4e63-9E61-C2E96D1FB1BC},{D64B3B84-1E8A-4c1d-B475-F79194305AED},{C6717DBB-30DB-470f-AEB7-D25FB6571C87},{ACD62EDE-39D7-4687-A3B3-0AE062210727},{23178C00-53AD-4d39-A11A-E8DB8CE1F9A0},{9BB69F28-B82B-4d42-A683-D4D181173CCB},{48988D93-01AA-4564-A67B-BD638293B821},{46AC8320-8C92-42dc-983D-076813926E2D},{D2E5B6C6-7E79-4e90-AC85-ED387A1A49BE},{645EB9D0-E48F-403a-831D-63CCE9C9C24D},{1F203D74-795F-4a4d-9778-7F11C3275E5C},{DAC0FAB6-7CA6-477f-8895-61E4894B929E},{43875C4D-7884-4091-B4B9-773C3869E17E},{6F8E1114-BC3E-4860-971F-184849FAAD0C},{8DB146C1-2FDD-46c1-9EBA-6F42FC0BA567},{5CA49154-8D93-427a-A67C-41954359FB1F},{74802467-3F35-4c37-B298-75C835E29AB0},{CF923D2A-30A9-4257-9F87-6F25D862CEC2},{B21657AB-762A-40cf-8253-9CC1A8553563},{CB4CA3A3-1CAA-4584-96AB-1A72B7DFFB4D},{B73D554C-9A0B-47b8-A08A-45CE02D7D450},{12CB7E3B-3679-48c6-887C-CCB9239EBD0B},{654F5423-42C7-4016-9A40-3CFBC570AA00},{4CC77915-D1F7-4e39-AB32-31E7526D8E49},{987C8BFD-17D5-4918-AD15-9B8D865DAAAC},{A9DA37EB-D911-4142-9259-016C63EA6CCD},{057DD432-70F1-4c0a-A94F-7C721EBEB76B},{B29464AF-526C-4a17-A236-56467E8B8063},{DDB437D0-35BC-40f6-8002-895FB2B0737E},{81FC3AE4-1E56-4058-9E09-A286C1D4C889},{12D62BE5-01E2-43fc-B7DA-6F8BB1A6CCD0},{17C3E1C1-86C6-480d-A331-4B00F4A0C727},{4286CA4C-D385-4d5f-94F4-44095B461917},{DC3443E4-8248-400f-9739-FFB40758DD64},{6E6A6F73-0BB6-4d69-BCA4-C24B88BDB2D6},{73182620-0C8D-416b-90AF-9A9EB0A4FD9F},{05655897-5BB6-4641-B492-D56589C20A86},{59AEBCF8-3376-43c4-8F10-0E7DA22FECE2},{2F6A1A9A-7E88-43f4-A6C4-E756DCB675D7},{A22D1A02-EBB5-412a-8EC7-D3DFE201A0D7},{50720A8C-0D08-4213-8AD8-5755381F878C},{2E91FAD4-01E7-4209-B48D-7188BC95BEED},{3D399319-495F-4b57-8EB6-8F518E0B252D},{DFFB4A34-3457-469a-9163-B9D11F6B9555},{F8B3C0DF-65B5-47b2-B774-DB35730E47B4},{40F79D6A-A4A0-4f9e-AD46-0E72CD1BF2F0},{EC5264E6-2813-4aa2-9A4A-C5943D8109A4}"/>
 														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 													</UML:ModelElement.taggedValue>
 												</UML:Class>
@@ -45994,7 +46318,7 @@ Considered Allred Score; = 3 is positive
 														<UML:TaggedValue tag="phase" value="1.0"/>
 														<UML:TaggedValue tag="complexity" value="1"/>
 														<UML:TaggedValue tag="status" value="Proposed"/>
-														<UML:TaggedValue tag="$ea_attsclassified" value="{85896A03-15AA-4c69-A11A-CD3A69467C66},{A4A2A0F8-52F5-490f-8C84-32EB2EC78504},{F28AAE95-28C5-47d4-8A5D-F95FAD3D261E},{F3865CEE-ACFC-4eed-8622-65E13B3E0E58},{C77E18FA-B675-4beb-B2DB-59AD138C9E6C},{711A0D44-B95C-48dd-A576-CE05A52F0424},{9499FD23-95EB-4156-848B-6BE14459E54A},{60C8D539-2851-4af5-A7E5-53994A9CA1F4},{93010380-EDF2-41da-A9DF-1A9E0546B5CB},{ABC1D162-6A52-4760-AE8A-91AB1070FAED},{766CFD21-C3C5-441b-8900-2E1C09146C46},{90DDEBA1-0852-4220-BB17-B41BBD547771},{69C493CA-926F-4744-B34F-96D8B299F383},{604CBCB1-14A3-44d7-AC1A-3D570362E96F},{D12B0875-B3B3-40d7-817B-14D4F03C16CB},{22D6C6B6-047A-4934-92F0-6A7B00B8E653},{39E6DCA9-FC88-470d-A3F8-D5FBE0DBA92D},{F79B9782-B601-45b4-BC9A-0BA62DA5C683}"/>
+														<UML:TaggedValue tag="$ea_attsclassified" value="{85896A03-15AA-4c69-A11A-CD3A69467C66},{A4A2A0F8-52F5-490f-8C84-32EB2EC78504},{F28AAE95-28C5-47d4-8A5D-F95FAD3D261E},{F3865CEE-ACFC-4eed-8622-65E13B3E0E58},{1235CD39-40D4-4b54-96C9-5B52C7B1D010},{C77E18FA-B675-4beb-B2DB-59AD138C9E6C},{711A0D44-B95C-48dd-A576-CE05A52F0424},{9499FD23-95EB-4156-848B-6BE14459E54A},{60C8D539-2851-4af5-A7E5-53994A9CA1F4},{93010380-EDF2-41da-A9DF-1A9E0546B5CB},{ABC1D162-6A52-4760-AE8A-91AB1070FAED},{766CFD21-C3C5-441b-8900-2E1C09146C46},{90DDEBA1-0852-4220-BB17-B41BBD547771},{69C493CA-926F-4744-B34F-96D8B299F383},{604CBCB1-14A3-44d7-AC1A-3D570362E96F},{D12B0875-B3B3-40d7-817B-14D4F03C16CB},{22D6C6B6-047A-4934-92F0-6A7B00B8E653},{39E6DCA9-FC88-470d-A3F8-D5FBE0DBA92D},{0DD267C1-A744-4384-AA8C-9EB5DFE8FC2F},{F79B9782-B601-45b4-BC9A-0BA62DA5C683}"/>
 														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
 													</UML:ModelElement.taggedValue>
 												</UML:Class>
