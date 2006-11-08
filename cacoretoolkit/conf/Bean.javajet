@@ -122,7 +122,8 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 			
 			  return <%=otherEnd.getName()%>;			
 			  
-			<% } else { %>
+			<% } else { if (!isAbstract.equals("abstract")) {%>
+		
 			
 			  ApplicationService applicationService = ApplicationServiceProvider.getApplicationService();
 			  <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.<%=klass.getName()%> thisIdSet = new <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.<%=klass.getName()%>();
@@ -152,7 +153,7 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 			  { 
 			      	System.out.println("<%=klass.getName()%>:get<%=capFirst(otherEnd.getName())%> throws exception ... ...");
 			   		ex.printStackTrace(); 
-			  }
+			   } <% } %>
 			  return <%=otherEnd.getName()%>;	
 			 
 			 <% } %>		
