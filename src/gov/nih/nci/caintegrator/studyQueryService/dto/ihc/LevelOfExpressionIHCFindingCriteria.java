@@ -2,10 +2,11 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.ihc;
 
 import java.util.Collection;
 
+import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 import gov.nih.nci.caintegrator.studyQueryService.finding.SpecimenBasedMolecularFindingHandler;
 import gov.nih.nci.caintegrator.studyQueryService.ihc.LevelOfExpressionIHCFindingHandler;
 
-public class LevelOfExpressionIHCFindingCriteria extends IHCFindingCriteria {
+public class LevelOfExpressionIHCFindingCriteria extends IHCFindingCriteria implements QueryDTO {
 	/*public SpecimenBasedMolecularFindingHandler getHandler() {		
 		return new LevelOfExpressionIHCFindingHandler();
 	}*/
@@ -20,6 +21,7 @@ public class LevelOfExpressionIHCFindingCriteria extends IHCFindingCriteria {
 	private Integer percentPositive;
 	private Integer percentPositiveRangeMin;
 	private Integer percentPositiveRangeMax;
+    private String queryName;
 	
 	
 	public Integer getPercentPositive() {
@@ -60,6 +62,12 @@ public class LevelOfExpressionIHCFindingCriteria extends IHCFindingCriteria {
 	public void setStainDistributionCollection(Collection<String> stainDistributionCollection) {
 		this.stainDistributionCollection = stainDistributionCollection;
 	}
+    public void setQueryName(String name) {
+        this.queryName = name;        
+    }
+    public String getQueryName() {
+        return queryName;
+    }
 	
 	
 	

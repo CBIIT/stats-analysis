@@ -1,11 +1,12 @@
 package gov.nih.nci.caintegrator.service.findings;
 
+import gov.nih.nci.caintegrator.dto.query.QueryDTO;
+import gov.nih.nci.caintegrator.enumeration.FindingStatus;
+
 import java.io.Serializable;
+import java.util.Collection;
 
 import org.apache.log4j.Logger;
-
-import gov.nih.nci.caintegrator.enumeration.FindingStatus;
-import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 /***
  * This class is abstract so that it will not be instantiated directly.  It is
  * intended to be a SuperClass for the Findings objects of substance.
@@ -79,6 +80,7 @@ public abstract class Finding implements Serializable{
 	private String sessionId;
 	private String taskId;
 	private FindingStatus status;
+    private Collection<? extends gov.nih.nci.caintegrator.domain.finding.bean.Finding> domainFindings;
 	private static Logger logger = Logger.getLogger(Finding.class);
 	
 	
@@ -179,5 +181,20 @@ public abstract class Finding implements Serializable{
 	public void setTaskId(String taskId) {
 		this.taskId = taskId;
 	}
+
+    /**
+     * @return Returns the domainFindings.
+     */
+    public Collection<? extends gov.nih.nci.caintegrator.domain.finding.bean.Finding> getDomainFindings() {
+        return domainFindings;
+    }
+
+    /**
+     * @param domainFindings The domainFindings to set.
+     */
+    public void setDomainFindings(
+            Collection<? extends gov.nih.nci.caintegrator.domain.finding.bean.Finding> domainFindings) {
+        this.domainFindings = domainFindings;
+    }
 
 }
