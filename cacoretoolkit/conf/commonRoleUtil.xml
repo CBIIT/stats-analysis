@@ -22,6 +22,12 @@
 	   <package>
 	    <include>@INCLUDE_PACKAGE@</include>
 	   </package>
+<stereotype>
+                <exclude>CADSR Value Domain</exclude>
+            </stereotype>
+<name> 
+				<exclude>@ROLE_EXCLUDE_NAME@</exclude>
+			</name>
 	  </filter>
 	 </transformer>
 	</transformer-chain>

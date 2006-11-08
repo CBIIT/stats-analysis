@@ -15,13 +15,19 @@
 	<transformer-chain>
 	 <transformer name="commonpackageutil"
 	 	className="gov.nih.nci.codegen.core.transformer.UML13CommonPackageUtilTransformer">
-
+ 
 	 	<param name="basePackage" value="Logical View.Logical Model"/>
 	 	<param name="database" value="@DATABASE@"/>
 	  <filter name="classifier" className="gov.nih.nci.codegen.core.filter.UML13ClassifierFilter">
 	   <package>
 	    <include>@INCLUDE_PACKAGE@</include>
 	   </package>
+<stereotype>
+                <exclude>CADSR Value Domain</exclude>
+            </stereotype>
+<name>
+				<exclude>@ROLE_EXCLUDE_NAME@</exclude>
+			</name>
 	  </filter>
 	 </transformer>
 	</transformer-chain>
