@@ -11,6 +11,9 @@
 			<package>
 				<include>@INCLUDE_PACKAGE@</include>
 			</package>
+            <stereotype>
+                <exclude>CADSR Value Domain</exclude>
+            </stereotype>
 			<name>
 				<exclude>@EXCLUDE_NAME@</exclude>
 			</name>
