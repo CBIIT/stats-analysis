@@ -325,8 +325,10 @@
 		description="Runs entire SDK code generation process"/>
 
 <!--	<target name="-build-system.main" depends="install-tomcat,build-schema,compile-framework,build-beans,build-orm,build-artifacts,package-system,deploy-server" unless="build-system.main.ignore"/> -->
-	<target name="-build-system.main" depends="compile-framework,build-orm,build-artifacts,package-system,deploy-server" unless="build-system.main.ignore"/>
-
+<!--<target name="-build-system.main" depends="build-orm,build-artifacts,package-system,deploy-server" unless="build-system.main.ignore"/>
+-->
+		<target name="-build-system.main" depends="build-orm,build-artifacts,package-system,deploy-server" unless="build-system.main.ignore"/>
+	
 	<target name="clean" 
 		depends="-clean.main,-clean.custom"
 		description="Removes all artifacts related to the project specified in deploy.properties"/>
@@ -720,14 +722,13 @@
 		depends="-generate-beans.main,-generate-beans.custom"
 		description="Generate beans based on model specified in deploy.properties"/>
 	
-	<target name="-generate-beans.main" depends="init-project,jetc" unless="generate-beans.main.ignore">
+	<target name="-generate-beans.main" depends="create-control-files,init-project,jetc" unless="generate-beans.main.ignore">
 		<SDKecho message="Generating Java beans from model"/> 
 		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beangeneration}"/>
 		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beanimplgeneration}"/>
 		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beanwsgeneration}"/>
 		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.beanwsimplgeneration}"/>
-		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.pojogeneration}"/>
-		
+		<SDKgenerate controlfile="${dir.output.project.conf}/${file.control.pojogeneration}"/>		
 	</target>
 
 	<target name="generate-cache" 
@@ -860,8 +861,11 @@
 		depends="-init-project.main,-init-project.custom"
 		description="Initialize project build by creating output directories and necessary files"/>
 	
-	<target name="-init-project.main" depends="create-output-dirs,create-project-dirs,create-control-files,copy-template-files,fix-xmi" unless="init-project.main.ignore">
-	</target>
+	<!--<target name="-init-project.main" depends="create-output-dirs,create-project-dirs,create-control-files,copy-template-files,fix-xmi" unless="init-project.main.ignore">
+	</target>-->
+	
+	<target name="-init-project.main" depends="create-output-dirs,create-project-dirs,copy-template-files,fix-xmi" unless="init-project.main.ignore">
+		</target>
 
 	<target name="jetc" 
 		depends="-jetc.main,-jetc.custom"
