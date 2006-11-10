@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.service.findings;
 
+import java.util.List;
+
 import gov.nih.nci.caintegrator.dto.query.ClassComparisonQueryDTO;
 import gov.nih.nci.caintegrator.dto.query.HierarchicalClusteringQueryDTO;
 import gov.nih.nci.caintegrator.dto.query.PrincipalComponentAnalysisQueryDTO;
@@ -151,6 +153,13 @@ public interface FindingsFactory {
 	 * @return
 	 */
 	public Object createCustomFinding(QueryDTO query);
-	
+	/**
+	  * Creates and returns a List<ClassComparisonFinding> using the parameters passed in the given query
+	  * @param query
+	  * @return
+	  * @throws FrameworkException 
+	  */
+	 public CompoundClassComparisonFinding createCompoundClassComparisonFinding(List<ClassComparisonQueryDTO> queryList, String sessionID, String taskID) throws FrameworkException;
+
 	
 }
