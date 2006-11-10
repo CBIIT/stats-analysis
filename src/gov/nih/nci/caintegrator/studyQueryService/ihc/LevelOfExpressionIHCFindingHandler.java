@@ -148,8 +148,13 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
              
              if (theProteinCriteria != null)
              {
+                 if(theHQL.toString().contains("WHERE")){
                  theHQL.append(" AND levelIHC.proteinBiomarker IN (");
-
+                 }
+                 else{
+                 theHQL.append(" WHERE levelIHC.proteinBiomarker IN (");    
+                 }
+                 
                  ProteinBiomarkerHandler theProteinHandler = theProteinCriteria.getHandler();
                  StringBuilder theProteinHQL = theProteinHandler.handleCriteria(theProteinCriteria, theParams);
                  theHQL.append(theProteinHQL + ")");
@@ -158,7 +163,12 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
              
              if (theSpecimenCriteria != null)
              {
-                 theHQL.append(" AND levelIHC.specimen IN (");
+                 if(theHQL.toString().contains("WHERE")){
+                     theHQL.append(" AND levelIHC.specimen IN (");
+                 }
+                 else{
+                     theHQL.append(" WHERE levelIHC.specimen IN (");
+                 }
 
                  SpecimenHandler theSpecimenHandler = theSpecimenCriteria.getHandler();
                  StringBuilder theSpecimenHQL = theSpecimenHandler.handleCriteria(theSpecimenCriteria, theParams);
