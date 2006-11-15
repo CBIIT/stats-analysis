@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : SNPAssociationFinding.hbm.xml
+    Created on : June 26, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for SNPAssociationFinding
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.analysis.snp.bean">
+   <class name="SNPAssociationFinding" 
+    	table="SNP_ANALYSIS_FINDING_FACT"
+        lazy="true">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.Long"
+           column="ASSO_ANA_FACT_ID">
+           <generator class="assigned" />
+       </id>
+       
+       
+        <!-- pvalue -->        
+       <property name="pvalue" 
+                 type="java.lang.Float" 
+                 column="ASSO_ANA_PVALUE" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- ASSO_ANA_RANK -->                 
+       <property name="rank" 
+                 type="java.lang.Integer" 
+                 column="ASSO_ANA_RANK" 
+                 insert="false" 
+                 update="false" />                 
+                   
+    
+            
+     <!--  m-1 relationship -->
+    
+   <many-to-one name="snpAnnotation"
+                class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation"
+                column="SNPANNO_ID"
+                outer-join="true"
+           />
+   <many-to-one name="snpAssociationAnalysis"
+                class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis"
+                column="ASSO_ANALYSIS_ID"
+           />
+      
+      
+	</class>
+</hibernate-mapping>
