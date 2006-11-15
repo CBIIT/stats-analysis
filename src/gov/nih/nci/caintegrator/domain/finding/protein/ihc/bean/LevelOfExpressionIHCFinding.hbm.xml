@@ -14,11 +14,17 @@
 
 	
 <hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean">
-
- <union-subclass name="LevelOfExpressionIHCFinding" 
-        extends="gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.IHCFinding" 
+       
+ <class name="LevelOfExpressionIHCFinding"          
     	table="IHC_LEVEL_FACT"
-        lazy="true">     
+        > 
+
+         <!-- id -->
+         <id name="id" 
+           type="java.lang.Long" 
+           column="IHC_LEVEL_FID">
+           <generator class="assigned" />
+         </id>     
 
         <property name="overallExpression"
                  type="java.lang.String"
@@ -74,7 +80,15 @@
                  type="java.lang.String" 
                  column="RESULTCODE" 
                  insert="false" 
-                 update="false" />           
+                 update="false" />  
+
+      <many-to-one name="proteinBiomarker"
+            class="gov.nih.nci.caintegrator.domain.annotation.protein.bean.ProteinBiomarker"
+            column="PROTEIN_BIOMARKER_ID"/> 
+
+      <many-to-one name="specimen"
+       class="gov.nih.nci.caintegrator.domain.study.bean.Specimen"
+       column="SPECIMEN_ID"/>      
       
-	</union-subclass>
+	</class>
 </hibernate-mapping>

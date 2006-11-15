@@ -13,6 +13,8 @@ public class LevelOfExpressionIHCFinding extends IHCFinding implements
 	 */
 	private static final long serialVersionUID = -5521922293848635255L;	
 	
+    private java.lang.Long id;	 
+	
 	private String overallExpression; 		
 	
 	public String getOverallExpression() {
@@ -126,6 +128,16 @@ public int hashCode() {
 
 		return h;
 	}
+
+
+public java.lang.Long getId() {
+	return id;
+}
+
+
+public void setId(java.lang.Long id) {
+	this.id = id;
+}
 
 
 

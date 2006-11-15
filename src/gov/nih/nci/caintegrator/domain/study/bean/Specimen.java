@@ -17,7 +17,7 @@ import java.util.*;
    * 
    */
 
-public  class Specimen 
+public  class Specimen
 
 
 	implements java.io.Serializable 
@@ -244,46 +244,13 @@ public  class Specimen
 
     public void setHistology(gov.nih.nci.caintegrator.domain.study.bean.Histology histology){
         this.histology = histology;
-    }	
-	   
-	   
+    }		   
+	      
+			
+			
+			
 	
-	   
-	   
-	   
-	      
-	   
-	
-	   
-	   
-	   
-	      
-			
-			
-			
-			
-      /**
-   * An ordered list of times at which events and activities are planned to occur during a clinical trial. 
-   * 
-   */
-
-   // private gov.nih.nci.caintegrator.domain.study.bean.TimeCourse timeCourse;
-      /**
-   * An ordered list of times at which events and activities are planned to occur during a clinical trial. 
-   * 
-   */
-
-    //public gov.nih.nci.caintegrator.domain.study.bean.TimeCourse getTimeCourse(){
-    //    return timeCourse;			
-   // }
-
-	      
-	               
-	   
-
-   // public void setTimeCourse(gov.nih.nci.caintegrator.domain.study.bean.TimeCourse timeCourse){
-       // this.timeCourse = timeCourse;
-   // }
+ 
 	public String getTimePoint() {
 		return timePoint;
 	}
