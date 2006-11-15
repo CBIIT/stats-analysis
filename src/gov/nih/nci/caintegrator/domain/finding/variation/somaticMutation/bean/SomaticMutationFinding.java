@@ -1,5 +1,4 @@
 
-
 package gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean;
 import gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean.*;
 import java.util.*;
@@ -15,15 +14,10 @@ import java.util.*;
 
 public  class SomaticMutationFinding 
     extends gov.nih.nci.caintegrator.domain.finding.variation.bean.VariationFinding
-
-
 	implements java.io.Serializable 
 {
 
 	private static final long serialVersionUID = 1234567890L;
-
-
- 	
 	   
     /**
    * Base Number(s) affected by Mutation
@@ -201,15 +195,15 @@ public  class SomaticMutationFinding
    * the size of mutation
    */
 
-    private Long sizeOfMutation;
+    private java.lang.String sizeOfMutation;
     /**
    * the size of mutation
    */
 
-	public Long getSizeOfMutation(){
+	public  java.lang.String getSizeOfMutation(){
         return sizeOfMutation;
     }
-    public void setSizeOfMutation(Long sizeOfMutation){
+    public void setSizeOfMutation( java.lang.String sizeOfMutation){
         this.sizeOfMutation = sizeOfMutation;
     }
 	
@@ -247,7 +241,39 @@ public  class SomaticMutationFinding
         this.wildtypeCodon = wildtypeCodon;
     }
 	
+	   
+    /**
+   * DOCUMENT ME!
+   */
 
+    private java.lang.Integer NCBI_build;
+    /**
+   * DOCUMENT ME!
+   */
+
+	public  java.lang.Integer getNCBI_build(){
+        return NCBI_build;
+    }
+    public void setNCBI_build( java.lang.Integer NCBI_build){
+        this.NCBI_build = NCBI_build;
+    }
+	
+	   
+    /**
+   * DOCUMENT ME!
+   */
+
+    private java.lang.Integer Chromosome;
+    /**
+   * DOCUMENT ME!
+   */
+
+	public  java.lang.Integer getChromosome(){
+        return Chromosome;
+    }
+    public void setChromosome( java.lang.Integer Chromosome){
+        this.Chromosome = Chromosome;
+    }	
 
 		public boolean equals(Object obj){
 			boolean eq = false;
@@ -273,5 +299,56 @@ public  class SomaticMutationFinding
 			return h;
 	}
 
+	
+	   
+	   
+	   
+	      
 			
+			
+			
+			
+      /**
+
+   */
+
+    private gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean.SomaticMutationAnnotation somaticMutationAnnotation;
+      /**
+
+   */
+
+    public gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean.SomaticMutationAnnotation getSomaticMutationAnnotation(){
+        return somaticMutationAnnotation;			
+    }
+
+	      
+	               
+	   
+
+    public void setSomatinMutationAnnotation(gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean.SomaticMutationAnnotation somaticMutationAnnotation){
+        this.somaticMutationAnnotation = somaticMutationAnnotation;
+    }	
+	   
+	
+      /**
+   * A GeneBiomarker is a gene based biological parameter that is indicative of a physiological or pathological 
+   * state. For example, EBBR2 is a biomarker used to identify risk of breast cancer. 
+   * 
+   */
+
+    private gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker somaticmutGene;
+      /**
+   * A GeneBiomarker is a gene based biological parameter that is indicative of a physiological or pathological 
+   * state. For example, EBBR2 is a biomarker used to identify risk of breast cancer. 
+   * 
+   */
+
+    public gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker getSomaticmutGene(){
+        return somaticmutGene;			
+    }
+
+    public void setSomaticmutGene(gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker somaticmutGene){
+        this.somaticmutGene = somaticmutGene;
+    }	
+		
 }

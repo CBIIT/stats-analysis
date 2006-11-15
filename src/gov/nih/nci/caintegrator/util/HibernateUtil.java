@@ -1,11 +1,15 @@
 package gov.nih.nci.caintegrator.util;
 
-
 import java.io.File;
+	import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +20,6 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-
 /**
  * @author kumarvi,sahnih
  *
@@ -24,55 +27,12 @@ import org.jdom.input.SAXBuilder;
  * DataBaseSessionFactory for caIntegrator based applications.
  */
 public class HibernateUtil {
+	private static final String DATA_SOURCE_CONTEXT_PROPERTIES = "DataSourceContext.properties";
 	//private static final SessionFactory sessionFactory;	   
     private final static ThreadLocal threadSession = new ThreadLocal();
     private final static ThreadLocal threadTransaction = new ThreadLocal();
-
-
-//    static {
-//        try {
-//            // Create the SessionFactory from hibernate.cfg.xml
-//            Configuration c= new Configuration();
-//            sessionFactory = c.
-//                                addClass(GenotypeFinding.class).
-//                                addClass(SNPAssay.class).
-//                                addClass(SNPPanel.class).
-//                                addClass(SNPAnnotation.class).
-//                                addClass(SNPAnalysisGroup.class).
-//                                addClass(Histology.class).
-//                                addClass(Population.class).
-//                                addClass(SNPAssociationAnalysis.class).
-//                                addClass(SNPAssociationFinding.class).
-//                                addClass(SNPFrequencyFinding.class).                               
-//                                addClass(Study.class).
-//                                addClass(StudyParticipant.class).
-//                                addClass(TimeCourse.class).
-//                                addClass(Activity.class).
-//                                addClass(GeneBiomarker.class).
-//                                addClass(ProteinBiomarker.class).
-//                                addClass(ClinicalFinding.class).
-//                                addClass(BreastCancerClinicalFinding.class).
-//                                addClass(SpecimenBasedMolecularFinding.class).
-//                                addClass(Specimen.class).
-//                                addClass(IHCFinding.class).
-//                                addClass(LevelOfExpressionIHCFinding.class).                                
-//                                addClass(Agent.class).
-//                                addClass(Procedure.class).
-//                                addClass(SubstanceAdministration.class).
-//                                addClass(Surgery.class).
-//                                configure().
-//                                buildSessionFactory();
-//
-//
-//
-//        } catch (Throwable ex) {
-//            ex.printStackTrace();
-//            // Make sure you log the exception, as it might be swallowed
-//            System.err.println("Initial SessionFactory creation failed." + ex);
-//            throw new ExceptionInInitializerError(ex);
-//        }
-//    }
-
+    private static Logger logger = Logger.getLogger(HibernateUtil.class);
+	
 	private static Hashtable dbSessionFactories;
 	  
 	/**
@@ -112,7 +72,28 @@ public class HibernateUtil {
 	
 	public static SessionFactory getSessionFactory() {
 		SessionFactory sf = null;
-		String applicationContextName = "cgems";
+//		Load the the application properties and set them as system properties
+		Properties appProperties = new Properties();
+	/*	String appPropertiesFileName = DATA_SOURCE_CONTEXT_PROPERTIES ;
+		   
+	    try 
+	    {
+
+			InputStream in = Thread.currentThread ().getContextClassLoader ().getResourceAsStream(appPropertiesFileName);
+			appProperties.load(in);
+		} 
+	    catch (FileNotFoundException e) 
+		{
+	    	logger.error(" Error loading Data Source Context"+e.toString()) ;
+		} 
+		catch (IOException e) 
+		{
+			logger.error(" Error loading Data Source Context"+e.toString()) ;
+		}
+	  */ 
+	    String applicationContextName = "cgems" ;// appProperties.getProperty("gov.nih.nci.caIntegrator.appDataSourceContext") ;
+	   
+		   
 		 sf = (SessionFactory)dbSessionFactories.get(applicationContextName);
 		 if(sf==null){
 		 	sf = getFromHotInitialization(applicationContextName);

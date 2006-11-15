@@ -255,6 +255,23 @@ public  class StudyParticipant
         this.survivalStatus = survivalStatus;
     }
 	
+	   
+    /**
+   * DOCUMENT ME!
+   */
+
+    private java.lang.Integer TSP_Patient_ID;
+    /**
+   * DOCUMENT ME!
+   */
+
+	public  java.lang.Integer getTSP_Patient_ID(){
+        return TSP_Patient_ID;
+    }
+    public void setTSP_Patient_ID( java.lang.Integer TSP_Patient_ID){
+        this.TSP_Patient_ID = TSP_Patient_ID;
+    }
+	
 
 
 		public boolean equals(Object obj){
@@ -319,9 +336,7 @@ public  class StudyParticipant
 	   
 	   
 	      
-			
-			
-			
+
 			
       /**
    * A standard of basic quantity or increment represented by numeric value  
@@ -343,6 +358,32 @@ public  class StudyParticipant
     public void setAgeAtDeath(gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement ageAtDeath){
         this.ageAtDeath = ageAtDeath;
     }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
+      /**
+
+   */
+
+    private Set <gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding> epiFinding = new HashSet<gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding>();
+      /**
+
+   */
+
+    public Set <gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding> getEpiFinding(){
+        return epiFinding;
+    }
+
+	      
+	               
+	   
+    public void setEpiFinding(Set<gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding> epiFinding){
+        this.epiFinding = epiFinding;
+    }
 	   
 	   
 	
@@ -415,9 +456,7 @@ public  class StudyParticipant
 	   
 	   
 	      
-			
-			
-			
+
 			
       /**
    * A standard of basic quantity or increment represented by numeric value  
@@ -474,9 +513,7 @@ public  class StudyParticipant
 	   
 	   
 	      
-			
-			
-			
+
 			
       /**
    * A standard of basic quantity or increment represented by numeric value  
@@ -586,23 +623,9 @@ public  class StudyParticipant
     public void setClinicalFindingCollection(Set<gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding> clinicalFindingCollection){
         this.clinicalFindingCollection = clinicalFindingCollection;
     }
+	   
+	   
+	
 
-
-    public String toString() {
-        return "StudyParticipant{" +
-                "administrativeGenderCode='" + administrativeGenderCode + '\'' +
-                ", caseControlStatus='" + caseControlStatus + '\'' +
-                ", daysOffStudy=" + daysOffStudy +
-                ", daysOnStudy=" + daysOnStudy +
-                ", ethnicGroupCode='" + ethnicGroupCode + '\'' +
-                ", familyHistory='" + familyHistory + '\'' +
-                ", id='" + id + '\'' +
-                ", institutionName='" + institutionName + '\'' +
-                ", isOffStudy=" + isOffStudy +
-                ", raceCode='" + raceCode + '\'' +
-                ", studySubjectIdentifier='" + studySubjectIdentifier + '\'' +
-                ", survivalStatus='" + survivalStatus + '\'' +
-                ", population=" + population +
-                '}';
-    }
+			
 }
