@@ -3,7 +3,7 @@
 <!--
     Document   : LossOfExpressionIHCFinding.hbm.xml
     Created on : August 21, 2006
-    Author     : Dana Zhang
+    Author     : Dana Zhang, Kevin Rosso
     Description: Hibernate mapping file for LossOfExpressionIHCFinding
 -->
 
@@ -15,15 +15,13 @@
 	
 <hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean">
 
- <union-subclass name="LossOfExpressionIHCFinding" 
-        extends="gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.IHCFinding" 
-    	table="IHC_LOSS_FACT"
-        lazy="true">
+ <class name="LossOfExpressionIHCFinding" 
+        table="IHC_LOSS_FACT">
         
        <!-- id -->
        <id name="id" 
            type="java.lang.Long" 
-           column="IHC_FID">
+           column="IHC_LOST_FID">
            <generator class="assigned" />
        </id>
 
@@ -31,44 +29,36 @@
        <!-- benignPresentValue -->  
         <property name="benignPresentValue"
                  type="java.lang.String"
-                 column="BENIGN_PRESENT_VALUE"
-                 insert="false"
-                 update="false" />
+                 column="BENIGN_PRESENT_VALUE"/>
 
         <!-- benignSum -->        
        <property name="benignSum" 
                  type="java.lang.Integer" 
-                 column="BENIGN_SUM" 
-                 insert="false" 
-                 update="false" />
+                 column="BENIGN_SUM"/>
                  
        <!-- comments -->
        <property name="comments" 
                  type="java.lang.String" 
-                 column="COMMENTS" 
-                 insert="false" 
-                 update="false" />
+                 column="COMMENTS"/>
                  
         <!-- invasiveBenignDiff -->
        <property name="invasiveBenignDiff" 
                  type="java.lang.Integer" 
-                 column="INVASIVE_BENIGN_DIFF" 
-                 insert="false" 
-                 update="false" />
+                 column="INVASIVE_BENIGN_DIFF"/>
                  
        <!-- invasiveSum -->        
        <property name="invasiveSum" 
                  type="java.lang.Integer" 
-                 column="INVASIVE_SUM" 
-                 insert="false" 
-                 update="false" />
+                 column="INVASIVE_SUM"/>
                                   
         <!-- lossResult -->        
        <property name="lossResult" 
                  type="java.lang.String" 
-                 column="LOSS_RSLT" 
-                 insert="false" 
-                 update="false" />       
+                 column="LOSS_RSLT"/> 
+       
+       <many-to-one name="specimen"
+       			class="gov.nih.nci.caintegrator.domain.study.bean.Specimen"
+       			column="SPECIMEN_ID"/>      
       
-	</union-subclass>
+	</class>
 </hibernate-mapping>
