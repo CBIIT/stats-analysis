@@ -1,0 +1,91 @@
+<project name="caintegrator-spec" default="build_jar_anthill" basedir=".">
+	<property file="basic_build.properties"/>
+	<!--
+	TARGET: COMPILE
+		Compiles the source directory
+	-->
+	<target name="build_dependency" if="anthill.artifacts.dir" depends="build_jar_anthill">
+		<echo>
+			Artifacts copied to ${anthill.artifacts.dir}
+		</echo>
+		<copy file="caintegrator-spec.jar" todir="${anthill.artifacts.dir}"/>
+	</target>
+   <target name="build_jar_anthill" depends="warning,config_application_context">
+		<delete dir="${build.classes.dir}" failonerror="false"/>
+		<delete file="caintegrator-spec.jar" failonerror="false"/>
+		<mkdir dir="${build.classes.dir}"/>
+		<javac srcdir="${build.source.dir}" destdir="${build.classes.dir}" source="1.5" excludes="**/test/**" debug="true" debuglevel="lines,vars,source">
+			<classpath>
+				<fileset dir="${build.deploy.lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+				<fileset dir="${build.deploy.lib.dir}/hibernate-3.0">
+					<include name="*.jar"/>
+                </fileset>
+				<fileset dir="${build.do.not.deploy.lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+				<fileset dir="${anthill.dependency.artifacts.dir}">
+					<include name="caintegrator-analysis-commons.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+		<jar jarfile="caintegrator-spec.jar">
+
+			<fileset dir="${build.source.dir}">
+                <exclude name="hibernate.cfg.xml"/>
+                <exclude name="hibernate.properties"/>
+                <exclude name="*.java"/>
+            </fileset>
+
+
+            <fileset dir="${build.classes.dir}">
+                <exclude name="hibernate.cfg.xml"/>
+                <exclude name="hibernate.properties"/>
+            </fileset>
+
+            <fileset dir="${build.deploy.lib.dir}">
+				<include name="*.jar"/>
+			</fileset>
+            <fileset dir="${build.deploy.lib.dir}/hibernate-3.0">
+				<include name="*.jar"/>
+                <exclude name="log4j*.jar"/>
+            </fileset>
+
+			<fileset dir="${anthill.dependency.artifacts.dir}">                      
+				<include name="caintegrator-analysis-commons.jar"/>
+			</fileset>
+			<fileset dir=".">                      
+				<include name="DataSourceContext.properties"/>
+			</fileset>
+		</jar>
+	</target>
+    <target name="jar_check">
+		<property name="weka.jar" value="${build.deploy.lib.dir}/weka.jar" />
+		<available file="${weka.jar}" property="required_jars.present"/>
+		<condition property="required_jars.not.present">
+			<not>
+				<istrue value="${required_jars.present}"/>
+			</not>
+		</condition>
+	</target>
+	<target name="warning" if="required_jars.not.present" depends="jar_check">
+		<fail message="Build Failed! The required ${weka.jar} is not present to compile!  Please see ${build.deploy.lib.dir}/readme.txt" />
+	</target>
+	<target name="noop"/>
+    <target name="config_hibernate">
+		<delete file="src/cgems-domain-hibernate.cfg.xml"/>
+		<copy file="src/hibernate.cfg.xml.template" tofile="src/hibernate.cfg.xml"/>
+        <replaceregexp file="src/hibernate.cfg.xml" match="__DRIVER__" replace="${connection.driver_class}" flags="g"/>
+		<replaceregexp file="src/hibernate.cfg.xml" match="__DBURL__" replace="${connection.url}" flags="g"/>
+		<replaceregexp file="src/hibernate.cfg.xml" match="__DBUSER__" replace="${connection.username}" flags="g"/>
+		<replaceregexp file="src/hibernate.cfg.xml" match="__DBPASSWORD__" replace="${connection.password}" flags="g"/>
+        <replaceregexp file="src/hibernate.cfg.xml" match="__DIALECT__" replace="${dialect}" flags="g"/>
+     </target>
+	<target name="config_application_context">
+		<delete file="DataSourceContext.properties"/>
+		<copy file="conf/DataSourceContext.properties.template" tofile="DataSourceContext.properties"/>
+        <replaceregexp file="DataSourceContext.properties" match="__APPLICATION_NAME__" replace="${application_name}" flags="g"/>
+	</target>
+	
+</project>
