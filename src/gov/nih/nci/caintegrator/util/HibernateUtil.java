@@ -74,7 +74,7 @@ public class HibernateUtil {
 		SessionFactory sf = null;
 //		Load the the application properties and set them as system properties
 		Properties appProperties = new Properties();
-	/*	String appPropertiesFileName = DATA_SOURCE_CONTEXT_PROPERTIES ;
+	    String appPropertiesFileName = DATA_SOURCE_CONTEXT_PROPERTIES ;
 		   
 	    try 
 	    {
@@ -90,8 +90,8 @@ public class HibernateUtil {
 		{
 			logger.error(" Error loading Data Source Context"+e.toString()) ;
 		}
-	  */ 
-	    String applicationContextName = "cgems" ;// appProperties.getProperty("gov.nih.nci.caIntegrator.appDataSourceContext") ;
+	  
+	    String applicationContextName = appProperties.getProperty("gov.nih.nci.caIntegrator.appDataSourceContext") ;
 	   
 		   
 		 sf = (SessionFactory)dbSessionFactories.get(applicationContextName);
