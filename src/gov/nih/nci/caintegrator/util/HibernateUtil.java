@@ -108,7 +108,7 @@ public class HibernateUtil {
 	private static Document getConfigDocument(){
 		Document configDoc = null;
 		try {
-			String configFilePath = System.getProperty("gov.nih.nci.caintegrator.configFile");
+			String configFilePath = System.getProperty("gov.nih.nci.caintegrator.configFile_ISPY");
             SAXBuilder builder = new SAXBuilder();
             configDoc = builder.build(new File(configFilePath));
             return configDoc;
