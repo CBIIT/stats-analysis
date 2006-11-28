@@ -15,6 +15,7 @@ import gov.nih.nci.system.applicationservice.ApplicationServiceProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -60,22 +61,130 @@ import org.hibernate.criterion.Restrictions;
  * @author sahnih, zhangd, guruswamis
  */
 public class TestClient {
-
 	public static void main(String[] args) {
 		System.out.println("*** TestClient...");
 		try {
+			Date startTime = new Date();
+			System.out.println("********************************");
+			System.out.println("  Start Time : " + startTime);
 			searchStudy();
+			Date endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			long elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSNPPanel();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSNPAssociationAnalysis();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSNPAnalysisGroup();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchPopulation();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSpecimen();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSNPAnnoation();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSNPAssociationFinding();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSNPFrequencyFinding();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchGeneBiomarker();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSNPAssay();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+			
+			
+			startTime = new Date();
+			System.out.println("  Start Time : " + startTime);
 			searchSNPAssayHQL();
+			endTime = new Date();
+			System.out.println("  End Time : " + endTime);
+			elapsed_time = endTime.getTime() - startTime.getTime();
+			System.out.println("That took " + elapsed_time + " milliseconds");
+			System.out.println("********************************");
+					
+		
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			System.out.println("Test client throws Exception = " + e);
