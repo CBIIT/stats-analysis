@@ -1,18 +1,24 @@
-package gov.nih.nci.caintegrator.service.findings;
+package gov.nih.nci.caintegrator.security;
 
-import gov.nih.nci.caintegrator.dto.query.ClassComparisonQueryDTO;
-import gov.nih.nci.caintegrator.dto.query.HierarchicalClusteringQueryDTO;
-import gov.nih.nci.caintegrator.dto.query.PrincipalComponentAnalysisQueryDTO;
-import gov.nih.nci.caintegrator.dto.query.QueryDTO;
-import gov.nih.nci.caintegrator.exceptions.FrameworkException;
+import gov.nih.nci.caintegrator.dto.de.InstitutionDE;
 
-/**
- * This interface will provide the method signatures of the
- * finding services available and pakaged in the caIntegrator
- * specification.
+import java.util.Collection;
+
+/***
+ * Class that will hold the "Credentials" required to fully use a caIntegrator
+ * based application.  It will hold the Role of the user and the institutes that
+ * the user is associated with.
  * 
- * Whether this will use proxies will be determined by the 
- * finding strategies that it's impl uses.
+ * The UserCredentials may have 1 of 3 roles.
+ * 	
+ *  UserRole.PUBLIC_USER is able to access only public data
+ *  
+ *  UserRole.INSTITUTE_USER is able to view PUBLIC_USER data and the data of the Institutes
+ *  listed in the Set institutes.
+ *  
+ *  UserRole.SUPER_USER is able to view all data across all institutes as well
+ *  as all public data
+ * 
  * 
  * @author BauerD
  *
@@ -76,81 +82,138 @@ import gov.nih.nci.caintegrator.exceptions.FrameworkException;
 * 
 */
 
-public interface FindingsFactory {
-	/**
-	 * Creates and returns a Kaplan-Meier Survival Plot finding result of
-	 * the patients returned from the given query. 
-	 * 
-	 * @param query
-	 * @return
-	 */
-	public KMFinding createKMFinding(QueryDTO query);
-	/**
-	 * Creates and returns a CopyNumberFinding for the query using
-	 * the parameters for the given query.
-	 * 
-	 * @param query
-	 * @return
-	 */
-	public CopyNumberFinding createCopyNumberFinding(QueryDTO query);
+public class UserCredentials {
+
+	private String userName;
+	private UserRole role;
+	private String emailAddress;
+	private String firstName;
+	private String lastName;
+	private Collection<InstitutionDE> institutes;
+	private boolean authenticated = false;
 	
-	/**
-	 * Creates and returns a ClinicalFinding using the parameters
-	 * of the given query described in the passed QueryDTOold.
-	 * @param query
-	 * @return
-	 */
-	public ClinicalFinding createClinicalFinding(QueryDTO query);
-	
-	/**
-	 * Creates and returns a ClassComparisonFinding using the parameters passed in the given query
-	 * @param query
-	 * @return
-	 * @throws FrameworkException 
-	 */
-	public ClassComparisonFinding createClassComparisonFinding(ClassComparisonQueryDTO query, String sessionID, String taskID) throws FrameworkException;
-	/**
-	 * Creates and returns a PCAFinding using the parameters of the given query 
-	 * described in the passed QueryDTOold.
-	 * @param query
-	 * @return
-	 */
-	public PrincipalComponentAnalysisFinding createPCAFinding(PrincipalComponentAnalysisQueryDTO queryDTO, String sessionID, String taskID) throws FrameworkException;
+	public enum UserRole{
+		PUBLIC_USER, INSTITUTE_USER, SUPER_USER;
+		public  String toString()
+		{
+			switch(this) {
+			case PUBLIC_USER:
+				return "PUBLIC_USER";
+			case INSTITUTE_USER:
+				return "INSTITUTE_USER";
+			case SUPER_USER:
+				return "SUPER_USER";
+			default:
+				//this should never happen
+				return "UNDEFINED_USER_ROLE";
+			}
+		}	
+	}
 
 	/**
-	 * Creates and returns an HCAFinding from the given query described 
-	 * in the passed QueryDTOold.
-	 * 
-	 * @param query
-	 * @return
+	 * This constructor is protected so that once the Credentials have been
+	 * set by the SecurityManager, they can not be modified.
+	 * @param emailAddress
+	 * @param firstName
+	 * @param institutes
+	 * @param lastName
+	 * @param role
+	 * @param userName
 	 */
-	public HCAFinding createHCAFinding(HierarchicalClusteringQueryDTO queryDTO, String sessionID, String taskID) throws FrameworkException;
+	protected UserCredentials(String emailAddress, String firstName, Collection<InstitutionDE> institutes, String lastName, UserRole role, String userName) {
+		this.emailAddress = emailAddress;
+		this.firstName = firstName;
+		this.institutes = institutes;
+		this.lastName = lastName;
+		this.role = role;
+		this.userName = userName;
+		if(role!=null) {
+			authenticated = true;
+		}
+	}
 	/**
-	 * Creates and returns a Gene Expression Intensity finding
-	 * (GEIntensityFinding) from the given query described 
-	 * in the passed QueryDTOold.
-	 * 
-	 * @param query
+	 * This constructor is protected so that once the Credentials have been
+	 * set by the SecurityManager, they can not be modified.
+	 * @param userName
+	 * @param role
+	 * @param institutes
+	 */
+	protected UserCredentials(String userName, UserRole role, Collection<InstitutionDE> allowableData) {
+		this.userName = userName;
+		this.role = role;
+		this.institutes = allowableData;
+		if(role!=null) {
+			authenticated = true;
+		}
+	}
+	/**
+	 * The institutes whose data the user is allowed to see
 	 * @return
 	 */
-	public GEIntensityFinding createGEIntensityFinding(QueryDTO query);
+	public Collection<InstitutionDE> getInstitutes() {
+		return this.institutes;
+	}
+
+	/**
+	 * @return Returns the role.
+	 */
+	public UserRole getRole() {
+		return role;
+	}
+
+	/**
+	 * @return Returns the userName.
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+
 	
 	/**
-	 * I added this because I was thinking of a framework that would allow
-	 * the creation at runtime of new strategies and queries without having
-	 * to overwrite the caIntegrator framework.  Custom strategies/queries and
-	 * associated parameterDTOs and validators that are considered more then
-	 * novel or trivial can be added to the framework in subsequent releases
-	 * but this will provide a mechanism whereby a person can write and use
-	 * effectively a new query at any time.
-	 * 
-	 * I imagine that this will use reflection to instantiate the property file
-	 * defined validators/findings/strategy.
-	 * 
-	 * @param query
+	 * Checks to see if these credential have been authenticated
 	 * @return
 	 */
-	public Object createCustomFinding(QueryDTO query);
+	public boolean authenticated() {
+		return authenticated;
+	}
 	
+	private void setAuthenticated(boolean auth) {
+		this.authenticated = auth;
+	}
+
+	/**
+	 * @param emailAddress The emailAddress to set.
+	 */
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	/**
+	 * @param firstName The firstName to set.
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * @param lastName The lastName to set.
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+
 }
