@@ -58,7 +58,11 @@
        
        <many-to-one name="specimen"
        			class="gov.nih.nci.caintegrator.domain.study.bean.Specimen"
-       			column="SPECIMEN_ID"/>      
+       			column="SPECIMEN_ID"/> 
+       
+       <many-to-one name="proteinBiomarker"
+            class="gov.nih.nci.caintegrator.domain.annotation.protein.bean.ProteinBiomarker"
+            column="PROTEIN_BIOMARKER_ID"/>      
       
 	</class>
 </hibernate-mapping>

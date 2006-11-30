@@ -43,7 +43,7 @@ public class FISHTest extends TestCase {
    private  Collection executeSearch() {
     	
     	 try {
-    		 
+             System.setProperty("gov.nih.nci.caintegrator.configFile","C:/devtools/jboss/jboss-4.0.4.GA/server/default/conf/caIntegratorConfig.xml");
     		 FISHFindingHandler fishHandler = new FISHFindingHandler();
              Collection<FISHFinding> fish = fishHandler.getFISHFindings(inCriteria);             
              System.out.println("Number of fish finding Retrieved: " + fish.size());

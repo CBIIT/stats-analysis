@@ -1,9 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.ihc;
 
-import gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.LevelOfExpressionIHCFinding;
 import gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.LossOfExpressionIHCFinding;
 import gov.nih.nci.caintegrator.studyQueryService.dto.finding.SpecimenBasedMolecularFindingCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.ihc.LevelOfExpressionIHCFindingCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.ihc.LossOfExpressionIHCFindingCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.protein.ProteinBiomarkerCriteia;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.SpecimenCriteria;
@@ -42,80 +40,43 @@ public class LossOfExpressionIHCFindingHandler extends IHCFindingHandler {
     	 
     	  // Start of the where clause
     	 
-     	 theHQL.append(" from LossOfExpressionIHCFinding as levelIHC LEFT JOIN FETCH levelIHC.proteinBiomarker LEFT JOIN FETCH levelIHC.specimen ");  
+     	 theHQL.append(" from LossOfExpressionIHCFinding as lossIHC LEFT JOIN FETCH lossIHC.proteinBiomarker LEFT JOIN FETCH lossIHC.specimen ");  
     	  	    
          String theANDString = " WHERE ";        
        
          
+         
+        /////////////////////////////////////////////////////
+         // Handle invasive sum number
          /////////////////////////////////////////////////////
-         // Handle percent positive absolute number
-         /////////////////////////////////////////////////////
-        if (theCriteria.getPercentPositive() != null )
+         if (theCriteria.getInvasiveSum() != null)
          {
-             System.out.println("ihc percent positive absolute #: " + theCriteria.getPercentPositive());
-             theHQL.append(theANDString + " levelIHC.percentPositive IN (:levelIHC_percentPositive) ");
-             inParams.put("levelIHC_percentPositive", theCriteria.getPercentPositive());
-             theANDString = " AND ";
-         }
-
-        /////////////////////////////////////////////////////
-        // Handle percent positive min number
-        /////////////////////////////////////////////////////
-        if (theCriteria.getPercentPositiveRangeMin() != null)
-        {
-        
-          System.out.println("ihc percent positive min #: " + theCriteria.getPercentPositiveRangeMin());
-          //theHQL.append(theANDString + " levelIHC.percentPositiveRangeMin IN (:levelIHC_percentPositiveRangeMin) ");
-             theHQL.append(theANDString + " levelIHC.percentPositiveRangeMin >="+ theCriteria.getPercentPositiveRangeMin().intValue());
-          //   inParams.put("levelIHC_percentPositiveRangeMin", theCriteria.getPercentPositiveRangeMin());
-             theANDString = " AND ";
-        }
-     
-        
-        
-        /////////////////////////////////////////////////////
-         // Handle percent positive max number
+        	  System.out.println("ihc invasive range: " + theCriteria.getInvasiveSumOperator() + theCriteria.getInvasiveSum());
+              theHQL.append(theANDString + " lossIHC.invasiveSum "+theCriteria.getInvasiveSumOperator()+ " " + theCriteria.getInvasiveSum());
+              theANDString = " AND ";
+         }  
+         
+         
          /////////////////////////////////////////////////////
-       if (theCriteria.getPercentPositiveRangeMax() != null)
+         // Handle benign sum number
+         /////////////////////////////////////////////////////
+         if (theCriteria.getBenignSum() != null)
          {
-        	  System.out.println("ihc percent positive max #: " + theCriteria.getPercentPositiveRangeMax());
-               //theHQL.append(theANDString + " levelIHC.percentPositiveRangeMax IN (:levelIHC_percentPositiveRangeMax) ");
-        	   theHQL.append(theANDString + " levelIHC.percentPositiveRangeMax <="+theCriteria.getPercentPositiveRangeMax().intValue());
-              //inParams.put("levelIHC_percentPositiveRangeMax", theCriteria.getPercentPositiveRangeMax());
+              System.out.println("ihc benign range: " + theCriteria.getBenignSumOperator() + theCriteria.getBenignSum());
+              theHQL.append(theANDString + " lossIHC.benignSum "+theCriteria.getBenignSumOperator()+ " " + theCriteria.getBenignSum());
               theANDString = " AND ";
          }
          
-         
-         
          /////////////////////////////////////////////////////
-         // Handle intensity of stain
+         // Handle result code
          /////////////////////////////////////////////////////
-         if (theCriteria.getStainIntensityCollection() != null && theCriteria.getStainIntensityCollection().size() > 0)
+         if (theCriteria.getResultCodeCollection() != null && theCriteria.getResultCodeCollection().size() > 0)
          {
-             theHQL.append(theANDString + " levelIHC.stainIntensity IN (:levelIHC_stainIntensity) ");
-             inParams.put("levelIHC_stainIntensity", theCriteria.getStainIntensityCollection());
+             theHQL.append(theANDString + " lossIHC.lossResult IN (:lossIHC_lossResult) ");
+             inParams.put("lossIHC_lossResult", theCriteria.getResultCodeCollection());
              theANDString = " AND ";
-         }
+         }         
          
-         /////////////////////////////////////////////////////
-         // Handle localization of stain
-         /////////////////////////////////////////////////////
-         if (theCriteria.getStainLocalizationCollection() != null && theCriteria.getStainLocalizationCollection().size() > 0)
-         {
-             theHQL.append(theANDString + " levelIHC.stainLocalization IN (:levelIHC_stainLocalization) ");
-             inParams.put("levelIHC_stainLocalization", theCriteria.getStainLocalizationCollection());
-             theANDString = " AND ";
-         }
-         
-         /////////////////////////////////////////////////////
-         // Handle distribution of stain
-         /////////////////////////////////////////////////////
-         if (theCriteria.getStainDistributionCollection() != null && theCriteria.getStainDistributionCollection().size() > 0)
-         {
-             theHQL.append(theANDString + " levelIHC.stainDistribution IN (:levelIHC_stainDistribution) ");
-             inParams.put("levelIHC_stainDistribution", theCriteria.getStainDistributionCollection());
-           
-         }
          
          logger.info("HQL: " + theHQL.toString());
          logger.debug("Exiting handleCriteria");
@@ -123,11 +84,11 @@ public class LossOfExpressionIHCFindingHandler extends IHCFindingHandler {
          return theHQL;
 	 }
      
-     public Collection<LevelOfExpressionIHCFinding> getLevelExpFindings(LossOfExpressionIHCFindingCriteria inCriteria)
+     public Collection<LossOfExpressionIHCFinding> getLossExpFindings(LossOfExpressionIHCFindingCriteria inCriteria)
      {
          logger.debug("Entering getFindings");
          Session theSession = null;
-         Set<LevelOfExpressionIHCFinding> theResults = new HashSet<LevelOfExpressionIHCFinding>();
+         Set<LossOfExpressionIHCFinding> theResults = new HashSet<LossOfExpressionIHCFinding>();
          try
          {
              theSession = HibernateUtil.getSession();
@@ -144,10 +105,10 @@ public class LossOfExpressionIHCFindingHandler extends IHCFindingHandler {
              if (theProteinCriteria != null)
              {
                  if(theHQL.toString().contains("WHERE")){
-                 theHQL.append(" AND levelIHC.proteinBiomarker IN (");
+                 theHQL.append(" AND lossIHC.proteinBiomarker IN (");
                  }
                  else{
-                 theHQL.append(" WHERE levelIHC.proteinBiomarker IN (");    
+                 theHQL.append(" WHERE lossIHC.proteinBiomarker IN (");    
                  }
                  
                  ProteinBiomarkerHandler theProteinHandler = theProteinCriteria.getHandler();
@@ -159,10 +120,10 @@ public class LossOfExpressionIHCFindingHandler extends IHCFindingHandler {
              if (theSpecimenCriteria != null)
              {
                  if(theHQL.toString().contains("WHERE")){
-                     theHQL.append(" AND levelIHC.specimen IN (");
+                     theHQL.append(" AND lossIHC.specimen IN (");
                  }
                  else{
-                     theHQL.append(" WHERE levelIHC.specimen IN (");
+                     theHQL.append(" WHERE lossIHC.specimen IN (");
                  }
 
                  SpecimenHandler theSpecimenHandler = theSpecimenCriteria.getHandler();
