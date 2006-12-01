@@ -15,18 +15,24 @@ import java.util.Map;
 
 /**
  * @author sahnih
- *
+ * 
  */
-public class CompoundClassComparisonFinding extends AnalysisFinding implements ReporterBasedFinding{
+public class CompoundClassComparisonFinding extends AnalysisFinding implements
+		ReporterBasedFinding {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private CompoundAnalysisResult myResults;
+
 	@SuppressWarnings("unused")
 	private List<ClassComparisonFinding> classComparisonFindingList = new ArrayList<ClassComparisonFinding>();
+
 	private Map reporterAnnotationsMap;
-	public CompoundClassComparisonFinding(String session, String task, FindingStatus status, CompoundAnalysisResult result) {
+
+	public CompoundClassComparisonFinding(String session, String task,
+			FindingStatus status, CompoundAnalysisResult result) {
 		super(session, task, status);
 		setAnalysisResult(result);
 	}
@@ -41,22 +47,36 @@ public class CompoundClassComparisonFinding extends AnalysisFinding implements R
 
 	public List<String> getReporterIds() {
 		List<String> idList = new ArrayList<String>();
-		
-		if(getClassComparisonFindingList() != null && getClassComparisonFindingList().size() > 0){
-				ClassComparisonFinding classComparisonFinding = getClassComparisonFindingList().get(0);
-				for (ClassComparisonResultEntry entry : classComparisonFinding.getResultEntries()) {
-				  idList.add(entry.getReporterId());
+
+		if (getClassComparisonFindingList() != null
+				&& getClassComparisonFindingList().size() > 0) {
+			ClassComparisonFinding classComparisonFinding = getClassComparisonFindingList()
+					.get(0);
+			if (classComparisonFinding.getResultEntries() != null) {
+				for (ClassComparisonResultEntry entry : classComparisonFinding
+						.getResultEntries()) {
+					if (entry != null) {
+						idList.add(entry.getReporterId());
+					}
 				}
-		}		
+			}
+		}
 		return idList;
 	}
+
 	/**
-	 * @param myResults The myResults to set.
+	 * @param myResults
+	 *            The myResults to set.
 	 */
-	public void setAnalysisResult(AnalysisResult results) throws ClassCastException{
+	public void setAnalysisResult(AnalysisResult results)
+			throws ClassCastException {
 		super.setAnalysisResult(results);
-		this.myResults = (CompoundAnalysisResult) results;	
-		populateClassComparisonFindingList();
+		this.myResults = (CompoundAnalysisResult) results;
+		//if (classComparisonFindingList.isEmpty()) { //first time
+			initialClassCompariosonFindingList();
+		//} else {
+		//	populateClassComparisonFindingList();
+		//}
 	}
 
 	/**
@@ -65,22 +85,36 @@ public class CompoundClassComparisonFinding extends AnalysisFinding implements R
 	public List<ClassComparisonFinding> getClassComparisonFindingList() {
 		return classComparisonFindingList;
 	}
-
-	private void populateClassComparisonFindingList(){
-		if(myResults != null){
+	private void initialClassCompariosonFindingList(){
+		if (myResults != null) {
 			List<AnalysisResult> analysisResults = myResults.getResults();
-			for(AnalysisResult result: analysisResults){
-				if( result instanceof ClassComparisonResult){
+			for (AnalysisResult result : analysisResults) {
+				if (result instanceof ClassComparisonResult) {
 					ClassComparisonResult ccresult = (ClassComparisonResult) result;
-					ClassComparisonFinding ccFinding = new ClassComparisonFinding(this.getSessionId(), this.getTaskId(), this.getStatus(), ccresult);
-					
-					classComparisonFindingList.add(ccFinding);					
+					ClassComparisonFinding ccFinding = new ClassComparisonFinding(
+							this.getSessionId(), ccresult.getTaskId(), this
+									.getStatus(), ccresult);
+					classComparisonFindingList.add(ccFinding);
 				}
-				
-				
 			}
-			//for(AnalysisResult )
 		}
 	}
-
+	private void populateClassComparisonFindingList() {
+		ClassComparisonFinding ccFinding;
+		if (myResults != null) {
+			List<AnalysisResult> analysisResults = myResults.getResults();
+			for (AnalysisResult result : analysisResults) {
+				if (result instanceof ClassComparisonResult) {
+					ClassComparisonResult ccresult = (ClassComparisonResult) result;
+					for (ClassComparisonFinding classComparisonFinding : classComparisonFindingList) {
+						if (classComparisonFinding != null
+								&& ccresult.getSessionId().equals(classComparisonFinding.getSessionId())
+								&& ccresult.getTaskId().equals(classComparisonFinding.getTaskId())) {
+							classComparisonFinding.setAnalysisResult(ccresult);						
+						}
+					}
+				}
+			}
+		}
+	}
 }
