@@ -142,6 +142,10 @@ public class ArrayPlatformDE extends DomainElement implements Serializable,
 				vo.equalsIgnoreCase(ArrayPlatformType.CDNA_ARRAY_PLATFORM.toString())){
 			return ArrayPlatformType.CDNA_ARRAY_PLATFORM; 
 		}
+		else if(vo.equals(ArrayPlatformType.UNIFIED_GENE.name()) ||
+				vo.equalsIgnoreCase(ArrayPlatformType.UNIFIED_GENE.toString())){
+			return ArrayPlatformType.UNIFIED_GENE; 
+		}
 		return null;
 	}
 	/**
