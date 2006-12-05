@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency" xmlns:gov.nih.nci.caintegrator.domain.study="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.study" xmlns:gov.nih.nci.caintegrator.domain.annotation.gene="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.gene" xmlns:gov.nih.nci.caintegrator.domain.annotation.protein="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.protein" xmlns:gov.nih.nci.caintegrator.domain.annotation.snp="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.snp" xmlns:gov.nih.nci.caintegrator.domain.finding="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding" xmlns:gov.nih.nci.caintegrator.domain.finding.clinical="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.clinical" xmlns:gov.nih.nci.caintegrator.domain.finding.variation="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation" xmlns:gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation" xmlns:gov.nih.nci.caintegrator.domain.finding.variation.germline="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.germline" xmlns:gov.nih.nci.caintegrator.domain.common="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.common" xmlns:gov.nih.nci.caintegrator.domain.analysis.snp="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.analysis.snp" targetNamespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency" elementFormDefault="qualified">
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.germline" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.germline.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.study" schemaLocation="gov.nih.nci.caintegrator.domain.study.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.clinical" schemaLocation="gov.nih.nci.caintegrator.domain.finding.clinical.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.protein" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.protein.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.snp" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.snp.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding" schemaLocation="gov.nih.nci.caintegrator.domain.finding.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.gene" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.gene.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.analysis.snp" schemaLocation="gov.nih.nci.caintegrator.domain.analysis.snp.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.common" schemaLocation="gov.nih.nci.caintegrator.domain.common.xsd" />
+  <xs:element name="SNPFrequencyFinding" type="SNPFrequencyFinding" />
+  <xs:complexType name="SNPFrequencyFinding">
+    <xs:complexContent>
+      <xs:extension base="gov.nih.nci.caintegrator.domain.finding:Finding">
+        <xs:sequence>
+          <xs:element name="population" type="gov.nih.nci.caintegrator.domain.study:Population" minOccurs="0" maxOccurs="1" />
+          <xs:element name="snpAnnotation" type="gov.nih.nci.caintegrator.domain.annotation.snp:SNPAnnotation" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="completionRate" type="xs:float" />
+        <xs:attribute name="hardyWeinbergPValue" type="xs:float" />
+        <xs:attribute name="heterozygoteCount" type="xs:integer" />
+        <xs:attribute name="id" type="xs:long" />
+        <xs:attribute name="minorAlleleFrequency" type="xs:float" />
+        <xs:attribute name="missingAlleleCount" type="xs:integer" />
+        <xs:attribute name="missingGenotypeCount" type="xs:integer" />
+        <xs:attribute name="otherAllele" type="xs:string" />
+        <xs:attribute name="otherAlleleCount" type="xs:integer" />
+        <xs:attribute name="otherHomozygoteCount" type="xs:integer" />
+        <xs:attribute name="referenceAllele" type="xs:string" />
+        <xs:attribute name="referenceAlleleCount" type="xs:integer" />
+        <xs:attribute name="referenceHomozygoteCount" type="xs:integer" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+
