@@ -660,6 +660,7 @@
 			<fileset dir="${dir.output.project.src}">
 				<include name="**/*.java"/>
 				<exclude name="**/jet/*.java"/>
+				<exclude name="**/bean/*.java"/>
 			</fileset>
 		</javadoc>	
 	</target>

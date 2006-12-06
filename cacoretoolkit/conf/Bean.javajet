@@ -45,27 +45,7 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 	private static final long serialVersionUID = 1234567890L;
 
 	<% for(Iterator i = UML13Utils.getAttributes((UmlClass)klass).iterator(); i.hasNext();){ %>
-	   <% Attribute att = (Attribute)i.next(); 	  
-	   
-	   if( (klass.getName().equals("SNPAssociationFinding") && getQualifiedName(klass, basePkg).equals("gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding"))
-	    ||( klass.getName().equals("GenotypeFinding") && getQualifiedName(klass, basePkg).equals("gov.nih.nci.caintegrator.domain.finding.variation.germline.GenotypeFinding"))
-	    ||( klass.getName().equals("SNPFrequencyFinding") && getQualifiedName(klass, basePkg).equals("gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.SNPFrequencyFinding"))
-	    ||( klass.getName().equals("SpecimenBasedMolecularFinding") && getQualifiedName(klass, basePkg).equals("gov.nih.nci.caintegrator.domain.finding.SpecimenBasedMolecularFinding"))){
-	  
-	     if(!att.getName().equals("id")){	   
-	   %>
-	   <%=att.getVisibility().toString().substring(3)%> <% if(getQualifiedName(att.getType(), basePkg).startsWith(".")){%><%=getQualifiedName(att.getType(), basePkg).substring(1)%> <%=att.getName()%>;<%} else {%><%=getQualifiedName(att.getType(), basePkg)%> <%=att.getName()%>;<%}%>
-	   public <%if(getQualifiedName(att.getType(), basePkg).startsWith(".")){%><%=getQualifiedName(att.getType(), basePkg).substring(1)%><%} else { %> <%=getQualifiedName(att.getType(),basePkg)%><%}%> get<%=capFirst(att.getName())%>(){
-	      return <%=att.getName()%>;
-	   }
-	   public void set<%=capFirst(att.getName())%>(<% if(getQualifiedName(att.getType(), basePkg).startsWith(".")) {%><%=getQualifiedName(att.getType(), basePkg).substring(1)%> <%=att.getName()%>)<%} else {%> <%=getQualifiedName(att.getType(), basePkg)%> <%=att.getName()%>)<% } %>{
-	      this.<%=att.getName()%> = <%=att.getName()%>;
-	      }
-	  <%   }
-	 } 
-	
-	else{	  
-	   %>
+	   <% Attribute att = (Attribute)i.next(); %>
 	   <%=att.getVisibility().toString().substring(3)%> <% if(getQualifiedName(att.getType(), basePkg).startsWith(".")){%><%=getQualifiedName(att.getType(), basePkg).substring(1)%> <%=att.getName()%>;<%} else {%><%=getQualifiedName(att.getType(), basePkg)%> <%=att.getName()%>;<%}%>
 	   public <%if(getQualifiedName(att.getType(), basePkg).startsWith(".")){%><%=getQualifiedName(att.getType(), basePkg).substring(1)%><%} else { %> <%=getQualifiedName(att.getType(),basePkg)%><%}%> get<%=capFirst(att.getName())%>(){
 	      return <%=att.getName()%>;
@@ -73,9 +53,7 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 	   public void set<%=capFirst(att.getName())%>(<% if(getQualifiedName(att.getType(), basePkg).startsWith(".")) {%><%=getQualifiedName(att.getType(), basePkg).substring(1)%> <%=att.getName()%>)<%} else {%> <%=getQualifiedName(att.getType(), basePkg)%> <%=att.getName()%>)<% } %>{
 	      this.<%=att.getName()%> = <%=att.getName()%>;
 	   }
-	<% } 
-	   }
-	%>
+	<% } %>
 
 	<% for(Iterator i = UML13Utils.getAssociationEnds(klass).iterator(); i.hasNext();){%>
 	   <% AssociationEnd thisEnd = (AssociationEnd)i.next(); %>
@@ -111,10 +89,10 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 				 	<%=otherEnd.getName()%> = resultList;  
 				 	return resultList;
 				 <% } %>
-			      <% } else { %>
+			      <% } else {  %>
 				 java.util.Collection resultList = applicationService.search("<%=getQualifiedName(otherEnd.getType(), basePkg)%>", this);	
 				 return resultList;	 
-				 <% } %>
+				 <%}  %>
 			      }catch(Exception ex) 
 			      {
 			      	System.out.println("<%=klass.getName()%>:get<%=capFirst(otherEnd.getName())%> throws exception ... ...");
@@ -145,7 +123,6 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 			  return <%=otherEnd.getName()%>;			
 			  
 			<% } else { if (!isAbstract.equals("abstract")) {%>
-		
 			
 			  ApplicationService applicationService = ApplicationServiceProvider.getApplicationService();
 			  <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.<%=klass.getName()%> thisIdSet = new <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.<%=klass.getName()%>();
@@ -175,7 +152,7 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 			  { 
 			      	System.out.println("<%=klass.getName()%>:get<%=capFirst(otherEnd.getName())%> throws exception ... ...");
 			   		ex.printStackTrace(); 
-			   } <% } %>
+			  } <% } %>
 			  return <%=otherEnd.getName()%>;	
 			 
 			 <% } %>		
@@ -210,6 +187,7 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 			      	System.out.println("<%=klass.getName()%>:get<%=capFirst(otherEnd.getName())%> throws exception ... ...");
 			   		ex.printStackTrace(); 
 			  }
+			  	
 			  return <%=otherEnd.getName()%>;			
 			 <% } %>		
               }
