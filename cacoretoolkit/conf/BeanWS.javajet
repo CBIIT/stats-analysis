@@ -21,11 +21,8 @@ import <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(
 import <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.*;
 import gov.nih.nci.system.applicationservice.*;
 import java.util.*;
-/**
- * <!-- LICENSE_TEXT_START -->
- * <!-- LICENSE_TEXT_END -->
- */
 
+<%=UML13JavaSourceHelper.getClassJavadoc(klass)%>
 public <% if (isAbstract.equals("abstract")) {%> <%=isAbstract%><%}%> class <%=klass.getName()%> 
 <% UmlClass superClass = UML13Utils.getSuperClass((UmlClass)klass); %>
 <% if(superClass != null){ %>

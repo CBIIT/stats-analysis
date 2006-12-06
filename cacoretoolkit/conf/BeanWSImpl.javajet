@@ -10,10 +10,7 @@ String basePkg = (String)context.get("basePackage");
 package <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.ws;
 import <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.ws.*;
 import <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.*;
-/**
- * <!-- LICENSE_TEXT_START -->
- * <!-- LICENSE_TEXT_END -->
- */
+
 public class <%=klass.getName()%>Impl extends <%=klass.getName()%>
 {
 	

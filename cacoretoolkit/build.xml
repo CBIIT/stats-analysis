@@ -661,6 +661,8 @@
 				<include name="**/*.java"/>
 				<exclude name="**/jet/*.java"/>
 				<exclude name="**/bean/*.java"/>
+				<exclude name="**/ws/*.java"/>
+				<exclude name="**/impl/*.java"/>
 			</fileset>
 		</javadoc>	
 	</target>
