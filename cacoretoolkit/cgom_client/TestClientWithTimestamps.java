@@ -60,7 +60,7 @@ import org.hibernate.criterion.Restrictions;
 /**
  * @author sahnih, zhangd, guruswamis
  */
-public class TestClient {
+public class TestClientWithTimestamps {
 	public static void main(String[] args) {
 		System.out.println("*** TestClient...");
 		try {
