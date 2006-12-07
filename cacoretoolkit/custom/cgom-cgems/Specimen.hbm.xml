@@ -14,7 +14,7 @@
 
 <hibernate-mapping package="gov.nih.nci.caintegrator.domain.study">
 <class name="Specimen" 
-    	table="SPECIMEN"
+    	table="SPECIMEN_V"
         lazy="true">
         
        <!-- id -->
