@@ -42,10 +42,13 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 
 	<% for(Iterator i = UML13Utils.getAttributes((UmlClass)klass).iterator(); i.hasNext();){ %>
 	   <% Attribute att = (Attribute)i.next(); %>
+	   <%=UML13JavaSourceHelper.getAttributeJavadoc(att)%>
 	   <%=att.getVisibility().toString().substring(3)%> <% if(getQualifiedName(att.getType(), basePkg).startsWith(".")){%><%=getQualifiedName(att.getType(), basePkg).substring(1)%> <%=att.getName()%>;<%} else {%><%=getQualifiedName(att.getType(), basePkg)%> <%=att.getName()%>;<%}%>
+	   <%=UML13JavaSourceHelper.getAttributeJavadoc(att)%>
 	   public <%if(getQualifiedName(att.getType(), basePkg).startsWith(".")){%><%=getQualifiedName(att.getType(), basePkg).substring(1)%><%} else { %> <%=getQualifiedName(att.getType(),basePkg)%><%}%> get<%=capFirst(att.getName())%>(){
 	      return <%=att.getName()%>;
 	   }
+	   <%=UML13JavaSourceHelper.getAttributeJavadoc(att)%>
 	   public void set<%=capFirst(att.getName())%>(<% if(getQualifiedName(att.getType(), basePkg).startsWith(".")) {%><%=getQualifiedName(att.getType(), basePkg).substring(1)%> <%=att.getName()%>)<%} else {%> <%=getQualifiedName(att.getType(), basePkg)%> <%=att.getName()%>)<% } %>{
 	      this.<%=att.getName()%> = <%=att.getName()%>;
 	   }
@@ -56,7 +59,9 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 	   <% AssociationEnd otherEnd = (AssociationEnd)UML13Utils.getOtherAssociationEnd(thisEnd); %>
 	   <% if(otherEnd.isNavigable()){ %>
 	      <% if(UML13Utils.isMany2Many(thisEnd, otherEnd) || UML13Utils.isOne2Many(thisEnd, otherEnd)){ %>
+	      <%=UML13JavaSourceHelper.getClassJavadoc(otherEnd.getType())%>
 			private java.util.Collection <%=otherEnd.getName()%> = new java.util.HashSet();
+			<%=UML13JavaSourceHelper.getClassJavadoc(otherEnd.getType())%>
 			public java.util.Collection get<%=capFirst(otherEnd.getName())%>(){
 			try{
 			   if(<%=otherEnd.getName()%>.size() == 0) {}
@@ -110,8 +115,9 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 			String fullBeanName = fullInterfaceName;
 			%>
 			
-			
+			<%=UML13JavaSourceHelper.getClassJavadoc(otherEnd.getType())%>
 			private <%=fullInterfaceName%> <%=otherEnd.getName()%>;
+			<%=UML13JavaSourceHelper.getClassJavadoc(otherEnd.getType())%>
 			public <%=getQualifiedName(otherEnd.getType(), basePkg)%> get<%=capFirst(otherEnd.getName())%>(){
 			
 			<% if (eagerFetchPackages.contains(UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass))) {%>
@@ -161,8 +167,9 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 			String fullBeanName = fullInterfaceName;
 			%>
 			
-			
+			<%=UML13JavaSourceHelper.getClassJavadoc(otherEnd.getType())%>
 			private <%=fullInterfaceName%> <%=otherEnd.getName()%>;
+			<%=UML13JavaSourceHelper.getClassJavadoc(otherEnd.getType())%>
 			public <%=getQualifiedName(otherEnd.getType(), basePkg)%> get<%=capFirst(otherEnd.getName())%>(){
 			<% if (eagerFetchPackages.contains(UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass))) {%>
 			
@@ -193,12 +200,13 @@ System.out.println("extends clause=>" + getQualifiedName(superClass, basePkg));
 	      <% } %>
 	               
 	   <% if(UML13Utils.isMany2Many(thisEnd, otherEnd) || UML13Utils.isOne2Many(thisEnd, otherEnd)){ %>
+	   <%=UML13JavaSourceHelper.getClassJavadoc(otherEnd.getType())%>	   
 	   	public void set<%=capFirst(otherEnd.getName())%>(java.util.Collection <%=otherEnd.getName()%>){
 	   		this.<%=otherEnd.getName()%> = <%=otherEnd.getName()%>;
 	        }	
 	   <% } else if(UML13Utils.isMany2One(thisEnd, otherEnd) || UML13Utils.isOne2One(thisEnd, otherEnd)){ %>
 	   
-	   
+	   <%=UML13JavaSourceHelper.getClassJavadoc(otherEnd.getType())%>
 	   public void set<%=capFirst(otherEnd.getName())%>(<%=getQualifiedName(otherEnd.getType(), basePkg)%> <%=otherEnd.getName()%>){
 		this.<%=otherEnd.getName()%> = <%=otherEnd.getName()%>;
 	   }	
