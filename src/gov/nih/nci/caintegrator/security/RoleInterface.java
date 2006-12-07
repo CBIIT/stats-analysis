@@ -1,22 +1,7 @@
-package gov.nih.nci.caintegrator.service.findings;
+package gov.nih.nci.caintegrator.security;
 
-import gov.nih.nci.caintegrator.dto.query.ClassComparisonQueryDTO;
-import gov.nih.nci.caintegrator.dto.query.HierarchicalClusteringQueryDTO;
-import gov.nih.nci.caintegrator.dto.query.PrincipalComponentAnalysisQueryDTO;
-import gov.nih.nci.caintegrator.dto.query.QueryDTO;
-import gov.nih.nci.caintegrator.exceptions.FrameworkException;
+import java.util.Date;
 
-/**
- * This interface will provide the method signatures of the
- * finding services available and pakaged in the caIntegrator
- * specification.
- * 
- * Whether this will use proxies will be determined by the 
- * finding strategies that it's impl uses.
- * 
- * @author BauerD
- *
- */
 
 
 /**
@@ -76,81 +61,98 @@ import gov.nih.nci.caintegrator.exceptions.FrameworkException;
 * 
 */
 
-public interface FindingsFactory {
-	/**
-	 * Creates and returns a Kaplan-Meier Survival Plot finding result of
-	 * the patients returned from the given query. 
-	 * 
-	 * @param query
-	 * @return
-	 */
-	public KMFinding createKMFinding(QueryDTO query);
-	/**
-	 * Creates and returns a CopyNumberFinding for the query using
-	 * the parameters for the given query.
-	 * 
-	 * @param query
-	 * @return
-	 */
-	public CopyNumberFinding createCopyNumberFinding(QueryDTO query);
-	
-	/**
-	 * Creates and returns a ClinicalFinding using the parameters
-	 * of the given query described in the passed QueryDTOold.
-	 * @param query
-	 * @return
-	 */
-	public ClinicalFinding createClinicalFinding(QueryDTO query);
-	
-	/**
-	 * Creates and returns a ClassComparisonFinding using the parameters passed in the given query
-	 * @param query
-	 * @return
-	 * @throws FrameworkException 
-	 */
-	public ClassComparisonFinding createClassComparisonFinding(ClassComparisonQueryDTO query, String sessionID, String taskID) throws FrameworkException;
-	/**
-	 * Creates and returns a PCAFinding using the parameters of the given query 
-	 * described in the passed QueryDTOold.
-	 * @param query
-	 * @return
-	 */
-	public PrincipalComponentAnalysisFinding createPCAFinding(PrincipalComponentAnalysisQueryDTO queryDTO, String sessionID, String taskID) throws FrameworkException;
+public interface RoleInterface {
 
 	/**
-	 * Creates and returns an HCAFinding from the given query described 
-	 * in the passed QueryDTOold.
-	 * 
-	 * @param query
-	 * @return
+	 * Indicates if the role is active or not.
 	 */
-	public HCAFinding createHCAFinding(HierarchicalClusteringQueryDTO queryDTO, String sessionID, String taskID) throws FrameworkException;
+	public abstract byte getActive_flag();
+
 	/**
-	 * Creates and returns a Gene Expression Intensity finding
-	 * (GEIntensityFinding) from the given query described 
-	 * in the passed QueryDTOold.
-	 * 
-	 * @param query
-	 * @return
+	 * The application to which the role belongs
+	 
+	 public Application getApplication(){
+	 return application;
+	 }
 	 */
-	public GEIntensityFinding createGEIntensityFinding(QueryDTO query);
-	
 	/**
-	 * I added this because I was thinking of a framework that would allow
-	 * the creation at runtime of new strategies and queries without having
-	 * to overwrite the caIntegrator framework.  Custom strategies/queries and
-	 * associated parameterDTOs and validators that are considered more then
-	 * novel or trivial can be added to the framework in subsequent releases
-	 * but this will provide a mechanism whereby a person can write and use
-	 * effectively a new query at any time.
-	 * 
-	 * I imagine that this will use reflection to instantiate the property file
-	 * defined validators/findings/strategy.
-	 * 
-	 * @param query
-	 * @return
+	 * This attribute describes the role in detail.
 	 */
-	public Object createCustomFinding(QueryDTO query);
-	
-	
+	public abstract String getDesc();
+
+	/**
+	 * This is the unique id by which this role can be identied  for an application.
+	 */
+	public abstract Long getId();
+
+	/**
+	 * This is the name of the role. This can be any user friendly name to address
+	 * business needs.
+	 */
+	public abstract String getName();
+
+	/**
+	 * A collection of Privilege objects. Indicates which privileges belong to this
+	 * role.
+	 */
+	public abstract java.util.Set getPrivileges();
+
+	/**
+	 * The date when the role information was last updated
+	 */
+	public abstract Date getUpdateDate();
+
+	/**
+	 * Indicates if the role is active or not.
+	 * @param newVal
+	 * 
+	 */
+	public abstract void setActive_flag(byte newVal);
+
+	/**
+	 * The application to which the role belongs
+	 * @param newVal
+	 * 
+	 
+	 public void setApplication(Application newVal){
+	 application = newVal;
+	 }
+	 */
+	/**
+	 * This attribute describes the role in detail.
+	 * @param newVal
+	 * 
+	 */
+	public abstract void setDesc(String newVal);
+
+	/**
+	 * This is the unique id by which this role can be identied  for an application.
+	 * @param newVal
+	 * 
+	 */
+	public abstract void setId(Long newVal);
+
+	/**
+	 * This is the name of the role. This can be any user friendly name to address
+	 * business needs.
+	 * @param newVal
+	 * 
+	 */
+	public abstract void setName(String newVal);
+
+	/**
+	 * A collection of Privilege objects. Indicates which privileges belong to this
+	 * role.
+	 * @param newVal
+	 * 
+	 */
+	public abstract void setPrivileges(java.util.Set newVal);
+
+	/**
+	 * The date when the role information was last updated
+	 * @param newVal
+	 * 
+	 */
+	public abstract void setUpdateDate(Date newVal);
+
 }
