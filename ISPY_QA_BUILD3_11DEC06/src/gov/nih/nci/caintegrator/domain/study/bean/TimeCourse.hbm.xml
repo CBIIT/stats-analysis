@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : TimeCourse.hbm.xml
+    Created on : June 26, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for TimeCourse
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study.bean">
+   <class name="TimeCourse" 
+    	table="STUDY_TIMECOURSE_DIM"
+        lazy="true">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.Long" 
+           column="TIMECOURSE_ID">
+           <generator class="assigned" />
+       </id>       
+       
+        <!-- name -->        
+       <property name="name" 
+                 type="java.lang.String" 
+                 column="TIMECOURSE_NAME" 
+         />
+      
+	</class>
+</hibernate-mapping>
