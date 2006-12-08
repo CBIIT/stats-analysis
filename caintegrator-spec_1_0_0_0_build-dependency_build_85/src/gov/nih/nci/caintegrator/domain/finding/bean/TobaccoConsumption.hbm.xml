@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : TobaccoConsumption.hbm.xml
+     extends="gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding"
+    
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.bean">
+   <class name="TobaccoConsumption" 
+   	    table="TOBACCO_CONSUMPTION"
+        lazy="true">
+        <id name="id"  type="java.lang.String"  column="FINDING_ID">			   
+		</id>      
+        <!-- Smoking_Status -->        
+       <property name="Smoking_Status" type="char" column="Smoking_Status" />
+       <property name="YearsQuit" type="int" column="Years_Quit" />
+       <property name="PackYears" type="int" column="Pack_Years" />
+       <property name="nicotineLevel" type="long" column="Licotine_Level" />
+      
+	</class>
+</hibernate-mapping>
