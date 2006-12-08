@@ -112,17 +112,8 @@ public class TestClientWithTimestamps {
 			System.out.println("  End Time : " + endTime);
 			elapsed_time = endTime.getTime() - startTime.getTime();
 			System.out.println("That took " + elapsed_time + " milliseconds");
-			System.out.println("********************************");
+			System.out.println("********************************");	
 			
-			
-			startTime = new Date();
-			System.out.println("  Start Time : " + startTime);
-			searchSpecimen();
-			endTime = new Date();
-			System.out.println("  End Time : " + endTime);
-			elapsed_time = endTime.getTime() - startTime.getTime();
-			System.out.println("That took " + elapsed_time + " milliseconds");
-			System.out.println("********************************");
 			
 			
 			startTime = new Date();
@@ -309,41 +300,7 @@ public class TestClientWithTimestamps {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Scenario2: Simple Search (Single Criteria Object) to retrieve Specimens
-	 * with identifier 2427. In this example, a search is performed for
-	 * specimens, with specimentIdentifier 2427.
-	 */
-	private static void searchSpecimen() {
-		Specimen specimen = new Specimen();
-		specimen.setSpecimenIdentifier("2427");
-		try {
-			System.out
-					.println("______________________________________________________________________");
-			System.out
-					.println("Retrieving Specimen object based on Specimen Id");
-			ApplicationService appService = ApplicationServiceProvider
-					.getApplicationService();
-
-			List resultList = appService.search(Specimen.class, specimen);
-			if (resultList != null) {
-				System.out.println("Number of results returned: "
-						+ resultList.size());
-				for (Iterator resultsIterator = resultList.iterator(); resultsIterator
-						.hasNext();) {
-					Specimen returnedObj = (Specimen) resultsIterator.next();
-					System.out.println("SpecimenIdentifier: "
-							+ returnedObj.getSpecimenIdentifier() + "\n"
-							+ "MaterialType: " + returnedObj.getMaterialType()
-							+ "\n");
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	/**
 	 * Scenario Three: Simple Search (Criteria Object Collection) to retrieve
 	 * SNPFrequencyFinding for the Gene “WT1” In this example, a search is
