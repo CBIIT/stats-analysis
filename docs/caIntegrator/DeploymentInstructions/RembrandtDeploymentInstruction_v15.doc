@@ -81,11 +81,12 @@ webGenome.url=http://<Server:Port Wherever WebGenome Application is deployed>/we
 webGenomeJndi.url=jnp://<Server:JNDI Port Wherever WGI is deployed>\par
 rembrandt.register.mailTo.support=ncicb@pop.nci.nih.gov\f1\par
 \pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 5.\tab Ensure all other paths inside the rembrandt.properties are set to \ldblquote /local/content/rembrandt/config\rdblquote\par
-\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0 6.\tab Ignore \ldblquote /local/content/rembrandt/data\rdblquote  for now\par
-7.\tab Copy file \ldblquote rembrandt_ehcache.xml\rdblquote  to /local/content/Rembrandt/cache\par
-\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 8.\tab Open the copied \ldblquote rembrandt_ehcache.xml\rdblquote  to verify the following tag within rembrandt_ehcache.xml is configured as follows\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0 6.    Ignore \ldblquote /local/content/rembrandt/data\rdblquote  for now\par
+7.    Create folder /local/content/rembrandt/cache\par
+8.    Copy file \ldblquote rembrandt_ehcache.xml\rdblquote  to /local/content/Rembrandt/cache\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 9.\tab Open the copied \ldblquote rembrandt_ehcache.xml\rdblquote  to verify the following tag within rembrandt_ehcache.xml is configured as follows\par
 \pard\intbl\nowidctlpar\li720\sb60\sa60\sl240\slmult0\tx360 <diskStore path="/local/content/rembrandt/cache"/>\par
-\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 9.\tab Create folder /local/content/rembrandt/cache\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360\par
 \pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\highlight0 ---------------------------------------------------------------------------------------------------------------\f0\par
 \pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 Configure BRB Data Files\par
 \pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 1.\tab Create a /local/content/rembrandt/brb\par
