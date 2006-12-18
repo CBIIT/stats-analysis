@@ -1,256 +1,455 @@
-{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\froman\fcharset0 Times New Roman;}{\f1\fswiss\fcharset0 Arial;}{\f2\fmodern\fcharset0 Courier New;}{\f3\fswiss\fcharset0 Verdana;}{\f4\froman\fcharset2 Symbol;}}
-{\colortbl ;\red0\green0\blue127;\red0\green0\blue0;\red192\green192\blue192;\red255\green255\blue255;}
-{\stylesheet{ Normal;}{\s1 heading 1;}{\s2 heading 2;}}
-{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b\f0\fs20 Application and Submitter Information\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4390\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx6528\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Submitted by\cell Jenny Glenn/ Himanso Sahni\cell Date\cell 12/5/2006\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4390\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx6528\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Application\cell Rembrandt\cell Release/Version\cell 1.5\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Build Information\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1088\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4390\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx6528\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Module\cell caintegrator\par
-caintegrator-analysis-commons\par
-caintegrator-spec\par
-caintegrator-application-commons\cell Tag\cell\cf1\f1 RBT_QA_BUILD1_112706\cf0\f0\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1088\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Associated change requests\cell WebGenomeIngerationDeploymentRequest_STAGENOV2006.doc\par
-WebGenomeDeploymentRequest_STAGENOV2006.doc\par
-RembrandtAnalysisServerDeploymentRequest_STAGENOV2006.doc\par
-\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Dependencies\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Project Background\cell\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 **********************************************************************************\par
-Technology Stack (jdk1.5.0_06, jboss 4.0.4, ant 1.6.2)\par
-**********************************************************************************\par
-An Anthill friendly build script has been written so that the above dependencies are checked out and placed in the appropriate locations by Anthill.  This is the default task for the build script.  If you choose not to use Anthill to grab these dependencies, you will need to acquire the above dependencies manually.\par
-**********************************************************************************\par
-The JBoss Message Queues for Rembrandt must also be installed and running at the locations specified in the properties file in order for this product to receive/respond to analysis requests.  The procedure for doing this is included in the instructions. It is also included in the caintegrator-analysis-server deployment request. Just so you know.\par
-**********************************************************************************\par
-Rembrandt also has a dependency on the Common Security Module.  Included in the instructions and the build script are the means to deploy and setup the CSM as we have for development.  Since we are not integrating our CSM deployment with any other application on the dev tier, it is understood that Systems may take some latitude in determining the best procedure for handling this dependency on both the Staging and Production tiers.  However, I would desire that any changes that are made to accommodate these tiers is made known to the Rembrandt team POC so that we are able to make any changes on our development server deployment that are required. \par
-Also, each tier CSM UPT tool must pointed to the matching Rembrandt database, for instance: Stage Tier UPT must be pointing towards the Stage Rembrandt DB. In Step 5.3.1, we have provided instructions from Kunal Modi of the CSM team regarding setting up the UPT.\par
-\f0\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Hardware\cell Dependent Servers:\par
-\pard\intbl\nowidctlpar\hyphpar0\li720\sl240\slmult0 caIntegrator Analysis Server\par
-WebGenome server\par
-\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Database\cell\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 This deployment is intended be configured to use our QA, staging or production database.  This configuration information and credentials are to be retrieved from the Systems DBAs and copied to the externalized rembrandt.properties file\f2\fs18\par
-\f1\fs20\par
-For this deployment to be successful we need a complete copy of the qa database and placed in our staging database, as well as a copy of our staging database placed in our production db.\par
-\par
-Please ensure all triggers and PL/SQL scripts are successfully imported and statistic and indexes are properly executed.\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b\f0 Deployment Instructions \cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Files need to be delivered to system group\cell\pard\intbl\nowidctlpar\li360\sb60\sa60\sl240\slmult0\ul\b\i\f1 From CSM:\par
-\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\ulnone\b0\i0\f2 o1\tab\ul\b\i\f1 War file\ulnone\b0\i0\par
-\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\f2 o\tab\f1 rembrandt.war \par
-\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\b\i\f2 o2\tab\ul\f1 Externalized Properties File\par
-\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\ulnone\b0\i0\f2 o\tab\f1 rembrandt.properties\par
-\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\b\i\f2 o3\tab\ul\f1 JMS Configuration Files\par
-\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\ulnone\b0\i0\f2 o\tab\f1 rembrandt-jbossmq-destinations-service\par
-\f2 o\tab\f1 caintegrator-jbossmq-destinations-service\par
-\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\b\i\f2 o4\tab\ul\f1 CMS Configuration Files\par
-\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\ulnone\b0\i0\f2 o\tab\f1 rembrandt.hibernate.cfg.xml\par
-\pard\intbl\nowidctlpar\li360\sb60\sa60\sl240\slmult0\ul\b\i\par
-From FTP site\par
-\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\ulnone\f2 o5\tab\ul\f1 BRB Data Files\par
-\pard\intbl\fi-360\li1440\tx1440\ulnone\b0\i0\f2 o\tab Rembrandt-Brain-All-Project.zip \par
-o\tab Rembrandt-Brain-PublicPlusDana-Farber-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusH.LeeMoffitt-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusHF-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusMGH-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusUCLA-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusUCSF-Project.zip\par
-o\tab Rembrandt-Brain-Public-Project.zip\f1\par
-\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\f0\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 First Time  Deployment Instructions\cell\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 Setup JMS Configuration Files.\par
-\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 1.\tab Copy file \ldblquote caintegrator-jbossmq-destinations-service\ldblquote  to /usr/local/jboss404/server/ncicb-caint/deploy/jms folder.\par
-2.\tab Copy file \ldblquote rembrandt-jbossmq-destinations-service\ldblquote  to /usr/local/jboss404/server/ncicb-caint/deploy/jms folder.\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0 ------------------------------------------------------------------------------------------------------------\par
-Setup Externalized Properties\par
-\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 1.\tab Edit /usr/local/jboss404/server/ncicb-caint/deploy/properties-service file, Scroll down to \ldblquote <mbean code="org.jboss.varia.property.SystemPropertiesService" name="jboss:type=Service,name=SystemProperties"> node.\par
-2.\tab Add the following inside the node\par
-\pard\intbl\nowidctlpar\hyphpar0\li360\sb60\sa60\sl240\slmult0  <attribute name="Properties">      gov.nih.nci.rembrandt.properties=/local/content/rembrandt/config/rembrandt.properties\par
-</attribute>\par
-\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 3.\tab Copy file \ldblquote rembrandt.properties\ldblquote  from caintegrator/conf cvs module to /local/content/Rembrandt/config folder.\par
-4.\tab Modify rembrandt.properties  set the following properties appropriately\par
-\pard\intbl\nowidctlpar\hyphpar0\li360\sb60\sa60\sl240\slmult0\f2 gov.nih.nci.rembrandt.jms.jboss_url=localhost: <JNDI PORT>\par
-gov.nih.nci.rembrandt.dbalias=thin:@<DB URL>:1521:<DB INSTANCE>\par
-gov.nih.nci.rembrandt.db.username=<DB USERNAME>\par
-gov.nih.nci.rembrandt.db.password=<DB PASSWORD>\par
-webGenome.url=http://<Server:Port Wherever WebGenome Application is deployed>/webGenome/client/plot.do?qType=copyNumber\par
-webGenomeJndi.url=jnp://<Server:JNDI Port Wherever WGI is deployed>\par
-rembrandt.register.mailTo.support=ncicb@pop.nci.nih.gov\par
-\f1\par
-\par
-\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 5.\tab Ensure all other paths inside the rembrandt.properties are set to \ldblquote /local/content/rembrandt/config\rdblquote\par
-\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 ---------------------------------------------------------------------------------------------------------------\f0\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 Configure BRB Data Files\par
-\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 1.\tab Create a /local/content/rembrandt/brb\par
-2.\tab Within remprandt.properties, if needed, modify gov.nih.nci.rembrandt.brb_filepath to /local/content/rembrandt/brb\par
-3.\tab Transfer the following files from the REMBRANDT/BRBFiles directory of the caintegrator ftp site \par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0           ftp://ncicbftp2.nci.nih.gov\par
-          login:caintegratorftp \par
-to $CONF_DIRECTORY/rembrandt/brb\par
-\pard\intbl\fi-360\li1440\tx1440\f2 o\tab Rembrandt-Brain-All-Project.zip \par
-o\tab Rembrandt-Brain-PublicPlusDana-Farber-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusH.LeeMoffitt-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusHF-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusMGH-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusUCLA-Project.zip\par
-o\tab Rembrandt-Brain-PublicPlusUCSF-Project.zip\par
-o\tab Rembrandt-Brain-Public-Project.zip\par
-\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\cf2\f3\fs18 -----------------------------------------------------------------------------------------\cf0\f0\fs20\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\cf2\f3\fs18 Configure log4j\par
-\cf0\f1\fs20 1.   Add the following to log4j.xml in jboss\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl-200\slmult0    \f0 <!-- Setup the configuration for the REBRANDT log file -->\par
-   <appender name="REMBRANDT_LOG" class="org.apache.log4j.FileAppender">\par
-      <param name="File" value="$\{jboss.server.home.dir\}/log/rembrandt.log"/>\par
-         <param name="Append" value="true"/>\par
-         <layout class="org.apache.log4j.PatternLayout">\par
-            <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>\par
-         </layout>\par
-   </appender>\par
-   <appender name="OJB_LOG" class="org.apache.log4j.FileAppender">\par
-      <param name="File" value="$\{jboss.server.home.dir\}/log/rembrandt_ojb.log"/>\par
-         <param name="Append" value="true"/>\par
-         <layout class="org.apache.log4j.PatternLayout">\par
-            <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>\par
-         </layout>\par
-   </appender>\par
-   <appender name="CAINTEGRATOR_LOG" class="org.apache.log4j.FileAppender">\par
-      <param name="File" value="$\{jboss.server.home.dir\}/log/caintegrator.log"/>\par
-         <param name="Append" value="true"/>\par
-         <layout class="org.apache.log4j.PatternLayout">\par
-            <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>\par
-         </layout>\par
-   </appender>\par
-   <!-- Set Rembrandt logging level -->\par
-  <category name="gov.nih.nci.rembrandt" additivity="false">\par
-        <level value="DEBUG"/>\par
-        <appender-ref ref="REMBRANDT_LOG"/>\par
-   </category>\par
-   <category name="gov.nih.nci.caintegrator" additivity="false">\par
-        <level value="DEBUG"/>\par
-        <appender-ref ref="CAINTEGRATOR_LOG"/>\par
-   </category>\b\f1  \par
-\b0\f0   <category name="org.apache.ojb" additivity="false">\par
-        <level value="DEBUG"/>\par
-        <appender-ref ref="OJB_LOG"/>\par
-   </category>\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\b\f1\par
-\b0 ------------------------------------------------------------------------------------------------------------------------\par
-\b Configure CSM v3.1\par
-\pard\intbl\nowidctlpar\fi-360\li660\sb60\sa60\sl240\slmult0\tx660\b0 1.\tab copy rembrandt.hibernate.cfg.xml to /usr/local/jboss404/server/ncicb-caint/conf\f0\par
-\f1 2.\tab Add the following content into /usr/local/jboss404/server/ncicb-caint/conf/login-config.xml\par
-\pard\intbl\nowidctlpar\li300\sb60\sa60\sl240\slmult0    <application-policy name="rembrandt">\par
-         <authentication>\par
-            <login-module code="gov.nih.nci.security.authentication.loginmodules.LDAPLoginModule" flag="required">\par
-                <module-option name="ldapHost">ldaps://ncids4a.nci.nih.gov:636</module-option>\par
-                <module-option name="ldapSearchableBase">ou=nci,o=nih</module-option>\par
-                <module-option name="ldapUserIdLabel">cn</module-option>\par
-            </login-module>\par
-         </authentication>\par
-    </application-policy>\par
-\pard\intbl\nowidctlpar\fi-360\li660\sb60\sa60\sl240\slmult0\tx660 3.\tab Copy the following contents in to /usr/local/jboss404/server/ncicb-caint/deploy/oracle-ds.xml \par
-\pard\intbl\nowidctlpar\li300\sb60\sa60\sl240\slmult0   <local-tx-datasource>\par
-               <jndi-name>rembrandtcsm</jndi-name>\par
-               <connection-url>\b jdbc:url\b0 </connection-url>\par
-               <user-name>\b user name\b0 </user-name>\par
-               <password>\b password\b0 </password>\par
-               <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>\par
-               <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-c\par
-lass-name>\par
-   </local-tx-datasource>\par
-\pard\intbl\nowidctlpar\fi-360\li660\sb60\sa60\sl240\slmult0\tx660 4.\tab if the following does not exist in /usr/local/jboss404/server/ncicb-caint/deploy/properties-service.xml, then add it\par
-\pard\intbl\nowidctlpar\li300\sb60\sa60\sl240\slmult0 <attribute name="Properties">\par
-gov.nih.nci.security.configFile=/usr/local/jboss404/server/ncicb-caint/conf/ApplicationSecurityConfig.xml\par
-</attribute>\par
-\pard\intbl\nowidctlpar\hyphpar0\fi-360\li660\sb60\sa60\sl240\slmult0\tx660\fs16 5.\tab\fs20 copy the following into /usr/local/jboss404/server/ncicb-caint/conf\f0 /\f1  ApplicationSecurityConfig\fs16\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\fs20                 <application>\par
-                        <context-name>\par
-                                rembrandt\par
-                        </context-name>\par
-                        <authentication>\par
-                                <authentication-provider-class>\par
-                                <!-- Fully qualified class name-->\par
-                                </authentication-provider-class>\par
-                        </authentication>\par
-                        <authorization>\par
-                                <authorization-provider-class>\par
-                                        <!-- Fully qualified class name-->\par
-                                </authorization-provider-class>\par
-                                <hibernate-config-file>\par
-                                        /usr/local/jboss-4.0.4.GA/server/ncicb-caint/conf/rembrandt.hibernate.cfg.xml\par
-                                </hibernate-config-file>\par
-                        </authorization>\par
-                </application>\par
-\pard\intbl\nowidctlpar\hyphpar0\li300\sb60\sa60\sl240\slmult0\fs16\par
-\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\f0\fs20\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\b\f1 Configure UPT v 3.1\par
-\pard\intbl\hyphpar0\b0\~\f0\fs24\par
-\f1\fs20 Once the initial setup of UPT is complete, UPT available for the applications to start using provisioning for their authorization data. However, applications must be registered and configured before they can start using the UPT.\f0\fs24\par
-\f1\fs20 1. To register an application, use the UPT front end user interface to create an entry for the new application. \f0\fs24\par
-\f1\fs20\~ - Login as a Super Admin, go to the Application section, and select Create a New Application. And create a new application with Application Name as "cgems"\f0\fs24\par
-\f1\fs20\~ - Once the details are entered, go to the User section to create a new user in UPT (unless existing user is to be assigned as the administrator). Then return to the Application section to assign these Users as Application Administrators.\f0\fs24\par
-\f1\fs20 2. Copy the attached Hibernate file in the path where all the other hibernate files for CSM are kept.\f0\fs24\par
-\f1\fs20 3. Make a new "application" entry in the ApplicationSecurityConfig.xml file. (Use the existing UPT application entry as a template - copy, paste, and modify for the new application.)\f0\fs24\par
-\f1\fs20\~ - Replace the <context-name> with "cgems".\f0\fs24\par
-\f1\fs20\~ - Replace the hibernate-config qualified path entry to point to the hibernate cfg file from step no 2.\f0\fs24\par
-\f1\fs20 4. Add the following entry into the oracle-ds.xml file. (Make sure that you replace the appropriate values for the production for "<<>>" values)\f0\fs24\par
-\f1\fs20\~\f0\fs24\par
-\f1\fs20 <local-tx-datasource>\f0\fs24\par
-\f1\fs20\~ <jndi-name>cgemscsm</jndi-name>\f0\fs24\par
-\f1\fs20\~ <connection-url>jdbc:oracle:thin:@<<Production Oracle Server Name>>:<<Port Name>>:<<Schema Name>></connection-url>\f0\fs24\par
-\f1\fs20\~ <user-name><<User Name>></user-name>\f0\fs24\par
-\f1\fs20\~ <password><<Password>></password>\f0\fs24\par
-\f1\fs20\~ <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>\f0\fs24\par
-\f1\fs20\~\~<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>\f0\fs24\par
-\f1\fs20 </local-tx-datasource>\f0\fs24\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\b\f1\fs20 -------------------------------------------------------------------------------------------------------------------\par
-Database \par
-Ensure \cf2\b0  Rembrandt qa database to Rembrandt staging database are completed\cf0\f0\fs24\par
-\pard\intbl\brdrb\brdrs\brdrw15\brsp20 \nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\b\f1\fs20\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0 Deploy war file\par
-\b0 Deploy the \b\i rembrandt.war\b0\i0  file to the Staging server and start JBoss.\par
-\par
--------------------------------------------------------------------------------------------------------------------------------\par
-\b Configure URL\par
-\b0  \ul http://caintegrator-stage.nci.nih.gov/rembrandt/\ulnone\par
- \ul http://caintegrator.nci.nih.gov/rembrandt/\ulnone\par
- should be configured\par
-\pard\intbl\nowidctlpar\hyphpar0\li300\sb60\sa60\sl240\slmult0\fs16\par
-\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\f0\fs20\par
-\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\cf2\f3\fs18\par
-\par
-\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\cf0\f0\fs20\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Proposed deployment to staging\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Requested Date\cell Dec 7, 2006\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Actual Date\cell\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Approval For Promotion to Production\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Date\cell\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\tx1560 Decision\cell __Approved\par
-__Not Approved  \cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Approved by\cell\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Proposed deployment to production\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Requested Date\cell Dec 20, 2006\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1111\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Actual Date\cell\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Notes\cell\row\trowd\trgaph115\trleft-139\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
-\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10323\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0\cell\row\pard\nowidctlpar\hyphpar0\sl240\slmult0\b\fs32\page\pard\keepn\nowidctlpar\hyphpar0\s1\sb240\sa120\sl240\slmult0\tx0\f1 Field Definitions\par
-\pard\nowidctlpar\hyphpar0\sa120\sl240\slmult0\b0\f0\fs20 Most of the fields should be self-explanatory, so this section will only cover those that are not.  If you have any questions about filling out this form, please contact the NCICB SCM Administrator\par
-\pard\keepn\nowidctlpar\hyphpar0\s2\sb240\sa120\sl240\slmult0\tx0\b\i\f1\fs28 Application and Submitter Information\par
-\pard\nowidctlpar\hyphpar0\fi-360\li720\sa120\sl240\slmult0\tx720\b0\i0\f4\fs18\'b7\tab\f0\fs20 Release/Version.  This section should include the product's official version number, in the form <major>.<minor>.<patch>.  For example, 2.3.04.\par
-\pard\keepn\nowidctlpar\hyphpar0\s2\sb240\sa120\sl240\slmult0\tx0\b\i\f1\fs28 Build Information\par
-\pard\nowidctlpar\hyphpar0\fi-360\li720\sa120\sl240\slmult0\tx720\b0\i0\f4\fs18\'b7\tab\f0\fs20 Module \endash  the name of your software module in CVS (i.e., the name you pass in to the CVS checkout command.)\par
-\f4\fs18\'b7\tab\f0\fs20 Tag \endash  the tag that you have created to denote the build you wish to be promoted. This should ideally consist of the application name, version number, and date.\par
-\pard\keepn\nowidctlpar\hyphpar0\s2\sb240\sa120\sl240\slmult0\tx0\b\i\f1\fs28 Dependencies\par
-\pard\nowidctlpar\hyphpar0\sa120\sl240\slmult0\b0\i0\f0\fs20 Most of this information should have already been covered in the Deployment Instructions Guide, but if some of those dependencies have changed, and deployment  coordination between your application and the other application, is necessary, document it here.\par
-\pard\keepn\nowidctlpar\hyphpar0\s2\sb240\sa120\sl240\slmult0\tx0\b\i\f1\fs28 Additional Instructions\par
-\pard\nowidctlpar\hyphpar0\sa120\sl240\slmult0\b0\i0\f0\fs20 Again, most of this information should be covered in the Deployment Instructions Guide, but if there are additional deployment or test instructions that apply only to this build, include them here.  If the deployment process changes are going to be permanent, they need to get included in the Deployment Instructions Guide.\par
-\pard\keepn\nowidctlpar\hyphpar0\s2\sb240\sa120\sl240\slmult0\tx0\b\i\f1\fs28 Proposed Deployment to Staging\par
-\pard\nowidctlpar\hyphpar0\fi-360\li720\sa120\sl240\slmult0\tx720\b0\i0\f4\fs18\'b7\tab\f0\fs20 Keeping in mind the published deployment windows and the 24-hour turn-around time on requests, enter the date you want to deploy here. The Systems Team/SCM administrator will fill in the actual date after deployment.\par
-\f4\fs18\'b7\tab\f0\fs20 Document any emergency/expedited deployment request in the Notes section\par
-\pard\keepn\nowidctlpar\hyphpar0\s2\sb240\sa120\sl240\slmult0\tx0\b\i\f1\fs28 Proposed Deployment to Production\par
-\pard\nowidctlpar\hyphpar0\fi-360\li720\sa120\sl240\slmult0\tx720\b0\i0\f4\fs18\'b7\tab\f0\fs20 Again, keeping in mind the published deployment windows, and the 24 hour staging requirement, enter the date you wish to go live here.  The Systems Team/SCM administrator will fill in the actual date after deployment.\par
-\f4\fs18\'b7\tab\f0\fs20 As discussed above, applications successfully staged will never be automatically deployed to production without a formal request.\par
-\f4\fs18\'b7\tab\f0\fs20 Document any emergency/expedited deployment request in the Notes section.\par
-\pard\keepn\nowidctlpar\hyphpar0\s2\sb240\sa120\sl240\slmult0\tx0\b\i\f1\fs28 Notes\par
-\pard\nowidctlpar\hyphpar0\fi-360\li720\sa120\sl240\slmult0\tx720\b0\i0\f4\fs18\'b7\tab\f0\fs20 This section can include any other information that is not covered elsewhere that you feel is important.\par
-\f4\fs18\'b7\tab\f0\fs20 If this is an emergency deployment request, please document it here, including a detailed justification of why this deployment should occur outside a scheduled window.\par
-\pard\nowidctlpar\hyphpar0\sa120\sl240\slmult0\par
-}
- 
+{\rtf1\ansi\ansicpg1252\uc1\deff0\stshfdbch0\stshfloch0\stshfhich0\stshfbi0\deflang1033\deflangfe1033{\fonttbl{\f0\froman\fcharset0\fprq2{\*\panose 02020603050405020304}Times New Roman;}{\f1\fswiss\fcharset0\fprq2{\*\panose 020b0604020202020204}Arial;}
+{\f2\fmodern\fcharset0\fprq1{\*\panose 02070309020205020404}Courier New;}{\f3\froman\fcharset2\fprq2{\*\panose 05050102010706020507}Symbol;}{\f10\fnil\fcharset2\fprq2{\*\panose 05000000000000000000}Wingdings;}
+{\f37\fswiss\fcharset0\fprq2{\*\panose 020b0604030504040204}Verdana;}{\f67\froman\fcharset238\fprq2 Times New Roman CE;}{\f68\froman\fcharset204\fprq2 Times New Roman Cyr;}{\f70\froman\fcharset161\fprq2 Times New Roman Greek;}
+{\f71\froman\fcharset162\fprq2 Times New Roman Tur;}{\f72\froman\fcharset177\fprq2 Times New Roman (Hebrew);}{\f73\froman\fcharset178\fprq2 Times New Roman (Arabic);}{\f74\froman\fcharset186\fprq2 Times New Roman Baltic;}
+{\f75\froman\fcharset163\fprq2 Times New Roman (Vietnamese);}{\f77\fswiss\fcharset238\fprq2 Arial CE;}{\f78\fswiss\fcharset204\fprq2 Arial Cyr;}{\f80\fswiss\fcharset161\fprq2 Arial Greek;}{\f81\fswiss\fcharset162\fprq2 Arial Tur;}
+{\f82\fswiss\fcharset177\fprq2 Arial (Hebrew);}{\f83\fswiss\fcharset178\fprq2 Arial (Arabic);}{\f84\fswiss\fcharset186\fprq2 Arial Baltic;}{\f85\fswiss\fcharset163\fprq2 Arial (Vietnamese);}{\f87\fmodern\fcharset238\fprq1 Courier New CE;}
+{\f88\fmodern\fcharset204\fprq1 Courier New Cyr;}{\f90\fmodern\fcharset161\fprq1 Courier New Greek;}{\f91\fmodern\fcharset162\fprq1 Courier New Tur;}{\f92\fmodern\fcharset177\fprq1 Courier New (Hebrew);}
+{\f93\fmodern\fcharset178\fprq1 Courier New (Arabic);}{\f94\fmodern\fcharset186\fprq1 Courier New Baltic;}{\f95\fmodern\fcharset163\fprq1 Courier New (Vietnamese);}{\f437\fswiss\fcharset238\fprq2 Verdana CE;}{\f438\fswiss\fcharset204\fprq2 Verdana Cyr;}
+{\f440\fswiss\fcharset161\fprq2 Verdana Greek;}{\f441\fswiss\fcharset162\fprq2 Verdana Tur;}{\f444\fswiss\fcharset186\fprq2 Verdana Baltic;}{\f445\fswiss\fcharset163\fprq2 Verdana (Vietnamese);}}{\colortbl;\red0\green0\blue0;\red0\green0\blue255;
+\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;
+\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;\red255\green255\blue255;}{\stylesheet{\ql \li0\ri0\nowidctlpar\faauto\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 \snext0 Normal;}{
+\s1\ql \li0\ri0\nowidctlpar\faauto\outlinelevel0\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 \sbasedon0 \snext0 heading 1;}{\s2\ql \li0\ri0\nowidctlpar\faauto\outlinelevel1\rin0\lin0\itap0 
+\fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 \sbasedon0 \snext0 heading 2;}{\*\cs10 \additive \ssemihidden Default Paragraph Font;}{\*
+\ts11\tsrowd\trftsWidthB3\trpaddl108\trpaddr108\trpaddfl3\trpaddft3\trpaddfb3\trpaddfr3\tscellwidthfts0\tsvertalt\tsbrdrt\tsbrdrl\tsbrdrb\tsbrdrr\tsbrdrdgl\tsbrdrdgr\tsbrdrh\tsbrdrv 
+\ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1024\langfe1024\cgrid\langnp1024\langfenp1024 \snext11 \ssemihidden Normal Table;}}{\*\latentstyles\lsdstimax156\lsdlockeddef0}{\*\listtable{\list\listtemplateid1260580828
+\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat0\levelspace0\levelindent0{\leveltext\leveltemplateid-1078659896\'01\u-3913 ?;}{\levelnumbers;}\loch\af3\hich\af3\dbch\af0\fbias0 \fi-360\li1440
+\jclisttab\tx1440\lin1440 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698691\'01o;}{\levelnumbers;}\f2\fbias0 \fi-360\li2160\jclisttab\tx2160\lin2160 }{\listlevel
+\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698693\'01\u-3929 ?;}{\levelnumbers;}\f10\fbias0 \fi-360\li2880\jclisttab\tx2880\lin2880 }{\listlevel\levelnfc23\levelnfcn23
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698689\'01\u-3913 ?;}{\levelnumbers;}\f3\fbias0 \fi-360\li3600\jclisttab\tx3600\lin3600 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698691\'01o;}{\levelnumbers;}\f2\fbias0 \fi-360\li4320\jclisttab\tx4320\lin4320 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid67698693\'01\u-3929 ?;}{\levelnumbers;}\f10\fbias0 \fi-360\li5040\jclisttab\tx5040\lin5040 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid67698689\'01\u-3913 ?;}{\levelnumbers;}\f3\fbias0 \fi-360\li5760\jclisttab\tx5760\lin5760 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698691
+\'01o;}{\levelnumbers;}\f2\fbias0 \fi-360\li6480\jclisttab\tx6480\lin6480 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698693\'01\u-3929 ?;}{\levelnumbers;}
+\f10\fbias0 \fi-360\li7200\jclisttab\tx7200\lin7200 }{\listname ;}\listid67462437}{\list\listtemplateid-1581116308\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid67698703\'02\'00.;}{\levelnumbers\'01;}\fbias0 \fi-360\li720\jclisttab\tx720\lin720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698713
+\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1440\jclisttab\tx1440\lin1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715\'02\'02.;}{\levelnumbers\'01;}\fi-180\li2160
+\jclisttab\tx2160\lin2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698703\'02\'03.;}{\levelnumbers\'01;}\fi-360\li2880\jclisttab\tx2880\lin2880 }{\listlevel
+\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698713\'02\'04.;}{\levelnumbers\'01;}\fi-360\li3600\jclisttab\tx3600\lin3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715\'02\'05.;}{\levelnumbers\'01;}\fi-180\li4320\jclisttab\tx4320\lin4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid67698703\'02\'06.;}{\levelnumbers\'01;}\fi-360\li5040\jclisttab\tx5040\lin5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid67698713\'02\'07.;}{\levelnumbers\'01;}\fi-360\li5760\jclisttab\tx5760\lin5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715
+\'02\'08.;}{\levelnumbers\'01;}\fi-180\li6480\jclisttab\tx6480\lin6480 }{\listname ;}\listid1426533690}{\list\listtemplateid-634243878\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat3\levelspace300\levelindent0
+{\leveltext\leveltemplateid1739372872\'02\'00.;}{\levelnumbers\'01;}\fbias0 \fi-360\li720\jclisttab\tx720\lin720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698713
+\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1500\jclisttab\tx1500\lin1500 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715\'02\'02.;}{\levelnumbers\'01;}
+\fi-180\li2220\jclisttab\tx2220\lin2220 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698703\'02\'03.;}{\levelnumbers\'01;}\fi-360\li2940\jclisttab\tx2940\lin2940 }
+{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698713\'02\'04.;}{\levelnumbers\'01;}\fi-360\li3660\jclisttab\tx3660\lin3660 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715\'02\'05.;}{\levelnumbers\'01;}\fi-180\li4380\jclisttab\tx4380\lin4380 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace300\levelindent0{\leveltext\leveltemplateid67698703\'02\'06.;}{\levelnumbers\'01;}\fi-360\li5100\jclisttab\tx5100\lin5100 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext
+\leveltemplateid67698713\'02\'07.;}{\levelnumbers\'01;}\fi-360\li5820\jclisttab\tx5820\lin5820 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715
+\'02\'08.;}{\levelnumbers\'01;}\fi-180\li6540\jclisttab\tx6540\lin6540 }{\listname ;}\listid1450776322}{\list\listtemplateid1490303042\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat3\levelspace300\levelindent0
+{\leveltext\leveltemplateid1739372872\'02\'00.;}{\levelnumbers\'01;}\fbias0 \fi-360\li720\jclisttab\tx720\lin720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698713
+\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1500\jclisttab\tx1500\lin1500 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715\'02\'02.;}{\levelnumbers\'01;}
+\fi-180\li2220\jclisttab\tx2220\lin2220 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698703\'02\'03.;}{\levelnumbers\'01;}\fi-360\li2940\jclisttab\tx2940\lin2940 }
+{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698713\'02\'04.;}{\levelnumbers\'01;}\fi-360\li3660\jclisttab\tx3660\lin3660 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715\'02\'05.;}{\levelnumbers\'01;}\fi-180\li4380\jclisttab\tx4380\lin4380 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace300\levelindent0{\leveltext\leveltemplateid67698703\'02\'06.;}{\levelnumbers\'01;}\fi-360\li5100\jclisttab\tx5100\lin5100 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext
+\leveltemplateid67698713\'02\'07.;}{\levelnumbers\'01;}\fi-360\li5820\jclisttab\tx5820\lin5820 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715
+\'02\'08.;}{\levelnumbers\'01;}\fi-180\li6540\jclisttab\tx6540\lin6540 }{\listname ;}\listid1519196959}{\list\listtemplateid-1579897638\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat3\levelspace0\levelindent0
+{\leveltext\leveltemplateid1739372872\'02\'00.;}{\levelnumbers\'01;}\fbias0 \fi-360\li660\jclisttab\tx660\lin660 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698713
+\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1380\jclisttab\tx1380\lin1380 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715\'02\'02.;}{\levelnumbers\'01;}\fi-180\li2100
+\jclisttab\tx2100\lin2100 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698703\'02\'03.;}{\levelnumbers\'01;}\fi-360\li2820\jclisttab\tx2820\lin2820 }{\listlevel
+\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698713\'02\'04.;}{\levelnumbers\'01;}\fi-360\li3540\jclisttab\tx3540\lin3540 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715\'02\'05.;}{\levelnumbers\'01;}\fi-180\li4260\jclisttab\tx4260\lin4260 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid67698703\'02\'06.;}{\levelnumbers\'01;}\fi-360\li4980\jclisttab\tx4980\lin4980 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid67698713\'02\'07.;}{\levelnumbers\'01;}\fi-360\li5700\jclisttab\tx5700\lin5700 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715
+\'02\'08.;}{\levelnumbers\'01;}\fi-180\li6420\jclisttab\tx6420\lin6420 }{\listname ;}\listid1551989566}{\list\listtemplateid-1134549492\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0
+{\leveltext\leveltemplateid67698703\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\jclisttab\tx720\lin720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698713
+\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1440\jclisttab\tx1440\lin1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698715\'02\'02.;}{\levelnumbers\'01;}
+\fi-180\li2160\jclisttab\tx2160\lin2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698703\'02\'03.;}{\levelnumbers\'01;}\fi-360\li2880\jclisttab\tx2880\lin2880 }
+{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698713\'02\'04.;}{\levelnumbers\'01;}\fi-360\li3600\jclisttab\tx3600\lin3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698715\'02\'05.;}{\levelnumbers\'01;}\fi-180\li4320\jclisttab\tx4320\lin4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace360\levelindent0{\leveltext\leveltemplateid67698703\'02\'06.;}{\levelnumbers\'01;}\fi-360\li5040\jclisttab\tx5040\lin5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext
+\leveltemplateid67698713\'02\'07.;}{\levelnumbers\'01;}\fi-360\li5760\jclisttab\tx5760\lin5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698715
+\'02\'08.;}{\levelnumbers\'01;}\fi-180\li6480\jclisttab\tx6480\lin6480 }{\listname ;}\listid1673027829}{\list\listtemplateid1393327798\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat3\levelspace300\levelindent0
+{\leveltext\leveltemplateid1739372872\'02\'00.;}{\levelnumbers\'01;}\fbias0 \fi-360\li720\jclisttab\tx720\lin720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698713
+\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1500\jclisttab\tx1500\lin1500 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715\'02\'02.;}{\levelnumbers\'01;}
+\fi-180\li2220\jclisttab\tx2220\lin2220 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698703\'02\'03.;}{\levelnumbers\'01;}\fi-360\li2940\jclisttab\tx2940\lin2940 }
+{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698713\'02\'04.;}{\levelnumbers\'01;}\fi-360\li3660\jclisttab\tx3660\lin3660 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715\'02\'05.;}{\levelnumbers\'01;}\fi-180\li4380\jclisttab\tx4380\lin4380 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace300\levelindent0{\leveltext\leveltemplateid67698703\'02\'06.;}{\levelnumbers\'01;}\fi-360\li5100\jclisttab\tx5100\lin5100 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext
+\leveltemplateid67698713\'02\'07.;}{\levelnumbers\'01;}\fi-360\li5820\jclisttab\tx5820\lin5820 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace300\levelindent0{\leveltext\leveltemplateid67698715
+\'02\'08.;}{\levelnumbers\'01;}\fi-180\li6540\jclisttab\tx6540\lin6540 }{\listname ;}\listid1839538448}{\list\listtemplateid2067987672\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat5\levelspace0\levelindent0
+{\leveltext\leveltemplateid67698703\'02\'00.;}{\levelnumbers\'01;}\fbias0 \fi-360\li720\jclisttab\tx720\lin720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698713
+\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1440\jclisttab\tx1440\lin1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715\'02\'02.;}{\levelnumbers\'01;}\fi-180\li2160
+\jclisttab\tx2160\lin2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698703\'02\'03.;}{\levelnumbers\'01;}\fi-360\li2880\jclisttab\tx2880\lin2880 }{\listlevel
+\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698713\'02\'04.;}{\levelnumbers\'01;}\fi-360\li3600\jclisttab\tx3600\lin3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715\'02\'05.;}{\levelnumbers\'01;}\fi-180\li4320\jclisttab\tx4320\lin4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid67698703\'02\'06.;}{\levelnumbers\'01;}\fi-360\li5040\jclisttab\tx5040\lin5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid67698713\'02\'07.;}{\levelnumbers\'01;}\fi-360\li5760\jclisttab\tx5760\lin5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid67698715
+\'02\'08.;}{\levelnumbers\'01;}\fi-180\li6480\jclisttab\tx6480\lin6480 }{\listname ;}\listid1916865018}{\list\listtemplateid1883296866\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0
+{\leveltext\leveltemplateid67698703\'02\'00.;}{\levelnumbers\'01;}\fi-360\li360\jclisttab\tx360\lin360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698713
+\'02\'01.;}{\levelnumbers\'01;}\fi-360\li1080\jclisttab\tx1080\lin1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698715\'02\'02.;}{\levelnumbers\'01;}
+\fi-180\li1800\jclisttab\tx1800\lin1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698703\'02\'03.;}{\levelnumbers\'01;}\fi-360\li2520\jclisttab\tx2520\lin2520 }
+{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698713\'02\'04.;}{\levelnumbers\'01;}\fi-360\li3240\jclisttab\tx3240\lin3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698715\'02\'05.;}{\levelnumbers\'01;}\fi-180\li3960\jclisttab\tx3960\lin3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace360\levelindent0{\leveltext\leveltemplateid67698703\'02\'06.;}{\levelnumbers\'01;}\fi-360\li4680\jclisttab\tx4680\lin4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext
+\leveltemplateid67698713\'02\'07.;}{\levelnumbers\'01;}\fi-360\li5400\jclisttab\tx5400\lin5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid67698715
+\'02\'08.;}{\levelnumbers\'01;}\fi-180\li6120\jclisttab\tx6120\lin6120 }{\listname ;}\listid2143845575}}{\*\listoverridetable{\listoverride\listid67462437\listoverridecount0\ls1}{\listoverride\listid1916865018\listoverridecount0\ls2}
+{\listoverride\listid2143845575\listoverridecount0\ls3}{\listoverride\listid1426533690\listoverridecount0\ls4}{\listoverride\listid1551989566\listoverridecount0\ls5}{\listoverride\listid1519196959\listoverridecount0\ls6}{\listoverride\listid1450776322
+\listoverridecount0\ls7}{\listoverride\listid1839538448\listoverridecount0\ls8}{\listoverride\listid1673027829\listoverridecount0\ls9}}{\*\rsidtbl \rsid1780310\rsid3502317\rsid4480226\rsid5637686\rsid6182411\rsid6291954\rsid7552273\rsid7878102\rsid9652710
+\rsid10238027\rsid10625435\rsid11697854\rsid13709056\rsid15037413}{\*\generator Microsoft Word 11.0.6568;}{\info{\author Himanso}{\operator Himanso}{\creatim\yr2006\mo12\dy18\hr4\min4}{\revtim\yr2006\mo12\dy18\hr6\min28}{\version16}{\edmins82}{\nofpages9}
+{\nofwords2274}{\nofchars12966}{\nofcharsws15210}{\vern24579}}\widowctrl\ftnbj\aenddoc\noxlattoyen\expshrtn\noultrlspc\dntblnsbdb\nospaceforul\hyphcaps0\horzdoc\dghspace120\dgvspace120\dghorigin1701\dgvorigin1984\dghshow0\dgvshow3
+\jcompress\viewkind4\viewscale100\nolnhtadjtbl\rsidroot7878102 \fet0\sectd \linex0\sectdefaultcl\sftnbj {\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl2\pnucltr\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl3
+\pndec\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang {\pntxta )}}{\*\pnseclvl5\pndec\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl6\pnlcltr\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}
+{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl9\pnlcrm\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}\trowd \irow0\irowband0
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15\brdrcf1 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\pard\plain \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\fs20\insrsid10238027 
+Application and Submitter Information\cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\b\fs20\insrsid10238027 \trowd \irow0\irowband0
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15\brdrcf1 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\row }\trowd \irow1\irowband1\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 
+\clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\cltxlrtb\clftsWidth3\clwWidth3279\clshdrawnil \cellx4414\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth2138\clcbpatraw8 \cellx6552\clvertalt\clbrdrt
+\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth3795\clshdrawnil \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {
+\fs20\insrsid10238027 Submitted by\cell Jenny Glenn/ Himanso Sahni\cell Date\cell 12/}{\fs20\insrsid7878102 18}{\fs20\insrsid10238027 /2006\cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 
+\trowd \irow1\irowband1\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \cltxlrtb\clftsWidth3\clwWidth3279\clshdrawnil \cellx4414\clvertalt\clbrdrt
+\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth2138\clcbpatraw8 \cellx6552\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth3795\clshdrawnil \cellx10347\row }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Application\cell Rembrandt\cell Release/Version\cell 1.5\cell 
+}\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow2\irowband2\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone 
+\clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\cltxlrtb\clftsWidth3\clwWidth3279\clshdrawnil \cellx4414\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth2138\clcbpatraw8 \cellx6552\clvertalt\clbrdrt
+\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth3795\clshdrawnil \cellx10347\row }\trowd \irow3\irowband3
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\b\fs20\insrsid10238027 Build Information\cell }\pard 
+\ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\b\fs20\insrsid10238027 \trowd \irow3\irowband3\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl
+\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\row }\trowd \irow4\irowband4
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1227\clcbpatraw8 \cellx1112\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \cltxlrtb\clftsWidth3\clwWidth3302\clshdrawnil \cellx4414\clvertalt\clbrdrt
+\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth2138\clcbpatraw8 \cellx6552\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth3795\clshdrawnil \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Module\cell caintegrator
+\par caintegrator-analysis-commons
+\par caintegrator-spec
+\par caintegrator-application-commons\cell \cell \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow4\irowband4
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1227\clcbpatraw8 \cellx1112\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \cltxlrtb\clftsWidth3\clwWidth3302\clshdrawnil \cellx4414\clvertalt\clbrdrt
+\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth2138\clcbpatraw8 \cellx6552\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth3795\clshdrawnil \cellx10347\row }\trowd \irow5\irowband5\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl
+\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1227\clcbpatraw8 \cellx1112\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9235\clshdrawnil \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Associated change requests\cell 
+WebGenomeIngerationDeploymentRequest_STAGENOV2006.doc
+\par WebGenomeDeploymentRequest_STAGENOV2006.doc
+\par RembrandtAnalysisServerDeploymentRequest_STAGENOV2006.doc
+\par \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow5\irowband5\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone 
+\clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1227\clcbpatraw8 \cellx1112\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9235\clshdrawnil \cellx10347\row }\trowd \irow6\irowband6\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl
+\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {
+\b\fs20\insrsid10238027 Dependencies\cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\b\fs20\insrsid10238027 \trowd \irow6\irowband6
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\row }\trowd \irow7\irowband7\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 
+\clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Project Background\cell }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0
+\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f1\fs20\insrsid10238027 **********************************************************************************
+\par Technology Stack (jdk1.5.0_06, jboss 4.0.4, ant 1.6.2)
+\par **********************************************************************************
+\par An Anthi
+ll friendly build script has been written so that the above dependencies are checked out and placed in the appropriate locations by Anthill.  This is the default task for the build script.  If you choose not to use Anthill to grab these dependencies, you 
+will need to acquire the above dependencies manually.
+\par **********************************************************************************
+\par The JBoss Message Queues for Rembrandt must also be installed and running at the locations specified in the properties f
+ile in order for this product to receive/respond to analysis requests.  The procedure for doing this is included in the instructions. It is also included in the caintegrator-analysis-server deployment request. Just so you know.
+\par **********************************************************************************
+\par Rembrandt also has a dependency on the Common Security Module.  Included in the instructions and the build script are the means to deploy and setup the CSM as we have for development.  Since we are not
+ integrating our CSM deployment with any other application on the dev tier, it is understood that Systems may take some latitude in determining the best procedure for handling this dependency on both the Staging and Production tiers.  However, I would des
+ire that any changes that are made to accommodate these tiers is made known to the Rembrandt team POC so that we are able to make any changes on our development server deployment that are required. 
+\par Also, each tier CSM UPT tool must pointed to the matching 
+Rembrandt database, for instance: Stage Tier UPT must be pointing towards the Stage Rembrandt DB. In Step 5.3.1, we have provided instructions from Kunal Modi of the CSM team regarding setting up the UPT.
+\par }{\fs20\insrsid10238027 \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow7\irowband7\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 
+\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb
+\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Hardware\cell Dependent Servers:
+
+\par }\pard \ql \li720\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin720 {\fs20\insrsid10238027 caIntegrator Analysis Server
+\par WebGenome server
+\par }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow8\irowband8
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row 
+}\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Database\cell }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f1\fs20\insrsid10238027 
+This deployment is intended be configured to use our QA, staging or production database.  This configuration information and credentials are to be retrieved from the Systems DBAs and copied to the externalized rembrandt.properties file}{
+\f2\fs18\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 
+\par For this deployment to be successful we need a complete copy of the qa database and placed in our staging database, as well as a copy of our staging database placed in our production db.
+\par 
+\par Please ensure all triggers and PL/SQL scripts are successfully imported and statistic and indexes are properly executed.\cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\f1\fs20\insrsid10238027 
+\trowd \irow9\irowband9\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row 
+}\trowd \irow10\irowband10\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\b\fs20\insrsid10238027 Deployment Instructions \cell }\pard 
+\ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\b\fs20\insrsid10238027 \trowd \irow10\irowband10\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl
+\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\row }\trowd \irow11\irowband11
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\pard 
+\ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Files need to be delivered to system group\cell }\pard \ql \li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\faauto\rin0\lin360 {
+\b\i\f1\fs20\ul\insrsid10238027 From CSM:
+\par }\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx720\faauto\rin0\lin720 {\b\i\f2\fs20\insrsid10238027\charrsid7878102 o1}{\f2\fs20\insrsid10238027 \tab }{\b\i\f1\fs20\ul\insrsid10238027 War file}{\f1\fs20\insrsid10238027 
+\par }\pard \ql \fi-360\li1440\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx1440\faauto\rin0\lin1440 {\f2\fs20\insrsid10238027 o\tab }{\f1\fs20\insrsid10238027 rembrandt.war 
+\par }\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx720\faauto\rin0\lin720 {\b\i\f2\fs20\insrsid10238027 o2\tab }{\b\i\f1\fs20\ul\insrsid10238027 Externalized Properties File
+\par {\listtext\pard\plain\intbl\f3\fs20\insrsid10238027 \loch\af3\dbch\af0\hich\f3 \'b7\tab}}\pard \ql \fi-360\li1440\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\jclisttab\tx1440\faauto\ls1\rin0\lin1440\pararsid7878102 {\f1\fs20\insrsid10238027 
+rembrandt.properties
+\par {\listtext\pard\plain\intbl\f3\fs20\insrsid7878102\charrsid7878102 \loch\af3\dbch\af0\hich\f3 \'b7\tab}}{\f1\fs20\insrsid7878102\charrsid7878102 rembrandt-properties-service}{\f1\fs20\insrsid7878102 
+.xml (skeleton tag to be used in properties-services.xml)
+\par {\listtext\pard\plain\intbl\f3\fs20\highlight16\insrsid7878102\charrsid7552273 \loch\af3\dbch\af0\hich\f3 \'b7\tab}}{\f1\fs20\highlight16\insrsid7878102\charrsid7552273 rembrandt_echcache.xml
+\par }\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx720\faauto\rin0\lin720 {\b\i\f2\fs20\insrsid10238027 o3\tab }{\b\i\f1\fs20\ul\insrsid10238027 JMS Configuration Files
+\par }\pard \ql \fi-360\li1440\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx1440\faauto\rin0\lin1440 {\f2\fs20\insrsid10238027 o\tab }{\f1\fs20\insrsid10238027 rembrandt-jbossmq-destinations-service
+\par }{\f2\fs20\insrsid10238027 o\tab }{\f1\fs20\insrsid10238027 caintegrator-jbossmq-destinations-service
+\par }\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx720\faauto\rin0\lin720 {\b\i\f2\fs20\insrsid10238027 o4\tab }{\b\i\f1\fs20\ul\insrsid10238027 CMS Configuration Files
+\par {\listtext\pard\plain\intbl\f3\fs20\insrsid10238027 \loch\af3\dbch\af0\hich\f3 \'b7\tab}}\pard \ql \fi-360\li1440\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\jclisttab\tx1440\faauto\ls1\rin0\lin1440\pararsid7878102 {\f1\fs20\insrsid10238027 
+rembrandt.hibernate.cfg.xml
+\par {\listtext\pard\plain\intbl\f3\fs20\insrsid7878102\charrsid7878102 \loch\af3\dbch\af0\hich\f3 \'b7\tab}}{\f1\fs20\insrsid7878102\charrsid7878102 oracle-ds}{\f1\fs20\insrsid7878102  (skeleton tag to be used in oracle-ds.xml
+\par }\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx720\faauto\rin0\lin720\pararsid7878102 {\b\i\f2\fs20\highlight16\insrsid7878102\charrsid7552273 o5 }{\b\i\f1\fs20\ul\highlight16\insrsid7878102\charrsid7552273 Logging Files
+\par {\listtext\pard\plain\intbl\f3\fs20\highlight16\insrsid7878102\charrsid7552273 \loch\af3\dbch\af0\hich\f3 \'b7\tab}}\pard \ql \fi-360\li1440\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\jclisttab\tx1440\faauto\ls1\rin0\lin1440\pararsid7878102 {
+\f1\fs20\highlight16\insrsid7878102\charrsid7552273 log4Configuration.txt }{\b\i\f1\fs20\ul\highlight16\insrsid7878102\charrsid7552273 
+\par }\pard \ql \li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\faauto\rin0\lin360 {\b\i\f1\fs20\ul\insrsid10238027 
+\par From FTP site
+\par }\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx720\faauto\rin0\lin720 {\b\i\f2\fs20\insrsid7878102 O6}{\b\i\f2\fs20\insrsid10238027 \tab }{\b\i\f1\fs20\ul\insrsid10238027 BRB Data Files
+\par }\pard \ql \fi-360\li1440\ri0\nowidctlpar\intbl\tx1440\faauto\rin0\lin1440 {\f2\fs20\insrsid10238027 o\tab Rembrandt-Brain-All-Project.zip 
+\par o\tab Rembrandt-Brain-PublicPlusDana-Farber-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusH.LeeMoffitt-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusHF-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusMGH-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusUCLA-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusUCSF-Project.zip
+\par o\tab Rembrandt-Brain-Public-Project.zip}{\f1\fs20\insrsid10238027 
+\par }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow11\irowband11
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row 
+}\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 First Time  Deployment Instructions\cell }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {
+\f1\fs20\insrsid10238027 Setup JMS Configuration Files.
+\par }\pard \ql \fi-360\li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx360\faauto\rin0\lin360 {\f1\fs20\insrsid10238027 1.\tab Copy file \'93caintegrator-jbossmq-destinations-service\'93 to /usr/local/jboss404/server/ncicb-caint/deploy/jms folder.
+
+\par 2.\tab Copy file \'93rembrandt-jbossmq-destinations-service\'93 to /usr/local/jboss404/server/ncicb-caint/deploy/jms folder.
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f1\fs20\insrsid10238027 ------------------------------------------------------------------------------------------------------------
+\par }{\f1\fs20\highlight16\insrsid10238027\charrsid7552273 Setup Externalized Properties
+\par {\listtext\pard\plain\intbl\f1\fs20\insrsid10238027\charrsid7552273 \hich\af1\dbch\af0\loch\f1 1.\tab}}\pard \ql \fi-360\li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\jclisttab\tx360\faauto\ls3\rin0\lin360\pararsid11697854 {
+\f1\fs20\insrsid10238027\charrsid7552273 Edit /usr/local/jboss404/server/ncicb-caint/deploy/properties-service file, Scroll down to \'93<mbean code="org.jboss.varia.property.SystemPropertiesService" name="jboss:type=Service,name=SystemProperties"> node.
+
+\par {\listtext\pard\plain\intbl\f1\fs20\insrsid10238027\charrsid7552273 \hich\af1\dbch\af0\loch\f1 2.\tab}}\pard \ql \fi-360\li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\jclisttab\tx360\faauto\ls3\rin0\lin360 {\f1\fs20\insrsid10238027\charrsid7552273 
+Add the following inside the node}{\f1\fs20\insrsid1780310\charrsid7552273  (use provided rembrandt-properties-service.xml as skeleton)}{\f1\fs20\insrsid10238027\charrsid7552273 
+\par }\pard \ql \li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin360 {\f1\fs20\insrsid10238027\charrsid7552273  <attribute name="Properties">      gov.nih.nci.rembrandt.properties=/local/content/rembrandt/config/rembrandt.properties
+
+\par </attribute>
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid10238027\charrsid7552273 \hich\af1\dbch\af0\loch\f1 3.\tab}}\pard \ql \fi-360\li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\jclisttab\tx360\faauto\ls3\rin0\lin360 {
+\f1\fs20\highlight16\insrsid10238027\charrsid7552273 Copy file \'93rembrandt.properties}{\f1\fs20\highlight16\insrsid1780310\charrsid7552273 \'93 to}{\f1\fs20\highlight16\insrsid10238027\charrsid7552273  /local/content/}{
+\f1\fs20\highlight16\insrsid1780310\charrsid7552273 r}{\f1\fs20\highlight16\insrsid10238027\charrsid7552273 embrandt/config folder.
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid10238027\charrsid7552273 \hich\af1\dbch\af0\loch\f1 4.\tab}Modify rembrandt.properties  set the following properties appropriately
+\par }\pard \ql \li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin360 {\f2\fs20\highlight16\insrsid10238027\charrsid7552273 gov.nih.nci.rembrandt.jms.jboss_url=localhost: <JNDI PORT>
+\par gov.nih.nci.rembrandt.dbalias=thin:@<DB URL>:1521:<DB INSTANCE>
+\par gov.nih.nci.rembrandt.db.username=<DB USERNAME>
+\par gov.nih.nci.rembrandt.db.password=<DB PASSWORD>
+\par webGenome.url=http://<Server:Port Wherever WebGenome Application is deployed>/webGenome/client/plot.do?qType=copyNumber
+\par webGenomeJndi.url=jnp://<Server:JNDI Port Wherever WGI is deployed>
+\par rembrandt.register.mailTo.support=ncicb@pop.nci.nih.gov}{\f1\fs20\highlight16\insrsid10238027\charrsid7552273 
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid10238027\charrsid7552273 \hich\af1\dbch\af0\loch\f1 5.\tab}}\pard \ql \fi-360\li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\jclisttab\tx360\faauto\ls3\rin0\lin360\pararsid1780310 {
+\f1\fs20\highlight16\insrsid10238027\charrsid7552273 Ensure all other paths inside the rembrandt.properties are set to \'93/local/content/rembrandt/config\'94
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid1780310\charrsid7552273 \hich\af1\dbch\af0\loch\f1 6.\tab}}{\f1\fs20\highlight16\insrsid1780310\charrsid7552273 Ignore \'93/local/content/rembrandt/data\'94 for now
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid1780310\charrsid7552273 \hich\af1\dbch\af0\loch\f1 7.\tab}Copy file \'93rembrandt_ehcache.xml\'94 to /local/content/Rembrandt/cache
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid1780310\charrsid7552273 \hich\af1\dbch\af0\loch\f1 8.\tab}}\pard \ql \fi-360\li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx360\faauto\ls3\rin0\lin360\pararsid1780310 {
+\f1\fs20\highlight16\insrsid1780310\charrsid7552273 Open the copied \'93rembrandt_ehcache.xml\'94 to verify the following tag within rembrandt_ehcache.xml is configured as follows
+\par }\pard \ql \li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx360\faauto\rin0\lin720\pararsid11697854 {\f1\fs20\highlight16\insrsid11697854\charrsid7552273 <diskStore path="/local/content/rembrandt/cache"/>}{
+\f1\fs20\highlight16\insrsid1780310\charrsid7552273 
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid11697854\charrsid7552273 \hich\af1\dbch\af0\loch\f1 9.\tab}}\pard \ql \fi-360\li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx360\faauto\ls3\rin0\lin360\pararsid15037413 {
+\f1\fs20\highlight16\insrsid11697854\charrsid7552273 Create folder /local/content/rembrandt/cache
+\par }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f1\fs20\insrsid10238027 ---------------------------------------------------------------------------------------------------------------}{\fs20\insrsid10238027 
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f1\fs20\insrsid10238027 Configure BRB Data Files
+\par }\pard \ql \fi-360\li360\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx360\faauto\rin0\lin360 {\f1\fs20\insrsid10238027 1.\tab Create a /local/content/rembrandt/brb
+\par 2.\tab Within remprandt.properties, if needed, modify gov.nih.nci.rembrandt.brb_filepath to /local/content/rembrandt/brb
+\par 3.\tab Transfer the following files from the REMBRANDT/BRBFiles directory of the caintegrator ftp site 
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f1\fs20\insrsid10238027           ftp://ncicbftp2.nci.nih.gov
+\par           login:caintegratorftp 
+\par to $CONF_DIRECTORY/rembrandt/brb
+\par }\pard \ql \fi-360\li1440\ri0\nowidctlpar\intbl\tx1440\faauto\rin0\lin1440 {\f2\fs20\insrsid10238027 o\tab Rembrandt-Brain-All-Project.zip 
+\par o\tab Rembrandt-Brain-PublicPlusDana-Farber-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusH.LeeMoffitt-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusHF-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusMGH-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusUCLA-Project.zip
+\par o\tab Rembrandt-Brain-PublicPlusUCSF-Project.zip
+\par o\tab Rembrandt-Brain-Public-Project.zip
+\par }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f37\fs18\cf1\insrsid10238027 -----------------------------------------------------------------------------------------}{\fs20\insrsid10238027 
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0\pararsid6291954 {\b\f1\fs20\highlight16\insrsid6291954\charrsid7552273 Configure log4j
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid6291954\charrsid7552273 \hich\af1\dbch\af0\loch\f1 1.\tab}}\pard \ql \fi-360\li720\ri0\sb60\sa60\sl-200\slmult0\nowidctlpar\intbl\jclisttab\tx720\hyphpar0\faauto\ls4\rin0\lin720\pararsid6291954 {
+\f1\fs20\highlight16\insrsid6291954\charrsid7552273 Open /usr/local/jboss404/server/ncicb-caint/conf/log4j.xml
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid6291954\charrsid7552273 \hich\af1\dbch\af0\loch\f1 2.\tab}Remove all previous \'93REMBRANDT_LOG\'94, \'93OJB_LOG\'94  and \'93CAINTEGRATOR_LOG\'94  appenders and loggers from this file.
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid6291954\charrsid7552273 \hich\af1\dbch\af0\loch\f1 3.\tab}Locate "Limit categories" comment  with the log4j.xml file
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid6291954\charrsid7552273 \hich\af1\dbch\af0\loch\f1 4.\tab}Open log4Configuration.txt file, select all text and copy.
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid6291954\charrsid7552273 \hich\af1\dbch\af0\loch\f1 5.\tab}Paste the selected text right above the "Limit categories" header as the log4j requires the loggers to follow the appenders.
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid6291954\charrsid7552273 \hich\af1\dbch\af0\loch\f1 6.\tab}Upon server startup ensure there are no log4j errors  reported
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\b\f1\fs20\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 ------------------------------------------------------------------------------------------------------------------------
+\par }{\b\f1\fs20\insrsid10238027 Configure CSM v3.1
+\par {\listtext\pard\plain\intbl\f1\fs20\insrsid10625435 \hich\af1\dbch\af0\loch\f1 1.\tab}}\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx660\jclisttab\tx720\faauto\ls9\rin0\lin720\pararsid10625435 {\f1\fs20\insrsid10625435 C}{
+\f1\fs20\insrsid10238027 opy rembrandt.hibernate.cfg.xml to /usr/local/jboss404/server/ncicb-caint/conf}{\f1\fs20\insrsid10238027\charrsid10625435 
+\par {\listtext\pard\plain\intbl\f1\fs20\insrsid10238027 \hich\af1\dbch\af0\loch\f1 2.\tab}}\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx660\jclisttab\tx720\faauto\ls9\rin0\lin720 {\f1\fs20\insrsid10238027 \tab 
+Add the following content into /usr/local/jboss404/server/ncicb-caint/conf/login-config.xml
+\par }\pard \ql \li300\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\faauto\rin0\lin300 {\f1\fs20\insrsid10238027    <application-policy name="rembrandt">
+\par          <authentication>
+\par             <login-module code="gov.nih.nci.security.authentication.loginmodules.LDAPLoginModule" flag="required">
+\par                 <module-option name="ldapHost">ldaps://ncids4a.nci.nih.gov:636</module-option>
+\par                 <module-option name="ldapSearchableBase">ou=nci,o=nih</module-option>
+\par                 <module-option name="ldapUserIdLabel">cn</module-option>
+\par             </login-module>
+\par          </authentication>
+\par     </application-policy>
+\par {\listtext\pard\plain\intbl\f1\fs20\highlight16\insrsid10238027\charrsid7552273 \hich\af1\dbch\af0\loch\f1 3.\tab}}\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx660\jclisttab\tx720\faauto\ls9\rin0\lin720\pararsid10625435 {
+\f1\fs20\highlight16\insrsid10238027\charrsid7552273 Copy the following contents in to /usr/local/jboss404/server/ncicb-caint/deploy/oracle-ds.xml }{\f1\fs20\highlight16\insrsid10625435\charrsid7552273 
+Please Note for Rembrandt the CSM tables are within the Rembrandt schema, therefore the  }{\b\f1\fs20\highlight16\insrsid10625435\charrsid7552273 jdbc:url}{\f1\fs20\highlight16\insrsid10625435\charrsid7552273 , }{
+\b\f1\fs20\highlight16\insrsid10625435\charrsid7552273 user name}{\f1\fs20\highlight16\insrsid10625435\charrsid7552273  and }{\b\f1\fs20\highlight16\insrsid10625435\charrsid7552273 password}{\f1\fs20\highlight16\insrsid10625435\charrsid7552273 
+ should be same as in the externalized properties section
+\par }\pard \ql \li300\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\faauto\rin0\lin300 {\f1\fs20\insrsid10238027   <local-tx-datasource>
+\par                <jndi-name>rembrandtcsm</jndi-name>
+\par                <connection-url>}{\b\f1\fs20\insrsid10238027 jdbc:url}{\f1\fs20\insrsid10238027 </connection-url>
+\par                <user-name>}{\b\f1\fs20\insrsid10238027 user name}{\f1\fs20\insrsid10238027 </user-name>
+\par                <password>}{\b\f1\fs20\insrsid10238027 password}{\f1\fs20\insrsid10238027 </password>
+\par                <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+\par                <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-c
+\par lass-name>
+\par    </local-tx-datasource>}{\f1\fs20\insrsid10625435 
+\par 
+\par 
+\par {\listtext\pard\plain\intbl\f1\fs20\insrsid10238027\charrsid10625435 \hich\af1\dbch\af0\loch\f1 4.\tab}}\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx660\jclisttab\tx720\faauto\ls9\rin0\lin720 {
+\f1\fs20\insrsid10238027\charrsid10625435 if the following does not exist in /usr/local/jboss404/server/ncicb-caint/deploy/properties-service.xml, then add it
+\par }\pard \ql \li300\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\faauto\rin0\lin300 {\f1\fs20\insrsid10238027 <attribute name="Properties">
+\par gov.nih.nci.security.configFile=/usr/local/jboss404/server/ncicb-caint/conf/ApplicationSecurityConfig.xml
+\par </attribute>
+\par {\listtext\pard\plain\intbl\f1\fs20\insrsid10238027\charrsid10625435 \hich\af1\dbch\af0\loch\f1 5.\tab}}\pard \ql \fi-360\li720\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\tx660\jclisttab\tx720\faauto\ls9\rin0\lin720\pararsid10625435 {
+\f1\fs20\insrsid10238027\charrsid10625435 copy the following into /usr/local/jboss404/server/ncicb-caint/conf/ ApplicationSecurityConfig
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f1\fs20\insrsid10238027                 <application>
+\par                         <context-name>
+\par                                 rembrandt
+\par                         </context-name>
+\par                         <authentication>
+\par                                 <authentication-provider-class>
+\par                                 <!-- Fully qualified class name-->
+\par                                 </authentication-provider-class>
+\par                         </authentication>
+\par                         <authorization>
+\par                                 <authorization-provider-class>
+\par                                         <!-- Fully qualified class name-->
+\par                                 </authorization-provider-class>
+\par                                 <hibernate-config-file>
+\par                                         /usr/local/jboss-4.0.4.GA/server/ncicb-caint/conf/rembrandt.hibernate.cfg.xml
+\par                                 </hibernate-config-file>
+\par                         </authorization>
+\par                 </application>
+\par }\pard \ql \li300\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin300 {\f1\fs16\insrsid10238027 
+\par }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\b\f1\fs20\insrsid10238027 Configure UPT v 3.1
+\par }\pard \ql \li0\ri0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f1\fs20\insrsid10238027 \~}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 Once the initial setup of UPT is complete, UPT available for the applications to start using provisioning for their authorization data. However, applications must be registered and configured before they can start using the UPT.
+}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 1. To register an application, use the UPT front end user interface to create an entry for the new application. }{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~ - Login as a Super Admin, go to the Application section, and select Create a New Application. And create a new application with Application Name as "cgems"}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~
+ - Once the details are entered, go to the User section to create a new user in UPT (unless existing user is to be assigned as the administrator). Then return to the Application section to assign these Users as Application Administrators.}{
+\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 2. Copy the attached Hibernate file in the path where all the other hibernate files for CSM are kept.}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 3. Make a new "application" entry in the ApplicationSecurityConfig.xml file. (Use the existing UPT application entry as a template - copy, paste, and modify for the new application.)}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~ - Replace the <context-name> with "cgems".}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~ - Replace the hibernate-config qualified path entry to point to the hibernate cfg file from step no 2.}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 4. Add the following entry into the oracle-ds.xml file. (Make sure that you replace the appropriate values for the production for "<<>>" values)}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 <local-tx-datasource>}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~ <jndi-name>cgemscsm</jndi-name>}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~ <connection-url>jdbc:oracle:thin:@<<Production Oracle Server Name>>:<<Port Name>>:<<Schema Name>></connection-url>}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~ <user-name><<User Name>></user-name>}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~ <password><<Password>></password>}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~ <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 \~\~<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>}{\insrsid10238027 
+\par }{\f1\fs20\insrsid10238027 </local-tx-datasource>}{\insrsid10238027 
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\b\f1\fs20\insrsid10238027 -------------------------------------------------------------------------------------------------------------------
+\par Database 
+\par Ensure }{\f1\fs20\cf1\insrsid10238027  }{\f1\fs20\cf1\insrsid9652710 All Rembrandt QA, to}{\f1\fs20\cf1\insrsid10238027  staging database are completed}{\insrsid10238027 
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\brdrb\brdrs\brdrw15\brsp20 \hyphpar0\faauto\rin0\lin0 {\b\f1\fs20\insrsid10238027 
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\b\f1\fs20\insrsid10238027 Deploy war file
+\par }{\f1\fs20\insrsid10238027 Deploy the }{\b\i\f1\fs20\insrsid10238027 rembrandt.war}{\f1\fs20\insrsid10238027  file to the Staging server and start JBoss.
+\par 
+\par -------------------------------------------------------------------------------------------------------------------------------
+\par }{\b\f1\fs20\insrsid10238027 Configure URL
+\par }{\f1\fs20\insrsid10238027  }{\f1\fs20\ul\insrsid10238027 http://caintegrator-stage.nci.nih.gov/rembrandt/}{\f1\fs20\insrsid10238027 
+\par  }{\f1\fs20\ul\insrsid10238027 http://caintegrator.nci.nih.gov/rembrandt/}{\f1\fs20\insrsid10238027 
+\par  should be configured
+\par }\pard \ql \li300\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin300 {\f1\fs16\insrsid10238027 
+\par }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 
+\par }\pard \ql \li0\ri0\sb60\sa60\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\f37\fs18\cf1\insrsid10238027 
+\par 
+\par }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow12\irowband12
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrnone 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrnone \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row 
+}\trowd \irow13\irowband13\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\b\fs20\insrsid10238027 Proposed deployment to staging\cell }\pard 
+\ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\b\fs20\insrsid10238027 \trowd \irow13\irowband13\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 
+\clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\row }\trowd \irow14\irowband14
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347
+\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Requested Date\cell Dec 18, 2006\cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 
+\trowd \irow14\irowband14\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row 
+}\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Actual Date\cell \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow15\irowband15
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row 
+}\trowd \irow16\irowband16\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\b\fs20\insrsid10238027 Approval For Promotion to Production\cell }\pard 
+\ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\b\fs20\insrsid10238027 \trowd \irow16\irowband16\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 
+\clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\row }\trowd \irow17\irowband17
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347
+\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Date\cell \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow17\irowband17
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 
+\clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row 
+}\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\tx1560\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Decision\cell __Approved
+\par __Not Approved  \cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow18\irowband18\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt
+\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb
+\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Approved by\cell \cell }\pard 
+\ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow19\irowband19\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 
+\clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row }\trowd \irow20\irowband20\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl
+\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {
+\b\fs20\insrsid10238027 Proposed deployment to production\cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\b\fs20\insrsid10238027 \trowd \irow20\irowband20
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\row }\trowd \irow21\irowband21\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl
+\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Requested Date\cell Dec 20, 2006\cell }\pard 
+\ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow21\irowband21\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 
+\clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row }\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 Actual Date\cell \cell }\pard 
+\ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow22\irowband22\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 
+\clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15 \clcbpat8\cltxlrtb\clftsWidth3\clwWidth1250\clcbpatraw8 \cellx1135\clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr
+\brdrs\brdrw15\brdrcf1 \cltxlrtb\clftsWidth3\clwWidth9212\clshdrawnil \cellx10347\row }\trowd \irow23\irowband23\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl
+\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {
+\b\fs20\insrsid10238027 Notes\cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\b\fs20\insrsid10238027 \trowd \irow23\irowband23
+\ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 
+\clcbpat16\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw16 \cellx10347\row }\trowd \irow24\irowband24\lastrow \ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt\brdrs\brdrw15 \clbrdrl
+\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat8\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw8 \cellx10347\pard \ql \li0\ri0\sl240\slmult0\nowidctlpar\intbl\hyphpar0\faauto\rin0\lin0 {\fs20\insrsid10238027 
+\cell }\pard \ql \li0\ri0\widctlpar\intbl\aspalpha\aspnum\faauto\adjustright\rin0\lin0 {\fs20\insrsid10238027 \trowd \irow24\irowband24\lastrow \ts11\trqc\trgaph115\trrh20\trleft-115\trftsWidth1\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3 \clvertalt\clbrdrt
+\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15\brdrcf1 \clbrdrb\brdrs\brdrw15\brdrcf1 \clbrdrr\brdrs\brdrw15\brdrcf1 \clcbpat8\cltxlrtb\clftsWidth3\clwWidth10462\clcbpatraw8 \cellx10347\row }\pard\plain \s1\ql \li0\ri0\sb240\sa120\sl240\slmult0\keepn\nowidctlpar
+\tx0\hyphpar0\faauto\outlinelevel0\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\fs32\insrsid10238027 \page }{\b\f1\fs32\insrsid10238027 Field Definitions
+\par }\pard\plain \ql \li0\ri0\sa120\sl240\slmult0\nowidctlpar\hyphpar0\faauto\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\fs20\insrsid10238027 
+Most of the fields should be self-explanatory, so this section will only cover those that are not.  If you have any questions about filling out this form, please contact the NCICB SCM Administrator
+\par }\pard\plain \s2\ql \li0\ri0\sb240\sa120\sl240\slmult0\keepn\nowidctlpar\tx0\hyphpar0\faauto\outlinelevel1\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\i\f1\fs28\insrsid10238027 Application and Submitter Information
+\par }\pard\plain \ql \fi-360\li720\ri0\sa120\sl240\slmult0\nowidctlpar\tx720\hyphpar0\faauto\rin0\lin720\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 Release/Version.  
+This section should include the product's official version number, in the form <major>.<minor>.<patch>.  For example, 2.3.04.
+\par }\pard\plain \s2\ql \li0\ri0\sb240\sa120\sl240\slmult0\keepn\nowidctlpar\tx0\hyphpar0\faauto\outlinelevel1\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\i\f1\fs28\insrsid10238027 Build Information
+\par }\pard\plain \ql \fi-360\li720\ri0\sa120\sl240\slmult0\nowidctlpar\tx720\hyphpar0\faauto\rin0\lin720\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 Module \endash 
+ the name of your software module in CVS (i.e., the name you pass in to the CVS checkout command.)
+\par }{\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 Tag \endash  the tag that you have created to denote the build you wish to be promoted. This should ideally consist of the application name, version number, and date.
+\par }\pard\plain \s2\ql \li0\ri0\sb240\sa120\sl240\slmult0\keepn\nowidctlpar\tx0\hyphpar0\faauto\outlinelevel1\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\i\f1\fs28\insrsid10238027 Dependencies
+\par }\pard\plain \ql \li0\ri0\sa120\sl240\slmult0\nowidctlpar\hyphpar0\faauto\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\fs20\insrsid10238027 Most of this information should have already been covered in the Deployment Instruct
+ions Guide, but if some of those dependencies have changed, and deployment  coordination between your application and the other application, is necessary, document it here.
+\par }\pard\plain \s2\ql \li0\ri0\sb240\sa120\sl240\slmult0\keepn\nowidctlpar\tx0\hyphpar0\faauto\outlinelevel1\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\i\f1\fs28\insrsid10238027 Additional Instructions
+\par }\pard\plain \ql \li0\ri0\sa120\sl240\slmult0\nowidctlpar\hyphpar0\faauto\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\fs20\insrsid10238027 Again, most of this information should be covered in the De
+ployment Instructions Guide, but if there are additional deployment or test instructions that apply only to this build, include them here.  If the deployment process changes are going to be permanent, they need to get included in the Deployment Instructio
+ns Guide.
+\par }\pard\plain \s2\ql \li0\ri0\sb240\sa120\sl240\slmult0\keepn\nowidctlpar\tx0\hyphpar0\faauto\outlinelevel1\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\i\f1\fs28\insrsid10238027 Proposed Deployment to Staging
+\par }\pard\plain \ql \fi-360\li720\ri0\sa120\sl240\slmult0\nowidctlpar\tx720\hyphpar0\faauto\rin0\lin720\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 
+Keeping in mind the published deployment windows and the 24-hour turn-around time on requests, enter the date you want to deploy here. The Systems Team/SCM administrator will fill in the actual date after deployment.
+\par }{\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 Document any emergency/expedited deployment request in the Notes section
+\par }\pard\plain \s2\ql \li0\ri0\sb240\sa120\sl240\slmult0\keepn\nowidctlpar\tx0\hyphpar0\faauto\outlinelevel1\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\i\f1\fs28\insrsid10238027 Proposed Deployment to Production
+\par }\pard\plain \ql \fi-360\li720\ri0\sa120\sl240\slmult0\nowidctlpar\tx720\hyphpar0\faauto\rin0\lin720\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 
+Again, keeping in mind the published deployment windows, and the 24 hour staging requirement, enter the date you wish to go live here.  The Systems Team/SCM administrator will fill in the actual date after deployment.
+\par }{\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 As discussed above, applications successfully staged will never be automatically deployed to production without a formal request.
+\par }{\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 Document any emergency/expedited deployment request in the Notes section.
+\par }\pard\plain \s2\ql \li0\ri0\sb240\sa120\sl240\slmult0\keepn\nowidctlpar\tx0\hyphpar0\faauto\outlinelevel1\rin0\lin0\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\b\i\f1\fs28\insrsid10238027 Notes
+\par }\pard\plain \ql \fi-360\li720\ri0\sa120\sl240\slmult0\nowidctlpar\tx720\hyphpar0\faauto\rin0\lin720\itap0 \fs24\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 {\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 
+This section can include any other information that is not covered elsewhere that you feel is important.
+\par }{\f3\fs18\insrsid10238027 \'b7\tab }{\fs20\insrsid10238027 If this is an emergency deployment request, please document it here, including a detailed justification of why this deployment should occur outside a scheduled window.
+\par }\pard \ql \li0\ri0\sa120\sl240\slmult0\nowidctlpar\hyphpar0\faauto\rin0\lin0\itap0 {\fs20\insrsid10238027 
+\par }}
