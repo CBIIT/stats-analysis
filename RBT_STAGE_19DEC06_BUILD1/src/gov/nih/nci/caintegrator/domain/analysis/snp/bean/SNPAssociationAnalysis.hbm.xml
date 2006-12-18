@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : SNPAssociationAnalysis.hbm.xml
+    Created on : June 26, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for SNPAssociationAnalysis
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.analysis.snp.bean">
+   <class name="SNPAssociationAnalysis" 
+    	table="SNP_ASSOCIATION_ANALYSIS"
+        lazy="true">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.Long" 
+           column="ASSO_ANALYSIS_ID">
+           <generator class="assigned" />
+       </id>
+       
+       
+        <!-- name -->        
+       <property name="name" 
+                 type="java.lang.String" 
+                 column="ASSO_ANALYSIS_NAME" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- description -->                 
+       <property name="description" 
+                 type="java.lang.String" 
+                 column="ASSO_ANALYSIS_DESCRIPTION" 
+                 insert="false" 
+                 update="false" />        
+                 
+                 
+       <!-- methods -->                 
+       <property name="methods" 
+                 type="java.lang.String" 
+                 column="ASSO_ANALYSIS_METHODS" 
+                 insert="false" 
+                 update="false" />        
+                 
+     
+	
+     
+      <!-- here is for 1-m relationships -->  
+    
+         <set name="analysisGroupCollection"  inverse="true">
+              <cache usage="read-write" />
+              <key column="ASSO_ANALYSIS_ID" />
+              <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup" />
+         </set>
+     
+          <set name="snpAssociationFindingCollection"  inverse="true">
+              <cache usage="read-write" />
+              <key column="ASSO_ANALYSIS_ID" />
+              <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding" />
+         </set>
+	</class>
+</hibernate-mapping>
