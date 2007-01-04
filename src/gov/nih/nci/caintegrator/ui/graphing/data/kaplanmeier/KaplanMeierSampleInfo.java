@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier;
 
+import java.io.Serializable;
+
 /**
  * @author XiaoN
  */
@@ -62,8 +64,8 @@ package gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier;
 * 
 */
 
-public class KaplanMeierSampleInfo {
-
+public class KaplanMeierSampleInfo implements Serializable{
+	private static final long serialVersionUID = 1L;
 	String sampleID; 
 	int time; 
 	int censor; //(0/1)
