@@ -73,8 +73,8 @@ import java.util.Collection;
 */
 
 public class KaplanMeierStoredData implements CachableGraphData{
-	
-	
+	private static final long serialVersionUID = 1L;
+
 	private Double upVsRestPvalue = null;
     
 	private Double downVsRestPvalue = null;

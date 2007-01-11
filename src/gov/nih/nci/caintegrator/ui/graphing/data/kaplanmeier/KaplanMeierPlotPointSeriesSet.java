@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier;
 import gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier.KaplanMeierPlotPointSeries.SeriesType;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * This Class contains two KaplainMeierPlotPointSeries. One for the probability
@@ -76,8 +77,8 @@ import java.util.ArrayList;
 * 
 */
 
-public class KaplanMeierPlotPointSeriesSet{
-
+public class KaplanMeierPlotPointSeriesSet implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private KaplanMeierPlotPointSeries censorPlotPoints = null;
 	private KaplanMeierPlotPointSeries probabilityPlotPoints = null;
 	private ArrayList<KaplanMeierSampleInfo> samples;

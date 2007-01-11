@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier;
 import gov.nih.nci.caintegrator.util.CaIntegratorConstants;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -78,7 +79,10 @@ import org.apache.log4j.Logger;
 * 
 */
 
-public class KaplanMeierDataController {
+public class KaplanMeierDataController implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	private KaplanMeierStoredData storedData;
 	
