@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto;
 
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 
 /**
@@ -13,6 +14,8 @@ public abstract class FindingCriteriaDTO {
     abstract public FindingsHandler getHandler();
 
     public AnnotationCriteria AnnotationCriteria;
+    public StudyCriteria studyCriteria;
+
     public int index;
 
     public FindingCriteriaDTO(){ }
@@ -33,7 +36,15 @@ public abstract class FindingCriteriaDTO {
 		this.index = index;
 	}
 
-	@Override
+    public StudyCriteria getStudyCriteria() {
+        return studyCriteria;
+    }
+
+    public void setStudyCriteria(StudyCriteria studyCriteria) {
+        this.studyCriteria = studyCriteria;
+    }
+
+    @Override
 	public String toString()
 	{
 		String str = new String();
