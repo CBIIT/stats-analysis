@@ -119,11 +119,7 @@ public  class SNPAssociationAnalysis
 			return h;
 	}
 
-	
-	   
-	   
-	   
-	      
+
       /**
    * Statistical results of evidence for or against genetic association between the phenotypes analyzed 
    * at a particular SNP. 
@@ -148,12 +144,7 @@ public  class SNPAssociationAnalysis
         this.snpAssociationFindingCollection = snpAssociationFindingCollection;
     }
 	   
-	   
-	
-	   
-	   
-	   
-	      
+
       /**
    * Representation of the analysis groups such as "CEPH Population" or "Non-Tumor Samples" 
    * 
@@ -169,15 +160,9 @@ public  class SNPAssociationAnalysis
         return analysisGroupCollection;
     }
 
-	      
-	               
-	   
+
     public void setAnalysisGroupCollection(Set<gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup> analysisGroupCollection){
         this.analysisGroupCollection = analysisGroupCollection;
     }
-	   
-	   
-	
 
-			
 }

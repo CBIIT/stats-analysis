@@ -108,12 +108,20 @@
       <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding" />
      </set>   
      
+<!--
       <set name="snpAssayCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="SNPANNO_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay" />
      </set>  
-     
+-->
+       <set name="snpPanelCollection" table="SNP_ASSAY" lazy="true">
+         <cache usage="read-write" />
+         <key column="SNPANNO_ID" />
+          <many-to-many class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel" column="SNP_PANEL_ID" />
+       </set>
+
+
       <set name="genotypeFindingCollection" lazy="true" inverse="true">
          <key column="SNPANNO_ID" />
          <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding" />

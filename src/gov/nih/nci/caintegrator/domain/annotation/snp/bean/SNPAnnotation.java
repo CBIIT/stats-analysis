@@ -295,7 +295,7 @@ public  class SNPAnnotation
     public void setSnpAssociationFindingCollection(Set<gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding> snpAssociationFindingCollection){
         this.snpAssociationFindingCollection = snpAssociationFindingCollection;
     }
-	   
+
 	   
 	
 	   
@@ -338,31 +338,19 @@ public  class SNPAnnotation
    * 
    */
 
-    private Set <gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay> snpAssayCollection = new HashSet<gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay>();
-      /**
-   * Information on the design characteristics of a molecular test for the presence of one or both alleles 
-   * at a SNP locus. 
-   * 
-   */
+   private Set <gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel> snpPanelCollection =
+              new HashSet<gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel>();
 
-    public Set <gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay> getSnpAssayCollection(){
-        return snpAssayCollection;
+    public Set<SNPPanel> getSnpPanelCollection() {
+        return snpPanelCollection;
     }
 
-	      
-	               
-	   
-    public void setSnpAssayCollection(Set<gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay> snpAssayCollection){
-        this.snpAssayCollection = snpAssayCollection;
+    public void setSnpPanelCollection(Set<SNPPanel> snpPanelCollection) {
+        this.snpPanelCollection = snpPanelCollection;
     }
-	   
-	   
-	
-	   
-	   
-	   
-	      
-      /**
+
+
+    /**
    * A GeneBiomarker is a gene based biological parameter that is indicative of a physiological or pathological 
    * state. For example, EBBR2 is a biomarker used to identify risk of breast cancer. 
    * 

@@ -8,6 +8,7 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.GenotypeFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
@@ -25,12 +26,17 @@ import org.hibernate.criterion.Restrictions;
  * Time:   3:08:00 PM
  */
 public class GenotypeFindingsHandler extends FindingsHandler {
+
     protected List<? extends Finding> getConcreteTypedFindingList() {
         return new ArrayList<GenotypeFinding>();
     }
 
     protected Set getConcreteTypedFindingSet() {
         return new HashSet<GenotypeFinding>();
+    }
+
+    protected Class getTargeFindingType() {
+        return GenotypeFinding.class;
     }
 
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
@@ -158,6 +164,8 @@ public class GenotypeFindingsHandler extends FindingsHandler {
     }
 
     private void addGenoTypeAttributeCriteria(GenotypeFindingCriteriaDTO crit, StringBuffer hql, HashMap params) {
+         StudyCriteria studyCrit = crit.getStudyCriteria();
+
         Float score = crit.getQualityScore();
         String status = crit.getQCStatus();
         ArithematicOperator oper =
@@ -175,6 +183,14 @@ public class GenotypeFindingsHandler extends FindingsHandler {
             hql.append(formattedClause);
             params.put("score", score);
         }
+
+        if (studyCrit != null) {
+                if (studyCrit.getName() != null) {
+                    hql.append( TARGET_FINDING_ALIAS + ".study.name = :studyName AND ");
+                    params.put("studyName", studyCrit.getName().trim());
+                }
+        }
+
     }
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
@@ -278,12 +294,6 @@ public class GenotypeFindingsHandler extends FindingsHandler {
             String specimenAddedCond = MessageFormat.format(specimenCond, new Object[] {specimenHQL});
             targetHQL.append(specimenAddedCond);
 
-/*
-            targetHQL.append(" " + TARGET_FINDING_ALIAS +
-                    ".specimen.id IN ( " + specimenHQL.toString() + " )" );
-            targetHQL.append(annotHQL);
-*/
-            //targetHQL.append( " AND ");
         }
         String targetHQLWhereRemoved = HQLHelper.removeTrailingToken(targetHQL, "WHERE");
         String targetHQLANDRemoved = HQLHelper.removeTrailingToken(new StringBuffer(targetHQLWhereRemoved), "AND");
@@ -298,7 +308,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         findingsSet.addAll(genotypeObjs);
         return findingsSet;
     }
-     public void populateFindings(FindingCriteriaDTO critDTO, List toBePopulated)
+     public void getFindingForFTP(FindingCriteriaDTO critDTO, List toBePopulated)
      throws Exception {
          Session session = HibernateUtil.getSessionFactory().getCurrentSession();
          session.beginTransaction();
@@ -323,5 +333,15 @@ public class GenotypeFindingsHandler extends FindingsHandler {
 
        }
 
+  
+        protected Collection<? extends Finding> getFindingsFromResults(List results) {
+            /*  This method will never be called as  getFindingForFTP() itself is overridden in this class */
+            return null;
+        }
+
+        public Collection<? extends Finding> executePanelOnlySearch(FindingCriteriaDTO findingCritDTO, Session session, int start, int end) {
+            /*  This method will never be called as  getFindingForFTP() itself is overridden in this class */
+            return null;
+        }
 }
 

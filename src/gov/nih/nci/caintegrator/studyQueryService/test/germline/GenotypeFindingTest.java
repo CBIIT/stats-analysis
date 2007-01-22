@@ -51,6 +51,8 @@ public class GenotypeFindingTest extends CGEMSTest {
     private void setUpGenotypeCrit() {
         //gfDTO.setQualityScore(new Float(0.50), ArithematicOperator.LT);
         gfDTO.setQcStatus("QC+");
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+        gfDTO.setStudyCriteria(studyCrit);
     }
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
@@ -78,32 +80,19 @@ public class GenotypeFindingTest extends CGEMSTest {
        //geneSymbols.add()
        annotCrit.setGeneSymbols(geneSymbols);
     }
-    protected void setUpDBSnpCrit() {
-        Collection<String> dbSNPIds = new ArrayList<String>();
-        //dbSNPIds.add("rs10215692");
-        //dbSNPIds.add("rs10216611");
-        //dbSNPIds.add("rs10170496");
-        dbSNPIds.add("rs7867544");
-        //dbSNPIds.add("rs1160166");
-        //dbSNPIds.add("rs10504944");
-        annotCrit.setSnpIdentifiers(dbSNPIds );
-    }
+   
 
     public void testSNPAnnotCrit() {
         setUpSNPPhysicalPositionCrit();
         executeGenotypeFindingSearch(0, 60);
     }
 
-    protected void setUpPanelCrit() {
-        PanelCriteria p = new PanelCriteria();
-        p.setName("HumanHap300");
-        p.setVersion("1.1");
-        annotCrit.setPanelCriteria(p);
-    }
+
 
     public void testPanelCrit() {
         setUpPanelCrit();
-        setUpDBSnpCrit();
+        setUpSNPPhysicalPositionCrit();
+        setUpGenotypeCrit();
         executeGenotypeFindingSearch(0, 60);
     }
 

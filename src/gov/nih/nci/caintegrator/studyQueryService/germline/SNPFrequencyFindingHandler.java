@@ -5,9 +5,12 @@ import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFr
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
+import gov.nih.nci.caintegrator.util.HibernateUtil;
 
 import java.util.*;
 import java.text.MessageFormat;
@@ -21,6 +24,10 @@ import org.hibernate.criterion.Restrictions;
  * Time:   5:52:11 PM
  */
 public class SNPFrequencyFindingHandler extends FindingsHandler {
+
+    protected Class getTargeFindingType() {
+        return SNPFrequencyFinding.class;
+    }
 
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO,
                                                 Set<String> snpAnnotationIDs,Session session,
@@ -122,8 +129,6 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
          List<SNPFrequencyFinding> findings = q.list();
          HashSet<SNPFrequencyFinding> results = new HashSet<SNPFrequencyFinding>();
          results.addAll(findings);
-         //initializeProxies(findings, session);
-         //session.flush();
          return results;
     }
     protected Collection<SNPFrequencyFinding> executeQueryForFindingSets(
@@ -171,8 +176,6 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
          List<SNPFrequencyFinding> findings = q.list();
          HashSet<SNPFrequencyFinding> results = new HashSet<SNPFrequencyFinding>();
          results.addAll(findings);
-         //initializeProxies(findings, session);
-         //session.flush();
          return results;
     }
 
@@ -219,7 +222,9 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
 
             return false;
     }
-    private void addSNPFrequencyFindingAttriuteCrit(SNPFrequencyFindingCriteriaDTO crit, StringBuffer hql, HashMap params) {
+
+    public void addSNPFrequencyFindingAttriuteCrit(SNPFrequencyFindingCriteriaDTO crit, StringBuffer hql, HashMap params) {
+        StudyCriteria studyCrit = crit.getStudyCriteria();
 
         Float hardyWeinbergPValue  = crit.getHardyWeinbergPValue();
         ArithematicOperator hardyWeinbergPValueOperator = crit.getHardyWeinbergPValueOperator();
@@ -304,6 +309,13 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         if (referenceHomogzoteCnt != null) {
             hql.append( TARGET_FINDING_ALIAS + ".referenceHomogyzoteCount = :referenceHomogzoteCnt AND ");
             params.put("referenceHomogzoteCnt", referenceHomogzoteCnt);
+        }
+
+        if (studyCrit != null) {
+            if (studyCrit.getName() != null) {
+                hql.append( TARGET_FINDING_ALIAS + ".study.name = :studyName AND ");
+                params.put("studyName", studyCrit.getName().trim());
+            }
         }
 
     }
@@ -489,6 +501,77 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         session.clear();*/
         return results;
     }
+   protected Collection<? extends Finding> getFindingsFromResults(List results) {
+        Collection<SNPFrequencyFinding> findings = new ArrayList<SNPFrequencyFinding>(results.size());
+        Iterator findingsAndAnnotsIter = results.iterator();
+        while(findingsAndAnnotsIter.hasNext()) {
+            Object[] duplet = (Object[]) findingsAndAnnotsIter.next();
+            SNPFrequencyFinding finding = (SNPFrequencyFinding) duplet[0];
+            findings.add(finding);
+        }
+        return findings;
+    }
 
+
+
+    public Collection<? extends Finding> executePanelOnlySearch(FindingCriteriaDTO critDTO,
+                                                                  Session session, int start, int end) {
+
+        SNPFrequencyFindingCriteriaDTO   findingCritDTO = (SNPFrequencyFindingCriteriaDTO)critDTO;
+        AnnotationCriteria annotCrit = findingCritDTO.getAnnotationCriteria();
+
+       /*   final StringBuffer snpTargetHQL = new StringBuffer(
+                          " FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS +
+                                  ", SNPAssay s JOIN s.snpAnnotation annot {0} WHERE s.snpPanel.id = {1} AND {2} ");
+*/
+        final StringBuffer snpTargetHQL = new StringBuffer(
+                          " FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS +
+                                  ", SNPAssay s  JOIN " +
+                                  TARGET_FINDING_ALIAS + ".snpAnnotation " +
+                                   " {0} WHERE s.snpPanel.id = {1} AND " + TARGET_FINDING_ALIAS + ".snpAnnotation = s.snpAnnotation " +
+                                  " AND {2} ");
+
+        HashMap params = new HashMap();
+        String populationJoin = "";
+        String populationCond = "";
+        List<Population> populationList = handlePopulationCriteria(findingCritDTO, session);
+        if (populationList.size() > 0) {
+           populationJoin = " LEFT JOIN FETCH " + TARGET_FINDING_ALIAS + ".population ";
+           populationCond =  TARGET_FINDING_ALIAS + ".population IN (:populationList) AND ";
+           params.put("populationList", populationList);
+        }
+
+        StringBuffer hql = new StringBuffer (
+                          MessageFormat.format( snpTargetHQL.toString(), new Object[] { populationJoin,
+                                  annotCrit.getPanelCriteria().getSnpPanelID(), populationCond })  );
+
+        StringBuffer hqlWithAND = new StringBuffer(HQLHelper.removeTrailingToken(new StringBuffer(hql), "AND"));
+        hqlWithAND.append(" AND ");
+
+        StringBuffer formattedTargetHQL = new StringBuffer(hqlWithAND);
+        addSNPFrequencyFindingAttriuteCrit(findingCritDTO, formattedTargetHQL, params);
+
+        String andRemovedHQL = HQLHelper.removeTrailingToken(new StringBuffer(formattedTargetHQL), "AND");
+        String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(andRemovedHQL), "WHERE");
+        Query q = session.createQuery(finalHQL);
+        HQLHelper.setParamsOnQuery(params, q);
+
+        if (start == -1 || end == -1) {
+            // do not use these indexes.  Just retrieve everything
+        }
+        else { // set the index values
+            q.setFirstResult(start);
+            q.setMaxResults(end - start);
+        }
+
+        Collection<? extends Finding> finalResults = getFindingsFromResults(q.list());
+        initializeProxies(finalResults, session);
+        List<SNPFrequencyFinding> results =  new ArrayList<SNPFrequencyFinding>(finalResults.size());
+        for (Iterator<? extends Finding> iterator = finalResults.iterator(); iterator.hasNext();) {
+            SNPFrequencyFinding finding =  (SNPFrequencyFinding)iterator.next();
+            results.add(finding);
+        }
+        return results;
+    }
 
 }

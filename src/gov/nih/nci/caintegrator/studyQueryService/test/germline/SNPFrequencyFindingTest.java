@@ -43,26 +43,50 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         spCrit.setPopulationCriteria(popCrit);     
      }
 
+    public void testSNPAnnotationRetrieval() {
+        setUpSNPPhysicalPositionCrit();
+        setUpPanelCrit();
+        try {
+            Collection<SNPAnnotation> snpAnnotObjs = FindingsManager.getSNPAnnotations(annotCrit);
+            for (Iterator<SNPAnnotation> iterator = snpAnnotObjs.iterator(); iterator.hasNext();) {
+                SNPAnnotation snpAnnotation = iterator.next();
+                System.out.println("SNP_ANNOT_ID: " + snpAnnotation.getId());
+            }
+
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+    }
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
        //setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
-       // setUpPanelCrit();
 
-        //setUpGeneBiomarkerCrit();
+       //setUpGeneBiomarkerCrit();
+       setUpPanelCrit();
+
 
         //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
         //freqDTO.setPopulationNames(new String[] {"CONTROL"});
 
-        // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
-        freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
+        freqDTO.setCompletionRate(new Double(0.9), ArithematicOperator.LT);
+       //freqDTO.setHardyWeinbergPValue(new Float(1.0), ArithematicOperator.GE);
+
+        // Now set up study name criteria
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+        freqDTO.setStudyCriteria(studyCrit);
+
         executeSearch(0, 501);
    }
 
     public void testPopulateFindings() {
-        setUpSNPPhysicalPositionCrit();
-        //freqDTO.setPopulationNames(new String[] {"CEPH"});
-        //freqDTO.setHardyWeinbergPValue(new Float(0.0011), ArithematicOperator.LE);
+        //setUpSNPPhysicalPositionCrit();
+        setUpPanelCrit();
+        freqDTO.setPopulationNames(new String[] {"CEPH"});
+        freqDTO.setHardyWeinbergPValue(new Float(0.0011), ArithematicOperator.LE);
+
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+        freqDTO.setStudyCriteria(studyCrit);
         //setUpGeneBiomarkerCrit();
         //setSNPFindingCriteria();
         try {

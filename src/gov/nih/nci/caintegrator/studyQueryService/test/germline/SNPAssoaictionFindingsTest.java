@@ -30,15 +30,19 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-       //setUpSNPPhysicalPositionCrit();
+        setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
-        //setUpPanelCrit();
+        setUpPanelCrit();
         //setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
 
         setSNPFindingCriteria();
+        // Now set up study name criteria
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+        safDTO.setStudyCriteria(studyCrit);
+
         executeSearch(0, 501);
     }
 
@@ -55,6 +59,11 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
                     System.out.println("ID: " + finding.getId());
                     System.out.println("pValue" + finding.getPvalue());
                     System.out.println("Rank" + finding.getRank());
+                    System.out.println("OrAggressiveHeterozygote: " + finding.getOrAggressiveHeterozygote());
+                    System.out.println("OrAggressiveHomozygote: " + finding.getOrAggressiveHomozygote());
+                    System.out.println("OrNonAggressiveHeterozygote: " + finding.getOrNonaggressiveHeterozygote());
+                    System.out.println("OrNonAggressiveHomozygote: " + finding.getOrNonaggressiveHomozygote());
+
                     System.out.println("DBSNP ID: " + finding.getSnpAnnotation().getDbsnpId());
                     System.out.println("Analysis Name: " + finding.getSnpAssociationAnalysis().getName());
                     System.out.println("Physical Position: " + finding.getSnpAnnotation().getChromosomeLocation());
@@ -86,7 +95,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
     private void setSNPFindingCriteria() {
         //safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
-        safDTO.setRank(new Integer(200), ArithematicOperator.LE);
+        safDTO.setRank(new Integer(10), ArithematicOperator.LE);
 
     }
 
@@ -112,7 +121,12 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
     public void testPopulateFindings() {
         //setUpSNPPhysicalPositionCrit();
         //setUpGeneBiomarkerCrit();
-        //setSNPFindingCriteria();
+
+       // setSNPAssociationAnalysisCriteria();
+       // setSNPAssociationGroupCriteria();
+
+       // setUpPanelCrit();
+        setSNPFindingCriteria();
         try {
              HashSet actualBatchFindings = new HashSet();
              final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());

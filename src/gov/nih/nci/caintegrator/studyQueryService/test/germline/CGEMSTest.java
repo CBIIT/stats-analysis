@@ -6,7 +6,9 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCrite
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.study.bean.DNASpecimen;
 
@@ -23,25 +25,38 @@ public abstract class CGEMSTest extends TestCase {
     protected abstract Collection executeSearch(int start, int end);
     //protected static int TOTAL_FINDINGS = 0;
     protected AnnotationCriteria annotCrit;
-    protected StudyParticipantCriteria spCrit;
+    protected StudyCriteria studyCrit;
 
+
+
+    protected StudyParticipantCriteria spCrit;
+        protected void setUpPanelCrit() {
+        PanelCriteria p = new PanelCriteria();
+        //p.setName("HumanHap300");
+       //p.setName("HumanHap550");
+        //p.setVersion("1.1");
+       p.setSnpPanelID(new Long(100));
+        annotCrit.setPanelCriteria(p);
+    }
 
     public void setUp() throws Exception{
         annotCrit = new AnnotationCriteria();
         spCrit = new StudyParticipantCriteria();
-
+        studyCrit = new StudyCriteria();
     }
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
-/*
-        ppc.setChromosome("8");
-        ppc.setStartPosition(new Integer(76065000));  // 76065158
-        ppc.setEndPosition(new Integer(76075000));    // should give 4 GenotypeFindings
 
-*/
+        ppc.setChromosome("8");
+        ppc.setStartPosition(new Long(76065000));  // 76065158
+        ppc.setEndPosition(new Long(76066000));    // should give 4 GenotypeFindings
+
+
+/*
         ppc.setChromosome("7");
         ppc.setStartPosition(new Long(40000000 ));
         ppc.setEndPosition(new Long(55000000));
+*/
 
         /*
         ppc.setChromosome("X");
@@ -52,6 +67,11 @@ public abstract class CGEMSTest extends TestCase {
         annotCrit.setPhysicalPositionCriteria(ppc);
 
     }
+    protected void setUpStudyCriteria() {
+       studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+
+    }
+
     protected void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
         //geneSymbols.add(new String("USP48"));
@@ -161,6 +181,16 @@ public abstract class CGEMSTest extends TestCase {
          //"early", "advanced"
          spCrit.setAnalysisGroupCriteria(crit);
      }
+     protected void setUpDBSnpCrit() {
+        Collection<String> dbSNPIds = new ArrayList<String>();
+        dbSNPIds.add("rs10215692");
+        dbSNPIds.add("rs10216611");
+        dbSNPIds.add("rs10170496");
+        dbSNPIds.add("rs7867544");
+        dbSNPIds.add("rs1160166");
+        dbSNPIds.add("rs10504944");
+        annotCrit.setSnpIdentifiers(dbSNPIds );
+    }
 
     protected void setUpStudyParticipantAttributesCriteria() {
         //spCrit.setLowerAgeLimit(55);

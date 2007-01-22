@@ -5,6 +5,7 @@ import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import junit.framework.TestCase;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import java.util.Iterator;
  * Date:   Aug 16, 2006
  * Time:   8:05:49 AM
  */
-public class StudyCriteriaTest extends GenotypeFindingTest {
+public class StudyCriteriaTest extends TestCase {
 
     private StudyCriteria studyCrit ;
 
@@ -28,7 +29,7 @@ public class StudyCriteriaTest extends GenotypeFindingTest {
     }
 
     protected void setUpStudyCriteria() {
-        //studyCrit.setName("CGEMS Prostate Scan 1");
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
         //studyCrit.setSponsorStudyIdentifier("NCI DCEG, NCI OCG");
     }
 

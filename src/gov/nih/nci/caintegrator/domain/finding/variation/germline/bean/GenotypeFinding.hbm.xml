@@ -97,12 +97,14 @@
            column="SPECIMEN_ID"
            not-null="true" />
 
+<!--
 
        <many-to-one name="snpAssay"
            class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay"
            column="ASSAY_ID"
            not-null="true" />
 
-     
+-->
+
 	</class>
 </hibernate-mapping>

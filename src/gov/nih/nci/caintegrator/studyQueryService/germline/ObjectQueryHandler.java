@@ -4,6 +4,7 @@ import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
@@ -13,14 +14,7 @@ import gov.nih.nci.caintegrator.util.HibernateUtil;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -49,6 +43,10 @@ public class ObjectQueryHandler {
     private static Set<Study> allStudyObjects = null;
 
     public static Collection<Study> getStudyObjects(StudyCriteria studyCrit) {
+         return getStudyObjects(studyCrit, false);
+    }
+
+    public static Collection<Study> getStudyObjects(StudyCriteria studyCrit, boolean populatePanel) {
         if (studyCrit == null) return new ArrayList<Study>();
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			
@@ -86,11 +84,33 @@ public class ObjectQueryHandler {
 	        }
 	
 	        List<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
-	        session.close();
+
+            // populate these study objects with SNPPanel objects based on parameer passes in
+            if (populatePanel) {
+                for (int i = 0; i < studyObjs.size(); i++) {
+                    Study study = studyObjs.get(i);
+                    // initialize SNPPanel associations
+                    study.getSnpPanelCollection().size();
+
+                }
+            }
+
+            session.close();
 	        return studyObjs;
     }
 
-    private static List<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {
+    public static Collection<SNPPanel> getPanelObjects(StudyCriteria studyCrit) {
+        Collection snpPanels = new ArrayList<SNPPanel>();
+        if (studyCrit == null) return snpPanels;
+	    Collection<Study> studyObjs = getStudyObjects(studyCrit, true);
+        for (Iterator<Study> iterator = studyObjs.iterator(); iterator.hasNext();) {
+            Study study = iterator.next();
+            snpPanels.addAll(study.getSnpPanelCollection());
+        }
+        return snpPanels;
+    }
+
+     private static List<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {
         String hql = MessageFormat.format(studyCritHQL, new Object[] {
                             studyNameJoin, sponsorJoin});
 

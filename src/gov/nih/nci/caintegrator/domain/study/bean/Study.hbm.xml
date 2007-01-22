@@ -91,8 +91,18 @@
       <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding" />
     </set>  
     
-   
-    
+     <set name="snpFrequencyCollection" lazy="true" inverse="true">
+        <cache usage="read-write" />
+        <key column="STUDY_NAME" />
+        <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding" />
+     </set>
+
+     <set name="snpAssociationFindingCollection" lazy="true" inverse="true">
+         <cache usage="read-write" />
+         <key column="STUDY_NAME" />
+         <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding" />
+     </set>
+
      <set name="associatedStudyCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="STUDY_NAME" />

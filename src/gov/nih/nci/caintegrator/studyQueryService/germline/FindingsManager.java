@@ -2,6 +2,7 @@ package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
@@ -34,7 +35,7 @@ public class FindingsManager {
 
     public static void populateFindings(FindingCriteriaDTO findingCritDTO, List toBePopulated)
     throws Exception {
-        findingCritDTO.getHandler().populateFindings(findingCritDTO, toBePopulated);
+        findingCritDTO.getHandler().getFindingForFTP(findingCritDTO, toBePopulated);
     }
 
     public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
@@ -57,6 +58,11 @@ public class FindingsManager {
     public static Collection<Study> getStudies(StudyCriteria studyCrit)
     throws Exception {
         return ObjectQueryHandler.getStudyObjects(studyCrit);
+    }
+
+    public static Collection<SNPPanel> getPanels(StudyCriteria studyCrit)
+    throws Exception {
+        return ObjectQueryHandler.getPanelObjects(studyCrit);
     }
 
     /**

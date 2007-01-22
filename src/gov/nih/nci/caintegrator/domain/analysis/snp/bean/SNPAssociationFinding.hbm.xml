@@ -39,8 +39,30 @@
                  insert="false" 
                  update="false" />                 
                    
-    
-            
+       <property name="orAggressiveHeterozygote"
+                 type="java.lang.Long"
+                 column="OR_AGGRESSIVE_HETEROZYGOTE"
+                 insert="false"
+                 update="false" />
+
+       <property name="orAggressiveHomozygote"
+                  type="java.lang.Long"
+                  column="OR_AGGRESSIVE_HOMOZYGOTE"
+                  insert="false"
+                  update="false" />
+
+       <property name="orNonaggressiveHeterozygote"
+                  type="java.lang.Long"
+                  column="OR_NONAGGRESSIVE_HETEROZYGOTE"
+                  insert="false"
+                  update="false" />
+
+       <property name="orNonaggressiveHomozygote"
+                  type="java.lang.Long"
+                  column="OR_NONAGGRESSIVE_HOMOZYGOTE"
+                  insert="false"
+                  update="false" />
+
      <!--  m-1 relationship -->
     
    <many-to-one name="snpAnnotation"
@@ -52,7 +74,12 @@
                 class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis"
                 column="ASSO_ANALYSIS_ID"
            />
-      
-      
-	</class>
+       <many-to-one name="study"
+            class="gov.nih.nci.caintegrator.domain.study.bean.Study"
+            column="STUDY_NAME"
+            not-null="true" />
+
+
+
+    </class>
 </hibernate-mapping>

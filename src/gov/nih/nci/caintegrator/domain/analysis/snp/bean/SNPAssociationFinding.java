@@ -1,8 +1,6 @@
 
 
 package gov.nih.nci.caintegrator.domain.analysis.snp.bean;
-import gov.nih.nci.caintegrator.domain.analysis.snp.bean.*;
-import java.util.*;
 
 /**
  * <!-- LICENSE_TEXT_START -->
@@ -168,16 +166,64 @@ public  class SNPAssociationFinding
         return snpAnnotation;			
     }
 
-	      
-	               
-	   
-
     public void setSnpAnnotation(gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation snpAnnotation){
         this.snpAnnotation = snpAnnotation;
     }	
 	   
-	   
-	
+    private gov.nih.nci.caintegrator.domain.study.bean.Study study;
+   /**
+   * A type of research activity that tests how well new medical treatments or other interventions work
+   * in subjects. Such plans test new methods of screening, prevention, diagnosis or treatment of a disease.
+   * The specific plans are fully defined in the protocol and may be carried out in a clinic or other medical
+   * facility.
+   *
+   */
+    public gov.nih.nci.caintegrator.domain.study.bean.Study getStudy(){
+        return study;
+    }
 
-			
+    public void setStudy(gov.nih.nci.caintegrator.domain.study.bean.Study study){
+        this.study = study;
+    }
+
+    private Long orAggressiveHeterozygote;
+
+    public Long getOrAggressiveHeterozygote() {
+        return orAggressiveHeterozygote;
+    }
+
+    public void setOrAggressiveHeterozygote(Long orAggressiveHeterozygote) {
+        this.orAggressiveHeterozygote = orAggressiveHeterozygote;
+    }
+
+    private Long orAggressiveHomozygote;
+
+    public Long getOrAggressiveHomozygote() {
+        return orAggressiveHomozygote;
+    }
+
+    public void setOrAggressiveHomozygote(Long orAggressiveHomozygote) {
+        this.orAggressiveHomozygote = orAggressiveHomozygote;
+    }
+
+    private Long orNonaggressiveHeterozygote;
+
+    public Long getOrNonaggressiveHeterozygote() {
+        return orNonaggressiveHeterozygote;
+    }
+
+    public void setOrNonaggressiveHeterozygote(Long orNonaggressiveHeterozygote) {
+        this.orNonaggressiveHeterozygote = orNonaggressiveHeterozygote;
+    }
+
+    private Long orNonaggressiveHomozygote;
+
+    public Long getOrNonaggressiveHomozygote() {
+        return orNonaggressiveHomozygote;
+    }
+
+    public void setOrNonaggressiveHomozygote(Long orNonaggressiveHomozygote) {
+        this.orNonaggressiveHomozygote = orNonaggressiveHomozygote;
+    }
+
 }
