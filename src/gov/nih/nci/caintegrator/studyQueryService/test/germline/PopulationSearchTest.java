@@ -22,15 +22,17 @@ public class PopulationSearchTest extends GenotypeFindingTest {
     public void testPopulationSearch() {
 
         Collection names = new ArrayList<String>();
-        names.add("CASE_EARLY"); // this should bring back object with name="CASE_EARLY"
+        names.add("CASE"); 
         names.add("CEPH");
-        popCrit = new PopulationCriteria(names);
+        //popCrit = new PopulationCriteria(names);
+        //popCrit = new PopulationCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+        popCrit = new PopulationCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
 
      /*  Collection<String> names = new ArrayList();
 
        popCrit = new PopulationCriteria(names);
-        //names.add("CEPH");
-        //popCrit.addNames(names);*/
+        //names.add("CEPH");    */
+        popCrit.addNames(names);
         executeSearch();
     }
 
