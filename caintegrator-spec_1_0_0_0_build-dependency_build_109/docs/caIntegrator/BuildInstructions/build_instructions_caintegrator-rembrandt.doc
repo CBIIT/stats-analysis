@@ -1,0 +1,45 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033\deftab708{\fonttbl{\f0\froman\fcharset0 Times New Roman;}{\f1\fmodern\fcharset0 Courier New;}{\f2\fswiss\fcharset0 Arial;}}
+{\colortbl ;\red127\green127\blue127;\red0\green0\blue0;\red0\green0\blue255;\red0\green0\blue127;}
+{\stylesheet{ Normal;}{\s1 heading 1;}}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\keepn\hyphpar0\s1\sl480\slmult1\qc\tx0\kerning1\caps\f0\fs24 $\{app.jar.name\}.jarBuild instructions\par
+\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrt\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrt\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\kerning0\b\i\caps0 Project name\cell\b0\i0 caintgrator-Rembrandt\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\b\i Project version\cell\b0\i0 1.5\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\b\i Build configuration (stage, prod, nightly, dependency, etc.)\cell\b0\i0\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\b\i Technology stack\cell\b0\i0 Jboss 4.0.4, JDK 1.5.0.6\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\b\i Build script\cell\b0\i0 build.xml\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\b\i Build target\cell\b0\i0 build_dependency\b\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\i CVS module\cell\b0\i0 caintegrator\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\b\i CVS branch\cell\b0\i0\cell\row\pard\hyphpar0\par
+\pard\keepn\hyphpar0\s1\sl480\slmult1\qc\tx0\kerning1\caps Build properties\par
+\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4054\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx9019\pard\intbl\noline\hyphpar0\sl480\slmult1\qc\kerning0\b\i\caps0 Property\cell Value\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4054\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx9019\pard\intbl\cf1\b0\i0\f1\fs20 #property for anthill dependency artifacts\cf0\par
+\cf2 anthill.dependency.artifacts.dir\cf1\cell\pard\intbl\noline\hyphpar0\cf3 Automatically supplied by Anthill at build time\cf0\f0\fs24\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4054\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx9019\pard\intbl\cf2\f1\fs20 anthill.artifacts.dir\cf0\par
+\cf1\cell\pard\intbl\noline\hyphpar0\cf3 Automatically supplied by Anthill at build time\cell\row\pard\hyphpar0\cf0\f0\fs24\par
+\pard\keepn\hyphpar0\s1\sl480\slmult1\qc\tx0\kerning1\caps Environment variables\par
+\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrt\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrt\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9018\pard\intbl\noline\hyphpar0\qc\kerning0\b\i\caps0 Variable\cell Value\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9018\pard\intbl\noline\hyphpar0\b0\i0\cell\cell\row\pard\hyphpar0\par
+\pard\keepn\hyphpar0\s1\sl480\slmult1\qc\tx0\kerning1\caps Deployment unit\par
+\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrt\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrt\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9018\pard\intbl\noline\hyphpar0\qc\kerning0\b\i\caps0 File\cell Location\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4502\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9018\pard\intbl\noline\hyphpar0\b0\i0 caintegrator-rembrandt.jar\cell\cf2\f1\fs20 anthill.artifacts.dir\cell\row\pard\hyphpar0\sl480\slmult1\cf0\f0\fs24\par
+\pard\keepn\hyphpar0\s1\sl480\slmult1\qc\tx0\kerning1\caps Dependent Project(s)\par
+\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrt\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4505\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrt\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\noline\hyphpar0\qc\kerning0\b\i\caps0 Project\cell Description of dependency\cell\row\trowd\trgaph10\trleft-10\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx4505\clbrdrl\brdrw2\brdrs\brdrcf2\clbrdrr\brdrw2\brdrs\brdrcf2\clbrdrb\brdrw2\brdrs\brdrcf2 \cellx9024\pard\intbl\hyphpar0\fi720\b0\i0 caintegrator-analysis-commons\par
+caintegrator-spec\par
+\pard\intbl\noline\hyphpar0\fi720 caintegrator-application-commons\i\cell\pard\intbl\hyphpar0\fi720\i0 caintegrator-analysis-commons.jar\par
+caintegrator-spec.jar\par
+\pard\intbl\noline\hyphpar0\fi720 caintegrator-application-commons.jar\i\cell\row\pard\hyphpar0\sl480\slmult1\i0\par
+\pard\keepn\hyphpar0\s1\qc\tx0\kerning1\caps Additional Instructions\par
+\pard{\pntext\f0 a)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart1\pnlcltr{\pntxta)}}
+\hyphpar0\fi-360\li360\tx360\kerning0\caps0 Do a CVS checkout of the caintegrator module using the cvs tag.\par
+\pard{\pntext\f0 b)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pnlcltr{\pntxta)}}
+\hyphpar0\fi-360\li360\tx360 Ensure the jar files:   caintegrator-analysis-commons.jar, caintegrator-spec.jar,  caintegrator-application-commons.jar  are located in the $\{anthill.dependency.artifacts.dir\} folder.\par
+\pard{\pntext\f0 c)\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart3\pnlcltr{\pntxta)}}
+\hyphpar0\fi-360\li360\tx360 Execute the ant task \cf4\b\f2\fs20 build_WGI_jar\b0  \cf0\f0\fs24 which will create the \b caintegrator-rembrandt.jar\b0  file.\par
+}
+ 
