@@ -248,6 +248,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
     private void handleAnalysisGroupCriteria(SNPAssociationFindingCriteriaDTO findingCritDTO, Session session) {
         AnalysisGroupCriteria groupCrit = findingCritDTO.getAnalysisGroupCriteria();
+        StudyCriteria studyCrit = findingCritDTO.getStudyCriteria();
         if (groupCrit != null) {
             String[] names = groupCrit.getNames();
             if (names != null && names.length > 0) {
@@ -261,7 +262,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                for (int i = 0; i < assocAnalysisObjs.size(); i++) {
                     SNPAssociationAnalysis assocAnalysisObj =  assocAnalysisObjs.get(i);
                     SNPAssociationAnalysisCriteria methodAndNameCrit =
-                                                    new SNPAssociationAnalysisCriteria();
+                                                    new SNPAssociationAnalysisCriteria(studyCrit.getName());
                     methodAndNameCrit.setMethods(assocAnalysisObj.getMethods());
                     methodAndNameCrit.setName(assocAnalysisObj.getName());
                     analysisCrits.add(methodAndNameCrit);

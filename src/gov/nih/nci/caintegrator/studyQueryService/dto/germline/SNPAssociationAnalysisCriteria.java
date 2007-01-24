@@ -13,16 +13,21 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.germline;
 
 public class SNPAssociationAnalysisCriteria {
 
-	/**
-	 * Overview of the methods used to perform the SNP association analysis
-	 */
 	private String methods;
-	/**
-	 * A textual identifier for the SNP association analysis
-	 */
 	private String name;
+    private String studyName;
 
-	public SNPAssociationAnalysisCriteria(){ }
+    public SNPAssociationAnalysisCriteria(String studyName) {
+        this.studyName = studyName;
+    }
+
+    public String getStudyName() {
+        return studyName;
+    }
+
+    public void setStudyName(String studyName) {
+        this.studyName = studyName;
+    }
 
     public String getMethods() {
         return methods;

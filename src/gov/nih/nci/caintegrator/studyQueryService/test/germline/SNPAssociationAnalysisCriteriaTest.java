@@ -22,10 +22,11 @@ public class SNPAssociationAnalysisCriteriaTest extends GenotypeFindingTest {
     private SNPAssociationAnalysisCriteria  assocCrit ;
 
     public void setUp() throws Exception {
-        assocCrit = new SNPAssociationAnalysisCriteria();
+        assocCrit = new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
     }
 
     public void testSNPAssociationAnalysis() {
+        //studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
         setUpSNPAssociationAnalysisCriteria();
         executeSearch();
     }

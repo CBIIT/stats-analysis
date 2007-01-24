@@ -21,7 +21,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
     public void setUp() throws Exception {
         super.setUp();
-        safDTO = new  SNPAssociationFindingCriteriaDTO();
+        safDTO = new  SNPAssociationFindingCriteriaDTO(studyCrit);
         safDTO.setAnnotationCriteria(annotCrit);
     }
     public void testAll() {
@@ -33,7 +33,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
         setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
         setUpPanelCrit();
-        //setUpGeneBiomarkerCrit();
+        setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
@@ -87,7 +87,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
     }
 
     private void setSNPAssociationGroupCriteria() {
-        AnalysisGroupCriteria groupCrit = new AnalysisGroupCriteria();
+        AnalysisGroupCriteria groupCrit = new AnalysisGroupCriteria("CGEMS Prostate Cancer WGAS Phase 1");
         String[] names = new String[] {"Test Name for 9999", "Both Name And Method", "Only Name"};
         groupCrit.setNames(names);
         safDTO.setAnalysisGroupCriteria(groupCrit);
@@ -102,7 +102,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
     private void setSNPAssociationAnalysisCriteria() {
         Collection analysisCrits = new ArrayList<SNPAssociationAnalysisCriteria>();
 
-        SNPAssociationAnalysisCriteria methodAndNameCrit = new SNPAssociationAnalysisCriteria();
+        SNPAssociationAnalysisCriteria methodAndNameCrit = new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1");
         //methodAndNameCrit.setMethods("P-Test");
         methodAndNameCrit.setName("score test");
         analysisCrits.add(methodAndNameCrit);

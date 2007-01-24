@@ -18,7 +18,12 @@ public abstract class FindingCriteriaDTO {
 
     public int index;
 
-    public FindingCriteriaDTO(){ }
+    //public FindingCriteriaDTO(StudyCriteria studyCrit){ }
+
+    protected FindingCriteriaDTO(StudyCriteria studyCriteria) throws Exception {
+        if (studyCriteria == null) throw new Exception("Study Criteria can not be null");
+        this.studyCriteria = studyCriteria;
+    }
 
     public AnnotationCriteria getAnnotationCriteria() {
         return AnnotationCriteria;

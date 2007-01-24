@@ -163,16 +163,32 @@ public class ObjectQueryHandler {
 
     public static Collection<SNPAnalysisGroup> getAnalysisGroups(AnalysisGroupCriteria analGrpCrit) {
         try {
+            String studyName = analGrpCrit.getStudyName();
+            assert(studyName != null);
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
             session.beginTransaction();
             Criteria crit = session.createCriteria(SNPAnalysisGroup.class);
+            HashMap params = new HashMap();
 
+            StringBuffer hql =new StringBuffer(" FROM SNPAnalysisGroup sg JOIN sg.snpAssociationAnalysis sa " +
+                    " WHERE sa.study.name= :studyName AND {0} ");
+            params.put("studyName", studyName);
+
+            String nameJoin = new String(" ( 0 = 0 ) ");
             if (analGrpCrit != null) {
                 String[] names = analGrpCrit.getNames();
-                if (names != null && names.length > 0)
-                    crit.add(Restrictions.in("name", names));
+                if (names != null && names.length > 0) {
+                    nameJoin = new String(" sg.name IN (:names) ");
+                    params.put("names", names);
+                    //crit.add(Restrictions.in("name", names));
+                }
             }
+
+            String tempHQL = MessageFormat.format(hql.toString(), new Object[] {nameJoin});
+            String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "AND");
+            Query q = session.createQuery(finalHQL);
+            HQLHelper.setParamsOnQuery(params, q);
             Collection<SNPAnalysisGroup> groups = crit.list();
             session.close();
             return groups;
@@ -320,9 +336,14 @@ public class ObjectQueryHandler {
             session.beginTransaction();
 
             HashMap params = new HashMap();
-            String analysisCritHQL = " FROM SNPAssociationAnalysis s WHERE {0} {1} ";
+            String analysisCritHQL = " FROM SNPAssociationAnalysis s WHERE {0} {1} {2} ";
             String analysisName = crit.getName();
             String methods = crit.getMethods();
+            String studyName = crit.getStudyName();
+
+            StringBuffer studyJoin = new StringBuffer("");
+            studyJoin.append(" s.study.name = :studyName AND ");
+            params.put("studyName", studyName);
 
             StringBuffer analysisJoin = new StringBuffer("");
             if ((analysisName != null) && (analysisName.length() > 0)) {
@@ -336,8 +357,9 @@ public class ObjectQueryHandler {
                  params.put("methods", methods);
             }
 
+
             String hql = MessageFormat.format(analysisCritHQL, new Object[] {
-                                analysisJoin, methodsJoin});
+                                studyJoin, analysisJoin, methodsJoin});
 
             String tempHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), "AND");
             String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "WHERE");

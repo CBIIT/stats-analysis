@@ -186,43 +186,43 @@ public  class SNPAssociationFinding
         this.study = study;
     }
 
-    private Long orAggressiveHeterozygote;
+    private Double orAggressiveHeterozygote;
 
-    public Long getOrAggressiveHeterozygote() {
+    public Double getOrAggressiveHeterozygote() {
         return orAggressiveHeterozygote;
     }
 
-    public void setOrAggressiveHeterozygote(Long orAggressiveHeterozygote) {
+    public void setOrAggressiveHeterozygote(Double orAggressiveHeterozygote) {
         this.orAggressiveHeterozygote = orAggressiveHeterozygote;
     }
 
-    private Long orAggressiveHomozygote;
+    private Double orAggressiveHomozygote;
 
-    public Long getOrAggressiveHomozygote() {
+    public Double getOrAggressiveHomozygote() {
         return orAggressiveHomozygote;
     }
 
-    public void setOrAggressiveHomozygote(Long orAggressiveHomozygote) {
+    public void setOrAggressiveHomozygote(Double orAggressiveHomozygote) {
         this.orAggressiveHomozygote = orAggressiveHomozygote;
     }
 
-    private Long orNonaggressiveHeterozygote;
+    private Double orNonaggressiveHeterozygote;
 
-    public Long getOrNonaggressiveHeterozygote() {
+    public Double getOrNonaggressiveHeterozygote() {
         return orNonaggressiveHeterozygote;
     }
 
-    public void setOrNonaggressiveHeterozygote(Long orNonaggressiveHeterozygote) {
+    public void setOrNonaggressiveHeterozygote(Double orNonaggressiveHeterozygote) {
         this.orNonaggressiveHeterozygote = orNonaggressiveHeterozygote;
     }
 
-    private Long orNonaggressiveHomozygote;
+    private Double orNonaggressiveHomozygote;
 
-    public Long getOrNonaggressiveHomozygote() {
+    public Double getOrNonaggressiveHomozygote() {
         return orNonaggressiveHomozygote;
     }
 
-    public void setOrNonaggressiveHomozygote(Long orNonaggressiveHomozygote) {
+    public void setOrNonaggressiveHomozygote(Double orNonaggressiveHomozygote) {
         this.orNonaggressiveHomozygote = orNonaggressiveHomozygote;
     }
 

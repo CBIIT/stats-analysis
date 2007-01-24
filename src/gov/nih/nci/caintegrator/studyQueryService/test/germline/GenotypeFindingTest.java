@@ -37,7 +37,7 @@ public class GenotypeFindingTest extends CGEMSTest {
 
     public void setUp() throws Exception {
         super.setUp();
-        gfDTO = new GenotypeFindingCriteriaDTO();
+        gfDTO = new GenotypeFindingCriteriaDTO(studyCrit);
         gfDTO.setAnnotationCriteria(annotCrit);
         gfDTO.setStudyParticipantCriteria(spCrit);
     }

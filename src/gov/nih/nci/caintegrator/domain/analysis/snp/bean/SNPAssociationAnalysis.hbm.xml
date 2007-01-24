@@ -64,5 +64,10 @@
               <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding" />
          </set>
 
+         <many-to-one name="study"
+            class="gov.nih.nci.caintegrator.domain.study.bean.Study"
+            column="STUDY_NAME"
+            not-null="true" />
+
     </class>
 </hibernate-mapping>

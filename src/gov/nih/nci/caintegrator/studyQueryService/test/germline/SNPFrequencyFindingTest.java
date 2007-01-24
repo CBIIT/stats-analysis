@@ -28,7 +28,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
      protected StudyParticipantCriteria spCrit;
     public void setUp() throws Exception {
         super.setUp();
-        freqDTO = new SNPFrequencyFindingCriteriaDTO();
+        freqDTO = new SNPFrequencyFindingCriteriaDTO(studyCrit);
         freqDTO.setAnnotationCriteria(annotCrit);
     }
     public void testAll() {
@@ -62,14 +62,14 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
        //setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
 
-       //setUpGeneBiomarkerCrit();
-       setUpPanelCrit();
+       setUpGeneBiomarkerCrit();
+      // setUpPanelCrit();
 
 
         //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
         //freqDTO.setPopulationNames(new String[] {"CONTROL"});
 
-        freqDTO.setCompletionRate(new Double(0.9), ArithematicOperator.LT);
+       // freqDTO.setCompletionRate(new Double(0.9), ArithematicOperator.LT);
        //freqDTO.setHardyWeinbergPValue(new Float(1.0), ArithematicOperator.GE);
 
         // Now set up study name criteria

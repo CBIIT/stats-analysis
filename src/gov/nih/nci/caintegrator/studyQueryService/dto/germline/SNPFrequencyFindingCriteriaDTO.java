@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.germline;
 
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 import gov.nih.nci.caintegrator.studyQueryService.germline.SNPFrequencyFindingHandler;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
@@ -65,9 +66,12 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
      private String studyName;
      private String sponsorStudyIdentifier;
 
-     public SNPFrequencyFindingCriteriaDTO(){ }
+    public SNPFrequencyFindingCriteriaDTO(StudyCriteria studyCriteria) throws Exception {
+        super(studyCriteria);
+    }
 
-     public String[] getPopulationNames() {
+
+    public String[] getPopulationNames() {
         return populationNames;
      }
 

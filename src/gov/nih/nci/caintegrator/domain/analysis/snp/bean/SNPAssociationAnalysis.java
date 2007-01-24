@@ -120,6 +120,23 @@ public  class SNPAssociationAnalysis
 	}
 
 
+    private gov.nih.nci.caintegrator.domain.study.bean.Study study;
+      /**
+      * A type of research activity that tests how well new medical treatments or other interventions work
+      * in subjects. Such plans test new methods of screening, prevention, diagnosis or treatment of a disease.
+      * The specific plans are fully defined in the protocol and may be carried out in a clinic or other medical
+      * facility.
+      *
+      */
+    public gov.nih.nci.caintegrator.domain.study.bean.Study getStudy(){
+           return study;
+    }
+
+    public void setStudy(gov.nih.nci.caintegrator.domain.study.bean.Study study){
+           this.study = study;
+    }
+
+
       /**
    * Statistical results of evidence for or against genetic association between the phenotypes analyzed 
    * at a particular SNP. 
