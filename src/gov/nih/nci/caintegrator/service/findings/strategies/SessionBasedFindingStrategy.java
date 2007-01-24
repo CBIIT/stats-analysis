@@ -3,9 +3,12 @@ package gov.nih.nci.caintegrator.service.findings.strategies;
 import gov.nih.nci.caintegrator.service.findings.strategies.FindingStrategy;
 
 
-/*
- * This class should really be moved up into app-commons or spec
+/**
+ * Abstract finding strategy for strategies that need to keep track 
+ * of session and task information.
  * 
+ * @author harrismic
+ *
  */
 public abstract class SessionBasedFindingStrategy implements FindingStrategy {
 
