@@ -2,6 +2,8 @@
 
 package gov.nih.nci.caintegrator.domain.study.bean;
 import gov.nih.nci.caintegrator.domain.study.bean.*;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
+
 import java.util.*;
 
 /**
@@ -397,4 +399,16 @@ public  class Study
     public void setSnpFrequencyCollection(Set<gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding> snpFrequencyCollection){
         this.snpFrequencyCollection = snpFrequencyCollection;
     }
+
+    private Set <gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis> snpAssociationAnalysisCollection =
+            new HashSet<gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis>();
+
+    public Set<SNPAssociationAnalysis> getSnpAssociationAnalysisCollection() {
+        return snpAssociationAnalysisCollection;
+    }
+
+    public void setSnpAssociationAnalysisCollection(Set<SNPAssociationAnalysis> snpAssociationAnalysisCollection) {
+        this.snpAssociationAnalysisCollection = snpAssociationAnalysisCollection;
+    }
+
 }

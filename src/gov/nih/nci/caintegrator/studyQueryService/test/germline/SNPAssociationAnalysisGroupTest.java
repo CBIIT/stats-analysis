@@ -26,12 +26,12 @@ public class SNPAssociationAnalysisGroupTest extends GenotypeFindingTest {
     }
 
     public void testSNPAssociationAnalysis() {
-        setUpSNPAnalysisGroupCriteria();
+        //setUpSNPAnalysisGroupCriteria();
         executeSearch();
     }
 
     protected void setUpSNPAnalysisGroupCriteria() {
-         assocCrit.setNames(new String[] {"early", "control"});
+         assocCrit.setNames(new String[] {"Incidence density sampling,Unadjusted score test,Controls", "control"});
     }
 
     private void executeSearch() {

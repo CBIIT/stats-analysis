@@ -168,19 +168,23 @@ public class ObjectQueryHandler {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
             session.beginTransaction();
-            Criteria crit = session.createCriteria(SNPAnalysisGroup.class);
+            //Criteria crit = session.createCriteria(SNPAnalysisGroup.class);
             HashMap params = new HashMap();
 
-            StringBuffer hql =new StringBuffer(" FROM SNPAnalysisGroup sg JOIN sg.snpAssociationAnalysis sa " +
-                    " WHERE sa.study.name= :studyName AND {0} ");
+            StringBuffer hql =new StringBuffer(" FROM SNPAnalysisGroup sg " +
+                    " WHERE sg.snpAssociationAnalysis.study.name=:studyName AND {0} ");
+
+                    // + " WHERE sa.study.name= :studyName AND {0} ");
             params.put("studyName", studyName);
 
             String nameJoin = new String(" ( 0 = 0 ) ");
             if (analGrpCrit != null) {
                 String[] names = analGrpCrit.getNames();
                 if (names != null && names.length > 0) {
+                    Collection<String> l = new ArrayList<String>(names.length);
+                    for (int i = 0; i < names.length; l.add(names[i++]));
                     nameJoin = new String(" sg.name IN (:names) ");
-                    params.put("names", names);
+                    params.put("names", l);
                     //crit.add(Restrictions.in("name", names));
                 }
             }
@@ -189,7 +193,7 @@ public class ObjectQueryHandler {
             String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "AND");
             Query q = session.createQuery(finalHQL);
             HQLHelper.setParamsOnQuery(params, q);
-            Collection<SNPAnalysisGroup> groups = crit.list();
+            Collection<SNPAnalysisGroup> groups = q.list();
             session.close();
             return groups;
         } catch (HibernateException e) {

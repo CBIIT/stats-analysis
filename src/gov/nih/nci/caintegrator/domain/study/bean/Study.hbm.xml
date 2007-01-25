@@ -103,6 +103,12 @@
          <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding" />
      </set>
 
+       <set name="snpAssociationAnalysisCollection" lazy="true" inverse="true">
+           <cache usage="read-write" />
+           <key column="STUDY_NAME" />
+           <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis" />
+       </set>
+
      <set name="associatedStudyCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="STUDY_NAME" />
