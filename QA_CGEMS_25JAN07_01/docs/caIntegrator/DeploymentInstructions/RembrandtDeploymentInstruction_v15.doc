@@ -1,0 +1,218 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033\deflangfe1033{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\fswiss\fprq2\fcharset0 Arial;}{\f2\fmodern\fprq1\fcharset0 Courier New;}{\f3\froman\fprq2\fcharset2 Symbol;}{\f4\fswiss\fprq2\fcharset0 Verdana;}}
+{\colortbl ;\red255\green255\blue0;\red0\green0\blue0;\red192\green192\blue192;\red255\green255\blue255;}
+{\stylesheet{ Normal;}{\s1 heading 1;}}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b\f0\fs20 Application and Submitter Information\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4414\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx6552\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Submitted by\cell Jenny Glenn/ Himanso Sahni\cell Date\cell 1/23/2007\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4414\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx6552\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Application\cell Rembrandt\cell Release/Version\cell 1.5\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Build Information\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1112\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx4414\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx6552\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Module\cell caintegrator\par
+caintegrator-analysis-commons\par
+caintegrator-spec\par
+caintegrator-application-commons\cell\cell\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1112\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Associated change requests\cell WebGenomeIntegrationDeploymentRequest_STAGE_TBD.doc\par
+WebGenomeDeploymentRequest_STAGE_TBD.doc\par
+RembrandtAnalysisServerDeploymentRequest_STAGE_TBD.doc\par
+\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Dependencies\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Project Background\cell\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 **********************************************************************************\par
+Technology Stack (jdk1.5.0_06, jboss 4.0.4, ant 1.6.2)\par
+**********************************************************************************\par
+An Anthill friendly build script has been written so that the above dependencies are checked out and placed in the appropriate locations by Anthill.  This is the default task for the build script.  If you choose not to use Anthill to grab these dependencies, you will need to acquire the above dependencies manually.\par
+**********************************************************************************\par
+The JBoss Message Queues for Rembrandt must also be installed and running at the locations specified in the properties file in order for this product to receive/respond to analysis requests.  The procedure for doing this is included in the instructions. It is also included in the caintegrator-analysis-server deployment request. Just so you know.\par
+**********************************************************************************\par
+Rembrandt also has a dependency on the Common Security Module.  Included in the instructions and the build script are the means to deploy and setup the CSM as we have for development.  Since we are not integrating our CSM deployment with any other application on the dev tier, it is understood that Systems may take some latitude in determining the best procedure for handling this dependency on both the Staging and Production tiers.  However, I would desire that any changes that are made to accommodate these tiers is made known to the Rembrandt team POC so that we are able to make any changes on our development server deployment that are required. \par
+Also, each tier CSM UPT tool must pointed to the matching Rembrandt database, for instance: Stage Tier UPT must be pointing towards the Stage Rembrandt DB. In Step 5.3.1, we have provided instructions from Kunal Modi of the CSM team regarding setting up the UPT.\par
+\f0\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Hardware\cell Dependent Servers:\par
+\pard\intbl\nowidctlpar\hyphpar0\li720\sl240\slmult0 caIntegrator Analysis Server\par
+WebGenome server\par
+\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Database\cell\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 This deployment is intended be configured to use our QA, staging or production database.  This configuration information and credentials are to be retrieved from the Systems DBAs and copied to the externalized rembrandt.properties file\f2\fs18\par
+\f1\fs20\par
+For this deployment to be successful we need a complete copy of the qa database and placed in our staging database, as well as a copy of our staging database placed in our production db.\par
+\par
+Please ensure all triggers and PL/SQL scripts are successfully imported and statistic and indexes are properly executed.\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b\f0 Deployment Instructions \cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Files need to be delivered to system group\cell\pard\intbl\nowidctlpar\li360\sb60\sa60\sl240\slmult0\ul\b\i\f1 From CSM:\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\ulnone\f2 o1\b0\i0\tab\ul\b\i\f1 War file\ulnone\b0\i0\par
+\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\f2 o\tab\f1 rembrandt.war \par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\b\i\f2 o2\tab\ul\f1 Externalized Properties File\par
+\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\ulnone\b0\i0\f3\'b7\tab\f1 rembrandt.properties\par
+\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\f3\'b7\tab\f1 rembrandt-properties-service.xml (skeleton tag to be used in properties-services.xml)\par
+\highlight1\f3\'b7\tab\f1 rembrandt_echcache.xml\par
+\b\i\f2 o\tab\b0\i0\f1 WGI.properties (from WebGenomeIntegration build)\highlight0\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\b\i\f2 o3\tab\ul\f1 JMS Configuration Files\par
+\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\ulnone\b0\i0\f2 o\tab\f1 rembrandt-jbossmq-destinations-service\par
+\f2 o\tab\f1 caintegrator-jbossmq-destinations-service\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\b\i\f2 o4\tab\ul\f1 CMS Configuration Files\par
+\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\ulnone\b0\i0\f3\'b7\tab\f1 rembrandt.hibernate.cfg.xml\par
+\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\f3\'b7\tab\f1 oracle-ds (skeleton tag to be used in oracle-ds.xml\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\highlight1\b\i\f2 o5 \ul\f1 Logging Files\par
+\pard\intbl\nowidctlpar\fi-360\li1440\sb60\sa60\sl240\slmult0\tx1440\ulnone\b0\i0\f3\'b7\tab\f1 log4Configuration.txt\highlight0  \ul\b\i\par
+\pard\intbl\nowidctlpar\li360\sb60\sa60\sl240\slmult0\par
+From FTP site\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx720\ulnone\f2 O6\tab\ul\f1 BRB Data Files\par
+\pard\intbl\nowidctlpar\fi-360\li1440\tx1440\ulnone\b0\i0\f2 o\tab Rembrandt-Brain-All-Project.zip \par
+o\tab Rembrandt-Brain-PublicPlusDana-Farber-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusH.LeeMoffitt-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusHF-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusMGH-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusUCLA-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusUCSF-Project.zip\par
+o\tab Rembrandt-Brain-Public-Project.zip\f1\par
+\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\f0\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 First Time  Deployment Instructions\cell\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 Setup JMS Configuration Files.\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 1.\tab Copy file \ldblquote caintegrator-jbossmq-destinations-service\ldblquote  to /usr/local/jboss404/server/ncicb-caint/deploy/jms folder.\par
+2.\tab Copy file \ldblquote rembrandt-jbossmq-destinations-service\ldblquote  to /usr/local/jboss404/server/ncicb-caint/deploy/jms folder.\par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0 ------------------------------------------------------------------------------------------------------------\par
+\highlight1 Setup Externalized Properties\highlight0\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 1.\tab Edit /usr/local/jboss404/server/ncicb-caint/deploy/properties-service file, Scroll down to \ldblquote <mbean code="org.jboss.varia.property.SystemPropertiesService" name="jboss:type=Service,name=SystemProperties"> node.\par
+2.\tab Add the following inside the node (use provided rembrandt-properties-service.xml as skeleton)\par
+\pard\intbl\nowidctlpar\hyphpar0\li360\sb60\sa60\sl240\slmult0  <attribute name="Properties">      gov.nih.nci.rembrandt.properties=/local/content/rembrandt/config/rembrandt.properties\par
+</attribute>\par
+\highlight1 <attribute name="Properties">      gov.nih.nci.wgi.properties=/local/content/rembrandt/config/WGI.properties\par
+</attribute>\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360\highlight0\par
+\highlight1 3.\tab Copy file \ldblquote WGI.properties\ldblquote  to /local/content/rembrandt/config folder.\par
+\par
+4.\tab Copy file \ldblquote rembrandt.properties\ldblquote  to /local/content/rembrandt/config folder.\par
+\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0 5.\tab Modify rembrandt.properties  set the following properties appropriately\par
+\pard\intbl\nowidctlpar\hyphpar0\li360\sb60\sa60\sl240\slmult0\f2 gov.nih.nci.rembrandt.jms.jboss_url=localhost: <JNDI PORT>\par
+gov.nih.nci.rembrandt.dbalias=thin:@<DB URL>:1521:<DB INSTANCE>\par
+gov.nih.nci.rembrandt.db.username=<DB USERNAME>\par
+gov.nih.nci.rembrandt.db.password=<DB PASSWORD>\par
+webGenome.url=http://<Server:Port Wherever WebGenome Application is deployed>/webGenome/client/plot.do?qType=copyNumber\par
+webGenomeJndi.url=jnp://<Server:JNDI Port Wherever WGI is deployed>\par
+rembrandt.register.mailTo.support=ncicb@pop.nci.nih.gov\f1\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 6.\tab Ensure all other paths inside the rembrandt.properties are set to \ldblquote /local/content/rembrandt/config\rdblquote\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0 7.    Ignore \ldblquote /local/content/rembrandt/data\rdblquote  for now\par
+8.    Create folder /local/content/rembrandt/cache\par
+9.    Copy file \ldblquote rembrandt_ehcache.xml\rdblquote  to /local/content/rembrandt/config\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 10.\tab Open the copied \ldblquote rembrandt_ehcache.xml\rdblquote  to verify the following tag within rembrandt_ehcache.xml is configured as follows\par
+\pard\intbl\nowidctlpar\li720\sb60\sa60\sl240\slmult0\tx360 <diskStore path="/local/content/rembrandt/cache"/>\highlight0\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360\par
+\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 ---------------------------------------------------------------------------------------------------------------\f0\par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\f1 Configure BRB Data Files\par
+\pard\intbl\nowidctlpar\fi-360\li360\sb60\sa60\sl240\slmult0\tx360 1.\tab Create a /local/content/rembrandt/brb\par
+2.\tab Within remprandt.properties, if needed, modify gov.nih.nci.rembrandt.brb_filepath to /local/content/rembrandt/brb\par
+3.\tab Transfer the following files from the REMBRANDT/BRBFiles directory of the caintegrator ftp site \par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0           ftp://ncicbftp2.nci.nih.gov\par
+          login:caintegratorftp \par
+to $CONF_DIRECTORY/rembrandt/brb\par
+\pard\intbl\nowidctlpar\fi-360\li1440\tx1440\f2 o\tab Rembrandt-Brain-All-Project.zip \par
+o\tab Rembrandt-Brain-PublicPlusDana-Farber-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusH.LeeMoffitt-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusHF-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusMGH-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusUCLA-Project.zip\par
+o\tab Rembrandt-Brain-PublicPlusUCSF-Project.zip\par
+o\tab Rembrandt-Brain-Public-Project.zip\par
+\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\cf2\f4\fs18 -----------------------------------------------------------------------------------------\cf0\f0\fs20\par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\highlight1\b\f1 Configure log4j\par
+\pard\intbl\nowidctlpar\hyphpar0\fi-360\li720\sb60\sa60\sl-200\slmult0\tx720\b0 1.\tab Open /usr/local/jboss404/server/ncicb-caint/conf/log4j.xml\par
+\pard\intbl\nowidctlpar\hyphpar0\fi-360\li720\sb60\sa60\sl-200\slmult0 2.\tab Remove all \b appender\b0  and \b category\b0  tags previously associated with \ldblquote\b REMBRANDT_LOG\b0\rdblquote , \ldblquote\b OJB_LOG\b0\rdblquote   and \ldblquote\b CAINTEGRATOR_LOG\b0\rdblquote   from this file\par
+3.\tab Locate "Limit categories" comment  with the log4j.xml file\par
+4.\tab Open log4Configuration.txt file, select all text and copy.\par
+5.\tab Paste the selected text right above the "Limit categories" header as the log4j requires the loggers to follow the appenders.\par
+6.\tab Upon server startup ensure there are no log4j errors  reported\highlight0\par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\b\par
+\b0 ------------------------------------------------------------------------------------------------------------------------\par
+\b Configure CSM v3.1\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx660\tx720\b0 1.\tab Copy rembrandt.hibernate.cfg.xml to /usr/local/jboss404/server/ncicb-caint/conf\par
+2.\tab\tab Add the following content into /usr/local/jboss404/server/ncicb-caint/conf/login-config.xml\par
+\pard\intbl\nowidctlpar\li300\sb60\sa60\sl240\slmult0    <application-policy name="rembrandt">\par
+         <authentication>\par
+            <login-module code="gov.nih.nci.security.authentication.loginmodules.LDAPLoginModule" flag="required">\par
+                <module-option name="ldapHost">ldaps://ncids4a.nci.nih.gov:636</module-option>\par
+                <module-option name="ldapSearchableBase">ou=nci,o=nih</module-option>\par
+                <module-option name="ldapUserIdLabel">cn</module-option>\par
+            </login-module>\par
+         </authentication>\par
+    </application-policy>\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx660\tx720\highlight1 3.\tab Copy the following contents in to /usr/local/jboss404/server/ncicb-caint/deploy/oracle-ds.xml Please Note for Rembrandt the CSM tables are within the Rembrandt schema, therefore the  \b jdbc:url\b0 , \b user name\b0  and \b password\b0  should be same as in the externalized properties section\highlight0\par
+\pard\intbl\nowidctlpar\li300\sb60\sa60\sl240\slmult0   <local-tx-datasource>\par
+               <jndi-name>rembrandtcsm</jndi-name>\par
+               <connection-url>\b jdbc:url\b0 </connection-url>\par
+               <user-name>\b user name\b0 </user-name>\par
+               <password>\b password\b0 </password>\par
+               <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>\par
+               <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-c\par
+lass-name>\par
+   </local-tx-datasource>\par
+\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx660\tx720 4.\tab if the following does not exist in /usr/local/jboss404/server/ncicb-caint/deploy/properties-service.xml, then add it\par
+\pard\intbl\nowidctlpar\li300\sb60\sa60\sl240\slmult0 <attribute name="Properties">\par
+gov.nih.nci.security.configFile=/usr/local/jboss404/server/ncicb-caint/conf/ApplicationSecurityConfig.xml\par
+</attribute>\par
+\pard\intbl\nowidctlpar\fi-360\li720\sb60\sa60\sl240\slmult0\tx660\tx720 5.\tab copy the following into /usr/local/jboss404/server/ncicb-caint/conf/ ApplicationSecurityConfig\par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0                 <application>\par
+                        <context-name>\par
+                                rembrandt\par
+                        </context-name>\par
+                        <authentication>\par
+                                <authentication-provider-class>\par
+                                <!-- Fully qualified class name-->\par
+                                </authentication-provider-class>\par
+                        </authentication>\par
+                        <authorization>\par
+                                <authorization-provider-class>\par
+                                        <!-- Fully qualified class name-->\par
+                                </authorization-provider-class>\par
+                                <hibernate-config-file>\par
+                                        /usr/local/jboss-4.0.4.GA/server/ncicb-caint/conf/rembrandt.hibernate.cfg.xml\par
+                                </hibernate-config-file>\par
+                        </authorization>\par
+                </application>\par
+\pard\intbl\nowidctlpar\hyphpar0\li300\sb60\sa60\sl240\slmult0\fs16\par
+\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\f0\fs20\par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\b\f1 Configure UPT v 3.1\par
+\pard\intbl\nowidctlpar\hyphpar0\b0\~\f0\fs24\par
+\f1\fs20 Once the initial setup of UPT is complete, UPT available for the applications to start using provisioning for their authorization data. However, applications must be registered and configured before they can start using the UPT.\f0\fs24\par
+\f1\fs20 1. To register an application, use the UPT front end user interface to create an entry for the new application. \f0\fs24\par
+\f1\fs20\~ - Login as a Super Admin, go to the Application section, and select Create a New Application. And create a new application with Application Name as "cgems"\f0\fs24\par
+\f1\fs20\~ - Once the details are entered, go to the User section to create a new user in UPT (unless existing user is to be assigned as the administrator). Then return to the Application section to assign these Users as Application Administrators.\f0\fs24\par
+\f1\fs20 2. Copy the attached Hibernate file in the path where all the other hibernate files for CSM are kept.\f0\fs24\par
+\f1\fs20 3. Make a new "application" entry in the ApplicationSecurityConfig.xml file. (Use the existing UPT application entry as a template - copy, paste, and modify for the new application.)\f0\fs24\par
+\f1\fs20\~ - Replace the <context-name> with "cgems".\f0\fs24\par
+\f1\fs20\~ - Replace the hibernate-config qualified path entry to point to the hibernate cfg file from step no 2.\f0\fs24\par
+\f1\fs20 4. Add the following entry into the oracle-ds.xml file. (Make sure that you replace the appropriate values for the production for "<<>>" values)\f0\fs24\par
+\f1\fs20\~\f0\fs24\par
+\f1\fs20 <local-tx-datasource>\f0\fs24\par
+\f1\fs20\~ <jndi-name>cgemscsm</jndi-name>\f0\fs24\par
+\f1\fs20\~ <connection-url>jdbc:oracle:thin:@<<Production Oracle Server Name>>:<<Port Name>>:<<Schema Name>></connection-url>\f0\fs24\par
+\f1\fs20\~ <user-name><<User Name>></user-name>\f0\fs24\par
+\f1\fs20\~ <password><<Password>></password>\f0\fs24\par
+\f1\fs20\~ <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>\f0\fs24\par
+\f1\fs20\~\~<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>\f0\fs24\par
+\f1\fs20 </local-tx-datasource>\f0\fs24\par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\b\f1\fs20 -------------------------------------------------------------------------------------------------------------------\par
+Database \par
+Ensure \cf2\b0  All Rembrandt QA, to staging database are completed\cf0\f0\fs24\par
+\pard\intbl\brdrb\brdrs\brdrw15\brsp20 \nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0\b\f1\fs20\par
+\pard\intbl\nowidctlpar\hyphpar0\sb60\sa60\sl240\slmult0 Deploy war file\par
+\b0 Deploy the \b\i rembrandt.war\b0\i0  file to the Staging server and start JBoss.\par
+\par
+-------------------------------------------------------------------------------------------------------------------------------\par
+\b Configure URL\par
+\b0  \ul http://caintegrator-stage.nci.nih.gov/rembrandt/\ulnone\par
+ \ul http://caintegrator.nci.nih.gov/rembrandt/\ulnone\par
+ should be configured\cf2\f4\fs18\par
+\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\cf0\f0\fs20\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Proposed deployment to staging\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Requested Date\cell TBD\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Actual Date\cell\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Approval For Promotion to Production\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Date\cell\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\tx1560 Decision\cell __Approved\par
+__Not Approved  \cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Approved by\cell\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Proposed deployment to production\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0 Requested Date\cell TBD\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx1135\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0 Actual Date\cell\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat3\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b Notes\cell\row\trowd\trgaph115\trleft-115\trqc\trrh20\trpaddl115\trpaddr115\trpaddfl3\trpaddfr3
+\clcbpat4\clbrdrl\brdrw15\brdrs\brdrcf2\clbrdrt\brdrw15\brdrs\clbrdrr\brdrw15\brdrs\brdrcf2\clbrdrb\brdrw15\brdrs\brdrcf2 \cellx10347\pard\intbl\nowidctlpar\hyphpar0\sl240\slmult0\b0\cell\row\pard\keepn\nowidctlpar\hyphpar0\s1\sb240\sa120\sl240\slmult0\tx0\b\f1\fs32\par
+}
+ 
