@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.service.findings.strategies;
 
-import gov.nih.nci.caintegrator.service.findings.strategies.FindingStrategy;
+import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 
 
 /**
@@ -14,7 +14,7 @@ public abstract class SessionBasedFindingStrategy implements FindingStrategy {
 
 	private String sessionId;
 	private String taskId;
-	
+	private QueryDTO query;
 	
 	public SessionBasedFindingStrategy(String sessionId, String taskId) {
 		this.sessionId = sessionId;
@@ -30,5 +30,25 @@ public abstract class SessionBasedFindingStrategy implements FindingStrategy {
 	public String getTaskId() {
 		return taskId;
 	}
+
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
+
+    public QueryDTO getQuery() {
+        return query;
+    }
+
+
+    public void setQuery(QueryDTO query) {
+        this.query = query;
+    }
 
 }
