@@ -1,0 +1,225 @@
+Exporting package to 'C:\devtools\cacoretoolkit\models\xmi\cgom.xmi'
+Retrieving data for export: packages
+Retrieving data for export: diagram elements
+Retrieving data for export: links
+Retrieving data for export: constraints
+Retrieving data for export: attribute tagged values
+Retrieving data for export: operation tagged values
+Retrieving data for export: operation parameter tagged values
+Retrieving data for export: connector tagged values
+Completed data retrieval
+Pre-processing export tree...
+Completed pre-processing
+***** Processing package: Logical View *****
+***** Processing package: Data Model *****
+Element:0: GENE_ACCESSION_NOW
+Element:1: PROTEIN_ALIAS
+Element:2: Table2
+Element:3: Table1
+Element:4: CELL_LYSATE_FACT
+Element:5: MUTATION_STATUS
+Element:6: FUNCTIONAL_DNA_DOMAIN
+Element:7: SPECIMEN_NOW
+Element:8: STUDY_PARTICIPANT
+Element:9: FISH_FACT_NOW
+Element:10: HUGO_GENE_SYMBOL
+Element:11: IHC_FACT
+Element:12: MUTATION_FACT
+Element:13: FUNCTIONAL_PROTEIN_DOMAIN
+Element:14: GENE_DIM_NOW
+Element:15: Note
+Element:16: INTENSITY_OF_STAIN_VIEW
+Element:17: LOCALIZATION_OF_STAIN_VIEW
+Element:18: DISTRIBUTION_OF_STAIN_VIEW
+Element:19: RESULT_CODE_VIEW
+Element:20: FUNCTIONAL_CHANGE_VIEW
+Element:21: MUTATION_TYPE
+Element:22: TIME_COURSE_VIEW
+Element:23: DISEASE_NAME_VIEW
+Element:24: DISEASE_GRADE_VIEW
+Element:25: DIFFENTIAL_EXPRESSION_SFACT
+Element:26: COPY_NUMBER_FACT
+Element:27: PROBESET_DIM
+Element:28: CLONE_DIM
+Element:29: ARRAY_GENO_ABN_FACT
+Element:30: CYTOBAND_POSITION
+Element:31: DIFFERENTIAL_EXPRESSION_SFACT
+Element:32: DIFF_EXPRESSION_GENE_SFACT
+Element:33: DISEASE_GRADE
+Element:34: DISEASE_HISTORY_DIM
+Element:35: DISEASE_TYPE_DIM
+Element:36: EXP_PLATFORM_DIM
+Element:37: GENE_CLONE
+Element:38: GENE_LL_ACC_SNP
+Element:39: GENE_ONTOLOGY_NOW
+Element:40: GENE_PATHWAY_NOW
+Element:41: GENE_SNP
+Element:42: INSTITUTION_DIM
+Element:43: PATIENT
+Element:44: STUDY_TIMECOURSE_DIM
+Element:45: SPECIMEN_PROVENANCE
+Element:46: SNP_PROBESET_DIM
+Element:47: BIO_ASSAY_ARRAY_VIEW
+Element:48: Note
+Element:49: Note
+Element:50: Note
+Element:51: PROTEIN_PRIMARY_ACCN
+Element:52: SPECIMEN_PROTEIN_CONTENT
+Element:53: PROTEIN_BIOMARKER
+Element:54: GENE_ALIAS
+Element:55: PATHWAY_DIM
+Element:56: ONTOLOGY_DIM
+Element:57: GENE_BIOMARKER
+Element:58: SPECIMEN_BASED_FINDING_VIEW
+Element:59: SBMF
+Element:60: MUTATION_DNA_DOMAIN
+Element:61: MUTATION_PROTEIN_DOMAIN
+***** Processing package: CGEMS-DB *****
+Element:62: SPECIMEN
+Element:63: STUDY_TIMECOURSE_DIM
+Element:64: SNP_ASSOCIATION_ANALYSIS
+Element:65: GENOTYPE_SFACT
+Element:66: SNP_ANALYSIS_GROUP
+Element:67: STUDY_PARTICIPANT
+Element:68: POPULATION
+Element:69: CLINICAL_ACCESSMENT
+Element:70: SNP_DIM
+Element:71: STUDY_DIM
+Element:72: SNP_PANEL
+Element:73: SNP_ASSO_ANALYSIS_FACT
+Element:74: SNP_ASSAY
+Element:75: SNP_FREQUENCY_FACT
+Element:76: DNA_SPECIMEN
+***** Processing package: Logical Model *****
+***** Processing package: gov *****
+***** Processing package: nih *****
+***** Processing package: nci *****
+***** Processing package: caintegrator *****
+Element:77: Note
+***** Processing package: domain *****
+***** Processing package: study *****
+Element:78: DNAMaterialType
+Element:79: CaseControlStatus
+Element:80: SecondarySpecimenIdentier
+Element:81: Study
+Element:82: Agent
+Element:83: SubstanceAdministration
+Element:84: AgentSynonym
+Element:85: Activity
+Element:86: Procedure
+Element:87: Surgery
+Element:88: Specimen
+Element:89: StudyParticipant
+Element:90: TimeCourse
+Element:91: DNASpecimen
+Element:92: SecondaryParticipantIdentifier
+Element:93: Population
+Element:94: ProcedureName
+Element:95: InvasivePresentation
+Element:96: Histology
+***** Processing package: annotation *****
+***** Processing package: gene *****
+Element:97: GeneExprReporterType
+Element:98: GeneExprReporter
+Element:99: GeneReporterAnnotation
+Element:100: GeneBiomarker
+Element:101: Pathway
+Element:102: GeneAlias
+Element:103: GOTerm
+Element:104: GenBankAccession
+***** Processing package: protein *****
+Element:105: UniprotAccession
+Element:106: ProteinBiomarker
+Element:107: ProteinAlias
+***** Processing package: snp *****
+Element:108: PlatformTechnology
+Element:109: BACCloneReporter
+Element:110: VariationReporter
+Element:111: SNPAssay
+Element:112: GeneLocation
+Element:113: SNPPanel
+Element:114: SNPAnnotation
+***** Processing package: finding *****
+Element:115: SpecimenBasedMolecularFinding
+Element:116: Finding
+***** Processing package: copyNumber *****
+Element:117: CopyNumberAbnomalityStatus
+Element:118: CopyNumberFinding
+***** Processing package: fish *****
+Element:119: FISHFinding
+***** Processing package: loh *****
+Element:120: LOHFinding
+***** Processing package: geneExpression *****
+***** Processing package: differentialFoldChangeFinding *****
+Element:121: DiffFoldChangeFinding
+***** Processing package: clinical *****
+Element:122: TextMeasurement
+Element:123: NumericMeasurement
+Element:124: ClinicalAssessment
+Element:125: ClinicalFinding
+Element:126: Measurement
+***** Processing package: breastCancer *****
+Element:127: BreastCancerClinicalFinding
+***** Processing package: protein *****
+***** Processing package: ihc *****
+Element:128: LossResult
+Element:129: BenignPresent
+Element:130: IntensityOfStain
+Element:131: LevelOfExpressionIHCFinding
+Element:132: DistributionOfStain
+Element:133: OverallExpression
+Element:134: LossOfExpressionIHCFinding
+Element:135: IHCFinding
+Element:136: LocalizationOfStain
+***** Processing package: cellLysate *****
+Element:137: CellLysateFinding
+Element:138: TotalProteinContent
+***** Processing package: variation *****
+Element:139: snpFinding
+Element:140: FunctionalProteinDomain
+Element:141: FunctionalDNADomain
+Element:142: VariationFinding
+***** Processing package: somaticMutation *****
+Element:143: SomaticMutationFinding
+Element:144: FunctionalChange
+Element:145: MutationType
+Element:146: MutationStatus
+***** Processing package: germline *****
+Element:147: GenotypeFinding
+***** Processing package: snpFrequency *****
+Element:148: SNPFrequencyFinding
+***** Processing package: common *****
+Element:149: BioAssayArrayType
+***** Processing package: analysis *****
+Element:150: BioDataCube
+Element:151: AnalysisVariableType
+Element:152: ReporterBasedAnalysis
+Element:153: AnalysisGroupResult
+Element:154: SpecimenBasedAnalysis
+Element:155: AnalysisGroup
+Element:156: AnalysisVariable
+***** Processing package: classComparison *****
+Element:157: ClassComparisonAnalysisFinding
+Element:158: ClassComparisonAnalysis
+Element:159: MultipleComparisonAdjustmentType
+Element:160: StatisticalMethodType
+***** Processing package: pca *****
+Element:161: PrincipleComponentAnalysisFinding
+Element:162: PrincipleComponentAnalysis
+***** Processing package: snp *****
+Element:163: SNPAssociationAnalysis
+Element:164: SNPAssociationFinding
+Element:165: SNPAnalysisGroup
+***** Processing package: java *****
+***** Processing package: lang *****
+Element:166: Double
+Element:167: Boolean
+Element:168: Float
+Element:169: enum
+Element:170: String
+Element:171: Integer
+Element:172: Long
+***** Processing package: util *****
+Element:173: Date
+Formatting output XML...please wait
+XMI Document Export Complete!
