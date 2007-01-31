@@ -35,7 +35,8 @@ public abstract class CGEMSTest extends TestCase {
         //p.setName("HumanHap300");
        //p.setName("HumanHap550");
         //p.setVersion("1.1");
-       p.setSnpPanelID(new Long(100));
+       //p.setSnpPanelID(new Long(100));
+            p.setSnpPanelID(new Long(400));
         annotCrit.setPanelCriteria(p);
     }
 
@@ -47,9 +48,9 @@ public abstract class CGEMSTest extends TestCase {
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
 
-        ppc.setChromosome("8");
-        ppc.setStartPosition(new Long(76065000));  // 76065158
-        ppc.setEndPosition(new Long(76066000));    // should give 4 GenotypeFindings
+        ppc.setChromosome("1");
+      ppc.setStartPosition(new Long(10000000));  // 76065158
+      ppc.setEndPosition(new Long(900000000));    // should give 4 GenotypeFindings
 
 
 /*

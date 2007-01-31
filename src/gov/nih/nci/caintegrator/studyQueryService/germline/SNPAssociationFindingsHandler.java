@@ -592,7 +592,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
          Query q = session.createQuery(finalHQL);
          HQLHelper.setParamsOnQuery(params, q);
          q.setFirstResult(start);
-         q.setMaxResults(end);
+         q.setMaxResults(end - start); //RAM: 01/31/07
          List results = q.list();
          findings = getFindingsFromResultsForPanelSearch(results);
          return findings;
