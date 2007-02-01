@@ -71,10 +71,11 @@
 			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
 			<property name="value" column="WHITE_BLOOD_COUNT" />
 		</component>
-		<component name="peripheralBloodBlastPercentage"
-			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
-			<property name="value" column="BLOOD_BLASTS" />
-		</component>
+		
+		<property name="peripheralBloodBlastPercentage"
+			type="java.lang.Float"
+			column="BLOOD_BLASTS" />
+	
 		<component name="karyotype"
 			class="gov.nih.nci.caintegrator.domain.common.bean.TextMeasurement">
 			<property name="value" column="KARYOTYPE" />

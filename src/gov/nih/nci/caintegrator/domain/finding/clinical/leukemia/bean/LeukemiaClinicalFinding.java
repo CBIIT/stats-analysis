@@ -24,26 +24,11 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment boneMarrowBlastPercentage;
     private ClinicalAssessment minimumResidualDisease;
     private ClinicalAssessment peripheralBloodWhiteBloodCount;
-    private ClinicalAssessment peripheralBloodBlastPercentage;
+    private Float peripheralBloodBlastPercentage;
     private TextMeasurement karyotype;
-    private TimeCourse timeCourse;
-    private StudyParticipant studyParticipant;
+    
 
-    public StudyParticipant getStudyParticipant() {
-        return studyParticipant;
-    }
-
-    public void setStudyParticipant(StudyParticipant studyParticipant) {
-        this.studyParticipant = studyParticipant;
-    }
-
-    public TimeCourse getTimeCourse() {
-        return timeCourse;
-    }
-
-    public void setTimeCourse(TimeCourse timeCourse) {
-        this.timeCourse = timeCourse;
-    }
+    
 
     public LeukemiaClinicalFinding() {
     }
@@ -124,12 +109,12 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
         this.mllStatus = mllStatus;
     }
 
-    public ClinicalAssessment getPeripheralBloodBlastPercentage() {
+    public Float getPeripheralBloodBlastPercentage() {
         return peripheralBloodBlastPercentage;
     }
 
     public void setPeripheralBloodBlastPercentage(
-            ClinicalAssessment peripheralBloodBlastPercentage) {
+            Float peripheralBloodBlastPercentage) {
         this.peripheralBloodBlastPercentage = peripheralBloodBlastPercentage;
     }
 
