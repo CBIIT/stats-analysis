@@ -15,14 +15,11 @@ public class PanelCriteria {
 	/**
 	 * textual identifier for the panel
 	 */
-	//private String name;
-
+	private String name;
 	private Long snpPanelID;
-
 
     public PanelCriteria(){ }
 
-/*
     public String getName() {
         return name;
     }
@@ -30,13 +27,23 @@ public class PanelCriteria {
     public void setName(String name) {
         this.name = name;
     }
-*/
 
-    public Long getSnpPanelID() {
+	public Long getSnpPanelID() {
         return snpPanelID;
     }
 
     public void setSnpPanelID(Long snpPanelID) {
         this.snpPanelID = snpPanelID;
     }
+    
+    @Override
+	public String toString()
+    {
+		String str = "";
+		
+		if ((name != null) && (name.length() > 0))
+			str = "Panel is " + name + "\n";
+		
+		return str;
+	}
 }
