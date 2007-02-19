@@ -104,9 +104,15 @@ public class AnnotationCriteria {
 	{
 		String str = "SNP Annotation Criteria\n";
 		
+		// If there is panel criteria output it
+		if (panelCriteria != null)
+			str = str + panelCriteria.toString();
+		
+		// If there is physical position criteria output it
 		if (physicalPositionCriteria != null)
 			str = str + physicalPositionCriteria.toString();
 		
+		// If there are gene symbols output them
 		if ((geneSymbols != null) && (geneSymbols.size() > 0))
 		{
 			str = str + "HUGO Gene Symbols:\n";
@@ -116,6 +122,7 @@ public class AnnotationCriteria {
 			}
 		}
 		
+		// If there are SNP identifiers output them
 		if ((snpIdentifiers != null) && (snpIdentifiers.size() > 0))
 		{
 			str = str + "SNP Identifiers:\n";

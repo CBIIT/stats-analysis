@@ -57,6 +57,9 @@ public abstract class FindingCriteriaDTO {
 		if (AnnotationCriteria != null)
 			str = str + AnnotationCriteria.toString();
 		
+		if (studyCriteria != null)
+			str = str + studyCriteria.toString();
+		
 		return str;
 	}
 
