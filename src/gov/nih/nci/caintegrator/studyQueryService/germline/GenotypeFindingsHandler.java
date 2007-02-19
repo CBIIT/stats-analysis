@@ -26,6 +26,15 @@ import org.hibernate.criterion.Restrictions;
  * Time:   3:08:00 PM
  */
 public class GenotypeFindingsHandler extends FindingsHandler {
+    protected StringBuffer getTargetFindingHQL() {
+        // TODO; Fix the below: 02/16/07
+        return null;
+    }
+
+    protected Collection<? extends Finding> executeFindingSetQuery(FindingCriteriaDTO critDTO, StringBuffer targetHQL, StringBuffer snpAnnotCond, HashMap params, Session session, int start, int end) throws Exception {
+        // TODO; Fix the below: 02/16/07
+        return null;
+    }
 
     protected List<? extends Finding> getConcreteTypedFindingList() {
         return new ArrayList<GenotypeFinding>();
@@ -38,7 +47,12 @@ public class GenotypeFindingsHandler extends FindingsHandler {
     protected Class getTargeFindingType() {
         return GenotypeFinding.class;
     }
-
+    protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO,
+                                                Session session,
+                                                int startIndex, int endIndex) {
+        //TODO: remove the below method
+        return null;
+    }
     protected Collection<? extends Finding> getMyFindings(FindingCriteriaDTO critDTO, Set<String> snpAnnotationIDs,
                                                           final Session session, final int startIndex, final int endIndex) {
 
@@ -332,6 +346,29 @@ public class GenotypeFindingsHandler extends FindingsHandler {
             session.close();
 
        }
+    protected static void appendAnnotationCriteriaHQL(Collection<String> snpAnnotationIDs, StringBuffer snpAnnotJoin,
+                                                        StringBuffer snpAnnotCond, HashMap params) {
+          if (snpAnnotationIDs != null) {
+              /* means some annotation criteria is specified */
+              if (snpAnnotationIDs.size() > 0) {
+                  snpAnnotJoin.append(" LEFT JOIN FETCH " + TARGET_FINDING_ALIAS + ".snpAnnotation ");
+                  snpAnnotCond.append(TARGET_FINDING_ALIAS + ".snpAnnotation.id IN (:snpAnnotationIDs) AND ");
+                  params.put("snpAnnotationIDs", snpAnnotationIDs);
+              }
+              else {
+                  /* means no annotations were selected from the Annotation Criteria Hence  when we
+                     and with rest of other criteria, no results should be returned */
+                  snpAnnotJoin.append(" LEFT JOIN FETCH " + TARGET_FINDING_ALIAS +  ".snpAnnotation ");
+                  snpAnnotCond.append(" (0 != 0) AND ");
+              }
+          } else {
+              /* no AnnotationCriteria was mentioned at all in the initial query DTO.  But we still need
+                to retrieve SNPAnnotations for the retrieved Findings  So just specify LEFT JOIN FETCH
+                so that outer-join will be used*/
+              snpAnnotJoin.append(" LEFT JOIN FETCH " + TARGET_FINDING_ALIAS +  ".snpAnnotation ");
+              /* keep snpAnnotCond as emppty so that it does not have any effect */
+          }
+      }
 
   
         protected Collection<? extends Finding> getFindingsFromResults(List results) {
