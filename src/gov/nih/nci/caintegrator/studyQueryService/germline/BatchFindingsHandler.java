@@ -1,6 +1,5 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
-import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 
 import java.util.List;
 import java.util.Set;
@@ -26,7 +25,7 @@ abstract public class BatchFindingsHandler {
           without Annotation Criteria (start: start  end: end)
     */
 
-    public static final int BATCH_OBJECT_INCREMENT = 500;
+    public static final int BATCH_OBJECT_INCREMENT = 5000;
 
     protected static int IN_PARAMETERS  = 100;
 

@@ -70,23 +70,23 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         //freqDTO.setPopulationNames(new String[] {"CONTROL"});
 
        // freqDTO.setCompletionRate(new Double(0.9), ArithematicOperator.LT);
-       //freqDTO.setHardyWeinbergPValue(new Float(1.0), ArithematicOperator.GE);
+       freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
 
         // Now set up study name criteria
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         freqDTO.setStudyCriteria(studyCrit);
 
-        executeSearch(0, 501);
+        executeSearch(0, 600);
    }
 
     public void testPopulateFindings() {
         //setUpSNPPhysicalPositionCrit();
         setUpPanelCrit();
-        freqDTO.setPopulationNames(new String[] {"CEPH"});
-        freqDTO.setHardyWeinbergPValue(new Float(0.0011), ArithematicOperator.LE);
+        //freqDTO.setPopulationNames(new String[] {"CEPH"});
+        freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
 
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
-        freqDTO.setStudyCriteria(studyCrit);
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
+        //freqDTO.setStudyCriteria(studyCrit);
         //setUpGeneBiomarkerCrit();
         //setSNPFindingCriteria();
         try {

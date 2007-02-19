@@ -30,16 +30,15 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
 
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        //setUpSNPPhysicalPositionCrit();
+        setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
-        //setUpPanelCrit();
+        setUpPanelCrit();
         //setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
-        setSNPAssociationGroupCriteria();
+        //setSNPAssociationGroupCriteria();
 
-        //setSNPFindingCriteria();
-        // Now set up study name criteria
+        setSNPFindingCriteria();
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
         safDTO.setStudyCriteria(studyCrit);
 
@@ -96,12 +95,12 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
     private void setSNPFindingCriteria() {
         //safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
         SNPAssociationAnalysisCriteria  assocCrit =
-                new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+                new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
         assocCrit.setName("Incidence density sampling, Unadjusted score test");
         Collection<SNPAssociationAnalysisCriteria> list = new ArrayList<SNPAssociationAnalysisCriteria>();
         list.add(assocCrit);
         safDTO.setSnpAssociationAnalysisCriteriaCollection(list);
-        //safDTO.setRank(new Integer(10), ArithematicOperator.LE);
+        safDTO.setRank(new Integer(1000), ArithematicOperator.LE);
 
     }
 
@@ -128,12 +127,15 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
         //setUpSNPPhysicalPositionCrit();
         //setUpGeneBiomarkerCrit();
 
-       setSNPAssociationAnalysisCriteria();
+       //setSNPAssociationAnalysisCriteria();
         
        //setSNPAssociationGroupCriteria();
 
-       setUpPanelCrit();
-        //setSNPFindingCriteria();
+        setUpPanelCrit();
+        setSNPFindingCriteria();
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+        safDTO.setStudyCriteria(studyCrit);
+
         try {
              HashSet actualBatchFindings = new HashSet();
              final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());

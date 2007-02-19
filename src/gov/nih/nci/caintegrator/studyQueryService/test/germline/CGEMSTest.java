@@ -48,9 +48,9 @@ public abstract class CGEMSTest extends TestCase {
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
 
-        ppc.setChromosome("1");
-      ppc.setStartPosition(new Long(10000000));  // 76065158
-      ppc.setEndPosition(new Long(900000000));    // should give 4 GenotypeFindings
+        ppc.setChromosome("8");
+      ppc.setStartPosition(new Long(1));  // 76065158
+      ppc.setEndPosition(new Long(100000000));    // should give 4 GenotypeFindings
 
 
 /*
