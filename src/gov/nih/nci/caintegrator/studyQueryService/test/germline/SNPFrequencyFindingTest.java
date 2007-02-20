@@ -31,9 +31,6 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         freqDTO = new SNPFrequencyFindingCriteriaDTO(studyCrit);
         freqDTO.setAnnotationCriteria(annotCrit);
     }
-    public void testAll() {
-        super.testAll();
-    }
 
     protected void setUpPopulationCriteria() {
         Collection<String> names = new ArrayList<String>();
@@ -47,7 +44,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         setUpSNPPhysicalPositionCrit();
         setUpPanelCrit();
         try {
-            Collection<SNPAnnotation> snpAnnotObjs = FindingsManager.getSNPAnnotations(annotCrit);
+            Collection<SNPAnnotation> snpAnnotObjs = manager.getSNPAnnotations(annotCrit);
             for (Iterator<SNPAnnotation> iterator = snpAnnotObjs.iterator(); iterator.hasNext();) {
                 SNPAnnotation snpAnnotation = iterator.next();
                 System.out.println("SNP_ANNOT_ID: " + snpAnnotation.getId());
@@ -95,7 +92,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
              new Thread(new Runnable() {
                  public void run() {
                      try {
-                        FindingsManager.populateFindings(freqDTO, findingsToBePopulated);
+                        manager.populateFindings(freqDTO, findingsToBePopulated);
                      } catch(Throwable t) {
                          t.printStackTrace();
                          System.out.println("Error from FindingsManager.populateFindings call: ");
@@ -143,7 +140,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
 
     public Collection executeSearch(int startIndex, int endIndex) {
            try {
-               Collection findings = FindingsManager.getFindings(freqDTO, startIndex, endIndex);
+               Collection findings = manager.getFindings(freqDTO, startIndex, endIndex);
                System.out.println("RESULTS COUNT: " + findings.size());
                for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                    SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();

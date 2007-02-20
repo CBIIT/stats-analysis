@@ -3,6 +3,7 @@ package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
+import gov.nih.nci.caintegrator.test.BaseSpringTestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.framework.TestCase;
@@ -15,7 +16,10 @@ import java.util.Iterator;
  * Date:   Aug 16, 2006
  * Time:   8:05:49 AM
  */
-public class StudyCriteriaTest extends TestCase {
+public class StudyCriteriaTest extends BaseSpringTestCase {
+    public String[] getConfigFiles() {
+            return new String[] {"classpath*:applicationContext-services.xml","test/applicationContext-junit.xml"};
+    }
 
     private StudyCriteria studyCrit ;
 
@@ -35,7 +39,7 @@ public class StudyCriteriaTest extends TestCase {
 
     private void executeSearch() {
         try {
-            Collection<Study> studyObjs = FindingsManager.getStudies(studyCrit);
+            Collection<Study> studyObjs = manager.getStudies(studyCrit);
             System.out.println("Number of Study Objects Retrieved: " + studyObjs.size());
             for (Iterator<Study> iterator = studyObjs.iterator(); iterator.hasNext();) {
                 Study study = iterator.next();

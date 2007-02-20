@@ -36,7 +36,7 @@ public class SNPAssociationAnalysisGroupTest extends GenotypeFindingTest {
 
     private void executeSearch() {
         try {
-            Collection<SNPAnalysisGroup> assocObjs = FindingsManager.getSNPAnalysisGroups(assocCrit);
+            Collection<SNPAnalysisGroup> assocObjs = manager.getSNPAnalysisGroups(assocCrit);
             System.out.println("Number of Group Objects Retrieved: " + assocObjs .size());
             for (Iterator<SNPAnalysisGroup> iterator = assocObjs .iterator(); iterator.hasNext();) {
                 SNPAnalysisGroup group = iterator.next();

@@ -42,10 +42,6 @@ public class GenotypeFindingTest extends CGEMSTest {
         gfDTO.setStudyParticipantCriteria(spCrit);
     }
 
-    public void testAll() {
-        super.testAll();
-    }
-
 
 
     private void setUpGenotypeCrit() {
@@ -256,7 +252,7 @@ public class GenotypeFindingTest extends CGEMSTest {
     private void executeGenotypeFindingSearch(int startIndex, int endIndex) {
        try {
            Collection<? extends Finding> findings =
-                FindingsManager.getFindings(gfDTO, startIndex, endIndex);
+                manager.getFindings(gfDTO, startIndex, endIndex);
 
            System.out.println("RESULTS COUNT: " + findings.size());
 
@@ -289,7 +285,7 @@ public class GenotypeFindingTest extends CGEMSTest {
     protected Collection executeSearch(int start, int end) {
        try {
         Collection<? extends Finding> findings =
-                FindingsManager.getFindings(gfDTO, start, end);
+                manager.getFindings(gfDTO, start, end);
         System.out.println("RESULTS COUNT: " + findings.size());
 
            /*for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
@@ -325,7 +321,7 @@ public class GenotypeFindingTest extends CGEMSTest {
              new Thread(new Runnable() {
                  public void run() {
                      try {
-                        FindingsManager.populateFindings(gfDTO, findingsToBePopulated);
+                        manager.populateFindings(gfDTO, findingsToBePopulated);
                      } catch(Throwable t) {
                          t.printStackTrace();
                          System.out.println("Error from FindingsManager.populateFindings call: ");

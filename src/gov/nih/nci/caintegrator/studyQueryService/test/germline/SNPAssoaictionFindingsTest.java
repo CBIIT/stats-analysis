@@ -24,9 +24,6 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
         safDTO = new  SNPAssociationFindingCriteriaDTO(studyCrit);
         safDTO.setAnnotationCriteria(annotCrit);
     }
-    public void testAll() {
-        super.testAll();
-    }
 
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
@@ -50,7 +47,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
     public Collection executeSearch(int startIndex, int endIndex) {
             try {
                 Long t1 = System.currentTimeMillis();
-                Collection<? extends Finding> findings = FindingsManager.getFindings(safDTO, startIndex, endIndex);
+                Collection<? extends Finding> findings = manager.getFindings(safDTO, startIndex, endIndex);
                 System.out.println("RESULTS COUNT: " + findings.size());
                 for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                     SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
@@ -142,7 +139,7 @@ public class SNPAssoaictionFindingsTest extends CGEMSTest {
              new Thread(new Runnable() {
                  public void run() {
                      try {
-                        FindingsManager.populateFindings(safDTO, findingsToBePopulated);
+                        manager.populateFindings(safDTO, findingsToBePopulated);
                      } catch(Throwable t) {
                          t.printStackTrace();
                          System.out.println("Error from FindingsManager.populateFindings call: ");

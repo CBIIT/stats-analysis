@@ -38,7 +38,7 @@ public class SNPAssociationAnalysisCriteriaTest extends GenotypeFindingTest {
 
     private void executeSearch() {
         try {
-            Collection<SNPAssociationAnalysis> assocObjs = FindingsManager.getSNPAssociationAnalysis(assocCrit);
+            Collection<SNPAssociationAnalysis> assocObjs = manager.getSNPAssociationAnalysis(assocCrit);
             System.out.println("Number of Association Objects Retrieved: " + assocObjs .size());
             for (Iterator<SNPAssociationAnalysis> iterator = assocObjs .iterator(); iterator.hasNext();) {
                 SNPAssociationAnalysis analysis = iterator.next();

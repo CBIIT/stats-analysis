@@ -38,7 +38,7 @@ public class PopulationSearchTest extends GenotypeFindingTest {
 
     private void executeSearch() {
         try {
-            Collection<Population> population = FindingsManager.getPopulations(popCrit);
+            Collection<Population> population = manager.getPopulations(popCrit);
             System.out.println("Number of Populations Retrieved: " + population.size());
             for (Iterator<Population> iterator = population.iterator(); iterator.hasNext();) {
                 Population popObj =  iterator.next();
