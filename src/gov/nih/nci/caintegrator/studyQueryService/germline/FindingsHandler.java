@@ -1,19 +1,19 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
-import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
-import gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
+import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.util.HibernateUtil;
-import gov.nih.nci.caintegrator.util.HQLHelper;
 
-import java.util.*;
-import java.text.MessageFormat;
-import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
-import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 
 /**
  * Author: Ram Bhattaru
@@ -22,8 +22,9 @@ import org.hibernate.Query;
  */
 abstract public class FindingsHandler extends BatchFindingsHandler {
 
+    private SessionFactory sessionFactory;
      protected static final String TARGET_FINDING_ALIAS = " finding";
-
+     
      protected abstract Class getTargeFindingType();
      protected abstract Collection<? extends Finding> getFindingsFromResults(List results);
      protected abstract StringBuffer getTargetFindingHQL() ;
@@ -37,15 +38,13 @@ abstract public class FindingsHandler extends BatchFindingsHandler {
 
         Collection<? extends Finding> findings ;
         AnnotationCriteria annotCrit = critDTO.getAnnotationCriteria();
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
+        Session session = getSessionFactory().getCurrentSession();
 
         if ((annotCrit == null) || !isOnlyPanelCriteria(annotCrit)) findings = getMyFindings(critDTO, session, fromIndex, toIndex);
         else findings = executePanelOnlySearch(critDTO, session, fromIndex, toIndex);
 
         initializeProxies(findings, session);
         session.clear();
-        session.close();
         return findings;
     }
 
@@ -95,8 +94,7 @@ abstract public class FindingsHandler extends BatchFindingsHandler {
      }
      private void populateFindingsForPanelOnly(FindingCriteriaDTO critDTO, List toBePopulated)
      throws Exception {
-         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-         session.beginTransaction();
+         Session session = getSessionFactory().getCurrentSession();
 
          Collection findings = null;
          int start = 0;
@@ -115,25 +113,20 @@ abstract public class FindingsHandler extends BatchFindingsHandler {
          Set h = getConcreteTypedFindingSet();
          /* send empty data object to let the client know that no more results are present */
          process(toBePopulated, h, session);
-         if (session.isOpen())
-            session.close();
+
        }
 
     protected void populateFindings(FindingCriteriaDTO critDTO, List toBePopulated)
     throws Exception {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
+        Session session = getSessionFactory().getCurrentSession();
         sendMyFindings(critDTO, session, toBePopulated);
-        session.close();
     }
 
-     public static List<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
+     public List<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
      throws Exception {
          List<SNPAnnotation> snpAnnotationObjs;
-         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-         session.beginTransaction();
+         Session session = getSessionFactory().getCurrentSession();
          snpAnnotationObjs = SNPAnnotationCriteriaHandler.getSNPAnnotations(annotCrit, session);
-         session.close();
          return snpAnnotationObjs;
      }
 
@@ -145,4 +138,10 @@ abstract public class FindingsHandler extends BatchFindingsHandler {
 
     public abstract Collection<? extends Finding> executePanelOnlySearch(FindingCriteriaDTO findingCritDTO,
                                                                   Session session, int start, int end);
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }
