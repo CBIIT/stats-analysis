@@ -11,14 +11,15 @@ import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 */
 public abstract class FindingCriteriaDTO {
 
-    abstract public FindingsHandler getHandler();
 
     public AnnotationCriteria AnnotationCriteria;
     public StudyCriteria studyCriteria;
-
+    private FindingsHandler handler;
     public int index;
 
     //public FindingCriteriaDTO(StudyCriteria studyCrit){ }
+    public FindingCriteriaDTO() {
+    }
 
     protected FindingCriteriaDTO(StudyCriteria studyCriteria) throws Exception {
         if (studyCriteria == null) throw new Exception("Study Criteria can not be null");
@@ -62,5 +63,13 @@ public abstract class FindingCriteriaDTO {
 		
 		return str;
 	}
+
+    public void setHandler(FindingsHandler handler) {
+        this.handler = handler;
+    }
+
+    public FindingsHandler getHandler() {
+        return handler;
+    }
 
 }
