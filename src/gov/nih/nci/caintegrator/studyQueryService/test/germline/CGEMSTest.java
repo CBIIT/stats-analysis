@@ -36,7 +36,7 @@ public abstract class CGEMSTest extends TestCase {
        //p.setName("HumanHap550");
         //p.setVersion("1.1");
        //p.setSnpPanelID(new Long(100));
-            p.setSnpPanelID(new Long(400));
+            p.setSnpPanelID(new Long(100));
         annotCrit.setPanelCriteria(p);
     }
 
@@ -78,7 +78,7 @@ public abstract class CGEMSTest extends TestCase {
         //geneSymbols.add(new String("USP48"));
         //geneSymbols.add(new String("HSPG2"));
         geneSymbols.add(new String("MET"));
-
+        //geneSymbols.add(new String("12FOO34"));
 
 
         //geneSymbols.add(new String("blimp"));

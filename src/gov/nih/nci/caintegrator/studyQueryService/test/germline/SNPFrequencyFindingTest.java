@@ -59,7 +59,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
     }
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-       //setUpSNPPhysicalPositionCrit();
+       setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
 
       //setUpGeneBiomarkerCrit();

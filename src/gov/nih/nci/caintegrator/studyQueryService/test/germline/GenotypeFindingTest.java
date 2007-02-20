@@ -103,7 +103,8 @@ public class GenotypeFindingTest extends CGEMSTest {
     public void testPanelAndSNPAnnotCrit() {
         setUpPanelCrit();
         setUpSNPPhysicalPositionCrit();
-        executeGenotypeFindingSearch(0, 60);
+        setUpStudyParticipantCrit();
+        executeGenotypeFindingSearch(0, 100);
     }
     protected void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
@@ -221,7 +222,7 @@ public class GenotypeFindingTest extends CGEMSTest {
 
     protected void setUpStudyCriteria() {
         StudyCriteria studyCrit = new StudyCriteria();
-        studyCrit.setName("CGEMS Prostate Scan 1");
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         //studyCrit.setSponsorStudyIdentifier("NIH");
         spCrit.setStudyCriteria(studyCrit);
     }
@@ -314,12 +315,12 @@ public class GenotypeFindingTest extends CGEMSTest {
 
     }
 
-        public void testPopulateFindings() {
+    public void testPopulateFindings() {
         setUpSNPPhysicalPositionCrit();
-        //setUpPopulationCriteria();
+        setUpPopulationCriteria();
         setUpGenotypeCrit();
         try {
-             HashSet actualBatchFindings = new HashSet();
+             HashSet actualBatchFindings;
              final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
              new Thread(new Runnable() {
                  public void run() {
@@ -370,5 +371,5 @@ public class GenotypeFindingTest extends CGEMSTest {
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-     }
+    }
 }
