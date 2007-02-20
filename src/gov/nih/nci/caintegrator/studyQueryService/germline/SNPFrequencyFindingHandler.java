@@ -10,7 +10,6 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCrite
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPFrequencyFindingCriteriaDTO;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
-import gov.nih.nci.caintegrator.util.HibernateUtil;
 
 import java.util.*;
 import java.text.MessageFormat;
