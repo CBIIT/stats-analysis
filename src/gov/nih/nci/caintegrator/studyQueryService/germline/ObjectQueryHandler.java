@@ -2,32 +2,35 @@ package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
-import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.util.HQLHelper;
-import gov.nih.nci.caintegrator.util.HibernateUtil;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.transform.AliasToBeanResultTransformer;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Projection;
+import org.hibernate.SessionFactory;
 
 /**
  * Author: Ram Bhattaru
@@ -38,22 +41,27 @@ import org.hibernate.criterion.Projection;
 public class ObjectQueryHandler {
     private static Logger logger = Logger.getLogger(ObjectQueryHandler.class);
 
-    private static List<String> CHROMOSOME_LIST = null;
-    private static Set<String> qcStatusValues = null;
-    private static Set<String> caseControlStatus = null;
-    private static Set<Integer> ageLowerLimits = null;
-    private static Set<Integer> ageUpperLimits = null;
-    private static Set<Study> allStudyObjects = null;
+    private SessionFactory sessionFactory;
+    
+    private  List<String> CHROMOSOME_LIST = null;
+    private  Set<String> qcStatusValues = null;
+    private  Set<String> caseControlStatus = null;
+    private  Set<Integer> ageLowerLimits = null;
+    private  Set<Integer> ageUpperLimits = null;
+    private  Set<Study> allStudyObjects = null;
 
-    public static Collection<Study> getStudyObjects(StudyCriteria studyCrit) {
+    public ObjectQueryHandler() {
+        
+    }
+    
+    public  Collection<Study> getStudyObjects(StudyCriteria studyCrit) {
          return getStudyObjects(studyCrit, false);
     }
 
-    public static Collection<Study> getStudyObjects(StudyCriteria studyCrit, boolean populatePanel) {
+    public  Collection<Study> getStudyObjects(StudyCriteria studyCrit, boolean populatePanel) {
         if (studyCrit == null) return new ArrayList<Study>();
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = getSessionFactory().getCurrentSession();
 
-            session.beginTransaction();
 
             HashMap params = new HashMap();
             String studyCritHQL = " FROM Study s WHERE {0} {1} ";
@@ -67,11 +75,9 @@ public class ObjectQueryHandler {
                     allStudyObjects = new HashSet<Study>();
                     List<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
                     allStudyObjects.addAll(studyObjs);
-                    session.close();
                     return allStudyObjects;
                 }
                 else {
-                    session.close();
                     return allStudyObjects;
                 }
             }
@@ -98,11 +104,10 @@ public class ObjectQueryHandler {
                 }
             }
 
-            session.close();
             return studyObjs;
     }
 
-    public static Collection<SNPPanel> getPanelObjects(StudyCriteria studyCrit) {
+    public  Collection<SNPPanel> getPanelObjects(StudyCriteria studyCrit) {
         Collection snpPanels = new ArrayList<SNPPanel>();
         if (studyCrit == null) return snpPanels;
         Collection<Study> studyObjs = getStudyObjects(studyCrit, true);
@@ -113,7 +118,7 @@ public class ObjectQueryHandler {
         return snpPanels;
     }
 
-     private static List<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {
+     private  List<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {
         String hql = MessageFormat.format(studyCritHQL, new Object[] {
                             studyNameJoin, sponsorJoin});
 
@@ -134,11 +139,10 @@ public class ObjectQueryHandler {
      * @param populationCrit
      * @return Collection of Population Objects
      */
-    public static Collection<Population> getPopulationObjects(PopulationCriteria populationCrit) {
+    public  Collection<Population> getPopulationObjects(PopulationCriteria populationCrit) {
         if (populationCrit == null) return new ArrayList<Population>();
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            session.beginTransaction();
+            Session session = getSessionFactory().getCurrentSession();
             Collection popNames = populationCrit.getNames();
             StringBuffer inClause = new StringBuffer("");
             HashMap params = new HashMap();
@@ -151,7 +155,6 @@ public class ObjectQueryHandler {
             params.put("name", populationCrit.getStudyName());
             HQLHelper.setParamsOnQuery(params, q);
             List<Population> popObjs = q.list();
-            session.close();
             return popObjs;
         } catch (HibernateException e) {
             logger.error(e);
@@ -161,13 +164,12 @@ public class ObjectQueryHandler {
         return null;
     }
 
-    public static Collection<SNPAnalysisGroup> getAnalysisGroups(AnalysisGroupCriteria analGrpCrit) {
+    public  Collection<SNPAnalysisGroup> getAnalysisGroups(AnalysisGroupCriteria analGrpCrit) {
         try {
             String studyName = analGrpCrit.getStudyName();
             assert(studyName != null);
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = getSessionFactory().getCurrentSession();
 
-            session.beginTransaction();
             //Criteria crit = session.createCriteria(SNPAnalysisGroup.class);
             HashMap params = new HashMap();
 
@@ -194,7 +196,6 @@ public class ObjectQueryHandler {
             Query q = session.createQuery(finalHQL);
             HQLHelper.setParamsOnQuery(params, q);
             Collection<SNPAnalysisGroup> groups = q.list();
-            session.close();
             return groups;
         } catch (HibernateException e) {
             logger.error(e);
@@ -205,14 +206,13 @@ public class ObjectQueryHandler {
     }
 
 
-    public static Collection<Integer> getAgeLowerLimitValues() {
+    public  Collection<Integer> getAgeLowerLimitValues() {
         System.out.println("HOT DEPLOYMENT");
         if (ageLowerLimits == null) {
            ageLowerLimits = new HashSet<Integer>();
         try {
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Session session = getSessionFactory().getCurrentSession();
 
-                session.beginTransaction();
 
                 String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU ";
 
@@ -226,7 +226,6 @@ public class ObjectQueryHandler {
                 Query q = session.createSQLQuery(sql);
                 Collection<BigDecimal> minValues = q.list();
                 Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
-                session.close();
                 ageLowerLimits.addAll(intValues);
             } catch (HibernateException e) {
                 logger.error(e);
@@ -236,7 +235,7 @@ public class ObjectQueryHandler {
        }
        return ageLowerLimits;
    }
-   public static class IntegerTransformer implements Transformer {
+   public  class IntegerTransformer implements Transformer {
        public Object transform(Object object) {
            if (object instanceof BigDecimal) {
                BigDecimal bdObject = (BigDecimal) object;
@@ -246,13 +245,12 @@ public class ObjectQueryHandler {
            }
        }
    }
-    public static Collection<Integer> getAgeUpperLimitValues() {
+    public  Collection<Integer> getAgeUpperLimitValues() {
        if (ageUpperLimits == null) {
            ageUpperLimits  = new HashSet<Integer>();
         try {
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Session session = getSessionFactory().getCurrentSession();
 
-                session.beginTransaction();
                 String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU ";
     /*
                  Criteria crit = session.createCriteria(StudyParticipant.class);
@@ -263,7 +261,6 @@ public class ObjectQueryHandler {
                 Query q = session.createSQLQuery(sql);
                 Collection<BigDecimal> minValues = q.list();
                 Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
-                session.close();
                 ageUpperLimits.addAll(intValues);
             } catch (HibernateException e) {
                 logger.error(e);
@@ -274,13 +271,12 @@ public class ObjectQueryHandler {
        return ageUpperLimits ;
    }
 
-    public static Collection<String> getCaseControlStatus() {
+    public  Collection<String> getCaseControlStatus() {
        if (caseControlStatus == null) {
            caseControlStatus = new HashSet<String>();
         try {
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Session session = getSessionFactory().getCurrentSession();
 
-                session.beginTransaction();
                 String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT ";
     /*
                  Criteria crit = session.createCriteria(StudyParticipant.class);
@@ -290,7 +286,6 @@ public class ObjectQueryHandler {
      */
                 Query q = session.createSQLQuery(sql);
                 List<String> statusValues = q.list();
-                session.close();
                 caseControlStatus.addAll(statusValues);
             } catch (HibernateException e) {
                 logger.error(e);
@@ -302,13 +297,12 @@ public class ObjectQueryHandler {
    }
 
 
-     public static Collection<String> getAllQCStatus() {
+     public  Collection<String> getAllQCStatus() {
         if (qcStatusValues == null) {
             qcStatusValues = new HashSet<String>();
             try {
-                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+                Session session = getSessionFactory().getCurrentSession();
 
-                session.beginTransaction();
 
     /*
                  Criteria crit = session.createCriteria(GenotypeFinding.class);
@@ -320,7 +314,6 @@ public class ObjectQueryHandler {
                 String sql = "SELECT GENETYPE_STATUS FROM GENOTYPE_STATUS_LU ";
                 Query q = session.createSQLQuery(sql);
                 Collection<String> values = q.list();
-                session.close();
                 qcStatusValues.addAll(values);
             } catch (HibernateException e) {
                 logger.error(e);
@@ -331,13 +324,11 @@ public class ObjectQueryHandler {
         return qcStatusValues;
     }
 
-    public static Collection<SNPAssociationAnalysis> getSNPAssociationAnalysisObjects(SNPAssociationAnalysisCriteria crit) {
+    public  Collection<SNPAssociationAnalysis> getSNPAssociationAnalysisObjects(SNPAssociationAnalysisCriteria crit) {
         if(crit == null) return new ArrayList<SNPAssociationAnalysis>();
 
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-            session.beginTransaction();
+            Session session = getSessionFactory().getCurrentSession();
 
             HashMap params = new HashMap();
             String analysisCritHQL = " FROM SNPAssociationAnalysis s WHERE {0} {1} {2} ";
@@ -371,7 +362,6 @@ public class ObjectQueryHandler {
             HQLHelper.setParamsOnQuery(params, analysisQuery);
             List<SNPAssociationAnalysis> analysisObjs = analysisQuery.list();
 
-            session.close();
             return analysisObjs;
         } catch (HibernateException e) {
             logger.error(e);
@@ -382,17 +372,16 @@ public class ObjectQueryHandler {
     }
 
 
-    public static List<String> getChromosomes() {
+    public  List<String> getChromosomes() {
         if (CHROMOSOME_LIST == null) {
             Session session = null;
             try {
-                session = HibernateUtil.getSessionFactory().getCurrentSession();
+                session = getSessionFactory().getCurrentSession();
             } catch (HibernateException e) {
                 logger.error(e);
             } catch (Exception e) {
                 logger.error(e);
             }
-            session.beginTransaction();
 
           /* The below code is extremely slow.  Hence commented out.
             At the same time, we do not have a class that is mapped to
@@ -427,8 +416,15 @@ public class ObjectQueryHandler {
             }
 
             CHROMOSOME_LIST.addAll(sexChromosomes);
-            session.close();
         }
         return CHROMOSOME_LIST;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }
