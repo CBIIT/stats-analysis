@@ -48,7 +48,7 @@
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="configLocation">
 			<value>
-				/src/cgems-domain-hibernate.cfg.xml
+				../cgems/src/cgems-domain-hibernate.cfg.xml
 			</value>
 		</property>
 		<property name="dataSource" ref="dataSource"/>
