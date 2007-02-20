@@ -44,7 +44,7 @@ public class SubjectSearchTest extends CGEMSTest {
 
     protected Collection executeSearch(int start, int end) {
         try {
-            Collection<StudyParticipant> subjects = FindingsManager.getStudySubjects(spCrit, start, end );
+            Collection<StudyParticipant> subjects = manager.getStudySubjects(spCrit, start, end );
             System.out.println("Number of Subjects Retrieved: " + subjects.size());
             for (Iterator<StudyParticipant> iterator = subjects.iterator(); iterator.hasNext();) {
                 StudyParticipant subject =  iterator.next();
@@ -74,7 +74,7 @@ public class SubjectSearchTest extends CGEMSTest {
              new Thread(new Runnable() {
                  public void run() {
                      try {
-                        FindingsManager.populateStudySubjects(spCrit, findingsToBePopulated);
+                        manager.populateStudySubjects(spCrit, findingsToBePopulated);
                      } catch(Throwable t) {
                          t.printStackTrace();
                          System.out.println("Error from FindingsManager.populateStudySubjects call: ");
