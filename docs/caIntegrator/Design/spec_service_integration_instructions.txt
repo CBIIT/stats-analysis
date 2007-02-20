@@ -1,0 +1,53 @@
+Author: Andrew Shinohara
+
+How to integrate new caintegrator applications with the 
+new service tier:
+
+1. Create a hibernate mapping file specific for your application.
+Name it [project name]-domain-hibernate.cfg.xml.  Place it on your
+application's classpath (i.e. in the src folder).  Make sure it uses JNDI
+by adding the following line:
+
+<property name="connection.datasource">java:/[project name]</property>
+
+and also add the correct datasource definition to the oracle-ds.xml file.
+
+2. Create an applicationContext.xml file that is placed into your
+application.  In this example, it is placed under the WEB-INF folder.
+
+It should look a little bit like this:
+
+[Omitting spring xml schema information]
+
+<bean id="sessionFactory"
+	class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	<property name="configLocation">
+		<value>classpath:[project name]-domain-hibernate.cfg.xml</value>
+	</property>
+</bean>
+
+This will now point the service tier to your datasource and hibernate session factory.
+
+3. Add the following to the web.xml file for your application:
+
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>/WEB-INF/applicationContext.xml, classpath*:applicationContext-*.xml</param-value>
+</context-param>
+	
+<listener>
+	<listener-class>
+		gov.nih.nci.caintegrator.application.configuration.ConfigurationListener
+	</listener-class>
+</listener>
+
+This will load all of the spec services and your session factory up when the application loads up.  
+
+Now, you can integrate spring with struts following one of the many tutorials online, or for a less invasive 
+approach, use the following syntax to get a spring managed bean from anywhere
+in the application:
+
+FindingsManager manager = (FindingsManager) SpringContext.getBean("findingsManager");
+
+This will give you your service from the spring application context with all dependenceis created.
+
