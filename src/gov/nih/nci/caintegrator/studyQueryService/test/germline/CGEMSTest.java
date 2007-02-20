@@ -1,27 +1,25 @@
 package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
-import junit.framework.TestCase;
-import gov.nih.nci.caintegrator.studyQueryService.germline.BatchFindingsHandler;
-import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.study.bean.DNASpecimen;
+import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
+import gov.nih.nci.caintegrator.test.BaseSpringTestCase;
 
-import java.util.Collection;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collection;
 
 /**
  * Author: Ram Bhattaru
  * Date:   Sep 20, 2006
  * Time:   5:37:48 AM
  */
-public abstract class CGEMSTest extends TestCase {
+public abstract class CGEMSTest extends BaseSpringTestCase {
     protected abstract Collection executeSearch(int start, int end);
     //protected static int TOTAL_FINDINGS = 0;
     protected AnnotationCriteria annotCrit;
@@ -237,32 +235,32 @@ public abstract class CGEMSTest extends TestCase {
     }
 
 
-    public void testAll() {
+//    public void testAll() {
 
-        Collection allFindings = new HashSet();
-        int findingsFound = 0;
-        int start = 0;
-        int end = BatchFindingsHandler.BATCH_OBJECT_INCREMENT + 1;
-        Collection findings = null;
-        do {
-            findings = executeSearch(start, end);
-            HashSet uniqueFindings = new HashSet();
-            uniqueFindings.addAll(findings);
-            if (findings == null) {
-                System.out.println("Error Occured in executeSearch() method");
-                System.exit(1);
-            }
-            allFindings.addAll(findings);
-            //findingsFound = findings.size();
-
-            System.out.println("\n\n ***** Findings Found For Start:" + start + " And End:" + end
-                                    + "  = " + findings.size() + " ***** \n\n");
-            //TOTAL_FINDINGS += findingsFound;
-            start += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;
-            end += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;;
-        } while(findings.size() > (BatchFindingsHandler.BATCH_OBJECT_INCREMENT ));
-        System.out.println("TOTAL UNIQUE FINDINGS FOUND: " + allFindings.size());
-    }
+//        Collection allFindings = new HashSet();
+//        int findingsFound = 0;
+//        int start = 0;
+//        int end = BatchFindingsHandler.BATCH_OBJECT_INCREMENT + 1;
+//        Collection findings = null;
+//        do {
+//            findings = executeSearch(start, end);
+//            HashSet uniqueFindings = new HashSet();
+//            uniqueFindings.addAll(findings);
+//            if (findings == null) {
+//                System.out.println("Error Occured in executeSearch() method");
+//                System.exit(1);
+//            }
+//            allFindings.addAll(findings);
+//            //findingsFound = findings.size();
+//
+//            System.out.println("\n\n ***** Findings Found For Start:" + start + " And End:" + end
+//                                    + "  = " + findings.size() + " ***** \n\n");
+//            //TOTAL_FINDINGS += findingsFound;
+//            start += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;
+//            end += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;;
+//        } while(findings.size() > (BatchFindingsHandler.BATCH_OBJECT_INCREMENT ));
+//        System.out.println("TOTAL UNIQUE FINDINGS FOUND: " + allFindings.size());
+//  }
     protected void printSNPAnnotation(SNPAnnotation annot) {
         System.out.println("              SNPAnnotation ID:    " + annot.getId());
         System.out.println("              Chromosome:          " + annot.getChromosomeName());
@@ -276,6 +274,9 @@ public abstract class CGEMSTest extends TestCase {
         System.out.println(s );
     }
 
+    public String[] getConfigFiles() {
 
+        return new String[] {"classpath*:applicationContext-services.xml","test/applicationContext-junit.xml"};
+    }
 
 }
