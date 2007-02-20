@@ -20,7 +20,10 @@ public class GenotypeFindingCriteriaDTO extends FindingCriteriaDTO {
     private String qcStatus;
     public ArithematicOperator operatorType = ArithematicOperator.EQ; //default
     public StudyParticipantCriteria StudyParticipantCriteria;
+    
 
+    public GenotypeFindingCriteriaDTO() {
+    }
     public GenotypeFindingCriteriaDTO(StudyCriteria studyCriteria) throws Exception {
         super(studyCriteria);
     }
@@ -71,9 +74,6 @@ public class GenotypeFindingCriteriaDTO extends FindingCriteriaDTO {
         AnnotationCriteria = annotationCriteria;
     }
 
-     public FindingsHandler getHandler() {
-        return new GenotypeFindingsHandler();
-    }
 
 	@Override
 	public String toString()

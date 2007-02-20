@@ -21,6 +21,9 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
 
 	private Float hardyWeinbergPValue;
     ArithematicOperator hardyWeinbergPValueOperator;
+    
+    public SNPFrequencyFindingCriteriaDTO() {
+    }
     public ArithematicOperator getHardyWeinbergPValueOperator() {
         return hardyWeinbergPValueOperator;
     }
@@ -175,9 +178,6 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
         this.referenceHomogyzoteCount = referenceHomogyzoteCount;
      }
 
-     public FindingsHandler getHandler() {
-        return new SNPFrequencyFindingHandler();
-     }
      
      @Override
  	public String toString()

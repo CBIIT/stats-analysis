@@ -26,6 +26,10 @@ public class SNPAssociationFindingCriteriaDTO extends FindingCriteriaDTO {
     private ArithematicOperator pValueOperator;
     private ArithematicOperator rankOperator;
 
+    public SNPAssociationFindingCriteriaDTO(){
+        
+    }
+
     public SNPAssociationFindingCriteriaDTO(StudyCriteria studyCriteria) throws Exception{
         super(studyCriteria);
     }
@@ -72,9 +76,6 @@ public class SNPAssociationFindingCriteriaDTO extends FindingCriteriaDTO {
         return rankOperator;
     }
 
-    public FindingsHandler getHandler() {
-        return new SNPAssociationFindingsHandler();
-    }
 
 	@Override
 	public String toString()
