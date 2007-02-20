@@ -1,25 +1,23 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
-import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
+import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
-import gov.nih.nci.caintegrator.domain.study.bean.Population;
-import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
-import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
-import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
-
 
 import java.util.Collection;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * User: Ram Bhattaru
@@ -27,42 +25,73 @@ import java.util.ArrayList;
  * Time: 5:21:49 PM
  */
 public class FindingsManager {
-    public static Collection<? extends Finding> getFindings(FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
+    private ObjectQueryHandler objectQueryHandler;
+    private FindingsHandler snpAssociationFindingsHandler;
+    private SubjectSearchHandler subjectSearchHandler;
+
+
+
+    public FindingsManager() {
+        
+    }
+    public SubjectSearchHandler getSubjectSearchHandler() {
+        return subjectSearchHandler;
+    }
+
+    public void setSubjectSearchHandler(SubjectSearchHandler subjectSearchHandler) {
+        this.subjectSearchHandler = subjectSearchHandler;
+    }
+
+    public FindingsHandler getSnpAssociationFindingsHandler() {
+        return snpAssociationFindingsHandler;
+    }
+
+    public void setSnpAssociationFindingsHandler(
+            FindingsHandler snpAssociationFindingsHandler) {
+        this.snpAssociationFindingsHandler = snpAssociationFindingsHandler;
+    }
+    public ObjectQueryHandler getObjectQueryHandler() {
+        return objectQueryHandler;
+    }
+
+    public void setObjectQueryHandler(ObjectQueryHandler objectQueryHandler) {
+        this.objectQueryHandler = objectQueryHandler;
+    }
+
+    public Collection<? extends Finding> getFindings(FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
     throws Exception {
         return findingCritDTO.getHandler().getFindings(
                 findingCritDTO, fromIndex, toIndex);
     }
 
-    public static void populateFindings(FindingCriteriaDTO findingCritDTO, List toBePopulated)
+    public void populateFindings(FindingCriteriaDTO findingCritDTO, List toBePopulated)
     throws Exception {
         findingCritDTO.getHandler().getFindingForFTP(findingCritDTO, toBePopulated);
     }
 
-    public static Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
+    public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
                                                       int fromIndex, int toIndex)  {
-        SubjectSearchHandler handler = new SubjectSearchHandler();
-        return handler.getStudySubjects(spCrit, fromIndex, toIndex);
+        return subjectSearchHandler.getStudySubjects(spCrit, fromIndex, toIndex);
     }
 
-    public static void populateStudySubjects(StudyParticipantCriteria spCrit,List toBePopulated ) {
-       SubjectSearchHandler handler = new SubjectSearchHandler();
-       handler.populateFindings(spCrit, toBePopulated);
+    public void populateStudySubjects(StudyParticipantCriteria spCrit,List toBePopulated ) {
+       subjectSearchHandler.populateFindings(spCrit, toBePopulated);
     }
 
 
-    public static Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
+    public Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
     throws Exception {
-            return FindingsHandler.getSNPAnnotations(annotCrit);
+            return snpAssociationFindingsHandler.getSNPAnnotations(annotCrit);
     }
 
-    public static Collection<Study> getStudies(StudyCriteria studyCrit)
+    public Collection<Study> getStudies(StudyCriteria studyCrit)
     throws Exception {
-        return ObjectQueryHandler.getStudyObjects(studyCrit);
+        return objectQueryHandler.getStudyObjects(studyCrit);
     }
 
-    public static Collection<SNPPanel> getPanels(StudyCriteria studyCrit)
+    public Collection<SNPPanel> getPanels(StudyCriteria studyCrit)
     throws Exception {
-        return ObjectQueryHandler.getPanelObjects(studyCrit);
+        return objectQueryHandler.getPanelObjects(studyCrit);
     }
 
     /**
@@ -75,37 +104,37 @@ public class FindingsManager {
      * @return Collection of Population Objects
      * @throws Exception
      */
-    public static Collection<Population> getPopulations(PopulationCriteria populationCrit)
+    public Collection<Population> getPopulations(PopulationCriteria populationCrit)
     throws Exception {
-        return ObjectQueryHandler.getPopulationObjects(populationCrit);
+        return objectQueryHandler.getPopulationObjects(populationCrit);
     }
-    public static Collection<SNPAssociationAnalysis> getSNPAssociationAnalysis(SNPAssociationAnalysisCriteria  assocCrit)
+    public Collection<SNPAssociationAnalysis> getSNPAssociationAnalysis(SNPAssociationAnalysisCriteria  assocCrit)
     throws Exception {
-        return ObjectQueryHandler.getSNPAssociationAnalysisObjects(assocCrit);
+        return objectQueryHandler.getSNPAssociationAnalysisObjects(assocCrit);
     }
-    public static Collection<SNPAnalysisGroup> getSNPAnalysisGroups(AnalysisGroupCriteria   analGrpCrit)
+    public Collection<SNPAnalysisGroup> getSNPAnalysisGroups(AnalysisGroupCriteria   analGrpCrit)
     throws Exception {
-        return ObjectQueryHandler.getAnalysisGroups(analGrpCrit);
+        return objectQueryHandler.getAnalysisGroups(analGrpCrit);
     }
-    public static List<String> getChromosomes()
+    public List<String> getChromosomes()
     throws Exception {
-        return ObjectQueryHandler.getChromosomes();
+        return objectQueryHandler.getChromosomes();
     }
 
-    public static Collection<String> getGenotypeFindingQCStatus() {
-        return ObjectQueryHandler.getAllQCStatus();
+    public Collection<String> getGenotypeFindingQCStatus() {
+        return objectQueryHandler.getAllQCStatus();
     }
 
-    public static Collection<String> getCaseControlStatus() {
-        return ObjectQueryHandler.getCaseControlStatus();
+    public Collection<String> getCaseControlStatus() {
+        return objectQueryHandler.getCaseControlStatus();
     }
 
-    public static Collection<Integer> getAgeLowerLimitValues() {
-        return ObjectQueryHandler.getAgeLowerLimitValues();
+    public Collection<Integer> getAgeLowerLimitValues() {
+        return objectQueryHandler.getAgeLowerLimitValues();
     }
 
-    public static Collection<Integer> getAgeUpperLimitValues() {
-        return ObjectQueryHandler.getAgeUpperLimitValues();
+    public Collection<Integer> getAgeUpperLimitValues() {
+        return objectQueryHandler.getAgeUpperLimitValues();
     }
 
 
@@ -117,7 +146,7 @@ public class FindingsManager {
      * @param toIndex
      * @throws Exception
      */
-    public static void getFindingsViaFTP(String email, FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
+    public void getFindingsViaFTP(String email, FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
     throws Exception {
 
     }
