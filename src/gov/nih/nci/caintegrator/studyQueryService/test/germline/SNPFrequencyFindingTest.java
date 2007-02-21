@@ -28,7 +28,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
      protected StudyParticipantCriteria spCrit;
     public void setUp() throws Exception {
         super.setUp();
-        freqDTO = new SNPFrequencyFindingCriteriaDTO(studyCrit);
+        freqDTO = (SNPFrequencyFindingCriteriaDTO) ctx.getBean("snpFrequencyFindingsCriteria");
         freqDTO.setAnnotationCriteria(annotCrit);
     }
 

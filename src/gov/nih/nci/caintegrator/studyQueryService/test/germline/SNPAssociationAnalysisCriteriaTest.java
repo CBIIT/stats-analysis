@@ -22,6 +22,7 @@ public class SNPAssociationAnalysisCriteriaTest extends GenotypeFindingTest {
     private SNPAssociationAnalysisCriteria  assocCrit ;
 
     public void setUp() throws Exception {
+        super.setUp();
         assocCrit = new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
     }
 
@@ -43,8 +44,8 @@ public class SNPAssociationAnalysisCriteriaTest extends GenotypeFindingTest {
             for (Iterator<SNPAssociationAnalysis> iterator = assocObjs .iterator(); iterator.hasNext();) {
                 SNPAssociationAnalysis analysis = iterator.next();
                 System.out.println("Analysis Name: " + analysis.getName());
-                System.out.println("Analysis Abstract: " + analysis.getMethods());
-                System.out.println("Analysis Description: " + analysis.getDescription());
+                /*System.out.println("Analysis Abstract: " + analysis.getMethods());
+                System.out.println("Analysis Description: " + analysis.getDescription());*/
             }
 
         } catch (Throwable t)  {

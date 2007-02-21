@@ -16,11 +16,11 @@ import java.util.Iterator;
  * Date:   Aug 16, 2006
  * Time:   8:05:49 AM
  */
-public class StudyCriteriaTest extends BaseSpringTestCase {
-    public String[] getConfigFiles() {
+public class StudyCriteriaTest extends CGEMSTest {
+   /* public String[] getConfigFiles() {
             return new String[] {"classpath*:applicationContext-services.xml","test/applicationContext-junit.xml"};
     }
-
+*/
     private StudyCriteria studyCrit ;
 
     public void setUp() throws Exception {
@@ -28,7 +28,7 @@ public class StudyCriteriaTest extends BaseSpringTestCase {
     }
 
     public void testStudyCriteria() {
-        setUpStudyCriteria();
+        //sStudyetUpStudyCriteria();
         executeSearch();
     }
 

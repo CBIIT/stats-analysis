@@ -32,7 +32,7 @@ public class PopulationSearchTest extends GenotypeFindingTest {
 
        popCrit = new PopulationCriteria(names);
         //names.add("CEPH");    */
-        popCrit.addNames(names);
+        //popCrit.addNames(names);
         executeSearch();
     }
 
@@ -44,9 +44,9 @@ public class PopulationSearchTest extends GenotypeFindingTest {
                 Population popObj =  iterator.next();
                 System.out.println("Population Name: " +
                                     popObj.getName());
-                System.out.println("Member Count: " + popObj.getMemberCount());
+              /*  System.out.println("Member Count: " + popObj.getMemberCount());
                 System.out.println("Description: " + popObj.getDescription());
-                System.out.println("Source: " + popObj.getSource());
+                System.out.println("Source: " + popObj.getSource());*/
             }
         } catch (Throwable t)  {
            System.out.println("CGEMS Exception in getting Population Objects: " + t.toString());

@@ -13,15 +13,8 @@ import gov.nih.nci.caintegrator.util.HQLHelper;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -48,12 +41,10 @@ public class ObjectQueryHandler {
     private  Set<String> caseControlStatus = null;
     private  Set<Integer> ageLowerLimits = null;
     private  Set<Integer> ageUpperLimits = null;
-    private  Set<Study> allStudyObjects = null;
+    private  TreeSet<Study> allStudyObjects = null;
 
-    public ObjectQueryHandler() {
-        
-    }
-    
+    public ObjectQueryHandler() { }
+
     public  Collection<Study> getStudyObjects(StudyCriteria studyCrit) {
          return getStudyObjects(studyCrit, false);
     }
@@ -61,8 +52,6 @@ public class ObjectQueryHandler {
     public  Collection<Study> getStudyObjects(StudyCriteria studyCrit, boolean populatePanel) {
         if (studyCrit == null) return new ArrayList<Study>();
             Session session = getSessionFactory().getCurrentSession();
-
-
             HashMap params = new HashMap();
             String studyCritHQL = " FROM Study s WHERE {0} {1} ";
             StringBuffer sponsorJoin = new StringBuffer("");
@@ -72,8 +61,9 @@ public class ObjectQueryHandler {
 
             if (studyName == null && sponsorStudyIdentifier == null) {
                 if (allStudyObjects == null) {
-                    allStudyObjects = new HashSet<Study>();
-                    List<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
+                    allStudyObjects = new TreeSet<Study>(
+                            new ObjectComparator.StudyNameComparator());
+                    Collection<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
                     allStudyObjects.addAll(studyObjs);
                     return allStudyObjects;
                 }
@@ -92,23 +82,21 @@ public class ObjectQueryHandler {
                  params.put("sponsorStudyIdentifier", sponsorStudyIdentifier);
             }
 
-            List<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
+            Collection<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
 
             // populate these study objects with SNPPanel objects based on parameer passes in
             if (populatePanel) {
-                for (int i = 0; i < studyObjs.size(); i++) {
-                    Study study = studyObjs.get(i);
-                    // initialize SNPPanel associations
+                for (Iterator<Study> iterator = studyObjs.iterator(); iterator.hasNext();) {
+                    Study study =  iterator.next();
                     study.getSnpPanelCollection().size();
-
                 }
             }
-
             return studyObjs;
     }
 
     public  Collection<SNPPanel> getPanelObjects(StudyCriteria studyCrit) {
-        Collection snpPanels = new ArrayList<SNPPanel>();
+        Collection snpPanels = new TreeSet<SNPPanel>(
+                        new ObjectComparator.PanelyNameComparator());
         if (studyCrit == null) return snpPanels;
         Collection<Study> studyObjs = getStudyObjects(studyCrit, true);
         for (Iterator<Study> iterator = studyObjs.iterator(); iterator.hasNext();) {
@@ -118,16 +106,16 @@ public class ObjectQueryHandler {
         return snpPanels;
     }
 
-     private  List<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {
-        String hql = MessageFormat.format(studyCritHQL, new Object[] {
-                            studyNameJoin, sponsorJoin});
-
+     private  Collection<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {
+        String hql = MessageFormat.format(studyCritHQL, new Object[] {studyNameJoin, sponsorJoin});
         String tempHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), "AND");
         String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "WHERE");
         Query studyQuery = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, studyQuery );
-        List<Study> studyObjs = studyQuery.list();
-        return studyObjs;
+        List results = studyQuery.list();
+        SortedSet<Study> s = new TreeSet<Study>(new ObjectComparator.StudyNameComparator());
+        s.addAll(results);
+        return s;
     }
 
     /**
@@ -141,97 +129,67 @@ public class ObjectQueryHandler {
      */
     public  Collection<Population> getPopulationObjects(PopulationCriteria populationCrit) {
         if (populationCrit == null) return new ArrayList<Population>();
-        try {
-            Session session = getSessionFactory().getCurrentSession();
-            Collection popNames = populationCrit.getNames();
-            StringBuffer inClause = new StringBuffer("");
-            HashMap params = new HashMap();
-            if (popNames != null && popNames.size() > 0) {
-                inClause.append(" AND p.name IN (:popNames)");
-                params.put("popNames", popNames);
-            }
-
-            Query q = session.createQuery(" FROM Population p WHERE p.studyCollection.name=:name " + inClause.toString());
-            params.put("name", populationCrit.getStudyName());
-            HQLHelper.setParamsOnQuery(params, q);
-            List<Population> popObjs = q.list();
-            return popObjs;
-        } catch (HibernateException e) {
-            logger.error(e);
-        } catch (Exception e) {
-            logger.error(e);
+        Session session = getSessionFactory().getCurrentSession();
+        Collection popNames = populationCrit.getNames();
+        StringBuffer inClause = new StringBuffer("");
+        HashMap params = new HashMap();
+        if (popNames != null && popNames.size() > 0) {
+            inClause.append(" AND p.name IN (:popNames)");
+            params.put("popNames", popNames);
         }
-        return null;
+
+        Query q = session.createQuery(" FROM Population p WHERE p.studyCollection.name=:name " + inClause.toString());
+        params.put("name", populationCrit.getStudyName());
+        HQLHelper.setParamsOnQuery(params, q);
+        List<Population> results = q.list();
+        Set<Population> popObjs = new TreeSet<Population>(
+                                    new ObjectComparator.PopulationNameComparator());
+        popObjs.addAll(results);
+        return popObjs;
     }
 
     public  Collection<SNPAnalysisGroup> getAnalysisGroups(AnalysisGroupCriteria analGrpCrit) {
-        try {
-            String studyName = analGrpCrit.getStudyName();
-            assert(studyName != null);
-            Session session = getSessionFactory().getCurrentSession();
+        String studyName = analGrpCrit.getStudyName();
+        assert(studyName != null);
+        Session session = getSessionFactory().getCurrentSession();
+        HashMap params = new HashMap();
 
-            //Criteria crit = session.createCriteria(SNPAnalysisGroup.class);
-            HashMap params = new HashMap();
+        StringBuffer hql =new StringBuffer(" FROM SNPAnalysisGroup sg " +
+                " WHERE sg.snpAssociationAnalysis.study.name=:studyName AND {0} ");
+        params.put("studyName", studyName);
 
-            StringBuffer hql =new StringBuffer(" FROM SNPAnalysisGroup sg " +
-                    " WHERE sg.snpAssociationAnalysis.study.name=:studyName AND {0} ");
-
-                    // + " WHERE sa.study.name= :studyName AND {0} ");
-            params.put("studyName", studyName);
-
-            String nameJoin = new String(" ( 0 = 0 ) ");
-            if (analGrpCrit != null) {
-                String[] names = analGrpCrit.getNames();
-                if (names != null && names.length > 0) {
-                    Collection<String> l = new ArrayList<String>(names.length);
-                    for (int i = 0; i < names.length; l.add(names[i++]));
-                    nameJoin = new String(" sg.name IN (:names) ");
-                    params.put("names", l);
-                    //crit.add(Restrictions.in("name", names));
-                }
+        String nameJoin = new String(" ( 0 = 0 ) ");
+        if (analGrpCrit != null) {
+            String[] names = analGrpCrit.getNames();
+            if (names != null && names.length > 0) {
+                Collection<String> l = new ArrayList<String>(names.length);
+                for (int i = 0; i < names.length; l.add(names[i++]));
+                nameJoin = new String(" sg.name IN (:names) ");
+                params.put("names", l);
             }
-
-            String tempHQL = MessageFormat.format(hql.toString(), new Object[] {nameJoin});
-            String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "AND");
-            Query q = session.createQuery(finalHQL);
-            HQLHelper.setParamsOnQuery(params, q);
-            Collection<SNPAnalysisGroup> groups = q.list();
-            return groups;
-        } catch (HibernateException e) {
-            logger.error(e);
-        } catch (Exception e) {
-            logger.error(e);
         }
-        return null;
+
+        String tempHQL = MessageFormat.format(hql.toString(), new Object[] {nameJoin});
+        String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "AND");
+        Query q = session.createQuery(finalHQL);
+        HQLHelper.setParamsOnQuery(params, q);
+        Collection<SNPAnalysisGroup> results = q.list();
+        Set<SNPAnalysisGroup> groups = new TreeSet<SNPAnalysisGroup>(
+                                        new ObjectComparator.SNPAnalysisGroupNameComparator() );
+        groups.addAll(results);
+        return groups;
     }
 
 
     public  Collection<Integer> getAgeLowerLimitValues() {
-        System.out.println("HOT DEPLOYMENT");
         if (ageLowerLimits == null) {
            ageLowerLimits = new HashSet<Integer>();
-        try {
-                Session session = getSessionFactory().getCurrentSession();
-
-
-                String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU ";
-
-    /*
-                 Criteria crit = session.createCriteria(StudyParticipant.class);
-                 crit.setProjection(Projections.distinct(
-                         Projections.property("ageAtEnrollment.minValue")));
-                 Collection<Double> statusValues =  crit.list() ;
-     */
-
-                Query q = session.createSQLQuery(sql);
-                Collection<BigDecimal> minValues = q.list();
-                Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
-                ageLowerLimits.addAll(intValues);
-            } catch (HibernateException e) {
-                logger.error(e);
-            } catch (Exception e) {
-                logger.error(e);
-            }
+            Session session = getSessionFactory().getCurrentSession();
+            String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU ";
+            Query q = session.createSQLQuery(sql);
+            Collection<BigDecimal> minValues = q.list();
+            Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
+            ageLowerLimits.addAll(intValues);
        }
        return ageLowerLimits;
    }
@@ -248,25 +206,12 @@ public class ObjectQueryHandler {
     public  Collection<Integer> getAgeUpperLimitValues() {
        if (ageUpperLimits == null) {
            ageUpperLimits  = new HashSet<Integer>();
-        try {
-                Session session = getSessionFactory().getCurrentSession();
-
-                String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU ";
-    /*
-                 Criteria crit = session.createCriteria(StudyParticipant.class);
-                 crit.setProjection(Projections.distinct(
-                             Projections.property("ageAtEnrollment.maxValue")));
-                 Collection<Double> statusValues =  crit.list() ;
-     */
-                Query q = session.createSQLQuery(sql);
-                Collection<BigDecimal> minValues = q.list();
-                Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
-                ageUpperLimits.addAll(intValues);
-            } catch (HibernateException e) {
-                logger.error(e);
-            } catch (Exception e) {
-                logger.error(e);
-            }
+           Session session = getSessionFactory().getCurrentSession();
+           String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU ";
+           Query q = session.createSQLQuery(sql);
+           Collection<BigDecimal> minValues = q.list();
+           Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
+           ageUpperLimits.addAll(intValues);
        }
        return ageUpperLimits ;
    }
@@ -274,24 +219,11 @@ public class ObjectQueryHandler {
     public  Collection<String> getCaseControlStatus() {
        if (caseControlStatus == null) {
            caseControlStatus = new HashSet<String>();
-        try {
-                Session session = getSessionFactory().getCurrentSession();
-
-                String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT ";
-    /*
-                 Criteria crit = session.createCriteria(StudyParticipant.class);
-                 crit.setProjection(
-                             Projections.property("caseControlStatus"));
-                 Collection<String> statusValues =  crit.list() ;
-     */
-                Query q = session.createSQLQuery(sql);
-                List<String> statusValues = q.list();
-                caseControlStatus.addAll(statusValues);
-            } catch (HibernateException e) {
-                logger.error(e);
-            } catch (Exception e) {
-                logger.error(e);
-            }
+            Session session = getSessionFactory().getCurrentSession();
+            String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT ";
+            Query q = session.createSQLQuery(sql);
+            List<String> statusValues = q.list();
+            caseControlStatus.addAll(statusValues);
        }
        return caseControlStatus;
    }
@@ -302,23 +234,16 @@ public class ObjectQueryHandler {
             qcStatusValues = new HashSet<String>();
             try {
                 Session session = getSessionFactory().getCurrentSession();
-
-
-    /*
-                 Criteria crit = session.createCriteria(GenotypeFinding.class);
-                 crit.setProjection(
-                             Projections.property("status"));
-                 Collection<String> statusValues =  crit.list() ;
-     */
-
                 String sql = "SELECT GENETYPE_STATUS FROM GENOTYPE_STATUS_LU ";
                 Query q = session.createSQLQuery(sql);
                 Collection<String> values = q.list();
                 qcStatusValues.addAll(values);
             } catch (HibernateException e) {
                 logger.error(e);
+                throw new RuntimeException(e);
             } catch (Exception e) {
                 logger.error(e);
+                throw new RuntimeException(e);
             }
         }
         return qcStatusValues;
@@ -360,15 +285,18 @@ public class ObjectQueryHandler {
             String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "WHERE");
             Query analysisQuery = session.createQuery(finalHQL);
             HQLHelper.setParamsOnQuery(params, analysisQuery);
-            List<SNPAssociationAnalysis> analysisObjs = analysisQuery.list();
-
+            List<SNPAssociationAnalysis> results = analysisQuery.list();
+            Set<SNPAssociationAnalysis> analysisObjs = new TreeSet<SNPAssociationAnalysis>(
+                                new ObjectComparator.SNPAnalysisNameComparator() );
+            analysisObjs.addAll(results);
             return analysisObjs;
         } catch (HibernateException e) {
             logger.error(e);
+            throw new RuntimeException(e);
         } catch (Exception e) {
             logger.error(e);
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
 

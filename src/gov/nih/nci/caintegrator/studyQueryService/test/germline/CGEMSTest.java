@@ -20,7 +20,7 @@ import java.util.Collection;
  * Time:   5:37:48 AM
  */
 public abstract class CGEMSTest extends BaseSpringTestCase {
-    protected abstract Collection executeSearch(int start, int end);
+    //protected abstract Collection executeSearch(int start, int end);
     //protected static int TOTAL_FINDINGS = 0;
     protected AnnotationCriteria annotCrit;
     protected StudyCriteria studyCrit;
@@ -39,6 +39,7 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
     }
 
     public void setUp() throws Exception{
+        // annotCrit = (AnnotationCriteria)ctx.getBean("AnnotationCriteria");
         annotCrit = new AnnotationCriteria();
         spCrit = new StudyParticipantCriteria();
         studyCrit = new StudyCriteria();
@@ -275,8 +276,9 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
     }
 
     public String[] getConfigFiles() {
-
-        return new String[] {"classpath*:applicationContext-services.xml","C:/Projects/caintegrator-spec/test/applicationContext-junit.xml"};
-    }
-
+        return new String[] {
+                "classpath*:applicationContext-services.xml",
+                "C:/Projects/caintegrator-spec/test/applicationContext-junit.xml",
+                "C:/Projects/cgems/WebRoot/WEB-INF/applicationContext.xml"};
+                }
 }
