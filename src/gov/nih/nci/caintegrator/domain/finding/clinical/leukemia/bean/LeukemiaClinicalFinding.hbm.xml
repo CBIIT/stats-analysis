@@ -72,9 +72,10 @@
 			<property name="value" column="WHITE_BLOOD_COUNT" />
 		</component>
 		
-		<property name="peripheralBloodBlastPercentage"
-			type="java.lang.Float"
-			column="BLOOD_BLASTS" />
+		<component name="peripheralBloodBlastPercentage"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="BLOOD_BLASTS" />
+		</component>		
 	
 		<component name="karyotype"
 			class="gov.nih.nci.caintegrator.domain.common.bean.TextMeasurement">

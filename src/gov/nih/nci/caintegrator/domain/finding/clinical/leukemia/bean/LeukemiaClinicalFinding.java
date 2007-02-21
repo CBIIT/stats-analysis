@@ -1,11 +1,10 @@
 package gov.nih.nci.caintegrator.domain.finding.clinical.leukemia.bean;
 
+import gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement;
 import gov.nih.nci.caintegrator.domain.common.bean.TextMeasurement;
 import gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment;
 import gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding;
 import gov.nih.nci.caintegrator.domain.finding.clinical.breastCancer.bean.BreastCancerClinicalFinding;
-import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
-import gov.nih.nci.caintegrator.domain.study.bean.TimeCourse;
 
 public class LeukemiaClinicalFinding extends ClinicalFinding {
     /**  */
@@ -24,7 +23,7 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment boneMarrowBlastPercentage;
     private ClinicalAssessment minimumResidualDisease;
     private ClinicalAssessment peripheralBloodWhiteBloodCount;
-    private Float peripheralBloodBlastPercentage;
+    private NumericMeasurement peripheralBloodBlastPercentage;
     private TextMeasurement karyotype;
     
 
@@ -109,12 +108,12 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
         this.mllStatus = mllStatus;
     }
 
-    public Float getPeripheralBloodBlastPercentage() {
+    public NumericMeasurement getPeripheralBloodBlastPercentage() {
         return peripheralBloodBlastPercentage;
     }
 
     public void setPeripheralBloodBlastPercentage(
-            Float peripheralBloodBlastPercentage) {
+            NumericMeasurement peripheralBloodBlastPercentage) {
         this.peripheralBloodBlastPercentage = peripheralBloodBlastPercentage;
     }
 
