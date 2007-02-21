@@ -56,12 +56,12 @@
 			<property name="value" column="BCR_STATUS" />
 		</component>
 		<component name="dnaIndex"
-			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
-			<property name="value" column="DNA_INDEX" />
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="DNA_INDEX" />
 		</component>
 		<component name="boneMarrowBlastPercentage"
-			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
-			<property name="value" column="BONE_MARROW_BLASTS" />
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="BONE_MARROW_BLASTS" />
 		</component>
 		<component name="minimumResidualDisease"
 			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">

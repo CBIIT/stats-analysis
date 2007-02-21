@@ -19,8 +19,8 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment mllStatus;
     private ClinicalAssessment e2aStatus;
     private ClinicalAssessment bcrStatus;
-    private ClinicalAssessment dnaIndex;
-    private ClinicalAssessment boneMarrowBlastPercentage;
+    private NumericMeasurement dnaIndex;
+    private NumericMeasurement boneMarrowBlastPercentage;
     private ClinicalAssessment minimumResidualDisease;
     private ClinicalAssessment peripheralBloodWhiteBloodCount;
     private NumericMeasurement peripheralBloodBlastPercentage;
@@ -40,12 +40,12 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
         this.bcrStatus = bcrStatus;
     }
 
-    public ClinicalAssessment getBoneMarrowBlastPercentage() {
+    public NumericMeasurement getBoneMarrowBlastPercentage() {
         return boneMarrowBlastPercentage;
     }
 
     public void setBoneMarrowBlastPercentage(
-            ClinicalAssessment boneMarrowBlastPercentage) {
+            NumericMeasurement boneMarrowBlastPercentage) {
         this.boneMarrowBlastPercentage = boneMarrowBlastPercentage;
     }
 
@@ -67,11 +67,11 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
         this.congenitalAbnormality = congenitalAbnormality;
     }
 
-    public ClinicalAssessment getDnaIndex() {
+    public NumericMeasurement getDnaIndex() {
         return dnaIndex;
     }
 
-    public void setDnaIndex(ClinicalAssessment dnaIndex) {
+    public void setDnaIndex(NumericMeasurement dnaIndex) {
         this.dnaIndex = dnaIndex;
     }
 
