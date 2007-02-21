@@ -18,6 +18,7 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCrit
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Iterator;
 
 /**
  * User: Ram Bhattaru
@@ -29,10 +30,8 @@ public class FindingsManager {
     private FindingsHandler snpAssociationFindingsHandler;
     private SubjectSearchHandler subjectSearchHandler;
 
-
-
     public FindingsManager() {
-        
+
     }
     public SubjectSearchHandler getSubjectSearchHandler() {
         return subjectSearchHandler;
@@ -70,7 +69,7 @@ public class FindingsManager {
     }
 
     public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
-                                                      int fromIndex, int toIndex)  {
+                                                         int fromIndex, int toIndex)  {
         return subjectSearchHandler.getStudySubjects(spCrit, fromIndex, toIndex);
     }
 
@@ -136,21 +135,4 @@ public class FindingsManager {
     public Collection<Integer> getAgeUpperLimitValues() {
         return objectQueryHandler.getAgeUpperLimitValues();
     }
-
-
-    /**
-     * This method posts the Findings to an FTP site that is configured during application start up
-     * @param email
-     * @param findingCritDTO
-     * @param fromIndex
-     * @param toIndex
-     * @throws Exception
-     */
-    public void getFindingsViaFTP(String email, FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
-    throws Exception {
-
-    }
-
-
-
 }
