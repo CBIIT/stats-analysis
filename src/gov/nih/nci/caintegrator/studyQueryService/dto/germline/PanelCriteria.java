@@ -39,10 +39,12 @@ public class PanelCriteria {
     @Override
 	public String toString()
     {
-		String str = "";
+		String str = "Panel Criteria: ";
 		
 		if ((name != null) && (name.length() > 0))
-			str = "Panel is " + name + "\n";
+			str = str + name;
+		
+		str = str + "\n";
 		
 		return str;
 	}

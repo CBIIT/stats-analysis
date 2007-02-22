@@ -104,6 +104,9 @@ public class AnnotationCriteria {
 	{
 		String str = "SNP Annotation Criteria\n";
 		
+		if (panelCriteria != null)
+			str = str + panelCriteria.toString();
+		
 		if (physicalPositionCriteria != null)
 			str = str + physicalPositionCriteria.toString();
 		
