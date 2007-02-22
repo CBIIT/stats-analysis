@@ -61,6 +61,7 @@ public class SNPAnnotationCriteriaHandler {
     public static List<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit,  Session session)
     throws Exception {
         List<String> annotObjIDs = getSNPAnnotationsIDs(annotCrit, session);
+        /* TODO:  convert HibernateCriteria query below in to HQL Query. */
         Criteria crit = session.createCriteria(SNPAnnotation.class);
         crit.add(Restrictions.in("id", annotObjIDs));
         List<SNPAnnotation> snpAnnotObjs = crit.list();
@@ -113,14 +114,12 @@ public class SNPAnnotationCriteriaHandler {
 
     public static StringBuffer getAnnotHQLWithParams(AnnotationCriteria annotCrit, HashMap params) throws Exception {
         PhysicalPositionCriteria poistionCrit = annotCrit.getPhysicalPositionCriteria();
-        Collection<String> dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
 
         String annotHSQL = new String(" SELECT s.id FROM SNPAnnotation s WHERE {0} {1} ");
 
         /* 0.  Handle GeneSymbol Criteria */
         Collection<String> geneSymbols = null;
-        if (annotCrit.getGeneSymbols() != null)
-            geneSymbols = HQLHelper.trimCollection(annotCrit.getGeneSymbols());
+        if (annotCrit.getGeneSymbols() != null) geneSymbols = HQLHelper.trimCollection(annotCrit.getGeneSymbols());
         StringBuffer snpAnnotHSQL = new StringBuffer(annotHSQL);
         String geneSymbolCond = "";
         if (geneSymbols != null && geneSymbols.size() > 0) {
@@ -137,12 +136,12 @@ public class SNPAnnotationCriteriaHandler {
         if (poistionCrit != null) handlePositionCriteria(poistionCrit, snpAnnotHSQL, params);
 
         /* 3 Handle CytobandCriteria, GeneOntology, GenePathway */
-        if ((annotCrit.getCytobandCriteria() != null) ||
-           (annotCrit.getGeneOntology() != null) || (annotCrit.getGenePathways() != null) )
+        if ((annotCrit.getCytobandCriteria() != null) || (annotCrit.getGeneOntology() != null) ||
+                                                                    (annotCrit.getGenePathways() != null) )
            throw new RuntimeException (" This method is not implelemted for now: ");
 
         /* 4 Handle SNPIdentifiers */
-        dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
+        Collection<String> dbSNPIdentifiers = annotCrit.getSnpIdentifiers();
         if (dbSNPIdentifiers !=  null && dbSNPIdentifiers.size() > 0) {
             String tmp = new String(" s.dbsnpId IN (:dbSnps ) AND ");
             params.put("dbSnps", dbSNPIdentifiers);
@@ -168,19 +167,21 @@ public class SNPAnnotationCriteriaHandler {
         }
     }
 
-    private static void handlePositionCriteria(PhysicalPositionCriteria poistionCrit, StringBuffer snpAnnotHSQL, HashMap params) {
+    private static void handlePositionCriteria(PhysicalPositionCriteria poistionCrit,
+                                                           StringBuffer snpAnnotHSQL, HashMap params) {
         String chromosome = poistionCrit.getChromosome();
+        assert(chromosome != null);
         Long startPos = poistionCrit.getStartPosition();
         Long endPos = poistionCrit.getEndPosition();
+        String tmp;
 
-        if ((chromosome == null) || (startPos == null) || (endPos == null) )
-             throw new RuntimeException("Chromosme, StartPosition, EndPosition are required ");
-        String tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end )) AND ");
+        if (startPos != null && endPos != null) {
+            tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end )) AND ");
+            params.put("start", startPos);
+            params.put("end", endPos);
+        } else tmp = new String(" (s.chromosomeName=:chr) AND ");
+
         params.put("chr", chromosome);
-        params.put("start", startPos);
-        params.put("end", endPos);
         snpAnnotHSQL.append(tmp);
     }
-
-
 }

@@ -25,7 +25,7 @@ abstract public class BatchFindingsHandler {
           without Annotation Criteria (start: start  end: end)
     */
 
-    public static final int BATCH_OBJECT_INCREMENT = 5000;
+    public static final int BATCH_OBJECT_INCREMENT = 20000;
 
     protected static int IN_PARAMETERS  = 100;
 

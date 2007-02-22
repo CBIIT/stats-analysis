@@ -40,7 +40,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         spCrit.setPopulationCriteria(popCrit);     
      }
 
-  /*  public void testSNPAnnotationRetrieval() {
+  /*   public void testSNPAnnotationRetrieval() {
         setUpSNPPhysicalPositionCrit();
         setUpPanelCrit();
         try {
@@ -54,6 +54,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
             t.printStackTrace();
         }
     }*/
+
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
        setUpSNPPhysicalPositionCrit();
@@ -76,66 +77,65 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         executeSearch(0, 600);
    }
 
-//    public void testPopulateFindings() {
-//        //setUpSNPPhysicalPositionCrit();
-//        setUpPanelCrit();
-//        //freqDTO.setPopulationNames(new String[] {"CEPH"});
-//        freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
-//
-//        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
-//        //freqDTO.setStudyCriteria(studyCrit);
-//        //setUpGeneBiomarkerCrit();
-//        //setSNPFindingCriteria();
-//        try {
-//             HashSet<SNPFrequencyFinding> actualBatchFindings = null;
-//             final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
-//             new Thread(new Runnable() {
-//                 public void run() {
-//                     try {
-//                        manager.populateFindings(freqDTO, findingsToBePopulated);
-//                     } catch(Throwable t) {
-//                         t.printStackTrace();
-//                         System.out.println("Error from FindingsManager.populateFindings call: ");
-//                     }
-//                 }
-//                       }
-//            ).start();
-//
-//            boolean sleep = true;
-//            int count = 1;
-//            int noOfResults = 0;
-//            do {
-//                synchronized(findingsToBePopulated) {
-//                    if (findingsToBePopulated.size() > 0) {
-//                         actualBatchFindings  = (HashSet<SNPFrequencyFinding>)findingsToBePopulated.remove(0);
-//                         for (Iterator<SNPFrequencyFinding> iterator = actualBatchFindings.iterator(); iterator.hasNext();) {
-//                             SNPFrequencyFinding sf = iterator.next();
-//                             System.out.print("ID: " + sf.getId());
-//                             System.out.print("  HardyWeinbergPValue" + sf.getHardyWeinbergPValue()) ;
-//                         }
-//                         noOfResults += actualBatchFindings.size();
-//                         System.out.println("WRITTEN BATCH: " + count++ + " SIZE: " +
-//                                                          actualBatchFindings.size() + "\n\n");
-//                         if (actualBatchFindings.size() == 0) {
-//                            /* means no more to results are coming.  Finished */
-//                             break;
-//                         }
-//                     }
-//                 }
-//                 Thread.currentThread().sleep(10);
-//                for (Iterator iterator = findingsToBePopulated.iterator(); iterator.hasNext();) {
-//                    Object toBeGCed = iterator.next();
-//                    toBeGCed = null;
-//                }
-//                actualBatchFindings = null;
-//             }  while(true);
-//
-//            System.out.println("ALL RESULTS WERE RECEIVED TOTAL: " + noOfResults);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        }
-//    }
+    public void testPopulateFindings() {
+        //setUpSNPPhysicalPositionCrit();
+        setUpPanelCrit();
+        //freqDTO.setPopulationNames(new String[] {"CEPH"});
+        freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
+
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
+        //freqDTO.setStudyCriteria(studyCrit);
+        //setUpGeneBiomarkerCrit();
+        //setSNPFindingCriteria();
+        try {
+             HashSet<SNPFrequencyFinding> actualBatchFindings = null;
+             final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
+             new Thread(new Runnable() {
+                 public void run() {
+                     try {
+                        manager.populateFindings(freqDTO, findingsToBePopulated);
+                     } catch(Throwable t) {
+                         t.printStackTrace();
+                         System.out.println("Error from FindingsManager.populateFindings call: ");
+                     }
+                 }
+                       }
+            ).start();
+
+            int count = 1;
+            int noOfResults = 0;
+            do {
+                synchronized(findingsToBePopulated) {
+                    if (findingsToBePopulated.size() > 0) {
+                         actualBatchFindings  = (HashSet<SNPFrequencyFinding>)findingsToBePopulated.remove(0);
+                         for (Iterator<SNPFrequencyFinding> iterator = actualBatchFindings.iterator(); iterator.hasNext();) {
+                             SNPFrequencyFinding sf = iterator.next();
+                             System.out.print("ID: " + sf.getId());
+                             System.out.print("  HardyWeinbergPValue" + sf.getHardyWeinbergPValue()) ;
+                         }
+                         noOfResults += actualBatchFindings.size();
+                         System.out.println("WRITTEN BATCH: " + count++ + " SIZE: " +
+                                                          actualBatchFindings.size() + "\n\n");
+                         if (actualBatchFindings.size() == 0) {
+                            /* means no more to results are coming.  Finished */
+                             break;
+                         }
+                     }
+                 }
+                 Thread.currentThread().sleep(10);
+                for (Iterator iterator = findingsToBePopulated.iterator(); iterator.hasNext();) {
+                    Object toBeGCed = iterator.next();
+                    toBeGCed = null;
+                }
+                actualBatchFindings = null;
+             }  while(true);
+
+            System.out.println("ALL RESULTS WERE RECEIVED TOTAL: " + noOfResults);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public Collection executeSearch(int startIndex, int endIndex) {

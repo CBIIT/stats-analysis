@@ -16,27 +16,28 @@ import java.util.*;
  * Date:   Jul 21, 2006
  * Time:   4:38:44 PM
  */
-public class SNPAssoaictionFindingsTest extends CGEMSTest {
+public class SNPAssociationFindingsTest extends CGEMSTest {
     private SNPAssociationFindingCriteriaDTO safDTO;
 
     public void setUp() throws Exception {
         super.setUp();
-        safDTO = new  SNPAssociationFindingCriteriaDTO(studyCrit);
+        safDTO = (SNPAssociationFindingCriteriaDTO) ctx.getBean("snpAssociationFindingsCriteria");
+        safDTO.setStudyCriteria(studyCrit);
         safDTO.setAnnotationCriteria(annotCrit);
     }
 
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        setUpSNPPhysicalPositionCrit();
+        //setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
-        setUpPanelCrit();
-        //setUpGeneBiomarkerCrit();
+        //setUpPanelCrit();
+        setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
 
-        setSNPFindingCriteria();
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+        //setSNPFindingCriteria();
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         safDTO.setStudyCriteria(studyCrit);
 
         executeSearch(0, 501);
