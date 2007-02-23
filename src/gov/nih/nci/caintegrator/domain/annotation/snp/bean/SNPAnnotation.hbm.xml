@@ -82,7 +82,7 @@
                  type="java.lang.String" 
                  column="REFERENCE_SEQUENCE" 
                  insert="false" 
-                 update="false" />     
+                 update="false" lazy="true"/>
                  
         <!-- referenceStrand -->        
        <property name="referenceStrand" 
