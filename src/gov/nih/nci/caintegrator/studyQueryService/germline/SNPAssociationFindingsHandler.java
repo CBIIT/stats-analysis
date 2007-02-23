@@ -43,10 +43,11 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
     protected StringBuffer getTargetFindingHQL() {
         StringBuffer targetHQL = new StringBuffer(
-                                 " FROM SNPAssociationFinding " + TARGET_FINDING_ALIAS + " JOIN "+
-                                 TARGET_FINDING_ALIAS + ".snpAnnotation snpAnnot " + " JOIN "+
-                                 TARGET_FINDING_ALIAS + ".snpAssociationAnalysis analysis "  + " {0} {1} " +
-                                 " WHERE {2} {3} {4} " );
+                                 " FROM SNPAssociationFinding " + TARGET_FINDING_ALIAS +
+                                // " JOIN "+ TARGET_FINDING_ALIAS + ".snpAnnotation snpAnnot " +
+                                 " JOIN "+ TARGET_FINDING_ALIAS + ".snpAssociationAnalysis analysis " +
+                                 " {0} {1} " + " WHERE {2} {3} {4} " );
+
 
         return targetHQL;
     }
@@ -90,9 +91,9 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
        while(triplets.hasNext()) {
            Object[] triplet = (Object[]) triplets.next();
            SNPAssociationFinding finding = (SNPAssociationFinding) triplet[0];
-           SNPAnnotation snpAnnot = (SNPAnnotation) triplet[1];
-           finding.setSnpAnnotation(snpAnnot);
-           SNPAssociationAnalysis analysis = (SNPAssociationAnalysis) triplet[2];
+           //SNPAnnotation snpAnnot = (SNPAnnotation) triplet[1];
+           //finding.setSnpAnnotation(snpAnnot);
+           SNPAssociationAnalysis analysis = (SNPAssociationAnalysis) triplet[1];
            finding.setSnpAssociationAnalysis(analysis);
            snpAssociationFindings.add(finding);
        }
@@ -225,6 +226,8 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
         List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
+        String hql = " FROM SNPAnnotation LEFT JOIN FETCH SNPAssociationFinding f WHERE f.";
+
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
            gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
