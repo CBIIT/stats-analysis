@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    $Id: CopyNUmberFinding.hbm.xml,v 1.1 2006-11-15 01:01:16 mujus Exp $
-    $Log: not supported by cvs2svn $
+    $Id$
+    $Log$
+    Revision 1.1  2006/11/15 01:01:16  mujus
+    CSP domain objs & updates
+
 <hibernate-mapping>
 	<union-subclass
 		name="gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean.CopyNUmberFinding"
@@ -15,7 +18,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 			
 <hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean">
-   <class name="CopyNUmberFinding" 
+   <class name="CopyNumberFinding" 
     	table="CNA_FINDING"
         lazy="true">
         
