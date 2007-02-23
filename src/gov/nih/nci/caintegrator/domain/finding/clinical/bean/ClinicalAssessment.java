@@ -28,15 +28,15 @@ public  class ClinicalAssessment
    * Unique identifier for the instance of ClinicalAssessment.
    */
 
-    private java.lang.String id;
+    private java.lang.Long id;
     /**
    * Unique identifier for the instance of ClinicalAssessment.
    */
 
-	public  java.lang.String getId(){
+	public  java.lang.Long getId(){
         return id;
     }
-    public void setId( java.lang.String id){
+    public void setId( java.lang.Long id){
         this.id = id;
     }
 	
@@ -63,7 +63,7 @@ public  class ClinicalAssessment
 			boolean eq = false;
 			if(obj instanceof ClinicalAssessment) {
 				ClinicalAssessment c =(ClinicalAssessment)obj; 			 
-				String thisId = getId();		
+				Long thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;

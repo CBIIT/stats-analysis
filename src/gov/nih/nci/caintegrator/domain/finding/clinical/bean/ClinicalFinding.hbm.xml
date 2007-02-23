@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    $Id: ClinicalFinding.hbm.xml,v 1.2 2007-01-31 15:34:01 ashinohara Exp $
+    $Id: ClinicalFinding.hbm.xml,v 1.3 2007-02-23 15:38:21 ashinohara Exp $
     
     $Log: not supported by cvs2svn $
     Revision 1.1  2006/08/14 16:58:52  georgeda
@@ -18,9 +18,9 @@
 		name="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding"
 		abstract="true" >
 		
-		<id name="id" column="CLINICAL_FACT_ID">
+		<id name="id" column="CLINICAL_FINDING_ID">
 			    <generator class="native"/>
 		</id>
-		
+
 	</class>
 </hibernate-mapping>
