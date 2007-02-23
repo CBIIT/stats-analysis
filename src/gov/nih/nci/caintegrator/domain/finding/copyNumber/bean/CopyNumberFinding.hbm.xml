@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    $Id$
-    $Log$
-    Revision 1.1  2006/11/15 01:01:16  mujus
-    CSP domain objs & updates
-
-<hibernate-mapping>
-	<union-subclass
-		name="gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean.CopyNUmberFinding"
-		extends="gov.nih.nci.caintegrator.domain.finding.bean.VariationFinding"
-		lazy="true" table="CNA_FINDING">
+	$Id$
+	$Log$
+	Revision 1.1  2006/11/15 01:01:16  mujus
+	CSP domain objs & updates
 -->
 
 <!DOCTYPE hibernate-mapping PUBLIC 
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-			
-<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.bean">
-   <class name="CopyNumberFinding" 
-    	table="CNA_FINDING"
-        lazy="true">
-        
-       <!-- id -->
-       <id name="id" 
-           type="java.lang.String" 
-           column="PARTICIPANT_DID">
-           <generator class="assigned" />
-       </id>
-		
-		<property name="abnomalityStatus" type="java.lang.String" column="Abnomality_Status"/>
-    	<property name="arrayType" type="java.lang.String" column="Array_Type"/>
-    	<property name="call" type="java.lang.String" column="call"/>
-    	<property name="copyNumber" type="java.lang.Double" column="Copy_Number"/>
-    	<property name="copyNumberPvalue" type="java.lang.Double" column="Copy_Number_Pvalue"/>
-    	<one-to-one name="CNAAnnotation" class="gov.nih.nci.caintegrator.domain.finding.copyNumber.bean.CopyNumberAnnotation" outer-join="auto" /> 
-               	
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.finding.copyNumber.bean">
+	<class name="CopyNumberFinding" table="COPY_NUMBER_FINDING"
+		lazy="true">
+
+		<!-- id -->
+		<id name="id" column="COPY_NUMBER_ID">
+			<generator class="assigned" />
+		</id>
+
+		<property name="abnomalityStatus" column="ABNORMALITY_STATUS" />
+		<property name="arrayType" column="ARRAY_TYPE" />
+		<property name="call" column="CALL" />
+		<property name="copyNumber" column="COPY_NUMBER" />
+		<property name="copyNumberPvalue" column="COPYNO_PVAL" />
+		<many-to-one name="snpAnnotation"
+			class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation"
+			column="SNPANNO_ID" />
+		<component name="variationReporter"
+			class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter">
+			<property name="name" column="REPORTER_NAME" />
+		</component>
 	</class>
 </hibernate-mapping>
