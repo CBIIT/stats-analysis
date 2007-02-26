@@ -15,10 +15,7 @@ import gov.nih.nci.caintegrator.util.HQLHelper;
 import java.util.*;
 import java.text.MessageFormat;
 
-import org.hibernate.Session;
-import org.hibernate.Query;
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -226,14 +223,29 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
         List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
-        String hql = " FROM SNPAnnotation LEFT JOIN FETCH SNPAssociationFinding f WHERE f.";
 
+        Collection values = new HashSet();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
-           gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
+           values.add(finding.getId());
+           //gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
         }
-        Hibernate.initialize(gbObjs);
-        gbObjs = null;
+
+        Criteria crit;
+        ArrayList<String> arrayIDs = new ArrayList<String>(values);
+        for (int i = 0; i < arrayIDs.size();) {
+            int begIndex = i;
+            i += 1000 ;
+            int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+            values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+            crit = session.createCriteria(SNPAnnotation.class).
+                                      createAlias("snpAssociationFindingCollection", "findings").
+                                      setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
+                                      add(Restrictions.in("findings.id", values));
+            crit.list();
+        }
+        //Hibernate.initialize(gbObjs);
+        //gbObjs = null;
     }
 
     protected StringBuffer addHQLForFindingAttributeCriteria(FindingCriteriaDTO crit, StringBuffer hql,

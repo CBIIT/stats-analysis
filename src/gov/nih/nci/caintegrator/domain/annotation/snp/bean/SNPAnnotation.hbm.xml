@@ -77,20 +77,7 @@
 
 
 
-       <!-- referenceSequence -->
-       <property name="referenceSequence" 
-                 type="java.lang.String" 
-                 column="REFERENCE_SEQUENCE" 
-                 insert="false" 
-                 update="false" lazy="true"/>
-                 
-        <!-- referenceStrand -->        
-       <property name="referenceStrand" 
-                 type="java.lang.String" 
-                 column="REFERENCE_STRAND" 
-                 insert="false" 
-                 update="false" />
-                 
+ 
 
     <!--    TODO: This is same as "id"/SNPANNO_ID attribute (internally assigned):  So commented out.  RAM
        <property name="secondaryIdentifier" 
@@ -98,7 +85,7 @@
                  column="SECONDARY_ID" 
                  insert="false" 
                  update="false" />                 
-     -->
+     -->                                 
                    
      <!-- here is for 1-m relationships -->  
     

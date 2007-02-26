@@ -278,7 +278,7 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
     public String[] getConfigFiles() {
         return new String[] {
                 "classpath*:applicationContext-services.xml",
-                "C:/Projects/caintegrator-spec/test/applicationContext-junit.xml",
-                "C:/Projects/cgems/WebRoot/WEB-INF/applicationContext.xml"};
+                "C:/Projects/mySpringFiles/applicationContext-junit.xml",
+                };
                 }
 }

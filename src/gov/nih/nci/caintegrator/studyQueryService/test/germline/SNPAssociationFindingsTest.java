@@ -28,10 +28,10 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
 
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        //setUpSNPPhysicalPositionCrit();
+        setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
-        //setUpPanelCrit();
-        setUpGeneBiomarkerCrit();
+        setUpPanelCrit();
+        //setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
@@ -71,6 +71,12 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
                     for (Iterator<GeneBiomarker> iterator1 = bioMarkers.iterator(); iterator1.hasNext();) {
                         GeneBiomarker geneBiomarker =  iterator1.next();
                         System.out.println(geneBiomarker.getHugoGeneSymbol() + " ");
+                        System.out.println("START PhyscialLocation of the bioMarker:" +
+                                                                        geneBiomarker.getStartPhyscialLocation());
+                        System.out.println("END PhyscialLocation of the bioMarker:" +
+                                                                        geneBiomarker.getEndPhysicalLocation());
+                        System.out.println("END Chromosome of the bioMarker:" +
+                                                                               geneBiomarker.getChromosome());
                     }
                  }
                  Long t2 = System.currentTimeMillis();
