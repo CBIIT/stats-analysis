@@ -27,7 +27,7 @@ abstract public class BatchFindingsHandler {
 
     public static final int BATCH_OBJECT_INCREMENT = 20000;
 
-    protected static int IN_PARAMETERS  = 100;
+    protected static int IN_PARAMETERS  = 1000;
 
     protected abstract Set getConcreteTypedFindingSet() ;
     protected abstract List getConcreteTypedFindingList() ;

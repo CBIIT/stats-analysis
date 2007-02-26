@@ -74,7 +74,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         freqDTO.setStudyCriteria(studyCrit);
 
-        executeSearch(0, 600);
+        executeSearch(0, 200);
    }
 
     public void testPopulateFindings() {
@@ -172,7 +172,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
     }
 
     protected void printPopulation(Population p) {
-        System.out.println("Population");
+        System.out.println("Population (SHOULD BE NO SQL): ");
         System.out.println("        " + p);
     }
     public static Test suite() {

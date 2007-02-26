@@ -219,33 +219,64 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
 
         /* initialize SNPAnnotations */
-        Collection<String> snpAnnotsIDs = new HashSet<String>();
-        Collection<Long> populationIDs = new HashSet<Long>();
+//        Collection<String> snpAnnotsIDs = new HashSet<String>();
+//        Collection<Long> populationIDs = new HashSet<Long>();
+//        for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
+//                SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
+//                snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
+//                populationIDs.add(finding.getPopulation().getId());
+//        }
+//        if(snpAnnotsIDs.size() >0) {
+//              ArrayList arrayIDs = new ArrayList(snpAnnotsIDs);
+//              for (int i = 0; i < arrayIDs.size();) {
+//                  Collection values = new ArrayList();
+//                  int begIndex = i;
+//                  i += IN_PARAMETERS ;
+//                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+//                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+//                  Criteria snpAnnotcrit = session.createCriteria(SNPAnnotation.class).
+//                  setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
+//                  add(Restrictions.in("id", values));
+//                  snpAnnotcrit.list();
+//              }
+//        }
+//
+//        /* initialize Population */
+//        if (populationIDs.size() > 0) {
+//            Criteria populationCrit = session.createCriteria(Population.class).
+//                                add(Restrictions.in("id", populationIDs));
+//            populationCrit.list();
+//        }
+
+            Collection values = new HashSet();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
-                SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
-                snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
-                populationIDs.add(finding.getPopulation().getId());
-        }
-        if(snpAnnotsIDs.size() >0) {
-              ArrayList arrayIDs = new ArrayList(snpAnnotsIDs);
-              for (int i = 0; i < arrayIDs.size();) {
-                  Collection values = new ArrayList();
-                  int begIndex = i;
-                  i += IN_PARAMETERS ;
-                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
-                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
-                  Criteria snpAnnotcrit = session.createCriteria(SNPAnnotation.class).
-                  setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
-                  add(Restrictions.in("id", values));
-                  snpAnnotcrit.list();
-              }
+           SNPFrequencyFinding finding = (SNPFrequencyFinding) iterator.next();
+           values.add(finding.getId());
         }
 
-        /* initialize Population */
-        if (populationIDs.size() > 0) {
-            Criteria populationCrit = session.createCriteria(Population.class).
-                                add(Restrictions.in("id", populationIDs));
-            populationCrit.list();
+        Criteria crit;
+        ArrayList<String> arrayIDs = new ArrayList<String>(values);
+        for (int i = 0; i < arrayIDs.size();) {
+            int begIndex = i;
+            i += 1000 ;
+            int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+            values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+            crit = session.createCriteria(SNPAnnotation.class).
+                                      createAlias("snpFrequencyCollection", "findings").
+                                      setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
+                                      add(Restrictions.in("findings.id", values));
+            crit.list();
+        }
+        Collection<Long> populationIDs = new HashSet<Long>();
+        for (int i = 0; i < arrayIDs.size();) {
+            int begIndex = i;
+            i += 1000 ;
+            int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+            values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+            crit = session.createCriteria(Population.class).
+                                        createAlias("snpFrequencyCollection", "findings").
+                                        add(Restrictions.in("findings.id", values));
+            crit.list();
         }
     }
 
