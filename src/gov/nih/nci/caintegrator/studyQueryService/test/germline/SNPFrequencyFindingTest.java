@@ -74,7 +74,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         freqDTO.setStudyCriteria(studyCrit);
 
-        executeSearch(0, 200);
+        executeSearch(0, 2000);
    }
 
     public void testPopulateFindings() {

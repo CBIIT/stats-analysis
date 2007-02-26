@@ -224,16 +224,17 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
         List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
 
-        Collection values = new HashSet();
+        Collection findingIDs = new HashSet();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
-           values.add(finding.getId());
+           findingIDs.add(finding.getId());
            //gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
         }
 
         Criteria crit;
-        ArrayList<String> arrayIDs = new ArrayList<String>(values);
+        ArrayList<String> arrayIDs = new ArrayList<String>(findingIDs);
         for (int i = 0; i < arrayIDs.size();) {
+            List<String> values = new ArrayList<String>();
             int begIndex = i;
             i += 1000 ;
             int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());

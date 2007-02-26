@@ -248,15 +248,16 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
 //            populationCrit.list();
 //        }
 
-            Collection values = new HashSet();
+        Collection findingIDs = new HashSet();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
            SNPFrequencyFinding finding = (SNPFrequencyFinding) iterator.next();
-           values.add(finding.getId());
+           findingIDs.add(finding.getId());
         }
 
         Criteria crit;
-        ArrayList<String> arrayIDs = new ArrayList<String>(values);
+        ArrayList<String> arrayIDs = new ArrayList<String>(findingIDs);
         for (int i = 0; i < arrayIDs.size();) {
+            List<String> values = new ArrayList<String>();
             int begIndex = i;
             i += 1000 ;
             int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
@@ -267,8 +268,9 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
                                       add(Restrictions.in("findings.id", values));
             crit.list();
         }
-        Collection<Long> populationIDs = new HashSet<Long>();
+
         for (int i = 0; i < arrayIDs.size();) {
+            List<String> values = new ArrayList<String>();
             int begIndex = i;
             i += 1000 ;
             int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());

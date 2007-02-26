@@ -40,7 +40,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         safDTO.setStudyCriteria(studyCrit);
 
-        executeSearch(0, 501);
+        executeSearch(0, 1500);
     }
 
 

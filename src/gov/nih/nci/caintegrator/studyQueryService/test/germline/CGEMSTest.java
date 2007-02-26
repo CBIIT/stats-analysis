@@ -47,7 +47,7 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
 
-        ppc.setChromosome("8");
+        ppc.setChromosome("1");
      // ppc.setStartPosition(new Long(1));  // 76065158
      // ppc.setEndPosition(new Long(100000000));    // should give 4 GenotypeFindings
 
