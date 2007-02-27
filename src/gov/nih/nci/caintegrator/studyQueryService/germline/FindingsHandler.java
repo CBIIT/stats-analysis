@@ -25,7 +25,6 @@ abstract public class FindingsHandler extends BatchFindingsHandler {
      private SessionFactory sessionFactory;
      protected static final String TARGET_FINDING_ALIAS = " finding";
      protected abstract Class getTargeFindingType();
-     //protected abstract Collection<? extends Finding> getFindingsFromResults(List results);
      protected abstract StringBuffer getTargetFindingHQL() ;
      protected abstract void initializeProxies(Collection<? extends Finding> findings, Session session);
      protected abstract Collection<? extends Finding> executeFindingSetQuery(FindingCriteriaDTO critDTO,
