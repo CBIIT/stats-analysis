@@ -174,18 +174,18 @@ public  class CopyNumberFinding
    */
   
 
-    private gov.nih.nci.caintegrator.domain.finding.variation.bean.SNPProbeSetReporter variationReporter;
+    private gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter variationReporter;
       /**
    * Variation reporter is a design element which is used to report change (variation) - alteration, 
    * deletion, or rearrangement - in the DNA sequence . 
    */ 
   
 
-    public gov.nih.nci.caintegrator.domain.finding.variation.bean.SNPProbeSetReporter getVariationReporter(){
+    public gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter getVariationReporter(){
         return variationReporter;			
     }
 
-    public void setVariationReporter(gov.nih.nci.caintegrator.domain.finding.variation.bean.SNPProbeSetReporter variationReporter){
+    public void setVariationReporter(gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter variationReporter){
         this.variationReporter = variationReporter;
     }	
 
