@@ -36,21 +36,28 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
     }
 
     protected StringBuffer getTargetFindingHQL() {
-        StringBuffer targetHQL = new StringBuffer(
-                                                " FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS +
-                                                " {0} {1} WHERE {2} {3} ");
+        StringBuffer targetHQL = new StringBuffer(" FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS +
+                                                  " {0} {1} WHERE {2} {3} ");
         return targetHQL;
     }
 
     protected Collection< ? extends Finding> executeFindingSetQuery(FindingCriteriaDTO critDTO,StringBuffer targetHQL,
-                                            StringBuffer snpAnnotCond, HashMap params, Session session,
-                                            int start, int end ) throws Exception {
-       SNPFrequencyFindingCriteriaDTO findingCritDTO = (SNPFrequencyFindingCriteriaDTO) critDTO;
+                                                               Session session, int start, int end ) throws Exception {
+        SNPFrequencyFindingCriteriaDTO findingCritDTO = (SNPFrequencyFindingCriteriaDTO) critDTO;
+        AnnotationCriteria annotCrit = critDTO.getAnnotationCriteria();
+        if ((annotCrit != null) && isOnlyPanelCriteria(annotCrit))
+               return executePanelOnlySearch(critDTO, session, start, end);
 
-       /* 1. Include Annotation Criteria in TargetFinding query   */
-       StringBuffer snpAnnotJoin = new StringBuffer("");
+        HashMap params = new HashMap();
+        StringBuffer snpAnnotCond = new StringBuffer();
 
-       /*  2. Handle population */
+        /* 0. if AnnotationCrit is specified, then append required HQL (to snpAnnotCondition) for handling AnnotationCrit*/
+        appendAnnotationCritHQL(critDTO, params, snpAnnotCond);
+        
+        /* 1. Include Annotation Criteria in TargetFinding query   */
+        StringBuffer snpAnnotJoin = new StringBuffer("");
+
+       /*  2. Handle population Criteria */
        StringBuffer populationJoin = new StringBuffer("");
        StringBuffer populationCond = new StringBuffer("");
        preparePopulationCriteria(findingCritDTO, session, populationJoin, populationCond, params);
@@ -60,6 +67,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
                                                 snpAnnotCond.toString(), populationCond.toString() });
 
        StringBuffer formattedTargetHQL = new StringBuffer(hql);
+
        /*  3. Handle SNPFrequencyFinding Attributes Criteria itself  and populate targetHQL/params */
        addSNPFrequencyFindingAttriuteCrit(findingCritDTO, formattedTargetHQL, params);
 

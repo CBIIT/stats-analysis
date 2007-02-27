@@ -28,19 +28,19 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
 
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        setUpSNPPhysicalPositionCrit();
+        //setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
-        setUpPanelCrit();
+        //setUpPanelCrit();
         //setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
         //setSNPAssociationGroupCriteria();
 
-        //setSNPFindingCriteria();
+        setSNPFindingCriteria();
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         safDTO.setStudyCriteria(studyCrit);
 
-        executeSearch(0, 1500);
+        executeSearch(0, 501);
     }
 
 
@@ -128,8 +128,8 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
      }
 
     public void testPopulateFindings() {
-        //setUpSNPPhysicalPositionCrit();
-        //setUpGeneBiomarkerCrit();
+       setUpSNPPhysicalPositionCrit();
+      //  setUpGeneBiomarkerCrit();
 
        //setSNPAssociationAnalysisCriteria();
         

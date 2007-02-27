@@ -27,17 +27,22 @@ import org.hibernate.criterion.Restrictions;
  */
 public class GenotypeFindingsHandler extends FindingsHandler {
     protected StringBuffer getTargetFindingHQL() {
-         return new StringBuffer(
-                " FROM GenotypeFinding " + TARGET_FINDING_ALIAS + " WHERE {0} {1} {2} ") ;
+         return new StringBuffer( " FROM GenotypeFinding " + TARGET_FINDING_ALIAS + " WHERE {0} {1} {2} ") ;
     }
 
-    protected Collection<? extends Finding> executeFindingSetQuery(FindingCriteriaDTO critDTO, StringBuffer targetHQL, StringBuffer snpAnnotCond, HashMap params, Session session, int start, int end) throws Exception {
+    protected Collection<? extends Finding> executeFindingSetQuery(FindingCriteriaDTO critDTO, StringBuffer targetHQL,
+                                                                Session session, int start, int end) throws Exception {
         GenotypeFindingCriteriaDTO findingCritDTO = (GenotypeFindingCriteriaDTO) critDTO;
+
+        HashMap params = new HashMap();
+        StringBuffer snpAnnotCond = new StringBuffer();
+
+        /* 0. if AnnotationCrit is specified, then append required HQL (to snpAnnotCondition) for handling AnnotationCrit*/
+        appendAnnotationCritHQL(critDTO, params, snpAnnotCond);
 
         /* 1. Handle GenoType Attributes Criteria itself  and populate targetHQL/params */
         StringBuffer selfHQL = new StringBuffer("");
         addGenoTypeAttributeCriteria(findingCritDTO, selfHQL, params);
-        //targetHQL.append(selfHQL);
 
         /* 2. get HQL to include StudyParticipantCriteria in the final query */
         String specimenCondition = new String("");
@@ -52,7 +57,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         }
 
         String formatedhql  = MessageFormat.format(targetHQL.toString(), new Object[] {
-                                snpAnnotCond.toString(), specimenCondition, selfHQL} );
+                                                                snpAnnotCond.toString(), specimenCondition, selfHQL} );
 
         String targetHQLWhereRemoved = HQLHelper.removeTrailingToken(new StringBuffer(formatedhql), "WHERE");
         String targetHQLANDRemoved = HQLHelper.removeTrailingToken(new StringBuffer(targetHQLWhereRemoved), "AND");
@@ -154,30 +159,13 @@ public class GenotypeFindingsHandler extends FindingsHandler {
             }
         }
     }
-        protected Collection<? extends Finding> getFindingsFromResults(List results) {
-            /*  nothing to format the results as the SELECT involved only GenotypeFindings table */
-            return results;
-        }
-
-       public Collection<? extends Finding> executePanelOnlySearch(FindingCriteriaDTO findingCritDTO, Session session, int start, int end) {
-            /*  This method is not applicable for GenotypeFinbdings.  This method will never be called as getFindings()
-                itself is overridden in this class */
-            return null;
-        }
-
-        public Collection<? extends Finding> getFindings(FindingCriteriaDTO critDTO, int fromIndex, int toIndex)
-        throws Exception {
-
+    public Collection<? extends Finding> getFindings(FindingCriteriaDTO critDTO, int fromIndex, int toIndex)
+    throws Exception {
             Collection<? extends Finding> findings ;
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-            session.beginTransaction();
+            Session session = getSessionFactory().getCurrentSession();
             findings = getMyFindings(critDTO, session, fromIndex, toIndex);
             initializeProxies(findings, session);
             session.clear();
-            session.close();
-
             return findings;
     }
 }
-

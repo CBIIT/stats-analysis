@@ -57,7 +57,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
 
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-       setUpSNPPhysicalPositionCrit();
+       //setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
 
       //setUpGeneBiomarkerCrit();
@@ -68,18 +68,18 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         //freqDTO.setPopulationNames(new String[] {"CONTROL"});
 
        // freqDTO.setCompletionRate(new Double(0.9), ArithematicOperator.LT);
-       freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
+      // freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
 
         // Now set up study name criteria
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         freqDTO.setStudyCriteria(studyCrit);
 
-        executeSearch(0, 2000);
+        executeSearch(0, 501);
    }
 
     public void testPopulateFindings() {
         //setUpSNPPhysicalPositionCrit();
-        setUpPanelCrit();
+        //setUpPanelCrit();
         //freqDTO.setPopulationNames(new String[] {"CEPH"});
         freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
 

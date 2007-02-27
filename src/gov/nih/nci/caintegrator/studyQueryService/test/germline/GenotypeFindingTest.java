@@ -37,7 +37,9 @@ public class GenotypeFindingTest extends CGEMSTest {
 
     public void setUp() throws Exception {
         super.setUp();
-        gfDTO = new GenotypeFindingCriteriaDTO(studyCrit);
+        //gfDTO = new GenotypeFindingCriteriaDTO(studyCrit);
+        gfDTO = (GenotypeFindingCriteriaDTO) ctx.getBean("genotypeFindingsCriteria");
+        gfDTO.setStudyCriteria(studyCrit);
         gfDTO.setAnnotationCriteria(annotCrit);
         gfDTO.setStudyParticipantCriteria(spCrit);
     }
@@ -97,10 +99,10 @@ public class GenotypeFindingTest extends CGEMSTest {
         executeGenotypeFindingSearch(0, 60);
     }
     public void testPanelAndSNPAnnotCrit() {
-        setUpPanelCrit();
+        //setUpPanelCrit();
         setUpSNPPhysicalPositionCrit();
         setUpStudyParticipantCrit();
-        executeGenotypeFindingSearch(0, 100);
+        executeGenotypeFindingSearch(0, 501);
     }
     protected void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
@@ -312,7 +314,8 @@ public class GenotypeFindingTest extends CGEMSTest {
     }
 
     public void testPopulateFindings() {
-        setUpSNPPhysicalPositionCrit();
+        //setUpSNPPhysicalPositionCrit();
+        setUpPanelCrit();
         setUpPopulationCriteria();
         setUpGenotypeCrit();
         try {

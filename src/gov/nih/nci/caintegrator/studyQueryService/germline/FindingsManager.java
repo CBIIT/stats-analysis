@@ -45,8 +45,7 @@ public class FindingsManager {
         return snpAssociationFindingsHandler;
     }
 
-    public void setSnpAssociationFindingsHandler(
-            FindingsHandler snpAssociationFindingsHandler) {
+    public void setSnpAssociationFindingsHandler(FindingsHandler snpAssociationFindingsHandler) {
         this.snpAssociationFindingsHandler = snpAssociationFindingsHandler;
     }
     public ObjectQueryHandler getObjectQueryHandler() {
@@ -59,8 +58,7 @@ public class FindingsManager {
 
     public Collection<? extends Finding> getFindings(FindingCriteriaDTO findingCritDTO, int fromIndex, int toIndex)
     throws Exception {
-        return findingCritDTO.getHandler().getFindings(
-                findingCritDTO, fromIndex, toIndex);
+        return findingCritDTO.getHandler().getFindings(findingCritDTO, fromIndex, toIndex);
     }
 
     public void populateFindings(FindingCriteriaDTO findingCritDTO, List toBePopulated)
@@ -68,8 +66,7 @@ public class FindingsManager {
         findingCritDTO.getHandler().getFindingForFTP(findingCritDTO, toBePopulated);
     }
 
-    public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
-                                                         int fromIndex, int toIndex)  {
+    public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit, int fromIndex, int toIndex) {
         return subjectSearchHandler.getStudySubjects(spCrit, fromIndex, toIndex);
     }
 
@@ -80,7 +77,8 @@ public class FindingsManager {
 
     public Collection<SNPAnnotation> getSNPAnnotations(AnnotationCriteria annotCrit)
     throws Exception {
-            return snpAssociationFindingsHandler.getSNPAnnotations(annotCrit);
+        /*  TODO: refer to the below method implementation  */
+        return snpAssociationFindingsHandler.getSNPAnnotations(annotCrit);
     }
 
     public Collection<Study> getStudies(StudyCriteria studyCrit)

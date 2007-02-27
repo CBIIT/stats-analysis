@@ -49,12 +49,21 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         return targetHQL;
     }
 
-    protected Collection<? extends SNPAssociationFinding> executeFindingSetQuery(FindingCriteriaDTO critDTO,
-                                                    StringBuffer targetHQL, StringBuffer snpAnnotCond, HashMap params,
-                                                    Session session, int start, int end ) throws Exception {
+    protected Collection<? extends Finding> executeFindingSetQuery(FindingCriteriaDTO critDTO, StringBuffer targetHQL,
+                                                               Session session, int start, int end ) throws Exception {
 
        SNPAssociationFindingCriteriaDTO  findingCritDTO= (SNPAssociationFindingCriteriaDTO) critDTO;
        Collection<SNPAssociationFinding>  snpAssociationFindings = new ArrayList<SNPAssociationFinding>();
+
+       AnnotationCriteria annotCrit = critDTO.getAnnotationCriteria();
+       if ((annotCrit != null) && isOnlyPanelCriteria(annotCrit))
+            return executePanelOnlySearch(critDTO, session, start, end);
+
+       HashMap params = new HashMap();
+       StringBuffer snpAnnotCond = new StringBuffer();
+
+       /* 0. if AnnotationCrit is specified, then append required HQL (to snpAnnotCondition) for handling AnnotationCrit*/
+       appendAnnotationCritHQL(critDTO, params, snpAnnotCond);
 
        /* 1.  Include SNPAssociationFinding attribute criteria in  TargetFinding query */
        StringBuffer myAttributeHql = new StringBuffer("");
