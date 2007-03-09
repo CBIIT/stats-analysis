@@ -22,5 +22,15 @@ public  class VariationReporter  extends Reporter
 
 	private static final long serialVersionUID = 1234567890L;
 
-			
+	private SNPAnnotation snpAnnotation;
+
+    public SNPAnnotation getSnpAnnotation() {
+        return snpAnnotation;
+    }
+
+    public void setSnpAnnotation(SNPAnnotation snpAnnotation) {
+        this.snpAnnotation = snpAnnotation;
+    }
+    
+    
 }

@@ -14,7 +14,7 @@ import java.util.*;
    */
 
 public  class LOHFinding 
-    extends gov.nih.nci.caintegrator.domain.finding.bean.SpecimenBasedMolecularFinding
+    extends gov.nih.nci.caintegrator.domain.finding.variation.bean.VariationFinding
 
 
 	implements java.io.Serializable 

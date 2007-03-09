@@ -1,6 +1,4 @@
 package gov.nih.nci.caintegrator.domain.finding.copyNumber.bean;
-import gov.nih.nci.caintegrator.domain.finding.copyNumber.bean.*;
-import java.util.*;
 
 /**
  * <!-- LICENSE_TEXT_START -->
@@ -14,7 +12,7 @@ import java.util.*;
    */
 
 public  class CopyNumberFinding 
-    extends gov.nih.nci.caintegrator.domain.finding.bean.SpecimenBasedMolecularFinding
+    extends gov.nih.nci.caintegrator.domain.finding.variation.bean.VariationFinding
 
 
 	implements java.io.Serializable 
@@ -145,48 +143,7 @@ public  class CopyNumberFinding
 			}
 			
 			return h;
-	}
-		
-			
-			
-			
-      /**
+        }
 
-   */
-
-    private Collection snpAnnotation;
-      /**
-
-   */
-
-    public Collection getSnpAnnotation(){
-        return snpAnnotation;			
-    }   
-
-    public void setSnpAnnotation(Collection snpAnnotation){
-        this.snpAnnotation = snpAnnotation;
-    }	
-	   	
-			
-      /**
-   * Variation reporter is a design element which is used to report change (variation) - alteration, 
-   * deletion, or rearrangement - in the DNA sequence . 
-   */
-  
-
-    private gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter variationReporter;
-      /**
-   * Variation reporter is a design element which is used to report change (variation) - alteration, 
-   * deletion, or rearrangement - in the DNA sequence . 
-   */ 
-  
-
-    public gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter getVariationReporter(){
-        return variationReporter;			
-    }
-
-    public void setVariationReporter(gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter variationReporter){
-        this.variationReporter = variationReporter;
-    }	
-
+        
 }

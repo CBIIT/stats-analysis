@@ -14,12 +14,13 @@
 
 <hibernate-mapping package="gov.nih.nci.caintegrator.domain.annotation.snp.bean">
    <class name="SNPAnnotation" 
-    	table="VARIATION_REPORTER"
+    	table="SNP_DIM"
         lazy="true">
         
        <!-- id -->
        <id name="id" 
-           column="VARIATION_REPORTER_ID">
+           type="java.lang.String" 
+           column="SNPANNO_ID">
            <generator class="assigned" />
        </id>
        
@@ -27,40 +28,43 @@
         <!-- chromosomeLocation -->        
        <property name="chromosomeLocation" 
                  type="java.lang.Long"
-                 column="SNP_PHYSICAL_POSITION" 
+                 column="PHYSICAL_LOCATION" 
                  insert="false" 
                  update="false" />
                  
        <!-- chromosomeName -->                 
        <property name="chromosomeName" 
                  type="java.lang.String" 
-                 column="SNP_CHROMOSOME" 
+                 column="CHROMOSOME" 
                  insert="false" 
                  update="false" />     
                  
         <!-- dbsnpBuild -->        
        <property name="dbsnpBuild" 
                  type="java.lang.String" 
-                 column="SNP_DBSNP_BUILD" 
+                 column="DBSNP_BUILD" 
                  insert="false" 
                  update="false" />
                  
        <!-- dbsnpId -->                 
        <property name="dbsnpId" 
                  type="java.lang.String" 
-                 column="DB_SNP_ID" 
+                 column="DBSNPID" 
                  insert="false" 
                  update="false" />    
-
+<!--
+       TODO: This is has been deleted per customer/Alex:  RAM
        <property name="geneLocation"
                  type="java.lang.String"
-                 column="SNP_CYTOBAND"
+                 column="GENELOCATION"
                  insert="false"
                  update="false" />
                  
+-->
         <!-- genomeBuild -->
        <property name="genomeBuild" 
-                 column="SNP_GENOME_BUILD" 
+                 type="java.lang.String" 
+                 column="GENOME_BUILD" 
                  insert="false" 
                  update="false" />
                  

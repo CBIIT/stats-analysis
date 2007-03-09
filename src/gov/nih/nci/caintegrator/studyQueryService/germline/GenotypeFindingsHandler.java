@@ -140,7 +140,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         Collection<String> specimenIDs = new HashSet<String>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
             GenotypeFinding finding =  (GenotypeFinding) iterator.next();
-            specimenIDs.add(finding.getSpecimen().getId());
+            specimenIDs.add(finding.getSpecimen().getSpecimenIdentifier());
         }
         
         if (specimenIDs.size() > 0)  {

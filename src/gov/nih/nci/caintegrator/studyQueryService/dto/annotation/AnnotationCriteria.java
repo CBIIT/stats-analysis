@@ -1,5 +1,6 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.annotation;
 
+import gov.nih.nci.caintegrator.enumeration.ArrayPlatformType;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.OperatorType;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria;
 
@@ -21,6 +22,10 @@ public class AnnotationCriteria {
     private gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria panelCriteria;
     private gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria physicalPositionCriteria;
     private Collection<String> snpIdentifiers;
+    private ArrayPlatformType arrayPlatformType;
+    private Collection<String> reporterIds;
+
+
 
     public AnnotationCriteria(){ }
 
@@ -99,6 +104,14 @@ public class AnnotationCriteria {
         this.snpIdentifiers = snpIdentifiers;
     }
 
+    public ArrayPlatformType getArrayPlatformType() {
+        return arrayPlatformType;
+    }
+
+    public void setArrayPlatformType(ArrayPlatformType arrayPlatformType) {
+        this.arrayPlatformType = arrayPlatformType;
+    }
+    
 	@Override
 	public String toString()
 	{
@@ -130,6 +143,14 @@ public class AnnotationCriteria {
 		
 		return str;
 	}
+
+    public Collection<String> getReporterIds() {
+        return reporterIds;
+    }
+
+    public void setReporterIds(Collection<String> reporterIds) {
+        this.reporterIds = reporterIds;
+    }
 
 
 }

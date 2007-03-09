@@ -24,7 +24,7 @@ public  class SNPAnnotation
 	private static final long serialVersionUID = 1234567890L;
 
 
- 	
+    
 	   
     /**
    * offset in number of bases of the mapped location of the SNP relative to the reference nucleotide sequence 

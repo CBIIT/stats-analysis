@@ -141,6 +141,7 @@
          <many-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup"
                 column="ANA_GRP_ID" />
       </set>      
+
       
       <!--  check with Srini-->
 <!--   TODO: Fix this: Ram
@@ -164,6 +165,11 @@
       <one-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Specimen" />
     </set>  
     
+    <set name="clinicalFindingCollection" lazy="true" inverse="true">
+      <key column="PARTICIPANT_DID" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding" />
+    </set>  
+   
     <!--
     <set name="epiFinding" lazy="true" inverse="true">
       <cache usage="read-write" />
