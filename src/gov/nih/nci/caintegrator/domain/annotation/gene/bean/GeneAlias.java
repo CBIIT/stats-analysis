@@ -64,15 +64,15 @@ public  class GeneAlias
    * unique identifier for the instance of GeneAlias.
    */
 
-    private java.lang.String id;
+    private java.lang.Long id;
     /**
    * unique identifier for the instance of GeneAlias.
    */
 
-	public  java.lang.String getId(){
+	public  java.lang.Long getId(){
         return id;
     }
-    public void setId( java.lang.String id){
+    public void setId( java.lang.Long id){
         this.id = id;
     }
 	
@@ -82,7 +82,7 @@ public  class GeneAlias
 			boolean eq = false;
 			if(obj instanceof GeneAlias) {
 				GeneAlias c =(GeneAlias)obj; 			 
-				String thisId = getId();		
+				Long thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;
