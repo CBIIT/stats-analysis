@@ -1,0 +1,55 @@
+Changes after version 1.59 to 1.62 (includes) 
+
+1.	Removed relationship between GenotypeFinding and SNPAssay
+2.	Added association between Study & SNPAssociationFinding
+3.	Added association between Study & SNPFrequencyFinding 
+4.	Added orAggressiveHeterozygote attribute to SNPAssociationFinding 
+5.	Added orAggressiveHomozygote attribute to SNPAssociationFinding 
+6.	Added orNonaggressiveHeterozygote attribute to SNPAssociationFinding 
+7.	Added orNonaggressiveHomozygote attribute to SNPAssociationFinding
+8.	Changed bi-directional association between SNPPanel & Study to Uni-direction.
+9.	Changed bi-directional association between SNPPanel & SNPAssay to Unidirection.
+10.	Added uni-directional association between SNPAssociationAnalysis and study
+
+Changes from version 1.62 to 1.63:
+
+Changed the following object’s id attribute from String to Long:
+
+ClassComparisonAnalysis
+ClassComparisonAnalysisFinding
+PrincipleComponentAnalysis
+PrincipleComponentAnalysisFinding
+AnalysisGroup
+AnalysisGroupResult
+GOTerm
+GenBankAccession
+GeneAlias
+GeneBiomarker
+GeneExprReporter
+GeneReporterAnnotation
+ProteinAlias
+ProteinBiomarker
+UniprotAccession
+Measurement
+ClinicalAssessment
+ClinicalFinding
+TotalProteinContent
+SomaticMutationAnnotation
+FunctionalDNADomain
+FunctionalProteinDomain
+Activity
+AgentSynonym
+SecondaryParticipantIdentifier
+SecondarySpecimenIdentifier
+Specimen
+Study
+StudyParticipant
+
+
+Changes from version 1.63 to 1.64:
+
+Added the ClinicalLeukemiaFinding object to the gov.nih.nci.caintegrator.domain.finding.clinical.leukemia package.
+
+Changes from 1.64 to 1.65:
+
+Added a Reporter object.  Both GeneExprReporter and VariationReporter extend this object.
