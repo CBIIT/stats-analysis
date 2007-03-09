@@ -20,4 +20,6 @@ public interface AnnotationManager {
     public GeneBiomarker getGeneForSymbol(String geneId);
     
     public List<CytobandPosition> getCytobandPositions(String chromosome, String startCytoband, String endCytoband);
+    
+    public List<CytobandPosition> getCytobandPositions(String chromosome);
 }

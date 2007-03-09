@@ -84,7 +84,9 @@ public class AnnotationManagerImpl implements AnnotationManager {
         Session currentSession = sessionFactory.getCurrentSession();
         Criteria criteria = currentSession.createCriteria(CytobandPosition.class);
         criteria.add(Restrictions.eq("chromosomeName", chromosome));
-        criteria.add(Restrictions.disjunction().add(Restrictions.eq("cytoband", startCytoband)).add(Restrictions.eq("cytoband", endCytoband)));
+        if(startCytoband != null && endCytoband != null) {
+            criteria.add(Restrictions.disjunction().add(Restrictions.eq("cytoband", startCytoband)).add(Restrictions.eq("cytoband", endCytoband)));
+        }
         criteria.addOrder(Order.asc("cytobandStartPosition"));
         List<CytobandPosition> positions = criteria.list();
         return positions;
@@ -97,6 +99,10 @@ public class AnnotationManagerImpl implements AnnotationManager {
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    public List<CytobandPosition> getCytobandPositions(String chromosome) {
+        return getCytobandPositions(chromosome, null, null);
     }
 
 
