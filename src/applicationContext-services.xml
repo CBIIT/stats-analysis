@@ -53,6 +53,12 @@
 		<property name="handler" ref="snpFrequencyFindingsHandler"/>
 	</bean>
 
+	<!-- Defenition for annotation manager -->
+	<bean id="annotationManager"
+		class="gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManagerImpl" >
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
+	
 	<!--  Definitions for transaction manager and declaritive transaction management -->
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -63,6 +69,12 @@
 			expression="execution(* gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager.*(..))" />
 		<aop:advisor advice-ref="txAdvice"
 			pointcut-ref="serviceMethods" />
+	</aop:config>
+	<aop:config>
+		<aop:pointcut id="annotationServiceMethods"
+			expression="execution(* gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManager.*(..))" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="annotationServiceMethods" />
 	</aop:config>
 
 	<tx:advice id="txAdvice" transaction-manager="txManager">
