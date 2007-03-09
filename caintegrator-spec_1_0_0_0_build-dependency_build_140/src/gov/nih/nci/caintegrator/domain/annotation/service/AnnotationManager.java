@@ -1,0 +1,23 @@
+package gov.nih.nci.caintegrator.domain.annotation.service;
+
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.CytobandPosition;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter;
+import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+public interface AnnotationManager {
+
+    public Collection<GeneExprReporter> getGenesForReporters(
+            AnnotationCriteria criteria);
+
+    public Map<GeneBiomarker, Collection<GeneExprReporter>> getReportersForGenes(
+            AnnotationCriteria criteria);
+    
+    public GeneBiomarker getGeneForSymbol(String geneId);
+    
+    public List<CytobandPosition> getCytobandPositions(String chromosome, String startCytoband, String endCytoband);
+}
