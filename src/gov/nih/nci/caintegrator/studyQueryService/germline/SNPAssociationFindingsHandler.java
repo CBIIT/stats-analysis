@@ -233,29 +233,52 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
         List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
 
-        Collection findingIDs = new HashSet();
+
+        /* initialize SNPAnnotations */
+        Collection<String> snpAnnotsIDs = new HashSet<String>();
+        Collection<Long> populationIDs = new HashSet<Long>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
-           SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
-           findingIDs.add(finding.getId());
-           //gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
+                SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
+                snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
+        }
+        if(snpAnnotsIDs.size() >0) {
+              ArrayList arrayIDs = new ArrayList(snpAnnotsIDs);
+              for (int i = 0; i < arrayIDs.size();) {
+                  Collection values = new ArrayList();
+                  int begIndex = i;
+                  i += IN_PARAMETERS ;
+                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                  Criteria snpAnnotcrit = session.createCriteria(SNPAnnotation.class).
+                  setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
+                  add(Restrictions.in("id", values));
+                  snpAnnotcrit.list();
+              }
         }
 
-        Criteria crit;
-        ArrayList<String> arrayIDs = new ArrayList<String>(findingIDs);
-        for (int i = 0; i < arrayIDs.size();) {
-            List<String> values = new ArrayList<String>();
-            int begIndex = i;
-            i += 1000 ;
-            int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
-            values.addAll(arrayIDs.subList(begIndex,  lastIndex));
-            crit = session.createCriteria(SNPAnnotation.class).
-                                      createAlias("snpAssociationFindingCollection", "findings").
-                                      setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
-                                      add(Restrictions.in("findings.id", values));
-            crit.list();
-        }
-        //Hibernate.initialize(gbObjs);
-        //gbObjs = null;
+//        Collection findingIDs = new HashSet();
+//        for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
+//           SNPAssociationFinding finding = (SNPAssociationFinding) iterator.next();
+//           findingIDs.add(finding.getId());
+//           //gbObjs.addAll(finding.getSnpAnnotation().getGeneBiomarkerCollection());
+//        }
+//
+//        Criteria crit;
+//        ArrayList<String> arrayIDs = new ArrayList<String>(findingIDs);
+//        for (int i = 0; i < arrayIDs.size();) {
+//            List<String> values = new ArrayList<String>();
+//            int begIndex = i;
+//            i += 1000 ;
+//            int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+//            values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+//            crit = session.createCriteria(SNPAnnotation.class).
+//                                      createAlias("snpAssociationFindingCollection", "findings").
+//                                      setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
+//                                      add(Restrictions.in("findings.id", values));
+//            crit.list();
+//        }
+//        //Hibernate.initialize(gbObjs);
+//        //gbObjs = null;
     }
 
     protected StringBuffer addHQLForFindingAttributeCriteria(FindingCriteriaDTO crit, StringBuffer hql,
@@ -291,8 +314,8 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
     public Collection<? extends Finding> executePanelOnlySearch(FindingCriteriaDTO findingCritDTO, Session session, int start, int end) {
        AnnotationCriteria annotCrit = findingCritDTO.getAnnotationCriteria();
        Collection<? extends Finding> findings ;
-       StringBuffer hql = new StringBuffer(" FROM SNPAssociationFinding {0}, SNPAssay s JOIN " +
-                                             TARGET_FINDING_ALIAS + ".snpAnnotation " +
+       StringBuffer hql = new StringBuffer(" FROM SNPAssociationFinding {0}, SNPAssay s " +
+                                         //   " JOIN " + TARGET_FINDING_ALIAS + ".snpAnnotation " +
                                              " {3} WHERE s.snpPanel.id = {1} AND " +
                                              TARGET_FINDING_ALIAS + ".snpAnnotation = s.snpAnnotation " +
                                              " AND {2} " );
@@ -322,9 +345,9 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         while(resultsIter.hasNext()) {
             Object[] triplet = (Object[]) resultsIter.next();
             SNPAssociationFinding finding = (SNPAssociationFinding) triplet[0];
-            SNPAnnotation snpAnnot = (SNPAnnotation) triplet[1];
-            finding.setSnpAnnotation(snpAnnot);
-            SNPAssociationAnalysis analysis = (SNPAssociationAnalysis) triplet[2];
+            //SNPAnnotation snpAnnot = (SNPAnnotation) triplet[1];
+            //finding.setSnpAnnotation(snpAnnot);
+            SNPAssociationAnalysis analysis = (SNPAssociationAnalysis) triplet[1];
             finding.setSnpAssociationAnalysis(analysis);
             snpAssociationFindings.add(finding);
         }
