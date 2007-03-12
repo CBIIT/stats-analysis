@@ -112,10 +112,28 @@ public class SNPAnnotationCriteriaHandler {
     }
 */
 
-    public static StringBuffer getAnnotHQLWithParams(AnnotationCriteria annotCrit, HashMap params) throws Exception {
+//    public static StringBuffer getAnnotAndGeneBiomarkerHQLWithParams(AnnotationCriteria annotCrit, HashMap params)  {
+//      /* String annotHSQL = new String(
+//                                    " FROM SNPAnnotation s LEFT JOIN FETCH s.geneBiomarkerCollection " +
+//                                    " WHERE {0} {1} ");*/
+//
+//        String annotHSQL = new String(
+//                                            " FROM SNPAnnotation s  " +
+//                                            " WHERE {0} {1} ");
+//
+//        return getAnnotHQLWithParams(annotCrit, annotHSQL, params);
+//    }
+
+    public static StringBuffer getAnnotHQLWithParams(AnnotationCriteria annotCrit, HashMap params)  {
+        String annotHSQL = new String(" SELECT s.id FROM SNPAnnotation s WHERE {0} {1} ");
+        return getAnnotHQLWithParams(annotCrit, annotHSQL, params);
+    }
+
+
+     public static StringBuffer getAnnotHQLWithParams(AnnotationCriteria annotCrit, String annotHSQL, HashMap params)  {
         PhysicalPositionCriteria poistionCrit = annotCrit.getPhysicalPositionCriteria();
 
-        String annotHSQL = new String(" SELECT s.id FROM SNPAnnotation s WHERE {0} {1} ");
+        //String annotHSQL = new String(" SELECT s.id FROM SNPAnnotation s WHERE {0} {1} ");
 
         /* 0.  Handle GeneSymbol Criteria */
         Collection<String> geneSymbols = null;
@@ -157,7 +175,6 @@ public class SNPAnnotationCriteriaHandler {
 
         return new StringBuffer(finalHQL);
     }
-
     private static void handlePanelCriteria(PanelCriteria panelCrit, StringBuffer panelCond, HashMap params) {
         if (panelCrit != null)  {
             if (panelCrit.getSnpPanelID() != null) {
