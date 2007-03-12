@@ -36,8 +36,18 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
     }
 
     protected StringBuffer getTargetFindingHQL() {
+
         StringBuffer targetHQL = new StringBuffer(" FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS +
                                                   " {0} {1} WHERE {2} {3} ");
+
+/*
+        StringBuffer targetHQL = new StringBuffer(" FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS +
+                                                 " JOIN "+ TARGET_FINDING_ALIAS + ".snpAnnotation " +
+                                                  " {0} {1} WHERE {2} {3} ");
+*/
+
+
+
         return targetHQL;
     }
 
@@ -227,34 +237,34 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
 
         /* initialize SNPAnnotations */
-//        Collection<String> snpAnnotsIDs = new HashSet<String>();
-//        Collection<Long> populationIDs = new HashSet<Long>();
-//        for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
-//                SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
-//                snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
-//                populationIDs.add(finding.getPopulation().getId());
-//        }
-//        if(snpAnnotsIDs.size() >0) {
-//              ArrayList arrayIDs = new ArrayList(snpAnnotsIDs);
-//              for (int i = 0; i < arrayIDs.size();) {
-//                  Collection values = new ArrayList();
-//                  int begIndex = i;
-//                  i += IN_PARAMETERS ;
-//                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
-//                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
-//                  Criteria snpAnnotcrit = session.createCriteria(SNPAnnotation.class).
-//                  setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
-//                  add(Restrictions.in("id", values));
-//                  snpAnnotcrit.list();
-//              }
-//        }
-//
-//        /* initialize Population */
-//        if (populationIDs.size() > 0) {
-//            Criteria populationCrit = session.createCriteria(Population.class).
-//                                add(Restrictions.in("id", populationIDs));
-//            populationCrit.list();
-//        }
+        Collection<String> snpAnnotsIDs = new HashSet<String>();
+        Collection<Long> populationIDs = new HashSet<Long>();
+        for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
+                SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
+                snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
+                populationIDs.add(finding.getPopulation().getId());
+        }
+        if(snpAnnotsIDs.size() >0) {
+              ArrayList arrayIDs = new ArrayList(snpAnnotsIDs);
+              for (int i = 0; i < arrayIDs.size();) {
+                  Collection values = new ArrayList();
+                  int begIndex = i;
+                  i += IN_PARAMETERS ;
+                  int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+                  values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                  Criteria snpAnnotcrit = session.createCriteria(SNPAnnotation.class).
+                  setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
+                  add(Restrictions.in("id", values));
+                  snpAnnotcrit.list();
+              }
+        }
+
+        /* initialize Population */
+        if (populationIDs.size() > 0) {
+            Criteria populationCrit = session.createCriteria(Population.class).
+                                add(Restrictions.in("id", populationIDs));
+            populationCrit.list();
+        }
 
         Collection findingIDs = new HashSet();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
@@ -262,6 +272,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
            findingIDs.add(finding.getId());
         }
 
+/*
         Criteria crit;
         ArrayList<String> arrayIDs = new ArrayList<String>(findingIDs);
         for (int i = 0; i < arrayIDs.size();) {
@@ -288,6 +299,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
                                         add(Restrictions.in("findings.id", values));
             crit.list();
         }
+*/
     }
 
    protected Collection<? extends Finding> getFindingsFromResults(List results) {
@@ -307,8 +319,9 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         AnnotationCriteria annotCrit = findingCritDTO.getAnnotationCriteria();
 
         final StringBuffer snpTargetHQL = new StringBuffer(
-                                      " FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS + ", SNPAssay s  JOIN "+
-                                      TARGET_FINDING_ALIAS + ".snpAnnotation " + " {0} WHERE s.snpPanel.id = {1} AND "+
+                                      " FROM SNPFrequencyFinding "+ TARGET_FINDING_ALIAS + ", SNPAssay s " +
+                                     //  " JOIN "+ TARGET_FINDING_ALIAS + ".snpAnnotation " + 
+                                       " {0} WHERE s.snpPanel.id = {1} AND "+
                                       TARGET_FINDING_ALIAS + ".snpAnnotation = s.snpAnnotation " + " AND {2} ");
 
         HashMap params = new HashMap();
