@@ -1,19 +1,25 @@
-package gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier;
+package gov.nih.nci.caintegrator.security;
 
-import gov.nih.nci.caintegrator.ui.graphing.data.kaplanmeier.KaplanMeierPlotPointSeries.SeriesType;
+import gov.nih.nci.caintegrator.dto.de.InstitutionDE;
 
-import java.awt.Color;
-import java.util.ArrayList;
-/**
- * This Class contains two KaplainMeierPlotPointSeries. One for the probability
- * line and a second series of Censor plot points.  This series also allows the
- * user to define certain attributes of how they would like the actual pair to 
- * be rendered on the JFreeChart.  Because both series are related by the sample
- * set that was used to generate them, they will overlay each other and appear
- * as one plot.  For this reason it is assumed that the entire set will be
- * the same color.  If no color is set, black will be used.
+import java.util.Collection;
+
+/***
+ * Class that will hold the "Credentials" required to fully use a caIntegrator
+ * based application.  It will hold the Role of the user and the institutes that
+ * the user is associated with.
  * 
+ * The UserCredentials may have 1 of 3 roles.
+ * 	
+ *  UserRole.PUBLIC_USER is able to access only public data
  *  
+ *  UserRole.INSTITUTE_USER is able to view PUBLIC_USER data and the data of the Institutes
+ *  listed in the Set institutes.
+ *  
+ *  UserRole.SUPER_USER is able to view all data across all institutes as well
+ *  as all public data
+ * 
+ * 
  * @author BauerD
  *
  */
@@ -76,115 +82,138 @@ import java.util.ArrayList;
 * 
 */
 
-public class KaplanMeierPlotPointSeriesSet{
+public class UserCredentials {
 
-	private KaplanMeierPlotPointSeries censorPlotPoints = null;
-	private KaplanMeierPlotPointSeries probabilityPlotPoints = null;
-	private ArrayList<KaplanMeierSampleInfo> samples;
-	private String legendTitle = "";
-	private String name = "";
-	private Comparable hashKey = 0;
-	//Set the default color
-	private Color color;
+	private String userName;
+	private UserRole role;
+	private String emailAddress;
+	private String firstName;
+	private String lastName;
+	private Collection<InstitutionDE> institutes;
+	private boolean authenticated = false;
 	
-	public KaplanMeierPlotPointSeriesSet() {
-		//create a hash set for this series
-		hashKey = createHash();
+	public enum UserRole{
+		PUBLIC_USER, INSTITUTE_USER, SUPER_USER;
+		public  String toString()
+		{
+			switch(this) {
+			case PUBLIC_USER:
+				return "PUBLIC_USER";
+			case INSTITUTE_USER:
+				return "INSTITUTE_USER";
+			case SUPER_USER:
+				return "SUPER_USER";
+			default:
+				//this should never happen
+				return "UNDEFINED_USER_ROLE";
+			}
+		}	
 	}
 
 	/**
-	 * @return Returns the censorPlotPoints.
+	 * This constructor is protected so that once the Credentials have been
+	 * set by the SecurityManager, they can not be modified.
+	 * @param emailAddress
+	 * @param firstName
+	 * @param institutes
+	 * @param lastName
+	 * @param role
+	 * @param userName
 	 */
-	public KaplanMeierPlotPointSeries getCensorPlotPoints() {
-		return censorPlotPoints;
+	protected UserCredentials(String emailAddress, String firstName, Collection<InstitutionDE> institutes, String lastName, UserRole role, String userName) {
+		this.emailAddress = emailAddress;
+		this.firstName = firstName;
+		this.institutes = institutes;
+		this.lastName = lastName;
+		this.role = role;
+		this.userName = userName;
+		if(role!=null) {
+			authenticated = true;
+		}
 	}
 	/**
-	 * @param censorPlotPoints The censorPlotPoints to set.
+	 * This constructor is protected so that once the Credentials have been
+	 * set by the SecurityManager, they can not be modified.
+	 * @param userName
+	 * @param role
+	 * @param institutes
 	 */
-	public void setCensorPlotPoints(KaplanMeierPlotPointSeries censorScatterDataPoints) {
-		this.censorPlotPoints = censorScatterDataPoints;
-		this.censorPlotPoints.setKey(hashKey);
-		this.censorPlotPoints.setSeriesType(SeriesType.CENSOR);
+	protected UserCredentials(String userName, UserRole role, Collection<InstitutionDE> allowableData) {
+		this.userName = userName;
+		this.role = role;
+		this.institutes = allowableData;
+		if(role!=null) {
+			authenticated = true;
+		}
 	}
 	/**
-	 * @return Returns the probabilityPlotPoints.
-	 */
-	public KaplanMeierPlotPointSeries getProbabilityPlotPoints() {
-		return probabilityPlotPoints;
-	}
-	/**
-	 * @param probabilityPlotPoints The probabilityPlotPoints to set.
-	 */
-	public void setProbabilityPlotPoints(KaplanMeierPlotPointSeries xyLineDataPoints) {
-		this.probabilityPlotPoints = xyLineDataPoints;
-		this.probabilityPlotPoints.setKey(hashKey);
-		this.probabilityPlotPoints.setSeriesType(SeriesType.PROBABILITY);
-	}
-	/**
-	 * @return Returns the color.
-	 */
-	public Color getColor() {
-		return color;
-	}
-	/**
-	 * @param color The color to set.
-	 */
-	public void setColor(Color color) {
-		this.color = color;
-	}
-	/**
-	 * @return Returns the legendTitle.
-	 */
-	public String getLegendTitle() {
-		return legendTitle;
-	}
-	/**
-	 * @param legendTitle The legendTitle to set.
-	 */
-	public void setLegendTitle(String legendTitle) {
-		this.legendTitle = legendTitle;
-	}
-	/**
-	 * @return Returns the name.
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name The name to set.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	 * @return Returns the samples.
-	 */
-	public ArrayList<KaplanMeierSampleInfo> getSamples() {
-		return samples;
-	}
-	/**
-	 * @param samples The samples to set.
-	 */
-	public void setSamples(ArrayList<KaplanMeierSampleInfo> samples) {
-		this.samples = samples;
-	}
-	/**
-	 * This function is required to create a unique id that will be used
-	 * to identify it's members later by the Plotting class.  This is necesary
-	 * because at the time if this writing, you could not get access to the
-	 * data set once it was placed into a JFreeChart.
+	 * The institutes whose data the user is allowed to see
 	 * @return
 	 */
-	private Comparable createHash(){
-		double result = Math.random() * (double)System.currentTimeMillis();
-		return result;
+	public Collection<InstitutionDE> getInstitutes() {
+		return this.institutes;
 	}
 
 	/**
-	 * A unique id that represents all members of this set
-	 * @return Returns the hashKey.
+	 * @return Returns the role.
 	 */
-	public Comparable getHashKey() {
-		return hashKey;
+	public UserRole getRole() {
+		return role;
 	}
+
+	/**
+	 * @return Returns the userName.
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+
+	
+	/**
+	 * Checks to see if these credential have been authenticated
+	 * @return
+	 */
+	public boolean authenticated() {
+		return authenticated;
+	}
+	
+	private void setAuthenticated(boolean auth) {
+		this.authenticated = auth;
+	}
+
+	/**
+	 * @param emailAddress The emailAddress to set.
+	 */
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	/**
+	 * @param firstName The firstName to set.
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * @param lastName The lastName to set.
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+
 }

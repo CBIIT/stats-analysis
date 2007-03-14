@@ -2,7 +2,6 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.germline;
 
 
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
@@ -26,13 +25,7 @@ public class SNPAssociationFindingCriteriaDTO extends FindingCriteriaDTO {
     private ArithematicOperator pValueOperator;
     private ArithematicOperator rankOperator;
 
-    public SNPAssociationFindingCriteriaDTO(){
-        
-    }
-
-    public SNPAssociationFindingCriteriaDTO(StudyCriteria studyCriteria) throws Exception{
-        super(studyCriteria);
-    }
+    public SNPAssociationFindingCriteriaDTO(){ }
 
     public Float getpValue() {
         return pValue;
@@ -76,6 +69,9 @@ public class SNPAssociationFindingCriteriaDTO extends FindingCriteriaDTO {
         return rankOperator;
     }
 
+    public FindingsHandler getHandler() {
+        return new SNPAssociationFindingsHandler();
+    }
 
 	@Override
 	public String toString()

@@ -81,14 +81,13 @@
      
     <!-- here is for 1-m relationships -->  
     
-  <!--   <set name="genotypeFindingCollection" lazy="true" inverse="true">
+     <set name="genotypeFindingCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="ASSAY_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding" />
-     </set> -->
+     </set>     
 
-
-      <many-to-one name="snpPanel"
+   <many-to-one name="snpPanel"
              class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel"
              column="SNP_PANEL_ID"
              not-null="true" />
@@ -98,5 +97,5 @@
              column="SNPANNO_ID"
              not-null="true" />
 
-    </class>
+	</class>
 </hibernate-mapping>

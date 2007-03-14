@@ -284,9 +284,6 @@ public class ClinicalPlot {
 	  DiseaseType[] diseases = DiseaseType.values();
 	  for (int i=0; i < diseases.length; i++ ) {
 	    diseaseName = diseases[i].name();
-	    if(diseases[i].equals(DiseaseType.UNCLASSIFIED))	{
-			  continue; //remove unclassified from the legend
-		}
 	    diseaseColor = diseases[i].getColor();
 	    item = new LegendItem(diseaseName, null, null, null, new Line2D.Double(0,0,6,6), new BasicStroke(3.0f), diseaseColor);	 
 	    legendSrc.addLegendItem(item);

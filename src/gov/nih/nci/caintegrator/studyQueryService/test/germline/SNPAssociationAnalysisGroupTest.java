@@ -22,26 +22,27 @@ public class SNPAssociationAnalysisGroupTest extends GenotypeFindingTest {
     private AnalysisGroupCriteria  assocCrit ;
 
     public void setUp() throws Exception {
-        super.setUp();
-        assocCrit = new AnalysisGroupCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+        assocCrit = new AnalysisGroupCriteria ();
     }
 
-    public void testSNPAssociationAnalysisGroup() {
-        //setUpSNPAnalysisGroupCriteria();
+    public void testSNPAssociationAnalysis() {
+        setUpSNPAnalysisGroupCriteria();
         executeSearch();
     }
 
     protected void setUpSNPAnalysisGroupCriteria() {
-         assocCrit.setNames(new String[] {"Incidence density sampling,Unadjusted score test,Controls", "control"});
+         //assocCrit.setNames(new String[] {"early", "control"});
     }
 
     private void executeSearch() {
         try {
-            Collection<SNPAnalysisGroup> assocObjs = manager.getSNPAnalysisGroups(assocCrit);
+            Collection<SNPAnalysisGroup> assocObjs = FindingsManager.getSNPAnalysisGroups(assocCrit);
             System.out.println("Number of Group Objects Retrieved: " + assocObjs .size());
             for (Iterator<SNPAnalysisGroup> iterator = assocObjs .iterator(); iterator.hasNext();) {
                 SNPAnalysisGroup group = iterator.next();
                 System.out.println("Group Name: " + group.getName());
+                System.out.println("Member Count: " + group.getMemberCount());
+                System.out.println("Group Description: " + group.getDescription());
             }
       } catch (Throwable t)  {
            System.out.println("CGEMS Exception in getting studies: " + t.toString());

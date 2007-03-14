@@ -537,7 +537,7 @@ public  class BreastCancerClinicalFinding
 			boolean eq = false;
 			if(obj instanceof BreastCancerClinicalFinding) {
 				BreastCancerClinicalFinding c =(BreastCancerClinicalFinding)obj; 			 
-				Long thisId = getId();		
+				String thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;

@@ -3,10 +3,8 @@ package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
-import gov.nih.nci.caintegrator.test.BaseSpringTestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import junit.framework.TestCase;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -16,11 +14,8 @@ import java.util.Iterator;
  * Date:   Aug 16, 2006
  * Time:   8:05:49 AM
  */
-public class StudyCriteriaTest extends CGEMSTest {
-   /* public String[] getConfigFiles() {
-            return new String[] {"classpath*:applicationContext-services.xml","test/applicationContext-junit.xml"};
-    }
-*/
+public class StudyCriteriaTest extends GenotypeFindingTest {
+
     private StudyCriteria studyCrit ;
 
     public void setUp() throws Exception {
@@ -28,18 +23,18 @@ public class StudyCriteriaTest extends CGEMSTest {
     }
 
     public void testStudyCriteria() {
-        //sStudyetUpStudyCriteria();
+        setUpStudyCriteria();
         executeSearch();
     }
 
     protected void setUpStudyCriteria() {
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+        //studyCrit.setName("CGEMS Prostate Scan 1");
         //studyCrit.setSponsorStudyIdentifier("NCI DCEG, NCI OCG");
     }
 
     private void executeSearch() {
         try {
-            Collection<Study> studyObjs = manager.getStudies(studyCrit);
+            Collection<Study> studyObjs = FindingsManager.getStudies(studyCrit);
             System.out.println("Number of Study Objects Retrieved: " + studyObjs.size());
             for (Iterator<Study> iterator = studyObjs.iterator(); iterator.hasNext();) {
                 Study study = iterator.next();

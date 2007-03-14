@@ -1,62 +1,47 @@
 package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
-import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
-import gov.nih.nci.caintegrator.domain.study.bean.DNASpecimen;
+import junit.framework.TestCase;
+import gov.nih.nci.caintegrator.studyQueryService.germline.BatchFindingsHandler;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.germline.PanelCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
-import gov.nih.nci.caintegrator.test.BaseSpringTestCase;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
+import gov.nih.nci.caintegrator.domain.study.bean.DNASpecimen;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Author: Ram Bhattaru
  * Date:   Sep 20, 2006
  * Time:   5:37:48 AM
  */
-public abstract class CGEMSTest extends BaseSpringTestCase {
-    //protected abstract Collection executeSearch(int start, int end);
+public abstract class CGEMSTest extends TestCase {
+    protected abstract Collection executeSearch(int start, int end);
     //protected static int TOTAL_FINDINGS = 0;
     protected AnnotationCriteria annotCrit;
-    protected StudyCriteria studyCrit;
-
-
-
     protected StudyParticipantCriteria spCrit;
-        protected void setUpPanelCrit() {
-        PanelCriteria p = new PanelCriteria();
-        //p.setName("HumanHap300");
-       //p.setName("HumanHap550");
-        //p.setVersion("1.1");
-       //p.setSnpPanelID(new Long(100));
-            p.setSnpPanelID(new Long(100));
-        annotCrit.setPanelCriteria(p);
-    }
+
 
     public void setUp() throws Exception{
-        // annotCrit = (AnnotationCriteria)ctx.getBean("AnnotationCriteria");
         annotCrit = new AnnotationCriteria();
         spCrit = new StudyParticipantCriteria();
-        studyCrit = new StudyCriteria();
+
     }
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
-
-        ppc.setChromosome("1");
-     // ppc.setStartPosition(new Long(1));  // 76065158
-     // ppc.setEndPosition(new Long(100000000));    // should give 4 GenotypeFindings
-
-
 /*
+        ppc.setChromosome("8");
+        ppc.setStartPosition(new Integer(76065000));  // 76065158
+        ppc.setEndPosition(new Integer(76075000));    // should give 4 GenotypeFindings
+
+*/
         ppc.setChromosome("7");
         ppc.setStartPosition(new Long(40000000 ));
         ppc.setEndPosition(new Long(55000000));
-*/
 
         /*
         ppc.setChromosome("X");
@@ -67,17 +52,12 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
         annotCrit.setPhysicalPositionCriteria(ppc);
 
     }
-    protected void setUpStudyCriteria() {
-       studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
-
-    }
-
     protected void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
         //geneSymbols.add(new String("USP48"));
         //geneSymbols.add(new String("HSPG2"));
         geneSymbols.add(new String("MET"));
-        //geneSymbols.add(new String("12FOO34"));
+
 
 
         //geneSymbols.add(new String("blimp"));
@@ -176,21 +156,11 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
 
     }
     protected void setUpAnalysisGroupCriteria() {
-         AnalysisGroupCriteria crit = new AnalysisGroupCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+         AnalysisGroupCriteria crit = new AnalysisGroupCriteria();
          crit.setNames(new String[] {"Incidence density sampling, Unadjusted score test, Controls"});
          //"early", "advanced"
          spCrit.setAnalysisGroupCriteria(crit);
      }
-     protected void setUpDBSnpCrit() {
-        Collection<String> dbSNPIds = new ArrayList<String>();
-        dbSNPIds.add("rs10215692");
-        dbSNPIds.add("rs10216611");
-        dbSNPIds.add("rs10170496");
-        dbSNPIds.add("rs7867544");
-        dbSNPIds.add("rs1160166");
-        dbSNPIds.add("rs10504944");
-        annotCrit.setSnpIdentifiers(dbSNPIds );
-    }
 
     protected void setUpStudyParticipantAttributesCriteria() {
         //spCrit.setLowerAgeLimit(55);
@@ -236,32 +206,32 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
     }
 
 
-//    public void testAll() {
+    public void testAll() {
 
-//        Collection allFindings = new HashSet();
-//        int findingsFound = 0;
-//        int start = 0;
-//        int end = BatchFindingsHandler.BATCH_OBJECT_INCREMENT + 1;
-//        Collection findings = null;
-//        do {
-//            findings = executeSearch(start, end);
-//            HashSet uniqueFindings = new HashSet();
-//            uniqueFindings.addAll(findings);
-//            if (findings == null) {
-//                System.out.println("Error Occured in executeSearch() method");
-//                System.exit(1);
-//            }
-//            allFindings.addAll(findings);
-//            //findingsFound = findings.size();
-//
-//            System.out.println("\n\n ***** Findings Found For Start:" + start + " And End:" + end
-//                                    + "  = " + findings.size() + " ***** \n\n");
-//            //TOTAL_FINDINGS += findingsFound;
-//            start += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;
-//            end += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;;
-//        } while(findings.size() > (BatchFindingsHandler.BATCH_OBJECT_INCREMENT ));
-//        System.out.println("TOTAL UNIQUE FINDINGS FOUND: " + allFindings.size());
-//  }
+        Collection allFindings = new HashSet();
+        int findingsFound = 0;
+        int start = 0;
+        int end = BatchFindingsHandler.BATCH_OBJECT_INCREMENT + 1;
+        Collection findings = null;
+        do {
+            findings = executeSearch(start, end);
+            HashSet uniqueFindings = new HashSet();
+            uniqueFindings.addAll(findings);
+            if (findings == null) {
+                System.out.println("Error Occured in executeSearch() method");
+                System.exit(1);
+            }
+            allFindings.addAll(findings);
+            //findingsFound = findings.size();
+
+            System.out.println("\n\n ***** Findings Found For Start:" + start + " And End:" + end
+                                    + "  = " + findings.size() + " ***** \n\n");
+            //TOTAL_FINDINGS += findingsFound;
+            start += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;
+            end += BatchFindingsHandler.BATCH_OBJECT_INCREMENT;;
+        } while(findings.size() > (BatchFindingsHandler.BATCH_OBJECT_INCREMENT ));
+        System.out.println("TOTAL UNIQUE FINDINGS FOUND: " + allFindings.size());
+    }
     protected void printSNPAnnotation(SNPAnnotation annot) {
         System.out.println("              SNPAnnotation ID:    " + annot.getId());
         System.out.println("              Chromosome:          " + annot.getChromosomeName());
@@ -275,10 +245,6 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
         System.out.println(s );
     }
 
-    public String[] getConfigFiles() {
-        return new String[] {
-                "classpath*:applicationContext-services.xml",
-                "C:/workspace/cgems/test/applicationContext-junit.xml",
-                };
-                }
+
+
 }

@@ -3,7 +3,6 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.germline;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 import gov.nih.nci.caintegrator.studyQueryService.germline.GenotypeFindingsHandler;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
@@ -20,13 +19,8 @@ public class GenotypeFindingCriteriaDTO extends FindingCriteriaDTO {
     private String qcStatus;
     public ArithematicOperator operatorType = ArithematicOperator.EQ; //default
     public StudyParticipantCriteria StudyParticipantCriteria;
-    
 
-    public GenotypeFindingCriteriaDTO() {
-    }
-    public GenotypeFindingCriteriaDTO(StudyCriteria studyCriteria) throws Exception {
-        super(studyCriteria);
-    }
+    public GenotypeFindingCriteriaDTO(){ }
 
     /**
      *
@@ -74,6 +68,9 @@ public class GenotypeFindingCriteriaDTO extends FindingCriteriaDTO {
         AnnotationCriteria = annotationCriteria;
     }
 
+     public FindingsHandler getHandler() {
+        return new GenotypeFindingsHandler();
+    }
 
 	@Override
 	public String toString()

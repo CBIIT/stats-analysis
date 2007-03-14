@@ -2,8 +2,6 @@
 
 package gov.nih.nci.caintegrator.domain.study.bean;
 import gov.nih.nci.caintegrator.domain.study.bean.*;
-import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
-
 import java.util.*;
 
 /**
@@ -378,37 +376,7 @@ public  class Study
     }
 	   
 	   
-    private Set <gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding> snpAssociationFindingCollection =
-            new HashSet<gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding>();
+	
 
-    public Set <gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding> getSnpAssociationFindingCollection(){
-        return snpAssociationFindingCollection;
-    }
-
-    public void setSnpAssociationFindingCollection(Set<gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding> snpAssociationFindingCollection){
-        this.snpAssociationFindingCollection = snpAssociationFindingCollection;
-    }
-
-    private Set <gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding> snpFrequencyCollection =
-            new HashSet<gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding>();
-
-    public Set <gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding> getSnpFrequencyCollection(){
-        return snpFrequencyCollection;
-    }
-
-    public void setSnpFrequencyCollection(Set<gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding> snpFrequencyCollection){
-        this.snpFrequencyCollection = snpFrequencyCollection;
-    }
-
-    private Set <gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis> snpAssociationAnalysisCollection =
-            new HashSet<gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis>();
-
-    public Set<SNPAssociationAnalysis> getSnpAssociationAnalysisCollection() {
-        return snpAssociationAnalysisCollection;
-    }
-
-    public void setSnpAssociationAnalysisCollection(Set<SNPAssociationAnalysis> snpAssociationAnalysisCollection) {
-        this.snpAssociationAnalysisCollection = snpAssociationAnalysisCollection;
-    }
-
+			
 }

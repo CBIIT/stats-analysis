@@ -22,12 +22,10 @@ public class SNPAssociationAnalysisCriteriaTest extends GenotypeFindingTest {
     private SNPAssociationAnalysisCriteria  assocCrit ;
 
     public void setUp() throws Exception {
-        super.setUp();
-        assocCrit = new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
+        assocCrit = new SNPAssociationAnalysisCriteria();
     }
 
     public void testSNPAssociationAnalysis() {
-        //studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
         setUpSNPAssociationAnalysisCriteria();
         executeSearch();
     }
@@ -39,13 +37,13 @@ public class SNPAssociationAnalysisCriteriaTest extends GenotypeFindingTest {
 
     private void executeSearch() {
         try {
-            Collection<SNPAssociationAnalysis> assocObjs = manager.getSNPAssociationAnalysis(assocCrit);
+            Collection<SNPAssociationAnalysis> assocObjs = FindingsManager.getSNPAssociationAnalysis(assocCrit);
             System.out.println("Number of Association Objects Retrieved: " + assocObjs .size());
             for (Iterator<SNPAssociationAnalysis> iterator = assocObjs .iterator(); iterator.hasNext();) {
                 SNPAssociationAnalysis analysis = iterator.next();
                 System.out.println("Analysis Name: " + analysis.getName());
-                /*System.out.println("Analysis Abstract: " + analysis.getMethods());
-                System.out.println("Analysis Description: " + analysis.getDescription());*/
+                System.out.println("Analysis Abstract: " + analysis.getMethods());
+                System.out.println("Analysis Description: " + analysis.getDescription());
             }
 
         } catch (Throwable t)  {

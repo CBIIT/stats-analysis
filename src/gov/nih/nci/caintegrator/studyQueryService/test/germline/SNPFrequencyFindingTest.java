@@ -28,8 +28,11 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
      protected StudyParticipantCriteria spCrit;
     public void setUp() throws Exception {
         super.setUp();
-        freqDTO = (SNPFrequencyFindingCriteriaDTO) ctx.getBean("snpFrequencyFindingsCriteria");
+        freqDTO = new SNPFrequencyFindingCriteriaDTO();
         freqDTO.setAnnotationCriteria(annotCrit);
+    }
+    public void testAll() {
+        super.testAll();
     }
 
     protected void setUpPopulationCriteria() {
@@ -40,51 +43,26 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         spCrit.setPopulationCriteria(popCrit);     
      }
 
-  /*   public void testSNPAnnotationRetrieval() {
-        setUpSNPPhysicalPositionCrit();
-        setUpPanelCrit();
-        try {
-            Collection<SNPAnnotation> snpAnnotObjs = manager.getSNPAnnotations(annotCrit);
-            for (Iterator<SNPAnnotation> iterator = snpAnnotObjs.iterator(); iterator.hasNext();) {
-                SNPAnnotation snpAnnotation = iterator.next();
-                System.out.println("SNP_ANNOT_ID: " + snpAnnotation.getId());
-            }
-
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-    }*/
-
     public void testSNPFrequencyFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
        //setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
+       // setUpPanelCrit();
 
-      //setUpGeneBiomarkerCrit();
-      setUpPanelCrit();
-
+        //setUpGeneBiomarkerCrit();
 
         //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
         //freqDTO.setPopulationNames(new String[] {"CONTROL"});
 
-       // freqDTO.setCompletionRate(new Double(0.9), ArithematicOperator.LT);
-      // freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
-
-        // Now set up study name criteria
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
-        freqDTO.setStudyCriteria(studyCrit);
-
+        // freqDTO.setCompletionRate(new Double(1.0), ArithematicOperator.GE);
+        freqDTO.setHardyWeinbergPValue(new Float(0.1), ArithematicOperator.LE);
         executeSearch(0, 501);
    }
 
     public void testPopulateFindings() {
-        //setUpSNPPhysicalPositionCrit();
-        //setUpPanelCrit();
+        setUpSNPPhysicalPositionCrit();
         //freqDTO.setPopulationNames(new String[] {"CEPH"});
-        freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
-
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
-        //freqDTO.setStudyCriteria(studyCrit);
+        //freqDTO.setHardyWeinbergPValue(new Float(0.0011), ArithematicOperator.LE);
         //setUpGeneBiomarkerCrit();
         //setSNPFindingCriteria();
         try {
@@ -93,7 +71,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
              new Thread(new Runnable() {
                  public void run() {
                      try {
-                        manager.populateFindings(freqDTO, findingsToBePopulated);
+                        FindingsManager.populateFindings(freqDTO, findingsToBePopulated);
                      } catch(Throwable t) {
                          t.printStackTrace();
                          System.out.println("Error from FindingsManager.populateFindings call: ");
@@ -102,6 +80,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
                        }
             ).start();
 
+            boolean sleep = true;
             int count = 1;
             int noOfResults = 0;
             do {
@@ -133,14 +112,14 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
             System.out.println("ALL RESULTS WERE RECEIVED TOTAL: " + noOfResults);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
 
 
     public Collection executeSearch(int startIndex, int endIndex) {
            try {
-               Collection findings = manager.getFindings(freqDTO, startIndex, endIndex);
+               Collection findings = FindingsManager.getFindings(freqDTO, startIndex, endIndex);
                System.out.println("RESULTS COUNT: " + findings.size());
                for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                    SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
@@ -172,7 +151,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
     }
 
     protected void printPopulation(Population p) {
-        System.out.println("Population (SHOULD BE NO SQL): ");
+        System.out.println("Population");
         System.out.println("        " + p);
     }
     public static Test suite() {

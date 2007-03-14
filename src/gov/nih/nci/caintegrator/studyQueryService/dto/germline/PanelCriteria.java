@@ -16,7 +16,12 @@ public class PanelCriteria {
 	 * textual identifier for the panel
 	 */
 	private String name;
-	private Long snpPanelID;
+
+    /**
+	 * vendor assigned version identifier for the panel
+	 */
+	private String version;
+
 
     public PanelCriteria(){ }
 
@@ -28,24 +33,11 @@ public class PanelCriteria {
         this.name = name;
     }
 
-	public Long getSnpPanelID() {
-        return snpPanelID;
+    public String getVersion() {
+        return version;
     }
 
-    public void setSnpPanelID(Long snpPanelID) {
-        this.snpPanelID = snpPanelID;
+    public void setVersion(String version) {
+        this.version = version;
     }
-    
-    @Override
-	public String toString()
-    {
-		String str = "Panel Criteria: ";
-		
-		if ((name != null) && (name.length() > 0))
-			str = str + name;
-		
-		str = str + "\n";
-		
-		return str;
-	}
 }

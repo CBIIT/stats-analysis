@@ -9,7 +9,6 @@ import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -91,42 +90,28 @@ public class FTestFinding extends AnalysisFinding implements ReporterBasedFindin
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#arePvaluesAdjusted()
 	 */
 	public boolean arePvaluesAdjusted() {
-		if(myResults != null){
-			return myResults.arePvaluesAdjusted();
-		}
-		return false;
+		return myResults.arePvaluesAdjusted();
 	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getGroup1()
 	 */
-	@SuppressWarnings("unchecked")
 	public List<SampleGroup> getSampleGroups() {
-		if(myResults != null){
-			return myResults.getSampleGroups();
-		}
-		return (List<SampleGroup>)Collections.EMPTY_LIST;
+		return myResults.getSampleGroups();
 	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getNumResultEntries()
 	 */
 	public int getNumResultEntries() {
-		if(myResults != null){
-			return myResults.getNumResultEntries();
-		}
-		return 0;
+		return myResults.getNumResultEntries();
 	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getResultEntries()
 	 */
-	@SuppressWarnings("unchecked")
 	public List<FTestResultEntry> getResultEntries() {
-		if(myResults != null){
-			return myResults.getResultEntries();
-		}
-		return (List<FTestResultEntry>)Collections.EMPTY_LIST;
+		return myResults.getResultEntries();
 	}
 
 
@@ -170,16 +155,12 @@ public class FTestFinding extends AnalysisFinding implements ReporterBasedFindin
 	  return idList;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<String> getGroupNames() {
-		if(myResults != null){
-		  List<String> groupNames = new ArrayList<String>();
-		  for(SampleGroup sg : myResults.getSampleGroups())	{
-			  groupNames.add(sg.getGroupName());
-		  }
-		  return groupNames;
-		}
-		return (List<String>)Collections.EMPTY_LIST;
+	  List<String> groupNames = new ArrayList<String>();
+	  for(SampleGroup sg : myResults.getSampleGroups())	{
+		  groupNames.add(sg.getGroupName());
+	  }
+	  return groupNames;
 	}
 
 	

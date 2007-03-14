@@ -37,11 +37,13 @@ public class GenotypeFindingTest extends CGEMSTest {
 
     public void setUp() throws Exception {
         super.setUp();
-        //gfDTO = new GenotypeFindingCriteriaDTO(studyCrit);
-        gfDTO = (GenotypeFindingCriteriaDTO) ctx.getBean("genotypeFindingsCriteria");
-        gfDTO.setStudyCriteria(studyCrit);
+        gfDTO = new GenotypeFindingCriteriaDTO();
         gfDTO.setAnnotationCriteria(annotCrit);
         gfDTO.setStudyParticipantCriteria(spCrit);
+    }
+
+    public void testAll() {
+        super.testAll();
     }
 
 
@@ -49,8 +51,6 @@ public class GenotypeFindingTest extends CGEMSTest {
     private void setUpGenotypeCrit() {
         //gfDTO.setQualityScore(new Float(0.50), ArithematicOperator.LT);
         gfDTO.setQcStatus("QC+");
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
-        gfDTO.setStudyCriteria(studyCrit);
     }
     protected void setUpSNPPhysicalPositionCrit() {
         PhysicalPositionCriteria ppc = new PhysicalPositionCriteria();
@@ -78,19 +78,32 @@ public class GenotypeFindingTest extends CGEMSTest {
        //geneSymbols.add()
        annotCrit.setGeneSymbols(geneSymbols);
     }
-   
+    protected void setUpDBSnpCrit() {
+        Collection<String> dbSNPIds = new ArrayList<String>();
+        //dbSNPIds.add("rs10215692");
+        //dbSNPIds.add("rs10216611");
+        //dbSNPIds.add("rs10170496");
+        dbSNPIds.add("rs7867544");
+        //dbSNPIds.add("rs1160166");
+        //dbSNPIds.add("rs10504944");
+        annotCrit.setSnpIdentifiers(dbSNPIds );
+    }
 
     public void testSNPAnnotCrit() {
         setUpSNPPhysicalPositionCrit();
         executeGenotypeFindingSearch(0, 60);
     }
 
-
+    protected void setUpPanelCrit() {
+        PanelCriteria p = new PanelCriteria();
+        p.setName("HumanHap300");
+        p.setVersion("1.1");
+        annotCrit.setPanelCriteria(p);
+    }
 
     public void testPanelCrit() {
         setUpPanelCrit();
-        setUpSNPPhysicalPositionCrit();
-        setUpGenotypeCrit();
+        setUpDBSnpCrit();
         executeGenotypeFindingSearch(0, 60);
     }
 
@@ -99,10 +112,9 @@ public class GenotypeFindingTest extends CGEMSTest {
         executeGenotypeFindingSearch(0, 60);
     }
     public void testPanelAndSNPAnnotCrit() {
-        //setUpPanelCrit();
+        setUpPanelCrit();
         setUpSNPPhysicalPositionCrit();
-        setUpStudyParticipantCrit();
-        executeGenotypeFindingSearch(0, 501);
+        executeGenotypeFindingSearch(0, 60);
     }
     protected void setUpGeneBiomarkerCrit() {
         Collection<String> geneSymbols = new ArrayList<String> ();
@@ -220,7 +232,7 @@ public class GenotypeFindingTest extends CGEMSTest {
 
     protected void setUpStudyCriteria() {
         StudyCriteria studyCrit = new StudyCriteria();
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
+        studyCrit.setName("CGEMS Prostate Scan 1");
         //studyCrit.setSponsorStudyIdentifier("NIH");
         spCrit.setStudyCriteria(studyCrit);
     }
@@ -254,7 +266,7 @@ public class GenotypeFindingTest extends CGEMSTest {
     private void executeGenotypeFindingSearch(int startIndex, int endIndex) {
        try {
            Collection<? extends Finding> findings =
-                manager.getFindings(gfDTO, startIndex, endIndex);
+                FindingsManager.getFindings(gfDTO, startIndex, endIndex);
 
            System.out.println("RESULTS COUNT: " + findings.size());
 
@@ -287,7 +299,7 @@ public class GenotypeFindingTest extends CGEMSTest {
     protected Collection executeSearch(int start, int end) {
        try {
         Collection<? extends Finding> findings =
-                manager.getFindings(gfDTO, start, end);
+                FindingsManager.getFindings(gfDTO, start, end);
         System.out.println("RESULTS COUNT: " + findings.size());
 
            /*for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
@@ -313,18 +325,17 @@ public class GenotypeFindingTest extends CGEMSTest {
 
     }
 
-    public void testPopulateFindings() {
-        //setUpSNPPhysicalPositionCrit();
-        setUpPanelCrit();
-        setUpPopulationCriteria();
+        public void testPopulateFindings() {
+        setUpSNPPhysicalPositionCrit();
+        //setUpPopulationCriteria();
         setUpGenotypeCrit();
         try {
-             HashSet actualBatchFindings;
+             HashSet actualBatchFindings = new HashSet();
              final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
              new Thread(new Runnable() {
                  public void run() {
                      try {
-                        manager.populateFindings(gfDTO, findingsToBePopulated);
+                        FindingsManager.populateFindings(gfDTO, findingsToBePopulated);
                      } catch(Throwable t) {
                          t.printStackTrace();
                          System.out.println("Error from FindingsManager.populateFindings call: ");
@@ -370,5 +381,5 @@ public class GenotypeFindingTest extends CGEMSTest {
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-    }
+     }
 }

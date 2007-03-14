@@ -2,19 +2,15 @@ package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyParticipantCriteria;
+import gov.nih.nci.caintegrator.util.HibernateUtil;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -24,8 +20,6 @@ import org.hibernate.criterion.Restrictions;
  */
 public class SubjectSearchHandler extends BatchFindingsHandler {
     private static Logger logger = Logger.getLogger(SubjectSearchHandler.class);
-    private SessionFactory sessionFactory;
-    
     final protected Set getConcreteTypedFindingSet() {
         return new HashSet<StudyParticipant>();
     }
@@ -37,7 +31,8 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 
 	public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
                                                             int fromIndex, int toIndex) {
-		   Session session = getSessionFactory().getCurrentSession();
+		   Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	       session.beginTransaction();
 	       List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
 	       List<StudyParticipant> subjects = new ArrayList<StudyParticipant>();
 	       HashSet<StudyParticipant> subjectsSet = new HashSet<StudyParticipant>();
@@ -57,6 +52,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	       else if (specimenIDs.size() == 0) {
 	            /* means StudyParticipantCriteria did not select and Specimens  Hence return
 	                no StudyParticipants */
+	            session.close();
 	            return subjects;
 	       }
 	        /*  means  specimens.size() > 0 so retrieve StudyPartipants beased on the Specimens */
@@ -81,6 +77,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	                 if (subjects.size() >= (toIndex - fromIndex + 1))  {
 	                    subjects.addAll(subjectsSet);
 	                    subjectsSet = null;
+	                    session.close();
 	                    return subjects.subList(0, (toIndex - fromIndex ));
 	                 }
 	               }
@@ -88,12 +85,15 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	               /* means each time it never gotten more than 500 results.  So add to final results */
 	               subjects.addAll(subjectsSet);
 	        }
+	        if (session.isOpen())
+	            session.close();
 	        return subjects;
     }
 
     public void populateFindings(StudyParticipantCriteria spCrit, List toBePopulated) {
-		   Session session = getSessionFactory().getCurrentSession();
+		   Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
+	       session.beginTransaction();
 	       List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
 
 	       /* if (specimenIDs == null) either StudyParticipantCriteria  is null or no StudyParticipantCriteria
@@ -105,6 +105,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	       /* if (specimenIDs.size() == 0) means that the StudyParticipantCriteria did not select
 	           and Specimens  Hence return no StudyParticipants */
 	       else if (specimenIDs.size() == 0) {
+	            session.close();
 	            /* send empty data object to let the client know that no more results are present */
 	            process(toBePopulated, new HashSet<StudyParticipant>(), session);
 	            return ;
@@ -113,6 +114,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	       else  if (specimenIDs != null && specimenIDs.size() > 0) {
 	            sendFindingsWithAnnotationCriteria(specimenIDs, session, toBePopulated);
 	       }
+	       session.close();
     }
     private void sendFindingsWithAnnotationCriteria(Collection<String> specimenIDs,
                                                     Session session, List toBePopulated) {
@@ -188,13 +190,5 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
         }
         Collection<StudyParticipant> studySubjects = crit.list();
         return studySubjects;
-    }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
     }
 }

@@ -19,6 +19,7 @@
         
        <!-- id -->
        <id name="id" 
+           type="java.lang.String" 
            column="GENE_ID">
            <generator class="assigned" />
        </id>
@@ -69,20 +70,15 @@
                  update="false" />     
          -->               
      
+            
+     
+     
       <!-- here is for m-m relationships -->      
       
       <set name="snpAnnotationCollection" table="GENE_SNP_ASSO" >
          <cache usage="read-write" />
          <key column="GENE_ID" />
          <many-to-many class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation" column="SNPANNO_ID" />
-      </set>                         
-      <set name="geneAliasCollection" inverse="true">
-         <key column="GENE_ID" />
-         <one-to-many class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias" />
-      </set>                         
-      <set name="geneExprReporterCollection" inverse="true">
-         <key column="GENE_ID" />
-         <one-to-many class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter" />
       </set>                         
 	</class>
 </hibernate-mapping>

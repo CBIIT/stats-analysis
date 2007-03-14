@@ -203,7 +203,7 @@ public  class SNPPanel
    * 
    */
 
-   /* private Set <gov.nih.nci.caintegrator.domain.study.bean.Study> studyCollection = new HashSet<gov.nih.nci.caintegrator.domain.study.bean.Study>();*/
+    private Set <gov.nih.nci.caintegrator.domain.study.bean.Study> studyCollection = new HashSet<gov.nih.nci.caintegrator.domain.study.bean.Study>();
       /**
    * A type of research activity that tests how well new medical treatments or other interventions work 
    * in subjects. Such plans test new methods of screening, prevention, diagnosis or treatment of a disease. 
@@ -212,7 +212,7 @@ public  class SNPPanel
    * 
    */
 
-   /* public Set <gov.nih.nci.caintegrator.domain.study.bean.Study> getStudyCollection(){
+    public Set <gov.nih.nci.caintegrator.domain.study.bean.Study> getStudyCollection(){
         return studyCollection;
     }
 
@@ -222,7 +222,7 @@ public  class SNPPanel
     public void setStudyCollection(Set<gov.nih.nci.caintegrator.domain.study.bean.Study> studyCollection){
         this.studyCollection = studyCollection;
     }
-*/	   
+	   
 	   
 	
 	   
@@ -253,15 +253,8 @@ public  class SNPPanel
         this.snpAssayCollection = snpAssayCollection;
     }
 	   
-	private Set <gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation> snpAnnotationCollection = new HashSet<gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation>();
+	   
+	
 
-    public Set<SNPAnnotation> getSnpAnnotationCollection() {
-        return snpAnnotationCollection;
-    }
-
-    public void setSnpAnnotationCollection(Set<SNPAnnotation> snpAnnotationCollection) {
-        this.snpAnnotationCollection = snpAnnotationCollection;
-    }
-
-
+			
 }

@@ -61,8 +61,20 @@
             <property name="minValue" column="AGE_AT_ENROLL_MIN" insert="false" update="false"/>
             <property name="maxValue" column="AGE_AT_ENROLL_MAX" insert="false" update="false"/>
        </component>
-             
-       
+                
+        <!-- ageAtEnrollment 
+       <property name="ageAtEnrollment" 
+                 type="java.lang.Integer" 
+                 column="AGE_AT_ENROLL" 
+                 insert="false" 
+                 update="false" />
+	    
+       <property name="ageAtDeath" 
+                 type="java.lang.Integer" 
+                 column="AGE_AT_DEATH" 
+                 insert="false" 
+                 update="false" /> -->
+                 
         <!-- daysOnStudy -->                 
         <property name="daysOnStudy" 
                  type="java.lang.Integer" 
@@ -119,13 +131,7 @@
                  insert="false" 
                  update="false" />                 
                  
-     <!--  TSP Specimen ID               
-        <property name="tspSpecimenId" 
-                 type="java.lang.String"
-                 column="TSP_SPECIMEN_ID"
-                 insert="false" 
-                 update="false" />   -->       
-                 
+
         <!--  isOffStudy -->                 
         <property name="isOffStudy"
                  type="org.hibernate.type.YesNoType"
@@ -141,7 +147,6 @@
          <many-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup"
                 column="ANA_GRP_ID" />
       </set>      
-
       
       <!--  check with Srini-->
 <!--   TODO: Fix this: Ram
@@ -151,7 +156,8 @@
          <many-to-many class="gov.nih.nci.caintegrator.domain.study.Histology" column="HISTOLOGY_ID" />
       </set>
       -->
-    
+                
+     
     <!-- here is for 1-m relationships --> 
  
     <set name="activityCollection" inverse="true" cascade="none">
@@ -165,23 +171,12 @@
       <one-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Specimen" />
     </set>  
     
-    <set name="clinicalFindingCollection" lazy="true" inverse="true">
-      <key column="PARTICIPANT_DID" />
-      <one-to-many class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding" />
-    </set>  
-   
-    <!--
-    <set name="epiFinding" lazy="true" inverse="true">
-      <cache usage="read-write" />
-      <key column="EPIFINDING_ID" />
-      <one-to-many class="gov.nih.nci.caintegrator.domain.finding.bean.TobaccoConsumption" />
-    </set>  
-    -->
-    
+      
      <!-- here is for m-1 relationships -->  
       <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.bean.Study" column="STUDY_NAME"  />
       <many-to-one name="population" class="gov.nih.nci.caintegrator.domain.study.bean.Population" column="POPULATION_ID"
-              lazy = "false"  />
-                 
+                />
+            
+      
 	</class>
 </hibernate-mapping>

@@ -63,34 +63,32 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
              theANDString = " AND ";
          }
 
-        /////////////////////////////////////////////////////
-        // Handle percent positive min number
-        /////////////////////////////////////////////////////
-        if (theCriteria.getPercentPositiveRangeMin() != null)
-        {
-        
-          System.out.println("ihc percent positive min #: " + theCriteria.getPercentPositiveRangeMin());
-          //theHQL.append(theANDString + " levelIHC.percentPositiveRangeMin IN (:levelIHC_percentPositiveRangeMin) ");
-             theHQL.append(theANDString + " levelIHC.percentPositiveRangeMin >="+ theCriteria.getPercentPositiveRangeMin().intValue());
-          //   inParams.put("levelIHC_percentPositiveRangeMin", theCriteria.getPercentPositiveRangeMin());
-             theANDString = " AND ";
-        }
-     
-        
-        
-        /////////////////////////////////////////////////////
+         /////////////////////////////////////////////////////
          // Handle percent positive max number
          /////////////////////////////////////////////////////
        if (theCriteria.getPercentPositiveRangeMax() != null)
          {
         	  System.out.println("ihc percent positive max #: " + theCriteria.getPercentPositiveRangeMax());
-               //theHQL.append(theANDString + " levelIHC.percentPositiveRangeMax IN (:levelIHC_percentPositiveRangeMax) ");
-        	   theHQL.append(theANDString + " levelIHC.percentPositiveRangeMax <="+theCriteria.getPercentPositiveRangeMax().intValue());
-              //inParams.put("levelIHC_percentPositiveRangeMax", theCriteria.getPercentPositiveRangeMax());
+               theHQL.append(theANDString + " levelIHC.percentPositiveRangeMax IN (:levelIHC_percentPositiveRangeMax) ");
+        	 // theHQL.append(theANDString + " levelIHC.percentPositiveRangeMax.maxValue<="+theCriteria.getPercentPositiveRangeMax().intValue());
+              inParams.put("levelIHC_percentPositiveRangeMax", theCriteria.getPercentPositiveRangeMax());
               theANDString = " AND ";
          }
          
-         
+         /////////////////////////////////////////////////////
+         // Handle percent positive min number
+         /////////////////////////////////////////////////////
+         if (theCriteria.getPercentPositiveRangeMin() != null)
+         {
+        	
+        	  System.out.println("ihc percent positive min #: " + theCriteria.getPercentPositiveRangeMin());
+        	  theHQL.append(theANDString + " levelIHC.percentPositiveRangeMin IN (:levelIHC_percentPositiveRangeMin) ");
+            	
+            //theHQL.append(theANDString + " levelIHC.percentPositiveRangeMin.minValue>="+ theCriteria.getPercentPositiveRangeMin().intValue());
+              inParams.put("levelIHC_percentPositiveRangeMin", theCriteria.getPercentPositiveRangeMin());
+              theANDString = " AND ";
+         }
+    	 
          
          /////////////////////////////////////////////////////
          // Handle intensity of stain
@@ -148,13 +146,8 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
              
              if (theProteinCriteria != null)
              {
-                 if(theHQL.toString().contains("WHERE")){
                  theHQL.append(" AND levelIHC.proteinBiomarker IN (");
-                 }
-                 else{
-                 theHQL.append(" WHERE levelIHC.proteinBiomarker IN (");    
-                 }
-                 
+
                  ProteinBiomarkerHandler theProteinHandler = theProteinCriteria.getHandler();
                  StringBuilder theProteinHQL = theProteinHandler.handleCriteria(theProteinCriteria, theParams);
                  theHQL.append(theProteinHQL + ")");
@@ -163,12 +156,7 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
              
              if (theSpecimenCriteria != null)
              {
-                 if(theHQL.toString().contains("WHERE")){
-                     theHQL.append(" AND levelIHC.specimen IN (");
-                 }
-                 else{
-                     theHQL.append(" WHERE levelIHC.specimen IN (");
-                 }
+                 theHQL.append(" AND levelIHC.specimen IN (");
 
                  SpecimenHandler theSpecimenHandler = theSpecimenCriteria.getHandler();
                  StringBuilder theSpecimenHQL = theSpecimenHandler.handleCriteria(theSpecimenCriteria, theParams);

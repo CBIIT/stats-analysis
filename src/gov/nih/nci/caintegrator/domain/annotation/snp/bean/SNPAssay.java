@@ -195,6 +195,15 @@ public  class SNPAssay
 			return h;
 	}
 
+	
+	   
+	   
+	   
+	      
+			
+			
+			
+			
       /**
    * A set of SNP genotype assays, typically packaged and performed in a multiplex assay. 
    * 
@@ -206,15 +215,28 @@ public  class SNPAssay
    * 
    */
 
-   public gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel getSnpPanel(){
+    public gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel getSnpPanel(){
         return snpPanel;			
     }
 
+	      
+	               
+	   
 
     public void setSnpPanel(gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel snpPanel){
         this.snpPanel = snpPanel;
-    }
-
+    }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
+			
+			
+			
+			
       /**
    * Places in the genomic sequence where one fraction of the human population has one nucleotide or allele, 
    * while another fraction has another. 
@@ -232,35 +254,46 @@ public  class SNPAssay
         return snpAnnotation;			
     }
 
+	      
+	               
+	   
 
     public void setSnpAnnotation(gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation snpAnnotation){
         this.snpAnnotation = snpAnnotation;
     }	
 	   
-
+	   
+	
+	   
+	   
+	   
+	      
       /**
    * The result of performing a SNP assay resulting in two alleles measured from a diploid DNA sample for 
    * a given study. 
    * 
    */
 
-/*    private Set <gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding> genotypeFindingCollection = new HashSet<gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding>();*/
+    private Set <gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding> genotypeFindingCollection = new HashSet<gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding>();
       /**
    * The result of performing a SNP assay resulting in two alleles measured from a diploid DNA sample for 
    * a given study. 
    * 
    */
 
-/*
     public Set <gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding> getGenotypeFindingCollection(){
         return genotypeFindingCollection;
     }
 
-
+	      
+	               
+	   
     public void setGenotypeFindingCollection(Set<gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding> genotypeFindingCollection){
         this.genotypeFindingCollection = genotypeFindingCollection;
     }
-*/
+	   
+	   
+	
 
 			
 }

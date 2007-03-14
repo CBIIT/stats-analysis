@@ -23,7 +23,7 @@ public class ChromosomeLookupTest extends GenotypeFindingTest {
 
     private void executeSearch() {
         try {
-            Collection<String> chromosomes = manager.getChromosomes();
+            Collection<String> chromosomes = FindingsManager.getChromosomes();
             System.out.println("Number of Chromosomes Retrieved: " + chromosomes .size());
             for (Iterator<String> iterator = chromosomes .iterator(); iterator.hasNext();) {
                 String chromosome = iterator.next();

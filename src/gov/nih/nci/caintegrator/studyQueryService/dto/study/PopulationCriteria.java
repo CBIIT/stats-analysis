@@ -19,19 +19,9 @@ public class PopulationCriteria {
 	 * A textual identifier for the study population
 	 */
 	private Collection<String> names;
-    private  String studyName;
 
-    public String getStudyName() {
-        return studyName;
-    }
-
-    public void setStudyName(String studyName) {
-        this.studyName = studyName;
-    }
-
-    public PopulationCriteria(String studyName) {
-        this.studyName = studyName;
-        names = new ArrayList();
+    public PopulationCriteria() {
+        names = new ArrayList<String>();
     }
 
     public void addNames(Collection<String> names) {

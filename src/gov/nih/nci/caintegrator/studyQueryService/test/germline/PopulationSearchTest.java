@@ -22,31 +22,29 @@ public class PopulationSearchTest extends GenotypeFindingTest {
     public void testPopulationSearch() {
 
         Collection names = new ArrayList<String>();
-        names.add("CASE"); 
+        names.add("CASE_EARLY"); // this should bring back object with name="CASE_EARLY"
         names.add("CEPH");
-        //popCrit = new PopulationCriteria(names);
-        //popCrit = new PopulationCriteria("CGEMS Prostate Cancer WGAS Phase 1");
-        popCrit = new PopulationCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
+        popCrit = new PopulationCriteria(names);
 
      /*  Collection<String> names = new ArrayList();
 
        popCrit = new PopulationCriteria(names);
-        //names.add("CEPH");    */
-        //popCrit.addNames(names);
+        //names.add("CEPH");
+        //popCrit.addNames(names);*/
         executeSearch();
     }
 
     private void executeSearch() {
         try {
-            Collection<Population> population = manager.getPopulations(popCrit);
+            Collection<Population> population = FindingsManager.getPopulations(popCrit);
             System.out.println("Number of Populations Retrieved: " + population.size());
             for (Iterator<Population> iterator = population.iterator(); iterator.hasNext();) {
                 Population popObj =  iterator.next();
                 System.out.println("Population Name: " +
                                     popObj.getName());
-              /*  System.out.println("Member Count: " + popObj.getMemberCount());
+                System.out.println("Member Count: " + popObj.getMemberCount());
                 System.out.println("Description: " + popObj.getDescription());
-                System.out.println("Source: " + popObj.getSource());*/
+                System.out.println("Source: " + popObj.getSource());
             }
         } catch (Throwable t)  {
            System.out.println("CGEMS Exception in getting Population Objects: " + t.toString());

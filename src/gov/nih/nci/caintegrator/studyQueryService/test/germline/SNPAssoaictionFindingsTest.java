@@ -16,19 +16,21 @@ import java.util.*;
  * Date:   Jul 21, 2006
  * Time:   4:38:44 PM
  */
-public class SNPAssociationFindingsTest extends CGEMSTest {
+public class SNPAssoaictionFindingsTest extends CGEMSTest {
     private SNPAssociationFindingCriteriaDTO safDTO;
 
     public void setUp() throws Exception {
         super.setUp();
-        safDTO = (SNPAssociationFindingCriteriaDTO) ctx.getBean("snpAssociationFindingsCriteria");
-        safDTO.setStudyCriteria(studyCrit);
+        safDTO = new  SNPAssociationFindingCriteriaDTO();
         safDTO.setAnnotationCriteria(annotCrit);
+    }
+    public void testAll() {
+        super.testAll();
     }
 
     public void testSNPAssocAnalysisFindingCriteriaDTO() {
         // 1. setup Annotation Criteria
-        //setUpSNPPhysicalPositionCrit();
+       //setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
         //setUpPanelCrit();
         //setUpGeneBiomarkerCrit();
@@ -37,9 +39,6 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
         //setSNPAssociationGroupCriteria();
 
         setSNPFindingCriteria();
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
-        safDTO.setStudyCriteria(studyCrit);
-
         executeSearch(0, 501);
     }
 
@@ -48,7 +47,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
     public Collection executeSearch(int startIndex, int endIndex) {
             try {
                 Long t1 = System.currentTimeMillis();
-                Collection<? extends Finding> findings = manager.getFindings(safDTO, startIndex, endIndex);
+                Collection<? extends Finding> findings = FindingsManager.getFindings(safDTO, startIndex, endIndex);
                 System.out.println("RESULTS COUNT: " + findings.size());
                 for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                     SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
@@ -56,11 +55,6 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
                     System.out.println("ID: " + finding.getId());
                     System.out.println("pValue" + finding.getPvalue());
                     System.out.println("Rank" + finding.getRank());
-                    System.out.println("OrAggressiveHeterozygote: " + finding.getOrAggressiveHeterozygote());
-                    System.out.println("OrAggressiveHomozygote: " + finding.getOrAggressiveHomozygote());
-                    System.out.println("OrNonAggressiveHeterozygote: " + finding.getOrNonaggressiveHeterozygote());
-                    System.out.println("OrNonAggressiveHomozygote: " + finding.getOrNonaggressiveHomozygote());
-
                     System.out.println("DBSNP ID: " + finding.getSnpAnnotation().getDbsnpId());
                     System.out.println("Analysis Name: " + finding.getSnpAssociationAnalysis().getName());
                     System.out.println("Physical Position: " + finding.getSnpAnnotation().getChromosomeLocation());
@@ -71,12 +65,6 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
                     for (Iterator<GeneBiomarker> iterator1 = bioMarkers.iterator(); iterator1.hasNext();) {
                         GeneBiomarker geneBiomarker =  iterator1.next();
                         System.out.println(geneBiomarker.getHugoGeneSymbol() + " ");
-                        System.out.println("START PhyscialLocation of the bioMarker:" +
-                                                                        geneBiomarker.getStartPhyscialLocation());
-                        System.out.println("END PhyscialLocation of the bioMarker:" +
-                                                                        geneBiomarker.getEndPhysicalLocation());
-                        System.out.println("END Chromosome of the bioMarker:" +
-                                                                               geneBiomarker.getChromosome());
                     }
                  }
                  Long t2 = System.currentTimeMillis();
@@ -90,7 +78,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
     }
 
     private void setSNPAssociationGroupCriteria() {
-        AnalysisGroupCriteria groupCrit = new AnalysisGroupCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+        AnalysisGroupCriteria groupCrit = new AnalysisGroupCriteria();
         String[] names = new String[] {"Test Name for 9999", "Both Name And Method", "Only Name"};
         groupCrit.setNames(names);
         safDTO.setAnalysisGroupCriteria(groupCrit);
@@ -98,22 +86,16 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
 
     private void setSNPFindingCriteria() {
         //safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
-        SNPAssociationAnalysisCriteria  assocCrit =
-                new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
-        assocCrit.setName("Incidence density sampling, Unadjusted score test");
-        Collection<SNPAssociationAnalysisCriteria> list = new ArrayList<SNPAssociationAnalysisCriteria>();
-        list.add(assocCrit);
-        safDTO.setSnpAssociationAnalysisCriteriaCollection(list);
-        safDTO.setRank(new Integer(1000), ArithematicOperator.LE);
+        safDTO.setRank(new Integer(200), ArithematicOperator.LE);
 
     }
 
     private void setSNPAssociationAnalysisCriteria() {
         Collection analysisCrits = new ArrayList<SNPAssociationAnalysisCriteria>();
 
-        SNPAssociationAnalysisCriteria methodAndNameCrit = new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+        SNPAssociationAnalysisCriteria methodAndNameCrit = new SNPAssociationAnalysisCriteria();
         //methodAndNameCrit.setMethods("P-Test");
-        methodAndNameCrit.setName("Incidence density sampling, Unadjusted score test");
+        methodAndNameCrit.setName("score test");
         analysisCrits.add(methodAndNameCrit);
 
    /*     SNPAssociationAnalysisCriteria methodOnlyCrit = new SNPAssociationAnalysisCriteria();
@@ -128,25 +110,16 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
      }
 
     public void testPopulateFindings() {
-       setUpSNPPhysicalPositionCrit();
-      //  setUpGeneBiomarkerCrit();
-
-       //setSNPAssociationAnalysisCriteria();
-        
-       //setSNPAssociationGroupCriteria();
-
-        setUpPanelCrit();
-        setSNPFindingCriteria();
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
-        safDTO.setStudyCriteria(studyCrit);
-
+        //setUpSNPPhysicalPositionCrit();
+        //setUpGeneBiomarkerCrit();
+        //setSNPFindingCriteria();
         try {
              HashSet actualBatchFindings = new HashSet();
              final List findingsToBePopulated =  Collections.synchronizedList(new ArrayList());
              new Thread(new Runnable() {
                  public void run() {
                      try {
-                        manager.populateFindings(safDTO, findingsToBePopulated);
+                        FindingsManager.populateFindings(safDTO, findingsToBePopulated);
                      } catch(Throwable t) {
                          t.printStackTrace();
                          System.out.println("Error from FindingsManager.populateFindings call: ");

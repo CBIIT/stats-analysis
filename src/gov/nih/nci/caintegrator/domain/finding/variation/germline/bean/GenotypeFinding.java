@@ -215,25 +215,36 @@ public  class GenotypeFinding
    * 
    */
 
-  /*  private gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay snpAssay; */
-  /**
+    private gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay snpAssay;
+      /**
    * Information on the design characteristics of a molecular test for the presence of one or both alleles 
    * at a SNP locus. 
    * 
    */
 
-/*
     public gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay getSnpAssay(){
         return snpAssay;			
     }
 
+	      
+	               
+	   
 
     public void setSnpAssay(gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay snpAssay){
         this.snpAssay = snpAssay;
-    }
-*/
-
- /**
+    }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
+			
+			
+			
+			
+      /**
    * Places in the genomic sequence where one fraction of the human population has one nucleotide or allele, 
    * while another fraction has another. 
    * 

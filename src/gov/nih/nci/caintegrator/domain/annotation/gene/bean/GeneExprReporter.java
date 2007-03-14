@@ -1,7 +1,8 @@
 
 
 package gov.nih.nci.caintegrator.domain.annotation.gene.bean;
-import gov.nih.nci.caintegrator.domain.common.bean.Reporter;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.*;
+import java.util.*;
 
 /**
  * <!-- LICENSE_TEXT_START -->
@@ -15,7 +16,7 @@ import gov.nih.nci.caintegrator.domain.common.bean.Reporter;
    * 
    */
 
-public  class GeneExprReporter extends Reporter
+public  class GeneExprReporter 
 
 
 	implements java.io.Serializable 
@@ -23,6 +24,104 @@ public  class GeneExprReporter extends Reporter
 
 	private static final long serialVersionUID = 1234567890L;
 
+
+ 	
+	   
+    /**
+   * unique identifier
+   */
+
+    private java.lang.String id;
+    /**
+   * unique identifier
+   */
+
+	public  java.lang.String getId(){
+        return id;
+    }
+    public void setId( java.lang.String id){
+        this.id = id;
+    }
+	
+	   
+    /**
+   * Identifier for the reporter: eg: Affymetrix probeset ID, Image clone ID
+   */
+
+    private java.lang.String name;
+    /**
+   * Identifier for the reporter: eg: Affymetrix probeset ID, Image clone ID
+   */
+
+	public  java.lang.String getName(){
+        return name;
+    }
+    public void setName( java.lang.String name){
+        this.name = name;
+    }
+	
+	   
+    /**
+   * An enumeration of Design Element types that represents some biological material (clone, oligo, 
+   * etc.) on an array which will report on some biosequence or biosequences; eg: Affymetrix probeset 
+   * or cDNA clone 
+   * 
+   */
+
+    private java.lang.String type;
+    /**
+   * An enumeration of Design Element types that represents some biological material (clone, oligo, 
+   * etc.) on an array which will report on some biosequence or biosequences; eg: Affymetrix probeset 
+   * or cDNA clone 
+   * 
+   */
+
+	public  java.lang.String getType(){
+        return type;
+    }
+    public void setType( java.lang.String type){
+        this.type = type;
+    }
+	
+
+
+		public boolean equals(Object obj){
+			boolean eq = false;
+			if(obj instanceof GeneExprReporter) {
+				GeneExprReporter c =(GeneExprReporter)obj; 			 
+				String thisId = getId();		
+				
+					if(thisId != null && thisId.equals(c.getId())) {
+					   eq = true;
+				    }		
+				
+			}
+			return eq;
+		}
+		
+		public int hashCode(){
+			int h = 0;
+			
+			if(getId() != null) {
+				h += getId().hashCode();
+			}
+			
+			return h;
+	}
+
+	
+	   
+	   
+	   
+	      
+	   
+	
+	   
+	   
+	   
+	      
+			
+			
 			
 			
       /**
@@ -38,10 +137,28 @@ public  class GeneExprReporter extends Reporter
         return geneReporterAnnotation;			
     }
 
+	      
+	               
+	   
 
     public void setGeneReporterAnnotation(gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneReporterAnnotation geneReporterAnnotation){
         this.geneReporterAnnotation = geneReporterAnnotation;
-    }
+    }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
+	   
+	
+	   
+	   
+	   
+	      
+			
+			
 			
 			
       /**
@@ -67,6 +184,22 @@ public  class GeneExprReporter extends Reporter
 
     public void setGeneBioMarker(gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker geneBioMarker){
         this.geneBioMarker = geneBioMarker;
-    }
+    }	
+	   
+	   
+	
+	   
+	   
+	   
+	      
+	   
+	
+	   
+	   
+	   
+	      
+	   
+	
+
 			
 }

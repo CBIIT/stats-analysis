@@ -104,15 +104,15 @@ public  class GeneBiomarker
    * unique identifier for the instance of GeneBiomarker.
    */
 
-    private java.lang.Long id;
+    private java.lang.String id;
     /**
    * unique identifier for the instance of GeneBiomarker.
    */
 
-	public  java.lang.Long getId(){
+	public  java.lang.String getId(){
         return id;
     }
-    public void setId( java.lang.Long id){
+    public void setId( java.lang.String id){
         this.id = id;
     }
 	
@@ -160,7 +160,7 @@ public  class GeneBiomarker
 			boolean eq = false;
 			if(obj instanceof GeneBiomarker) {
 				GeneBiomarker c =(GeneBiomarker)obj; 			 
-				Long thisId = getId();		
+				String thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;

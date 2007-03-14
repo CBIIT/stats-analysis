@@ -27,6 +27,21 @@ public  class BACCloneReporter
 
  	
 	   
+    /**
+   * unique identifier for instance of the bacCloneReporter
+   */
+
+    private java.lang.String id;
+    /**
+   * unique identifier for instance of the bacCloneReporter
+   */
+
+	public  java.lang.String getId(){
+        return id;
+    }
+    public void setId( java.lang.String id){
+        this.id = id;
+    }
 	
 	   
     /**
@@ -55,7 +70,7 @@ public  class BACCloneReporter
 			boolean eq = false;
 			if(obj instanceof BACCloneReporter) {
 				BACCloneReporter c =(BACCloneReporter)obj; 			 
-				Long thisId = getId();		
+				String thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;

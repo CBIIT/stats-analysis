@@ -2,7 +2,6 @@ package gov.nih.nci.caintegrator.service.findings;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -92,51 +91,35 @@ public class ClassComparisonFinding extends AnalysisFinding implements ReporterB
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#arePvaluesAdjusted()
 	 */
 	public boolean arePvaluesAdjusted() {
-		if(myResults != null){
-			return myResults.arePvaluesAdjusted();
-		}
-		return false;
+		return myResults.arePvaluesAdjusted();
 	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getGroup1()
 	 */
 	public SampleGroup getGroup1() {
-		if(myResults != null){
-			return myResults.getGroup1();
-		}
-		return null;
+		return myResults.getGroup1();
 	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getBaselineGroup()
 	 */
 	public SampleGroup getBaselineGroup() {
-		if(myResults != null){
-			return myResults.getBaselineGroup();
-		}
-		return null;
+		return myResults.getBaselineGroup();
 	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getNumResultEntries()
 	 */
 	public int getNumResultEntries() {
-		if(myResults != null){
-			return myResults.getNumResultEntries();
-		}
-		return 0;
+		return myResults.getNumResultEntries();
 	}
 
 	/* (non-Javadoc)
 	 * @see gov.nih.nci.caintegrator.analysis.messaging.ClassComparisonResult#getResultEntries()
 	 */
-	@SuppressWarnings("unchecked")
 	public List<ClassComparisonResultEntry> getResultEntries() {
-		if(myResults != null){
-			return myResults.getResultEntries();
-		}
-		return (List<ClassComparisonResultEntry>) Collections.EMPTY_LIST;
+		return myResults.getResultEntries();
 	}
 
 	/**
