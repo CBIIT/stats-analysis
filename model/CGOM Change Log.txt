@@ -53,3 +53,13 @@ Added the ClinicalLeukemiaFinding object to the gov.nih.nci.caintegrator.domain.
 Changes from 1.64 to 1.65:
 
 Added a Reporter object.  Both GeneExprReporter and VariationReporter extend this object.
+
+Changes from 1.65 to 1.66:
+
+1. Changed directionality between SNPAssociationAnalysis and study from Source -> Destination, to Bi-Directional
+2. Added id (datatype Long)in SpecimenBasedFinding object, removed the id (datatype Long) from SpecimenBasedMolecularFinding object for now,
+   once all the ids have been changed to Long data type, then will move the id to the super class: Finding.
+3. Changed the assocation direction from SomaticMutationAnnotation to GeneBiomarker from "Unspecified" to "Source-> Destination"
+4. Changed the assocation btwn SNPPanel to SNPAssay from uni-directional to bi-directional.
+5. Changed the following object’s id attribute from String to Long: SNPAnnotation, BACCloneReporter,VariationReporter
+
