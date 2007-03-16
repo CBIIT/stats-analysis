@@ -197,10 +197,12 @@ public class SNPAnnotationCriteriaHandler {
             params.put("start", startPos);
             params.put("end", endPos);
         }else if (startPos != null && endPos == null){ //get values from start position to end of chr
-        	tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  >= :start )) AND ");
+        	tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end)) AND ");
             params.put("start", startPos);
+            params.put("end", java.lang.Long.MAX_VALUE);
         }else if (endPos != null  && startPos == null){ //get values from start of chr to end pos
-        	tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  <= :end )) AND ");
+        	tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end)) AND ");
+        	params.put("start", new Long(0));
             params.put("end", endPos);
         }else tmp = new String(" (s.chromosomeName=:chr) AND ");
 
