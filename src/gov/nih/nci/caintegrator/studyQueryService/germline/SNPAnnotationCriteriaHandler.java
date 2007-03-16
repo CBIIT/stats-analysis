@@ -204,7 +204,11 @@ public class SNPAnnotationCriteriaHandler {
         	tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end)) AND ");
         	params.put("start", new Long(0));
             params.put("end", endPos);
-        }else tmp = new String(" (s.chromosomeName=:chr) AND ");
+        }else {
+        	tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end)) AND ");
+        	params.put("start", new Long(0));
+        	params.put("end", java.lang.Long.MAX_VALUE);
+        }
 
         params.put("chr", chromosome);
         snpAnnotHSQL.append(tmp);
