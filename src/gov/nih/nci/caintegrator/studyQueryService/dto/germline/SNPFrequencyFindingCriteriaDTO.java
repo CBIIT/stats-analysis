@@ -66,7 +66,7 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
 	 private Integer referenceAlleleCount;
 	 private Integer referenceHomogyzoteCount;
      private String[] populationNames;
-     private String studyName;
+     //private String studyName;
      private String sponsorStudyIdentifier;
 
     public SNPFrequencyFindingCriteriaDTO(StudyCriteria studyCriteria) throws Exception {
@@ -82,6 +82,7 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
         this.populationNames = populationNames;
      }
 
+/*
      public String getStudyName() {
         return studyName;
      }
@@ -89,6 +90,7 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
      public void setStudyName(String studyName) {
         this.studyName = studyName;
      }
+*/
 
      public String getSponsorStudyIdentifier() {
         return sponsorStudyIdentifier;
@@ -184,8 +186,8 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
  	{	
  		String str = "SNP Population Frequency search\n";
  		
- 		if (studyName != null)
- 			str = str + "Study name " + studyName + "\n";
+ 		if (studyCriteria != null && studyCriteria.getName() != null)
+ 			str = str + "Study name " + studyCriteria.getName() + "\n";
  		if ((populationNames != null) && (populationNames.length > 0))
  		{
  			str = str + "Populations:\n";

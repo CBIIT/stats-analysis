@@ -10,6 +10,7 @@ import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
 import gov.nih.nci.caintegrator.util.ArithematicOperator;
 
 import java.util.*;
+import java.sql.Connection;
 
 /**
  * Author: Ram Bhattaru
@@ -30,7 +31,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
         // 1. setup Annotation Criteria
         //setUpSNPPhysicalPositionCrit();
         //setUpDBSnpCrit();
-        //setUpPanelCrit();
+        setUpPanelCrit();
         //setUpGeneBiomarkerCrit();
 
         //setSNPAssociationAnalysisCriteria();
@@ -40,15 +41,19 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         safDTO.setStudyCriteria(studyCrit);
 
-        executeSearch(0, 501);
+        executeSearch(0, 101);
     }
 
-
+ 
 
     public Collection executeSearch(int startIndex, int endIndex) {
             try {
                 Long t1 = System.currentTimeMillis();
                 Collection<? extends Finding> findings = manager.getFindings(safDTO, startIndex, endIndex);
+/*
+                Connection connection = manager.getSnpAssociationFindingsHandler().getSessionFactory().getCurrentSession().connection();
+                connection.close();
+*/
                 System.out.println("RESULTS COUNT: " + findings.size());
                 for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                     SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
@@ -132,7 +137,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
       //  setUpGeneBiomarkerCrit();
 
        //setSNPAssociationAnalysisCriteria();
-        
+
        //setSNPAssociationGroupCriteria();
 
         setUpPanelCrit();

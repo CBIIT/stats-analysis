@@ -96,7 +96,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
 
     private List<Population> handlePopulationCriteria(SNPFrequencyFindingCriteriaDTO findingCritDTO, Session session) {
        String[] populationNames = findingCritDTO.getPopulationNames();
-       String studyName = findingCritDTO.getStudyName();
+       String studyName = findingCritDTO.getStudyCriteria().getName();
        String sponsorIdentifier = findingCritDTO.getSponsorStudyIdentifier();
 
        if ((populationNames == null || populationNames.length < 1) && (studyName == null || studyName.length() < 1) &&
@@ -120,7 +120,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
     }
 
     private void addStudyCriteria( SNPFrequencyFindingCriteriaDTO findingCritDTO, Criteria studyCrit, Session session) {
-        String studyName = findingCritDTO.getStudyName();
+        String studyName = findingCritDTO.getStudyCriteria().getName();
         String sponsorIdentifier = findingCritDTO.getSponsorStudyIdentifier();
         if (studyName != null && studyName.length() > 0) {
             studyCrit.add(Restrictions.eq("name", studyName));
@@ -130,7 +130,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         }
     }
     private boolean isAddStudyCriteria( SNPFrequencyFindingCriteriaDTO findingCritDTO) {
-            String studyName = findingCritDTO.getStudyName();
+            String studyName = findingCritDTO.getStudyCriteria().getName();
             String sponsorIdentifier = findingCritDTO.getSponsorStudyIdentifier();
             if ((studyName != null && studyName.length() > 0) ||
                     (sponsorIdentifier != null && sponsorIdentifier.length() > 0) )
@@ -352,7 +352,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         }
 
         Collection<? extends Finding> finalResults = getFindingsFromResults(q.list());
-        initializeProxies(finalResults, session);
+        //initializeProxies(finalResults, session);  (CALLED FROM FindingsHandler)
         List<SNPFrequencyFinding> results =  new ArrayList<SNPFrequencyFinding>(finalResults.size());
         for (Iterator<? extends Finding> iterator = finalResults.iterator(); iterator.hasNext();) {
             SNPFrequencyFinding finding =  (SNPFrequencyFinding)iterator.next();

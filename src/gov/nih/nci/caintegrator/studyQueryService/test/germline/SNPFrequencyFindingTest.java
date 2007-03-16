@@ -60,12 +60,12 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
        //setUpSNPPhysicalPositionCrit();
        //setUpDBSnpCrit();
 
-      //setUpGeneBiomarkerCrit();
-      setUpPanelCrit();
+      setUpGeneBiomarkerCrit();
+      //setUpPanelCrit();
 
 
         //freqDTO.setMinorAlleleFrequency(new Float(1.0), ArithematicOperator.GE);
-        //freqDTO.setPopulationNames(new String[] {"CONTROL"});
+        freqDTO.setPopulationNames(new String[] {"CASE"});
 
        // freqDTO.setCompletionRate(new Double(0.9), ArithematicOperator.LT);
       // freqDTO.setHardyWeinbergPValue(new Float(0.001), ArithematicOperator.LT);
@@ -74,7 +74,7 @@ public class SNPFrequencyFindingTest extends CGEMSTest {
         studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         freqDTO.setStudyCriteria(studyCrit);
 
-        executeSearch(0, 501);
+        executeSearch(0, 100);
    }
 
     public void testPopulateFindings() {
