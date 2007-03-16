@@ -192,11 +192,17 @@ public class SNPAnnotationCriteriaHandler {
         Long endPos = poistionCrit.getEndPosition();
         String tmp;
 
-        if (startPos != null && endPos != null) {
+        if (startPos != null && endPos != null) { //get entire range 
             tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  BETWEEN :start AND :end )) AND ");
             params.put("start", startPos);
             params.put("end", endPos);
-        } else tmp = new String(" (s.chromosomeName=:chr) AND ");
+        }else if (startPos != null && endPos == null){ //get values from start position to end of chr
+        	tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  >= :start )) AND ");
+            params.put("start", startPos);
+        }else if (endPos != null  && startPos == null){ //get values from start of chr to end pos
+        	tmp = new String(" (s.chromosomeName=:chr AND ( s.chromosomeLocation  <= :end )) AND ");
+            params.put("end", endPos);
+        }else tmp = new String(" (s.chromosomeName=:chr) AND ");
 
         params.put("chr", chromosome);
         snpAnnotHSQL.append(tmp);
