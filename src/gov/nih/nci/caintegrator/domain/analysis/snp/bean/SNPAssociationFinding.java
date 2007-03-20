@@ -226,4 +226,32 @@ public  class SNPAssociationFinding
         this.orNonaggressiveHomozygote = orNonaggressiveHomozygote;
     }
 
+    private Double orCaseHeterozygote;
+
+    private Double orCaseHomozygote;
+	/**
+	 * @return Returns the orCaseHomozygote.
+	 */
+	public Double getOrCaseHomozygote() {
+		return orCaseHomozygote;
+	}
+	/**
+	 * @param orCaseHomozygote The orCaseHomozygote to set.
+	 */
+	public void setOrCaseHomozygote(Double orCaseHomozygote) {
+		this.orCaseHomozygote = orCaseHomozygote;
+	}
+	/**
+	 * @return Returns the orCaseHeterozygote.
+	 */
+	public Double getOrCaseHeterozygote() {
+		return orCaseHeterozygote;
+	}
+	/**
+	 * @param orCaseHeterozygote The orCaseHeterozygote to set.
+	 */
+	public void setOrCaseHeterozygote(Double orCaseHeterozygote) {
+		this.orCaseHeterozygote = orCaseHeterozygote;
+	}
+
 }
