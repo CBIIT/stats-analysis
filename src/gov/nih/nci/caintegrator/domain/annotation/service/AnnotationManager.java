@@ -1,8 +1,10 @@
 package gov.nih.nci.caintegrator.domain.annotation.service;
 
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.CytobandPosition;
+import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 
 import java.util.Collection;
@@ -19,7 +21,11 @@ public interface AnnotationManager {
     
     public GeneBiomarker getGeneForSymbol(String geneId);
     
+    public List<GeneAlias> getGeneAliasForSymbol(String symbol);
+    
     public List<CytobandPosition> getCytobandPositions(String chromosome, String startCytoband, String endCytoband);
     
     public List<CytobandPosition> getCytobandPositions(String chromosome);
+    
+    public List<VariationReporter> getReportersForDbSnpId(String dbSnpId);
 }
