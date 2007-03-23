@@ -69,19 +69,19 @@ public class NestedCriteria2HQL
 				else
 					hql.append(destAlias).append("=").append(srcAlias).append(".").append(roleName);
 
-				hql.append(" and ");
+				//hql.append(" and ");
 			} else
 			{  
 				log.debug("1111111");
 				if(!temp.getTargetObjectName().contains("GenotypeFinding")) {				
-				  hql.append(" where ");
+				 // hql.append(" where ");
 				}
 			}
 
 			//If it is the last node then process the attached object list collection
 			if (temp.getInternalNestedCriteria() == null)
 			{
-				for (Iterator i = temp.getSourceObjectList().iterator(); i.hasNext();)
+				/*for (Iterator i = temp.getSourceObjectList().iterator(); i.hasNext();)
 				{
 					Object obj = i.next();
 					log.debug("222"+obj.getClass().getName());
@@ -93,6 +93,9 @@ public class NestedCriteria2HQL
 						hql.append(" or ");
 				}
 			  }
+				*/
+				
+			
 			}
 			closingStack.push(")");
 			temp = temp.getInternalNestedCriteria();
@@ -326,6 +329,8 @@ public class NestedCriteria2HQL
 	{
 		log.debug("obj setAssoCriterion-----------:"+obj);
 		log.debug("pclass setAssoCriterion-----------:"+pclass);
+		log.debug("p class super class-----------:"+pclass.getSuperclass());
+		
 		log.debug("criterions setAssoCriterion-----------:"+criterions.size());
 		if(pclass!= null) {
 		Iterator properties = pclass.getPropertyIterator();
@@ -336,8 +341,23 @@ public class NestedCriteria2HQL
 			{
 				String fieldName = prop.getName();
 				log.debug("fieldName setAssoCriterion-----------:"+fieldName);
+				Field field = null;
+				boolean fieldNameRetirieved = false;
 				
-				Field field = pclass.getMappedClass().getDeclaredField(fieldName);
+				
+				while (pclass.getSuperclass() != null)
+				{
+					pclass = pclass.getSuperclass();
+					log.debug("000000000:"+pclass.getClassName());
+					
+					field = pclass.getMappedClass().getDeclaredField(fieldName);
+					log.debug("111111111:"+field.getName());
+					fieldNameRetirieved = true;
+					
+				}
+				if(!fieldNameRetirieved){
+				   field = pclass.getMappedClass().getDeclaredField(fieldName);
+				}
 				field.setAccessible(true);
 				Object value = field.get(obj);
 				if (value != null)
@@ -355,6 +375,10 @@ public class NestedCriteria2HQL
 		String objClassName = obj.getClass().getName();
 
 		PersistentClass pclass = cfg.getClassMapping(objClassName);
+		log.debug("000000000:"+pclass.getClassName());
+		log.debug("0000000001:"+pclass.getSuperclass());
+		
+		
 		if(pclass!= null) {
 
 		setAssoCriterion(obj, pclass, criterions);
