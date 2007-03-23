@@ -63,3 +63,8 @@ Changes from 1.65 to 1.66:
 4. Changed the assocation btwn SNPPanel to SNPAssay from uni-directional to bi-directional.
 5. Changed the following object’s id attribute from String to Long: SNPAnnotation, BACCloneReporter,VariationReporter
 
+Changes from 1.66 to 1.67:
+
+1. Created target object diagram.
+2. Added the assocation btwn VariationReporter to SNPAnnotation.
+3. Changed all the ClinicalAssessment return packge to clinical from domain in the the LeukemiaClinicalFinding object.
