@@ -4,6 +4,7 @@ import gov.nih.nci.caintegrator.domain.annotation.gene.bean.CytobandPosition;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 
@@ -28,4 +29,6 @@ public interface AnnotationManager {
     public List<CytobandPosition> getCytobandPositions(String chromosome);
     
     public List<VariationReporter> getReportersForDbSnpId(String dbSnpId);
+    
+    public List<SNPAnnotation> getSnpAnnotationsForGene(String geneId, Long kbUpstream, Long kbDownstream);
 }

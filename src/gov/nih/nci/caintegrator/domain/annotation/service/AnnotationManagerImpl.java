@@ -4,6 +4,7 @@ import gov.nih.nci.caintegrator.domain.annotation.gene.bean.CytobandPosition;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter;
+import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter;
 import gov.nih.nci.caintegrator.enumeration.ArrayPlatformType;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
@@ -127,6 +128,23 @@ public class AnnotationManagerImpl implements AnnotationManager {
         criteria.add(Restrictions.disjunction().add(
                 Restrictions.ilike("alias", symbol, MatchMode.START)).add(
                 Restrictions.ilike("hugoGeneSymbol", symbol, MatchMode.START)));
+        return criteria.list();
+    }
+
+    public List<SNPAnnotation> getSnpAnnotationsForGene(String geneId, Long kbUpstream, Long kbDownstream) {
+        GeneBiomarker gene = getGeneForSymbol(geneId);
+        
+        String chr = gene.getChromosome();
+        Long start = gene.getStartPhyscialLocation();
+        Long end = gene.getEndPhysicalLocation();
+        
+        Session sess = sessionFactory.getCurrentSession();
+        
+        Criteria criteria = sess.createCriteria(SNPAnnotation.class);
+        
+        criteria.add(Restrictions.eq("chromosomeName", chr));
+        criteria.add(Restrictions.ge("chromosomeLocation", start - (kbUpstream * 1000)));
+        criteria.add(Restrictions.le("chromosomeLocation", end + (kbDownstream * 1000)));
         return criteria.list();
     }
 
