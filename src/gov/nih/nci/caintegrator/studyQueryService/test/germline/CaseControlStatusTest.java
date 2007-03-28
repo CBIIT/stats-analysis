@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.study.StudyCriteria;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -22,7 +23,9 @@ public class CaseControlStatusTest extends GenotypeFindingTest {
     }
     private void executeSearch() {
         try {
-            Collection<String> statusValues = manager.getCaseControlStatus();
+        	StudyCriteria studyCrit = new StudyCriteria();
+        	studyCrit.setName("CGEMS Breast Cancer WGAS Phase 1");
+            Collection<String> statusValues = manager.getCaseControlStatus(studyCrit);
             System.out.println("Number of Statuses Retrieved: " + statusValues .size());
             for (Iterator<String> iterator = statusValues.iterator(); iterator.hasNext();) {
                 System.out.println("Status: " + iterator.next());

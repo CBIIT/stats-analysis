@@ -138,7 +138,7 @@ public class ObjectQueryHandler {
             params.put("popNames", popNames);
         }
 
-        Query q = session.createQuery(" FROM Population p WHERE p.studyCollection.name=:name " + inClause.toString());
+        Query q = session.createQuery(" FROM Population p WHERE p.studyCollection.name = :name " + inClause.toString());
         params.put("name", populationCrit.getStudyName());
         HQLHelper.setParamsOnQuery(params, q);
         List<Population> results = q.list();
@@ -181,16 +181,19 @@ public class ObjectQueryHandler {
     }
 
 
-    public  Collection<Integer> getAgeLowerLimitValues() {
-        if (ageLowerLimits == null) {
-           ageLowerLimits = new HashSet<Integer>();
+    public  Collection<Integer> getAgeLowerLimitValues(StudyCriteria studyCrit) {
+	 		if (studyCrit == null || studyCrit.getName() == null) return new ArrayList<Integer>();
+	 		String studyName = studyCrit.getName();
+            ageLowerLimits = new HashSet<Integer>();
             Session session = getSessionFactory().getCurrentSession();
-            String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU ";
+            HashMap params = new HashMap();
+            String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU WHERE STUDY_NAME = :studyName ";
+            params.put("studyName", studyName);
             Query q = session.createSQLQuery(sql);
+            HQLHelper.setParamsOnQuery(params, q);
             Collection<BigDecimal> minValues = q.list();
             Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
             ageLowerLimits.addAll(intValues);
-       }
        return ageLowerLimits;
    }
    public  class IntegerTransformer implements Transformer {
@@ -203,29 +206,35 @@ public class ObjectQueryHandler {
            }
        }
    }
-    public  Collection<Integer> getAgeUpperLimitValues() {
-       if (ageUpperLimits == null) {
-           ageUpperLimits  = new HashSet<Integer>();
+    public  Collection<Integer> getAgeUpperLimitValues(StudyCriteria studyCrit) {
+    	   if (studyCrit == null || studyCrit.getName() == null) return new ArrayList<Integer>();
+ 		   String studyName = studyCrit.getName();
+    	   ageUpperLimits  = new HashSet<Integer>();
            Session session = getSessionFactory().getCurrentSession();
-           String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU ";
+           HashMap params = new HashMap();
+           String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU WHERE STUDY_NAME = :studyName ";
+           params.put("studyName", studyName);
            Query q = session.createSQLQuery(sql);
+           HQLHelper.setParamsOnQuery(params, q);
            Collection<BigDecimal> minValues = q.list();
            Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
            ageUpperLimits.addAll(intValues);
-       }
        return ageUpperLimits ;
    }
 
-    public  Collection<String> getCaseControlStatus() {
-       if (caseControlStatus == null) {
-           caseControlStatus = new HashSet<String>();
+    public  Collection<String> getCaseControlStatus(StudyCriteria studyCrit) {
+    	 	if (studyCrit == null || studyCrit.getName() == null) return new ArrayList<String>();
+           	String studyName = studyCrit.getName();
+            caseControlStatus = new HashSet<String>();
             Session session = getSessionFactory().getCurrentSession();
-            String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT ";
+            HashMap params = new HashMap();
+            String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT WHERE STUDY_NAME = :studyName ";
+            params.put("studyName", studyName);
             Query q = session.createSQLQuery(sql);
+            HQLHelper.setParamsOnQuery(params, q);
             List<String> statusValues = q.list();
             caseControlStatus.addAll(statusValues);
-       }
-       return caseControlStatus;
+            return caseControlStatus;
    }
 
 

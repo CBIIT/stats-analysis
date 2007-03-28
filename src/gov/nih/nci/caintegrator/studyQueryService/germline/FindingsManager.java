@@ -122,15 +122,15 @@ public class FindingsManager {
         return objectQueryHandler.getAllQCStatus();
     }
 
-    public Collection<String> getCaseControlStatus() {
-        return objectQueryHandler.getCaseControlStatus();
+    public Collection<String> getCaseControlStatus(StudyCriteria studyCrit) {
+        return objectQueryHandler.getCaseControlStatus(studyCrit);
     }
 
-    public Collection<Integer> getAgeLowerLimitValues() {
-        return objectQueryHandler.getAgeLowerLimitValues();
+    public Collection<Integer> getAgeLowerLimitValues(StudyCriteria studyCrit) {
+        return objectQueryHandler.getAgeLowerLimitValues( studyCrit);
     }
 
-    public Collection<Integer> getAgeUpperLimitValues() {
-        return objectQueryHandler.getAgeUpperLimitValues();
+    public Collection<Integer> getAgeUpperLimitValues(StudyCriteria studyCrit) {
+        return objectQueryHandler.getAgeUpperLimitValues( studyCrit);
     }
 }
