@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	$Id: 
+	
+	$Log:
+	
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.finding.clinical.leukemia.bean" >
+	<class name="LeukemiaClinicalFinding"
+		table="LEUKEMIA_CLINICAL_FINDING" >
+
+		<id name="id" column="CLINICAL_FINDING_ID" >
+			<generator class="assigned" />
+		</id>
+		<component name="stratum"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="STRATUM" />
+		</component>
+		<component name="congenitalAbnormality"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="CONGENITAL_ABNORMALITY" />
+		</component>
+		<component name="centralNervousSystemDiseaseStatus"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="CENTRAL_NERVOUS_SYSTEM" />
+		</component>
+		<component name="testicularDiseaseStatus"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="TESTICULAR_DISEASE" />
+		</component>
+		<component name="telStatus"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="TEL_STATUS" />
+		</component>
+		<component name="trisomies4and10Status"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="TRISOMIES_STATUS" />
+		</component>
+		<component name="mllStatus"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="MLL_STATUS" />
+		</component>
+		<component name="e2aStatus"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="E2A_STATUS" />
+		</component>
+		<component name="bcrStatus"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="BCR_STATUS" />
+		</component>
+		<component name="dnaIndex"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="DNA_INDEX" />
+		</component>
+		<component name="boneMarrowBlastPercentage"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="BONE_MARROW_BLASTS" />
+		</component>
+		<component name="minimumResidualDisease"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="RESIDUAL_DISEASE" />
+		</component>
+		<component name="peripheralBloodWhiteBloodCount"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="WHITE_BLOOD_COUNT" />
+		</component>
+		
+		<component name="peripheralBloodBlastPercentage"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="BLOOD_BLASTS" />
+		</component>		
+	
+		<component name="karyotype"
+			class="gov.nih.nci.caintegrator.domain.common.bean.TextMeasurement">
+			<property name="value" column="KARYOTYPE" />
+		</component>
+		<component name="timeCourse"
+			class="gov.nih.nci.caintegrator.domain.study.bean.TimeCourse">
+			<property name="name" column="TIME_COURSE" />
+		</component>
+		<many-to-one name="studyParticipant" class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant" column="PARTICIPANT_DID"  />
+	</class>
+</hibernate-mapping>
