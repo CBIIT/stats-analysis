@@ -25,11 +25,22 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment peripheralBloodWhiteBloodCount;
     private NumericMeasurement peripheralBloodBlastPercentage;
     private TextMeasurement karyotype;
+    private gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant studyParticipant;
     
 
-    
+    /**
+     * @return Returns the studyParticipant.
+     */
+    public gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant getStudyParticipant() {
+        return studyParticipant;
+    }
 
-    public LeukemiaClinicalFinding() {
+    /**
+     * @param studyParticipant The studyParticipant to set.
+     */
+    public void setStudyParticipant(
+            gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant studyParticipant) {
+        this.studyParticipant = studyParticipant;
     }
 
     public ClinicalAssessment getBcrStatus() {

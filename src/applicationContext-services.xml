@@ -38,6 +38,14 @@
 		class="gov.nih.nci.caintegrator.studyQueryService.germline.SubjectSearchHandler" >
 		<property name="sessionFactory" ref="sessionFactory" />		
 	</bean>
+	<bean id="levelOfExpressionFindingsHandler"
+		class="gov.nih.nci.caintegrator.studyQueryService.ihc.LevelOfExpressionIHCFindingHandler">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="lossOfExpressionFindingsHandler"
+		class="gov.nih.nci.caintegrator.studyQueryService.ihc.LossOfExpressionIHCFindingHandler">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	
 	<!--  Criteria with the findings handlers injected into them -->
 	<bean id="snpAssociationFindingsCriteria"
@@ -75,6 +83,12 @@
 			expression="execution(* gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManager.*(..))" />
 		<aop:advisor advice-ref="txAdvice"
 			pointcut-ref="annotationServiceMethods" />
+	</aop:config>
+	<aop:config>
+		<aop:pointcut id="ihcserviceMethods"
+			expression="execution(* gov.nih.nci.caintegrator.studyQueryService.ihc.*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="ihcserviceMethods" />
 	</aop:config>
 
 	<tx:advice id="txAdvice" transaction-manager="txManager">

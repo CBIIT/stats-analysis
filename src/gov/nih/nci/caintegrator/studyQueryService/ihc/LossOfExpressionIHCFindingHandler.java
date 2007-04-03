@@ -87,13 +87,11 @@ public class LossOfExpressionIHCFindingHandler extends IHCFindingHandler {
      public Collection<LossOfExpressionIHCFinding> getLossExpFindings(LossOfExpressionIHCFindingCriteria inCriteria)
      {
          logger.debug("Entering getFindings");
-         Session theSession = null;
+         Session theSession = sessionFactory.getCurrentSession();
          Set<LossOfExpressionIHCFinding> theResults = new HashSet<LossOfExpressionIHCFinding>();
          try
          {
-             theSession = HibernateUtil.getSession();
-             HibernateUtil.beginTransaction();
-
+             
              HashMap<String, Object> theParams = new HashMap<String, Object>();
 
              StringBuilder theHQL = handleCriteria(inCriteria, theParams,null);
@@ -133,8 +131,7 @@ public class LossOfExpressionIHCFindingHandler extends IHCFindingHandler {
              }
 
              logger.info("HQL7777777777: " + theHQL.toString());
-             Query q = theSession.createQuery(theHQL.toString());
-             //Query q = theSession.createQuery("from LevelOfExpressionIHCFinding f WHERE  f.stainDistribution IN ('HOMOGENOUS')");
+             Query q = theSession.createQuery(theHQL.toString());             
              HQLHelper.setParamsOnQuery(theParams, q);
              Collection theObjects = q.list();
              theResults.addAll(theObjects);
@@ -145,15 +142,7 @@ public class LossOfExpressionIHCFindingHandler extends IHCFindingHandler {
              e.printStackTrace();
              logger.error("Error getting findings: ", e);
          }
-         finally
-         {
-             // Close the session if necessart
-             if (theSession != null)
-             {
-                 theSession.close();
-             }
-         }
-
+         
          logger.debug("Exiting getFindings");
 
          return theResults;

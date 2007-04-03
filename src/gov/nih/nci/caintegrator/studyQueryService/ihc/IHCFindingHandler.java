@@ -1,5 +1,13 @@
 package gov.nih.nci.caintegrator.studyQueryService.ihc;
 
+import gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.IHCFinding;
+import gov.nih.nci.caintegrator.studyQueryService.dto.finding.SpecimenBasedMolecularFindingCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.ihc.IHCFindingCriteria;
+import gov.nih.nci.caintegrator.studyQueryService.dto.protein.ProteinBiomarkerCriteia;
+import gov.nih.nci.caintegrator.studyQueryService.finding.SpecimenBasedMolecularFindingHandler;
+import gov.nih.nci.caintegrator.studyQueryService.protein.ProteinBiomarkerHandler;
+import gov.nih.nci.caintegrator.util.HQLHelper;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,24 +16,13 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
-import gov.nih.nci.breastCancer.dto.StudyParticipantCriteria;
-import gov.nih.nci.breastCancer.service.StudyParticipantHandler;
-import gov.nih.nci.caintegrator.domain.finding.bean.SpecimenBasedMolecularFinding;
-import gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding;
-import gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.IHCFinding;
-import gov.nih.nci.caintegrator.studyQueryService.dto.finding.SpecimenBasedMolecularFindingCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.ihc.IHCFindingCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.protein.ProteinBiomarkerCriteia;
-import gov.nih.nci.caintegrator.studyQueryService.dto.study.SpecimenCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.finding.SpecimenBasedMolecularFindingHandler;
-import gov.nih.nci.caintegrator.studyQueryService.protein.ProteinBiomarkerHandler;
-import gov.nih.nci.caintegrator.util.HQLHelper;
-import gov.nih.nci.caintegrator.util.HibernateUtil;
+import org.hibernate.SessionFactory;
 
 public abstract class IHCFindingHandler extends SpecimenBasedMolecularFindingHandler{
 	
 	 private static Logger logger = Logger.getLogger(IHCFindingHandler.class);
+     
+     protected SessionFactory sessionFactory;
 	 
 	 protected abstract StringBuilder handleCriteria(SpecimenBasedMolecularFindingCriteria inCriteria,
              HashMap<String, Object> inParams,
@@ -64,8 +61,8 @@ public abstract class IHCFindingHandler extends SpecimenBasedMolecularFindingHan
                
             }
 		    
-            Session theSession = HibernateUtil.getSession();
-            theSession.beginTransaction();
+            Session theSession = sessionFactory.getCurrentSession();
+            //theSession.beginTransaction();
 
 
             Query theQuery = theSession.createQuery(theHQL.toString());
@@ -91,4 +88,20 @@ public abstract class IHCFindingHandler extends SpecimenBasedMolecularFindingHan
 	        return theResults;		
 
      }
+
+
+    /**
+     * @return Returns the sessionFactory.
+     */
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+
+    /**
+     * @param sessionFactory The sessionFactory to set.
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }

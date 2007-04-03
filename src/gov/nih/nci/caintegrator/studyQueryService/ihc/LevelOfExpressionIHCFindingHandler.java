@@ -1,21 +1,13 @@
 package gov.nih.nci.caintegrator.studyQueryService.ihc;
 
-import gov.nih.nci.breastCancer.dto.BreastCancerClinicalFindingCriteria;
-import gov.nih.nci.breastCancer.dto.StudyParticipantCriteria;
-import gov.nih.nci.breastCancer.service.BreastCancerClinicalFindingHandler;
-import gov.nih.nci.breastCancer.service.StudyParticipantHandler;
 import gov.nih.nci.caintegrator.domain.finding.protein.ihc.bean.LevelOfExpressionIHCFinding;
-import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
-import gov.nih.nci.caintegrator.enumeration.Operator;
 import gov.nih.nci.caintegrator.studyQueryService.dto.finding.SpecimenBasedMolecularFindingCriteria;
-import gov.nih.nci.caintegrator.studyQueryService.dto.ihc.IHCFindingCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.ihc.LevelOfExpressionIHCFindingCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.protein.ProteinBiomarkerCriteia;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.SpecimenCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.protein.ProteinBiomarkerHandler;
 import gov.nih.nci.caintegrator.studyQueryService.study.SpecimenHandler;
 import gov.nih.nci.caintegrator.util.HQLHelper;
-import gov.nih.nci.caintegrator.util.HibernateUtil;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,7 +21,8 @@ import org.hibernate.Session;
 public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
 	
 	 private static Logger logger = Logger.getLogger(LevelOfExpressionIHCFindingHandler.class);
-	
+     // This is the Hibernate Session factory that is injected by Spring
+     
 	
 	 protected Class getFindingType() {
 	   return LevelOfExpressionIHCFinding.class;
@@ -131,12 +124,12 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
      public Collection<LevelOfExpressionIHCFinding> getLevelExpFindings(LevelOfExpressionIHCFindingCriteria inCriteria)
      {
          logger.debug("Entering getFindings");
-         Session theSession = null;
+         Session theSession = sessionFactory.getCurrentSession();
          Set<LevelOfExpressionIHCFinding> theResults = new HashSet<LevelOfExpressionIHCFinding>();
          try
          {
-             theSession = HibernateUtil.getSession();
-             HibernateUtil.beginTransaction();
+             //theSession = HibernateUtil.getSession();
+             //HibernateUtil.beginTransaction();
 
              HashMap<String, Object> theParams = new HashMap<String, Object>();
 
@@ -178,7 +171,6 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
 
              logger.info("HQL7777777777: " + theHQL.toString());
              Query q = theSession.createQuery(theHQL.toString());
-             //Query q = theSession.createQuery("from LevelOfExpressionIHCFinding f WHERE  f.stainDistribution IN ('HOMOGENOUS')");
              HQLHelper.setParamsOnQuery(theParams, q);
              Collection theObjects = q.list();
              theResults.addAll(theObjects);
@@ -189,15 +181,6 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
              e.printStackTrace();
              logger.error("Error getting findings: ", e);
          }
-         finally
-         {
-             // Close the session if necessart
-             if (theSession != null)
-             {
-                 theSession.close();
-             }
-         }
-
          logger.debug("Exiting getFindings");
 
          return theResults;
