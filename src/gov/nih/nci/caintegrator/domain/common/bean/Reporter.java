@@ -1,8 +1,8 @@
 package gov.nih.nci.caintegrator.domain.common.bean;
 
-import gov.nih.nci.caintegrator.domain.annotation.snp.bean.VariationReporter;
+import java.io.Serializable;
 
-public abstract class Reporter {
+public abstract class Reporter implements Serializable {
 
     private Long id;
     private String name;
