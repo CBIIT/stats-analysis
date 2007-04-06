@@ -13,7 +13,7 @@
 	
 
 <hibernate-mapping package="gov.nih.nci.caintegrator.domain.study.bean">
-<class name="TargetSpecimen" 
+<class name="Specimen" 
     	table="SPECIMEN"
         lazy="true">
         
@@ -65,7 +65,7 @@
     
      <many-to-one name="studyParticipant"
                 class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant"
-                column="PARTICIPANT_DID" />
+                column="PARTICIPANT_ID" />
  
     
     <!--  1-1 relationship -->

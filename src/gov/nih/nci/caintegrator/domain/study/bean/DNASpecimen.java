@@ -93,7 +93,7 @@ public  class DNASpecimen
 			boolean eq = false;
 			if(obj instanceof DNASpecimen) {
 				DNASpecimen c =(DNASpecimen)obj; 			 
-				String thisId = getId();		
+				Long thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;

@@ -146,15 +146,15 @@ public  class SNPAnnotation
    * Unique identifier  for the instance of SNPAnnotation.
    */
 
-    private java.lang.String id;
+    private java.lang.Long id;
     /**
    * Unique identifier  for the instance of SNPAnnotation.
    */
 
-	public  java.lang.String getId(){
+	public  java.lang.Long getId(){
         return id;
     }
-    public void setId( java.lang.String id){
+    public void setId( java.lang.Long id){
         this.id = id;
     }
 	
@@ -217,7 +217,7 @@ public  class SNPAnnotation
 			boolean eq = false;
 			if(obj instanceof SNPAnnotation) {
 				SNPAnnotation c =(SNPAnnotation)obj; 			 
-				String thisId = getId();		
+				Long thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;
