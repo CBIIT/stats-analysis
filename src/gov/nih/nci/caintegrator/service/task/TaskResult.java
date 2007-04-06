@@ -39,14 +39,13 @@ public interface TaskResult extends Serializable{
     public void setStartTime(long startTime);
    
     /**
-     * @return Returns the domainFindings.
+     * @return Returns the TaskResults.
      */
-    public Collection<? extends gov.nih.nci.caintegrator.domain.finding.bean.Finding> getDomainFindings();
+    public Collection getTaskResults();
 
     /**
-     * @param domainFindings The domainFindings to set.
+     * @param taskResults The taskResults to set.
      */
-    public void setDomainFindings(
-            Collection<? extends gov.nih.nci.caintegrator.domain.finding.bean.Finding> domainFindings);
+    public void setTaskResults(Collection taskResults);
  
 }

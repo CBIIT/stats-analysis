@@ -17,11 +17,11 @@ import java.util.List;
 public interface QueryHandler {
 
 
-    public List<Finding> getFindings(QueryDTO dto, Integer page);
+    public List getResults(QueryDTO dto, Integer page);
 
     public Integer getResultCount(QueryDTO query);
 
-    public List<Finding> getFindings(QueryDTO query);
+    public List getResults(QueryDTO query);
     
     public boolean canHandle(QueryDTO query);
 }

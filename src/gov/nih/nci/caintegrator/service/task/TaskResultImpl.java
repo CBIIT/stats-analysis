@@ -13,7 +13,7 @@ public class TaskResultImpl implements TaskResult{
     private long startTime;
     private long endTime;
     private long elapsedTime;
-    private Collection<? extends gov.nih.nci.caintegrator.domain.finding.bean.Finding> domainFindings;
+    private Collection taskResults;
 
     public TaskResultImpl(){
         
@@ -25,19 +25,19 @@ public class TaskResultImpl implements TaskResult{
 
 
     /**
-     * @return Returns the domainFindings.
+     * @return Returns the taskResults.
      */
-    public Collection<? extends gov.nih.nci.caintegrator.domain.finding.bean.Finding> getDomainFindings() {
-        return domainFindings;
+    public Collection getTaskResults() {
+        return taskResults;
     }
 
 
     /**
-     * @param domainFindings The domainFindings to set.
+     * @param taskResults The taskResults to set.
      */
-    public void setDomainFindings(
-            Collection<? extends gov.nih.nci.caintegrator.domain.finding.bean.Finding> domainFindings) {
-        this.domainFindings = domainFindings;
+    public void setTaskResults(
+            Collection taskResults) {
+        this.taskResults = taskResults;
     }
 
 
