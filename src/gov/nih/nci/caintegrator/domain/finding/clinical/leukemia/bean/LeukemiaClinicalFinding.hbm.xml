@@ -85,6 +85,6 @@
 			class="gov.nih.nci.caintegrator.domain.study.bean.TimeCourse">
 			<property name="name" column="TIME_COURSE" />
 		</component>
-		<many-to-one name="studyParticipant" class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant" column="PARTICIPANT_DID"  />
+		<many-to-one name="studyParticipant" class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant" column="PARTICIPANT_ID"  />
 	</class>
 </hibernate-mapping>

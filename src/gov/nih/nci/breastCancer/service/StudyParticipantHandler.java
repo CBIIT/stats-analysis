@@ -150,7 +150,7 @@ public class StudyParticipantHandler
         if (inCriteria.getAgentNameCollection() != null)
         {
             // Get the list of study participants that have an activity w/ the associated agent
-            Set<String> theParticipantIDs = getStudyParticipantsForAgents(inCriteria.getAgentNameCollection());
+            Set<Long> theParticipantIDs = getStudyParticipantsForAgents(inCriteria.getAgentNameCollection());
             theHQL.append("from StudyParticipant AS s WHERE s.id IN (:sps_for_agent) ");
             inParams.put("sps_for_agent", theParticipantIDs);
             theANDString = " AND ";
@@ -233,11 +233,11 @@ public class StudyParticipantHandler
     //////////////////////////////////////////////////////////////
     // Get a list of the study participant ID's for an agent
     //////////////////////////////////////////////////////////////
-    private Set<String> getStudyParticipantsForAgents(Set<String> inAgentNames)
+    private Set<Long> getStudyParticipantsForAgents(Set<String> inAgentNames)
     {
         logger.debug("Entering getStudyParticipantsForAgents");
         
-        Set<String> theReturnSet = new HashSet<String>();
+        Set<Long> theReturnSet = new HashSet<Long>();
 
         try
         {
@@ -270,7 +270,7 @@ public class StudyParticipantHandler
         // Nothing matched.  Return a -1, thus matching nothing
         if (theReturnSet.size() == 0)
         {
-            theReturnSet.add("-1");
+            theReturnSet.add(-1L);
         }
         
         logger.debug("Exiting getStudyParticipantsForAgents");
@@ -280,9 +280,12 @@ public class StudyParticipantHandler
 }
 
 /**
- * $Id: StudyParticipantHandler.java,v 1.4 2006-10-03 20:35:08 zhangd Exp $
+ * $Id: StudyParticipantHandler.java,v 1.5 2007-04-06 17:43:31 ashinohara Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.4  2006/10/03 20:35:08  zhangd
+ * *** empty log message ***
+ *
  * Revision 1.3  2006/08/17 19:25:57  georgeda
  * Cleanup age handling
  *

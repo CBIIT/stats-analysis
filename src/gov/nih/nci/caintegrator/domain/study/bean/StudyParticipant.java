@@ -152,15 +152,15 @@ public  class StudyParticipant
    * Unique identifier for the instance of StudyParticipant.
    */
 
-    private java.lang.String id;
+    private java.lang.Long id;
     /**
    * Unique identifier for the instance of StudyParticipant.
    */
 
-	public  java.lang.String getId(){
+	public  java.lang.Long getId(){
         return id;
     }
-    public void setId( java.lang.String id){
+    public void setId( java.lang.Long id){
         this.id = id;
     }
 	
@@ -278,7 +278,7 @@ public  class StudyParticipant
 			boolean eq = false;
 			if(obj instanceof StudyParticipant) {
 				StudyParticipant c =(StudyParticipant)obj; 			 
-				String thisId = getId();		
+				Long thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;

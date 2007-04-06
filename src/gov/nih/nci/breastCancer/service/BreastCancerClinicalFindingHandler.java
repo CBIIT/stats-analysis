@@ -195,7 +195,7 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
         /////////////////////////////////////////////////////
         if (theCriteria.getPercentLDChange() != null)
         {
-            Set<String> theSPs = getStudyParticipantsForLDChange(theCriteria);
+            Set<Long> theSPs = getStudyParticipantsForLDChange(theCriteria);
             
             theHQL.append(theANDString + " f.studyParticipant IN (:f_studyParticipants) ");
             inParams.put("f_studyParticipants", theSPs);
@@ -277,11 +277,11 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
     //////////////////////////////////////////////////////////////
     // Get a list of the study participant ID's for an LD and TimeCourse
     //////////////////////////////////////////////////////////////
-    private Set<String> getStudyParticipantsForLDChange(BreastCancerClinicalFindingCriteria inCriteria)
+    private Set<Long> getStudyParticipantsForLDChange(BreastCancerClinicalFindingCriteria inCriteria)
     {
         logger.debug("Entering getStudyParticipantsForLDChange");
         
-        Set<String> theReturnSet = new HashSet<String>();
+        Set<Long> theReturnSet = new HashSet<Long>();
 
         String theHQL = "from BreastCancerClinicalFinding AS f LEFT JOIN FETCH f.studyParticipant  ";
         
@@ -322,7 +322,7 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
         // Nothing matched.  Return a -1, thus matching nothing
         if (theReturnSet.size() == 0)
         {
-            theReturnSet.add("-1");
+            theReturnSet.add(-1L);
         }
         
         logger.debug("Exiting getStudyParticipantsForLDChange");
@@ -332,9 +332,12 @@ public class BreastCancerClinicalFindingHandler extends ClinicalFindingHandler
 }
 
 /**
- * $Id: BreastCancerClinicalFindingHandler.java,v 1.5 2006-10-03 20:31:06 zhangd Exp $
+ * $Id: BreastCancerClinicalFindingHandler.java,v 1.6 2007-04-06 17:43:31 ashinohara Exp $
  * 
  * $Log: not supported by cvs2svn $
+ * Revision 1.5  2006/10/03 20:31:06  zhangd
+ * *** empty log message ***
+ *
  * Revision 1.4  2006/08/17 18:05:09  georgeda
  * Removed unneeded import
  *
