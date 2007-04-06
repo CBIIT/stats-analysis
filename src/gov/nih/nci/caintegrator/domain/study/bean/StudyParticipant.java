@@ -24,6 +24,9 @@ public  class StudyParticipant
 	private static final long serialVersionUID = 1234567890L;
 
 
+    private Double weight;
+    private Double height;
+    private Double waistCircumference;
  	
 	   
     /**
@@ -622,6 +625,24 @@ public  class StudyParticipant
 	   
     public void setClinicalFindingCollection(Set<gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding> clinicalFindingCollection){
         this.clinicalFindingCollection = clinicalFindingCollection;
+    }
+    public Double getHeight() {
+        return height;
+    }
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+    public Double getWaistCircumference() {
+        return waistCircumference;
+    }
+    public void setWaistCircumference(Double waistCircumference) {
+        this.waistCircumference = waistCircumference;
+    }
+    public Double getWeight() {
+        return weight;
+    }
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 	   
 	   

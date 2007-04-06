@@ -118,7 +118,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
 
         /* 1. initialize SNPAnnotations */
-        Collection<String> snpAnnotsIDs = new HashSet<String>();
+        Collection<Long> snpAnnotsIDs = new HashSet<Long>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                 GenotypeFinding finding =  (GenotypeFinding) iterator.next();
                 snpAnnotsIDs.add(finding.getSnpAnnotation().getId());

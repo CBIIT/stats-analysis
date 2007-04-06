@@ -235,7 +235,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
 
         /* initialize SNPAnnotations */
-        Collection<String> snpAnnotsIDs = new HashSet<String>();
+        Collection<Long> snpAnnotsIDs = new HashSet<Long>();
         Collection<Long> populationIDs = new HashSet<Long>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                 SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();

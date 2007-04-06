@@ -237,7 +237,7 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
 
         /* initialize SNPAnnotations */
-        Collection<String> snpAnnotsIDs = new HashSet<String>();
+        Collection<Long> snpAnnotsIDs = new HashSet<Long>();
         Collection<Long> populationIDs = new HashSet<Long>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                 SNPFrequencyFinding finding =  (SNPFrequencyFinding) iterator.next();
