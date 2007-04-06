@@ -66,7 +66,9 @@
 		class="gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManagerImpl" >
 		<property name="sessionFactory" ref="sessionFactory" />		
 	</bean>
-	
+	<!-- beans for the finding containers -->
+	<bean id="taskResult" class="gov.nih.nci.caintegrator.service.task.TaskResultImpl" scope="prototype">
+	</bean>	
 	<!--  Definitions for transaction manager and declaritive transaction management -->
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -90,6 +92,12 @@
 		<aop:advisor advice-ref="txAdvice"
 			pointcut-ref="ihcserviceMethods" />
 	</aop:config>
+	<aop:config>
+		<aop:pointcut id="handlerMethods"
+			expression="execution(* gov.nih.nci.caintegrator.studyQueryService.QueryHandler.*(..))" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="handlerMethods" />
+	</aop:config>	
 
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
