@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    $Id: Activity.hbm.xml,v 1.1 2006-08-14 16:58:52 georgeda Exp $
+    $Id: Activity.hbm.xml,v 1.2 2007-04-09 15:01:40 ashinohara Exp $
     
     $Log: not supported by cvs2svn $
+    Revision 1.1  2006/08/14 16:58:52  georgeda
+    Updated w/ newest OM changes (Rev 1.51)
+
 -->
 
 <!DOCTYPE hibernate-mapping PUBLIC 
@@ -36,7 +39,7 @@
         
         <many-to-one 
             name="studyParticipant"
-            column="PATIENT_DID"
+            column="PARTICIPANT_ID"
             class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant"
         />
         

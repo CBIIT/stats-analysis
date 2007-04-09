@@ -363,39 +363,6 @@ public  class StudyParticipant
     }	
 	   
 	   
-	
-	   
-	   
-	   
-	      
-      /**
-
-   */
-
-    private Set <gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding> epiFinding = new HashSet<gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding>();
-      /**
-
-   */
-
-    public Set <gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding> getEpiFinding(){
-        return epiFinding;
-    }
-
-	      
-	               
-	   
-    public void setEpiFinding(Set<gov.nih.nci.caintegrator.domain.finding.bean.EpidimeologicalFinding> epiFinding){
-        this.epiFinding = epiFinding;
-    }
-	   
-	   
-	
-	   
-	   
-	   
-	      
-			
-			
 			
 			
       /**
