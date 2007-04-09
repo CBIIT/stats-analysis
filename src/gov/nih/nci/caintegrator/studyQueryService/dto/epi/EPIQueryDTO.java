@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
+import gov.nih.nci.caintegrator.dto.query.QueryDTO;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,16 @@ import java.util.List;
   * Time:   6:07:50 PM
 **/
 
-public class EPIQueryDTO {
+public class EPIQueryDTO implements QueryDTO {
+    private String queryName;
+
+    public String getQueryName() {
+        return queryName;
+    }
+
+    public void setQueryName(String queryName) {
+        this.queryName = queryName;
+    }
 
     public BehavioralCriterion behavioralCriterion;
     public EnvironmentalTobaccoSmokeCriterion environmentalTobaccoSmokeCriterion;
