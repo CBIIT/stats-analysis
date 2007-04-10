@@ -50,13 +50,14 @@ public class FindingsManagerImpl implements FindingsManager{
       */    
     public Task checkStatus(Task task){        
         SessionBasedFindingStrategy strategy = chooseStrategy(task.getQueryDTO());
-        task = strategy.getTaskResult().getTask();
+        TaskResult taskResult = strategy.retrieveTaskResult(task);
+        task = taskResult.getTask();
         return task;
     }
 
     public Collection<Finding> getFindings(QueryDTO queryDTO) {
         // TODO Auto-generated method stub
-        return null;
+        return null; 
     }
 
     public Collection<Finding> getFindings(Task task) {
@@ -89,7 +90,7 @@ public class FindingsManagerImpl implements FindingsManager{
      */
     public TaskResult getTaskResult(Task task) {
         SessionBasedFindingStrategy strategy = chooseStrategy(task.getQueryDTO());
-        TaskResult taskResult = strategy.getTaskResult();
+        TaskResult taskResult = strategy.retrieveTaskResult(task);
         return taskResult;
     }
     

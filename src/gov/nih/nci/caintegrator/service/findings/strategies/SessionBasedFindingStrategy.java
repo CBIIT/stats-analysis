@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.service.findings.strategies;
 
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
+import gov.nih.nci.caintegrator.service.task.Task;
 import gov.nih.nci.caintegrator.service.task.TaskResult;
 
 
@@ -27,6 +28,11 @@ public abstract class SessionBasedFindingStrategy implements FindingStrategy {
 		this.taskId = taskId;
 	}
        
+    
+    public TaskResult retrieveTaskResult(Task task){
+        return null;
+    }
+    
     /**
      * @return Returns the taskResult.
      */

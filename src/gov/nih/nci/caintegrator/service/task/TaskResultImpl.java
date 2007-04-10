@@ -9,10 +9,7 @@ public class TaskResultImpl implements TaskResult{
      * 
      */
     private static final long serialVersionUID = 1L;    
-    private Task task;
-    private long startTime;
-    private long endTime;
-    private long elapsedTime;
+    private Task task;    
     private Collection taskResults;
 
     public TaskResultImpl(){
@@ -40,53 +37,6 @@ public class TaskResultImpl implements TaskResult{
         this.taskResults = taskResults;
     }
 
-
-    /**
-     * @return Returns the elapsedTime.
-     */
-    public long getElapsedTime() {
-        return elapsedTime;
-    }
-
-
-    /**
-     * @param elapsedTime The elapsedTime to set.
-     */
-    public void setElapsedTime(long elapsedTime) {
-        this.elapsedTime = elapsedTime;
-    }
-
-
-    /**
-     * @return Returns the endTime.
-     */
-    public long getEndTime() {
-        return endTime;
-    }
-
-
-    /**
-     * @param endTime The endTime to set.
-     */
-    public void setEndTime(long endTime) {
-        this.endTime = endTime;
-    }
-
-    
-    /**
-     * @return Returns the startTime.
-     */
-    public long getStartTime() {
-        return startTime;
-    }
-
-
-    /**
-     * @param startTime The startTime to set.
-     */
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
-    }
 
 
     /**
