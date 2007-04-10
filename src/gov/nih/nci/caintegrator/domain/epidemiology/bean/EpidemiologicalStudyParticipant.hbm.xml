@@ -108,7 +108,16 @@
                  type="java.lang.String" 
                  column="PARTICIPANT_DID" 
                  insert="false" 
-                 update="false" />                 
+                 update="false" />     
+                             
+        <property name="weight" 
+                 column="WEIGHT" />    
+                              
+        <property name="height" 
+                 column="HEIGHT"  />   
+                               
+        <property name="waistCircumference" 
+                 column="WAIST_CIRCUMFERENCE" />                 
                 
 	     <!--  survivalStatus -->                 
         <property name="survivalStatus" 
