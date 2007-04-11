@@ -7,10 +7,20 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum Relative {
-	BROTHER,
-	FATHER,
-	GRANDFATHER,
-	GRANDMOTHER,
-	MOTHER,
-	SISTER
+	BROTHER("Brother"),
+	FATHER("Father"),
+	GRANDFATHER("GrandFather"),
+	GRANDMOTHER("GrandMother"),
+	MOTHER("Mother"),
+	SISTER("Sister") ;
+
+    private String value;
+
+    Relative(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

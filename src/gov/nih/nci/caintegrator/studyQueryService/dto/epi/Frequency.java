@@ -7,9 +7,19 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum Frequency {
-	NEVER,
-	ONCEAMONTH,
-	ONCEAWEEK,
-	ONETOSIXTIMESPERSEASON,
-	SEVENTOELEVENTIMESPERSEASON
+	NEVER("Never"),
+	ONCEAMONTH("Once A Month"),
+	ONCEAWEEK("Once A Week"),
+	ONETOSIXTIMESPERSEASON("One to Six times per season"),
+	SEVENTOELEVENTIMESPERSEASON("Seven to eleven times per season")  ;
+
+    private String value;
+
+    Frequency(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

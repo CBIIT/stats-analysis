@@ -7,7 +7,17 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum ExposureLevel {
-	HEAVY,
-	LIGHT,
-	MODERATE
+	HEAVY("Heavy"),
+	LIGHT("Light"),
+	MODERATE("Moderate");
+
+    private String value;
+
+    ExposureLevel(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

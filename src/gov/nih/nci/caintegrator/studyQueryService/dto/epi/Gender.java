@@ -7,7 +7,17 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum Gender {
-	FEMALE,
-	MALE,
-	OTHERORUNKNOWN
+	FEMALE("Female"),
+	MALE("Male"),
+	OTHERORUNKNOWN("Other Or Unknko");
+
+    private String value;
+
+    Gender(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

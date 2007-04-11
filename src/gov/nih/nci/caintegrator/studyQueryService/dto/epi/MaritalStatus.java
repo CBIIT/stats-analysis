@@ -7,8 +7,18 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum MaritalStatus {
-	DIVORCED,
-	MARRIED,
-	SINGLE,
-	WIDOWED
+	DIVORCED("Divorced"),
+	MARRIED("Married"),
+	SINGLE("Single"),
+	WIDOWED("Widowed") ;
+
+    private String value;
+
+    MaritalStatus(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

@@ -7,7 +7,17 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum SocioEconomicStatus {
-	TBD1,
-	TBD2,
-	TBD3
+	TBD1("TBD1"),
+	TBD2("TBD2"),
+	TBD3("TBD3")  ;
+
+    private String value;
+
+    SocioEconomicStatus(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

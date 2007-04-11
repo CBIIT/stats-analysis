@@ -7,9 +7,19 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum FoodItems {
-	ONIONS,
-	POTATOES,
-	RAWPEPPERS,
-	SALAD,
-	TOMATOES
+	ONIONS("Onions"),
+	POTATOES("Potatoes"),
+	RAWPEPPERS("RawPeppers"),
+	SALAD("Salad"),
+	TOMATOES("Tomatoes");
+
+    private String value;
+
+    FoodItems(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

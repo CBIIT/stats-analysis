@@ -7,7 +7,17 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum SmokingExposure {
-	ADULTHOOD,
-	CHILDHOOD,
-	WORKPLACE
+	ADULTHOOD("Adulthood"),
+	CHILDHOOD("Childhood"),
+	WORKPLACE("Workplace");
+
+    private String value;
+
+    SmokingExposure(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

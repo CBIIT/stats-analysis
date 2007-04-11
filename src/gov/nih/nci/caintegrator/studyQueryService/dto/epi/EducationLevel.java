@@ -7,8 +7,18 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum EducationLevel {
-	BACHELORS,
-	HIGHSCHOOL,
-	MASTERS,
-	PHD
+	BACHELORS("Bachelors"),
+	HIGHSCHOOL("High Schoole"),
+	MASTERS("Masters"),
+	PHD("PhD");
+
+    private String value;
+
+    EducationLevel(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

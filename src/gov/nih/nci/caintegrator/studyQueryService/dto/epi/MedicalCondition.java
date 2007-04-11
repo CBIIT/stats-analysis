@@ -7,8 +7,18 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum MedicalCondition {
-	CHRONICBRONCHITIS,
-	EMPHYSEMA,
-	PNEUOMONIA,
-	TUBERCULOSIS
+	CHRONICBRONCHITIS("Chroninc Bronchitis"),
+	EMPHYSEMA("Emphysema"),
+	PNEUOMONIA("Pneuomonia"),
+	TUBERCULOSIS("Tuberculosis");
+
+    private String value;
+
+    MedicalCondition(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

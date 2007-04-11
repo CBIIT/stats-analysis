@@ -7,8 +7,18 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum SmokingStatus {
-	CURRENT,
-	FORMER,
-	NONSMOKER,
-	OCCASIONAL
+	CURRENT("Current"),
+	FORMER("Former"),
+	NONSMOKER("NonSmoker"),
+	OCCASIONAL("Occasional")  ;
+
+    private String value;
+
+    SmokingStatus(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }
