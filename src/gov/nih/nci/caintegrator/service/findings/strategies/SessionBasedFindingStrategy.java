@@ -14,10 +14,10 @@ import gov.nih.nci.caintegrator.service.task.TaskResult;
  */
 public abstract class SessionBasedFindingStrategy implements FindingStrategy {
 
-	private String sessionId;
-	private String taskId;
-	private QueryDTO query;
-    private TaskResult taskResult;
+	protected String sessionId;
+	protected String taskId;
+	protected QueryDTO query;
+    protected TaskResult taskResult;
     
     public SessionBasedFindingStrategy(){
         
