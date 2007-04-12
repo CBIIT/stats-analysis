@@ -146,6 +146,14 @@ public class ArrayPlatformDE extends DomainElement implements Serializable,
 				vo.equalsIgnoreCase(ArrayPlatformType.UNIFIED_GENE.toString())){
 			return ArrayPlatformType.UNIFIED_GENE; 
 		}
+		else if(vo.equals(ArrayPlatformType.BLOOD_ARRAY.name()) ||
+		        vo.equalsIgnoreCase(ArrayPlatformType.BLOOD_ARRAY.toString())){
+		    return ArrayPlatformType.BLOOD_ARRAY; 
+		}
+		else if(vo.equals(ArrayPlatformType.TISSUE_ARRAY.name()) ||
+		        vo.equalsIgnoreCase(ArrayPlatformType.TISSUE_ARRAY.toString())){
+		    return ArrayPlatformType.TISSUE_ARRAY; 
+		}
 		return null;
 	}
 	/**
