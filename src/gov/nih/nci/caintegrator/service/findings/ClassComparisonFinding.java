@@ -82,6 +82,10 @@ public class ClassComparisonFinding extends AnalysisFinding implements ReporterB
 	private Collection<SampleIDDE> samplesNotFound;
 	private Map reporterAnnotationsMap;
 	
+    public ClassComparisonFinding() {
+        super(null, null, FindingStatus.Running);
+    }
+    
 	public ClassComparisonFinding(String session, String task, FindingStatus status, ClassComparisonResult result) {
 		super(session, task, status);
 		setAnalysisResult(result);
