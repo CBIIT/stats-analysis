@@ -7,21 +7,27 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum Companion {
-	BROTHER("Brother"),
-	FATHER("Father"),
-	FRIEND("Friend"),
-	GRANDFATHER("GrandFather"),
-	GRANDMOTHER("GrandMother"),
-	MOTHER("Mother"),
-	SISTER("Sister");
+	BROTHER(1, "Brother"),
+	FATHER(2, "Father"),
+	FRIEND(3, "Friend"),
+	GRANDFATHER(4, "GrandFather"),
+	GRANDMOTHER(5, "GrandMother"),
+	MOTHER(6, "Mother"),
+	SISTER(7, "Sister");
 
-    private String value;
+    private final int value;
+    private final String name;
 
-    Companion(String value) {
+    Companion(int value, String name) {
         this.value = value;
+        this.name = name;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
+    }
+
+    public String getName() {
+        return name;
     }
 }
