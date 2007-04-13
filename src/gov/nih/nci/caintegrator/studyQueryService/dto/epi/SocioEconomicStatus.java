@@ -7,17 +7,23 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum SocioEconomicStatus {
-	TBD1("TBD1"),
-	TBD2("TBD2"),
-	TBD3("TBD3")  ;
+    MEASURE1(1, "measure-1"),
+    MEASURE2(2, "measure-2");
 
-    private String value;
+    private final int value;
+    private final String name;
 
-    SocioEconomicStatus(String value) {
-        this.value = value;
+    SocioEconomicStatus(int key, String name) {
+            this.value = key;
+            this.name = name;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
+
+    public String getName() {
+        return name;
+    }
+
 }

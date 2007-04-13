@@ -7,18 +7,25 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum TobaccoType {
-	CIGAR("Cigar"),
-	CIGARETTE("Cigarette"),
-	CIGARILLOS("Cigarillos"),
-	PIPE("Pipe") ;
+	CIGAR(1, "Cigar"),
+	CIGARETTE(2, "Cigarette"),
+	CIGARILLOS(3, "Cigarillos"),
+	PIPE(4, "Pipe") ;
 
-    private String value;
+    final private int value;
+    final private String name;
 
-    TobaccoType(String value) {
-        this.value = value;
+    TobaccoType(int value, String name) {
+       this.value = value;
+       this.name = name;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
+
+    public String getName() {
+        return name;
+    }
+
 }
