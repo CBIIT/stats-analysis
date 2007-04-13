@@ -1,23 +1,30 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
 /**
-  * Author: Ram Bhattaru
-  * Date:   Apr 06, 2007
-  * Time:   5:08:50 PM
-**/
+ * Created by IntelliJ IDEA.
+ * User: Ram Bhattaru
+ * Date: Apr 13, 2007
+ * Time: 5:23:08 PM
 
+ */
 public enum Gender {
-	FEMALE("Female"),
-	MALE("Male"),
-	OTHERORUNKNOWN("Other Or Unknko");
+    MALE(1, "Male"),
+    FEMALE(2, "Female");
 
-    private String value;
+    private final int value;
+    private final String name;
 
-    Gender(String value) {
-        this.value = value;
+    Gender(int key, String name) {
+        this.value = key;
+    	this.name = name;
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return name;
     }
+
+    public int getValue()	{
+    	return value;
+    }
+
 }

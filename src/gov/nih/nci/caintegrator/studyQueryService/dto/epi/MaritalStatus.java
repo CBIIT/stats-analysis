@@ -1,24 +1,33 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
 /**
-  * Author: Ram Bhattaru
-  * Date:   Apr 06, 2007
-  * Time:   5:08:50 PM
-**/
-
+ * Created by IntelliJ IDEA.
+ * User: Ram Bhattaru
+ * Date: Apr 13, 2007
+ * Time: 5:24:07 PM
+ */
 public enum MaritalStatus {
-	DIVORCED("Divorced"),
-	MARRIED("Married"),
-	SINGLE("Single"),
-	WIDOWED("Widowed") ;
+    MARRIED(1,"Married"),
+    COHABITING(2,"Cohabiting"),
+    SEPARATED(3,"Separated"),
+    WIDOWED(4,"Widowed"),
+    DIVORCED(5,"Divorced"),
+    SINGLE(6,"Single");
 
-    private String value;
+    private final int value;
+    private final String name;
 
-    MaritalStatus(String value) {
-        this.value = value;
+    MaritalStatus(int key, String name) {
+        this.value = key;
+    	this.name = name;
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return name;
     }
+
+    public int getValue()	{
+    	return value;
+    }
+
 }
