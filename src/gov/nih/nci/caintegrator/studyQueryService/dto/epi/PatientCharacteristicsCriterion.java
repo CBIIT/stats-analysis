@@ -10,9 +10,9 @@ public class PatientCharacteristicsCriterion {
 
 	private Integer ageLowerLimit;
 	private Integer ageUpperLimit;
-	private Float heightInFeet;
-	private Float waistCircumferenceInInches;
-	private Float weightInPounds;
+	private Float heightInCentiMeters;
+	private Float waistCircumferenceCentiMeters;
+	private Float weightInKilograms;
 	public Gender selfReportedgender;
 	public SocioEconomicStatus socioEconomicStatus;
 	public MaritalStatus maritalStatus;
@@ -38,28 +38,28 @@ public class PatientCharacteristicsCriterion {
         this.ageUpperLimit = ageUpperLimit;
     }
 
-    public Float getHeightInFeet() {
-        return heightInFeet;
+    public Float getHeightInCentiMeters() {
+        return heightInCentiMeters;
     }
 
-    public void setHeightInFeet(Float heightInFeet) {
-        this.heightInFeet = heightInFeet;
+    public void setHeightInCentiMeters(Float heightInCentiMeters) {
+        this.heightInCentiMeters = heightInCentiMeters;
     }
 
-    public Float getWaistCircumferenceInInches() {
-        return waistCircumferenceInInches;
+    public Float getWaistCircumferenceCentiMeters() {
+        return waistCircumferenceCentiMeters;
     }
 
-    public void setWaistCircumferenceInInches(Float waistCircumferenceInInches) {
-        this.waistCircumferenceInInches = waistCircumferenceInInches;
+    public void setWaistCircumferenceCentiMeters(Float waistCircumferenceCentiMeters) {
+        this.waistCircumferenceCentiMeters = waistCircumferenceCentiMeters;
     }
 
-    public Float getWeightInPounds() {
-        return weightInPounds;
+    public Float getWeightInKilograms() {
+        return weightInKilograms;
     }
 
-    public void setWeightInPounds(Float weightInPounds) {
-        this.weightInPounds = weightInPounds;
+    public void setWeightInKilograms(Float weightInKilograms) {
+        this.weightInKilograms = weightInKilograms;
     }
 
     public Gender getSelfReportedgender() {
