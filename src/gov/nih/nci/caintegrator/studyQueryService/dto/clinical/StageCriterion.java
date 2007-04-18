@@ -1,4 +1,4 @@
-package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
+package gov.nih.nci.caintegrator.studyQueryService.dto.clinical;
 
 /**
   * Author: Ram Bhattaru
