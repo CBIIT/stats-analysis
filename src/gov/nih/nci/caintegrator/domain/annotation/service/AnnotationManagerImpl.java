@@ -11,6 +11,8 @@ import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCrite
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +28,10 @@ public class AnnotationManagerImpl implements AnnotationManager {
 
     private SessionFactory sessionFactory;
 
-    public Collection<GeneExprReporter> getGenesForReporters(
+    public Map<String, GeneBiomarker> getGenesForReporters(
             AnnotationCriteria annotationCriteria) {
+        
+        HashMap<String, GeneBiomarker> reporterMap = new HashMap<String, GeneBiomarker>();
         ArrayPlatformType arrayPlatformType = annotationCriteria
                 .getArrayPlatformType();
         Collection<String> reporters = annotationCriteria.getReporterIds();
@@ -40,14 +44,44 @@ public class AnnotationManagerImpl implements AnnotationManager {
         }
 
         Session currentSession = sessionFactory.getCurrentSession();
-        Criteria criteria = currentSession
-                .createCriteria(GeneExprReporter.class);
-        criteria.createAlias("geneBioMarker", "gene");
-        criteria.add(Restrictions.in("name", reporters));
-        List<GeneExprReporter> reporterList = criteria.setResultTransformer(
-                Criteria.DISTINCT_ROOT_ENTITY).list();
 
-        return reporterList;
+        List<GeneExprReporter> reporterList = new ArrayList<GeneExprReporter>();
+        if(reporters.size() > 1000) {
+            for(int i = 0; i < ((reporters.size() / 1000) + 1); i++) {
+                Criteria criteria = currentSession
+                .createCriteria(GeneExprReporter.class);
+                criteria.createAlias("geneBioMarker", "gene");
+
+                int size;
+                if(i == (reporters.size() / 1000)) {
+                    size = reporters.size() % 1000;
+                } else {
+                    size = 1000;
+                }
+                String[] tempArray = new String[size];
+                System.arraycopy(reporters.toArray(), i * 1000, tempArray, 0, size);
+                Collection tempList = new ArrayList();
+                Collections.addAll(tempList, tempArray);
+                criteria.add(Restrictions.in("name", tempList));
+                reporterList.addAll(criteria.setResultTransformer(
+                        Criteria.DISTINCT_ROOT_ENTITY).list());
+            }
+        } else {
+            Criteria criteria = currentSession
+            .createCriteria(GeneExprReporter.class);
+            criteria.createAlias("geneBioMarker", "gene");
+            criteria.add(Restrictions.in("name", reporters));
+            reporterList = criteria.setResultTransformer(
+                    Criteria.DISTINCT_ROOT_ENTITY).list();
+        }
+
+
+        
+        for(GeneExprReporter reporter : reporterList) {
+            reporterMap.put(reporter.getName(), reporter.getGeneBioMarker());
+        }
+
+        return reporterMap;
     }
 
     public Map<GeneBiomarker, Collection<GeneExprReporter>> getReportersForGenes(

@@ -14,7 +14,7 @@ import java.util.Map;
 
 public interface AnnotationManager {
 
-    public Collection<GeneExprReporter> getGenesForReporters(
+    public Map<String, GeneBiomarker> getGenesForReporters(
             AnnotationCriteria criteria);
 
     public Map<GeneBiomarker, Collection<GeneExprReporter>> getReportersForGenes(
@@ -31,4 +31,5 @@ public interface AnnotationManager {
     public List<VariationReporter> getReportersForDbSnpId(String dbSnpId);
     
     public List<SNPAnnotation> getSnpAnnotationsForGene(String geneId, Long kbUpstream, Long kbDownstream);
+    
 }
