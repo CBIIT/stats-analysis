@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="gov.nih.nci.caintegrator.domain.epidemiology.bean.BehavioralAssessment" 
+    	table="BEHAVIORAL_ASSESSMENT"
+        lazy="true">
+
+	    <id name="id" 
+	    	column="ID">
+	        <generator class="native"/>
+	    </id>
+	    
+        <property name="depressionScore" 
+        	column="DEPRESSION_SCORE"/>
+        <property name="anxietyScore" 
+        	column="ANXIETY_SCORE"/>
+        <property name="fagerstromScore" 
+        	column="FAGERSTROM_SCORE"/>
+
+        	
+
+
+	</class>
+</hibernate-mapping>
