@@ -70,6 +70,7 @@ import java.io.Serializable;
 public class InstitutionDE extends DomainElement implements Serializable, Cloneable{
    
      private String instituteName;
+     private String displayName;
 	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
 	 * data field that is added to this class also be cloneable and be added to
@@ -90,6 +91,11 @@ public class InstitutionDE extends DomainElement implements Serializable, Clonea
        super(instituteID);
        this.instituteName = institutionName;
     }
+    public InstitutionDE(String institutionName, String institutionDisplayName, Long instituteID) {
+        super(instituteID);
+        this.instituteName = institutionName;
+        this.displayName = institutionDisplayName;
+     }
 
     public String getInstituteName() {
         return instituteName;
@@ -136,5 +142,17 @@ public class InstitutionDE extends DomainElement implements Serializable, Clonea
     public Object clone() {
     	InstitutionDE myClone = (InstitutionDE) super.clone();
 		return myClone;
+	}
+	/**
+	 * @return Returns the displayName.
+	 */
+	public String getDisplayName() {
+		return displayName;
+	}
+	/**
+	 * @param displayName The displayName to set.
+	 */
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 }

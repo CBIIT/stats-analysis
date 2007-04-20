@@ -103,7 +103,9 @@ public class CaIntegratorConstants {
 	
 	public static final String REPORT_COUNTER = "reportCounter";
 	
-    public static final String GRAPH_DEFAULT = "Default";
+    public static final String GRAPH_MEAN = "Mean";
+    
+    public static final String GRAPH_MEDIAN = "Median";
     
     public static final String GENE_EXP_KMPLOT ="GE_KM_PLOT";
     
