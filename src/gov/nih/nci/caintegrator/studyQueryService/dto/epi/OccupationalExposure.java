@@ -10,35 +10,22 @@ import java.util.Date;
 
 public class OccupationalExposure {
 
-    private Date endDate;
-    private Date startDate;
-    public ExposureLevel exposureLevel;
+    private Float yearsExposed;
+    private ExposureLevel smokingExposure;
 
-    public OccupationalExposure(){
-
+    public Float getYearsExposed() {
+        return yearsExposed;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public void setYearsExposed(Float yearsExposed) {
+        this.yearsExposed = yearsExposed;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public ExposureLevel getSmokingExposure() {
+        return smokingExposure;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public ExposureLevel getExposureLevel() {
-        return exposureLevel;
-    }
-
-    public void setExposureLevel(ExposureLevel exposureLevel) {
-        this.exposureLevel = exposureLevel;
+    public void setSmokingExposure(ExposureLevel smokingExposure) {
+        this.smokingExposure = smokingExposure;
     }
 }

@@ -8,10 +8,14 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
 public class TobaccoConsumptionCriterion {
 
-	private Integer ageAtInitiation;
-	private Integer duration;
-	private Integer intensity;
-	private Integer yearsSinceQuitting;
+	private Integer ageAtInitiationLower;
+    private Integer ageAtInitiationUpper;
+    private Integer durationLower;
+    private Integer durationUpper;
+    private Integer intensityLower;
+    private Integer intensityUpper;
+	private Integer yearsSinceQuittingLower;
+    private Integer yearsSinceQuittingUpper;
 	public TobaccoType tobaccoType;
 	public SmokingStatus smokingStatus;
 
@@ -19,37 +23,68 @@ public class TobaccoConsumptionCriterion {
 
 	}
 
-
-    public Integer getAgeAtInitiation() {
-        return ageAtInitiation;
+    public Integer getAgeAtInitiationLower() {
+        return ageAtInitiationLower;
     }
 
-    public void setAgeAtInitiation(Integer ageAtInitiation) {
-        this.ageAtInitiation = ageAtInitiation;
+    public void setAgeAtInitiationLower(Integer ageAtInitiationLower) {
+        this.ageAtInitiationLower = ageAtInitiationLower;
     }
 
-    public Integer getDuration() {
-        return duration;
+    public Integer getAgeAtInitiationUpper() {
+        return ageAtInitiationUpper;
     }
 
-    public void setDuration(Integer duration) {
-        this.duration = duration;
+    public void setAgeAtInitiationUpper(Integer ageAtInitiationUpper) {
+        this.ageAtInitiationUpper = ageAtInitiationUpper;
     }
 
-    public Integer getIntensity() {
-        return intensity;
+    public Integer getDurationUpper() {
+        return durationUpper;
     }
 
-    public void setIntensity(Integer intensity) {
-        this.intensity = intensity;
+    public void setDurationUpper(Integer durationUpper) {
+        this.durationUpper = durationUpper;
     }
 
-    public Integer getYearsSinceQuitting() {
-        return yearsSinceQuitting;
+    public Integer getDurationLower() {
+        return durationLower;
     }
 
-    public void setYearsSinceQuitting(Integer yearsSinceQuitting) {
-        this.yearsSinceQuitting = yearsSinceQuitting;
+    public void setDurationLower(Integer durationLower) {
+        this.durationLower = durationLower;
+    }
+
+    public Integer getIntensityLower() {
+        return intensityLower;
+    }
+
+    public void setIntensityLower(Integer intensityLower) {
+        this.intensityLower = intensityLower;
+    }
+
+    public Integer getIntensityUpper() {
+        return intensityUpper;
+    }
+
+    public void setIntensityUpper(Integer intensityUpper) {
+        this.intensityUpper = intensityUpper;
+    }
+
+    public Integer getYearsSinceQuittingLower() {
+        return yearsSinceQuittingLower;
+    }
+
+    public void setYearsSinceQuittingLower(Integer yearsSinceQuittingLower) {
+        this.yearsSinceQuittingLower = yearsSinceQuittingLower;
+    }
+
+    public Integer getYearsSinceQuittingUpper() {
+        return yearsSinceQuittingUpper;
+    }
+
+    public void setYearsSinceQuittingUpper(Integer yearsSinceQuittingUpper) {
+        this.yearsSinceQuittingUpper = yearsSinceQuittingUpper;
     }
 
     public TobaccoType getTobaccoType() {

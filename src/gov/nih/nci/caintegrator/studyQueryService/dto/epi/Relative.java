@@ -1,26 +1,30 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
 /**
-  * Author: Ram Bhattaru
-  * Date:   Apr 06, 2007
-  * Time:   5:08:50 PM
-**/
-
+ * @version 1.0
+ * @created 19-Apr-2007 6:23:27 PM
+ */
 public enum Relative {
-	BROTHER("Brother"),
-	FATHER("Father"),
-	GRANDFATHER("GrandFather"),
-	GRANDMOTHER("GrandMother"),
-	MOTHER("Mother"),
-	SISTER("Sister") ;
+	BROTHER(1, "Brother"),
+	FATHER(2, "Father"),
+	GRANDFATHER(3, "Grand Father"),
+	GRANDMOTHER(4, "Grand Mother"),
+	MOTHER(5, "Mother"),
+	SISTER(6, "Sister");
 
-    private String value;
+    final private String name;
+    final private int value;
 
-    Relative(String value) {
-        this.value = value;
+    Relative(int value, String name ) {
+       this.name = name;
+       this.value = value;
+   }
+
+    public String getName() {
+        return name;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 }

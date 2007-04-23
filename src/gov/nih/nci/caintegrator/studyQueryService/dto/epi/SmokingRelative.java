@@ -1,18 +1,16 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
 /**
-  * Author: Ram Bhattaru
-  * Date:   Apr 06, 2007
-  * Time:   5:08:50 PM
-**/
+ * User: Ram Bhattaru
+ * Date: Apr 20, 2007
+ * Time: 11:26:32 AM
+ */
 
 public class SmokingRelative {
 
 	public Relative relative;
 
-	public SmokingRelative(){
-
-	}
+	public SmokingRelative(){}
 
     public Relative getRelative() {
         return relative;

@@ -21,7 +21,8 @@ public enum EducationLevel {
     private final int value;
     private final String name;
 
-    EducationLevel(int key, String name) {
+
+     EducationLevel(int key, String name) {
         this.value = key;
     	this.name = name;
     }

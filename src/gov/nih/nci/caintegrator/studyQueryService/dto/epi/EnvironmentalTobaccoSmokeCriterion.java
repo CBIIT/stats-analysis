@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
   * Author: Ram Bhattaru
@@ -10,35 +10,35 @@ import java.util.List;
 
 public class EnvironmentalTobaccoSmokeCriterion {
 
-    public OccupationalExposure occupationalExposure;
-    public java.util.List smokingExposureCollection;
-    public java.util.List livingCompanionExposureCollection;
+    public java.util.Collection<OccupationalExposure> occupationalExposureCollection;
+    public java.util.Collection<SmokingExposure> smokingExposureCollection;
+    public java.util.Collection<LivingCompanionExposure> livingCompanionExposureCollection;
 
     public EnvironmentalTobaccoSmokeCriterion(){
 
     }
 
-    public OccupationalExposure getOccupationalExposure() {
-        return occupationalExposure;
+    public Collection<OccupationalExposure> getOccupationalExposureCollection() {
+        return occupationalExposureCollection;
     }
 
-    public void setOccupationalExposure(OccupationalExposure occupationalExposure) {
-        this.occupationalExposure = occupationalExposure;
+    public void setOccupationalExposureCollection(Collection<OccupationalExposure> occupationalExposureCollection) {
+        this.occupationalExposureCollection = occupationalExposureCollection;
     }
 
-    public List getSmokingExposureCollection() {
+    public Collection<SmokingExposure> getSmokingExposureCollection() {
         return smokingExposureCollection;
     }
 
-    public void setSmokingExposureCollection(List smokingExposureCollection) {
+    public void setSmokingExposureCollection(Collection<SmokingExposure> smokingExposureCollection) {
         this.smokingExposureCollection = smokingExposureCollection;
     }
 
-    public List getLivingCompanionExposureCollection() {
+    public Collection<LivingCompanionExposure> getLivingCompanionExposureCollection() {
         return livingCompanionExposureCollection;
     }
 
-    public void setLivingCompanionExposureCollection(List livingCompanionExposureCollection) {
+    public void setLivingCompanionExposureCollection(Collection<LivingCompanionExposure> livingCompanionExposureCollection) {
         this.livingCompanionExposureCollection = livingCompanionExposureCollection;
     }
 }

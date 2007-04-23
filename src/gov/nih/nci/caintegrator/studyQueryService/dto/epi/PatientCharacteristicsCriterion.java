@@ -10,10 +10,17 @@ public class PatientCharacteristicsCriterion {
 
 	private Integer ageLowerLimit;
 	private Integer ageUpperLimit;
-	private Float heightInCentiMeters;
-	private Float waistCircumferenceCentiMeters;
-	private Float weightInKilograms;
-	public Gender selfReportedgender;
+	private Float heightLowerLimit;
+    private Float heightUpperLimit;
+    private Float waistLowerLimit;
+    private Float waisUpperLimit;
+    private Float weightLowerLimit;
+    private Float weightUpperLimit;
+
+    // TODO:
+    private ResidentialArea areas;
+
+    public Gender selfReportedgender;
 	public SocioEconomicStatus socioEconomicStatus;
 	public MaritalStatus maritalStatus;
 	public EducationLevel educationLevel;
@@ -38,28 +45,52 @@ public class PatientCharacteristicsCriterion {
         this.ageUpperLimit = ageUpperLimit;
     }
 
-    public Float getHeightInCentiMeters() {
-        return heightInCentiMeters;
+    public Float getHeightLowerLimit() {
+        return heightLowerLimit;
     }
 
-    public void setHeightInCentiMeters(Float heightInCentiMeters) {
-        this.heightInCentiMeters = heightInCentiMeters;
+    public void setHeightLowerLimit(Float heightLowerLimit) {
+        this.heightLowerLimit = heightLowerLimit;
     }
 
-    public Float getWaistCircumferenceCentiMeters() {
-        return waistCircumferenceCentiMeters;
+    public Float getHeightUpperLimit() {
+        return heightUpperLimit;
     }
 
-    public void setWaistCircumferenceCentiMeters(Float waistCircumferenceCentiMeters) {
-        this.waistCircumferenceCentiMeters = waistCircumferenceCentiMeters;
+    public void setHeightUpperLimit(Float heightUpperLimit) {
+        this.heightUpperLimit = heightUpperLimit;
     }
 
-    public Float getWeightInKilograms() {
-        return weightInKilograms;
+    public Float getWaistLowerLimit() {
+        return waistLowerLimit;
     }
 
-    public void setWeightInKilograms(Float weightInKilograms) {
-        this.weightInKilograms = weightInKilograms;
+    public void setWaistLowerLimit(Float waistLowerLimit) {
+        this.waistLowerLimit = waistLowerLimit;
+    }
+
+    public Float getWaisUpperLimit() {
+        return waisUpperLimit;
+    }
+
+    public void setWaisUpperLimit(Float waisUpperLimit) {
+        this.waisUpperLimit = waisUpperLimit;
+    }
+
+    public Float getWeightLowerLimit() {
+        return weightLowerLimit;
+    }
+
+    public void setWeightLowerLimit(Float weightLowerLimit) {
+        this.weightLowerLimit = weightLowerLimit;
+    }
+
+    public Float getWeightUpperLimit() {
+        return weightUpperLimit;
+    }
+
+    public void setWeightUpperLimit(Float weightUpperLimit) {
+        this.weightUpperLimit = weightUpperLimit;
     }
 
     public Gender getSelfReportedgender() {

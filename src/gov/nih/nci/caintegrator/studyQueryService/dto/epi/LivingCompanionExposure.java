@@ -6,51 +6,35 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
   * Time:   5:08:50 PM
 **/
 
-public class LivingCompanionExposure {
+    public class LivingCompanionExposure {
 
-	private Integer hoursPerDayExposed;
-	private Float yearsExposued;
-	public Companion companion;
-	public TobaccoType tobaccoType;
+        private Float hoursPerDayExposed;
+        private Float yearsExposued;
+        public TobaccoType tobaccoType;
 
-	public LivingCompanionExposure(){
+	    public LivingCompanionExposure(){}
 
-	}
+        public Float getHoursPerDayExposed() {
+            return hoursPerDayExposed;
+        }
 
-	public void finalize() throws Throwable {
+        public void setHoursPerDayExposed(Float hoursPerDayExposed) {
+            this.hoursPerDayExposed = hoursPerDayExposed;
+        }
 
-	}
+        public Float getYearsExposued() {
+            return yearsExposued;
+        }
 
-    public Integer getHoursPerDayExposed() {
-        return hoursPerDayExposed;
-    }
+        public void setYearsExposued(Float yearsExposued) {
+            this.yearsExposued = yearsExposued;
+        }
 
-    public void setHoursPerDayExposed(Integer hoursPerDayExposed) {
-        this.hoursPerDayExposed = hoursPerDayExposed;
-    }
+        public TobaccoType getTobaccoType() {
+            return tobaccoType;
+        }
 
-    public Float getYearsExposued() {
-        return yearsExposued;
-    }
-
-    public void setYearsExposued(Float yearsExposued) {
-        this.yearsExposued = yearsExposued;
-    }
-
-    public Companion getCompanion() {
-        return companion;
-    }
-
-    public void setCompanion(Companion companion) {
-        this.companion = companion;
-    }
-
-    public TobaccoType getTobaccoType() {
-        return tobaccoType;
-    }
-
-    public void setTobaccoType(TobaccoType tobaccoType) {
-        this.tobaccoType = tobaccoType;
-    }
-
+        public void setTobaccoType(TobaccoType tobaccoType) {
+            this.tobaccoType = tobaccoType;
+        }
 }

@@ -1,37 +1,32 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
-  * Author: Ram Bhattaru
-  * Date:   Apr 06, 2007
-  * Time:   5:08:50 PM
-**/
-
-
+ * User: Ram Bhattaru
+ * Date: Apr 20, 2007
+ * Time: 11:26:32 AM
+ */
 public class FamilyHistoryCriterion {
 
-    public java.util.List smokingRelativeCollection;
-    public java.util.List relativeMedicalConditionCollection;
+    public java.util.Collection<SmokingRelative>  smokingRelativeCollection;
+    public java.util.Collection<LungCancerRelative> lungCancerRelativeCollection;
 
-    public FamilyHistoryCriterion(){
+    public FamilyHistoryCriterion(){}
 
-    }
-
-
-    public List getRelativeMedicalConditionCollection() {
-        return relativeMedicalConditionCollection;
-    }
-
-    public void setRelativeMedicalConditionCollection(List relativeMedicalConditionCollection) {
-        this.relativeMedicalConditionCollection = relativeMedicalConditionCollection;
-    }
-
-    public List getSmokingRelativeCollection() {
+    public Collection<SmokingRelative> getSmokingRelativeCollection() {
         return smokingRelativeCollection;
     }
 
-    public void setSmokingRelativeCollection(List smokingRelativeCollection) {
+    public void setSmokingRelativeCollection(Collection<SmokingRelative> smokingRelativeCollection) {
         this.smokingRelativeCollection = smokingRelativeCollection;
+    }
+
+    public Collection<LungCancerRelative> getLungCancerRelativeCollection() {
+        return lungCancerRelativeCollection;
+    }
+
+    public void setLungCancerRelativeCollection(Collection<LungCancerRelative> lungCancerRelativeCollection) {
+        this.lungCancerRelativeCollection = lungCancerRelativeCollection;
     }
 }
