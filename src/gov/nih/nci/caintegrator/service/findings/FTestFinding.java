@@ -82,6 +82,10 @@ public class FTestFinding extends AnalysisFinding implements ReporterBasedFindin
 	private Collection<SampleIDDE> samplesNotFound;
 	private Map reporterAnnotationsMap;
 	
+    public FTestFinding() {
+        super(null, null, FindingStatus.Running);
+    }
+    
 	public FTestFinding(String session, String task, FindingStatus status, FTestResult result) {
 		super(session, task, status);
 		setAnalysisResult(result);
