@@ -1,9 +1,10 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
 /**
- * @version 1.0
- * @created 19-Apr-2007 6:23:27 PM
- */
+  * Author: Ram Bhattaru
+  * Date:   Apr 24, 2007
+  * Time:   3:58:50 PM
+**/
 public enum Relative {
 	BROTHER(1, "Brother"),
 	FATHER(2, "Father"),
