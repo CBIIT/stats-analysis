@@ -17,8 +17,8 @@ public class PatientCharacteristicsCriterion {
     private Float weightLowerLimit;
     private Float weightUpperLimit;
 
-    // TODO:
-    private ResidentialArea areas;
+    private ResidentialArea residentialArea;
+    private Religion religion;
 
     public Gender selfReportedgender;
 	public SocioEconomicStatus socioEconomicStatus;
@@ -28,6 +28,22 @@ public class PatientCharacteristicsCriterion {
 	public PatientCharacteristicsCriterion(){
 
 	}
+
+    public ResidentialArea getResidentialArea() {
+        return residentialArea;
+    }
+
+    public void setResidentialArea(ResidentialArea residentialArea) {
+        this.residentialArea = residentialArea;
+    }
+
+    public Religion getReligion() {
+        return religion;
+    }
+
+    public void setReligion(Religion religion) {
+        this.religion = religion;
+    }
 
     public Integer getAgeLowerLimit() {
         return ageLowerLimit;

@@ -9,24 +9,24 @@ import java.util.Collection;
  */
 public class FamilyHistoryCriterion {
 
-    public java.util.Collection<SmokingRelative>  smokingRelativeCollection;
-    public java.util.Collection<LungCancerRelative> lungCancerRelativeCollection;
+    public java.util.Collection<Relative>  smokingRelativeCollection;
+    public java.util.Collection<Relative> lungCancerRelativeCollection;
 
     public FamilyHistoryCriterion(){}
 
-    public Collection<SmokingRelative> getSmokingRelativeCollection() {
+    public Collection<Relative> getSmokingRelativeCollection() {
         return smokingRelativeCollection;
     }
 
-    public void setSmokingRelativeCollection(Collection<SmokingRelative> smokingRelativeCollection) {
+    public void setSmokingRelativeCollection(Collection<Relative> smokingRelativeCollection) {
         this.smokingRelativeCollection = smokingRelativeCollection;
     }
 
-    public Collection<LungCancerRelative> getLungCancerRelativeCollection() {
+    public Collection<Relative> getLungCancerRelativeCollection() {
         return lungCancerRelativeCollection;
     }
 
-    public void setLungCancerRelativeCollection(Collection<LungCancerRelative> lungCancerRelativeCollection) {
+    public void setLungCancerRelativeCollection(Collection<Relative> lungCancerRelativeCollection) {
         this.lungCancerRelativeCollection = lungCancerRelativeCollection;
     }
 }
