@@ -19,10 +19,14 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment mllStatus;
     private ClinicalAssessment e2aStatus;
     private ClinicalAssessment bcrStatus;
+    private ClinicalAssessment event;    
+    private NumericMeasurement timeToEvent;
+    private NumericMeasurement timeToDeath;
+    private ClinicalAssessment siteOfRelapse;
     private NumericMeasurement dnaIndex;
     private NumericMeasurement boneMarrowBlastPercentage;
     private ClinicalAssessment minimumResidualDisease;
-    private ClinicalAssessment peripheralBloodWhiteBloodCount;
+    private NumericMeasurement peripheralBloodWhiteBloodCount;
     private NumericMeasurement peripheralBloodBlastPercentage;
     private TextMeasurement karyotype;
     private gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant studyParticipant;
@@ -128,15 +132,7 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
         this.peripheralBloodBlastPercentage = peripheralBloodBlastPercentage;
     }
 
-    public ClinicalAssessment getPeripheralBloodWhiteBloodCount() {
-        return peripheralBloodWhiteBloodCount;
-    }
-
-    public void setPeripheralBloodWhiteBloodCount(
-            ClinicalAssessment peripheralBloodWhiteBloodCount) {
-        this.peripheralBloodWhiteBloodCount = peripheralBloodWhiteBloodCount;
-    }
-
+   
     public ClinicalAssessment getStratum() {
         return stratum;
     }
@@ -194,4 +190,77 @@ public class LeukemiaClinicalFinding extends ClinicalFinding {
 
         return h;
     }
+
+    /**
+     * @return Returns the event.
+     */
+    public ClinicalAssessment getEvent() {
+        return event;
+    }
+
+    /**
+     * @param event The event to set.
+     */
+    public void setEvent(ClinicalAssessment event) {
+        this.event = event;
+    }
+
+    /**
+     * @return Returns the timeToDeath.
+     */
+    public NumericMeasurement getTimeToDeath() {
+        return timeToDeath;
+    }
+
+    /**
+     * @param timeToDeath The timeToDeath to set.
+     */
+    public void setTimeToDeath(NumericMeasurement timeToDeath) {
+        this.timeToDeath = timeToDeath;
+    }
+
+    /**
+     * @return Returns the timeToEvent.
+     */
+    public NumericMeasurement getTimeToEvent() {
+        return timeToEvent;
+    }
+
+    /**
+     * @param timeToEvent The timeToEvent to set.
+     */
+    public void setTimeToEvent(NumericMeasurement timeToEvent) {
+        this.timeToEvent = timeToEvent;
+    }
+
+    /**
+     * @return Returns the siteOfRelapse.
+     */
+    public ClinicalAssessment getSiteOfRelapse() {
+        return siteOfRelapse;
+    }
+
+    /**
+     * @param siteOfRelapse The siteOfRelapse to set.
+     */
+    public void setSiteOfRelapse(ClinicalAssessment siteOfRelapse) {
+        this.siteOfRelapse = siteOfRelapse;
+    }
+
+    /**
+     * @param peripheralBloodWhiteBloodCount The peripheralBloodWhiteBloodCount to set.
+     */
+    public void setPeripheralBloodWhiteBloodCount(
+            NumericMeasurement peripheralBloodWhiteBloodCount) {
+        this.peripheralBloodWhiteBloodCount = peripheralBloodWhiteBloodCount;
+    }
+
+    /**
+     * @return Returns the peripheralBloodWhiteBloodCount.
+     */
+    public NumericMeasurement getPeripheralBloodWhiteBloodCount() {
+        return peripheralBloodWhiteBloodCount;
+    }
+
+   
 }

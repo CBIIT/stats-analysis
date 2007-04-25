@@ -68,8 +68,8 @@
 			<property name="value" column="RESIDUAL_DISEASE" />
 		</component>
 		<component name="peripheralBloodWhiteBloodCount"
-			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
-			<property name="value" column="WHITE_BLOOD_COUNT" />
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="WHITE_BLOOD_COUNT" />
 		</component>
 		
 		<component name="peripheralBloodBlastPercentage"
@@ -85,6 +85,23 @@
 			class="gov.nih.nci.caintegrator.domain.study.bean.TimeCourse">
 			<property name="name" column="TIME_COURSE" />
 		</component>
+		<component name="event"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="EVENT"/>
+		</component>
+		<component name="timeToEvent"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="TIME_TO_EVENT"/>
+		</component>
+		<component name="timeToDeath"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="TIME_TO_DEATH"/>
+		</component>
+		<component name="siteOfRelapse"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="SITE_OF_RELAPSE"/>
+		</component>
+				
 		<many-to-one name="studyParticipant" class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant" column="PARTICIPANT_ID"  />
 	</class>
 </hibernate-mapping>
