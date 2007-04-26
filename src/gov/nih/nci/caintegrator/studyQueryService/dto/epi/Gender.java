@@ -8,8 +8,8 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
  */
 public enum Gender {
-    MALE(1, "Male"),
-    FEMALE(2, "Female");
+    MALE(1, "MALE"),
+    FEMALE(2, "FEMALE");
 
     private final int value;
     private final String name;
