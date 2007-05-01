@@ -80,6 +80,18 @@ public class GeneralizedLinearModelFinding extends AnalysisFinding implements
 		return idList;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<String> getGroupNames() {
+		if(myResults != null){
+		  List<String> groupNames = new ArrayList<String>();
+		  for(SampleGroup sg : myResults.getSampleGroups())	{
+			  groupNames.add(sg.getGroupName());
+		  }
+		  return groupNames;
+		}
+		return (List<String>)Collections.EMPTY_LIST;
+	}
+	
 	public Map getReporterAnnotationsMap() {
 		return reporterAnnotationsMap;
 	}
