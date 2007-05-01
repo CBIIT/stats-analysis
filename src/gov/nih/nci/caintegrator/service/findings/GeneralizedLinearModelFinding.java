@@ -32,12 +32,6 @@ public class GeneralizedLinearModelFinding extends AnalysisFinding implements
 		setAnalysisResult(result);
 	}
 	
-	public SampleGroup getGroup1() {
-		if(myResults != null){
-			return myResults.getGroup1();
-		}
-		return null;
-	}
 
 	public int getNumResultEntries() {
 		if(myResults != null){
