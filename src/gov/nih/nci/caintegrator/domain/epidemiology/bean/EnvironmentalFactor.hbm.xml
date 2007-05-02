@@ -14,7 +14,7 @@
         lazy="true">
 
 	    <id name="id" 
-	    	column="ID">
+	    	column="ENV_FACTOR_ID">
 	        <generator class="native"/>
 	    </id>
 	    

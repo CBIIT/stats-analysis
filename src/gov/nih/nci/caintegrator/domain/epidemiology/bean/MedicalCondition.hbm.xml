@@ -9,20 +9,18 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="gov.nih.nci.caintegrator.domain.epidemiology.bean.DietaryConsumption" 
-    	table="DIETARY_CONSUMPTION"
+	<class name="gov.nih.nci.caintegrator.domain.epidemiology.bean.MedicalCondition" 
+    	table="MEDICAL_CONDITION"
         lazy="true">
 
 	    <id name="id" 
-	    	column="ID">
+	    	column="MEDICAL_CONDITION_ID">
 	        <generator class="native"/>
 	    </id>
-	    
-        <property name="frequency" 
-        	column="FREQUENCY"/>
+	   
         	
-        <property name="name" 
-        	column="NAME"/>
+        <property name="conditionName" 
+        	column="CONDITION_NAME"/>
 
 
 	</class>

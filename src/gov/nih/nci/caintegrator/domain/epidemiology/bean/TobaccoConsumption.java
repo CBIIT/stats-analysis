@@ -1,5 +1,9 @@
 package gov.nih.nci.caintegrator.domain.epidemiology.bean;
 
+import gov.nih.nci.caintegrator.studyQueryService.dto.epi.SmokingStatus;
+
+import java.util.Collection;
+
 public class TobaccoConsumption {
 
     private Long id;

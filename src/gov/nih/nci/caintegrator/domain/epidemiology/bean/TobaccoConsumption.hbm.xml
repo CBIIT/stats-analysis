@@ -14,7 +14,7 @@
         lazy="true">
 
 	    <id name="id" 
-	    	column="ID">
+	    	column="TOBACCO_CONSUMPTION_ID">
 	        <generator class="native"/>
 	    </id>
 	    
@@ -35,7 +35,6 @@
         	
         <property name="yearsSinceQuitting" 
         	column="YEARS_SINCE_QUITTING"/>
-
 
 	</class>
 </hibernate-mapping>

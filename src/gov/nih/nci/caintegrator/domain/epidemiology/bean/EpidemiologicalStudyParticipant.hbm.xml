@@ -18,22 +18,18 @@
 
        <!-- id -->
        <id name="id" 
-           column="ID">
-           <generator class="assigned" />
+           column="EPI_STUDY_PARTICIPANT_ID">
+           <generator class="native" />
        </id>
 
         <property name="caseControlStatus"
                  type="java.lang.String"
-                 column="CASE_CONTROL_STATUS"
-                 insert="false"
-                 update="false" />
+                 column="CASE_CONTROL_STATUS"/>
 
         <!-- administrativeGenderCode -->        
        <property name="administrativeGenderCode" 
                  type="java.lang.String" 
-                 column="GENDER" 
-                 insert="false" 
-                 update="false" />
+                 column="GENDER" />
                  
        <!-- ageAtDiagnosis
        <property name="ageAtDiagnosis" 
@@ -43,72 +39,59 @@
                  update="false" /> -->
 
        <component name="ageAtDiagnosis" class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement"> 
-            <property name="absoluteValue" column="AGE_AT_DIAGNOSIS" insert="false" update="false"/>
-            <property name="minValue" column="AGE_AT_DIAGNOSIS_MIN" insert="false" update="false"/>
-            <property name="maxValue" column="AGE_AT_DIAGNOSIS_MAX" insert="false" update="false"/>
+            <property name="absoluteValue" column="AGE_AT_DIAGNOSIS" />
+            <property name="minValue" column="AGE_AT_DIAGNOSIS_MIN" />
+            <property name="maxValue" column="AGE_AT_DIAGNOSIS_MAX" />
        </component>
 
        <component name="ageAtDeath" class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement"> 
-            <property name="absoluteValue" column="AGE_AT_DEATH" insert="false" update="false"/>
-            <property name="minValue" column="AGE_AT_DEATH_MIN" insert="false" update="false"/>
-            <property name="maxValue" column="AGE_AT_DEATH_MAX" insert="false" update="false"/>
+            <property name="absoluteValue" column="AGE_AT_DEATH" />
+            <property name="minValue" column="AGE_AT_DEATH_MIN" />
+            <property name="maxValue" column="AGE_AT_DEATH_MAX" />
        </component>
 
        <component name="ageAtEnrollment" class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement"> 
-            <property name="absoluteValue" column="AGE_AT_ENROLL" insert="false" update="false"/>
-            <property name="minValue" column="AGE_AT_ENROLL_MIN" insert="false" update="false"/>
-            <property name="maxValue" column="AGE_AT_ENROLL_MAX" insert="false" update="false"/>
+            <property name="absoluteValue" column="AGE_AT_ENROLL" />
+            <property name="minValue" column="AGE_AT_ENROLL_MIN" />
+            <property name="maxValue" column="AGE_AT_ENROLL_MAX" />
        </component>
              
        
         <!-- daysOnStudy -->                 
         <property name="daysOnStudy" 
                  type="java.lang.Integer" 
-                 column="DAYS_ON_STUDY" 
-                 insert="false" 
-                 update="false" />
+                 column="DAYS_ON_STUDY"  />
                  
         <!-- ethnicGroupCode -->                 
         <property name="ethnicGroupCode" 
                  type="java.lang.String" 
-                 column="ETHNIC_GROUP_CODE" 
-                 insert="false" 
-                 update="false" />
+                 column="ETHNIC_GROUP_CODE"  />
                  
         <!-- familyHistory -->                 
         <property name="familyHistory" 
                  type="java.lang.String" 
-                 column="FAMILY_HISTORY" 
-                 insert="false" 
-                 update="false" />
+                 column="FAMILY_HISTORY" />
                  
         <!-- institutionName -->                 
         <property name="institutionName" 
                  type="java.lang.String" 
-                 column="INSTITUTION_NAME" 
-                 insert="false" 
-                 update="false" />
+                 column="INSTITUTION_NAME"  />
                  
         <!-- offStudyDate -->                 
         <property name="daysOffStudy" 
                  type="java.lang.Integer" 
-                 column="DAYS_OFF_STUDY" 
-                 insert="false" 
-                 update="false" />
+                 column="DAYS_OFF_STUDY" />
                  
         <!-- raceCode -->                 
         <property name="raceCode" 
                  type="java.lang.String" 
                  column="RACE_CODE" 
-                 insert="false" 
-                 update="false" />
+                  />
                  
         <!-- studySubjectIdentifier -->                 
         <property name="studySubjectIdentifier" 
-                 type="java.lang.String" 
                  column="PARTICIPANT_DID" 
-                 insert="false" 
-                 update="false" />     
+                  />     
                              
         <property name="weight" 
                  column="WEIGHT" />    
@@ -121,10 +104,8 @@
                 
 	     <!--  survivalStatus -->                 
         <property name="survivalStatus" 
-                 type="java.lang.String"
                  column="SURVIVAL_STATUS"
-                 insert="false" 
-                 update="false" />                 
+                  />                 
                  
      <!--  TSP Specimen ID               
         <property name="tspSpecimenId" 
@@ -136,9 +117,7 @@
         <!--  isOffStudy -->                 
         <property name="isOffStudy"
                  type="org.hibernate.type.YesNoType"
-                 column="OFF_STUDY"
-                 insert="false" 
-                 update="false" />
+                 column="OFF_STUDY" />
          
       <!-- here is for m-m relationships --> 
       
@@ -177,12 +156,13 @@
       <one-to-many class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding" />
     </set>  
    
-
+<!-- 
     <set name="dietaryConsumptionCollection" lazy="true" inverse="true">
       <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.DietaryConsumption" />
     </set>  
-    <set name="tobaccoConsumptionCollection" lazy="true" inverse="true">
+    -->
+    <set name="tobaccoConsumptionCollection" lazy="true"  cascade="all">
       <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.TobaccoConsumption" />
     </set>  
