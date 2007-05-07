@@ -27,7 +27,6 @@ public class EPIQueryDTO implements QueryDTO {
     public java.util.List dietaryConsumptionCriterionCollection;
     public PatientCharacteristicsCriterion patientCharacteristicsCriterion;
     public TobaccoConsumptionCriterion tobaccoConsumptionCriterion;
-    public TobaccoDependencyCriterion tobaccoDependencyCriterion;
 
     public EPIQueryDTO(){
 
@@ -79,13 +78,5 @@ public class EPIQueryDTO implements QueryDTO {
 
     public void setTobaccoConsumptionCriterion(TobaccoConsumptionCriterion tobaccoConsumptionCriterion) {
         this.tobaccoConsumptionCriterion = tobaccoConsumptionCriterion;
-    }
-
-    public TobaccoDependencyCriterion getTobaccoDependencyCriterion() {
-        return tobaccoDependencyCriterion;
-    }
-
-    public void setTobaccoDependencyCriterion(TobaccoDependencyCriterion tobaccoDependencyCriterion) {
-        this.tobaccoDependencyCriterion = tobaccoDependencyCriterion;
     }
 }

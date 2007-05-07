@@ -7,18 +7,18 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 **/
 
 public enum ResidentialArea {
-    AREA1(1, "area-1"),
-    AREA2(2, "area-2");
+    ITALY("Italy", "Italy"),
+    USA("USA", "USA");
 
-    private final int value;
+    private final String value;
     private final String name;
 
-    ResidentialArea(int key, String name) {
+    ResidentialArea(String key, String name) {
             this.value = key;
             this.name = name;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 

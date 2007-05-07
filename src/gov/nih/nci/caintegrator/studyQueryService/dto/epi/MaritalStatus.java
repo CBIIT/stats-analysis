@@ -7,17 +7,17 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
  * Time: 5:24:07 PM
  */
 public enum MaritalStatus {
-    MARRIED(1,"Married"),
-    COHABITING(2,"Cohabiting"),
-    SEPARATED(3,"Separated"),
-    WIDOWED(4,"Widowed"),
-    DIVORCED(5,"Divorced"),
-    SINGLE(6,"Single");
+    MARRIED("Married","Married"),
+    COHABITING("Cohabiting","Cohabiting"),
+    SEPARATED("Separated","Separated"),
+    WIDOWED("Widowed","Widowed"),
+    DIVORCED("Divorced","Divorced"),
+    SINGLE("Single","Single");
 
-    private final int value;
+    private final String value;
     private final String name;
 
-    MaritalStatus(int key, String name) {
+    MaritalStatus(String key, String name) {
         this.value = key;
     	this.name = name;
     }
@@ -26,7 +26,7 @@ public enum MaritalStatus {
         return name;
     }
 
-    public int getValue()	{
+    public String getValue()	{
     	return value;
     }
 

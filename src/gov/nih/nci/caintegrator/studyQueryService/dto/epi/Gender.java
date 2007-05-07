@@ -8,13 +8,13 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
  */
 public enum Gender {
-    MALE(1, "MALE"),
-    FEMALE(2, "FEMALE");
+    MALE("MALE", "Male"),
+    FEMALE("FEMALE", "Female");
 
-    private final int value;
+    private final String value;
     private final String name;
 
-    Gender(int key, String name) {
+    Gender(String key, String name) {
         this.value = key;
     	this.name = name;
     }
@@ -23,7 +23,7 @@ public enum Gender {
         return name;
     }
 
-    public int getValue()	{
+    public String getValue()	{
     	return value;
     }
 

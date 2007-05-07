@@ -12,8 +12,8 @@ public class TobaccoConsumptionCriterion {
     private Integer ageAtInitiationUpper;
     private Integer durationLower;
     private Integer durationUpper;
-    private Integer intensityLower;
-    private Integer intensityUpper;
+    private Double intensityLower;
+    private Double intensityUpper;
 	private Integer yearsSinceQuittingLower;
     private Integer yearsSinceQuittingUpper;
 	public TobaccoType tobaccoType;
@@ -55,19 +55,19 @@ public class TobaccoConsumptionCriterion {
         this.durationLower = durationLower;
     }
 
-    public Integer getIntensityLower() {
+    public Double getIntensityLower() {
         return intensityLower;
     }
 
-    public void setIntensityLower(Integer intensityLower) {
+    public void setIntensityLower(Double intensityLower) {
         this.intensityLower = intensityLower;
     }
 
-    public Integer getIntensityUpper() {
+    public Double getIntensityUpper() {
         return intensityUpper;
     }
 
-    public void setIntensityUpper(Integer intensityUpper) {
+    public void setIntensityUpper(Double intensityUpper) {
         this.intensityUpper = intensityUpper;
     }
 

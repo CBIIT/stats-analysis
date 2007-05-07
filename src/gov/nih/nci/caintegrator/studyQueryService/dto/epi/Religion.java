@@ -8,18 +8,18 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
  */
 public enum Religion {
-    NONE(1, "None"),
-    CATHOLIC(2, "Catholic"),
-    JEWISH(3,"Jewish"),
-    MOSLEM(4,"Moslem"),
-    PROTESTANT(5,"Protestant"),
-    OTHER(6,"Other"),
-    DONT_KNOW(7,"Don't know");
+    NONE("None", "None"),
+    CATHOLIC("Catholic", "Catholic"),
+    JEWISH("Jewish","Jewish"),
+    MOSLEM("Moslem","Moslem"),
+    PROTESTANT("Protestant","Protestant"),
+    OTHER("Other","Other"),
+    DONT_KNOW("Don't know","Don't know");
 
-    private final int value;
+    private final String value;
     private final String name;
 
-    Religion(int key, String name) {
+    Religion(String key, String name) {
         this.value = key;
     	this.name = name;
     }
@@ -28,7 +28,7 @@ public enum Religion {
         return name;
     }
 
-    public int getValue()	{
+    public String getValue()	{
     	return value;
     }
 

@@ -8,14 +8,19 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
 public class PatientCharacteristicsCriterion {
 
-	private Integer ageLowerLimit;
-	private Integer ageUpperLimit;
-	private Float heightLowerLimit;
-    private Float heightUpperLimit;
-    private Float waistLowerLimit;
-    private Float waisUpperLimit;
-    private Float weightLowerLimit;
-    private Float weightUpperLimit;
+	private Double ageLowerLimit;
+
+    public void setAgeLowerLimit(Double ageLowerLimit) {
+        this.ageLowerLimit = ageLowerLimit;
+    }
+
+    private Double ageUpperLimit;
+	private Double heightLowerLimit;
+    private Double heightUpperLimit;
+    private Double waistLowerLimit;
+    private Double waisUpperLimit;
+    private Double weightLowerLimit;
+    private Double weightUpperLimit;
 
     private ResidentialArea residentialArea;
     private Religion religion;
@@ -45,67 +50,63 @@ public class PatientCharacteristicsCriterion {
         this.religion = religion;
     }
 
-    public Integer getAgeLowerLimit() {
+    public Double getAgeLowerLimit() {
         return ageLowerLimit;
     }
 
-    public void setAgeLowerLimit(Integer ageLowerLimit) {
-        this.ageLowerLimit = ageLowerLimit;
-    }
-
-    public Integer getAgeUpperLimit() {
+    public Double getAgeUpperLimit() {
         return ageUpperLimit;
     }
 
-    public void setAgeUpperLimit(Integer ageUpperLimit) {
+    public void setAgeUpperLimit(Double ageUpperLimit) {
         this.ageUpperLimit = ageUpperLimit;
     }
 
-    public Float getHeightLowerLimit() {
+    public Double getHeightLowerLimit() {
         return heightLowerLimit;
     }
 
-    public void setHeightLowerLimit(Float heightLowerLimit) {
+    public void setHeightLowerLimit(Double heightLowerLimit) {
         this.heightLowerLimit = heightLowerLimit;
     }
 
-    public Float getHeightUpperLimit() {
+    public Double getHeightUpperLimit() {
         return heightUpperLimit;
     }
 
-    public void setHeightUpperLimit(Float heightUpperLimit) {
+    public void setHeightUpperLimit(Double heightUpperLimit) {
         this.heightUpperLimit = heightUpperLimit;
     }
 
-    public Float getWaistLowerLimit() {
+    public Double getWaistLowerLimit() {
         return waistLowerLimit;
     }
 
-    public void setWaistLowerLimit(Float waistLowerLimit) {
+    public void setWaistLowerLimit(Double waistLowerLimit) {
         this.waistLowerLimit = waistLowerLimit;
     }
 
-    public Float getWaisUpperLimit() {
+    public Double getWaisUpperLimit() {
         return waisUpperLimit;
     }
 
-    public void setWaisUpperLimit(Float waisUpperLimit) {
+    public void setWaisUpperLimit(Double waisUpperLimit) {
         this.waisUpperLimit = waisUpperLimit;
     }
 
-    public Float getWeightLowerLimit() {
+    public Double getWeightLowerLimit() {
         return weightLowerLimit;
     }
 
-    public void setWeightLowerLimit(Float weightLowerLimit) {
+    public void setWeightLowerLimit(Double weightLowerLimit) {
         this.weightLowerLimit = weightLowerLimit;
     }
 
-    public Float getWeightUpperLimit() {
+    public Double getWeightUpperLimit() {
         return weightUpperLimit;
     }
 
-    public void setWeightUpperLimit(Float weightUpperLimit) {
+    public void setWeightUpperLimit(Double weightUpperLimit) {
         this.weightUpperLimit = weightUpperLimit;
     }
 
@@ -141,4 +142,5 @@ public class PatientCharacteristicsCriterion {
         this.educationLevel = educationLevel;
     }
 
+    
 }
