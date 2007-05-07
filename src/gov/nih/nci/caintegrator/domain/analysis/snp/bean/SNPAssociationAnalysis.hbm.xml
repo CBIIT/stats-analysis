@@ -47,7 +47,12 @@
                  insert="false" 
                  update="false" />        
                  
-     
+     <!-- analysisCode  -->
+            <property name="analysisCode" 
+                 type="java.lang.String" 
+                 column="ASSO_ANALYSIS_CODE" 
+                 insert="false" 
+                 update="false" />    
 	
      
       <!-- here is for 1-m relationships -->  

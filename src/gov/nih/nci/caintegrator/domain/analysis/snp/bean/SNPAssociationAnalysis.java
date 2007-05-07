@@ -181,5 +181,22 @@ public  class SNPAssociationAnalysis
     public void setAnalysisGroupCollection(Set<gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup> analysisGroupCollection){
         this.analysisGroupCollection = analysisGroupCollection;
     }
+    /**
+     * Representation of the analysis method code
+     * 
+     */
 
+      private String analysisCode ;
+	/**
+	 * @return Returns the analysisCode.
+	 */
+	public String getAnalysisCode() {
+		return analysisCode;
+	}
+	/**
+	 * @param analysisCode The analysisCode to set.
+	 */
+	public void setAnalysisCode(String analysisCode) {
+		this.analysisCode = analysisCode;
+	}
 }
