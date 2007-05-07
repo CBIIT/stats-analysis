@@ -19,6 +19,7 @@
         
        <!-- id -->
        <id name="id" 
+           type="java.lang.Long" 
            column="SPECIMEN_ID">
            <generator class="assigned" />
        </id>
@@ -34,7 +35,7 @@
        <!-- specimenIdentifier -->                 
        <property name="specimenIdentifier" 
                  type="java.lang.String" 
-                 column="SPECIMEN_ID" 
+                 column="SPECIMEN_ID_C" 
                  insert="false" 
                  update="false" />                 
      
@@ -65,7 +66,7 @@
     
      <many-to-one name="studyParticipant"
                 class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant"
-                column="PARTICIPANT_DID" />
+                column="PARTICIPANT_ID" />
  
     
     <!--  1-1 relationship -->
