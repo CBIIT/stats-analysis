@@ -36,7 +36,6 @@
 	<classpathentry kind="lib" path="deployed_jars/jdom.jar"/>
 	<classpathentry kind="lib" path="deployed_jars/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="deployed_jars/aspectjweaver.jar"/>
-	<classpathentry kind="lib" path="deployed_jars/CSM_API_rel_3.1.zip"/>
 	<classpathentry kind="lib" path="deployed_jars/jcommon-1.0.0-rc1.jar"/>
 	<classpathentry kind="lib" path="deployed_jars/spring.jar"/>
 	<classpathentry kind="lib" path="deployed_jars/spring-aspects.jar"/>
