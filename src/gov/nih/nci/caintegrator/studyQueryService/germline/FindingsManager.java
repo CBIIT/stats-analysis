@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisMethod;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
@@ -132,5 +133,15 @@ public class FindingsManager {
 
     public Collection<Integer> getAgeUpperLimitValues(StudyCriteria studyCrit) {
         return objectQueryHandler.getAgeUpperLimitValues( studyCrit);
+    }
+    
+    public List<SNPAnalysisMethod> getSNPAnalysisMethods (StudyCriteria studyCrit,String analysisMethodType){
+    	return objectQueryHandler.getSNPAnalysisMethods(studyCrit, analysisMethodType);
+    }
+    public List<SNPAnalysisMethod> getSNPAnalysisMethods (StudyCriteria studyCrit){
+    	return objectQueryHandler.getSNPAnalysisMethods(studyCrit, null);
+    }
+    public List<String> getAnalysisMethodTypes (StudyCriteria studyCrit){
+    	return objectQueryHandler.getAnalysisMethodTypes(studyCrit);
     }
 }

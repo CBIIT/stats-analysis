@@ -62,6 +62,13 @@
          <many-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Study"
                        column="STUDY_NAME" />
       </set>  
+      
+      <set name="studyParticipantCollection" table="STD_PARTICIPANT_POPULATION_AS" lazy="true">
+         <cache usage="read-write" />
+         <key column="POPULATION_ID" />
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant"
+                       column="PARTICIPANT_DID" />
+      </set>  
                 
      
     <!-- here is for 1-m relationships -->  
@@ -72,11 +79,13 @@
       <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding" />
     </set>     
     
-   <set name="studyParticipantCollection" lazy="true" inverse="true">
+  <!--  <set name="studyParticipantCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
       <key column="POPULATION_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant" />
-    </set>   	   
+    </set>   
+    
+    -->	   
       
       
 	</class>

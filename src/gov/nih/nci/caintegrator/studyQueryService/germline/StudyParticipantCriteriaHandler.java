@@ -99,7 +99,7 @@ public class StudyParticipantCriteriaHandler {
      * @return  List of Specimens
      */
 
-    public static List<String> retrieveSpecimens(StudyParticipantCriteria spCrit, Session session) {
+    public static List<Long> retrieveSpecimens(StudyParticipantCriteria spCrit, Session session) {
         if (spCrit == null) return null; // indicating that this crit can be ignored in the calling method
         HashMap params = new HashMap();  // to hold HQL Parameters
 
@@ -146,7 +146,7 @@ public class StudyParticipantCriteriaHandler {
 //                && analysisGroupJoin.length() < 1 )
 //            return null;
         StringBuffer hql = getSpecimenHQLWithParams(spCrit, session, params);
-        List<String> specimenIDs = null;
+        List<Long> specimenIDs = null;
         if (hql != null) {
             Query q = session.createQuery(hql.toString());
             HQLHelper.setParamsOnQuery(params, q);
@@ -334,8 +334,8 @@ public class StudyParticipantCriteriaHandler {
         if (popCrit != null) {
             Collection<String> popNames = popCrit.getNames();
             if (popNames != null && popNames.size() > 0) {
-                populationJoin.append(" JOIN sp.population ");
-                spHQL.append("sp.population.name IN (:popNames) AND ");
+                populationJoin.append(" JOIN sp.populationCollection ");
+                spHQL.append("sp.populationCollection.name IN (:popNames) AND ");
                 params.put("popNames", popNames);
             }
         }

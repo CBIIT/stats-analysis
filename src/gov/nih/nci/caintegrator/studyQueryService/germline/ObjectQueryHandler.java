@@ -1,5 +1,6 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisMethod;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
@@ -14,7 +15,6 @@ import gov.nih.nci.caintegrator.util.HQLHelper;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.*;
-import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -42,6 +42,7 @@ public class ObjectQueryHandler {
     private  Set<Integer> ageLowerLimits = null;
     private  Set<Integer> ageUpperLimits = null;
     private  TreeSet<Study> allStudyObjects = null;
+    private  Set<String> analysisMethodTypes = null;
 
     public ObjectQueryHandler() { }
 
@@ -364,4 +365,53 @@ public class ObjectQueryHandler {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+    
+    @SuppressWarnings("unchecked")
+	public List<String> getAnalysisMethodTypes (StudyCriteria studyCrit){
+    	if (studyCrit == null || studyCrit.getName() == null) return new ArrayList<String>();
+       	String studyName = studyCrit.getName();
+       	analysisMethodTypes = new HashSet<String>();
+        Session session = getSessionFactory().getCurrentSession();
+        HashMap params = new HashMap();
+        String sql = "SELECT ANALYSIS_METHOD_TYPE FROM SNP_ANALYSIS_LU WHERE STUDY_NAME = :studyName ORDER BY DISPLAY_ORDER";
+        params.put("studyName", studyName);
+        Query q = session.createSQLQuery(sql);
+        HQLHelper.setParamsOnQuery(params, q);
+        List<String> values = q.list();
+        if(values != null){
+        analysisMethodTypes.addAll(values);
+        return new ArrayList<String>(analysisMethodTypes);
+        }
+        else
+        	return Collections.EMPTY_LIST;
+    }
+    public List<SNPAnalysisMethod> getSNPAnalysisMethods (StudyCriteria studyCrit,String analysisMethodType){
+    	String studyName = studyCrit.getName();
+        assert(studyName != null);
+        Session session = getSessionFactory().getCurrentSession();
+        HashMap params = new HashMap();
+        StringBuffer sponsorJoin = new StringBuffer("");
+
+        StringBuffer hql =new StringBuffer(" FROM SNPAnalysisMethod sm " +
+                " WHERE sm.studyName=:studyName AND {0} ORDER BY sm.displayOrder");
+        params.put("studyName", studyName);
+
+        String nameJoin = new String(" ( 0 = 0 ) ");
+        if (analysisMethodType != null  && analysisMethodType.length() > 0) {
+                nameJoin = new String(" sm.methodType IN (:analysisMethodType) ");
+                params.put("analysisMethodType", analysisMethodType);
+            }
+
+        String tempHQL = MessageFormat.format(hql.toString(), new Object[] {nameJoin});
+        String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "AND");
+        Query q = session.createQuery(finalHQL);
+        HQLHelper.setParamsOnQuery(params, q);
+        Collection<SNPAnalysisMethod> results = q.list();
+        if(results != null){
+        	return new ArrayList<SNPAnalysisMethod>(results);
+	    }
+	    else
+	    	return Collections.EMPTY_LIST;
+	    }
+    
 }

@@ -315,22 +315,23 @@ public  class StudyParticipant
    * 
    */
 
-    private gov.nih.nci.caintegrator.domain.study.bean.Population population;
-      /**
+    private Set <gov.nih.nci.caintegrator.domain.study.bean.Population> populationCollection = new HashSet<gov.nih.nci.caintegrator.domain.study.bean.Population>();
+
+   /**
    * Groups of subjects based on self-described ethnic groupings and phenotypic ascertainment scheme. 
    * 
    */
 
-    public gov.nih.nci.caintegrator.domain.study.bean.Population getPopulation(){
-        return population;			
+    public Set <gov.nih.nci.caintegrator.domain.study.bean.Population> getPopulationCollection(){
+        return populationCollection;			
     }
 
 	      
 	               
 	   
 
-    public void setPopulation(gov.nih.nci.caintegrator.domain.study.bean.Population population){
-        this.population = population;
+    public void setPopulationCollection(Set<gov.nih.nci.caintegrator.domain.study.bean.Population> populationCollection){
+        this.populationCollection = populationCollection;
     }	
 	   
 	   

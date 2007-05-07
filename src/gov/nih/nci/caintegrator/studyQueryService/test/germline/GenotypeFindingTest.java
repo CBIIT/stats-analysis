@@ -33,10 +33,14 @@ public class GenotypeFindingTest extends CGEMSTest {
    // protected AnnotationCriteria annotCrit;
     private GenotypeFindingCriteriaDTO gfDTO;
    // protected static int TOTAL_FINDINGS = 0;
+    protected String[] studyNames = {"CGEMS Prostate Cancer WGAS Phase 1A","CGEMS Prostate Cancer WGAS Phase 1","CGEMS Breast Cancer WGAS Phase 1"};
+    
 
 
     public void setUp() throws Exception {
         super.setUp();
+   	
+
         //gfDTO = new GenotypeFindingCriteriaDTO(studyCrit);
         gfDTO = (GenotypeFindingCriteriaDTO) ctx.getBean("genotypeFindingsCriteria");
         gfDTO.setStudyCriteria(studyCrit);

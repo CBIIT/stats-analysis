@@ -136,11 +136,16 @@
       
       <set name="analysisGroupCollection" table="STDPT_ANALYSIS_GRP_AS" lazy="true">
          <cache usage="read-write" />
-         <key column="PARTICIPANT_DID" />
+         <key column="PARTICIPANT_ID" />
          <many-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup"
                 column="ANA_GRP_ID" />
-      </set>      
-
+      </set>  
+      <set name="populationCollection" table="STD_PARTICIPANT_POPULATION_AS" lazy="true">
+         <cache usage="read-write" />
+         <key column="PARTICIPANT_ID" />
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Population"
+                column="POPULATION_ID" />
+      </set>          
       
       <!--  check with Srini-->
 <!--   TODO: Fix this: Ram
@@ -160,12 +165,12 @@
  
      <set name="specimenCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
-      <key column="PARTICIPANT_DID" />
+      <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Specimen" />
     </set>  
     
     <set name="clinicalFindingCollection" lazy="true" inverse="true">
-      <key column="PARTICIPANT_DID" />
+      <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding" />
     </set>  
    
@@ -177,10 +182,12 @@
     </set>  
     -->
     
-     <!-- here is for m-1 relationships -->  
+     <!-- here is for m-1 relationships -->       
       <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.bean.Study" column="STUDY_NAME"  />
+      <!-- commenteed by Himanso 5/1
       <many-to-one name="population" class="gov.nih.nci.caintegrator.domain.study.bean.Population" column="POPULATION_ID"
               lazy = "false"  />
+      -->
                  
 	</class>
 </hibernate-mapping>

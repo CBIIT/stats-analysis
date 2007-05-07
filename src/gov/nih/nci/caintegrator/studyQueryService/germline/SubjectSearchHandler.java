@@ -38,7 +38,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	public Collection<StudyParticipant> getStudySubjects(StudyParticipantCriteria spCrit,
                                                             int fromIndex, int toIndex) {
 		   Session session = getSessionFactory().getCurrentSession();
-	       List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
+	       List<Long> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
 	       List<StudyParticipant> subjects = new ArrayList<StudyParticipant>();
 	       HashSet<StudyParticipant> subjectsSet = new HashSet<StudyParticipant>();
 	       Criteria crit = null;
@@ -47,7 +47,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	           /* meanse either StudyParticipantCriteria  is null or no StudyParticipantCriteria
 	              attributes are mentioned.  So ignore StudyParticipantCriteria and return all StudyParticipant* */
 	           crit = session.createCriteria(StudyParticipant.class).
-	                            setFetchMode("population", FetchMode.EAGER);
+	                            setFetchMode("populationCollection", FetchMode.EAGER);
 	           crit.setFirstResult(fromIndex);
 	           crit.setMaxResults(toIndex - fromIndex);
 	           List<StudyParticipant> list = crit.list();
@@ -61,17 +61,17 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	       }
 	        /*  means  specimens.size() > 0 so retrieve StudyPartipants beased on the Specimens */
 	       else  if (specimenIDs != null && specimenIDs.size() > 0) {
-	             ArrayList<String> arrayIDs = new ArrayList<String>(specimenIDs);
+	             ArrayList<Long> arrayIDs = new ArrayList<Long>(specimenIDs);
 	             for (int i = 0; i < arrayIDs.size();) {
-	                 List<String> values = new ArrayList<String>();
+	                 List<Long> values = new ArrayList<Long>();
 	                 int begIndex = i;
 	                 i += BatchFindingsHandler.IN_PARAMETERS ;
 	                 int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
 	                 values.addAll(arrayIDs.subList(begIndex,  lastIndex));
 	                 crit = session.createCriteria(StudyParticipant.class).
 	                                   createAlias("specimenCollection", "specimens").
-	                                   setFetchMode("population", FetchMode.EAGER).
-	                                   add(Restrictions.in("specimens.specimenIdentifier", values));
+	                                   setFetchMode("populationCollection", FetchMode.EAGER).
+	                                   add(Restrictions.in("specimens.id", values));
 	                 //crit.uniqueResult();
 	                 crit.setFirstResult(0);
 	                 crit.setMaxResults(toIndex - fromIndex);
@@ -94,7 +94,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
     public void populateFindings(StudyParticipantCriteria spCrit, List toBePopulated) {
 		   Session session = getSessionFactory().getCurrentSession();
 
-	       List<String> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
+	       List<Long> specimenIDs = StudyParticipantCriteriaHandler.retrieveSpecimens(spCrit, session);
 
 	       /* if (specimenIDs == null) either StudyParticipantCriteria  is null or no StudyParticipantCriteria
 	          attributes are mentioned.  So ignore StudyParticipantCriteria and return all subjects */
@@ -114,21 +114,21 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	            sendFindingsWithAnnotationCriteria(specimenIDs, session, toBePopulated);
 	       }
     }
-    private void sendFindingsWithAnnotationCriteria(Collection<String> specimenIDs,
+    private void sendFindingsWithAnnotationCriteria(Collection<Long> specimenIDs,
                                                     Session session, List toBePopulated) {
         List<StudyParticipant> subjects = new ArrayList<StudyParticipant>();
         HashSet<StudyParticipant> subjectsSet = new HashSet<StudyParticipant>();
-        ArrayList<String> arrayIDs = new ArrayList<String>(specimenIDs);
+        ArrayList<Long> arrayIDs = new ArrayList<Long>(specimenIDs);
         for (int i = 0; i < arrayIDs.size();) {
-            List<String> values = new ArrayList<String>();
+            List<Long> values = new ArrayList<Long>();
             int begIndex = i;
             i += BatchFindingsHandler.IN_PARAMETERS ;
             int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
             values.addAll(arrayIDs.subList(begIndex,  lastIndex));
             Criteria crit  = session.createCriteria(StudyParticipant.class).
                               createAlias("specimenCollection", "specimens").
-                              setFetchMode("population", FetchMode.EAGER).
-                              add(Restrictions.in("specimens.specimenIdentifier", values));
+                              setFetchMode("populationCollection", FetchMode.EAGER).
+                              add(Restrictions.in("specimens.id", values));
 
             Collection<StudyParticipant> currentFindings = executeBatchSearch(
                                                                     crit, -1, -1);
@@ -158,7 +158,7 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 
     private void sendFindingsWithoutAnnotationCriteria( Session session, List toBePopulated ) {
          Criteria crit = session.createCriteria(StudyParticipant.class).
-                         setFetchMode("population", FetchMode.EAGER);
+                         setFetchMode("populationCollection", FetchMode.EAGER);
 
          Collection findings = null;
          int start = 0;

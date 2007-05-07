@@ -2,6 +2,7 @@ package gov.nih.nci.caintegrator.studyQueryService.test.germline;
 
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsManager;
 import gov.nih.nci.caintegrator.studyQueryService.germline.FindingsHandler;
+import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 
 import java.util.*;
@@ -54,7 +55,12 @@ public class SubjectSearchTest extends CGEMSTest {
                 System.out.println("AGE (PLEASE CONFIRM THIS - WHICH AGE -): " + subject.getAgeAtEnrollment());
                 System.out.println("AFFECTION STATUS: (PLEASE CONFIRM THIS -): " + subject.getSurvivalStatus());
                 System.out.println("FAMILY HISTORY: " + subject.getFamilyHistory());
-                System.out.println("Population Name: "+ subject.getPopulation().getName());
+                Collection<Population> populationCollection =  subject.getPopulationCollection();
+                if(populationCollection != null){
+                	for(Population population:populationCollection){
+                			System.out.println("Population Name: "+ population.getName());     
+                	}
+                }
                 if (subject.getAgeAtEnrollment() != null)
                     System.out.println("Enroll Age:" + subject.getAgeAtEnrollment().getAbsoluteValue());
             }

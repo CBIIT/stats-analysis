@@ -19,7 +19,7 @@
         
        <!-- id -->
        <id name="id" 
-           column="GENE_ID">
+           column="GENE_DIM_ID">
            <generator class="assigned" />
        </id>
        
@@ -62,12 +62,12 @@
        -->                  
      
        <!-- entrezGeneID -->                 
-        <!--  <property name="entrezGeneID" 
+        <property name="entrezGeneID" 
                  type="java.lang.String" 
-                 column="ENTREZ_GENE_ID" 
+                 column="GENE_ID" 
                  insert="false" 
                  update="false" />     
-         -->               
+                     
      
       <!-- here is for m-m relationships -->      
       
