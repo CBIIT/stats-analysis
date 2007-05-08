@@ -178,8 +178,12 @@
     
      <!-- here is for m-1 relationships -->  
       <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.bean.Study" column="STUDY_NAME"  />
-      <many-to-one name="population" class="gov.nih.nci.caintegrator.domain.study.bean.Population" column="POPULATION_ID"
-              lazy = "false"  />
+      <set name="populationCollection" table="STD_PARTICIPANT_POPULATION_AS" lazy="true">
+         <cache usage="read-write" />
+         <key column="PARTICIPANT_ID" />
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Population"
+                column="POPULATION_ID" />
+      </set>   
                  
 	  <many-to-one name="behavioralAssessment" column="ASSESSMENT_ID" unique="true" not-null="false"/>
       <many-to-one name="lifestyle" column="LIFESTYLE_ID" unique="true" not-null="false"/>        
