@@ -55,6 +55,7 @@ public class FindingsManagerImpl implements FindingsManager{
         task = taskResult.getTask();
         if(taskResult instanceof AnalysisFinding) {
             task.setElapsedTime(((AnalysisFinding)taskResult).getElapsedTime());
+            task.setStatus(((AnalysisFinding)taskResult).getStatus());
         }
         return task;
     }
