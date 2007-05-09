@@ -135,7 +135,7 @@ public class ImageMapUtil {
           ChartEntity chartEntity;
           String areaTag;
 
-          RembrandtStandardToolTipTagFragmentGenerator ttg = new RembrandtStandardToolTipTagFragmentGenerator();
+          caiStandardToolTipTagFragmentGenerator ttg = new caiStandardToolTipTagFragmentGenerator();
           StandardURLTagFragmentGenerator urlg = new StandardURLTagFragmentGenerator();
           sb.append("\n\n<MAP name=\"" + name + "\">");
           sb.append(StringUtils.getLineSeparator());

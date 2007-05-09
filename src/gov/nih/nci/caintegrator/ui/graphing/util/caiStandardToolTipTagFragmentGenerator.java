@@ -66,7 +66,7 @@ import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 * 
 */
 
-public class RembrandtStandardToolTipTagFragmentGenerator implements ToolTipTagFragmentGenerator{
+public class caiStandardToolTipTagFragmentGenerator implements ToolTipTagFragmentGenerator{
    
           public String generateToolTipFragment(String toolTipText) {
               String[] toolTipStrings = toolTipText.split(" "); 
