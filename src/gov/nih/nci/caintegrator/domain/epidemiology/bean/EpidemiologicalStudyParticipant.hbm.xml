@@ -163,17 +163,22 @@
     </set>  
     -->
     <set name="tobaccoConsumptionCollection" lazy="true"  cascade="all">
-      <key column="PARTICIPANT_ID" />
+      <key column="EPI_STUDY_PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.TobaccoConsumption" />
     </set>  
     <set name="environmentalFactorCollection" lazy="true" inverse="true">
       <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EnvironmentalFactor" />
     </set>  
-    <set name="relativeCollection" lazy="true" inverse="true">
+
+     <set name="lungCancerRelativeCollection" lazy="true" inverse="true">
       <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.Relative" />
-    </set>  
+    </set>
+        <set name="smokingRelativeCollection" lazy="true" inverse="true">
+      <key column="PARTICIPANT_ID" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.Relative" />
+    </set>
 
     
      <!-- here is for m-1 relationships -->  

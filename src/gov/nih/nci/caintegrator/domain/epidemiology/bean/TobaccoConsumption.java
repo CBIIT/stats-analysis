@@ -9,7 +9,7 @@ public class TobaccoConsumption {
     private Long id;
     private String tobaccoType;
     private String smokingStatus;
-    private Integer intensity;
+    private Double intensity;
     private Integer duration;
     private Integer ageAtInitiation;
     private Integer yearsSinceQuitting;
@@ -32,12 +32,15 @@ public class TobaccoConsumption {
     public void setId(Long id) {
         this.id = id;
     }
-    public Integer getIntensity() {
+
+    public Double getIntensity() {
         return intensity;
     }
-    public void setIntensity(Integer intensity) {
+
+    public void setIntensity(Double intensity) {
         this.intensity = intensity;
     }
+
     public String getSmokingStatus() {
         return smokingStatus;
     }
