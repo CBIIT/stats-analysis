@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="gov.nih.nci.caintegrator.domain.epidemiology.bean.TobaccoConsumption" 
+    	table="TOBACCO_CONSUMPTION"
+        lazy="true">
+
+	    <id name="id" 
+	    	column="TOBACCO_CONSUMPTION_ID">
+	        <generator class="native"/>
+	    </id>
+	    
+        <property name="tobaccoType" 
+        	column="TOBACCO_TYPE"/>
+        	
+        <property name="smokingStatus" 
+        	column="SMOKING_STATUS"/>
+        	
+        <property name="intensity" 
+        	column="INTENSITY"/>
+        	
+        <property name="duration" 
+        	column="DURATION"/>
+        	
+        <property name="ageAtInitiation" 
+        	column="AGE_AT_INITIATION"/>
+        	
+        <property name="yearsSinceQuitting" 
+        	column="YEARS_SINCE_QUITTING"/>
+
+	</class>
+</hibernate-mapping>
