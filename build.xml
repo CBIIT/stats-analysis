@@ -14,7 +14,7 @@
 		<delete dir="${build.classes.dir}" failonerror="false"/>
 		<delete file="caintegrator-spec.jar" failonerror="false"/>
 		<mkdir dir="${build.classes.dir}"/>
-		<javac srcdir="${build.source.dir}" destdir="${build.classes.dir}" source="1.5" excludes="**/test/**" debug="true" debuglevel="lines,vars,source">
+		<javac srcdir="${build.source.dir}" destdir="${build.classes.dir}" source="1.5" debug="true" debuglevel="lines,vars,source">
 			<classpath>
 				<fileset dir="${build.deploy.lib.dir}">
 					<include name="*.jar"/>
