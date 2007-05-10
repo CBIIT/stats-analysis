@@ -66,12 +66,18 @@ import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 * 
 */
 
-public class caiStandardToolTipTagFragmentGenerator implements ToolTipTagFragmentGenerator{
+public class CAIOverlibToolTipTagFragmentGenerator implements ToolTipTagFragmentGenerator{
    
           public String generateToolTipFragment(String toolTipText) {
               String[] toolTipStrings = toolTipText.split(" "); 
               String idText = toolTipStrings[0];
-              return " id=\"" + idText + "\" title=\"" + toolTipText + "\" alt=\"\"";
+              //return " id=\"" + idText + "\" title=\"" + toolTipText + "\" alt=\"\"";
+              
+          	 
+              return " id=\"" + idText + "\"  onMouseOver=\"return overlib('" + toolTipText 
+              + "', CAPTION, 'Additional Info', FGCOLOR, '#FFFFFF', BGCOLOR, '#000000', WIDTH, 150, HEIGHT, 25);\" onMouseOut=\"return nd();\"";
+
+          	  
            }
 
 
