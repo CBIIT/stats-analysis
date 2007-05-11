@@ -643,18 +643,15 @@ public class BoxAndWhiskerCoinPlotRenderer extends BoxAndWhiskerRenderer {
         // OutlierListCollection
         // CaIntegrator Extension
        	List yCoinList = this.caIntegatorCoinList.get(String.valueOf(row)+"_"+String.valueOf(column));
- 
+       	Random generator = new Random();
         if (yCoinList != null) {
             for (int i = 0; i < yCoinList.size(); i++) {
                 double outlier = ((Number) yCoinList.get(i)).doubleValue();
 				yyOutlier = rangeAxis.valueToJava2D(
                 	outlier, dataArea, location
                 );
-				outliers.add(
-					new Outlier(
-						xx + state.getBarWidth() / 2.0, yyOutlier, oRadius
-					)
-				);
+				double xxOutlier = (xx + state.getBarWidth()/5)+ generator.nextInt((int)state.getBarWidth());
+				outliers.add(new Outlier(xxOutlier , yyOutlier, oRadius ));
 
                 Collections.sort(outliers);
             }
