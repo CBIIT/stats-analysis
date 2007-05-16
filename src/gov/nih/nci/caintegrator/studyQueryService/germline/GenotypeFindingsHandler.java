@@ -152,7 +152,7 @@ public class GenotypeFindingsHandler extends FindingsHandler {
                 int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                 values.addAll(arrayIDs.subList(begIndex,  lastIndex));
                 Criteria specimenCrit = session.createCriteria(Specimen.class)
-                                        .add(Restrictions.in("id", values))
+                                        .add(Restrictions.in("specimenIdentifier", values))
                                         .setFetchMode("studyParticipant", FetchMode.EAGER);
 
                 specimenCrit .list();

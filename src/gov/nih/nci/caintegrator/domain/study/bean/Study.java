@@ -68,15 +68,15 @@ public  class Study
    * Unique identifier for the instance of Study.
    */
 
-    private java.lang.String id;
+    private java.lang.Long id;
     /**
    * Unique identifier for the instance of Study.
    */
 
-	public  java.lang.String getId(){
+	public  java.lang.Long getId(){
         return id;
     }
-    public void setId( java.lang.String id){
+    public void setId( java.lang.Long id){
         this.id = id;
     }
 	
@@ -139,7 +139,7 @@ public  class Study
 			boolean eq = false;
 			if(obj instanceof Study) {
 				Study c =(Study)obj; 			 
-				String thisId = getId();		
+				Long thisId = getId();		
 				
 					if(thisId != null && thisId.equals(c.getId())) {
 					   eq = true;

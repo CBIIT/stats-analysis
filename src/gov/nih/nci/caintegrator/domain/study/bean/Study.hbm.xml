@@ -19,8 +19,8 @@
         
 
        <id name="id" 
-           type="java.lang.String" 
-           column="STUDY_NAME">
+           type="java.lang.Long" 
+           column="STUDY_ID">
            <generator class="assigned" />
        </id>
        
@@ -65,14 +65,14 @@
    
       <set name="populationCollection" table="STUDY_STDPOPUPLATION_ASSO" lazy="true">
          <cache usage="read-write" />
-         <key column="STUDY_NAME"  />
+         <key column="STUDY_ID"  />
          <many-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Population" column="POPULATION_ID" />
       </set>              
      
      
       <set name="snpPanelCollection" table="STUDY_PANEL_ASSO" lazy="true"> 
       <cache usage="read-write" />
-      <key column="STUDY_NAME" />
+      <key column="STUDY_ID" />
       <many-to-many class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel" column="SNP_PANEL_ID" />
      </set>  
      
@@ -81,37 +81,37 @@
     
      <set name="studyParticipantCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
-      <key column="STUDY_NAME" />
+      <key column="STUDY_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant" />
      </set>  
     
      <set name="genoTypeFindingCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
-      <key column="STUDY_NAME" />
+      <key column="STUDY_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.germline.bean.GenotypeFinding" />
     </set>  
     
      <set name="snpFrequencyCollection" lazy="true" inverse="true">
         <cache usage="read-write" />
-        <key column="STUDY_NAME" />
+        <key column="STUDY_ID" />
         <one-to-many class="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.bean.SNPFrequencyFinding" />
      </set>
 
      <set name="snpAssociationFindingCollection" lazy="true" inverse="true">
          <cache usage="read-write" />
-         <key column="STUDY_NAME" />
+         <key column="STUDY_ID" />
          <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding" />
      </set>
 
        <set name="snpAssociationAnalysisCollection" lazy="true" inverse="true">
            <cache usage="read-write" />
-           <key column="STUDY_NAME" />
+           <key column="STUDY_ID" />
            <one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis" />
        </set>
 
      <set name="associatedStudyCollection" lazy="true" inverse="true">
       <cache usage="read-write" />
-      <key column="STUDY_NAME" />
+      <key column="STUDY_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.study.bean.Study" />
     </set> 
     
@@ -119,7 +119,7 @@
     
   <!-- TODO: Fix this Ram
 
-   <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.Study" column="STUDY_NAME"
+   <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.Study" column="STUDY_ID"
            insert="" />
   -->
 

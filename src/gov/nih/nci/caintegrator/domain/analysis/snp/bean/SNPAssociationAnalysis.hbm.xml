@@ -71,7 +71,7 @@
 
          <many-to-one name="study"
             class="gov.nih.nci.caintegrator.domain.study.bean.Study"
-            column="STUDY_NAME"
+            column="STUDY_ID"
             not-null="true" />
 
     </class>

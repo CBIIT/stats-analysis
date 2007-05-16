@@ -182,7 +182,7 @@
 
     
      <!-- here is for m-1 relationships -->  
-      <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.bean.Study" column="STUDY_NAME"  />
+      <many-to-one name="study" class="gov.nih.nci.caintegrator.domain.study.bean.Study" column="STUDY_ID"  />
       <set name="populationCollection" table="STD_PARTICIPANT_POPULATION_AS" lazy="true">
          <cache usage="read-write" />
          <key column="PARTICIPANT_ID" />

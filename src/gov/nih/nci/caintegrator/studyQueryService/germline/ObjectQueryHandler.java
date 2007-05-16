@@ -270,7 +270,8 @@ public class ObjectQueryHandler {
             String analysisName = crit.getName();
             String methods = crit.getMethods();
             String studyName = crit.getStudyName();
-
+            String analysisCode = crit.getAnalysisCode();
+            
             StringBuffer studyJoin = new StringBuffer("");
             studyJoin.append(" s.study.name = :studyName AND ");
             params.put("studyName", studyName);
@@ -280,7 +281,13 @@ public class ObjectQueryHandler {
                analysisJoin.append(" s.name = :analysisName  AND ");
                params.put("analysisName", analysisName);
             }
-
+            
+            StringBuffer analysisCodeJoin = new StringBuffer("");
+            if ((analysisCode != null) && (analysisCode.length() > 0)) {
+               analysisJoin.append(" s.analysisCode = :analysisCode  AND ");
+               params.put("analysisCode", analysisCode);
+            }
+            
             StringBuffer methodsJoin = new StringBuffer("");
             if ((methods != null) && (methods.length() > 0))  {
                  methodsJoin.append(" s.methods = :methods ");
@@ -289,7 +296,7 @@ public class ObjectQueryHandler {
 
 
             String hql = MessageFormat.format(analysisCritHQL, new Object[] {
-                                studyJoin, analysisJoin, methodsJoin});
+                                studyJoin, analysisJoin, analysisCodeJoin, methodsJoin});
 
             String tempHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), "AND");
             String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "WHERE");

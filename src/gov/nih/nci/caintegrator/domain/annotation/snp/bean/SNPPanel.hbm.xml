@@ -81,7 +81,7 @@
       <set name="studyCollection" table="STUDY_PANEL_ASSO" lazy="true"> 
         <cache usage="read-write" />
         <key column="SNP_PANEL_ID" />
-         <many-to-many class="gov.nih.nci.caintegrator.domain.study.Study" column="STUDY_NAME" />
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.Study" column="STUDY_ID" />
       </set>         
      
 -->

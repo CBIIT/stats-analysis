@@ -16,6 +16,7 @@ public class SNPAssociationAnalysisCriteria {
 	private String methods;
 	private String name;
     private String studyName;
+    private String analysisCode ;
 
     public SNPAssociationAnalysisCriteria(String studyName) {
         this.studyName = studyName;
@@ -44,5 +45,19 @@ public class SNPAssociationAnalysisCriteria {
     public void setName(String name) {
         this.name = name;
     }
+
+	/**
+	 * @return Returns the analysisCode.
+	 */
+	public String getAnalysisCode() {
+		return analysisCode;
+	}
+
+	/**
+	 * @param analysisCode The analysisCode to set.
+	 */
+	public void setAnalysisCode(String analysisCode) {
+		this.analysisCode = analysisCode;
+	}
 
 }                                   ;
