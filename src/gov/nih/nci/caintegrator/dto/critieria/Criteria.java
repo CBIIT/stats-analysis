@@ -94,7 +94,8 @@ abstract public class Criteria implements Serializable, Cloneable {
 				if ((currMethodString.toUpperCase().startsWith("GET"))
 						&& (currMethod.getModifiers() == Modifier.PUBLIC)
 						&& (!currMethodString.equalsIgnoreCase("getclass"))) {
-					Object thisObj = currMethod.invoke(this, null);
+					Object[] args = null;
+					Object thisObj = currMethod.invoke(this, args);
 
 					if (thisObj != null) {
 						if (Collection.class.isInstance(thisObj)) {
