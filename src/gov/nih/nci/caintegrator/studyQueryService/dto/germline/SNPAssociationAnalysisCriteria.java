@@ -1,5 +1,10 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.germline;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * A set of univeriate genetic analysie to detect association between phenotypic
  * characteristics shared by groups of subjects and their genotypes at a series of
@@ -16,8 +21,8 @@ public class SNPAssociationAnalysisCriteria {
 	private String methods;
 	private String name;
     private String studyName;
-    private String analysisCode ;
-
+    private String analysisCode;
+    private Map<Long, List<String>> representCodeMap = new TreeMap<Long, List<String>>();
     public SNPAssociationAnalysisCriteria(String studyName) {
         this.studyName = studyName;
     }
@@ -45,6 +50,49 @@ public class SNPAssociationAnalysisCriteria {
     public void setName(String name) {
         this.name = name;
     }
+
+	/**
+	 * @return Returns the analysisCodes.
+	 */
+	public List<String> getAnalysisCodes() {
+		return createAnalysisCodes();
+	}
+
+	public void addAnalysisMethodTypes(Long displayOrder, String representCode){
+		if(displayOrder != null && representCode != null){
+			List<String> representCodes = new ArrayList<String>();
+			if(representCodeMap.containsKey(displayOrder)){
+				representCodes = representCodeMap.get(displayOrder) ;
+			}
+			representCodes.add(representCode);
+			representCodeMap.put(displayOrder,representCodes);
+		}
+	}
+	private List<String> createAnalysisCodes(){
+		List<String> analysisCodes = new ArrayList<String>();
+		for(Long displayOrder:representCodeMap.keySet()){
+			List<String> representCodes = representCodeMap.get(displayOrder);
+				if(displayOrder == 1){
+					//initial Entry so create new codes
+					analysisCodes.addAll(representCodes);	
+					
+				}
+				else{
+					//not a new code so concatenade the codes to exsisting String
+					List<String> newList = new ArrayList<String>();
+					for (int i = 0; i < analysisCodes.size(); i++) {	
+						String analysisCode = (String) analysisCodes.get(i);						
+						for(String representCode: representCodes){
+							String newCode =	analysisCode+representCode;
+	//						//lists start at 0 so subtract 1
+							newList.add(newCode);
+						}
+					}
+					analysisCodes = newList;
+				}
+		}
+		return analysisCodes;
+	}
 
 	/**
 	 * @return Returns the analysisCode.

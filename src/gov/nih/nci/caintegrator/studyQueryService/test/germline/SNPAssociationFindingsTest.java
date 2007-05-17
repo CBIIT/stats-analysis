@@ -105,7 +105,9 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
         //safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
         SNPAssociationAnalysisCriteria  assocCrit =
                 new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
-        assocCrit.setName("Incidence density sampling, Unadjusted score test");
+        //assocCrit.setName("Incidence density sampling, Unadjusted score test");
+        assocCrit.setAnalysisCode("S1C1");
+        
         Collection<SNPAssociationAnalysisCriteria> list = new ArrayList<SNPAssociationAnalysisCriteria>();
         list.add(assocCrit);
         safDTO.setSnpAssociationAnalysisCriteriaCollection(list);
@@ -118,7 +120,8 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
 
         SNPAssociationAnalysisCriteria methodAndNameCrit = new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1");
         //methodAndNameCrit.setMethods("P-Test");
-        methodAndNameCrit.setName("Incidence density sampling, Unadjusted score test");
+       // methodAndNameCrit.setName("Incidence density sampling, Unadjusted score test");
+        methodAndNameCrit.setAnalysisCode("S1C1");
         analysisCrits.add(methodAndNameCrit);
 
    /*     SNPAssociationAnalysisCriteria methodOnlyCrit = new SNPAssociationAnalysisCriteria();
@@ -142,7 +145,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
 
         setUpPanelCrit();
         setSNPFindingCriteria();
-        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1A");
+        studyCrit.setName("CGEMS Prostate Cancer WGAS Phase 1");
         safDTO.setStudyCriteria(studyCrit);
 
         try {

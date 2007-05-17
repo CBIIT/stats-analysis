@@ -163,7 +163,6 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                                                     new SNPAssociationAnalysisCriteria(studyCrit.getName());
                     methodAndNameCrit.setMethods(assocAnalysisObj.getMethods());
                     methodAndNameCrit.setName(assocAnalysisObj.getName());
-                    methodAndNameCrit.setAnalysisCode(assocAnalysisObj.getAnalysisCode());
                     analysisCrits.add(methodAndNameCrit);
                }
 
@@ -196,8 +195,8 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             int suffix = 0;
             for (SNPAssociationAnalysisCriteria anaCritObj : anaCrits) {
                 String methods = anaCritObj.getMethods();
-                String analysisCode = anaCritObj.getAnalysisCode();
-                if ((methods == null) && (analysisCode == null)) continue;
+                List<String> analysisCodes = anaCritObj.getAnalysisCodes();
+                if ((methods == null) && (analysisCodes == null)) continue;
                 StringBuffer methodTrailingAND = new StringBuffer("");
                 if (methods != null) {
                     String methodParam = "methods" + suffix;
@@ -207,13 +206,13 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                     params.put(methodParam, methods);
                     methodTrailingAND.append(" AND ");
                 }
-                if (analysisCode != null) {
+                if (analysisCodes != null  && analysisCodes.size()> 0) {
                     analysisCond.append(methodTrailingAND);
                     String nameParam = "analysisCode" + suffix;
                     StringBuffer tmpAnalysisCond = new StringBuffer("");
-                    tmpAnalysisCond.append(TARGET_FINDING_ALIAS + ".snpAssociationAnalysis.analysisCode = :{0} ");
+                    tmpAnalysisCond.append(TARGET_FINDING_ALIAS + ".snpAssociationAnalysis.analysisCode IN (:{0}) ");
                     analysisCond.append(MessageFormat.format(tmpAnalysisCond.toString(), new Object[]{nameParam}));
-                    params.put(nameParam, analysisCode);
+                    params.put(nameParam, analysisCodes);
                 }
                 analysisCond.append(" OR ");
                 suffix++;
