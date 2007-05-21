@@ -2,8 +2,11 @@ package gov.nih.nci.caintegrator.service.task;
 
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
+import gov.nih.nci.caintegrator.service.findings.Finding;
 
 import java.io.Serializable;
+
+import org.apache.log4j.Logger;
 
 /**
  * Task is the object used to identify TaskResult objects,
@@ -18,6 +21,7 @@ import java.io.Serializable;
 public class Task implements Serializable{
     
     private static final long serialVersionUID = -1301876517502792305L;
+    private static Logger logger = Logger.getLogger(Task.class);
     private String id;
     private String cacheId;
     private FindingStatus status;
@@ -68,6 +72,17 @@ public class Task implements Serializable{
      */
     public void setStatus(FindingStatus status) {
         this.status = status;
+        switch(status) { 
+        case Running:
+            setStartTime(System.currentTimeMillis());
+            break;
+        case Error:
+        case Completed:
+            setEndTime(System.currentTimeMillis());
+            break;
+        default:
+            logger.error("Uknown FindingState passed");
+        }
     }
 
     /**
@@ -113,6 +128,7 @@ public class Task implements Serializable{
      */
     public void setEndTime(long endTime) {
         this.endTime = endTime;
+        this.elapsedTime = this.endTime-this.startTime;
     }
 
     
