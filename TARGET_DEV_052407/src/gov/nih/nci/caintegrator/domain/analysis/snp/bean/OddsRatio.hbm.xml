@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : OddsRatio
+    Created on : May 22, 2007
+    Author     : Himanso Sahni
+    Description: Hibernate mapping file for OddsRatio
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.analysis.snp.bean">
+   <class name="OddsRatio"
+    	table="ODDS_RATIO"
+        lazy="false">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.Long"
+           column="ODDS_RATIO_ID">
+           <generator class="assigned" />
+       </id>
+
+        <!-- homozygoteOddsRatio-->
+         <property name="homozygoteOddsRatio"
+                 type="java.lang.Double"
+                 column="HOMOZYGOTE"
+                 insert="false"
+                 update="false" />
+
+        <!-- name -->
+       <property name="name" 
+                 type="java.lang.String" 
+                 column="ODDS_RATIO_NAME" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- hetrozygoteOddsRatio -->                 
+       <property name="hetrozygoteOddsRatio" 
+                 type="java.lang.Double" 
+                 column="HETEROZYGOTE" 
+                 insert="false" 
+                 update="false" />     
+                 
+       <!-- <many-to-one name="study"
+            class="gov.nih.nci.caintegrator.domain.study.bean.Study"
+            column="STUDY_ID"
+            not-null="true" />   
+            -->
+                 
+ 
+	</class>
+</hibernate-mapping>
