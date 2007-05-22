@@ -1,5 +1,6 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
+import gov.nih.nci.caintegrator.domain.analysis.snp.bean.OddsRatio;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationFinding;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
@@ -232,7 +233,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
         List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
-
+        List<OddsRatio> oddsRatioObjs = new ArrayList<OddsRatio>();
 
         /* initialize SNPAnnotations */
         Collection<Long> snpAnnotsIDs = new HashSet<Long>();
@@ -240,7 +241,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                 SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
                 snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
+                oddsRatioObjs.addAll(finding.getOddsRatioCollection());
         }
+        Hibernate.initialize(oddsRatioObjs);
+        oddsRatioObjs = null;
         if(snpAnnotsIDs.size() >0) {
               ArrayList arrayIDs = new ArrayList(snpAnnotsIDs);
               for (int i = 0; i < arrayIDs.size();) {
@@ -250,7 +254,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                   int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
                   values.addAll(arrayIDs.subList(begIndex,  lastIndex));
                   Criteria snpAnnotcrit = session.createCriteria(SNPAnnotation.class).
-                  setFetchMode("geneBiomarkerCollection", FetchMode.EAGER).
+                  setFetchMode("geneBiomarkerCollection", FetchMode.JOIN).
                   add(Restrictions.in("id", values));
                   snpAnnotcrit.list();
               }

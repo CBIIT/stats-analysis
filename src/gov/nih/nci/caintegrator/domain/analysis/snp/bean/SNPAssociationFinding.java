@@ -2,6 +2,9 @@
 
 package gov.nih.nci.caintegrator.domain.analysis.snp.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * <!-- LICENSE_TEXT_START -->
  * <!-- LICENSE_TEXT_END -->
@@ -252,6 +255,20 @@ public  class SNPAssociationFinding
 	 */
 	public void setOrCaseHeterozygote(Double orCaseHeterozygote) {
 		this.orCaseHeterozygote = orCaseHeterozygote;
+	}
+	   private Set <gov.nih.nci.caintegrator.domain.analysis.snp.bean.OddsRatio> oddsRatioCollection = new HashSet<gov.nih.nci.caintegrator.domain.analysis.snp.bean.OddsRatio>();
+	/**
+	 * @return Returns the oddsRatioCollection.
+	 */
+	public Set<gov.nih.nci.caintegrator.domain.analysis.snp.bean.OddsRatio> getOddsRatioCollection() {
+		return oddsRatioCollection;
+	}
+	/**
+	 * @param oddsRatioCollection The oddsRatioCollection to set.
+	 */
+	public void setOddsRatioCollection(
+			Set<gov.nih.nci.caintegrator.domain.analysis.snp.bean.OddsRatio> oddsRatioCollection) {
+		this.oddsRatioCollection = oddsRatioCollection;
 	}
 
 }

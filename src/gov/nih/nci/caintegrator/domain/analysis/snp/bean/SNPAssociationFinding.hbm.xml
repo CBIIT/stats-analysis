@@ -91,7 +91,13 @@
             column="STUDY_ID"
             not-null="true" />
 
-
+ 	<!-- here is for 1-m relationships -->  
+    
+          <set name="oddsRatioCollection">
+        	<key column="ASSO_ANA_FACT_ID" 
+            	not-null="true"/>
+        	<one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.bean.OddsRatio"/>
+    	 </set>
 
     </class>
 </hibernate-mapping>
