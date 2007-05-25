@@ -162,20 +162,20 @@
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.DietaryConsumption" />
     </set>  
     -->
-    <set name="tobaccoConsumptionCollection" lazy="true"  cascade="all">
+    <set name="tobaccoConsumptionCollection"  fetch="join">
       <key column="EPI_STUDY_PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.TobaccoConsumption" />
     </set>  
-    <set name="environmentalFactorCollection" lazy="true" inverse="true">
+    <set name="environmentalFactorCollection" inverse="true" fetch="join">
       <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EnvironmentalFactor" />
     </set>  
 
-     <set name="lungCancerRelativeCollection" lazy="true" inverse="true">
+     <set name="lungCancerRelativeCollection" inverse="true">
       <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.Relative" />
     </set>
-        <set name="smokingRelativeCollection" lazy="true" inverse="true">
+        <set name="smokingRelativeCollection" inverse="true">
       <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.Relative" />
     </set>
@@ -191,7 +191,7 @@
       </set>   
                  
 	  <many-to-one name="behavioralAssessment" column="ASSESSMENT_ID" unique="true" not-null="false"/>
-      <many-to-one name="lifestyle" column="LIFESTYLE_ID" unique="true" not-null="false"/>        
+      <one-to-one name="lifestyle" class="gov.nih.nci.caintegrator.domain.epidemiology.bean.Lifestyle" />        
         
 	</class>
 </hibernate-mapping>
