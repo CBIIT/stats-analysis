@@ -36,7 +36,7 @@ public interface FindingsManager {
      * @param queryDTO
      * @return Collection <Finding>
      */
-    public Collection<Finding> getFindings(QueryDTO queryDTO);
+    public Collection getFindings(QueryDTO queryDTO) throws FindingsQueryException ;
     
     /**
      * @param task

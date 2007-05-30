@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class FindingsManagerImpl implements FindingsManager{
     private List<SessionBasedFindingStrategy> strategyList;
+    private List<SessionBasedFindingStrategy> synchronousStrategyList;
     
    
     /**
@@ -60,9 +61,14 @@ public class FindingsManagerImpl implements FindingsManager{
         return task;
     }
 
-    public Collection<Finding> getFindings(QueryDTO queryDTO) {
-        // TODO Auto-generated method stub
-        return null; 
+    public Collection getFindings(QueryDTO queryDTO) throws FindingsQueryException {
+        SessionBasedFindingStrategy strategy = chooseSynchronousStrategy(queryDTO);
+        Task task = new Task(queryDTO.getQueryName(),queryDTO.toString(),FindingStatus.Running,queryDTO);
+        strategy.getTaskResult().setTask(task);
+        strategy.getTaskResult().getTask().setQueryDTO(queryDTO);            
+        strategy.executeQuery();  
+        TaskResult taskResult = strategy.retrieveTaskResult(task);
+        return taskResult.getTaskResults();
     }
 
     public Collection<Finding> getFindings(Task task) {
@@ -80,6 +86,14 @@ public class FindingsManagerImpl implements FindingsManager{
      */
     public SessionBasedFindingStrategy chooseStrategy(QueryDTO queryDTO){       
         for(SessionBasedFindingStrategy s : strategyList){
+            if(s.canHandle(queryDTO)){
+                return s;                
+            }
+        } 
+        return null;
+    }
+    public SessionBasedFindingStrategy chooseSynchronousStrategy(QueryDTO queryDTO){       
+        for(SessionBasedFindingStrategy s : synchronousStrategyList){
             if(s.canHandle(queryDTO)){
                 return s;                
             }
@@ -113,6 +127,14 @@ public class FindingsManagerImpl implements FindingsManager{
      */
     public void setStrategyList(List<SessionBasedFindingStrategy> strategyList) {
         this.strategyList = strategyList;
+    }
+
+    public List getSynchronousStrategyList() {
+        return synchronousStrategyList;
+    }
+
+    public void setSynchronousStrategyList(List synchronousStrategyList) {
+        this.synchronousStrategyList = synchronousStrategyList;
     }
 
 }
