@@ -13,6 +13,8 @@
     	table="TOBACCO_CONSUMPTION"
         lazy="true">
 
+
+     
 	    <id name="id" 
 	    	column="TOBACCO_CONSUMPTION_ID">
 	        <generator class="native"/>

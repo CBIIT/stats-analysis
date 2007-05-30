@@ -1,8 +1,10 @@
 
 
 package gov.nih.nci.caintegrator.domain.study.bean;
-import gov.nih.nci.caintegrator.domain.study.bean.*;
-import java.util.*;
+import gov.nih.nci.caintegrator.domain.epidemiology.bean.EpidemiologicalFinding;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <!-- LICENSE_TEXT_START -->
@@ -27,6 +29,7 @@ public  class StudyParticipant
     private Double weight;
     private Double height;
     private Double waistCircumference;
+    private EpidemiologicalFinding epidemiologicalFinding;
  	
 	   
     /**
@@ -611,6 +614,13 @@ public  class StudyParticipant
     }
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+    public EpidemiologicalFinding getEpidemiologicalFinding() {
+        return epidemiologicalFinding;
+    }
+    public void setEpidemiologicalFinding(
+            EpidemiologicalFinding epidemiologicalFinding) {
+        this.epidemiologicalFinding = epidemiologicalFinding;
     }
 	   
 	   

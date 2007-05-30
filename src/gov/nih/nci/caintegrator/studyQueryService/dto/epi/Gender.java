@@ -7,14 +7,14 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
  * Time: 5:23:08 PM
 
  */
-public enum Gender {
-    MALE("MALE", "Male"),
-    FEMALE("FEMALE", "Female");
+public enum Gender implements IntegerValueEnum {
+    MALE(1, "Male"), 
+    FEMALE(2, "Female");
 
-    private final String value;
+    private final int value;
     private final String name;
 
-    Gender(String key, String name) {
+    Gender(int key, String name) {
         this.value = key;
     	this.name = name;
     }
@@ -23,7 +23,7 @@ public enum Gender {
         return name;
     }
 
-    public String getValue()	{
+    public int getValue()	{
     	return value;
     }
 

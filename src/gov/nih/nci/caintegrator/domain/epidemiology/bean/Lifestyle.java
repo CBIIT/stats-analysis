@@ -8,7 +8,15 @@ public class Lifestyle {
     private String residentialArea;
     private String maritalStatus;
     private String religion;
+    private EpidemiologicalFinding epidemiologicalFinding;
     
+    public EpidemiologicalFinding getEpidemiologicalFinding() {
+        return epidemiologicalFinding;
+    }
+    public void setEpidemiologicalFinding(
+            EpidemiologicalFinding epidemiologicalFinding) {
+        this.epidemiologicalFinding = epidemiologicalFinding;
+    }
     public String getEducationLevel() {
         return educationLevel;
     }

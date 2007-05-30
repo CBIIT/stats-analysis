@@ -6,7 +6,15 @@ public class BehavioralAssessment {
     private Integer depressionScore;
     private Integer anxietyScore;
     private Integer fagerstromScore;
+    private EpidemiologicalFinding epidemiologicalFinding;
     
+    public EpidemiologicalFinding getEpidemiologicalFinding() {
+        return epidemiologicalFinding;
+    }
+    public void setEpidemiologicalFinding(
+            EpidemiologicalFinding epidemiologicalFinding) {
+        this.epidemiologicalFinding = epidemiologicalFinding;
+    }
     public Integer getAnxietyScore() {
         return anxietyScore;
     }

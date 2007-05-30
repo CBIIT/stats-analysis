@@ -27,6 +27,15 @@ public class EPIQueryDTO implements QueryDTO {
     public java.util.List dietaryConsumptionCriterionCollection;
     public PatientCharacteristicsCriterion patientCharacteristicsCriterion;
     public TobaccoConsumptionCriterion tobaccoConsumptionCriterion;
+    public List<String> patientIds;
+
+    public List<String> getPatientIds() {
+        return patientIds;
+    }
+
+    public void setPatientIds(List<String> patientIds) {
+        this.patientIds = patientIds;
+    }
 
     public EPIQueryDTO(){
 

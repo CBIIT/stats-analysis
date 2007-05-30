@@ -4,23 +4,17 @@ import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
 
 import java.util.Collection;
 
-public class EpidemiologicalStudyParticipant extends StudyParticipant {
+public class EpidemiologicalFinding  {
 
+    private Long id;
+    private StudyParticipant studyParticipant;
     private Lifestyle lifestyle;
     private BehavioralAssessment behavioralAssessment;
     private Collection<DietaryConsumption> dietaryConsumptionCollection;
     private Collection<TobaccoConsumption> tobaccoConsumptionCollection;
-    private Collection<Relative> lungCancerRelativeCollection;
-    private Collection<Relative> smokingRelativeCollection;
+    private Collection<Relative> relativeCollection;
     private Collection<EnvironmentalFactor> environmentalFactorCollection;
 
-    public Collection<Relative> getSmokingRelativeCollection() {
-        return smokingRelativeCollection;
-    }
-
-    public void setSmokingRelativeCollection(Collection<Relative> smokingRelativeCollection) {
-        this.smokingRelativeCollection = smokingRelativeCollection;
-    }
 
     public Collection<DietaryConsumption> getDietaryConsumptionCollection() {
         return dietaryConsumptionCollection;
@@ -38,12 +32,12 @@ public class EpidemiologicalStudyParticipant extends StudyParticipant {
         this.tobaccoConsumptionCollection = tobaccoConsumptionCollection;
     }
 
-    public Collection<Relative> getLungCancerRelativeCollection() {
-        return lungCancerRelativeCollection;
+    public Collection<Relative> getRelativeCollection() {
+        return relativeCollection;
     }
 
-    public void setLungCancerRelativeCollection(Collection<Relative> lungCancerRelativeCollection) {
-        this.lungCancerRelativeCollection = lungCancerRelativeCollection;
+    public void setRelativeCollection(Collection<Relative> lungCancerRelativeCollection) {
+        this.relativeCollection = lungCancerRelativeCollection;
     }
 
     public Collection<EnvironmentalFactor> getEnvironmentalFactorCollection() {
@@ -65,6 +59,22 @@ public class EpidemiologicalStudyParticipant extends StudyParticipant {
     }
     public void setLifestyle(Lifestyle lifestyle) {
         this.lifestyle = lifestyle;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public StudyParticipant getStudyParticipant() {
+        return studyParticipant;
+    }
+
+    public void setStudyParticipant(StudyParticipant studyParticipant) {
+        this.studyParticipant = studyParticipant;
     }
     
 }

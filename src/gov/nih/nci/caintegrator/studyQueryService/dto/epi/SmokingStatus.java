@@ -1,5 +1,6 @@
 package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
 
+
 /**
  * Created by IntelliJ IDEA.
  * User: Ram Bhattaru
@@ -7,7 +8,7 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
  * Time: 5:25:28 PM
 
  */
-public enum SmokingStatus {
+public enum SmokingStatus implements IntegerValueEnum {
     NEVER(0, "Never Smoker"),
     FORMER(1, "Former Smoker"),
     CURRENT(2, "Current Smoker"),

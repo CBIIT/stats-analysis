@@ -29,7 +29,6 @@
         <property name="religion" 
         	column="RELIGION"/>
         	
-
-
+		<many-to-one name="epidemiologicalFinding" class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EpidemiologicalFinding" column="EPI_FINDING_ID" />
 	</class>
 </hibernate-mapping>
