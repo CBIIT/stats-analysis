@@ -28,17 +28,28 @@ public class EPIQueryDTO implements QueryDTO {
     public PatientCharacteristicsCriterion patientCharacteristicsCriterion;
     public TobaccoConsumptionCriterion tobaccoConsumptionCriterion;
     public List<String> patientIds;
+    public String patientGroupName;
 
+
+
+
+    public EPIQueryDTO(){
+
+    }
+    
+    public String getPatientGroupName() {
+        return patientGroupName;
+    }
+
+    public void setPatientGroupName(String patientGroupName) {
+        this.patientGroupName = patientGroupName;
+    }
     public List<String> getPatientIds() {
         return patientIds;
     }
 
     public void setPatientIds(List<String> patientIds) {
         this.patientIds = patientIds;
-    }
-
-    public EPIQueryDTO(){
-
     }
 
     public BehavioralCriterion getBehavioralCriterion() {
