@@ -361,17 +361,12 @@ public class StudyParticipantCriteriaHandler {
 
         StringBuffer studyJoin = new StringBuffer("");
         if (studyCrit != null)  {
-            String studyName = studyCrit.getName();
+            Long studyId = studyCrit.getId();
             String sponsorStudyIdentifier = studyCrit.getSponsorStudyIdentifier();
-            if (studyName != null) {
+            if (studyId != null) {
                 studyJoin.append(" JOIN sp.study ");
-                studyHql.append(" sp.study.name = :studyName AND ");
-                params.put("studyName", studyName);
-            }
-            if (sponsorStudyIdentifier != null)  {
-                if (studyJoin.length() < 1) studyJoin.append(" JOIN sp.study ");
-                studyHql.append("sp.study.sponsorStudyIdentifier = :sponsorStudyIdentifier AND ");
-                params.put("sponsorStudyIdentifier", sponsorStudyIdentifier);
+                studyHql.append(" sp.study.id = :studyId AND ");
+                params.put("studyId", studyId);
             }
         }
         return studyJoin;

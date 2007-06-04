@@ -39,41 +39,7 @@
                  insert="false" 
                  update="false" />                 
                    
-       <property name="orAggressiveHeterozygote"
-                 type="java.lang.Double"
-                 column="OR_AGGRESSIVE_HETEROZYGOTE"
-                 insert="false"
-                 update="false" />
-
-       <property name="orAggressiveHomozygote"
-                  type="java.lang.Double"
-                  column="OR_AGGRESSIVE_HOMOZYGOTE"
-                  insert="false"
-                  update="false" />
-
-       <property name="orNonaggressiveHeterozygote"
-                  type="java.lang.Double"
-                  column="OR_NONAGGRESSIVE_HETEROZYGOTE"
-                  insert="false"
-                  update="false" />
-
-       <property name="orNonaggressiveHomozygote"
-                  type="java.lang.Double"
-                  column="OR_NONAGGRESSIVE_HOMOZYGOTE"
-                  insert="false"
-                  update="false" />
-                  
-       <property name="orCaseHeterozygote"
-                  type="java.lang.Double"
-                  column="OR_HETEROZYGOTE"
-                  insert="false"
-                  update="false" />
-
-       <property name="orCaseHomozygote"
-                  type="java.lang.Double"
-                  column="OR_HOMOZYGOTE"
-                  insert="false"
-                  update="false" />
+      
 
      <!--  m-1 relationship -->
     

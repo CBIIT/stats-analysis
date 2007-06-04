@@ -186,8 +186,8 @@ public class SNPFrequencyFindingCriteriaDTO extends FindingCriteriaDTO {
  	{	
  		String str = "SNP Population Frequency search\n";
  		
- 		if (studyCriteria != null && studyCriteria.getName() != null)
- 			str = str + "Study name " + studyCriteria.getName() + "\n";
+ 		if (studyCriteria != null && studyCriteria.getId() != null)
+ 			str = str + "Study Id " + studyCriteria.getId() + "\n";
  		if ((populationNames != null) && (populationNames.length > 0))
  		{
  			str = str + "Populations:\n";

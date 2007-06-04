@@ -23,7 +23,7 @@ public class SNPAssociationAnalysisGroupTest extends GenotypeFindingTest {
 
     public void setUp() throws Exception {
         super.setUp();
-        assocCrit = new AnalysisGroupCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+        assocCrit = new AnalysisGroupCriteria(new Long(1));
     }
 
     public void testSNPAssociationAnalysisGroup() {

@@ -20,8 +20,8 @@ import junit.framework.TestSuite;
 public class SNPAnalysisMethodLookupTest extends GenotypeFindingTest {
 
     public void testGetAnalysisMethodTypesMethod() {
-    	for(String studyName:studyNames){
-    		studyCrit.setName(studyName);
+    	for(long studyId:studyIDs){
+    		studyCrit.setId(studyId);
         	executeGetAnalysisMethodsMethod(studyCrit);
         	executeGetAnalysisMethodTypesMethod(studyCrit);        	
     	}
@@ -32,7 +32,7 @@ public class SNPAnalysisMethodLookupTest extends GenotypeFindingTest {
     	try {
             Collection<String> analysisMethodTypes = manager.getAnalysisMethodTypes(studyCrit);
             System.out.println("Number of AnalysisMethodTypes Retrieved: " + analysisMethodTypes.size()+
-            		"for Study: "+ studyCrit.getName());
+            		"for Study: "+ studyCrit.getName()+studyCrit.getVersion());
             for (String analysisMethodType:analysisMethodTypes) {
                System.out.println("AnalysisMethodType Name: " + analysisMethodType);
                executeGetAnalysisMethodTypesMethod(studyCrit,analysisMethodType);
@@ -47,7 +47,7 @@ public class SNPAnalysisMethodLookupTest extends GenotypeFindingTest {
     	try{
             Collection<SNPAnalysisMethod> analysisMethods = manager.getSNPAnalysisMethods(studyCrit, analysisMethodType);
             System.out.println("Number of SNPAnalysisMethod Retrieved: " + analysisMethods.size()+
-            		"for Study: "+ studyCrit.getName() + "and SNPAnalysisMethod: "+analysisMethodType);
+            		"for Study: "+ studyCrit.getName() + studyCrit.getVersion()+"and SNPAnalysisMethod: "+analysisMethodType);
             System.out.println("methodType "+"\t|"+
 		   			  "methodName "+"\t|"+
 		   			  "methodDesc "+"\t|"+
@@ -70,7 +70,7 @@ public class SNPAnalysisMethodLookupTest extends GenotypeFindingTest {
     	try{
             Collection<SNPAnalysisMethod> analysisMethods = manager.getSNPAnalysisMethods(studyCrit);
             System.out.println("Number of SNPAnalysisMethod Retrieved: " + analysisMethods.size()+
-            		"for Study: "+ studyCrit.getName());
+            		"for Study: "+ studyCrit.getName()+studyCrit.getVersion());
             System.out.println("methodType "+"\t|"+
 		   			  "methodName "+"\t|"+
 		   			  "methodDesc "+"\t|"+

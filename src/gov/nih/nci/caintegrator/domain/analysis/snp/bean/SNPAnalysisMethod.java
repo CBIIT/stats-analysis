@@ -3,6 +3,8 @@
  */
 package gov.nih.nci.caintegrator.domain.analysis.snp.bean;
 
+import gov.nih.nci.caintegrator.domain.study.bean.Study;
+
 /**
  * @author sahnih
  *
@@ -13,7 +15,7 @@ public class SNPAnalysisMethod {
 	private String methodName;
 	private String methodType;
 	private String represensitiveCode;
-	private String studyName;
+	private Study study;
 	private Long displayOrder;
 	/**
 	 * @return Returns the id.
@@ -76,18 +78,6 @@ public class SNPAnalysisMethod {
 		this.represensitiveCode = represensitiveCode;
 	}
 	/**
-	 * @return Returns the studyName.
-	 */
-	public String getStudyName() {
-		return studyName;
-	}
-	/**
-	 * @param studyName The studyName to set.
-	 */
-	public void setStudyName(String studyName) {
-		this.studyName = studyName;
-	}
-	/**
 	 * @return Returns the displayOrder.
 	 */
 	public Long getDisplayOrder() {
@@ -98,5 +88,17 @@ public class SNPAnalysisMethod {
 	 */
 	public void setDisplayOrder(Long displayOrder) {
 		this.displayOrder = displayOrder;
+	}
+	/**
+	 * @return Returns the study.
+	 */
+	public Study getStudy() {
+		return study;
+	}
+	/**
+	 * @param study The study to set.
+	 */
+	public void setStudy(Study study) {
+		this.study = study;
 	}
 }

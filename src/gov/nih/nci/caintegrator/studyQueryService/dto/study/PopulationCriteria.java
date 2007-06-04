@@ -19,18 +19,26 @@ public class PopulationCriteria {
 	 * A textual identifier for the study population
 	 */
 	private Collection<String> names;
-    private  String studyName;
+    private  Long studyId;
 
-    public String getStudyName() {
-        return studyName;
-    }
 
-    public void setStudyName(String studyName) {
-        this.studyName = studyName;
-    }
 
-    public PopulationCriteria(String studyName) {
-        this.studyName = studyName;
+    /**
+	 * @return Returns the studyId.
+	 */
+	public Long getStudyId() {
+		return studyId;
+	}
+
+	/**
+	 * @param studyId The studyId to set.
+	 */
+	public void setStudyId(Long studyId) {
+		this.studyId = studyId;
+	}
+
+	public PopulationCriteria(Long studyId) {
+        this.studyId = studyId;
         names = new ArrayList();
     }
 

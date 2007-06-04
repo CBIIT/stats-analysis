@@ -96,11 +96,10 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
 
     private List<Population> handlePopulationCriteria(SNPFrequencyFindingCriteriaDTO findingCritDTO, Session session) {
        String[] populationNames = findingCritDTO.getPopulationNames();
-       String studyName = findingCritDTO.getStudyCriteria().getName();
-       String sponsorIdentifier = findingCritDTO.getSponsorStudyIdentifier();
+       Long studyId = findingCritDTO.getStudyCriteria().getId();
+       
 
-       if ((populationNames == null || populationNames.length < 1) && (studyName == null || studyName.length() < 1) &&
-                                                    (sponsorIdentifier == null || sponsorIdentifier.length() < 1) ) {
+       if ((populationNames == null || populationNames.length < 1) && (studyId == null )) {
             return new ArrayList<Population>();
        }
 
@@ -120,20 +119,14 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
     }
 
     private void addStudyCriteria( SNPFrequencyFindingCriteriaDTO findingCritDTO, Criteria studyCrit, Session session) {
-        String studyName = findingCritDTO.getStudyCriteria().getName();
-        String sponsorIdentifier = findingCritDTO.getSponsorStudyIdentifier();
-        if (studyName != null && studyName.length() > 0) {
-            studyCrit.add(Restrictions.eq("name", studyName));
-        }
-        if (sponsorIdentifier != null && sponsorIdentifier.length() > 0) {
-            studyCrit.add(Restrictions.eq("sponsorStudyIdentifier", sponsorIdentifier));
+        Long studyId = findingCritDTO.getStudyCriteria().getId();
+        if (studyId != null ) {
+            studyCrit.add(Restrictions.eq("id", studyId));
         }
     }
     private boolean isAddStudyCriteria( SNPFrequencyFindingCriteriaDTO findingCritDTO) {
-            String studyName = findingCritDTO.getStudyCriteria().getName();
-            String sponsorIdentifier = findingCritDTO.getSponsorStudyIdentifier();
-            if ((studyName != null && studyName.length() > 0) ||
-                    (sponsorIdentifier != null && sponsorIdentifier.length() > 0) )
+            Long studyId = findingCritDTO.getStudyCriteria().getId();
+            if (studyId != null)
                return true;
 
             return false;
@@ -227,9 +220,9 @@ public class SNPFrequencyFindingHandler extends FindingsHandler {
         }
 
         if (studyCrit != null) {
-            if (studyCrit.getName() != null) {
-                hql.append( TARGET_FINDING_ALIAS + ".study.name = :studyName AND ");
-                params.put("studyName", studyCrit.getName().trim());
+            if (studyCrit.getId() != null) {
+                hql.append( TARGET_FINDING_ALIAS + ".study.id = :studyId AND ");
+                params.put("studyId", studyCrit.getId());
             }
         }
 

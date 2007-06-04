@@ -61,11 +61,6 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
                     System.out.println("ID: " + finding.getId());
                     System.out.println("pValue" + finding.getPvalue());
                     System.out.println("Rank" + finding.getRank());
-                    System.out.println("OrAggressiveHeterozygote: " + finding.getOrAggressiveHeterozygote());
-                    System.out.println("OrAggressiveHomozygote: " + finding.getOrAggressiveHomozygote());
-                    System.out.println("OrNonAggressiveHeterozygote: " + finding.getOrNonaggressiveHeterozygote());
-                    System.out.println("OrNonAggressiveHomozygote: " + finding.getOrNonaggressiveHomozygote());
-
                     System.out.println("DBSNP ID: " + finding.getSnpAnnotation().getDbsnpId());
                     System.out.println("Analysis Name: " + finding.getSnpAssociationAnalysis().getName());
                     System.out.println("Physical Position: " + finding.getSnpAnnotation().getChromosomeLocation());
@@ -95,7 +90,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
     }
 
     private void setSNPAssociationGroupCriteria() {
-        AnalysisGroupCriteria groupCrit = new AnalysisGroupCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+        AnalysisGroupCriteria groupCrit = new AnalysisGroupCriteria(new Long(1));
         String[] names = new String[] {"Test Name for 9999", "Both Name And Method", "Only Name"};
         groupCrit.setNames(names);
         safDTO.setAnalysisGroupCriteria(groupCrit);
@@ -104,7 +99,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
     private void setSNPFindingCriteria() {
         //safDTO.setpValue(new Float(0.4), ArithematicOperator.LE);
         SNPAssociationAnalysisCriteria  assocCrit =
-                new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
+                new SNPAssociationAnalysisCriteria(new Long(1));
         //assocCrit.setName("Incidence density sampling, Unadjusted score test");
         assocCrit.setAnalysisCode("S1C1");
         
@@ -118,7 +113,7 @@ public class SNPAssociationFindingsTest extends CGEMSTest {
     private void setSNPAssociationAnalysisCriteria() {
         Collection analysisCrits = new ArrayList<SNPAssociationAnalysisCriteria>();
 
-        SNPAssociationAnalysisCriteria methodAndNameCrit = new SNPAssociationAnalysisCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+        SNPAssociationAnalysisCriteria methodAndNameCrit = new SNPAssociationAnalysisCriteria(new Long(1));
         //methodAndNameCrit.setMethods("P-Test");
        // methodAndNameCrit.setName("Incidence density sampling, Unadjusted score test");
         methodAndNameCrit.setAnalysisCode("S1C1");

@@ -42,13 +42,15 @@
 		<property name="represensitiveCode" type="java.lang.String"
 			column="REPRESENT_CODE" insert="false" update="false" />
 
-		<!-- studyName -->
-		<property name="studyName" type="java.lang.String"
-			column="STUDY_NAME" insert="false" update="false" />
 		<!-- displayOrder -->
 		<property name="displayOrder" type="java.lang.Long"
 			column="DISPLAY_ORDER" insert="false" update="false" />
 
-
+	<!--  m-1 relationship -->
+       <many-to-one name="study"
+            class="gov.nih.nci.caintegrator.domain.study.bean.Study"
+            column="STUDY_ID"
+            not-null="true" />
+            
 	</class>
 </hibernate-mapping>

@@ -54,17 +54,20 @@ public class ObjectQueryHandler {
         if (studyCrit == null) return new ArrayList<Study>();
             Session session = getSessionFactory().getCurrentSession();
             HashMap params = new HashMap();
-            String studyCritHQL = " FROM Study s WHERE {0} {1} ";
+            String studyCritHQL = " FROM Study s WHERE {0} {1} {2} {3}";
             StringBuffer sponsorJoin = new StringBuffer("");
             StringBuffer studyNameJoin = new StringBuffer("");
+            StringBuffer idJoin = new StringBuffer("");
+            StringBuffer versionJoin = new StringBuffer("");
             String studyName = studyCrit.getName();
             String sponsorStudyIdentifier = studyCrit.getSponsorStudyIdentifier();
-
-            if (studyName == null && sponsorStudyIdentifier == null) {
+            Long id = studyCrit.getId();
+            String version = studyCrit.getVersion();
+            if (studyName == null && sponsorStudyIdentifier == null  && id == null && version == null) {
                 if (allStudyObjects == null) {
                     allStudyObjects = new TreeSet<Study>(
-                            new ObjectComparator.StudyNameComparator());
-                    Collection<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
+                            new ObjectComparator.StudyIdComparator());
+                    Collection<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin,  versionJoin, idJoin,session, params);
                     allStudyObjects.addAll(studyObjs);
                     return allStudyObjects;
                 }
@@ -72,18 +75,26 @@ public class ObjectQueryHandler {
                     return allStudyObjects;
                 }
             }
-
+            if (id != null)  {
+                idJoin .append(" s.id = :id AND");
+                params.put("id", id);
+            }
             if ((studyName != null) && (studyName.length() > 0)) {
                studyNameJoin.append(" s.name = :studyName  AND ");
                params.put("studyName", studyName);
             }
 
             if ((sponsorStudyIdentifier != null) && (sponsorStudyIdentifier.length() > 0))  {
-                 sponsorJoin .append(" s.sponsorStudyIdentifier = :sponsorStudyIdentifier ");
+                 sponsorJoin .append(" s.sponsorStudyIdentifier = :sponsorStudyIdentifier AND");
                  params.put("sponsorStudyIdentifier", sponsorStudyIdentifier);
             }
 
-            Collection<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, session, params);
+            if ((version != null) && (version.length() > 0))  {
+                versionJoin .append(" s.version = :version ");
+                params.put("version", version);
+            }
+            
+            Collection<Study> studyObjs = executeStudyQuery(studyCritHQL, studyNameJoin, sponsorJoin, versionJoin, idJoin, session, params);
 
             // populate these study objects with SNPPanel objects based on parameer passes in
             if (populatePanel) {
@@ -107,14 +118,14 @@ public class ObjectQueryHandler {
         return snpPanels;
     }
 
-     private  Collection<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, Session session, HashMap params) {
-        String hql = MessageFormat.format(studyCritHQL, new Object[] {studyNameJoin, sponsorJoin});
+     private  Collection<Study> executeStudyQuery(String studyCritHQL, StringBuffer studyNameJoin, StringBuffer sponsorJoin, StringBuffer versionJoin,StringBuffer idJoin, Session session, HashMap params) {
+        String hql = MessageFormat.format(studyCritHQL, new Object[] {idJoin, studyNameJoin, sponsorJoin, versionJoin,});
         String tempHQL = HQLHelper.removeTrailingToken(new StringBuffer(hql), "AND");
         String finalHQL = HQLHelper.removeTrailingToken(new StringBuffer(tempHQL), "WHERE");
         Query studyQuery = session.createQuery(finalHQL);
         HQLHelper.setParamsOnQuery(params, studyQuery );
         List results = studyQuery.list();
-        SortedSet<Study> s = new TreeSet<Study>(new ObjectComparator.StudyNameComparator());
+        SortedSet<Study> s = new TreeSet<Study>(new ObjectComparator.StudyIdComparator());
         s.addAll(results);
         return s;
     }
@@ -139,8 +150,8 @@ public class ObjectQueryHandler {
             params.put("popNames", popNames);
         }
 
-        Query q = session.createQuery(" FROM Population p WHERE p.studyCollection.name = :name " + inClause.toString());
-        params.put("name", populationCrit.getStudyName());
+        Query q = session.createQuery(" FROM Population p WHERE p.studyCollection.id = :id " + inClause.toString());
+        params.put("id", populationCrit.getStudyId());
         HQLHelper.setParamsOnQuery(params, q);
         List<Population> results = q.list();
         Set<Population> popObjs = new TreeSet<Population>(
@@ -150,14 +161,14 @@ public class ObjectQueryHandler {
     }
 
     public  Collection<SNPAnalysisGroup> getAnalysisGroups(AnalysisGroupCriteria analGrpCrit) {
-        String studyName = analGrpCrit.getStudyName();
-        assert(studyName != null);
+        Long studyId = analGrpCrit.getStudyId();
+        assert(studyId != null);
         Session session = getSessionFactory().getCurrentSession();
         HashMap params = new HashMap();
 
         StringBuffer hql =new StringBuffer(" FROM SNPAnalysisGroup sg " +
-                " WHERE sg.snpAssociationAnalysis.study.name=:studyName AND {0} ");
-        params.put("studyName", studyName);
+                " WHERE sg.snpAssociationAnalysis.study.id=:studyId AND {0} ");
+        params.put("studyId", studyId);
 
         String nameJoin = new String(" ( 0 = 0 ) ");
         if (analGrpCrit != null) {
@@ -183,13 +194,13 @@ public class ObjectQueryHandler {
 
 
     public  Collection<Integer> getAgeLowerLimitValues(StudyCriteria studyCrit) {
-	 		if (studyCrit == null || studyCrit.getName() == null) return new ArrayList<Integer>();
-	 		String studyName = studyCrit.getName();
+	 		if (studyCrit == null || studyCrit.getId() == null) return new ArrayList<Integer>();
+	 		Long studyId = studyCrit.getId();
             ageLowerLimits = new HashSet<Integer>();
             Session session = getSessionFactory().getCurrentSession();
             HashMap params = new HashMap();
-            String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU WHERE STUDY_NAME = :studyName ";
-            params.put("studyName", studyName);
+            String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU WHERE STUDY_ID = :studyId ";
+            params.put("studyId", studyId);
             Query q = session.createSQLQuery(sql);
             HQLHelper.setParamsOnQuery(params, q);
             Collection<BigDecimal> minValues = q.list();
@@ -208,13 +219,13 @@ public class ObjectQueryHandler {
        }
    }
     public  Collection<Integer> getAgeUpperLimitValues(StudyCriteria studyCrit) {
-    	   if (studyCrit == null || studyCrit.getName() == null) return new ArrayList<Integer>();
- 		   String studyName = studyCrit.getName();
+    	   if (studyCrit == null || studyCrit.getId() == null) return new ArrayList<Integer>();
+ 		   Long studyId = studyCrit.getId();
     	   ageUpperLimits  = new HashSet<Integer>();
            Session session = getSessionFactory().getCurrentSession();
            HashMap params = new HashMap();
-           String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU WHERE STUDY_NAME = :studyName ";
-           params.put("studyName", studyName);
+           String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU WHERE STUDY_ID = :studyId ";
+           params.put("studyId", studyId);
            Query q = session.createSQLQuery(sql);
            HQLHelper.setParamsOnQuery(params, q);
            Collection<BigDecimal> minValues = q.list();
@@ -224,13 +235,13 @@ public class ObjectQueryHandler {
    }
 
     public  Collection<String> getCaseControlStatus(StudyCriteria studyCrit) {
-    	 	if (studyCrit == null || studyCrit.getName() == null) return new ArrayList<String>();
-           	String studyName = studyCrit.getName();
+    	 	if (studyCrit == null || studyCrit.getId() == null) return new ArrayList<String>();
+           	Long studyId = studyCrit.getId();
             caseControlStatus = new HashSet<String>();
             Session session = getSessionFactory().getCurrentSession();
             HashMap params = new HashMap();
-            String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT WHERE STUDY_NAME = :studyName ";
-            params.put("studyName", studyName);
+            String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT WHERE STUDY_ID= :studyId ";
+            params.put("studyId", studyId);
             Query q = session.createSQLQuery(sql);
             HQLHelper.setParamsOnQuery(params, q);
             List<String> statusValues = q.list();
@@ -269,12 +280,12 @@ public class ObjectQueryHandler {
             String analysisCritHQL = " FROM SNPAssociationAnalysis s WHERE {0} {1} {2} ";
             String analysisName = crit.getName();
             String methods = crit.getMethods();
-            String studyName = crit.getStudyName();
+            Long studyId = crit.getStudyId();
             String analysisCode = crit.getAnalysisCode();
             
             StringBuffer studyJoin = new StringBuffer("");
-            studyJoin.append(" s.study.name = :studyName AND ");
-            params.put("studyName", studyName);
+            studyJoin.append(" s.study.id = :studyId AND ");
+            params.put("studyId", studyId);
 
             StringBuffer analysisJoin = new StringBuffer("");
             if ((analysisName != null) && (analysisName.length() > 0)) {
@@ -375,13 +386,13 @@ public class ObjectQueryHandler {
     
     @SuppressWarnings("unchecked")
 	public List<String> getAnalysisMethodTypes (StudyCriteria studyCrit){
-    	if (studyCrit == null || studyCrit.getName() == null) return new ArrayList<String>();
-       	String studyName = studyCrit.getName();
+    	if (studyCrit == null || studyCrit.getId() == null) return new ArrayList<String>();
+       	Long studyId = studyCrit.getId();
        	analysisMethodTypes = new HashSet<String>();
         Session session = getSessionFactory().getCurrentSession();
         HashMap params = new HashMap();
-        String sql = "SELECT ANALYSIS_METHOD_TYPE FROM SNP_ANALYSIS_LU WHERE STUDY_NAME = :studyName ORDER BY DISPLAY_ORDER";
-        params.put("studyName", studyName);
+        String sql = "SELECT ANALYSIS_METHOD_TYPE FROM SNP_ANALYSIS_LU WHERE STUDY_ID = :studyId ORDER BY DISPLAY_ORDER";
+        params.put("studyId", studyId);
         Query q = session.createSQLQuery(sql);
         HQLHelper.setParamsOnQuery(params, q);
         List<String> values = q.list();
@@ -393,15 +404,15 @@ public class ObjectQueryHandler {
         	return Collections.EMPTY_LIST;
     }
     public List<SNPAnalysisMethod> getSNPAnalysisMethods (StudyCriteria studyCrit,String analysisMethodType){
-    	String studyName = studyCrit.getName();
-        assert(studyName != null);
+    	Long studyId = studyCrit.getId();
+        assert(studyId != null);
         Session session = getSessionFactory().getCurrentSession();
         HashMap params = new HashMap();
         StringBuffer sponsorJoin = new StringBuffer("");
 
         StringBuffer hql =new StringBuffer(" FROM SNPAnalysisMethod sm " +
-                " WHERE sm.studyName=:studyName AND {0} ORDER BY sm.displayOrder");
-        params.put("studyName", studyName);
+                " WHERE sm.study.id=:studyId AND {0} ORDER BY sm.displayOrder");
+        params.put("studyId", studyId);
 
         String nameJoin = new String(" ( 0 = 0 ) ");
         if (analysisMethodType != null  && analysisMethodType.length() > 0) {

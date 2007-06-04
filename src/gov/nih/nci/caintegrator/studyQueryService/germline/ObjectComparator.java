@@ -16,13 +16,13 @@ import java.util.Comparator;
  * To change this template use File | Settings | File Templates.
  */
 public class ObjectComparator {
-    public static class StudyNameComparator implements Comparator {
+    public static class StudyIdComparator implements Comparator {
         public int compare(Object a, Object b) {
             Study s1 = (Study)a;
             Study s2 = (Study)b;
-            String studyName1 = s1.getName();
-            String studyName2 = s2.getName();
-            return studyName1.compareTo(studyName2);
+            Long studyId1 = s1.getId();
+            Long studyId2 = s2.getId();
+            return studyId1.compareTo(studyId2);
         }
     }
 

@@ -33,7 +33,8 @@ public class GenotypeFindingTest extends CGEMSTest {
    // protected AnnotationCriteria annotCrit;
     private GenotypeFindingCriteriaDTO gfDTO;
    // protected static int TOTAL_FINDINGS = 0;
-    protected String[] studyNames = {"CGEMS Prostate Cancer WGAS Phase 1A","CGEMS Prostate Cancer WGAS Phase 1","CGEMS Breast Cancer WGAS Phase 1"};
+   // protected String[] studyNames = {"CGEMS Prostate Cancer WGAS Phase 1A","CGEMS Prostate Cancer WGAS Phase 1","CGEMS Breast Cancer WGAS Phase 1"};
+    protected Long[] studyIDs = {new Long(1),new Long(2), new Long(3)};
     
 
 

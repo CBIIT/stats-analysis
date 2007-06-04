@@ -26,7 +26,7 @@ public class PopulationSearchTest extends GenotypeFindingTest {
         names.add("CEPH");
         //popCrit = new PopulationCriteria(names);
         //popCrit = new PopulationCriteria("CGEMS Prostate Cancer WGAS Phase 1");
-        popCrit = new PopulationCriteria("CGEMS Prostate Cancer WGAS Phase 1A");
+        popCrit = new PopulationCriteria(new Long(2));
 
      /*  Collection<String> names = new ArrayList();
 

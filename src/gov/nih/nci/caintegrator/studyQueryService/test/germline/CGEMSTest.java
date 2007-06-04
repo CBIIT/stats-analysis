@@ -176,7 +176,7 @@ public abstract class CGEMSTest extends BaseSpringTestCase {
 
     }
     protected void setUpAnalysisGroupCriteria() {
-         AnalysisGroupCriteria crit = new AnalysisGroupCriteria("CGEMS Prostate Cancer WGAS Phase 1");
+         AnalysisGroupCriteria crit = new AnalysisGroupCriteria(new Long(1));
          crit.setNames(new String[] {"Incidence density sampling, Unadjusted score test, Controls"});
          //"early", "advanced"
          spCrit.setAnalysisGroupCriteria(crit);

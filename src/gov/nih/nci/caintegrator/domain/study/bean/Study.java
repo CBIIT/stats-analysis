@@ -133,8 +133,24 @@ public  class Study
         this.startDate = startDate;
     }
 	
+    /***
+     * * The version of the study
+     */
 
-
+    	private java.lang.String version;
+    	
+    	/**
+    	 * @return Returns the version.
+    	 */
+    	public java.lang.String getVersion() {
+    		return version;
+    	}
+    	/**
+    	 * @param version The version to set.
+    	 */
+    	public void setVersion(java.lang.String version) {
+    		this.version = version;
+    	}
 		public boolean equals(Object obj){
 			boolean eq = false;
 			if(obj instanceof Study) {
@@ -410,5 +426,6 @@ public  class Study
     public void setSnpAssociationAnalysisCollection(Set<SNPAssociationAnalysis> snpAssociationAnalysisCollection) {
         this.snpAssociationAnalysisCollection = snpAssociationAnalysisCollection;
     }
+
 
 }

@@ -44,6 +44,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                                  " FROM SNPAssociationFinding " + TARGET_FINDING_ALIAS +
                                 // " JOIN "+ TARGET_FINDING_ALIAS + ".snpAnnotation snpAnnot " +
                                  " JOIN "+ TARGET_FINDING_ALIAS + ".snpAssociationAnalysis analysis " +
+                                 " JOIN "+TARGET_FINDING_ALIAS + ".oddsRatioCollection oddsRatios " +
                                  " {0} {1} " + " WHERE {2} {3} {4} " );
 
 
@@ -137,9 +138,9 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
             myHql.append(hql);
         }
         if (studyCrit != null) {
-            if (studyCrit.getName() != null) {
-                myHql.append( TARGET_FINDING_ALIAS + ".study.name = :studyName AND ");
-                params.put("studyName", studyCrit.getName().trim());
+            if (studyCrit.getId() != null) {
+                myHql.append( TARGET_FINDING_ALIAS + ".study.id = :studyId AND ");
+                params.put("studyId", studyCrit.getId());
             }
         }
     }
@@ -161,7 +162,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                for (int i = 0; i < assocAnalysisObjs.size(); i++) {
                     SNPAssociationAnalysis assocAnalysisObj =  assocAnalysisObjs.get(i);
                     SNPAssociationAnalysisCriteria methodAndNameCrit =
-                                                    new SNPAssociationAnalysisCriteria(studyCrit.getName());
+                                                    new SNPAssociationAnalysisCriteria(studyCrit.getId());
                     methodAndNameCrit.setMethods(assocAnalysisObj.getMethods());
                     methodAndNameCrit.setName(assocAnalysisObj.getName());
                     analysisCrits.add(methodAndNameCrit);
@@ -233,7 +234,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
         List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
-        List<OddsRatio> oddsRatioObjs = new ArrayList<OddsRatio>();
+        //List<OddsRatio> oddsRatioObjs = new ArrayList<OddsRatio>();
 
         /* initialize SNPAnnotations */
         Collection<Long> snpAnnotsIDs = new HashSet<Long>();
@@ -241,10 +242,10 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                 SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
                 snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
-                oddsRatioObjs.addAll(finding.getOddsRatioCollection());
+                finding.getOddsRatioCollection().size();
         }
-        Hibernate.initialize(oddsRatioObjs);
-        oddsRatioObjs = null;
+        //Hibernate.initialize(oddsRatioObjs);
+        //oddsRatioObjs = null;
         if(snpAnnotsIDs.size() >0) {
               ArrayList arrayIDs = new ArrayList(snpAnnotsIDs);
               for (int i = 0; i < arrayIDs.size();) {

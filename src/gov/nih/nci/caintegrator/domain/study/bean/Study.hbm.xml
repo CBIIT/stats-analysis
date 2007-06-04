@@ -61,6 +61,13 @@
                  insert="false" 
                  update="false" />  
                  
+        <!-- version-->                 
+        <property name="version" 
+                 type="java.lang.String" 
+                 column="VERSION_CODE" 
+                 insert="false" 
+                 update="false" />
+                 
       <!-- here is for m-m relationships -->        
    
       <set name="populationCollection" table="STUDY_STDPOPUPLATION_ASSO" lazy="true">

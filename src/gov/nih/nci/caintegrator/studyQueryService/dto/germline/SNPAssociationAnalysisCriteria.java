@@ -20,19 +20,19 @@ public class SNPAssociationAnalysisCriteria {
 
 	private String methods;
 	private String name;
-    private String studyName;
+    private Long studyId;
     private String analysisCode;
     private Map<Long, List<String>> representCodeMap = new TreeMap<Long, List<String>>();
-    public SNPAssociationAnalysisCriteria(String studyName) {
-        this.studyName = studyName;
+    public SNPAssociationAnalysisCriteria(Long studyId) {
+        this.studyId = studyId;
     }
 
-    public String getStudyName() {
-        return studyName;
+    public Long getStudyId() {
+        return studyId;
     }
 
-    public void setStudyName(String studyName) {
-        this.studyName = studyName;
+    public void setStudyId(Long studyId) {
+        this.studyId = studyId;
     }
 
     public String getMethods() {

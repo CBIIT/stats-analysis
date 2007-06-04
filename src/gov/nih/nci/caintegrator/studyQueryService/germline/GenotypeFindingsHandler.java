@@ -107,9 +107,9 @@ public class GenotypeFindingsHandler extends FindingsHandler {
         }
 
         if (studyCrit != null) {
-                if (studyCrit.getName() != null) {
-                    hql.append( TARGET_FINDING_ALIAS + ".study.name = :studyName AND ");
-                    params.put("studyName", studyCrit.getName().trim());
+                if (studyCrit.getId() != null) {
+                    hql.append( TARGET_FINDING_ALIAS + ".study.id = :studyId AND ");
+                    params.put("studyId", studyCrit.getId());
                 }
         }
 

@@ -9,6 +9,10 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.germline;
 public class AnalysisGroupCriteria {
 
     private String[] names;
+    
+    public AnalysisGroupCriteria(Long studyId) {
+        this.studyId = studyId;
+    }
 
     public String[] getNames() {
         return names;
@@ -17,19 +21,22 @@ public class AnalysisGroupCriteria {
     public void setNames(String[] names) {
         this.names = names;
     }
-     private String studyName;
+     private Long studyId;
+     
+ 	/**
+ 	 * @return Returns the studyId.
+ 	 */
+ 	public Long getStudyId() {
+ 		return studyId;
+ 	}
 
-    public String getStudyName() {
-        return studyName;
-    }
+ 	/**
+ 	 * @param studyId The studyId to set.
+ 	 */
+ 	public void setStudyId(Long studyId) {
+ 		this.studyId = studyId;
+ 	}
 
-    public AnalysisGroupCriteria(String studyName) {
-        this.studyName = studyName;
-    }
-
-    public void setStudyName(String studyName) {
-        this.studyName = studyName;
-    }
 
     @Override
 	public String toString()
@@ -46,4 +53,6 @@ public class AnalysisGroupCriteria {
 			
 		return str;
 	}
+
+
 }

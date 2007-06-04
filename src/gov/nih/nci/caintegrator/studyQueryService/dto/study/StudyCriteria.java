@@ -14,6 +14,8 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.study;
  */
 
 public class StudyCriteria {
+	private Long id;
+	private String version;
 
 	private String name;
 	/**
@@ -49,6 +51,34 @@ public class StudyCriteria {
 			str = str + "Study Name: " + name + "\n";
 		
 		return str;
+	}
+
+	/**
+	 * @return Returns the id.
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id The id to set.
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return Returns the version.
+	 */
+	public String getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version The version to set.
+	 */
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 }
