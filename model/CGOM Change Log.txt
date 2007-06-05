@@ -68,3 +68,7 @@ Changes from 1.66 to 1.67:
 1. Created target object diagram.
 2. Added the assocation btwn VariationReporter to SNPAnnotation.
 3. Changed all the ClinicalAssessment return packge to clinical from domain in the the LeukemiaClinicalFinding object.
+
+Changes from 1.67 to 1.68:
+
+Add association from StudyParticipant to Histology
