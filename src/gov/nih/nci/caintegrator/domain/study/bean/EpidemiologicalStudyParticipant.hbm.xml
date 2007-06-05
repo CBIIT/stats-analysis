@@ -198,5 +198,8 @@
 	<one-to-one name="epidemiologicalFinding"
 			class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EpidemiologicalFinding" property-ref="studyParticipant" outer-join="true" constrained="false"/>                 
 			
+ 	<one-to-one name="histology"
+		class="gov.nih.nci.caintegrator.domain.study.bean.Histology"  property-ref="studyParticipant" outer-join="true" constrained="false"/>			
+			
 	</class>
 </hibernate-mapping>

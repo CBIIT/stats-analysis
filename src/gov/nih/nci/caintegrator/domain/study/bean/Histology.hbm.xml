@@ -34,7 +34,7 @@
         <!-- comment -->        
        <property name="comment" 
                  type="java.lang.String" 
-                 column="COMMENT" 
+                 column="COMMENTS" 
                  insert="false" 
                  update="false" />
                  
@@ -67,7 +67,7 @@
                  insert="false" 
                  update="false" />                
      
-     
+	<many-to-one name="studyParticipant" class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant" column="PARTICIPANT_ID" />     
          
       <!-- here is for m-m relationships , needs to change here too once checking with Srini-->      
       

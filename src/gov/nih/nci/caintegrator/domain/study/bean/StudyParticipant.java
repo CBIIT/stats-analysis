@@ -30,6 +30,7 @@ public  class StudyParticipant
     private Double height;
     private Double waistCircumference;
     private EpidemiologicalFinding epidemiologicalFinding;
+    private Histology histology;
  	
 	   
     /**
@@ -621,6 +622,12 @@ public  class StudyParticipant
     public void setEpidemiologicalFinding(
             EpidemiologicalFinding epidemiologicalFinding) {
         this.epidemiologicalFinding = epidemiologicalFinding;
+    }
+    public Histology getHistology() {
+        return histology;
+    }
+    public void setHistology(Histology histology) {
+        this.histology = histology;
     }
 	   
 	   

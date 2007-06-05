@@ -23,7 +23,7 @@ public  class Histology
 {
 
 	private static final long serialVersionUID = 1234567890L;
-
+	private StudyParticipant studyParticipant;
 
  	
 	   
@@ -186,6 +186,12 @@ public  class Histology
 			
 			return h;
 	}
+        public StudyParticipant getStudyParticipant() {
+            return studyParticipant;
+        }
+        public void setStudyParticipant(StudyParticipant studyParticipant) {
+            this.studyParticipant = studyParticipant;
+        }
 
 	
 	   
