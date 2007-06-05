@@ -6,12 +6,10 @@ package gov.nih.nci.caintegrator.studyQueryService.dto.epi;
   * Time:   3:58:50 PM
 **/
 public enum Relative {
-	BROTHER(1, "Brother"),
+	MOTHER(1, "Mother"),
 	FATHER(2, "Father"),
-	GRANDFATHER(3, "Grand Father"),
-	GRANDMOTHER(4, "Grand Mother"),
-	MOTHER(5, "Mother"),
-	SISTER(6, "Sister");
+	SIBLING(3, "Sibling");
+
 
     final private String name;
     final private int value;
