@@ -44,7 +44,7 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                                  " FROM SNPAssociationFinding " + TARGET_FINDING_ALIAS +
                                 // " JOIN "+ TARGET_FINDING_ALIAS + ".snpAnnotation snpAnnot " +
                                  " JOIN "+ TARGET_FINDING_ALIAS + ".snpAssociationAnalysis analysis " +
-                                 " JOIN "+TARGET_FINDING_ALIAS + ".oddsRatioCollection oddsRatios " +
+                                 //" JOIN "+TARGET_FINDING_ALIAS + ".oddsRatioCollection oddsRatios " +
                                  " {0} {1} " + " WHERE {2} {3} {4} " );
 
 
@@ -234,18 +234,17 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
 
     protected void initializeProxies(Collection<? extends Finding> findings, Session session) {
         List<GeneBiomarker> gbObjs = new ArrayList<GeneBiomarker>();
-        //List<OddsRatio> oddsRatioObjs = new ArrayList<OddsRatio>();
 
         /* initialize SNPAnnotations */
+        List<Long> snpAssocFindingIDs = new ArrayList<Long>();
         Collection<Long> snpAnnotsIDs = new HashSet<Long>();
         Collection<Long> populationIDs = new HashSet<Long>();
         for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
                 SNPAssociationFinding finding =  (SNPAssociationFinding) iterator.next();
                 snpAnnotsIDs.add(finding.getSnpAnnotation().getId());
-                finding.getOddsRatioCollection().size();
+                snpAssocFindingIDs.add(finding.getId());
         }
-        //Hibernate.initialize(oddsRatioObjs);
-        //oddsRatioObjs = null;
+
         if(snpAnnotsIDs.size() >0) {
               ArrayList arrayIDs = new ArrayList(snpAnnotsIDs);
               for (int i = 0; i < arrayIDs.size();) {
@@ -260,6 +259,21 @@ public class SNPAssociationFindingsHandler extends FindingsHandler {
                   snpAnnotcrit.list();
               }
         }
+        
+        if(snpAssocFindingIDs.size() >0) {
+            ArrayList arrayIDs = new ArrayList(snpAssocFindingIDs);
+            for (int i = 0; i < arrayIDs.size();) {
+                Collection values = new ArrayList();
+                int begIndex = i;
+                i += IN_PARAMETERS ;
+                int lastIndex = (i < arrayIDs.size()) ? i : (arrayIDs.size());
+                values.addAll(arrayIDs.subList(begIndex,  lastIndex));
+                Criteria snpAssocFindingCrit = session.createCriteria(SNPAssociationFinding.class).
+                setFetchMode("oddsRatioCollection", FetchMode.JOIN).
+                add(Restrictions.in("id", values));
+                snpAssocFindingCrit.list();
+            }
+      }
 
 //        Collection findingIDs = new HashSet();
 //        for (Iterator<? extends Finding> iterator = findings.iterator(); iterator.hasNext();) {
