@@ -35,6 +35,7 @@ public class Task implements Serializable{
         this.cacheId = cacheId;
         this.status = status;
         this.queryDTO = queryDTO;
+        setStartTime(System.currentTimeMillis());
     }
     
     /**

@@ -22,7 +22,7 @@ public class PatientCharacteristicsCriterion {
     private Double weightLowerLimit;
     private Double weightUpperLimit;
 
-    private ResidentialArea residentialArea;
+    private String residentialArea;
     private Religion religion;
 
     public Gender selfReportedgender;
@@ -34,11 +34,11 @@ public class PatientCharacteristicsCriterion {
 
 	}
 
-    public ResidentialArea getResidentialArea() {
+    public String getResidentialArea() {
         return residentialArea;
     }
 
-    public void setResidentialArea(ResidentialArea residentialArea) {
+    public void setResidentialArea(String residentialArea) {
         this.residentialArea = residentialArea;
     }
 

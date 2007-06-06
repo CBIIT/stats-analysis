@@ -54,10 +54,6 @@ public class FindingsManagerImpl implements FindingsManager{
         SessionBasedFindingStrategy strategy = chooseStrategy(task.getQueryDTO());
         TaskResult taskResult = strategy.retrieveTaskResult(task);
         task = taskResult.getTask();
-        if(taskResult instanceof AnalysisFinding) {
-            task.setElapsedTime(((AnalysisFinding)taskResult).getElapsedTime());
-            task.setStatus(((AnalysisFinding)taskResult).getStatus());
-        }
         return task;
     }
 
