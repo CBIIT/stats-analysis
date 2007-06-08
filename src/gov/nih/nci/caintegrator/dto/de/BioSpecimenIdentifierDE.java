@@ -72,7 +72,9 @@ import java.io.Serializable;
 */
 
 public class BioSpecimenIdentifierDE extends DomainElement implements
-		Serializable, Cloneable {
+		Serializable, Cloneable , Comparable{
+	private String sampleId;
+	private String specimenName;
 	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
 	 * data field that is added to this class also be cloneable and be added to
@@ -138,6 +140,62 @@ public class BioSpecimenIdentifierDE extends DomainElement implements
 		BioSpecimenIdentifierDE myClone = (BioSpecimenIdentifierDE) super
 				.clone();
 		return myClone;
+	}
+
+	/**
+	 * @return Returns the sampleId.
+	 */
+	public String getSampleId() {
+		return sampleId;
+	}
+
+	/**
+	 * @param sampleId The sampleId to set.
+	 */
+	public void setSampleId(String sampleId) {
+		this.sampleId = sampleId;
+	}
+
+	/**
+	 * @return Returns the specimenName.
+	 */
+	public String getSpecimenName() {
+		return specimenName;
+	}
+
+	/**
+	 * @param specimenName The specimenName to set.
+	 */
+	public void setSpecimenName(String specimanName) {
+		this.specimenName = specimanName;
+	}
+	/**
+	 * The compareTo method is used to compare this object with another and determine
+	 * is this is less, equal, or greater than that object.  This is used in sorting
+	 * these objects.
+	 * <P>
+	 * @param o The object to compare this to
+	 * @return int
+	 */
+	public int compareTo(Object o) {
+		int returnValue = 0;
+		BioSpecimenIdentifierDE other;
+		// Must be another SNPAssociationFindingReport object
+		if (!(o instanceof BioSpecimenIdentifierDE))
+		      throw new ClassCastException("A BioSpecimenIdentifierDE object expected.");
+		else
+			other = (BioSpecimenIdentifierDE)o;
+		
+		if(this.getSpecimenName() != null && other.getSpecimenName()!= null){
+			returnValue =  this.getSpecimenName().compareTo(other.getSpecimenName());
+		}
+		else if	(this.getSampleId() != null && other.getSampleId()!= null){
+				returnValue =  this.getSampleId().compareTo(other.getSampleId());
+		}
+		else{
+			returnValue =  this.getValueObject().compareTo(other.getValueObject());
+		}
+		return returnValue;
 	}
 
 }
