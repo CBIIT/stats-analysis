@@ -19,6 +19,9 @@
 		<id name="id" column="EPI_FINDING_ID">
 			<generator class="native" />
 		</id>
+		
+		<property name="relativeWithLungCancer" 
+        	column="FAMILY_LUNG_CANCER"/>
 
 		<set name="tobaccoConsumptionCollection" lazy="true" >
 			<key column="EPI_FINDING_ID" />

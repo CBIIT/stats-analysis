@@ -9,8 +9,8 @@ import java.util.Collection;
  */
 public class FamilyHistoryCriterion {
 
+    public Integer familyLungCancer;
     public java.util.Collection<Relative>  smokingRelativeCollection;
-    public java.util.Collection<Relative> lungCancerRelativeCollection;
 
     public FamilyHistoryCriterion(){}
 
@@ -22,11 +22,13 @@ public class FamilyHistoryCriterion {
         this.smokingRelativeCollection = smokingRelativeCollection;
     }
 
-    public Collection<Relative> getLungCancerRelativeCollection() {
-        return lungCancerRelativeCollection;
+    public Integer getFamilyLungCancer() {
+        return familyLungCancer;
     }
 
-    public void setLungCancerRelativeCollection(Collection<Relative> lungCancerRelativeCollection) {
-        this.lungCancerRelativeCollection = lungCancerRelativeCollection;
+    public void setFamilyLungCancer(Integer familyLungCancer) {
+        this.familyLungCancer = familyLungCancer;
     }
+
+
 }

@@ -7,7 +7,7 @@ import java.util.Collection;
 public class EpidemiologicalFinding  {
 
     private Long id;
-    private Boolean relativeWithLungCancer;
+    private String relativeWithLungCancer;
     private StudyParticipant studyParticipant;
     private Lifestyle lifestyle;
     private BehavioralAssessment behavioralAssessment;
@@ -78,11 +78,11 @@ public class EpidemiologicalFinding  {
         this.studyParticipant = studyParticipant;
     }
 
-    public Boolean getRelativeWithLungCancer() {
+    public String getRelativeWithLungCancer() {
         return relativeWithLungCancer;
     }
 
-    public void setRelativeWithLungCancer(Boolean relativeWithLungCancer) {
+    public void setRelativeWithLungCancer(String relativeWithLungCancer) {
         this.relativeWithLungCancer = relativeWithLungCancer;
     }
     
