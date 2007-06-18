@@ -10,8 +10,7 @@
 
 <hibernate-mapping>
 	<class name="gov.nih.nci.caintegrator.domain.epidemiology.bean.Relative" 
-    	table="RELATIVE"
-        lazy="true">
+    	table="RELATIVE">
 
 	    <id name="id" 
 	    	column="RELATIVE_ID">

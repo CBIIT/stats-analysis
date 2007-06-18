@@ -28,13 +28,13 @@
 			<one-to-many
 				class="gov.nih.nci.caintegrator.domain.epidemiology.bean.TobaccoConsumption"  />
 		</set>
-		<set name="environmentalFactorCollection" inverse="true" lazy="true">
+		<set name="environmentalFactorCollection" inverse="true" >
 			<key column="EPI_FINDING_ID" />
 			<one-to-many
 				class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EnvironmentalFactor"  />
 		</set>
 
-		<set name="relativeCollection" inverse="true">
+		<set name="relativeCollection" inverse="true" lazy="false" fetch="subselect">
 			<key column="EPI_FINDING_ID" />
 			<one-to-many
 				class="gov.nih.nci.caintegrator.domain.epidemiology.bean.Relative" />
