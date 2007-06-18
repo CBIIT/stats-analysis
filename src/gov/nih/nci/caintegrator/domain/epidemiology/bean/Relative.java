@@ -6,41 +6,29 @@ public class Relative {
 
     private Long id;
     private String relationshipType;
-    private Boolean alive;
-    private Boolean livingCompanion;
-    private Collection tobaccoConsumptionCollection;
-    private Collection medicalConditionCollection;
+    private String smokingStatus;
+    private EpidemiologicalFinding epidemiologicalFinding;
     
-    public Collection getMedicalConditionCollection() {
-        return medicalConditionCollection;
+    public EpidemiologicalFinding getEpidemiologicalFinding() {
+        return epidemiologicalFinding;
     }
-    public void setMedicalConditionCollection(Collection medicalConditionCollection) {
-        this.medicalConditionCollection = medicalConditionCollection;
+    public void setEpidemiologicalFinding(
+            EpidemiologicalFinding epidemiologicalFinding) {
+        this.epidemiologicalFinding = epidemiologicalFinding;
     }
-    public Collection getTobaccoConsumptionCollection() {
-        return tobaccoConsumptionCollection;
-    }
-    public void setTobaccoConsumptionCollection(
-            Collection tobaccoConsumptionCollection) {
-        this.tobaccoConsumptionCollection = tobaccoConsumptionCollection;
-    }
-    public Boolean isAlive() {
-        return alive;
-    }
-    public void setAlive(Boolean alive) {
-        this.alive = alive;
-    }
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    public Boolean isLivingCompanion() {
-        return livingCompanion;
+
+    public String getSmokingStatus() {
+        return smokingStatus;
     }
-    public void setLivingCompanion(Boolean livingCompanion) {
-        this.livingCompanion = livingCompanion;
+    public void setSmokingStatus(String smokingStatus) {
+        this.smokingStatus = smokingStatus;
     }
     public String getRelationshipType() {
         return relationshipType;

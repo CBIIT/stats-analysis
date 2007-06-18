@@ -21,19 +21,9 @@
         <property name="relationshipType" 
         	column="RELATIONSHIP_TYPE"/>
         	
-        <property name="alive" 
-        	column="ALIVE"/>
+        <property name="smokingStatus" 
+        	column="SMOKER"/>
         	
-        <property name="livingCompanion" 
-        	column="LIVING_COMPANION"/>
-    	<set name="tobaccoConsumptionCollection" lazy="true" inverse="true">
-      		<key column="RELATIVE_ID" />
-      		<one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.TobaccoConsumption" />
-    	</set>  
-    	<set name="medicalConditionCollection" lazy="true" inverse="true">
-      		<key column="RELATIVE_ID" />
-      		<one-to-many class="gov.nih.nci.caintegrator.domain.epidemiology.bean.MedicalCondition" />
-    	</set>  
-
+		<many-to-one name="epidemiologicalFinding" class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EpidemiologicalFinding" column="EPI_FINDING_ID" />
 	</class>
 </hibernate-mapping>
