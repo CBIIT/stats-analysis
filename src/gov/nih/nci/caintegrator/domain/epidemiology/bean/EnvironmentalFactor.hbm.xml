@@ -18,19 +18,11 @@
 	        <generator class="native"/>
 	    </id>
 	    
-        <property name="exposureLevel" 
-        	column="EXPOSURE_LEVEL"/>
-        	
-        <property name="exposureArea" 
-        	column="EXPOSURE_AREA"/>
-        	
-        <property name="exposureAgeGroup" 
-        	column="EXPOSURE_AGE_GROUP"/>
         	
         <property name="exposureType" 
         	column="EXPOSURE_TYPE"/>
         	
 
-
+		<many-to-one name="epidemiologicalFinding" class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EpidemiologicalFinding" column="EPI_FINDING_ID" />
 	</class>
 </hibernate-mapping>

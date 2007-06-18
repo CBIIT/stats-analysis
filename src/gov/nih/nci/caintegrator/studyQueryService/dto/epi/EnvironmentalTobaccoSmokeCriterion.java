@@ -10,20 +10,10 @@ import java.util.Collection;
 
 public class EnvironmentalTobaccoSmokeCriterion {
 
-    public java.util.Collection<OccupationalExposure> occupationalExposureCollection;
     public java.util.Collection<SmokingExposure> smokingExposureCollection;
-    public java.util.Collection<LivingCompanionExposure> livingCompanionExposureCollection;
 
     public EnvironmentalTobaccoSmokeCriterion(){
 
-    }
-
-    public Collection<OccupationalExposure> getOccupationalExposureCollection() {
-        return occupationalExposureCollection;
-    }
-
-    public void setOccupationalExposureCollection(Collection<OccupationalExposure> occupationalExposureCollection) {
-        this.occupationalExposureCollection = occupationalExposureCollection;
     }
 
     public Collection<SmokingExposure> getSmokingExposureCollection() {
@@ -34,11 +24,4 @@ public class EnvironmentalTobaccoSmokeCriterion {
         this.smokingExposureCollection = smokingExposureCollection;
     }
 
-    public Collection<LivingCompanionExposure> getLivingCompanionExposureCollection() {
-        return livingCompanionExposureCollection;
-    }
-
-    public void setLivingCompanionExposureCollection(Collection<LivingCompanionExposure> livingCompanionExposureCollection) {
-        this.livingCompanionExposureCollection = livingCompanionExposureCollection;
-    }
 }

@@ -4,27 +4,14 @@ public class EnvironmentalFactor {
 
     private Long id;
     private String exposureType;
-    private String exposureLevel;
-    private String exposureArea;
-    private String exposureAgeGroup;
+    private EpidemiologicalFinding epidemiologicalFinding;
     
-    public String getExposureAgeGroup() {
-        return exposureAgeGroup;
+    public EpidemiologicalFinding getEpidemiologicalFinding() {
+        return epidemiologicalFinding;
     }
-    public void setExposureAgeGroup(String exposureAgeGroup) {
-        this.exposureAgeGroup = exposureAgeGroup;
-    }
-    public String getExposureArea() {
-        return exposureArea;
-    }
-    public void setExposureArea(String exposureArea) {
-        this.exposureArea = exposureArea;
-    }
-    public String getExposureLevel() {
-        return exposureLevel;
-    }
-    public void setExposureLevel(String exposureLevel) {
-        this.exposureLevel = exposureLevel;
+    public void setEpidemiologicalFinding(
+            EpidemiologicalFinding epidemiologicalFinding) {
+        this.epidemiologicalFinding = epidemiologicalFinding;
     }
     public String getExposureType() {
         return exposureType;
