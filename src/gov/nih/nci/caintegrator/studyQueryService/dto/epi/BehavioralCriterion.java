@@ -10,7 +10,8 @@ public class BehavioralCriterion {
 
 	private Integer anxietyScore;
 	private Integer depressionScore;
-	private Integer fagerstromScore;
+	private Integer fagerstromScoreLower;
+	private Integer fagerstromScoreUpper;
 
 	public BehavioralCriterion(){ }
 
@@ -30,11 +31,21 @@ public class BehavioralCriterion {
         this.depressionScore = depressionScore;
     }
 
-    public Integer getFagerstromScore() {
-        return fagerstromScore;
-    }
+	public Integer getFagerstromScoreLower() {
+		return fagerstromScoreLower;
+	}
 
-    public void setFagerstromScore(Integer fagerstromScore) {
-        this.fagerstromScore = fagerstromScore;
-    }
+	public void setFagerstromScoreLower(Integer fagerstromScoreLower) {
+		this.fagerstromScoreLower = fagerstromScoreLower;
+	}
+
+	public Integer getFagerstromScoreUpper() {
+		return fagerstromScoreUpper;
+	}
+
+	public void setFagerstromScoreUpper(Integer fagerstromScoreUpper) {
+		this.fagerstromScoreUpper = fagerstromScoreUpper;
+	}
+
+   
 }
