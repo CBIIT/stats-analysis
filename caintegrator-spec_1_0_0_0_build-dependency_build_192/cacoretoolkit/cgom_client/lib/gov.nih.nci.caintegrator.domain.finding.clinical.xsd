@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.clinical" xmlns:gov.nih.nci.caintegrator.domain.study="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.study" xmlns:gov.nih.nci.caintegrator.domain.annotation.gene="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.gene" xmlns:gov.nih.nci.caintegrator.domain.annotation.protein="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.protein" xmlns:gov.nih.nci.caintegrator.domain.annotation.snp="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.snp" xmlns:gov.nih.nci.caintegrator.domain.finding="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding" xmlns:gov.nih.nci.caintegrator.domain.finding.variation="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation" xmlns:gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation" xmlns:gov.nih.nci.caintegrator.domain.finding.variation.germline="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.germline" xmlns:gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency" xmlns:gov.nih.nci.caintegrator.domain.common="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.common" xmlns:gov.nih.nci.caintegrator.domain.analysis.snp="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.analysis.snp" targetNamespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.clinical" elementFormDefault="qualified">
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.protein" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.protein.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.analysis.snp" schemaLocation="gov.nih.nci.caintegrator.domain.analysis.snp.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.common" schemaLocation="gov.nih.nci.caintegrator.domain.common.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.snp" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.snp.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding" schemaLocation="gov.nih.nci.caintegrator.domain.finding.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.germline" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.germline.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.gene" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.gene.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.study" schemaLocation="gov.nih.nci.caintegrator.domain.study.xsd" />
+  <xs:element name="ClinicalAssessment" type="ClinicalAssessment" />
+  <xs:complexType name="ClinicalAssessment">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="value" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ClinicalFinding" type="ClinicalFinding" />
+  <xs:complexType name="ClinicalFinding">
+    <xs:complexContent>
+      <xs:extension base="gov.nih.nci.caintegrator.domain.finding:Finding">
+        <xs:sequence>
+          <xs:element name="studyParticipant" type="gov.nih.nci.caintegrator.domain.study:StudyParticipant" minOccurs="0" maxOccurs="1" />
+          <xs:element name="timeCourse" type="gov.nih.nci.caintegrator.domain.study:TimeCourse" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+
