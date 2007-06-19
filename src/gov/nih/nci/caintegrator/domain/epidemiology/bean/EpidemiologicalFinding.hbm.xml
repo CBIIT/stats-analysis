@@ -23,7 +23,7 @@
 		<property name="relativeWithLungCancer" 
         	column="FAMILY_LUNG_CANCER"/>
 
-		<set name="tobaccoConsumptionCollection" lazy="true" >
+		<set name="tobaccoConsumptionCollection" lazy="false" fetch="join">
 			<key column="EPI_FINDING_ID" />
 			<one-to-many
 				class="gov.nih.nci.caintegrator.domain.epidemiology.bean.TobaccoConsumption"  />
