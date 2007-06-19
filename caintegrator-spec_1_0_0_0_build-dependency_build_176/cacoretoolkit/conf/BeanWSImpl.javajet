@@ -1,0 +1,17 @@
+<%@ jet package="gov.nih.nci.codegen.core.template.jet" 
+        class="BeanWSImpl"
+        skeleton="BeanSkel.skeleton" %>
+
+<%
+Classifier klass = (Classifier)context.get("modelElement");
+String basePkg = (String)context.get("basePackage");
+%>
+
+package <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.ws;
+import <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.ws.*;
+import <%=UML13Utils.getNamespaceName(UML13Utils.getPackage(UML13Utils.getModel(klass), basePkg), klass)%>.*;
+
+public class <%=klass.getName()%>Impl extends <%=klass.getName()%>
+{
+	
+}
