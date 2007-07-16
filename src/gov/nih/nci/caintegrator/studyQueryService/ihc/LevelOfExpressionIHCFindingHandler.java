@@ -9,9 +9,11 @@ import gov.nih.nci.caintegrator.studyQueryService.protein.ProteinBiomarkerHandle
 import gov.nih.nci.caintegrator.studyQueryService.study.SpecimenHandler;
 import gov.nih.nci.caintegrator.util.HQLHelper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -21,9 +23,9 @@ import org.hibernate.Session;
 public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
 	
 	 private static Logger logger = Logger.getLogger(LevelOfExpressionIHCFindingHandler.class);
-     // This is the Hibernate Session factory that is injected by Spring
+    // This is the Hibernate Session factory that is injected by Spring
      
-	
+     	
 	 protected Class getFindingType() {
 	   return LevelOfExpressionIHCFinding.class;
       }
@@ -40,8 +42,10 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
     	 
     	  // Start of the where clause
     	 
-     	 theHQL.append(" from LevelOfExpressionIHCFinding as levelIHC LEFT JOIN FETCH levelIHC.proteinBiomarker LEFT JOIN FETCH levelIHC.specimen ");  
-    	  	    
+     	 theHQL.append("select levelIHC.specimen.patientDID||levelIHC.proteinBiomarker.id from LevelOfExpressionIHCFinding as levelIHC LEFT JOIN levelIHC.proteinBiomarker LEFT JOIN levelIHC.specimen ");  
+    	 
+        
+         
          String theANDString = " WHERE ";        
        
          
@@ -135,9 +139,9 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
 
              StringBuilder theHQL = handleCriteria(inCriteria, theParams,null);
              
-        	 ProteinBiomarkerCriteia theProteinCriteria = inCriteria.getProteinBiomarkerCrit();
-        	 SpecimenCriteria theSpecimenCriteria = inCriteria.getSpecimenCriteria();
-        	  
+             ProteinBiomarkerCriteia theProteinCriteria = inCriteria.getProteinBiomarkerCrit();
+             SpecimenCriteria theSpecimenCriteria = inCriteria.getSpecimenCriteria();
+              
              
              if (theProteinCriteria != null)
              {
@@ -151,6 +155,7 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
                  ProteinBiomarkerHandler theProteinHandler = theProteinCriteria.getHandler();
                  StringBuilder theProteinHQL = theProteinHandler.handleCriteria(theProteinCriteria, theParams);
                  theHQL.append(theProteinHQL + ")");
+                 
                  
              }
              
@@ -171,9 +176,65 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
 
              logger.info("HQL7777777777: " + theHQL.toString());
              Query q = theSession.createQuery(theHQL.toString());
-             HQLHelper.setParamsOnQuery(theParams, q);
-             Collection theObjects = q.list();
-             theResults.addAll(theObjects);
+             
+             long start = System.currentTimeMillis();
+             
+             HQLHelper.setParamsOnQuery(theParams, q);   
+             
+                         
+             /*this returns my "initial query" to bring back objects that met my criteria.
+             Next I would like to find out about the other timepoint data for the objects
+             that were just found.*/
+             
+             List<String> theObjects = q.list();
+             
+             //check to see if objects exceed 1000, so that the statemnt can be segmented
+             
+             if(theObjects.size()>1000){
+                     List<List<String>> segmentedObjects = new ArrayList<List<String>>();
+                     List<String> myObjects = new ArrayList<String>();
+                     
+                     for(int i=0;i<theObjects.size();i++){
+                         if(i!=0 && i%1000==0){
+                             List<String> tempObjects = new ArrayList<String>(myObjects);
+                             segmentedObjects.add(tempObjects);
+                             myObjects.clear();
+                         }
+                         else{
+                             myObjects.add(theObjects.get(i));
+                         }
+                     }
+                     if(!myObjects.isEmpty()){
+                         segmentedObjects.add(myObjects);
+                     }
+                     /* now I should have segemented groups of 1000 (or less) to iterate over
+                      and populate into my "in" clause for each group. When the queries complete,
+                      I add the results into my results object. */
+                     
+                     for(List list: segmentedObjects){
+                         String theFinalHQL = "select levelIHC from LevelOfExpressionIHCFinding as levelIHC LEFT JOIN FETCH levelIHC.proteinBiomarker LEFT JOIN FETCH levelIHC.specimen " +
+                         " WHERE levelIHC.specimen.patientDID||levelIHC.proteinBiomarker.id IN (:levelIHC_objects)";
+                         System.out.println(theFinalHQL);
+                         Query theFinalQuery = null;
+                         theFinalQuery = theSession.createQuery(theFinalHQL);
+                         theFinalQuery.setParameterList("levelIHC_objects",list);
+                         Collection<LevelOfExpressionIHCFinding> objs = theFinalQuery.list();
+                         theResults.addAll(objs);
+                     }
+               }
+             
+             //if the objects do not exceed 1000, procedd with a regular in clause
+             else{
+                 String theFinalHQL = "select levelIHC from LevelOfExpressionIHCFinding as levelIHC LEFT JOIN FETCH levelIHC.proteinBiomarker LEFT JOIN FETCH levelIHC.specimen " +
+                 " WHERE levelIHC.specimen.patientDID||levelIHC.proteinBiomarker.id IN (:levelIHC_objects)";
+                 System.out.println(theFinalHQL);
+                 Query theFinalQuery = null;
+                 theFinalQuery = theSession.createQuery(theFinalHQL);
+                 theFinalQuery.setParameterList("levelIHC_objects",theObjects);
+                 Collection<LevelOfExpressionIHCFinding> objs = theFinalQuery.list();
+                 theResults.addAll(objs);
+             }
+             
          }
          
          catch (Exception e)
