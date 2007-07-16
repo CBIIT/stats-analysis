@@ -19,6 +19,7 @@ import java.util.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -201,7 +202,8 @@ public class ObjectQueryHandler {
             HashMap params = new HashMap();
             String sql = " SELECT AGE_AT_ENROLL_MIN FROM ENROLL_AGE_LU WHERE STUDY_ID = :studyId ";
             params.put("studyId", studyId);
-            Query q = session.createSQLQuery(sql);
+            SQLQuery q = session.createSQLQuery(sql);
+            q.addScalar( "AGE_AT_ENROLL_MIN", Hibernate.INTEGER); 
             HQLHelper.setParamsOnQuery(params, q);
             Collection<BigDecimal> minValues = q.list();
             Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
@@ -226,7 +228,8 @@ public class ObjectQueryHandler {
            HashMap params = new HashMap();
            String sql = " SELECT AGE_AT_ENROLL_MAX FROM ENROLL_AGE_LU WHERE STUDY_ID = :studyId ";
            params.put("studyId", studyId);
-           Query q = session.createSQLQuery(sql);
+           SQLQuery q = session.createSQLQuery(sql);
+           q.addScalar( "AGE_AT_ENROLL_MAX", Hibernate.INTEGER);
            HQLHelper.setParamsOnQuery(params, q);
            Collection<BigDecimal> minValues = q.list();
            Collection<Integer> intValues = CollectionUtils.collect(minValues, new IntegerTransformer());
@@ -242,7 +245,8 @@ public class ObjectQueryHandler {
             HashMap params = new HashMap();
             String sql = " SELECT DISTINCT CASE_CONTROL_STATUS FROM STUDY_PARTICIPANT WHERE STUDY_ID= :studyId ";
             params.put("studyId", studyId);
-            Query q = session.createSQLQuery(sql);
+            SQLQuery q = session.createSQLQuery(sql);
+            q.addScalar( "CASE_CONTROL_STATUS", Hibernate.STRING);
             HQLHelper.setParamsOnQuery(params, q);
             List<String> statusValues = q.list();
             caseControlStatus.addAll(statusValues);
@@ -256,7 +260,8 @@ public class ObjectQueryHandler {
             try {
                 Session session = getSessionFactory().getCurrentSession();
                 String sql = "SELECT GENETYPE_STATUS FROM GENOTYPE_STATUS_LU ";
-                Query q = session.createSQLQuery(sql);
+                SQLQuery q = session.createSQLQuery(sql);
+                q.addScalar( "GENETYPE_STATUS", Hibernate.STRING);
                 Collection<String> values = q.list();
                 qcStatusValues.addAll(values);
             } catch (HibernateException e) {
@@ -348,7 +353,8 @@ public class ObjectQueryHandler {
               List<String> values = crit.list();
            */
 
-            SQLQuery q = session.createSQLQuery("SELECT chromosome FROM CHR_START_END");
+            SQLQuery q = session.createSQLQuery("SELECT CHROMOSOME FROM CHR_START_END");
+            q.addScalar( "CHROMOSOME", Hibernate.STRING); 
             q.list();
             List<String> values = q.list();
             /* now sort them and place 'em in CHROMOSOME_LIST */
@@ -393,7 +399,8 @@ public class ObjectQueryHandler {
         HashMap params = new HashMap();
         String sql = "SELECT ANALYSIS_METHOD_TYPE FROM SNP_ANALYSIS_LU WHERE STUDY_ID = :studyId ORDER BY DISPLAY_ORDER";
         params.put("studyId", studyId);
-        Query q = session.createSQLQuery(sql);
+        SQLQuery q = session.createSQLQuery(sql);
+        q.addScalar( "ANALYSIS_METHOD_TYPE", Hibernate.STRING); 
         HQLHelper.setParamsOnQuery(params, q);
         List<String> values = q.list();
         if(values != null){
