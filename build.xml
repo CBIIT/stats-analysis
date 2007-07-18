@@ -10,7 +10,7 @@
 		</echo>
 		<copy file="caintegrator-spec.jar" todir="${anthill.artifacts.dir}"/>
 	</target>
-   <target name="build_jar_anthill" depends="warning,config_application_context">
+   <target name="build_jar_anthill" depends="warning">
 		<delete dir="${build.classes.dir}" failonerror="false"/>
 		<delete file="caintegrator-spec.jar" failonerror="false"/>
 		<mkdir dir="${build.classes.dir}"/>
@@ -71,21 +71,6 @@
 	</target>
 	<target name="warning" if="required_jars.not.present" depends="jar_check">
 		<fail message="Build Failed! The required ${weka.jar} is not present to compile!  Please see ${build.deploy.lib.dir}/readme.txt" />
-	</target>
-	<target name="noop"/>
-    <target name="config_hibernate">
-		<delete file="src/cgems-domain-hibernate.cfg.xml"/>
-		<copy file="src/hibernate.cfg.xml.template" tofile="src/hibernate.cfg.xml"/>
-        <replaceregexp file="src/hibernate.cfg.xml" match="__DRIVER__" replace="${connection.driver_class}" flags="g"/>
-		<replaceregexp file="src/hibernate.cfg.xml" match="__DBURL__" replace="${connection.url}" flags="g"/>
-		<replaceregexp file="src/hibernate.cfg.xml" match="__DBUSER__" replace="${connection.username}" flags="g"/>
-		<replaceregexp file="src/hibernate.cfg.xml" match="__DBPASSWORD__" replace="${connection.password}" flags="g"/>
-        <replaceregexp file="src/hibernate.cfg.xml" match="__DIALECT__" replace="${dialect}" flags="g"/>
-     </target>
-	<target name="config_application_context">
-		<delete file="DataSourceContext.properties"/>
-		<copy file="conf/DataSourceContext.properties.template" tofile="DataSourceContext.properties"/>
-        <replaceregexp file="DataSourceContext.properties" match="__APPLICATION_NAME__" replace="${application_name}" flags="g"/>
 	</target>
 	
 </project>
