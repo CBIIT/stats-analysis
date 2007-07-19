@@ -3,6 +3,8 @@
  */
 package gov.nih.nci.caintegrator.ui.graphing.chart.plot;
 
+import gov.nih.nci.caintegrator.util.MathUtil;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Paint;
@@ -325,7 +327,7 @@ public class BoxAndWhiskerCoinPlotRenderer extends BoxAndWhiskerRenderer {
         
         if(this.isDisplayCoinCloud()){
 	        //draw coin clouds
-	        drawCoinCloud( g2, state, dataArea, location, rangeAxis, xx, row, column);
+	        drawCoinCloud( g2, state, dataArea, location, rangeAxis, xx, row, column, bawDataset);
         }
 		//caIntegrator: oRadius is the radius of the outlier circles. It was used to be 3.
         // draw outliers
@@ -631,7 +633,8 @@ public class BoxAndWhiskerCoinPlotRenderer extends BoxAndWhiskerRenderer {
     							ValueAxis rangeAxis,
     							double xx,
     							int row, 
-    							int column){
+    							int column, 
+    							BoxAndWhiskerCategoryDataset bawDataset){
         double yyOutlier;
         List outliers = new ArrayList();
 		//caIntegrator Modify: oRadius is the radius of the outlier circles. It used to be 3.
@@ -643,15 +646,15 @@ public class BoxAndWhiskerCoinPlotRenderer extends BoxAndWhiskerRenderer {
         // OutlierListCollection
         // CaIntegrator Extension
        	List yCoinList = this.caIntegatorCoinList.get(String.valueOf(row)+"_"+String.valueOf(column));
-       	Random generator = new Random();
         if (yCoinList != null) {
             for (int i = 0; i < yCoinList.size(); i++) {
                 double outlier = ((Number) yCoinList.get(i)).doubleValue();
 				yyOutlier = rangeAxis.valueToJava2D(
                 	outlier, dataArea, location
                 );
-				double xxOutlier = (xx + state.getBarWidth()/5)+ generator.nextInt((int)state.getBarWidth());
-				outliers.add(new Outlier(xxOutlier , yyOutlier, oRadius ));
+				double xxmid = xx + state.getBarWidth() / 2.0;
+				//double xxOutlier = MathUtil.getRandom(xx,xx + state.getBarWidth());
+				outliers.add(new Outlier(xxmid , yyOutlier, oRadius ));
 
                 Collections.sort(outliers);
             }

@@ -359,7 +359,9 @@ public class PrincipalComponentAnalysisPlot {
 		Color diseaseColor = Color.GRAY;
 		if (diseaseName != null) {
 		  DiseaseType disease = DiseaseType.valueOf(diseaseName);
-		  diseaseColor = disease.getColor();
+		  if(disease != null){
+			  diseaseColor = disease.getColor();
+		  }
 		}
 	    
 	    int grade = pcaPoint.getDiseaseGrade();

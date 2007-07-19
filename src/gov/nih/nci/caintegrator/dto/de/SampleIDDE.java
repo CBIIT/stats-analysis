@@ -142,7 +142,7 @@ public class SampleIDDE extends DomainElement implements Cloneable, Comparable{
 	  }
 	
 	public boolean equals(Object anotherSampleIDDE){
-	    if(!(anotherSampleIDDE instanceof SampleIDDE))
+	    if(anotherSampleIDDE == null || !(anotherSampleIDDE instanceof SampleIDDE))
 	        return false;
 	    if(((SampleIDDE)anotherSampleIDDE).getValue().equals(value)) 
 	      return true;
