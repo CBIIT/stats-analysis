@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    $Id: Surgery.hbm.xml,v 1.1 2007-03-14 15:39:52 zhangd Exp $
+    
+    $Log: not supported by cvs2svn $
+    Revision 1.1  2006/11/15 15:57:41  zhangd
+    checked the files under the new project name
+
+    Revision 1.1  2006/11/08 17:51:47  zhangd
+    checked in hbm files
+
+    Revision 1.1  2006/08/18 20:00:54  georgeda
+    Final tweaks for missing attributes
+
+
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<union-subclass
+		name="gov.nih.nci.caintegrator.domain.study.Surgery"
+		extends="gov.nih.nci.caintegrator.domain.study.Procedure"
+		lazy="true" table="STUDY_SURGERY_ADMIN">
+		
+		<property name="outcomeCode" 
+        	column="OUTCOME"/>
+	</union-subclass>
+</hibernate-mapping>
