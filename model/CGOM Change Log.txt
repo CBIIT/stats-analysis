@@ -72,3 +72,10 @@ Changes from 1.66 to 1.67:
 Changes from 1.67 to 1.68:
 
 Add association from StudyParticipant to Histology
+
+Changed from 1.68 to 1.69:
+
+Added eagle objects, including everything in the epidemiology package
+Added association from StudyParticipant to EpidemiologyFinding
+Added height and weight to StudyParticipant
+Added OddsRatio object
