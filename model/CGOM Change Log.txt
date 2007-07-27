@@ -79,3 +79,6 @@ Added eagle objects, including everything in the epidemiology package
 Added association from StudyParticipant to EpidemiologyFinding
 Added height and weight to StudyParticipant
 Added OddsRatio object
+
+1.69 to 1.70
+Added call to GenotypeFinding object
