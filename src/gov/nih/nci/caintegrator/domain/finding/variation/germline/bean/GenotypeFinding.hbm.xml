@@ -81,6 +81,8 @@
                  column="STATUS" 
                  insert="false" 
                  update="false" />  
+        <property name="call"
+        		  column="CALL"/>
                     
         <many-to-one name="snpAnnotation"
            class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation"

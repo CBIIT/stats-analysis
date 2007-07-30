@@ -24,6 +24,7 @@ public  class GenotypeFinding
 
 	private static final long serialVersionUID = 1234567890L;
 
+    private String call;
 
  	
 	   
@@ -295,6 +296,12 @@ public  class GenotypeFinding
 
     public void setStudy(gov.nih.nci.caintegrator.domain.study.bean.Study study){
         this.study = study;
+    }
+    public String getCall() {
+        return call;
+    }
+    public void setCall(String call) {
+        this.call = call;
     }	
 	   
 	   
