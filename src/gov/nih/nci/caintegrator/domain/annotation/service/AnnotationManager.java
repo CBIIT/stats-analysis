@@ -32,4 +32,6 @@ public interface AnnotationManager {
     
     public List<SNPAnnotation> getSnpAnnotationsForGene(String geneId, Long kbUpstream, Long kbDownstream);
     
+    public List<SNPAnnotation> getSnpAnnotationsForSymbol(String symbol);
+    
 }

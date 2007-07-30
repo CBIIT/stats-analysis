@@ -20,6 +20,8 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -179,6 +181,17 @@ public class AnnotationManagerImpl implements AnnotationManager {
         criteria.add(Restrictions.eq("chromosomeName", chr));
         criteria.add(Restrictions.ge("chromosomeLocation", start - (kbUpstream * 1000)));
         criteria.add(Restrictions.le("chromosomeLocation", end + (kbDownstream * 1000)));
+        return criteria.list();
+    }
+
+    public List<SNPAnnotation> getSnpAnnotationsForSymbol(String symbol) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Criteria criteria = currentSession
+                .createCriteria(SNPAnnotation.class);
+        Disjunction ids = Expression.disjunction();
+        ids.add(Restrictions.ilike("dbsnpId", symbol));
+        ids.add(Restrictions.ilike("secondaryIdentifier", symbol));        
+        criteria.add(ids);
         return criteria.list();
     }
 
