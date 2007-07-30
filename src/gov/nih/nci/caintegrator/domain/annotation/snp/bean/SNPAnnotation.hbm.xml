@@ -78,13 +78,12 @@
 
  
 
-    <!--    TODO: This is same as "id"/SNPANNO_ID attribute (internally assigned):  So commented out.  RAM
        <property name="secondaryIdentifier" 
                  type="java.lang.String" 
                  column="SECONDARY_ID" 
                  insert="false" 
                  update="false" />                 
-     -->                                 
+                               
                    
      <!-- here is for 1-m relationships -->  
     
