@@ -30,6 +30,10 @@ public class CompoundClassComparisonFinding extends AnalysisFinding implements
 	private List<ClassComparisonFinding> classComparisonFindingList = new ArrayList<ClassComparisonFinding>();
 
 	private Map reporterAnnotationsMap;
+    
+    public CompoundClassComparisonFinding() {
+        super(null, null, FindingStatus.Running);
+    }
 
 	public CompoundClassComparisonFinding(String session, String task,
 			FindingStatus status, CompoundAnalysisResult result) {
