@@ -12,9 +12,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Restrictions;
+
 public interface AnnotationManager {
 
-    public Map<String, GeneBiomarker> getGenesForReporters(
+    public Map<String, Collection<GeneBiomarker>> getGenesForReporters(
             AnnotationCriteria criteria);
 
     public Map<GeneBiomarker, Collection<GeneExprReporter>> getReportersForGenes(
@@ -33,5 +38,9 @@ public interface AnnotationManager {
     public List<SNPAnnotation> getSnpAnnotationsForGene(String geneId, Long kbUpstream, Long kbDownstream);
     
     public List<SNPAnnotation> getSnpAnnotationsForSymbol(String symbol);
+
+    public Collection<GeneExprReporter> getReporterAnnotations(AnnotationCriteria annotationCriteria);
+
+    public Collection<GeneExprReporter> getReportersForPlatform(AnnotationCriteria annotationCriteria);
     
 }

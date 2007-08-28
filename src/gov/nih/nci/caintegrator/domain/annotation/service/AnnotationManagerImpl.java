@@ -20,6 +20,7 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.MatchMode;
@@ -28,12 +29,12 @@ import org.hibernate.criterion.Restrictions;
 
 public class AnnotationManagerImpl implements AnnotationManager {
 
-    private SessionFactory sessionFactory;
+    SessionFactory sessionFactory;
 
-    public Map<String, GeneBiomarker> getGenesForReporters(
+    public Map<String, Collection<GeneBiomarker>> getGenesForReporters(
             AnnotationCriteria annotationCriteria) {
         
-        HashMap<String, GeneBiomarker> reporterMap = new HashMap<String, GeneBiomarker>();
+        HashMap<String, Collection<GeneBiomarker>> reporterMap = new HashMap<String, Collection<GeneBiomarker>>();
         ArrayPlatformType arrayPlatformType = annotationCriteria
                 .getArrayPlatformType();
         Collection<String> reporters = annotationCriteria.getReporterIds();
@@ -52,7 +53,8 @@ public class AnnotationManagerImpl implements AnnotationManager {
             for(int i = 0; i < ((reporters.size() / 1000) + 1); i++) {
                 Criteria criteria = currentSession
                 .createCriteria(GeneExprReporter.class);
-                criteria.createAlias("geneBioMarker", "gene");
+                criteria.createAlias("geneBiomarkerCollection", "gene",
+                        CriteriaSpecification.LEFT_JOIN);
 
                 int size;
                 if(i == (reporters.size() / 1000)) {
@@ -71,7 +73,8 @@ public class AnnotationManagerImpl implements AnnotationManager {
         } else {
             Criteria criteria = currentSession
             .createCriteria(GeneExprReporter.class);
-            criteria.createAlias("geneBioMarker", "gene");
+            criteria.createAlias("geneBiomarkerCollection", "gene",
+                    CriteriaSpecification.LEFT_JOIN);
             criteria.add(Restrictions.in("name", reporters));
             reporterList = criteria.setResultTransformer(
                     Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -80,7 +83,7 @@ public class AnnotationManagerImpl implements AnnotationManager {
 
         
         for(GeneExprReporter reporter : reporterList) {
-            reporterMap.put(reporter.getName(), reporter.getGeneBioMarker());
+            reporterMap.put(reporter.getName(), reporter.getGeneBiomarkerCollection());
         }
 
         return reporterMap;
@@ -104,6 +107,67 @@ public class AnnotationManagerImpl implements AnnotationManager {
             return null;
         }
 
+    }
+    
+    public Collection<GeneExprReporter> getReportersForPlatform(AnnotationCriteria annotationCriteria) {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        Criteria criteria = currentSession
+        .createCriteria(GeneExprReporter.class);
+        criteria.createAlias("geneBiomarkerCollection", "gene",
+                CriteriaSpecification.LEFT_JOIN);
+        criteria.createAlias("geneReporterAnnotationCollection", "annotation",
+                CriteriaSpecification.LEFT_JOIN);
+        criteria.add(Restrictions.eq("platform", annotationCriteria.getArrayPlatformName()));
+        return criteria.list();
+    }
+    
+    public Collection<GeneExprReporter> getReporterAnnotations(AnnotationCriteria annotationCriteria) {
+        Collection<String> reporters = annotationCriteria.getReporterIds();
+
+        if (reporters == null || reporters.isEmpty()) {
+            throw new RuntimeException("Reporter list must not be empty");
+        }
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        List<GeneExprReporter> reporterList = new ArrayList<GeneExprReporter>();
+        if(reporters.size() > 1000) {
+            for(int i = 0; i < ((reporters.size() / 1000) + 1); i++) {
+                Criteria criteria = currentSession
+                .createCriteria(GeneExprReporter.class);
+                criteria.createAlias("geneBiomarkerCollection", "gene",
+                        CriteriaSpecification.LEFT_JOIN);
+                criteria.createAlias("geneReporterAnnotationCollection", "annotation",
+                        CriteriaSpecification.LEFT_JOIN);
+                
+                int size;
+                if(i == (reporters.size() / 1000)) {
+                    size = reporters.size() % 1000;
+                } else {
+                    size = 1000;
+                }
+                String[] tempArray = new String[size];
+                System.arraycopy(reporters.toArray(), i * 1000, tempArray, 0, size);
+                Collection tempList = new ArrayList();
+                Collections.addAll(tempList, tempArray);
+                criteria.add(Restrictions.in("name", tempList));
+                reporterList.addAll(criteria.setResultTransformer(
+                        Criteria.DISTINCT_ROOT_ENTITY).list());
+            }
+        } else {
+            Criteria criteria = currentSession
+            .createCriteria(GeneExprReporter.class);
+            criteria.createAlias("geneBiomarkerCollection", "gene",
+                    CriteriaSpecification.LEFT_JOIN);
+            criteria.createAlias("geneReporterAnnotationCollection", "annotation",
+                    CriteriaSpecification.LEFT_JOIN);
+            criteria.add(Restrictions.in("name", reporters));
+            reporterList = criteria.setResultTransformer(
+                    Criteria.DISTINCT_ROOT_ENTITY).list();
+        }
+        
+        return reporterList;
     }
 
     public Collection<GeneBiomarker> getGeneAnnotations(
@@ -138,13 +202,7 @@ public class AnnotationManagerImpl implements AnnotationManager {
         return positions;
     }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     public List<CytobandPosition> getCytobandPositions(String chromosome) {
         return getCytobandPositions(chromosome, null, null);
@@ -194,5 +252,12 @@ public class AnnotationManagerImpl implements AnnotationManager {
         criteria.add(ids);
         return criteria.list();
     }
+    
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }
