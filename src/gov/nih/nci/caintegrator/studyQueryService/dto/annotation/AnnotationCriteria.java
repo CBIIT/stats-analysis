@@ -23,6 +23,7 @@ public class AnnotationCriteria {
     private gov.nih.nci.caintegrator.studyQueryService.dto.annotation.PhysicalPositionCriteria physicalPositionCriteria;
     private Collection<String> snpIdentifiers;
     private ArrayPlatformType arrayPlatformType;
+    private String arrayPlatformName;
     private Collection<String> reporterIds;
 
 
@@ -150,6 +151,14 @@ public class AnnotationCriteria {
 
     public void setReporterIds(Collection<String> reporterIds) {
         this.reporterIds = reporterIds;
+    }
+
+    public String getArrayPlatformName() {
+        return arrayPlatformName;
+    }
+
+    public void setArrayPlatformName(String arrayPlatformName) {
+        this.arrayPlatformName = arrayPlatformName;
     }
 
 
