@@ -80,9 +80,9 @@
          <key column="GENE_ID" />
          <one-to-many class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneAlias" />
       </set>                         
-      <set name="geneExprReporterCollection" inverse="true">
-         <key column="GENE_ID" />
-         <one-to-many class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter" />
+      <set name="geneExprReporterCollection" table="PROBESET_GENE_ASSO">
+         <key column="GENE_DIM_ID" />
+         <many-to-many column="REPORTER_ID" class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter" />
       </set>                         
 	</class>
 </hibernate-mapping>

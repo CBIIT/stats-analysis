@@ -3,6 +3,8 @@
 package gov.nih.nci.caintegrator.domain.annotation.gene.bean;
 import gov.nih.nci.caintegrator.domain.common.bean.Reporter;
 
+import java.util.Collection;
+
 /**
  * <!-- LICENSE_TEXT_START -->
  * <!-- LICENSE_TEXT_END -->
@@ -22,25 +24,25 @@ public  class GeneExprReporter extends Reporter
 {
 
 	private static final long serialVersionUID = 1234567890L;
-
+	private Collection<GeneBiomarker> geneBiomarkerCollection;
 			
 			
       /**
    * Genomic Annotations associated with a  Design Element 
    */
 
-    private gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneReporterAnnotation geneReporterAnnotation;
+    private Collection<GeneReporterAnnotation> geneReporterAnnotationCollection;
       /**
    * Genomic Annotations associated with a  Design Element 
    */
 
-    public gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneReporterAnnotation getGeneReporterAnnotation(){
-        return geneReporterAnnotation;			
+    public Collection<GeneReporterAnnotation> getGeneReporterAnnotationCollection(){
+        return geneReporterAnnotationCollection;			
     }
 
 
-    public void setGeneReporterAnnotation(gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneReporterAnnotation geneReporterAnnotation){
-        this.geneReporterAnnotation = geneReporterAnnotation;
+    public void setGeneReporterAnnotationCollection(Collection<GeneReporterAnnotation> geneReporterAnnotation){
+        this.geneReporterAnnotationCollection = geneReporterAnnotation;
     }
 			
 			
@@ -50,23 +52,20 @@ public  class GeneExprReporter extends Reporter
    * 
    */
 
-    private gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker geneBioMarker;
       /**
    * A GeneBiomarker is a gene based biological parameter that is indicative of a physiological or pathological 
    * state. For example, EBBR2 is a biomarker used to identify risk of breast cancer. 
    * 
    */
 
-    public gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker getGeneBioMarker(){
-        return geneBioMarker;			
+    public Collection<GeneBiomarker> getGeneBiomarkerCollection() {
+        return geneBiomarkerCollection;
     }
 
-	      
-	               
-	   
 
-    public void setGeneBioMarker(gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker geneBioMarker){
-        this.geneBioMarker = geneBioMarker;
+    public void setGeneBiomarkerCollection(
+            Collection<GeneBiomarker> geneBiomarkerCollection) {
+        this.geneBiomarkerCollection = geneBiomarkerCollection;
     }
 			
 }
