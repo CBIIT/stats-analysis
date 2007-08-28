@@ -54,16 +54,16 @@ public class CompoundClassComparisonFinding extends AnalysisFinding implements
 
 		if (getClassComparisonFindingList() != null
 				&& getClassComparisonFindingList().size() > 0) {
-			ClassComparisonFinding classComparisonFinding = getClassComparisonFindingList()
-					.get(0);
-			if (classComparisonFinding.getResultEntries() != null) {
-				for (ClassComparisonResultEntry entry : classComparisonFinding
-						.getResultEntries()) {
-					if (entry != null) {
-						idList.add(entry.getReporterId());
-					}
-				}
-			}
+			for(ClassComparisonFinding classComparisonFinding : getClassComparisonFindingList()) {
+    			if (classComparisonFinding.getResultEntries() != null) {
+    				for (ClassComparisonResultEntry entry : classComparisonFinding
+    						.getResultEntries()) {
+    					if (entry != null) {
+    						idList.add(entry.getReporterId());
+    					}
+    				}
+    			}
+            }
 		}
 		return idList;
 	}
