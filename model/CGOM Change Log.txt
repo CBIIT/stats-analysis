@@ -82,3 +82,7 @@ Added OddsRatio object
 
 1.69 to 1.70
 Added call to GenotypeFinding object
+
+1.70 to 1.71
+1. Removed attributes orAggressiveHeterozygote, orAggressiveHomozygote,orNonaggressiveHeterozygote, and orNonaggressiveHomozygote from SNPAssociationFinding.
+2.Change the relationship btwn OddsRatio and SNPAssociationFinding from uni-dir to bi-dir.
