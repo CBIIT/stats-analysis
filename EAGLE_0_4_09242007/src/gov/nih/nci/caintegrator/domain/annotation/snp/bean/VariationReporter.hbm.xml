@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.annotation.snp.bean">
+	<class name="VariationReporter" table="SNP_DIM"
+		lazy="true">
+
+		<!-- id -->
+		<id name="id" column="SNPANNO_ID">
+			<generator class="assigned" />
+		</id>
+
+		<property name="name" column="REPORTER_NAME" />
+		<property name="platform" column="REPORTER_PLATFORM" />
+		<property name="type" column="REPORTER_TYPE" />
+		<set name="copyNumberFindingCollection" inverse="true"  >
+			<key column="SNPANNO_ID" />
+			<one-to-many
+				class="gov.nih.nci.caintegrator.domain.finding.copyNumber.bean.CopyNumberFinding" />
+		</set>
+		<component name="snpAnnotation"
+			class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation">
+			<property name="chromosomeLocation"
+				column="PHYSICAL_LOCATION" />
+			<property name="chromosomeName" column="CHROMOSOME" />
+			<property name="dbsnpBuild" column="DBSNP_BUILD" />
+			<property name="dbsnpId" column="DBSNPID" />
+			<property name="geneLocation" column="GENELOCATION" />
+			<property name="genomeBuild" column="GENOME_BUILD" />
+			<!--property name="referenceSequence"
+				column="SNP_REF_SEQUENCE" />
+			<property name="referenceStrand" column="SNP_STRAND" />
+			<property name="secondaryIdentifier"
+				column="SNP_SECONDARY_IDENTIFIER" /-->
+			<set name="geneBiomarkerCollection" table="GENE_SNP_ASSO"
+				batch-size="60">
+				<cache usage="read-write" />
+				<key column="SNPANNO_ID" />
+				<many-to-many
+					class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker"
+					outer-join="true" column="GENE_ID" />
+			</set>
+		</component>
+
+
+	</class>
+</hibernate-mapping>
