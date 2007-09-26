@@ -15,11 +15,14 @@
 	package="gov.nih.nci.caintegrator.domain.finding.clinical.brainCancer">
 	<class name="GBMClinicalFinding" table="CLINICAL_STG">
 
-		<id name="id" column="PTID">
+		<id name="id" column="CF_ID">
 			<generator class="assigned" />
 		</id>		
 			
-
+		<component name="PTID"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="PTID" />
+		</component>
 		<component name="WEIGHT"
 			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
 			<property name="absoluteValue" column="WEIGHT" />
