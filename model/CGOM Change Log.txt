@@ -95,3 +95,6 @@ Added call to GenotypeFinding object
 5.remove id from VariationReporter
 6.remove id from BACCloneReporter
 7.remove id from SNPFrequencyFinding
+
+1.76 to 1.77
+7.remove id from SpecimenBasedFinding
