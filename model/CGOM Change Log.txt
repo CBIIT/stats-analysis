@@ -86,3 +86,12 @@ Added call to GenotypeFinding object
 1.70 to 1.71
 1. Removed attributes orAggressiveHeterozygote, orAggressiveHomozygote,orNonaggressiveHeterozygote, and orNonaggressiveHomozygote from SNPAssociationFinding.
 2.Change the relationship btwn OddsRatio and SNPAssociationFinding from uni-dir to bi-dir.
+
+1.75 to 1.76
+1. remove id from PrincipleComponentAnalysisFinding.
+2.remove id from SNPAssociationFinding.
+3.remove id from ClassComparisonAnalysisFinding
+4.remove id from GeneExprReporter
+5.remove id from VariationReporter
+6.remove id from BACCloneReporter
+7.remove id from SNPFrequencyFinding
