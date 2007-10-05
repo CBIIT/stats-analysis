@@ -88,13 +88,22 @@ Added call to GenotypeFinding object
 2.Change the relationship btwn OddsRatio and SNPAssociationFinding from uni-dir to bi-dir.
 
 1.75 to 1.76
-1. remove id from PrincipleComponentAnalysisFinding.
-2.remove id from SNPAssociationFinding.
-3.remove id from ClassComparisonAnalysisFinding
-4.remove id from GeneExprReporter
-5.remove id from VariationReporter
-6.remove id from BACCloneReporter
-7.remove id from SNPFrequencyFinding
+1. Removed id from PrincipleComponentAnalysisFinding.
+2.Removed id from SNPAssociationFinding.
+3.Removed id from ClassComparisonAnalysisFinding
+4.Removed id from GeneExprReporter
+5.Removed id from VariationReporter
+6.Removed id from BACCloneReporter
+7.Removed id from SNPFrequencyFinding
 
 1.76 to 1.77
-7.remove id from SpecimenBasedFinding
+1.Removed id from SpecimenBasedFinding
+
+1.77 to 1.78
+1.Removed name, type, and platform from GeneExprReporter
+2.Removed name from VariationReporter
+3.Removed name from BACCloneReporter
+4.Removed «CADSR Value Domain» VariantType (no attributes in it) from somaticMutation package
+5.Removed «CADSR Value Domain» VariantClassification ( had only one attribute: description, it should not 
+  be a value domain attribute) from somaticMutation package
+
