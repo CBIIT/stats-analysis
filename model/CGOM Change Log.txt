@@ -106,4 +106,7 @@ Added call to GenotypeFinding object
 4.Removed «CADSR Value Domain» VariantType (no attributes in it) from somaticMutation package
 5.Removed «CADSR Value Domain» VariantClassification ( had only one attribute: description, it should not 
   be a value domain attribute) from somaticMutation package
+  
+  1.78 to 1.79
+1. removed two vd tags for   SomaticMutationFinding:variantClassification  & variantType
 
