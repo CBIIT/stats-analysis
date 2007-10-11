@@ -5,12 +5,6 @@ import gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment;
 import gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding;
 
 public class GBMClinicalFinding extends ClinicalFinding {
-
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1389764732570216913L;
-    private ClinicalAssessment PTID;
     private ClinicalAssessment BCRSITEID;
     private ClinicalAssessment INFORMEDCONSENTACQUIRED;
     private ClinicalAssessment BCRSLIDEBARCODE;
@@ -47,7 +41,6 @@ public class GBMClinicalFinding extends ClinicalFinding {
     private NumericMeasurement REVISION;
     private ClinicalAssessment OCTEMBEDDED;
     private ClinicalAssessment DATECREATED;
-    private NumericMeasurement A260A280RATIO;
     private ClinicalAssessment GELIMAGEFILE;
     private NumericMeasurement PERCENTNECROSIS;
     private ClinicalAssessment BCRPORTIONBARCODE;
@@ -69,6 +62,7 @@ public class GBMClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment ENDOTHELIALPROLIFERATION;
     private ClinicalAssessment TNMPATHOLOGYTUMORSTATUS;
     private ClinicalAssessment VITALSTATUS;
+    private ClinicalAssessment PTID;
     private ClinicalAssessment BCRSAMPLEBARCODE;
     private ClinicalAssessment VERIFICATIONBYBCR;
     private ClinicalAssessment FREEZINGMETHOD;
@@ -118,7 +112,6 @@ public class GBMClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment SMOKINGHISTORY;
     private ClinicalAssessment PROTOCOLTEXT;
     private NumericMeasurement TIMEBETWEENEXCISIONANDFREEZING;
-    private NumericMeasurement RATIO28S18S;
     private ClinicalAssessment BCRALIQUOTBARCODE;
     private ClinicalAssessment SAMPLETYPE;
     private ClinicalAssessment GENDER;
@@ -126,14 +119,6 @@ public class GBMClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment PCRAMPLIFICATIONSUCCESSFUL;
     private NumericMeasurement NUMFRACTIONS;
     private ClinicalAssessment TNMPATHOLOGYLYMPHNODESTATUS;
-
-    public ClinicalAssessment getPTID() {
-        return this.PTID;
-    }
-
-    public void setPTID(ClinicalAssessment PTID) {
-        this.PTID = PTID;
-    }
 
     public ClinicalAssessment getBCRSITEID() {
         return this.BCRSITEID;
@@ -437,14 +422,6 @@ public class GBMClinicalFinding extends ClinicalFinding {
         this.DATECREATED = DATECREATED;
     }
 
-    public NumericMeasurement getA260A280RATIO() {
-        return this.A260A280RATIO;
-    }
-
-    public void setA260A280RATIO(NumericMeasurement A260A280RATIO) {
-        this.A260A280RATIO = A260A280RATIO;
-    }
-
     public ClinicalAssessment getGELIMAGEFILE() {
         return this.GELIMAGEFILE;
     }
@@ -618,6 +595,14 @@ public class GBMClinicalFinding extends ClinicalFinding {
 
     public void setVITALSTATUS(ClinicalAssessment VITALSTATUS) {
         this.VITALSTATUS = VITALSTATUS;
+    }
+
+    public ClinicalAssessment getPTID() {
+        return this.PTID;
+    }
+
+    public void setPTID(ClinicalAssessment PTID) {
+        this.PTID = PTID;
     }
 
     public ClinicalAssessment getBCRSAMPLEBARCODE() {
@@ -1028,14 +1013,6 @@ public class GBMClinicalFinding extends ClinicalFinding {
         this.TIMEBETWEENEXCISIONANDFREEZING = TIMEBETWEENEXCISIONANDFREEZING;
     }
 
-    public NumericMeasurement getRATIO28S18S() {
-        return this.RATIO28S18S;
-    }
-
-    public void setRATIO28S18S(NumericMeasurement RATIO28S18S) {
-        this.RATIO28S18S = RATIO28S18S;
-    }
-
     public ClinicalAssessment getBCRALIQUOTBARCODE() {
         return this.BCRALIQUOTBARCODE;
     }
@@ -1093,5 +1070,4 @@ public class GBMClinicalFinding extends ClinicalFinding {
             ClinicalAssessment TNMPATHOLOGYLYMPHNODESTATUS) {
         this.TNMPATHOLOGYLYMPHNODESTATUS = TNMPATHOLOGYLYMPHNODESTATUS;
     }
-
 }
