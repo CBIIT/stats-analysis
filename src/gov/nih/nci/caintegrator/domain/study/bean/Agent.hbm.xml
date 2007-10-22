@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    $Id: Agent.hbm.xml,v 1.1 2006-08-14 16:58:52 georgeda Exp $
+    $Id: Agent.hbm.xml,v 1.2 2007-10-22 14:59:04 sahnih Exp $
     
     $Log: not supported by cvs2svn $
+    Revision 1.1  2006/08/14 16:58:52  georgeda
+    Updated w/ newest OM changes (Rev 1.51)
+
 -->
 
 <!DOCTYPE hibernate-mapping PUBLIC 
@@ -17,7 +20,7 @@
 
 	    <id name="id" 
 	    	column="AGENT_ID">
-	        <generator class="native"/>
+	        <generator class="hilo"/>
 	    </id>
 	    
         <property name="description" 

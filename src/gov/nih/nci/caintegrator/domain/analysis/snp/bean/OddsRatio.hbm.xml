@@ -38,8 +38,8 @@
                  insert="false" 
                  update="false" />
                  
-       <!-- hetrozygoteOddsRatio -->                 
-       <property name="hetrozygoteOddsRatio" 
+       <!-- heterozygoteOddsRatio -->                 
+       <property name="heterozygoteOddsRatio" 
                  type="java.lang.Double" 
                  column="HETEROZYGOTE" 
                  insert="false" 

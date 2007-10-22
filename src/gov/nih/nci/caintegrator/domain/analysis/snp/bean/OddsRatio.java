@@ -9,20 +9,20 @@ package gov.nih.nci.caintegrator.domain.analysis.snp.bean;
  */
 public class OddsRatio {
 	private Long id;
-	private Double hetrozygoteOddsRatio;
+	private Double heterozygoteOddsRatio;
 	private Double homozygoteOddsRatio;
 	private String name;
 	/**
 	 * @return Returns the hetrozygoteOddsRatio.
 	 */
-	public Double getHetrozygoteOddsRatio() {
-		return hetrozygoteOddsRatio;
+	public Double getHeterozygoteOddsRatio() {
+		return heterozygoteOddsRatio;
 	}
 	/**
 	 * @param hetrozygoteOddsRatio The hetrozygoteOddsRatio to set.
 	 */
-	public void setHetrozygoteOddsRatio(Double hetrozygoteOddsRatio) {
-		this.hetrozygoteOddsRatio = hetrozygoteOddsRatio;
+	public void setHeterozygoteOddsRatio(Double heterozygoteOddsRatio) {
+		this.heterozygoteOddsRatio = heterozygoteOddsRatio;
 	}
 	/**
 	 * @return Returns the homozygoteOddsRatio.
