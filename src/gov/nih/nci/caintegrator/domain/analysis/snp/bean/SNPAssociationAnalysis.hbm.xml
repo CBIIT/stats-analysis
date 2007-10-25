@@ -54,7 +54,13 @@
                  insert="false" 
                  update="false" />    
 	
-     
+     <!-- numberOfCategories  -->
+            <property name="numberOfCategories" 
+                 type="java.lang.Integer" 
+                 column="NUMBER_OF_CATEGORIES" 
+                 insert="false" 
+                 update="false" />  
+                 
       <!-- here is for 1-m relationships -->  
     
          <set name="analysisGroupCollection"  inverse="true">

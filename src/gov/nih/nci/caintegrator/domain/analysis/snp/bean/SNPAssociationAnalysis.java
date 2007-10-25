@@ -187,6 +187,14 @@ public  class SNPAssociationAnalysis
      */
 
       private String analysisCode ;
+      
+      /**
+       * Represents number of Analysis Categories for example "dichotomous" is 2 categories
+       * "trichotomous" is 3 categories
+       * 
+       */
+
+        private Integer numberOfCategories ;
 	/**
 	 * @return Returns the analysisCode.
 	 */
@@ -198,5 +206,17 @@ public  class SNPAssociationAnalysis
 	 */
 	public void setAnalysisCode(String analysisCode) {
 		this.analysisCode = analysisCode;
+	}
+	/**
+	 * @return Returns the numberOfCategories.
+	 */
+	public Integer getNumberOfCategories() {
+		return numberOfCategories;
+	}
+	/**
+	 * @param numberOfCategories The numberOfCategories to set.
+	 */
+	public void setNumberOfCategories(Integer numberOfCategories) {
+		this.numberOfCategories = numberOfCategories;
 	}
 }
