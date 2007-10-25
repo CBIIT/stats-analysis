@@ -110,3 +110,8 @@ Added call to GenotypeFinding object
   1.78 to 1.79
 1. removed two vd tags for   SomaticMutationFinding:variantClassification  & variantType
 
+ 1.82 to 1.83
+1. Removed cgems's (cgems is a package in the otherStuff) Study object in the variation chart
+
+ 1.83 to 1.84
+removed otherstuff from custom folder
