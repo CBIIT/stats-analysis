@@ -29,235 +29,276 @@ import org.hibernate.criterion.Restrictions;
 
 public class AnnotationManagerImpl implements AnnotationManager {
 
-    SessionFactory sessionFactory;
+	SessionFactory sessionFactory;
 
-    public Map<String, Collection<GeneBiomarker>> getGenesForReporters(
-            AnnotationCriteria annotationCriteria) {
-        
-        HashMap<String, Collection<GeneBiomarker>> reporterMap = new HashMap<String, Collection<GeneBiomarker>>();
-        ArrayPlatformType arrayPlatformType = annotationCriteria
-                .getArrayPlatformType();
-        Collection<String> reporters = annotationCriteria.getReporterIds();
+	public Map<String, Collection<GeneBiomarker>> getGenesForReporters(
+			AnnotationCriteria annotationCriteria) {
 
-        if (arrayPlatformType == null) {
-            throw new RuntimeException("Array Platform type cannot be null");
-        }
-        if (reporters == null || reporters.isEmpty()) {
-            throw new RuntimeException("Reporter list must not be empty");
-        }
+		HashMap<String, Collection<GeneBiomarker>> reporterMap = new HashMap<String, Collection<GeneBiomarker>>();
+		ArrayPlatformType arrayPlatformType = annotationCriteria
+				.getArrayPlatformType();
+		Collection<String> reporters = annotationCriteria.getReporterIds();
 
-        Session currentSession = sessionFactory.getCurrentSession();
+		if (arrayPlatformType == null) {
+			throw new RuntimeException("Array Platform type cannot be null");
+		}
+		if (reporters == null || reporters.isEmpty()) {
+			throw new RuntimeException("Reporter list must not be empty");
+		}
 
-        List<GeneExprReporter> reporterList = new ArrayList<GeneExprReporter>();
-        if(reporters.size() > 1000) {
-            for(int i = 0; i < ((reporters.size() / 1000) + 1); i++) {
-                Criteria criteria = currentSession
-                .createCriteria(GeneExprReporter.class);
-                criteria.createAlias("geneBiomarkerCollection", "gene",
-                        CriteriaSpecification.LEFT_JOIN);
+		Session currentSession = sessionFactory.getCurrentSession();
 
-                int size;
-                if(i == (reporters.size() / 1000)) {
-                    size = reporters.size() % 1000;
-                } else {
-                    size = 1000;
-                }
-                String[] tempArray = new String[size];
-                System.arraycopy(reporters.toArray(), i * 1000, tempArray, 0, size);
-                Collection tempList = new ArrayList();
-                Collections.addAll(tempList, tempArray);
-                criteria.add(Restrictions.in("name", tempList));
-                reporterList.addAll(criteria.setResultTransformer(
-                        Criteria.DISTINCT_ROOT_ENTITY).list());
-            }
-        } else {
-            Criteria criteria = currentSession
-            .createCriteria(GeneExprReporter.class);
-            criteria.createAlias("geneBiomarkerCollection", "gene",
-                    CriteriaSpecification.LEFT_JOIN);
-            criteria.add(Restrictions.in("name", reporters));
-            reporterList = criteria.setResultTransformer(
-                    Criteria.DISTINCT_ROOT_ENTITY).list();
-        }
+		List<GeneExprReporter> reporterList = new ArrayList<GeneExprReporter>();
+		if (reporters.size() > 1000) {
+			for (int i = 0; i < ((reporters.size() / 1000) + 1); i++) {
+				Criteria criteria = currentSession
+						.createCriteria(GeneExprReporter.class);
+				criteria.createAlias("geneBiomarkerCollection", "gene",
+						CriteriaSpecification.LEFT_JOIN);
 
+				int size;
+				if (i == (reporters.size() / 1000)) {
+					size = reporters.size() % 1000;
+				} else {
+					size = 1000;
+				}
+				String[] tempArray = new String[size];
+				System.arraycopy(reporters.toArray(), i * 1000, tempArray, 0,
+						size);
+				Collection tempList = new ArrayList();
+				Collections.addAll(tempList, tempArray);
+				criteria.add(Restrictions.in("name", tempList));
+				reporterList.addAll(criteria.setResultTransformer(
+						Criteria.DISTINCT_ROOT_ENTITY).list());
+			}
+		} else {
+			Criteria criteria = currentSession
+					.createCriteria(GeneExprReporter.class);
+			criteria.createAlias("geneBiomarkerCollection", "gene",
+					CriteriaSpecification.LEFT_JOIN);
+			criteria.add(Restrictions.in("name", reporters));
+			reporterList = criteria.setResultTransformer(
+					Criteria.DISTINCT_ROOT_ENTITY).list();
+		}
 
-        
-        for(GeneExprReporter reporter : reporterList) {
-            reporterMap.put(reporter.getName(), reporter.getGeneBiomarkerCollection());
-        }
+		for (GeneExprReporter reporter : reporterList) {
+			reporterMap.put(reporter.getName(), reporter
+					.getGeneBiomarkerCollection());
+		}
 
-        return reporterMap;
-    }
+		return reporterMap;
+	}
 
-    public Map<GeneBiomarker, Collection<GeneExprReporter>> getReportersForGenes(
-            AnnotationCriteria annotationCriteria) {
+	public Map<GeneBiomarker, Collection<GeneExprReporter>> getReportersForGenes(
+			AnnotationCriteria annotationCriteria) {
+		HashMap<GeneBiomarker, Collection<GeneExprReporter>> reporterMap = new HashMap<GeneBiomarker, Collection<GeneExprReporter>>();
 
-        return null;
-    }
+		List<GeneBiomarker> geneList = new ArrayList<GeneBiomarker>();
 
-    public GeneBiomarker getGeneForSymbol(String geneId) {
-        Collection<String> genes = new ArrayList<String>();
-        AnnotationCriteria criteria = new AnnotationCriteria();
-        genes.add(geneId);
-        criteria.setGeneSymbols(genes);
-        Iterator<GeneBiomarker> i = getGeneAnnotations(criteria).iterator();
-        if (i.hasNext()) {
-            return i.next();
-        } else {
-            return null;
-        }
+		Collection<String> genes = annotationCriteria.getGeneSymbols();
+		Session currentSession = sessionFactory.getCurrentSession();
+		Criteria criteria = currentSession.createCriteria(GeneBiomarker.class);
+		criteria.createAlias("geneExprReporterCollection", "reporter",
+				CriteriaSpecification.LEFT_JOIN);
+		if (genes.size() > 1000) {
+			for (int i = 0; i < ((genes.size() / 1000) + 1); i++) {
 
-    }
-    
-    public Collection<GeneExprReporter> getReportersForPlatform(AnnotationCriteria annotationCriteria) {
-        Session currentSession = sessionFactory.getCurrentSession();
+				int size;
+				if (i == (genes.size() / 1000)) {
+					size = genes.size() % 1000;
+				} else {
+					size = 1000;
+				}
+				String[] tempArray = new String[size];
+				System.arraycopy(genes.toArray(), i * 1000, tempArray, 0, size);
+				Collection tempList = new ArrayList();
+				Collections.addAll(tempList, tempArray);
+				criteria.add(Restrictions.in("hugoGeneSymbol", tempList));
+				geneList.addAll(criteria.setResultTransformer(
+						Criteria.DISTINCT_ROOT_ENTITY).list());
+			}
+		} else {
 
-        Criteria criteria = currentSession
-        .createCriteria(GeneExprReporter.class);
-        criteria.createAlias("geneBiomarkerCollection", "gene",
-                CriteriaSpecification.LEFT_JOIN);
-        criteria.createAlias("geneReporterAnnotationCollection", "annotation",
-                CriteriaSpecification.LEFT_JOIN);
-        criteria.add(Restrictions.eq("platform", annotationCriteria.getArrayPlatformName()));
-        return criteria.list();
-    }
-    
-    public Collection<GeneExprReporter> getReporterAnnotations(AnnotationCriteria annotationCriteria) {
-        Collection<String> reporters = annotationCriteria.getReporterIds();
+			criteria.add(Restrictions.in("hugoGeneSymbol", genes));
+			geneList = criteria.setResultTransformer(
+					Criteria.DISTINCT_ROOT_ENTITY).list();
+		}
+		
+		for (GeneBiomarker gene : geneList) {
+			reporterMap.put(gene, gene
+					.getGeneExprReporterCollection());
+		}
+		
+		return reporterMap;
+	}
 
-        if (reporters == null || reporters.isEmpty()) {
-            throw new RuntimeException("Reporter list must not be empty");
-        }
+	public GeneBiomarker getGeneForSymbol(String geneId) {
+		Collection<String> genes = new ArrayList<String>();
+		AnnotationCriteria criteria = new AnnotationCriteria();
+		genes.add(geneId);
+		criteria.setGeneSymbols(genes);
+		Iterator<GeneBiomarker> i = getGeneAnnotations(criteria).iterator();
+		if (i.hasNext()) {
+			return i.next();
+		} else {
+			return null;
+		}
 
-        Session currentSession = sessionFactory.getCurrentSession();
+	}
 
-        List<GeneExprReporter> reporterList = new ArrayList<GeneExprReporter>();
-        if(reporters.size() > 1000) {
-            for(int i = 0; i < ((reporters.size() / 1000) + 1); i++) {
-                Criteria criteria = currentSession
-                .createCriteria(GeneExprReporter.class);
-                criteria.createAlias("geneBiomarkerCollection", "gene",
-                        CriteriaSpecification.LEFT_JOIN);
-                criteria.createAlias("geneReporterAnnotationCollection", "annotation",
-                        CriteriaSpecification.LEFT_JOIN);
-                
-                int size;
-                if(i == (reporters.size() / 1000)) {
-                    size = reporters.size() % 1000;
-                } else {
-                    size = 1000;
-                }
-                String[] tempArray = new String[size];
-                System.arraycopy(reporters.toArray(), i * 1000, tempArray, 0, size);
-                Collection tempList = new ArrayList();
-                Collections.addAll(tempList, tempArray);
-                criteria.add(Restrictions.in("name", tempList));
-                reporterList.addAll(criteria.setResultTransformer(
-                        Criteria.DISTINCT_ROOT_ENTITY).list());
-            }
-        } else {
-            Criteria criteria = currentSession
-            .createCriteria(GeneExprReporter.class);
-            criteria.createAlias("geneBiomarkerCollection", "gene",
-                    CriteriaSpecification.LEFT_JOIN);
-            criteria.createAlias("geneReporterAnnotationCollection", "annotation",
-                    CriteriaSpecification.LEFT_JOIN);
-            criteria.add(Restrictions.in("name", reporters));
-            reporterList = criteria.setResultTransformer(
-                    Criteria.DISTINCT_ROOT_ENTITY).list();
-        }
-        
-        return reporterList;
-    }
+	public Collection<GeneExprReporter> getReportersForPlatform(
+			AnnotationCriteria annotationCriteria) {
+		Session currentSession = sessionFactory.getCurrentSession();
 
-    public Collection<GeneBiomarker> getGeneAnnotations(
-            AnnotationCriteria annotationCriteria) {
-        Collection<String> geneIds = annotationCriteria.getGeneSymbols();
-        if (geneIds == null || geneIds.isEmpty()) {
-            throw new RuntimeException("Gene symbol list cannot be empty");
-        }
-        Session currentSession = sessionFactory.getCurrentSession();
-        Criteria criteria = currentSession.createCriteria(GeneBiomarker.class);
-        criteria.createAlias("geneAliasCollection", "alias");
-        criteria.add(Restrictions.disjunction().add(
-                Restrictions.in("alias.alias", geneIds)).add(
-                Restrictions.in("alias.hugoGeneSymbol", geneIds)));
-        List<GeneBiomarker> genes = criteria.list();
-        return genes;
-    }
+		Criteria criteria = currentSession
+				.createCriteria(GeneExprReporter.class);
+		criteria.createAlias("geneBiomarkerCollection", "gene",
+				CriteriaSpecification.LEFT_JOIN);
+		criteria.createAlias("geneReporterAnnotationCollection", "annotation",
+				CriteriaSpecification.LEFT_JOIN);
+		criteria.add(Restrictions.eq("platform", annotationCriteria
+				.getArrayPlatformName()));
+		return criteria.list();
+	}
 
-    public List<CytobandPosition> getCytobandPositions(String chromosome,
-            String startCytoband, String endCytoband) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        Criteria criteria = currentSession
-                .createCriteria(CytobandPosition.class);
-        criteria.add(Restrictions.eq("chromosomeName", chromosome));
-        if (startCytoband != null && endCytoband != null) {
-            criteria.add(Restrictions.disjunction().add(
-                    Restrictions.eq("cytoband", startCytoband)).add(
-                    Restrictions.eq("cytoband", endCytoband)));
-        }
-        criteria.addOrder(Order.asc("cytobandStartPosition"));
-        List<CytobandPosition> positions = criteria.list();
-        return positions;
-    }
+	public Collection<GeneExprReporter> getReporterAnnotations(
+			AnnotationCriteria annotationCriteria) {
+		Collection<String> reporters = annotationCriteria.getReporterIds();
 
+		if (reporters == null || reporters.isEmpty()) {
+			throw new RuntimeException("Reporter list must not be empty");
+		}
 
+		Session currentSession = sessionFactory.getCurrentSession();
 
-    public List<CytobandPosition> getCytobandPositions(String chromosome) {
-        return getCytobandPositions(chromosome, null, null);
-    }
+		List<GeneExprReporter> reporterList = new ArrayList<GeneExprReporter>();
+		if (reporters.size() > 1000) {
+			for (int i = 0; i < ((reporters.size() / 1000) + 1); i++) {
+				Criteria criteria = currentSession
+						.createCriteria(GeneExprReporter.class);
+				criteria.createAlias("geneBiomarkerCollection", "gene",
+						CriteriaSpecification.LEFT_JOIN);
+				criteria.createAlias("geneReporterAnnotationCollection",
+						"annotation", CriteriaSpecification.LEFT_JOIN);
 
-    public List<VariationReporter> getReportersForDbSnpId(String dbSnpId) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        Criteria criteria = currentSession
-                .createCriteria(VariationReporter.class);
-        criteria.add(Restrictions.ilike("snpAnnotation.dbsnpId", dbSnpId));
-        return criteria.list();
-    }
+				int size;
+				if (i == (reporters.size() / 1000)) {
+					size = reporters.size() % 1000;
+				} else {
+					size = 1000;
+				}
+				String[] tempArray = new String[size];
+				System.arraycopy(reporters.toArray(), i * 1000, tempArray, 0,
+						size);
+				Collection tempList = new ArrayList();
+				Collections.addAll(tempList, tempArray);
+				criteria.add(Restrictions.in("name", tempList));
+				reporterList.addAll(criteria.setResultTransformer(
+						Criteria.DISTINCT_ROOT_ENTITY).list());
+			}
+		} else {
+			Criteria criteria = currentSession
+					.createCriteria(GeneExprReporter.class);
+			criteria.createAlias("geneBiomarkerCollection", "gene",
+					CriteriaSpecification.LEFT_JOIN);
+			criteria.createAlias("geneReporterAnnotationCollection",
+					"annotation", CriteriaSpecification.LEFT_JOIN);
+			criteria.add(Restrictions.in("name", reporters));
+			reporterList = criteria.setResultTransformer(
+					Criteria.DISTINCT_ROOT_ENTITY).list();
+		}
 
-    public List<GeneAlias> getGeneAliasForSymbol(String symbol) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        Criteria criteria = currentSession.createCriteria(GeneAlias.class);
-        criteria.add(Restrictions.disjunction().add(
-                Restrictions.ilike("alias", symbol, MatchMode.START)).add(
-                Restrictions.ilike("hugoGeneSymbol", symbol, MatchMode.START)));
-        return criteria.list();
-    }
+		return reporterList;
+	}
 
-    public List<SNPAnnotation> getSnpAnnotationsForGene(String geneId, Long kbUpstream, Long kbDownstream) {
-        GeneBiomarker gene = getGeneForSymbol(geneId);
-        
-        String chr = gene.getChromosome();
-        Long start = gene.getStartPhyscialLocation();
-        Long end = gene.getEndPhysicalLocation();
-        
-        Session sess = sessionFactory.getCurrentSession();
-        
-        Criteria criteria = sess.createCriteria(SNPAnnotation.class);
-        
-        criteria.add(Restrictions.eq("chromosomeName", chr));
-        criteria.add(Restrictions.ge("chromosomeLocation", start - (kbUpstream * 1000)));
-        criteria.add(Restrictions.le("chromosomeLocation", end + (kbDownstream * 1000)));
-        return criteria.list();
-    }
+	public Collection<GeneBiomarker> getGeneAnnotations(
+			AnnotationCriteria annotationCriteria) {
+		Collection<String> geneIds = annotationCriteria.getGeneSymbols();
+		if (geneIds == null || geneIds.isEmpty()) {
+			throw new RuntimeException("Gene symbol list cannot be empty");
+		}
+		Session currentSession = sessionFactory.getCurrentSession();
+		Criteria criteria = currentSession.createCriteria(GeneBiomarker.class);
+		criteria.createAlias("geneAliasCollection", "alias");
+		criteria.add(Restrictions.disjunction().add(
+				Restrictions.in("alias.alias", geneIds)).add(
+				Restrictions.in("alias.hugoGeneSymbol", geneIds)));
+		List<GeneBiomarker> genes = criteria.list();
+		return genes;
+	}
 
-    public List<SNPAnnotation> getSnpAnnotationsForSymbol(String symbol) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        Criteria criteria = currentSession
-                .createCriteria(SNPAnnotation.class);
-        Disjunction ids = Expression.disjunction();
-        ids.add(Restrictions.ilike("dbsnpId", symbol));
-        ids.add(Restrictions.ilike("secondaryIdentifier", symbol));        
-        criteria.add(ids);
-        return criteria.list();
-    }
-    
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+	public List<CytobandPosition> getCytobandPositions(String chromosome,
+			String startCytoband, String endCytoband) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Criteria criteria = currentSession
+				.createCriteria(CytobandPosition.class);
+		criteria.add(Restrictions.eq("chromosomeName", chromosome));
+		if (startCytoband != null && endCytoband != null) {
+			criteria.add(Restrictions.disjunction().add(
+					Restrictions.eq("cytoband", startCytoband)).add(
+					Restrictions.eq("cytoband", endCytoband)));
+		}
+		criteria.addOrder(Order.asc("cytobandStartPosition"));
+		List<CytobandPosition> positions = criteria.list();
+		return positions;
+	}
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+	public List<CytobandPosition> getCytobandPositions(String chromosome) {
+		return getCytobandPositions(chromosome, null, null);
+	}
+
+	public List<VariationReporter> getReportersForDbSnpId(String dbSnpId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Criteria criteria = currentSession
+				.createCriteria(VariationReporter.class);
+		criteria.add(Restrictions.ilike("snpAnnotation.dbsnpId", dbSnpId));
+		return criteria.list();
+	}
+
+	public List<GeneAlias> getGeneAliasForSymbol(String symbol) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Criteria criteria = currentSession.createCriteria(GeneAlias.class);
+		criteria.add(Restrictions.disjunction().add(
+				Restrictions.ilike("alias", symbol, MatchMode.START)).add(
+				Restrictions.ilike("hugoGeneSymbol", symbol, MatchMode.START)));
+		return criteria.list();
+	}
+
+	public List<SNPAnnotation> getSnpAnnotationsForGene(String geneId,
+			Long kbUpstream, Long kbDownstream) {
+		GeneBiomarker gene = getGeneForSymbol(geneId);
+
+		String chr = gene.getChromosome();
+		Long start = gene.getStartPhyscialLocation();
+		Long end = gene.getEndPhysicalLocation();
+
+		Session sess = sessionFactory.getCurrentSession();
+
+		Criteria criteria = sess.createCriteria(SNPAnnotation.class);
+
+		criteria.add(Restrictions.eq("chromosomeName", chr));
+		criteria.add(Restrictions.ge("chromosomeLocation", start
+				- (kbUpstream * 1000)));
+		criteria.add(Restrictions.le("chromosomeLocation", end
+				+ (kbDownstream * 1000)));
+		return criteria.list();
+	}
+
+	public List<SNPAnnotation> getSnpAnnotationsForSymbol(String symbol) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Criteria criteria = currentSession.createCriteria(SNPAnnotation.class);
+		Disjunction ids = Expression.disjunction();
+		ids.add(Restrictions.ilike("dbsnpId", symbol));
+		ids.add(Restrictions.ilike("secondaryIdentifier", symbol));
+		criteria.add(ids);
+		return criteria.list();
+	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 }
