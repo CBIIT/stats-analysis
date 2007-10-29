@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.dto.critieria;
 
 import gov.nih.nci.caintegrator.dto.de.SampleIDDE;
+import gov.nih.nci.caintegrator.enumeration.TissueType;
 
 import java.io.Serializable;
 import java.security.InvalidParameterException;
@@ -82,7 +83,7 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private Collection sampleIDs;
-
+	private TissueType tissueType; 
 	public Collection getSampleIDs() {
 		return sampleIDs;
 	}
@@ -118,6 +119,20 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 	public boolean isValid() {
 		return true;
 	}
+
+	/**
+	 * @return the tissueType
+	 */
+	public TissueType getTissueType() {
+		return tissueType;
+	}
+
+	/**
+	 * @param tissueType the tissueType to set
+	 */
+	public void setTissueType(TissueType tissueType) {
+		this.tissueType = tissueType;
+	}
 	/**
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance
@@ -134,6 +149,7 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 				myClone.sampleIDs.add(((SampleIDDE) i.next()).clone());
 			}
 		}
+		myClone.tissueType = tissueType;
 		return myClone;
 	}
 }
