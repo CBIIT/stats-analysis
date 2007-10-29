@@ -96,6 +96,15 @@ public class AnnotationManagerImpl implements AnnotationManager {
 		List<GeneBiomarker> geneList = new ArrayList<GeneBiomarker>();
 
 		Collection<String> genes = annotationCriteria.getGeneSymbols();
+		String platform = annotationCriteria.getArrayPlatformName();
+		
+		if (platform == null) {
+			throw new RuntimeException("Array Platform name cannot be null");
+		}
+		if (genes == null || genes.isEmpty()) {
+			throw new RuntimeException("Gene list must not be empty");
+		}
+		
 		Session currentSession = sessionFactory.getCurrentSession();
 		Criteria criteria = currentSession.createCriteria(GeneBiomarker.class);
 		criteria.createAlias("geneExprReporterCollection", "reporter",
@@ -114,14 +123,18 @@ public class AnnotationManagerImpl implements AnnotationManager {
 				Collection tempList = new ArrayList();
 				Collections.addAll(tempList, tempArray);
 				criteria.add(Restrictions.in("hugoGeneSymbol", tempList));
+				criteria.add(Restrictions.eq("reporter.platform", platform));
 				geneList.addAll(criteria.setResultTransformer(
 						Criteria.DISTINCT_ROOT_ENTITY).list());
+
 			}
 		} else {
 
 			criteria.add(Restrictions.in("hugoGeneSymbol", genes));
+			criteria.add(Restrictions.eq("reporter.platform", platform));
 			geneList = criteria.setResultTransformer(
 					Criteria.DISTINCT_ROOT_ENTITY).list();
+
 		}
 		
 		for (GeneBiomarker gene : geneList) {
