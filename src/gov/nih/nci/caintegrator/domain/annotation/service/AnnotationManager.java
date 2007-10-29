@@ -25,6 +25,8 @@ public interface AnnotationManager {
     public Map<GeneBiomarker, Collection<GeneExprReporter>> getReportersForGenes(
             AnnotationCriteria criteria);
     
+    public Map<GeneBiomarker, Collection<VariationReporter>> getVariationReportersForGenes(AnnotationCriteria criteria);
+    
     public GeneBiomarker getGeneForSymbol(String geneId);
     
     public List<GeneAlias> getGeneAliasForSymbol(String symbol);

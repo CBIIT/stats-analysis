@@ -144,6 +144,80 @@ public class AnnotationManagerImpl implements AnnotationManager {
 		
 		return reporterMap;
 	}
+	
+
+	public Map<GeneBiomarker, Collection<VariationReporter>> getVariationReportersForGenes(
+			AnnotationCriteria annotationCriteria) {
+		
+		HashMap<GeneBiomarker, Collection<VariationReporter>> reporterMap = new HashMap<GeneBiomarker, Collection<VariationReporter>>();
+
+
+		Collection<String> genes = annotationCriteria.getGeneSymbols();
+		String platform = annotationCriteria.getArrayPlatformName();
+		
+		if (platform == null) {
+			throw new RuntimeException("Array Platform name cannot be null");
+		}
+		if (genes == null || genes.isEmpty()) {
+			throw new RuntimeException("Gene list must not be empty");
+		}
+		
+		List<VariationReporter> reporterList = new ArrayList<VariationReporter>();
+		Session currentSession = sessionFactory.getCurrentSession();
+		Criteria criteria = currentSession.createCriteria(VariationReporter.class);
+		criteria.createAlias("snpAnnotation", "snp",
+				CriteriaSpecification.LEFT_JOIN);
+		criteria.createAlias("snpAnnotation.geneBiomarkerCollection", "gene",
+				CriteriaSpecification.LEFT_JOIN);
+		if (genes.size() > 1000) {
+			for (int i = 0; i < ((genes.size() / 1000) + 1); i++) {
+
+				int size;
+				if (i == (genes.size() / 1000)) {
+					size = genes.size() % 1000;
+				} else {
+					size = 1000;
+				}
+				String[] tempArray = new String[size];
+				System.arraycopy(genes.toArray(), i * 1000, tempArray, 0, size);
+				Collection tempList = new ArrayList();
+				Collections.addAll(tempList, tempArray);
+				criteria.add(Restrictions.in("gene.hugoGeneSymbol", tempList));
+				criteria.add(Restrictions.eq("platform", platform));
+				reporterList.addAll(criteria.setResultTransformer(
+						Criteria.DISTINCT_ROOT_ENTITY).list());
+
+			}
+		} else {
+
+			criteria.add(Restrictions.in("gene.hugoGeneSymbol", genes));
+			criteria.add(Restrictions.eq("platform", platform));
+			reporterList = criteria.setResultTransformer(
+					Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		}
+		
+		// Build return map for service
+		for(VariationReporter r : reporterList) {
+			Collection<GeneBiomarker> genesForReporter = r.getSnpAnnotation().getGeneBiomarkerCollection();
+			for(GeneBiomarker b : genesForReporter) {
+				
+				if(genes.contains(b.getHugoGeneSymbol())) {
+					
+					Collection<VariationReporter> reportersToAdd = null;
+					reportersToAdd = reporterMap.get(b);
+					if(reportersToAdd == null) {
+						reportersToAdd = new ArrayList<VariationReporter>();
+						
+					}
+					reportersToAdd.add(r);
+					reporterMap.put(b, reportersToAdd);
+				}
+			}
+		}
+		
+		return reporterMap;
+	}
 
 	public GeneBiomarker getGeneForSymbol(String geneId) {
 		Collection<String> genes = new ArrayList<String>();
@@ -314,4 +388,5 @@ public class AnnotationManagerImpl implements AnnotationManager {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
 }
