@@ -115,3 +115,7 @@ Added call to GenotypeFinding object
 
  1.83 to 1.84
 removed otherstuff from custom folder
+
+ 1.84 to 1.85
+1. changed mne to nme for InvasivePresentation Value Domain.
+2. changed mns to nms for InvasivePresentation Value Domain.
