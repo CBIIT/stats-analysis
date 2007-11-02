@@ -45,6 +45,10 @@
 		<!-- displayOrder -->
 		<property name="displayOrder" type="java.lang.Long"
 			column="DISPLAY_ORDER" insert="false" update="false" />
+			
+		<!-- methodTypeOrder -->
+		<property name="methodTypeOrder" type="java.lang.Double"
+			column="DEF_OPTION_ORDER" insert="false" update="false" />
 
 	<!--  m-1 relationship -->
        <many-to-one name="study"

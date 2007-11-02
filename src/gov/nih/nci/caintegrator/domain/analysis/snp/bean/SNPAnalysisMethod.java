@@ -17,6 +17,7 @@ public class SNPAnalysisMethod {
 	private String represensitiveCode;
 	private Study study;
 	private Long displayOrder;
+	private Double methodTypeOrder;
 	/**
 	 * @return Returns the id.
 	 */
@@ -100,5 +101,17 @@ public class SNPAnalysisMethod {
 	 */
 	public void setStudy(Study study) {
 		this.study = study;
+	}
+	/**
+	 * @return the methodTypeOrder
+	 */
+	public Double getMethodTypeOrder() {
+		return methodTypeOrder;
+	}
+	/**
+	 * @param methodTypeOrder the methodTypeOrder to set
+	 */
+	public void setMethodTypeOrder(Double methodTypeOrder) {
+		this.methodTypeOrder = methodTypeOrder;
 	}
 }
