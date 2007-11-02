@@ -143,6 +143,6 @@ public class CaIntegratorConstants {
 	public static final Long PUBLIC_ACCESS = new Long(8);;
 	
 	public static enum GraphType{KaplanMeierGeneExpression, KaplanMeierCopyNumber, GeneExrpression};
-	
+	public static final String NOT_INCLUDED = "NONE";
 
 }
