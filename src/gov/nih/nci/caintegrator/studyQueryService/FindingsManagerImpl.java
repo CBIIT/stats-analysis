@@ -4,7 +4,6 @@ import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 import gov.nih.nci.caintegrator.exceptions.FindingsQueryException;
-import gov.nih.nci.caintegrator.service.findings.AnalysisFinding;
 import gov.nih.nci.caintegrator.service.findings.strategies.SessionBasedFindingStrategy;
 import gov.nih.nci.caintegrator.service.task.Task;
 import gov.nih.nci.caintegrator.service.task.TaskResult;

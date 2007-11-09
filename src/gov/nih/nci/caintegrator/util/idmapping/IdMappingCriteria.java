@@ -8,7 +8,7 @@ public class IdMappingCriteria {
 	private String platformName;
 	private Set aliquotbarcode;
 	private String fileName;
-	private String analysisFileId;
+	private Set analysisFileIds;
 	
 	/**
      * @return the fileName
@@ -23,16 +23,16 @@ public class IdMappingCriteria {
         this.fileName = fileName;
     }
     /**
-     * @return the analysisFileId
+     * @return the analysisFileIds
      */
-    public String getAnalysisFileId() {
-        return analysisFileId;
+    public Set getAnalysisFileIds() {
+        return analysisFileIds;
     }
     /**
-     * @param analysisFileId the analysisFileId to set
+     * @param analysisFileIds the analysisFileIds to set
      */
-    public void setAnalysisFileId(String analysisFileId) {
-        this.analysisFileId = analysisFileId;
+    public void setAnalysisFileIds(Set analysisFileIds) {
+        this.analysisFileIds = analysisFileIds;
     }
     public Set getAliquotbarcode() {
 		return aliquotbarcode;

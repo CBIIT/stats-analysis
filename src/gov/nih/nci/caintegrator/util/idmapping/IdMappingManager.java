@@ -37,12 +37,7 @@ public class IdMappingManager implements IdMapper{
           return rbinaryIds;
 	}
 	
-	public Set getRbinaryIdsForPatientDIDs(Set patientDIDs, String tissue, String rBinaryFileName) {
-		
-		
-		return null;
-	}
-
+	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -50,5 +45,31 @@ public class IdMappingManager implements IdMapper{
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
+    
+
+
+    public Set getPatientDIDsForAnalysisIds(IdMappingCriteria criteria) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Criteria c = currentSession
+        .createCriteria(IdMapping.class);
+        c.add(Restrictions.in("analysisFileId", criteria.getAnalysisFileIds()));
+        c.add(Restrictions.eq("fileName", criteria.getFileName()));
+        List<IdMapping> objs = c.list();
+        Set<String> patientIds = new HashSet<String>();
+        for (IdMapping idm : objs) {
+            patientIds.add(idm.getPdid());
+        }
+        
+        return patientIds;
+  }
+    
+
+
+    public Set getRbinaryIdsForPatientDIDs(Set patientDIDs, String tissue,
+            String binaryFileName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 	
 }
