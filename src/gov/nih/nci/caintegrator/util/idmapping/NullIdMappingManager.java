@@ -48,4 +48,9 @@ public class NullIdMappingManager implements IdMapper {
 
     }
 
+    public Set getPatientDIDsForAnalysisIds(IdMappingCriteria criteria) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
