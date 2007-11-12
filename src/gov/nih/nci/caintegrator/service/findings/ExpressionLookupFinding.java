@@ -1,6 +1,7 @@
 package gov.nih.nci.caintegrator.service.findings;
 
 import gov.nih.nci.caintegrator.analysis.messaging.DataPointVector;
+import gov.nih.nci.caintegrator.analysis.messaging.DataPointVectorMeanComparator;
 import gov.nih.nci.caintegrator.analysis.messaging.ExpressionLookupResult;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
 import gov.nih.nci.caintegrator.service.findings.AnalysisFinding;
@@ -49,5 +50,16 @@ public class ExpressionLookupFinding extends AnalysisFinding  {
 	  return result.getDataVectors();
 	  
 	}
+	
+	public List<DataPointVector> getDataVectors(DataPointVectorMeanComparator comparator) {
+		List<DataPointVector> vectors = getDataVectors();
+		
+		//sort by the comparator
+		Collections.sort(vectors, comparator);
+		
+		return vectors;
+		
+	}
+	
 
 }
