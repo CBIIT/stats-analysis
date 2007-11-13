@@ -1,25 +1,17 @@
 package gov.nih.nci.caintegrator.util.idmapping;
 
-import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter;
-
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Expression;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class IdMappingManager implements IdMapper{
 
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	public Set getRbinaryIdsForPatientDIDs(IdMappingCriteria criteria) {
 		
