@@ -7,10 +7,10 @@
 
 <hibernate-mapping
 	package="gov.nih.nci.caintegrator.util">
-	<class name="PlatformMapping" table="TCGA_PLATFORM" lazy="true">
+	<class name="PlatformMapping" table="PLATFORM" lazy="true">
 
 		<!-- id -->
-		<id name="id" column="ID">
+		<id name="id" column="PLATFORM_ID">
 			<generator class="assigned" />
 		</id>
     
