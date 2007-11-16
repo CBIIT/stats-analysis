@@ -53,4 +53,9 @@ public class NullIdMappingManager implements IdMapper {
         return null;
     }
 
+    public String getPlatformNameFromDataSetName(IdMappingCriteria criteria) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

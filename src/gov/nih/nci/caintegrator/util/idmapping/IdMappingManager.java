@@ -1,10 +1,13 @@
 package gov.nih.nci.caintegrator.util.idmapping;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -62,6 +65,23 @@ public class IdMappingManager implements IdMapper{
             String binaryFileName) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+
+    public String getPlatformNameFromDataSetName(IdMappingCriteria criteria) {
+        String platform = "";
+        Session theSession = sessionFactory.getCurrentSession();        
+        String theHQL = "";
+        Query theQuery = null;
+        Collection objs = null;        
+        theHQL = "select distinct im.platform from IdMapping im where im.fileName=:dataSetName";
+        theQuery = theSession.createQuery(theHQL);
+        theQuery.setParameter("dataSetName", criteria.getFileName());
+        System.out.println("HQL: " + theHQL);        
+        objs = theQuery.list();
+        ArrayList<String> list = new ArrayList<String>(objs);        
+        platform = (String)list.get(0);
+        return platform;
     }
 	
 }
