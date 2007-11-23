@@ -128,7 +128,10 @@ removed otherstuff from custom folder
 3. EpidemiologyFinding to StudyParticipant missing
 
 1.86 to 1.87
-1. put the model back in
+1. put the data model back in
+
+1.87 to 1.88
+1. Moved StatisticalMethodType to classComparison package
 
 
 
