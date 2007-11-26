@@ -8,6 +8,7 @@ public class PlatformMapping implements java.io.Serializable {
 	private String dataType;
 	private String fileName;
 	private String annotationFileName;
+	private String arrayDesign;
 	
 	private int id;
 	
@@ -53,6 +54,12 @@ public class PlatformMapping implements java.io.Serializable {
 	}
 	public void setAnnotationFileName(String annotationFileName) {
 		this.annotationFileName = annotationFileName;
+	}
+	public String getArrayDesign() {
+		return arrayDesign;
+	}
+	public void setArrayDesign(String arrayDesign) {
+		this.arrayDesign = arrayDesign;
 	}
 	
 	
