@@ -29,6 +29,9 @@
 		<property name="fileName" column="FILE_NAME" />
 		
 		<property name="annotationFileName" column="ANNOTATION_FILE_NAME" />
+		
+		<property name="arrayDesign" column="ARRAY_DESIGN" />
+		
 			
 	</class>
 </hibernate-mapping>
