@@ -1,11 +1,21 @@
 package gov.nih.nci.caintegrator.util;
 
+/**
+ * 
+ * @author caintegrator team
+ * Contains all information for array platforms used in a study. The information
+ * can later used in determining gene expression from a file or datastore.
+ *
+ */
 public class PlatformMapping implements java.io.Serializable {
 	
 	private String platformName;
 	private String displayString;
 	private String center;
 	private String dataType;
+	/**
+	 * change fileName variable to dataSetName (below) as to make more generic
+	 */
 	private String fileName;
 	private String annotationFileName;
 	private String arrayDesign;
