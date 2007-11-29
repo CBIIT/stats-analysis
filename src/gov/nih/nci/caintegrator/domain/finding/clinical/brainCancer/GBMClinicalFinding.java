@@ -11,6 +11,7 @@ public class GBMClinicalFinding extends ClinicalFinding {
     private ClinicalAssessment MIB1_POSITIVE;
     private ClinicalAssessment PERCENTMONOCYTEINFILTRATION;
     private ClinicalAssessment PROTOCOLFILENAME;
+    private NumericMeasurement SURVIVAL_LENGTH_MONTH;
     private NumericMeasurement NUMBERPROLIFERATINGCELLS;
     private ClinicalAssessment PRIMARYORMETASTATICSTATUS;
     private ClinicalAssessment SHIPPINGDATE;
@@ -1069,5 +1070,19 @@ public class GBMClinicalFinding extends ClinicalFinding {
     public void setTNMPATHOLOGYLYMPHNODESTATUS(
             ClinicalAssessment TNMPATHOLOGYLYMPHNODESTATUS) {
         this.TNMPATHOLOGYLYMPHNODESTATUS = TNMPATHOLOGYLYMPHNODESTATUS;
+    }
+
+    /**
+     * @return the sURVIVAL_LENGTH_MONTH
+     */
+    public NumericMeasurement getSURVIVAL_LENGTH_MONTH() {
+        return SURVIVAL_LENGTH_MONTH;
+    }
+
+    /**
+     * @param survival_length_month the sURVIVAL_LENGTH_MONTH to set
+     */
+    public void setSURVIVAL_LENGTH_MONTH(NumericMeasurement survival_length_month) {
+        SURVIVAL_LENGTH_MONTH = survival_length_month;
     }
 }

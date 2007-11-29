@@ -490,7 +490,10 @@
 			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
 			<property name="value" column="TNMPATHOLOGYLYMPHNODESTATUS" />
 		</component>
-
+		<component name="SURVIVAL_LENGTH_MONTH"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="SURVIVAL_LENGTH_MONTH" />
+		</component>
 
 
 	</class>
