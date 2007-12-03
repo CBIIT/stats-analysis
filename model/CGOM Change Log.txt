@@ -133,5 +133,6 @@ removed otherstuff from custom folder
 1.87 to 1.88
 1. Moved StatisticalMethodType to classComparison package
 
-
+1.88 to 1.89
+1. Change the  Value Domain "EnumeratedPlatformTechnology" tag to "E" from "N".
 
