@@ -44,51 +44,54 @@
                  column="HETEROZYGOTE" 
                  insert="false" 
                  update="false" />     
-       
+                 
        <!-- heterozygoteLowerConfidenceBound -->
-            <!--  <property name="heterozygoteLowerConfidenceBound" 
+              <property name="heterozygoteLowerConfidenceBound" 
                  type="java.lang.Double" 
                  column="HETEROZYGOTE_LOWER_CB" 
                  insert="false" 
                  update="false" />  
-            -->     
+                 
        <!-- heterozygoteStandardError -->
-            <!--  <property name="heterozygoteStandardError" 
+              <property name="heterozygoteStandardError" 
                  type="java.lang.Double" 
                  column="HETEROZYGOTE_STD_ERR" 
                  insert="false" 
                  update="false" />  
-             -->    
+                 
        <!-- heterozygoteUpperConfidenceBound -->
-            <!--  <property name="heterozygoteUpperConfidenceBound" 
+              <property name="heterozygoteUpperConfidenceBound" 
                  type="java.lang.Double" 
                  column="HETEROZYGOTE_UPPER_CB" 
                  insert="false" 
                  update="false" />
-             -->    
+                 
        <!-- homozygoteLowerConfidenceBound -->
-             <!-- <property name="homozygoteLowerConfidenceBound" 
+              <property name="homozygoteLowerConfidenceBound" 
                  type="java.lang.Double" 
                  column="HOMOZYGOTE_LOWER_CB" 
                  insert="false" 
                  update="false" />  
-             -->    
+                 
        <!-- homozygoteStandardError -->
-            <!--  <property name="homozygoteStandardError" 
+              <property name="homozygoteStandardError" 
                  type="java.lang.Double" 
                  column="HOMOZYGOTE_STD_ERR" 
                  insert="false" 
                  update="false" />  
-             -->    
+                 
        <!-- homozygoteUpperConfidenceBound -->
-            <!--  <property name="homozygoteUpperConfidenceBound" 
+              <property name="homozygoteUpperConfidenceBound" 
                  type="java.lang.Double" 
                  column="HOMOZYGOTE_UPPER_CB" 
                  insert="false" 
-                 update="false" />   
-            -->       
+                 update="false" />                       
                  
-
+       <!-- <many-to-one name="study"
+            class="gov.nih.nci.caintegrator.domain.study.bean.Study"
+            column="STUDY_ID"
+            not-null="true" />   
+            -->
                  
  
 	</class>
