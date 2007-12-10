@@ -134,5 +134,9 @@ removed otherstuff from custom folder
 1. Moved StatisticalMethodType to classComparison package
 
 1.88 to 1.89
-1. Change the  Value Domain "EnumeratedPlatformTechnology" tag to "E" from "N".
+1. Change the  Value Domain "PlatformTechnology" tag to "E" from "N".
+
+1.89 to 1.90
+1. Change the  Value Domain "DNAMaterialType" tag to "E" from "N".
+2. Change the  Value Domain "ProcedureName" tag to "E" from "N".
 
