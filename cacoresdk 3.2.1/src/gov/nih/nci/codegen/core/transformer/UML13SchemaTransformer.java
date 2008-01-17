@@ -414,7 +414,11 @@ public class UML13SchemaTransformer implements Transformer, XMLConfigurable {
             Element innerSequence = new Element("sequence", w3cNS);
             Element associatedObjElement = new Element("element", w3cNS);
                 
-            associatedObjElement.setAttribute("ref", otherEnd.getType().getName());
+            //associatedObjElement.setAttribute("ref", otherEnd.getType().getName());
+			String thisPackage = getPackage(thisEnd.getType());
+			String type = (associationPackage.equals(thisPackage)) ? otherEnd.getType().getName() : associationPackage + ":" + otherEnd.getType().getName();
+			associatedObjElement.setAttribute("ref", type);
+
             associatedObjElement.setAttribute("minOccurs","0");   
             associatedObjElement.setAttribute("maxOccurs",maxOccurs);  
                 
