@@ -381,15 +381,15 @@ public class NestedCriteria2HQL
 				Object value = criterionMap.get(key);
 				if (!key.equals("id") && (value instanceof String))
 				{
-					if (criteria.caseSensitivityFlag)
-					{
+//					if (criteria.caseSensitivityFlag)
+//					{
 						whereClause.append(sourceAlias + Constant.DOT + key + getOperator(value) + "? ");
 						paramList.add(((String) value).replaceAll("\\*", "\\%"));
-					} else
-					{
-						whereClause.append("lower(" + sourceAlias + Constant.DOT + key + ") " + getOperator(value) + "? ");
-						paramList.add(((String) value).toLowerCase().replaceAll("\\*", "\\%"));
-					}
+//					} else
+//					{
+//						whereClause.append("lower(" + sourceAlias + Constant.DOT + key + ") " + getOperator(value) + "? ");
+//						paramList.add(((String) value).toLowerCase().replaceAll("\\*", "\\%"));
+//					}
 				} else
 				{
 					whereClause.append(sourceAlias).append(Constant.DOT).append(key).append(getOperator(value)).append("? ");
