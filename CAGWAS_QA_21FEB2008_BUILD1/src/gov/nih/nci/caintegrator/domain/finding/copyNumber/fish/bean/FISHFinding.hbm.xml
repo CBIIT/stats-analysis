@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : FISHFinding.hbm.xml
+    Created on : November 2, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for FISHFinding
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+	
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.copyNumber.fish.bean">
+        <class name="FISHFinding" 
+        table="FISH_FACT_NOW">        
+
+         <!-- id -->
+         <id name="id" 
+           type="java.lang.Long" 
+           column="FISH_FACT_ID">
+           <generator class="assigned" />
+         </id> 
+
+        <property name="abnomalityStatus"
+                 type="java.lang.String"
+                 column="CNA_STATUS"
+                 insert="false"
+                 update="false" />
+
+        <!-- gene -->        
+       <property name="gene" 
+                 type="java.lang.String" 
+                 column="GENE_SYMBOL" 
+                 insert="false" 
+                 update="false" />   
+
+      <!-- ratio-->        
+       <property name="ratio" 
+                 type="java.lang.Double" 
+                 column="RATIO" 
+                 insert="false" 
+                 update="false" />  
+
+    <many-to-one name="specimen"
+       class="gov.nih.nci.caintegrator.domain.study.bean.Specimen"
+       column="SPECIMEN_ID"/>             
+      
+	</class>
+</hibernate-mapping>
