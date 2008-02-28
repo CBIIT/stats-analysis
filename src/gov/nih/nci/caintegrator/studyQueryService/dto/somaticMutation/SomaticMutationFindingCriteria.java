@@ -280,7 +280,7 @@ public class SomaticMutationFindingCriteria {
 		}
 
 		public void setGeneAnnotationCriteria(AnnotationCriteria annotationCriteria) {
-			this.geneAnnotationCriteria = geneAnnotationCriteria;
+			this.geneAnnotationCriteria = annotationCriteria;
 		}	
 
 }
