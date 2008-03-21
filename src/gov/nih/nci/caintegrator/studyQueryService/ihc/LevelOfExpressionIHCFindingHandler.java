@@ -130,7 +130,7 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
          logger.debug("Entering getFindings");
          Session theSession = sessionFactory.getCurrentSession();
          Set<LevelOfExpressionIHCFinding> theResults = new HashSet<LevelOfExpressionIHCFinding>();
-         try
+          try
          {
              //theSession = HibernateUtil.getSession();
              //HibernateUtil.beginTransaction();
@@ -227,6 +227,8 @@ public class LevelOfExpressionIHCFindingHandler extends IHCFindingHandler {
              else{
                  String theFinalHQL = "select levelIHC from LevelOfExpressionIHCFinding as levelIHC LEFT JOIN FETCH levelIHC.proteinBiomarker LEFT JOIN FETCH levelIHC.specimen " +
                  " WHERE levelIHC.specimen.patientDID||levelIHC.proteinBiomarker.id IN (:levelIHC_objects)";
+                 
+             
                  System.out.println(theFinalHQL);
                  Query theFinalQuery = null;
                  theFinalQuery = theSession.createQuery(theFinalHQL);
