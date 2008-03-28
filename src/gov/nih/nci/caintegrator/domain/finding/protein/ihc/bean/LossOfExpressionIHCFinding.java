@@ -15,6 +15,10 @@ public class LossOfExpressionIHCFinding extends IHCFinding implements Serializab
     private Integer invasiveBenignDiff;
     private String lossResult;
     private String comments;
+    private String benignSumOperator;
+    private String invasiveSumOperator;
+    
+
     /**
      * @return Returns the benignPresentValue.
      */
@@ -87,6 +91,18 @@ public class LossOfExpressionIHCFinding extends IHCFinding implements Serializab
     public void setLossResult(String lossResult) {
         this.lossResult = lossResult;
     }
+	public String getBenignSumOperator() {
+		return benignSumOperator;
+	}
+	public void setBenignSumOperator(String benignSumOperator) {
+		this.benignSumOperator = benignSumOperator;
+	}
+	public String getInvasiveSumOperator() {
+		return invasiveSumOperator;
+	}
+	public void setInvasiveSumOperator(String invasiveSumOperator) {
+		this.invasiveSumOperator = invasiveSumOperator;
+	}
     
 	
 	
