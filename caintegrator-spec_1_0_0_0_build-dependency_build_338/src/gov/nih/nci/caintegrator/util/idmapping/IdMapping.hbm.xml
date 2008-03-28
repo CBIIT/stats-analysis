@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.util.idmapping">
+	<class name="IdMapping" table="ID_MAPPING" lazy="true">
+
+		<!-- id -->
+		<id name="id" column="MAPPING_ID">
+			<generator class="assigned" />
+		</id>
+    
+	    <property name="pdid" column="PDID" />
+
+		<!-- sample id -->
+		<property name="sampleId" column="SAMPLE_ID" />
+
+		<!-- tissue -->
+		<property name="tissue" column="TISSUE" />
+		
+		<!-- FILENAME -->
+		<property name="fileName" column="FILENAME" />
+		
+		<!-- PLATFORM -->
+		<property name="platform" column="PLATFORM" />
+		
+		<!--  ANALYSIS_FILE_ID -->
+		<property name="analysisFileId" column="ANALYSIS_FILE_ID" />
+		
+		<!-- ALIQUOTBARCODE -->
+		<property name="aliquotbarcode" column="ALIQUOTBARCODE" />
+		
+	</class>
+</hibernate-mapping>
