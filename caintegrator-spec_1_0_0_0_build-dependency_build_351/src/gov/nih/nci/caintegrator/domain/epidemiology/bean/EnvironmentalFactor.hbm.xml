@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="gov.nih.nci.caintegrator.domain.epidemiology.bean.EnvironmentalFactor" 
+    	table="ENV_FACTOR"
+        lazy="true">
+
+	    <id name="id" 
+	    	column="ENV_FACTOR_ID">
+	        <generator class="native"/>
+	    </id>
+	    
+        	
+        <property name="exposureType" 
+        	column="EXPOSURE_TYPE"/>
+        	
+
+		<many-to-one name="epidemiologicalFinding" class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EpidemiologicalFinding" column="EPI_FINDING_ID" />
+	</class>
+</hibernate-mapping>
