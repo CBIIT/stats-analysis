@@ -47,9 +47,12 @@ public class ExpressionLookupFinding extends AnalysisFinding  {
 	
 	public List<DataPointVector> getDataVectors() {
 	  ExpressionLookupResult result = (ExpressionLookupResult) getAnalysisResult();
-	  List<DataPointVector> retList = new ArrayList<DataPointVector>(result.getDataVectors());
-	  return retList;
+	  List<DataPointVector> retList = null;
+	  if (result != null) {
+		 retList = new ArrayList<DataPointVector>(result.getDataVectors());
+	  }
 	  
+	  return retList;
 	}
 	
 	public List<DataPointVector> getDataVectors(DataPointVectorMeanComparator comparator) {
