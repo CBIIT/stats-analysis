@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ****************************************************************************************************-->
+<!--                                     Configure cagWAS caGrid Service Build Script	                 -->
+<!-- ****************************************************************************************************-->
+
+
+<project name="Configure cagWAS caGrid service" default="config-grid-service" basedir=".">
+	<property file="build.properties"/>
+	<property name="temp.dir" value="temp" />
+    <property name="artifacts.dir" value="artifacts" />
+
+	<!-- ************************************************************************************************-->
+	<!--                                             Configure Index Service                             -->
+	<!-- ************************************************************************************************-->
+	<target name="config-index-service-url" depends="unjar-file">
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/CAGWAS_registration.xml" token="http://cbiovdev5012.nci.nih.gov:8080" value="${grid.index.service.base.url}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="${jboss.server.hostname}:${jboss.server.port}"/>
+		<replace file="${temp.dir}/WEB-INF/web.xml" token="8080" value="${jboss.server.port}"/>
+	</target>
+	<!-- ************************************************************************************************-->
+	<!--                                             Configure Remote Service                             -->
+	<!-- ************************************************************************************************-->
+	<target name="config-remote-service-url" depends="config-index-service-url">
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/jndi-config.xml" token="@JBOSS_SERVER@" value="${jboss.server.hostname}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/jndi-config.xml" token="@JBOSS_PORT@" value="${jboss.server.port}"/>
+	</target>
+	<!-- ************************************************************************************************-->
+	<!--                                             Configure   Service    Metadata                         -->
+	<!-- ************************************************************************************************-->
+	<target name="config-service-metadata" depends="config-remote-service-url">
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
+   	    <replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@SHORT_NAME@" value="${shortName}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@COUNTRY@" value="${country}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@LOCALITY@" value="${locality}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@POSTAL_CODE@" value="${postalCode}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@STATE@" value="${stateProvince}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@STREET1@" value="${street1}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@STREET2@" value="${street2}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@AFFILIATION@" value="${affiliation}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@EMAIL@" value="${email}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@FIRST_NAME@" value="${firstName}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@LAST_NAME@" value="${lastName}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@PHONE_NUMBER@" value="${phoneNumber}"/>
+	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_CAGWAS/serviceMetadata.xml" token="@ROLE@" value="${role}"/>
+</target>
+	<target name="unjar-file">
+		<delete dir="${temp.dir}" failonerror="false"/>
+		<mkdir dir="${temp.dir}"/>
+		<unjar src="wsrf.war" dest="${temp.dir}"/>
+	</target>
+	<target name="config-grid-service" depends="config-service-metadata">
+		<delete dir="${artifacts.dir}" failonerror="false"/>
+		<mkdir dir="${artifacts.dir}"/>
+		<jar destfile="${artifacts.dir}/wsrf.war" basedir="${temp.dir}"/>
+	</target>
+</project>
