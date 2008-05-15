@@ -565,7 +565,14 @@ public class NestedCriteria2HQL
 			if (prop.getType().isAssociationType())
 			{
 				String fieldName = prop.getName();
-				Field field = pclass.getMappedClass().getDeclaredField(fieldName);
+				Field field ;
+				try{
+					field = pclass.getMappedClass().getDeclaredField(fieldName);
+				}
+				catch(NoSuchFieldException e){
+					Class objClass = obj.getClass();
+					field = checkForImplicitInheritance(objClass,fieldName);
+				}
 				field.setAccessible(true);
 				Object value = field.get(obj);
 				if (value != null)
@@ -574,7 +581,6 @@ public class NestedCriteria2HQL
 			}
 		}
 	}
-
 	private HashMap getObjAssocCriterion(Object obj, Configuration cfg) throws Exception
 	{
 		HashMap criterions = new HashMap();
