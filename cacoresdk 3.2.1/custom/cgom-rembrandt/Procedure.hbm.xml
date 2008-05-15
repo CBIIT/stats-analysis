@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    $Id: Procedure.hbm.xml,v 1.1 2008-05-15 21:58:14 sahnih Exp $
+    
+    $Log: not supported by cvs2svn $
+    Revision 1.1  2007/12/17 22:21:55  sahnih
+    checked in modified TAG_CACORE_321
+
+    Revision 1.2  2006/08/18 20:45:02  georgeda
+    Added procedureType and procedureName to Procedure object in Study package
+
+    Revision 1.1  2006/08/14 16:58:52  georgeda
+    Updated w/ newest OM changes (Rev 1.51)
+
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<union-subclass
+		name="gov.nih.nci.caintegrator.domain.study.Procedure"
+		extends="gov.nih.nci.caintegrator.domain.study.Activity"
+		lazy="true" table="STUDY_PROC_ADMIN">
+		
+		<property name="targetSiteCode" type="java.lang.String" column="PROC_SITE"/>
+		<property name="procedureName" type="java.lang.String" column="PROC_NAME"/>
+		<property name="procedureType" type="java.lang.String" column="PROC_TYPE"/>
+	</union-subclass>
+</hibernate-mapping>
