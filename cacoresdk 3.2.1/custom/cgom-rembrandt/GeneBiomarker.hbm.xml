@@ -74,7 +74,7 @@
       
       <set name="snpAnnotationCollection" table="GENE_SNP_ASSO" >
          <cache usage="read-write" />
-         <key column="GENE_ID" />
+         <key column="GENE_DIM_ID" />
          <many-to-many class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation" column="SNPANNO_ID" />
       </set>                         
       <set name="geneAliasCollection" inverse="true">

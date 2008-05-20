@@ -18,10 +18,16 @@
 
 		<property name="name" 
 		type="java.lang.String" 
-		column="PROBE_SET_ID" />
+		column="PROBE_SET_ID" 
+		insert="false" 
+        update="false" />
+     
+		
 		<property name="platform" 
 		type="java.lang.String" 
 		column="GENECHIP_ARRAY" />
+		
+		
 <!--
 		<set name="geneBiomarkerCollection"
 			table="PROBESET_GENE_ASSO">

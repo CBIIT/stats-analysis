@@ -45,7 +45,7 @@
 				<key column="SNPANNO_ID" />
 				<many-to-many
 					class="gov.nih.nci.caintegrator.domain.annotation.gene.GeneBiomarker"
-					outer-join="true" column="GENE_ID" />
+					outer-join="true" column="GENE_DIM_ID" />
 			</set>
 		</component>
 
