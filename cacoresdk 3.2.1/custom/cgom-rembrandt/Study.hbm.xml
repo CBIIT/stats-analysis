@@ -84,6 +84,13 @@
      </set>  
      
     <!-- here is for 1-m relationships -->   
+    
+    
+     <set name="agentCollection" lazy="true" inverse="true">
+      <cache usage="read-write" />
+      <key column="STUDY_ID" />
+      <one-to-many class="gov.nih.nci.caintegrator.domain.study.Agent" />
+     </set>  
   
     
      <set name="studyParticipantCollection" lazy="true" inverse="true">

@@ -27,6 +27,9 @@
 		type="java.lang.String" 
 		column="GENECHIP_ARRAY" />
 		
+		<many-to-one name="geneBioMarker" class="gov.nih.nci.caintegrator.domain.annotation.gene.GeneBiomarker" column="GENE_DIM_ID"  />
+   
+		
 		
 <!--
 		<set name="geneBiomarkerCollection"

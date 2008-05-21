@@ -173,7 +173,15 @@
     <set name="clinicalFindingCollection" lazy="true" inverse="true">
       <key column="PARTICIPANT_ID" />
       <one-to-many class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalFinding" />
-    </set>  
+    </set>
+    
+            
+         <!--  1-1 relationship -->   
+          
+               
+                 
+	<many-to-one name="histology" class="gov.nih.nci.caintegrator.domain.study.Histology" column="PARTICIPANT_ID" insert="false" update="false"/>     
+     
    
     <!--
     <set name="epiFinding" lazy="true" inverse="true">
