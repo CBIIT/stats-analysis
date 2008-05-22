@@ -6,6 +6,7 @@
 	<session-factory name="cgom-rembrandt">        
           <!-- JDBC connection pool (use the built-in)
           <property name="connection.pool_size">50</property> -->
+          <property name="dialect">org.hibernate.dialect.OracleDialect</property>  
 
           <!-- Enable Hibernate's automatic session context management -->
           <property name="current_session_context_class">thread</property>
