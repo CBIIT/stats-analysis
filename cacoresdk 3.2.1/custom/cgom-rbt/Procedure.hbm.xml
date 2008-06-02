@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    $Id: Procedure.hbm.xml,v 1.1 2008-05-15 21:58:14 sahnih Exp $
+    $Id: Procedure.hbm.xml,v 1.1 2008-06-02 10:42:06 sahnih Exp $
     
     $Log: not supported by cvs2svn $
+    Revision 1.1  2008/05/15 21:58:14  sahnih
+    added cgom-rembrandt
+
     Revision 1.1  2007/12/17 22:21:55  sahnih
     checked in modified TAG_CACORE_321
 

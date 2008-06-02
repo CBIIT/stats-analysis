@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-	$Id: CopyNumberFinding.hbm.xml,v 1.1 2008-05-15 21:58:14 sahnih Exp $
+	$Id: CopyNumberFinding.hbm.xml,v 1.1 2008-06-02 10:42:06 sahnih Exp $
 	$Log: not supported by cvs2svn $
+	Revision 1.1  2008/05/15 21:58:14  sahnih
+	added cgom-rembrandt
+
 	Revision 1.4  2007/03/23 19:35:44  ashinohara
 	added copy number query functionality
 	
