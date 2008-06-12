@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.annotation.gene.bean">
+	<class name="GeneAlias" table="GENE_ALIAS" lazy="true">
+
+		<!-- id -->
+		<id name="id" column="ALIAS_ID">
+			<generator class="assigned" />
+		</id>
+
+		<!-- chromosome -->
+		<property name="alias" column="ALIAS" />
+
+		<!-- hugoGeneSymbol -->
+		<property name="hugoGeneSymbol" column="GENE_SYMBOL" />
+
+		<many-to-one name="geneBiomarker" class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker" column="GENE_ID"/>
+	</class>
+</hibernate-mapping>
