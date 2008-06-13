@@ -23,8 +23,17 @@ public class GPTask implements Serializable{
     private long elapsedTime;
     private long endTime;
     private long startTime;
+    private String taskModule;
     
-    public GPTask(String jobId, String resultName, FindingStatus status){
+    public String getTaskModule() {
+		return taskModule;
+	}
+
+	public void setTaskModule(String taskModule) {
+		this.taskModule = taskModule;
+	}
+
+	public GPTask(String jobId, String resultName, FindingStatus status){
         this.jobId = jobId;
         this.resultName = resultName;
         this.status = status;
