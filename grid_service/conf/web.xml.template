@@ -30,7 +30,7 @@
     </servlet-class>
 <init-param>
 <param-name>webContext</param-name>
-<param-value>wsrf-rbt</param-value>
+<param-value>@APP_NAME@</param-value>
 </init-param>
 <init-param>
 <param-name>defaultPort</param-name>
@@ -62,24 +62,7 @@
     <!-- Default to 5 minute session timeouts -->
     <session-timeout>5</session-timeout>
   </session-config>
-
-	<servlet>
-	    <servlet-name>WSRFServlet</servlet-name>
-	    <display-name>WSRF Container Servlet</display-name>
-	    <servlet-class>
-	        org.globus.wsrf.container.AxisServlet?
-	    </servlet-class>
-	    <init-param>
-	            <param-name>defaultProtocol</param-name>
-	            <param-value>http</param-value>
-	        </init-param>
-	        <init-param>
-	            <param-name>defaultPort</param-name>
-	            <param-value>@SERVER_PORT@</param-value>
-	    </init-param>
-	    <load-on-startup>true</load-on-startup>
-	</servlet>
-
+	
   <mime-mapping>
       <extension>wsdl</extension>
       <mime-type>text/xml</mime-type>
