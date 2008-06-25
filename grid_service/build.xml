@@ -14,12 +14,12 @@
 	<!--                                             Configure Index Service                             -->
 	<!-- ************************************************************************************************-->
 	<target name="config-index-service-url" depends="unjar-file">
-		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cbiovdev5012.nci.nih.gov:8080" value="${grid.index.service.base.url}"/>
+		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/${grid.service.name}_registration.xml" token="http://cagrid-index.nci.nih.gov:8080" value="${grid.index.service.base.url}"/>
 		<replace file="${temp.dir}/WEB-INF/etc/globus_resolution_service/jndi-config.xml" token="localhost:8080" value="${jboss.server.hostname}:${jboss.server.port}"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="8080" value="${jboss.server.port}"/>
-		<copy file="conf/server-config.wsdd.template" tofile="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd"/>
+		<copy file="conf/server-config.wsdd.template" tofile="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" overwrite="true"/>
 		<replace file="${temp.dir}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd" token="@LOGICAL_HOST@" value="${grid.logicalHost}"/>
-		<copy file="conf/web.xml.template" tofile="${temp.dir}/WEB-INF/web.xml"/>
+		<copy file="conf/web.xml.template" tofile="${temp.dir}/WEB-INF/web.xml" overwrite="true"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="@SERVER_PORT@" value="${jboss.server.port}"/>
 		<replace file="${temp.dir}/WEB-INF/web.xml" token="@APP_NAME@" value="${grid.service.application.name}"/>		
 		
@@ -35,7 +35,7 @@
 	<!--                                             Configure   Service    Metadata                         -->
 	<!-- ************************************************************************************************-->
 	<target name="config-service-metadata" depends="config-remote-service-url">
-		<copy file="conf/serviceMetadata.xml.template" tofile="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml"/>
+		<copy file="conf/serviceMetadata.xml.template" tofile="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" overwrite="true"/>
 		<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SERVICE_NAME@" value="${grid.service.name}"/>
 	   	<replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@DISPLAY_NAME@" value="${displayName}"/>
    	    <replace file="${temp.dir}/WEB-INF/etc/cagrid_${grid.service.name}/serviceMetadata.xml" token="@SHORT_NAME@" value="${shortName}"/>
