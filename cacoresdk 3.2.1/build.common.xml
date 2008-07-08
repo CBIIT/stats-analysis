@@ -231,16 +231,22 @@ oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 	*********************************************************************** -->
 
 	<target name="clean-all" depends="-clean-all.main,-clean-all.custom" description="Removes all generated code and all artifacts related to all projects" />
-
-	<target name="-clean-all.main" unless="clean-all.main.ignore" >
+    
+    <target name="-clean-all.main" >
+	    <delete dir="${dir.output}" />	
+    </target>
+    
+    
+	<!--<target name="-clean-all.main" unless="clean-all.main.ignore" >
 		<input message="Are you sure you want to delete ALL generated code and all project artifacts? " validargs="y,n" addproperty="do.delete" />
 		<condition property="do.abort">
 			<equals arg1="n" arg2="${do.delete}" />
 		</condition>
-		<fail if="do.abort">Cleanall aborted--no files have been removed.</fail>
+		<fail if="do.abort">Cleanall aborted-no files have been removed.</fail>
 		<delete dir="${dir.output}" />
 		<SDKecho message="All generated code and artifacts have been deleted" />
 	</target>
+	-->
 
 	<target name="init-project" depends="-init-project.main,-init-project.custom" description="Initialize project build by creating output directories and necessary files" />
 
