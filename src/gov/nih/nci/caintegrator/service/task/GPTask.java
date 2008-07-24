@@ -24,6 +24,7 @@ public class GPTask implements Serializable{
     private long endTime;
     private long startTime;
     private String taskModule;
+    private String taskModuleDisplayName;
     
     public String getTaskModule() {
 		return taskModule;
@@ -112,4 +113,12 @@ public class GPTask implements Serializable{
     public long getEndTime() {
         return endTime;
     }
+
+	public String getTaskModuleDisplayName() {
+		return taskModuleDisplayName;
+	}
+
+	public void setTaskModuleDisplayName(String taskModuleDisplayName) {
+		this.taskModuleDisplayName = taskModuleDisplayName;
+	}
 }
