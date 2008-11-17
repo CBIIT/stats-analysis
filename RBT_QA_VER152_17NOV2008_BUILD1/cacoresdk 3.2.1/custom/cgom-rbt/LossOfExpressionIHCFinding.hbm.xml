@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : LossOfExpressionIHCFinding.hbm.xml
+    Created on : August 21, 2006
+    Author     : Dana Zhang, Kevin Rosso
+    Description: Hibernate mapping file for LossOfExpressionIHCFinding
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+	
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.protein.ihc">
+
+ <class name="LossOfExpressionIHCFinding" 
+        table="IHC_LOSS_FACT">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.Long" 
+           column="IHC_LOST_FID">
+           <generator class="assigned" />
+       </id>
+
+
+       <!-- benignPresentValue -->  
+        <property name="benignPresentValue"
+                 type="java.lang.String"
+                 column="BENIGN_PRESENT_VALUE"/>
+
+        <!-- benignSum -->        
+       <property name="benignSum" 
+                 type="java.lang.Integer" 
+                 column="BENIGN_SUM"/>
+                 
+       <!-- comments -->
+       <property name="comments" 
+                 type="java.lang.String" 
+                 column="COMMENTS"/>
+                 
+        <!-- invasiveBenignDiff -->
+       <property name="invasiveBenignDiff" 
+                 type="java.lang.Integer" 
+                 column="INVASIVE_BENIGN_DIFF"/>
+                 
+       <!-- invasiveSum -->        
+       <property name="invasiveSum" 
+                 type="java.lang.Integer" 
+                 column="INVASIVE_SUM"/>
+                                  
+        <!-- lossResult -->        
+       <property name="lossResult" 
+                 type="java.lang.String" 
+                 column="LOSS_RSLT"/> 
+       
+       <many-to-one name="specimen"
+       			class="gov.nih.nci.caintegrator.domain.study.Specimen"
+       			column="SPECIMEN_ID"/> 
+       
+       <many-to-one name="proteinBiomarker"
+            class="gov.nih.nci.caintegrator.domain.annotation.protein.ProteinBiomarker"
+            column="PROTEIN_BIOMARKER_ID"/>      
+      
+	</class>
+</hibernate-mapping>
