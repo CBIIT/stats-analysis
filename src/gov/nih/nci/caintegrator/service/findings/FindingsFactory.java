@@ -160,6 +160,8 @@ public interface FindingsFactory {
 	  * @throws FrameworkException 
 	  */
 	 public CompoundClassComparisonFinding createCompoundClassComparisonFinding(List<ClassComparisonQueryDTO> queryList, String sessionID, String taskID, List<String> reporterList) throws FrameworkException;
-
+    
+	 
+		
 	
 }
