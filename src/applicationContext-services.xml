@@ -38,6 +38,10 @@
 		class="gov.nih.nci.caintegrator.studyQueryService.germline.SubjectSearchHandler" >
 		<property name="sessionFactory" ref="sessionFactory" />		
 	</bean>
+	<bean id="p53FindingsHandler"
+		class="gov.nih.nci.caintegrator.studyQueryService.p53.P53FindingHandler">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="levelOfExpressionFindingsHandler"
 		class="gov.nih.nci.caintegrator.studyQueryService.ihc.LevelOfExpressionIHCFindingHandler">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -85,6 +89,12 @@
 			expression="execution(* gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManager.*(..))" />
 		<aop:advisor advice-ref="txAdvice"
 			pointcut-ref="annotationServiceMethods" />
+	</aop:config>
+	<aop:config>
+		<aop:pointcut id="p53serviceMethods"
+			expression="execution(* gov.nih.nci.caintegrator.studyQueryService.p53.*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="p53serviceMethods" />
 	</aop:config>
 	<aop:config>
 		<aop:pointcut id="ihcserviceMethods"
