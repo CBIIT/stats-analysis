@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.annotation.gene.bean">
+	<class name="GeneReporterAnnotation" table="PROBESET_ALIGNMENTS" lazy="true">
+
+		<!-- id -->
+		<id name="id" column="PROBESET_ALIGNMENTS_ID">
+			<generator class="assigned" />
+		</id>
+
+		<property name="chromosome" column="CHROMOSOME" />
+		<property name="startPhysicalLocation" column="START_POSITION" />
+		<property name="endPhysicalLocation" column="END_POSITION" />
+
+	</class>
+</hibernate-mapping>
