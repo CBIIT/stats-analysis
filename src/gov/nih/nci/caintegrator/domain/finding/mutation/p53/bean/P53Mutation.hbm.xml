@@ -11,8 +11,6 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 	
-
-	
 <hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.mutation.p53.bean">
        
  <class name="P53MutationFinding"          
@@ -43,7 +41,7 @@
         <!-- exonOrIntronLocation -->        
        <property name="exonOrIntronLocation" 
                  type="java.lang.String" 
-                 column="EXON_OR_INTRON_LOCATION" 
+                 column="EXON_INTRON_LOCATION" 
                  insert="false" 
                  update="false" />          
                  
@@ -58,7 +56,7 @@
       <!-- codonAminoacidChange -->        
        <property name="codonAminoacidChange" 
                  type="java.lang.String" 
-                 column="CODON_AMINOACID_CHANGE" 
+                 column="CODON_AMINO_ACID_CHANGE" 
                  insert="false" 
                  update="false" />  
                 
