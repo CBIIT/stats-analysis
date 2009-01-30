@@ -48,8 +48,8 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	              attributes are mentioned.  So ignore StudyParticipantCriteria and return all StudyParticipant* */
 	           crit = session.createCriteria(StudyParticipant.class).
 	                            setFetchMode("populationCollection", FetchMode.EAGER);
-	           crit.setFirstResult(fromIndex);
-	           crit.setMaxResults(toIndex - fromIndex);
+	           //crit.setFirstResult(fromIndex);
+	           //crit.setMaxResults(toIndex - fromIndex);
 	           List<StudyParticipant> list = crit.list();
 	           subjectsSet.addAll(list);
 	           subjects.addAll(subjectsSet);
@@ -73,8 +73,8 @@ public class SubjectSearchHandler extends BatchFindingsHandler {
 	                                   setFetchMode("populationCollection", FetchMode.EAGER).
 	                                   add(Restrictions.in("specimens.id", values));
 	                 //crit.uniqueResult();
-	                 crit.setFirstResult(0);
-	                 crit.setMaxResults(toIndex - fromIndex);
+	                 //crit.setFirstResult(0);
+	                 //crit.setMaxResults(toIndex - fromIndex);
 	                 Collection<StudyParticipant> studySubjects = crit.list();
 	                 // avoid duplicates
 	                 subjectsSet.addAll(studySubjects);

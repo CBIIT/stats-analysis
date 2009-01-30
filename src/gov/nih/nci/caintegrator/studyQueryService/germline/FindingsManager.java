@@ -123,6 +123,10 @@ public class FindingsManager {
         return objectQueryHandler.getAllQCStatus();
     }
 
+    public Long getStudyParticipantCount(StudyCriteria studyCrit) {
+        return objectQueryHandler.getStudyParticipantCount(studyCrit);
+    }
+    
     public Collection<String> getCaseControlStatus(StudyCriteria studyCrit) {
         return objectQueryHandler.getCaseControlStatus(studyCrit);
     }

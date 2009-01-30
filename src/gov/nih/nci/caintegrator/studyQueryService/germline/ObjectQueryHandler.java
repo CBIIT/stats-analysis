@@ -253,7 +253,23 @@ public class ObjectQueryHandler {
             return caseControlStatus;
    }
 
-
+    public  Long getStudyParticipantCount(StudyCriteria studyCrit) {
+    	Long count = new Long (0);
+	 	if (studyCrit == null || studyCrit.getId() == null) return count;
+       	Long studyId = studyCrit.getId();
+       	Set studyParticipantSet = new HashSet<String>();
+        Session session = getSessionFactory().getCurrentSession();
+        HashMap params = new HashMap();
+        String sql = " SELECT PARTICIPANT_ID FROM STUDY_PARTICIPANT WHERE STUDY_ID= :studyId ";
+        params.put("studyId", studyId);
+        SQLQuery q = session.createSQLQuery(sql);
+        q.addScalar( "PARTICIPANT_ID", Hibernate.STRING);
+        HQLHelper.setParamsOnQuery(params, q);
+        List<String> statusValues = q.list();
+        studyParticipantSet.addAll(statusValues);  
+        count = new Long( studyParticipantSet.size());
+        return count;
+}
      public  Collection<String> getAllQCStatus() {
         if (qcStatusValues == null) {
             qcStatusValues = new HashSet<String>();
