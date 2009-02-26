@@ -103,13 +103,17 @@ public class CaIntegratorConstants {
 	
 	public static final String REPORT_COUNTER = "reportCounter";
 	
-    public static final String GRAPH_MEAN = "Mean";
+    public static final String GRAPH_MEAN = "Mean of All Reporters";
     
-    public static final String GRAPH_MEDIAN = "Median";
+    public static final String GRAPH_MEDIAN = "Median of All Reporters";
     
     public static final String GENE_EXP_KMPLOT ="GE_KM_PLOT";
     
     public static final String COPY_NUMBER_KMPLOT = "COPY_NUM_KM_PLOT";
+    
+	public static final String LOWEST_GEOMETRIC_MEAN_INTENSITY = " (Lowest Geometric Mean Intensity)";
+
+	public static final String HIGHEST_GEOMETRIC_MEAN_INTENSITY = " (Highest Geometric Mean Intensity)";
     
     public static final String SAMPLE_KMPLOT = "SAMPLE_KM_PLOT";
     
