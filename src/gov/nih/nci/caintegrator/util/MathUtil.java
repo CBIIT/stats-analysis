@@ -50,7 +50,7 @@ public class MathUtil {
 	   } else {
 	      // Even number -- return average of middle two
 	      // Must cast the numbers to double before dividing.
-	      return (list.get(middle-1) + list.get(middle) / 2.0);
+	      return (list.get(middle-1) + list.get(middle)) / 2.0;
 	   }
 	}
 	
