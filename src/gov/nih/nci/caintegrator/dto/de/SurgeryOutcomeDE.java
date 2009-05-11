@@ -84,6 +84,14 @@ public class SurgeryOutcomeDE extends DomainElement implements Serializable,
 	 * methods now! (Not necesary for primitives.)
 	 */
 
+	/**
+	 * Initializes a newly created <code>SurgeryOutcomeDE</code> object so that
+	 * it represents a SurgeryOutcomeDE.
+	 * This default constructor is used by Castor XML
+	 */
+	public SurgeryOutcomeDE() {
+		super("");
+	}
 
 
 	/**

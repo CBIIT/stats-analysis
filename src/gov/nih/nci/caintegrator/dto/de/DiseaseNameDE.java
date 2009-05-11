@@ -83,6 +83,14 @@ public class DiseaseNameDE extends DomainElement implements Serializable,
 
 	/**
 	 * Initializes a newly created <code>DiseaseNameDE</code> object so that
+	 * it represents an DiseaseNameDE. This default constructor required by Castor XML.
+	 */
+	public DiseaseNameDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>DiseaseNameDE</code> object so that
 	 * it represents an DiseaseNameDE.
 	 */
 	public DiseaseNameDE(String diseaseName) {

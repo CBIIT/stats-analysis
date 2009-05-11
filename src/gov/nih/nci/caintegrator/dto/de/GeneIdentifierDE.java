@@ -143,6 +143,11 @@ abstract public class GeneIdentifierDE extends DomainElement implements Serializ
        public GeneSymbol(String geneSymbol) {
             super(GENESYMBOL, geneSymbol);
        }	 
+
+       public GeneSymbol() {
+           super(GENESYMBOL, "");
+      }	 
+
     }
 
 
@@ -154,7 +159,13 @@ abstract public class GeneIdentifierDE extends DomainElement implements Serializ
         return geneIDType;
     }
 
-  /**
+	
+	public void setGeneIDType(String geneIDType) {
+		this.geneIDType = geneIDType;
+	}
+
+
+/**
     * Sets the value for this <code>GeneIdentifierDE</code> object
     * @param object the value
 	*/

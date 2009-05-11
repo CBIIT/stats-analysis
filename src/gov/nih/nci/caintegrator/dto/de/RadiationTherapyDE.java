@@ -81,6 +81,14 @@ public class RadiationTherapyDE extends DomainElement implements Serializable, C
 	 * methods now! (Not necesary for primitives.)
 	 */
    
+   /**
+    * Initializes a newly created <code>RadiationTherapyDE</code> object 
+    * so that it represents a RadiationTherapyDE.
+    * This default constructor is used by Castor XML
+    */
+    public RadiationTherapyDE() {
+        super("");
+    }
 	
    /**
     * Initializes a newly created <code>RadiationTherapyDE</code> object 

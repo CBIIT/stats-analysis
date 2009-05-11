@@ -82,6 +82,15 @@ public class SampleIDDE extends DomainElement implements Cloneable, Comparable{
 	/**
 	 * Initializes a newly created <code>CytobandDE</code> object so that it
 	 * represents an CytobandDE.
+	 * This default constructor is used by Castor XML
+	 */
+	public SampleIDDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>CytobandDE</code> object so that it
+	 * represents an CytobandDE.
 	 */
 	public SampleIDDE(String sampleID) {
 		super(sampleID);

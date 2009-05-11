@@ -126,6 +126,10 @@ abstract public class ExprFoldChangeDE extends DomainElement implements
 		public UpRegulation(Float upRegValue) {
 			super(UP_REGULATION, upRegValue);
 		}
+		
+		public UpRegulation() {
+			super( UP_REGULATION, 0f );
+		}
 	}
 
 	/**
@@ -134,6 +138,10 @@ abstract public class ExprFoldChangeDE extends DomainElement implements
 	public final static class DownRegulation extends ExprFoldChangeDE {
 		public DownRegulation(Float downRegValue) {
 			super(DOWN_REGULATION, downRegValue);
+		}
+		
+		public DownRegulation() {
+			super( DOWN_REGULATION, 0f );
 		}
 
 	}

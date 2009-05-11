@@ -85,6 +85,15 @@ public class OnStudyRadiationTherapyDE extends DomainElement implements Serializ
    /**
     * Initializes a newly created <code>OnStudyRadiationTherapyDE</code> object 
     * so that it represents an OnStudyRadiationTherapyDE.
+    * This default Constructor is used by Castor XML.
+    */
+    public OnStudyRadiationTherapyDE() {
+        super("");
+    }
+
+	/**
+    * Initializes a newly created <code>OnStudyRadiationTherapyDE</code> object 
+    * so that it represents an OnStudyRadiationTherapyDE.
     */
     public OnStudyRadiationTherapyDE(String onStudyRadiationTherapy) {
         super(onStudyRadiationTherapy);

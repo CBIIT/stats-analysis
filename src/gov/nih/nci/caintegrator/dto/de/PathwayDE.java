@@ -81,6 +81,14 @@ public class PathwayDE extends DomainElement implements Serializable, Cloneable{
 	 * methods now! (Not necesary for primitives.)
 	 */
   
+   /**
+    * Initializes a newly created <code>PathwayDE</code> object so that it represents an PathwayDE.
+    * This default constructor is needed by Castor XML
+    */
+	
+    public PathwayDE() {
+        super("");
+    }
 
 
    /**

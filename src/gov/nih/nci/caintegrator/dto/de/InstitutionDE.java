@@ -87,7 +87,10 @@ public class InstitutionDE extends DomainElement implements Serializable, Clonea
    /**
     * Initializes a newly created <code>InstitutionDE</code> object so that it represents an InstitutionDE.
     */
-    public InstitutionDE(String institutionName, Long instituteID) {
+     public InstitutionDE() {
+         super("");
+      }
+     public InstitutionDE(String institutionName, Long instituteID) {
        super(instituteID);
        this.instituteName = institutionName;
     }

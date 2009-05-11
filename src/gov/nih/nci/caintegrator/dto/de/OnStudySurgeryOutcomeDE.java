@@ -86,6 +86,14 @@ public class OnStudySurgeryOutcomeDE extends DomainElement implements Serializab
 	 */
 
 
+	/**
+	 * Initializes a newly created <code>OnStudySurgeryOutcomeDE</code> object so that
+	 * it represents a OnStudySurgeryOutcomeDE object.
+	 * This default constructor is needed by Castor XML
+	 */
+	public OnStudySurgeryOutcomeDE() {
+		super("");
+	}
 
 	/**
 	 * Initializes a newly created <code>OnStudySurgeryOutcomeDE</code> object so that

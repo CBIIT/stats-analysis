@@ -86,6 +86,14 @@ public class OnStudySurgeryTitleDE extends DomainElement implements Serializable
 	 * methods now! (Not necesary for primitives.)
 	 */
 
+	/**
+	 * Initializes a newly created <code>onStudySurgeryTitleDE</code> object so that
+	 * it represents a onStudySurgeryTitleDE object.
+	 * This default constructor is used by Castor XML.
+	 */
+	public OnStudySurgeryTitleDE() {
+		super("");
+	}
 
 
 	/**

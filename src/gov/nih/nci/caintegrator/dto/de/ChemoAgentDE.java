@@ -84,6 +84,15 @@ public class ChemoAgentDE extends DomainElement implements Serializable,
 	/**
 	 * Initializes a newly created <code>ChemoAgentDE</code> object so that it
 	 * represents a ChemoAgentDE.
+	 * This default constructor is used by Castor XML
+	 */
+	public ChemoAgentDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>ChemoAgentDE</code> object so that it
+	 * represents a ChemoAgentDE.
 	 */
 	public ChemoAgentDE(String chemoAgentName) {
 		super(chemoAgentName);

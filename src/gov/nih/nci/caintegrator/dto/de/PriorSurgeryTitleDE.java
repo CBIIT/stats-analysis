@@ -86,6 +86,14 @@ public class PriorSurgeryTitleDE extends DomainElement implements Serializable,
 	 */
 
 
+	/**
+	 * Initializes a newly created <code>PriorSurgeryTitleDE</code> object so that
+	 * it represents a PriorSurgeryTitleDE object.
+	 * This default Constructor is needed by Castor XML
+	 */
+	public PriorSurgeryTitleDE() {
+		super("");
+	}
 
 	/**
 	 * Initializes a newly created <code>PriorSurgeryTitleDE</code> object so that

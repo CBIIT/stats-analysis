@@ -85,6 +85,13 @@ public class RaceDE extends DomainElement implements Serializable, Cloneable  {
 	
 	private static final long serialVersionUID = 1L; 
 
+	/**
+	 * Initializes a newly created <code>RaceDE</code> object so that
+	 * it represents a RaceDE object. This default initialization is required by Castor XML.
+	 */
+	public RaceDE() {
+		super("");
+	}
 
 	/**
 	 * Initializes a newly created <code>RaceDE</code> object so that

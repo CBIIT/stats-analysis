@@ -85,6 +85,15 @@ public class OnStudyChemoAgentDE extends DomainElement implements Serializable,
 	/**
 	 * Initializes a newly created <code>OnStudyChemoAgentDE</code> object so that it
 	 * represents an OnStudyChemoAgentDE.
+	 * This default constructor is used by Castor XML
+	 */
+	public OnStudyChemoAgentDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>OnStudyChemoAgentDE</code> object so that it
+	 * represents an OnStudyChemoAgentDE.
 	 */
 	public OnStudyChemoAgentDE(String onStudyChemoAgentDE) {
 		super(onStudyChemoAgentDE);
