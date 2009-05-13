@@ -86,6 +86,15 @@ public class ArrayPlatformDE extends DomainElement implements Serializable,
 	/**
 	 * Initializes a newly created <code>ArrayPlatformDE</code> object so that
 	 * it represents an ArrayPlatformDE.
+	 * This default constructor is needed by Castor XML.
+	 */
+	public ArrayPlatformDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>ArrayPlatformDE</code> object so that
+	 * it represents an ArrayPlatformDE.
 	 */
 	public ArrayPlatformDE(String arrayName) {
 		super(arrayName);
