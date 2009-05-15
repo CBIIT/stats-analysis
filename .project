@@ -3,6 +3,7 @@
 	<name>caIntegrator_spec</name>
 	<comment></comment>
 	<projects>
+		<project>caintegrator-analysis-commons</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

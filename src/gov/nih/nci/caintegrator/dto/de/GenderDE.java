@@ -81,6 +81,14 @@ public class GenderDE extends DomainElement implements Serializable, Cloneable {
 
 	/**
 	 * Initializes a newly created <code>GenderDE</code> object so that it
+	 * represents an GenderDE. This default constructor needed for Castor XML.
+	 */
+	public GenderDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>GenderDE</code> object so that it
 	 * represents an GenderDE.
 	 */
 	public GenderDE(String gender) {

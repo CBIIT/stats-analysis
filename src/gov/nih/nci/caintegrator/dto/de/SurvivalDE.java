@@ -91,6 +91,13 @@ public class SurvivalDE extends DomainElement implements Serializable,
 	public static final String LOWER_SURVIVAL_RANGE = "lower_survival_range";
 
 	// initializes a SurvivalDE object with the survival limit type and actual
+	// survival limit. This default constructor needed by castor XML.
+	private SurvivalDE() {
+		super(0);
+	}
+
+	
+	// initializes a SurvivalDE object with the survival limit type and actual
 	// survival limit
 	private SurvivalDE(String survivalRangeType, Integer survivalLimit) {
 		super(survivalLimit);
@@ -99,6 +106,10 @@ public class SurvivalDE extends DomainElement implements Serializable,
 
 	// final class UpperSurvivalRange indicating upper survival range
 	public static final class UpperSurvivalRange extends SurvivalDE {
+		public UpperSurvivalRange() {
+			super(UPPER_SURVIVAL_RANGE, 0);
+		}
+		
 		public UpperSurvivalRange(Integer upperSurvivalRange) {
 			super(UPPER_SURVIVAL_RANGE, upperSurvivalRange);
 		}
@@ -106,6 +117,10 @@ public class SurvivalDE extends DomainElement implements Serializable,
 
 	// final class LowerSurvivalRange indicating lower survival range
 	public static final class LowerSurvivalRange extends SurvivalDE {
+		public LowerSurvivalRange() {
+			super(LOWER_SURVIVAL_RANGE, 0);
+		}
+
 		public LowerSurvivalRange(Integer lowerSurvivalRange) {
 			super(LOWER_SURVIVAL_RANGE, lowerSurvivalRange);
 		}

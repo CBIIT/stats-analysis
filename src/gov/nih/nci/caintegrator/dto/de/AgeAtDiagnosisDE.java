@@ -97,6 +97,12 @@ public class AgeAtDiagnosisDE extends DomainElement implements Serializable,
 	// ****************************************************
 
 	// initializes a new AgeAtDiagnosisDE object with the age limit type and
+	// actual ages. This default constructor needed for Castor XML
+	private AgeAtDiagnosisDE() {
+		super(0);
+	}
+
+	// initializes a new AgeAtDiagnosisDE object with the age limit type and
 	// actual ages
 	private AgeAtDiagnosisDE(String ageLimitType, Integer ageLimit) {
 		super(ageLimit);
@@ -106,6 +112,10 @@ public class AgeAtDiagnosisDE extends DomainElement implements Serializable,
 	// final class indicating lowerAgeLimit
 	public static final class LowerAgeLimit extends AgeAtDiagnosisDE implements
 			Serializable, Cloneable {
+		public LowerAgeLimit() {
+			super(LOWER_AGE_LIMIT, 0);
+		}
+
 		public LowerAgeLimit(Integer lowerAge) {
 			super(LOWER_AGE_LIMIT, lowerAge);
 		}
@@ -119,6 +129,10 @@ public class AgeAtDiagnosisDE extends DomainElement implements Serializable,
 	// final class indicating upperAgeLimit
 	public static final class UpperAgeLimit extends AgeAtDiagnosisDE implements
 			Serializable, Cloneable {
+		public UpperAgeLimit() {
+			super(UPPER_AGE_LIMIT, 0);
+		}
+
 		public UpperAgeLimit(Integer upperAge) {
 			super(UPPER_AGE_LIMIT, upperAge);
 		}
