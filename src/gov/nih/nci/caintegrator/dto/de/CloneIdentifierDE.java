@@ -105,6 +105,10 @@ abstract public class CloneIdentifierDE extends DomainElement implements
 	 * nested child class: BACClone
 	 */
 	public final static class BACClone extends CloneIdentifierDE {
+		public BACClone() {
+			super(BAC_CLONE, "");
+		}
+
 		public BACClone(String bacClineID) {
 			super(BAC_CLONE, bacClineID);
 		}
@@ -115,6 +119,10 @@ abstract public class CloneIdentifierDE extends DomainElement implements
 	 * nested child class: IMAGEClone
 	 */
 	public final static class IMAGEClone extends CloneIdentifierDE {
+		public IMAGEClone() {
+			super(IMAGE_CLONE, "");
+		}
+
 		public IMAGEClone(String imageCloneID) {
 			super(IMAGE_CLONE, imageCloneID);
 		}
@@ -126,6 +134,11 @@ abstract public class CloneIdentifierDE extends DomainElement implements
 	}
 
 	public final static class ProbesetID extends CloneIdentifierDE {
+		public ProbesetID() {
+			super(PROBE_SET, "");
+
+		}
+
 		public ProbesetID(String imageCloneID) {
 			super(PROBE_SET, imageCloneID);
 

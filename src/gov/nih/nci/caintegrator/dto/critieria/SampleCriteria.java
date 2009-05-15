@@ -84,6 +84,28 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 	 */
 	private Collection sampleIDs;
 	private SpecimenType specimenType; 
+	private String sampleFile;
+	private String sampleGroup;
+	
+	
+	public String getSampleFile() {
+		return sampleFile;
+	}
+
+	public void setSampleFile(String sampleFile) {
+		this.sampleFile = sampleFile;
+	}
+	
+	
+
+	public String getSampleGroup() {
+		return sampleGroup;
+	}
+
+	public void setSampleGroup(String sampleGroup) {
+		this.sampleGroup = sampleGroup;
+	}
+
 	public Collection getSampleIDs() {
 		return sampleIDs;
 	}

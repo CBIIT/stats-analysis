@@ -88,6 +88,8 @@ public class RegionCriteria extends Criteria implements Serializable, Cloneable 
 	private BasePairPositionDE.StartPosition start;
 
 	private BasePairPositionDE.EndPosition end;
+	
+	private String region;
 
 	private boolean empty = true;
 
@@ -105,6 +107,15 @@ public class RegionCriteria extends Criteria implements Serializable, Cloneable 
 
 	public void setEndCytoband(CytobandDE endCytoband) {
 		this.endCytoband = endCytoband;
+	}
+
+	
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
 	}
 
 	public boolean isValid() {

@@ -83,6 +83,16 @@ public class ChromosomeNumberDE extends DomainElement implements Serializable,
 	/**
 	 * Initializes a newly created <code>ChromosomeNumberDE</code> object so
 	 * that it represents an ChromosomeNumberDE.
+	 * This default constructor is required by Castor XML.
+	 */
+	public ChromosomeNumberDE() {
+		super("");
+	}
+
+	
+	/**
+	 * Initializes a newly created <code>ChromosomeNumberDE</code> object so
+	 * that it represents an ChromosomeNumberDE.
 	 */
 	public ChromosomeNumberDE(String chromosomeNumber) {
 		super(chromosomeNumber);

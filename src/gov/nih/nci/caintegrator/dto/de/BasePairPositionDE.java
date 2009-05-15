@@ -116,6 +116,10 @@ abstract public class BasePairPositionDE extends DomainElement implements
 	 * nested child class: StartPosition
 	 */
 	public final static class StartPosition extends BasePairPositionDE {
+		public StartPosition() {
+			super(START_POSITION, 0L);
+		}
+		
 		public StartPosition(Long startPosition) {
 			super(START_POSITION, startPosition);
 		}
@@ -131,6 +135,11 @@ abstract public class BasePairPositionDE extends DomainElement implements
 	 * nested child class: EndPosition
 	 */
 	public final static class EndPosition extends BasePairPositionDE {
+		public EndPosition() {
+			super(END_POSITION, 0L);
+		}
+
+		
 		public EndPosition(Long endPosition) {
 			super(END_POSITION, endPosition);
 		}

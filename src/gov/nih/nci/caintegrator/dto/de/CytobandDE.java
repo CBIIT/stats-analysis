@@ -83,6 +83,15 @@ public class CytobandDE extends DomainElement implements Serializable,
 	/**
 	 * Initializes a newly created <code>CytobandDE</code> object so that it
 	 * represents an CytobandDE.
+	 * This default constructor is needed for Castor XML
+	 */
+	public CytobandDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>CytobandDE</code> object so that it
+	 * represents an CytobandDE.
 	 */
 	public CytobandDE(String cytobandLocation) {
 		super(cytobandLocation);

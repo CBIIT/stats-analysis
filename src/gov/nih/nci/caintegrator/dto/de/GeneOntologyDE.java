@@ -83,6 +83,14 @@ public class GeneOntologyDE extends DomainElement implements Serializable, Clone
 
    /**
     * Initializes a newly created <code>GeneOntologyDE</code> object so that it represents an GeneOntologyDE.
+    * This default constructor needed for Castor XML
+    */
+    public GeneOntologyDE() {
+        super("");
+    }
+
+	/**
+    * Initializes a newly created <code>GeneOntologyDE</code> object so that it represents an GeneOntologyDE.
     */
     public GeneOntologyDE(String ontologyID) {
         super(ontologyID);

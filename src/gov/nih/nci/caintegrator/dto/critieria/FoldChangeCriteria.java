@@ -82,6 +82,16 @@ public class FoldChangeCriteria extends Criteria implements Serializable,
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private Collection foldChangeObjects;
+	
+	private String regulationStatus;
+	
+	public String getRegulationStatus() {
+		return regulationStatus;
+	}
+
+	public void setRegulationStatus(String regulationStatus) {
+		this.regulationStatus = regulationStatus;
+	}
 
 	public Collection getFoldChangeObjects() {
 		return foldChangeObjects;

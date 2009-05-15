@@ -88,7 +88,7 @@ public class GeneOntologyCriteria extends Criteria implements Serializable,
 	}
 
 	public void setGOIdentifiers(Collection goIdentifiersObjs) {
-		for (Iterator iterator = goIdentifiers.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = goIdentifiersObjs.iterator(); iterator.hasNext();) {
 			Object obj = iterator.next();
 			if (obj instanceof GeneOntologyDE) {
 				getGOIdentifierMember().add(obj);
