@@ -84,11 +84,16 @@ public class SNPCriteria extends Criteria implements Serializable, Cloneable {
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private Collection snpIdentifiers;
+	private String snpId;
 
 	public Collection getIdentifiers() {
 		return snpIdentifiers;
 	}
 
+	public Collection getSNPIdentifiers() {
+		return snpIdentifiers;
+	}
+	
 	public void setSNPIdentifiers(Collection snpIdentifiersObjs) {
 		for (Iterator iterator = snpIdentifiersObjs.iterator(); iterator
 				.hasNext();) {
@@ -115,6 +120,8 @@ public class SNPCriteria extends Criteria implements Serializable, Cloneable {
 	public boolean isValid() {
 		return true;
 	}
+	
+	
 	/**
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance
@@ -132,5 +139,13 @@ public class SNPCriteria extends Criteria implements Serializable, Cloneable {
 			}
 		}
 		return myClone;
+	}
+
+	public String getSnpId() {
+		return snpId;
+	}
+
+	public void setSnpId(String snpId) {
+		this.snpId = snpId;
 	}
 }

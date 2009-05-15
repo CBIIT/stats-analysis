@@ -83,6 +83,8 @@ public class CopyNumberCriteria extends Criteria implements Serializable,
 	 * methods now! (Not necesary for primitives.)
 	 */
 	private Collection copyNumbers;
+	
+	private String copyNumber;
 
 	public CopyNumberCriteria() {
 	}
@@ -94,6 +96,10 @@ public class CopyNumberCriteria extends Criteria implements Serializable,
 		}
 	}
 
+	public void setCopyNummbers(Collection multiCopyNumbers) {
+		setCopyNumbers( multiCopyNumbers );
+	}
+	
 	// this is to deal w/ a collection of copyNumberDE
 	public void setCopyNumbers(Collection multiCopyNumbers) {
 		for (Iterator iterator = multiCopyNumbers.iterator(); iterator
@@ -132,6 +138,16 @@ public class CopyNumberCriteria extends Criteria implements Serializable,
 		}
 		return false;
 	}
+	
+	
+	public String getCopyNumber() {
+		return copyNumber;
+	}
+
+	public void setCopyNumber(String copyNumber) {
+		this.copyNumber = copyNumber;
+	}
+
 	/**
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance

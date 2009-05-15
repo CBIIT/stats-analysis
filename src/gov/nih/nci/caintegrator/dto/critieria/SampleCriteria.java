@@ -157,6 +157,20 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 		this.specimenType = specimenType;
 	}
 
+	public String getSpecimenTypeValue() {
+		return specimenType.toString();
+	}
+
+	public void setSpecimenTypeValue(String specimenTypeValue) {
+		for (SpecimenType sp : SpecimenType.values())
+		{
+			if ( sp.toString().equals(specimenTypeValue)) {
+				this.specimenType = sp;
+				break;
+			}
+		}
+	}
+
 	/**
 	 * Overrides the protected Object.clone() method exposing it as public.
 	 * It performs a 2 tier copy, that is, it does a memcopy of the instance

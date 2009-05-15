@@ -117,6 +117,14 @@ abstract public class CopyNumberDE extends DomainElement implements
 
 	/**
 	 * private parent constructor utilized in the two nested/childe classes
+	 * This default constructor needed by Castor XML
+	 */
+	private CopyNumberDE() {
+		super("");
+	}
+
+	/**
+	 * private parent constructor utilized in the two nested/childe classes
 	 */
 	private CopyNumberDE(String CGHType, Float value) {
 		super(value);
@@ -127,6 +135,10 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 * nested child class: Amplification
 	 */
 	public final static class Amplification extends CopyNumberDE {
+		public Amplification() {
+			super(AMPLIFICATION, 0f);
+		}
+
 		public Amplification(Float AmplificationNumber) {
 			super(AMPLIFICATION, AmplificationNumber);
 		}
@@ -141,6 +153,10 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 * nested child class: Deletion
 	 */
 	public final static class Deletion extends CopyNumberDE {
+		public Deletion() {
+			super(DELETION, 0f);
+		}
+		
 		public Deletion(Float deletionNumber) {
 			super(DELETION, deletionNumber);
 		}
@@ -156,6 +172,10 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 */
 	public final static class UnChangedCopyNumberUpperLimit extends
 			CopyNumberDE {
+		public UnChangedCopyNumberUpperLimit() {
+			super(UNCHANGED_COPYNUMBER_UPPER_LIMIT, 0f);
+		}
+
 		public UnChangedCopyNumberUpperLimit(Float unChangedCopyNoUpperValue) {
 			super(UNCHANGED_COPYNUMBER_UPPER_LIMIT, unChangedCopyNoUpperValue);
 		}
@@ -172,6 +192,10 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 * nested child class: UnChangedCopyNumberDownLimit
 	 */
 	public final static class UnChangedCopyNumberDownLimit extends CopyNumberDE {
+		public UnChangedCopyNumberDownLimit() {
+			super(UNCHANGED_COPYNUMBER_DOWN_LIMIT, 0f);
+		}
+		
 		public UnChangedCopyNumberDownLimit(Float unChangedCopyNoDownValue) {
 			super(UNCHANGED_COPYNUMBER_DOWN_LIMIT, unChangedCopyNoDownValue);
 		}

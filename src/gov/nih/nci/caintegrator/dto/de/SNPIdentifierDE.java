@@ -110,6 +110,15 @@ abstract public class SNPIdentifierDE extends DomainElement implements
 
 	/**
 	 * private parent constructor utilized in the two nested/childe classes
+	 * This is the default constructor used by Castor XML.
+	 */
+	private SNPIdentifierDE() {
+		super("");
+	}
+
+	
+	/**
+	 * private parent constructor utilized in the two nested/childe classes
 	 */
 	private SNPIdentifierDE(String SNPType, String value) {
 		super(value);
@@ -120,6 +129,10 @@ abstract public class SNPIdentifierDE extends DomainElement implements
 	 * nested child class: TSC
 	 */
 	public final static class TSC extends SNPIdentifierDE {
+		public TSC() {
+			super(TSC, "");
+		}
+		
 		public TSC(String TSCId) {
 			super(TSC, TSCId);
 		}
@@ -129,6 +142,10 @@ abstract public class SNPIdentifierDE extends DomainElement implements
 	 * nested child class: DBSNP
 	 */
 	public final static class DBSNP extends SNPIdentifierDE {
+		public DBSNP() {
+			super(DBSNP, "");
+		}
+		
 		public DBSNP(String DBSNPId) {
 			super(DBSNP, DBSNPId);
 		}
@@ -138,13 +155,17 @@ abstract public class SNPIdentifierDE extends DomainElement implements
 	 * nested child class: SNPProbeSet
 	 */
 	public final static class SNPProbeSet extends SNPIdentifierDE {
+		public SNPProbeSet() {
+			super(SNP_PROBESET, "");
+		}
+		
 		public SNPProbeSet(String SNPProbeSetId) {
 			super(SNP_PROBESET, SNPProbeSetId);
 		}
 	}
 
 	/**
-	 * Returns the SNPType for this SNPIdentifierDE obect.
+	 * Returns the SNPType for this SNPIdentifierDE object.
 	 * 
 	 * @return the SNPType for this <code>SNPIdentifierDE</code> object
 	 */

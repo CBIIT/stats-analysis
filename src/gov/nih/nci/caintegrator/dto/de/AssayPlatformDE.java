@@ -87,6 +87,14 @@ public class AssayPlatformDE extends DomainElement implements Serializable, Clon
    
    /**
     * Initializes a newly created <code>AssayPlatformDE</code> object so that it represents an AssayPlatformDE.
+    * This default Constructor is needed by Castor XML.
+    */
+    public AssayPlatformDE() {
+        super("");
+    }
+
+	/**
+    * Initializes a newly created <code>AssayPlatformDE</code> object so that it represents an AssayPlatformDE.
     */
     public AssayPlatformDE(String assayName) {
         super(assayName);
