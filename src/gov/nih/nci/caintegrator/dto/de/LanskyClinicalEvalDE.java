@@ -85,6 +85,15 @@ public class LanskyClinicalEvalDE extends DomainElement implements Serializable,
 	/**
 	 * Initializes a newly created <code>LanskyClinicalEvalDE</code> object so that it
 	 * represents an LanskyClinicalEvalDE.
+	 * This default constructor required by Castor XML
+	 */
+	public LanskyClinicalEvalDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>LanskyClinicalEvalDE</code> object so that it
+	 * represents an LanskyClinicalEvalDE.
 	 */
 	public LanskyClinicalEvalDE(String lanskyName) {
 		super(lanskyName);

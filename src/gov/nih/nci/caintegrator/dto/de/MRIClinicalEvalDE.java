@@ -85,6 +85,16 @@ public class MRIClinicalEvalDE extends DomainElement implements Serializable,
 	/**
 	 * Initializes a newly created <code>MRIClinicalEvalDE</code> object so that it
 	 * represents an MRIClinicalEvalDE.
+	 * This default constructor required by Castor XML
+	 */
+	public MRIClinicalEvalDE() {
+		super("");
+	}
+
+	
+	/**
+	 * Initializes a newly created <code>MRIClinicalEvalDE</code> object so that it
+	 * represents an MRIClinicalEvalDE.
 	 */
 	public MRIClinicalEvalDE(String mriName) {
 		super(mriName);

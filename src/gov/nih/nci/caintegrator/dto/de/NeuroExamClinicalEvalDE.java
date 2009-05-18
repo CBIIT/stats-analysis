@@ -85,6 +85,15 @@ public class NeuroExamClinicalEvalDE extends DomainElement implements Serializab
 	/**
 	 * Initializes a newly created <code>NeuroExamClinicalEvalDE</code> object so that it
 	 * represents an NeuroExamClinicalEvalDE.
+	 * This default constructor required by Castor XML
+	 */
+	public NeuroExamClinicalEvalDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>NeuroExamClinicalEvalDE</code> object so that it
+	 * represents an NeuroExamClinicalEvalDE.
 	 */
 	public NeuroExamClinicalEvalDE(String neuroExamName) {
 		super(neuroExamName);

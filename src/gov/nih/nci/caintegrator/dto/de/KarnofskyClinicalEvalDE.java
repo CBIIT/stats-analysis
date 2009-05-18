@@ -86,6 +86,15 @@ public class KarnofskyClinicalEvalDE extends DomainElement implements Serializab
 	/**
 	 * Initializes a newly created <code>KarnofskyClinicalEvalDE</code> object so that it
 	 * represents an KarnofskyClinicalEvalDE.
+	 * This default constructor required by Castor XML
+	 */
+	public KarnofskyClinicalEvalDE() {
+		super("");
+	}
+
+	/**
+	 * Initializes a newly created <code>KarnofskyClinicalEvalDE</code> object so that it
+	 * represents an KarnofskyClinicalEvalDE.
 	 */
 	public KarnofskyClinicalEvalDE(String karnofskyName) {
 		super(karnofskyName);
