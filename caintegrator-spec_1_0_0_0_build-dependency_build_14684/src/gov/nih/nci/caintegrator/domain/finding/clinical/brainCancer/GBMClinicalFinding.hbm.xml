@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	$Id: 
+	
+	$Log:
+	
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.finding.clinical.brainCancer">
+	<class name="GBMClinicalFinding" table="CLINICAL_NEW">
+
+		<id name="id" column="CF_ID">
+			<generator class="assigned" />
+		</id>
+
+		<component name="PATIENT_ID"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="PATIENT_ID" />
+		</component>
+		<component name="TUMOR_TISSUE_SITE"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="TUMOR_TISSUE_SITE" />
+		</component>
+			<component name="VITAL_STATUS"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="VITAL_STATUS" />
+		</component>
+			<component name="DOB"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="DOB" />
+		</component>
+			<component name="DOD"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="DOD" />
+		</component>
+		<component name="LAST_FOLLOW_UP"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="LAST_FOLLOW_UP" />
+		</component>
+		<component name="INFORMED_CONSENT_ACQUIRED"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="INFORMED_CONSENT_ACQUIRED" />
+		</component>
+		<component name="GENDER"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="GENDER" />
+		</component>
+		<component name="FIRST_PROCEDURE"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="FIRST_PROCEDURE" />
+		</component>
+		<component name="FIRST_EXAM"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="FIRST_EXAM" />
+		</component>
+		<component name="KARNOFSKY_SCORE"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="KARNOFSKY_SCORE" />
+		</component>
+		<component name="FIRST_RADIATION"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="FIRST_RADIATION" />
+		</component>
+		<component name="DOD_MINUS_DOP"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="DOD_MINUS_DOP" />
+		</component>
+		<component name="DODFU_MINUS_DOP"
+			class="gov.nih.nci.caintegrator.domain.common.bean.NumericMeasurement">
+			<property name="absoluteValue" column="DODFU_MINUS_DOP" />
+		</component>
+		<component name="PTID"
+			class="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalAssessment">
+			<property name="value" column="PTID" />
+		</component>
+		
+	</class>
+</hibernate-mapping>
