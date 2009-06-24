@@ -141,7 +141,7 @@ public class KaplanMeierStoredData implements CachableGraphData{
 
 	private String id;
      
-    private DecimalFormat resultFormat = new DecimalFormat("0.0000");
+    private DecimalFormat resultFormat = new DecimalFormat("0.0000000000");
 
 
 	/**

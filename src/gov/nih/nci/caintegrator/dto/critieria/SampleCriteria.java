@@ -73,6 +73,10 @@ import java.util.Iterator;
 
 public class SampleCriteria extends Criteria implements Serializable, Cloneable {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7482968366908296674L;
+	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
 	 * data field that is added to this class also be cloneable and be added to
 	 * clone calls in the clone method.If you do not do this, you will not
@@ -158,7 +162,10 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 	}
 
 	public String getSpecimenTypeValue() {
-		return specimenType.toString();
+		if(specimenType != null){
+			return specimenType.toString();
+		}
+		return null;
 	}
 
 	public void setSpecimenTypeValue(String specimenTypeValue) {

@@ -80,6 +80,11 @@ import java.util.Iterator;
 public class PriorSurgeryTitleCriteria extends Criteria implements Serializable,
 		Cloneable {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8868921699846151024L;
+
+	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
 	 * data field that is added to this class also be cloneable and be added to
 	 * clone calls in the clone method.If you do not do this, you will not

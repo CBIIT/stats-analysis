@@ -80,6 +80,7 @@ abstract public class GeneIdentifierDE extends DomainElement implements Serializ
 	 * track down if you aren't ultra familiar with the code base, so add those
 	 * methods now! (Not necesary for primitives.)
 	 */
+	private static final long serialVersionUID = -5312556037549756527L;
 
   /**
 	* type of geneID

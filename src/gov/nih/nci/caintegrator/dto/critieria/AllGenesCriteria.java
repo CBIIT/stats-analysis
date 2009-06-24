@@ -77,6 +77,11 @@ public class AllGenesCriteria extends Criteria implements Serializable, Cloneabl
 	 */
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8093897378662464806L;
+
+	/**
 	 * @param allGenes
 	 */
     public AllGenesCriteria(boolean allGenes) {

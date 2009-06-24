@@ -73,6 +73,10 @@ import java.io.Serializable;
 public class AssayPlatformCriteria extends Criteria implements Serializable,
 		Cloneable {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3156618665560787152L;
+	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
 	 * data field that is added to this class also be cloneable and be added to
 	 * clone calls in the clone method.If you do not do this, you will not
