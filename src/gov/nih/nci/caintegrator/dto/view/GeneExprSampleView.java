@@ -67,6 +67,10 @@ import gov.nih.nci.caintegrator.dto.de.DomainElementClass;
 */
 
 public class GeneExprSampleView extends View implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2715072678508825657L;
 	private GroupType groupType = GroupType.DISEASE_TYPE_GROUP; //always defalut to disease
     /**
 	 * @return Returns the groupType.
@@ -80,15 +84,6 @@ public class GeneExprSampleView extends View implements Serializable{
 	public void setGroupType(GroupType groupType) {
 		this.groupType = groupType;
 	}
-	private static DomainElementClass[] validDEs
-            = new DomainElementClass[]
-              { DomainElementClass.LOCUS_LINK,
-                DomainElementClass.GENBANK_ACCESSION_NUMBER,
-                DomainElementClass.CHROMOSOME_NUMBER,
-                DomainElementClass.PATHWAY,
-              };
-
-    public DomainElementClass[] getValidElements() {
-        return validDEs;
-    }
+	public GeneExprSampleView() {		
+	}
 }

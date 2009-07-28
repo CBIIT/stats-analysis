@@ -119,7 +119,10 @@ import gov.nih.nci.caintegrator.dto.de.DomainElementClass;
 
 public class CopyNumberSampleView extends View implements Serializable{
 
-	private DomainElementClass[] validDEs;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6424377269693876305L;
 	private GroupType groupType = GroupType.DISEASE_TYPE_GROUP; //always defalut to disease
     /**
 	 * @return Returns the groupType.
@@ -133,15 +136,10 @@ public class CopyNumberSampleView extends View implements Serializable{
 	public void setGroupType(GroupType groupType) {
 		this.groupType = groupType;
 	}
-	CopyNumberSampleView() {
-        validDEs = new DomainElementClass[]
-              { DomainElementClass.DISEASE_NAME,
-        		//TODO: All List here
-              };
+	public CopyNumberSampleView() {
+
     }
 
-    public DomainElementClass[] getValidElements() {
-        return validDEs;
-    }
+
 
 }

@@ -67,16 +67,9 @@ import gov.nih.nci.caintegrator.dto.de.DomainElementClass;
 */
 
 public class ClinicalSampleView extends View implements Serializable{
-    private DomainElementClass[] validDEs;
 
-    ClinicalSampleView() {
-        validDEs = new DomainElementClass[]
-              { DomainElementClass.DISEASE_NAME,
-        		//TODO: All List here
-              };
+    public ClinicalSampleView() {
+    	
     }
 
-    public DomainElementClass[] getValidElements() {
-        return validDEs;
-    }
 }

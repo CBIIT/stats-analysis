@@ -88,7 +88,6 @@ abstract public class View implements Viewable,Serializable{
    public void setSelectedElements(Collection selectedElems) {
           selectedDomainElements = selectedElems;
    }
-   public abstract DomainElementClass[] getValidElements();
    /**
     * Compares the class names to determine if the passed view is
     * of the same type as this view
