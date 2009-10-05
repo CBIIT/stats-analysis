@@ -53,7 +53,22 @@ public class MathUtil {
 	      return (list.get(middle-1) + list.get(middle)) / 2.0;
 	   }
 	}
-	
+	/**
+	 * This method returns you the mean value for a List of Doubles
+	 * @param list
+	 * @return
+	 */
+	public static Double mean(List<Double> list) {
+	    double sum = 0;  // sum of all the elements
+	    if(list== null){
+	    	list = Collections.emptyList();
+	    }
+		    for (Double i:list) {
+		        sum += i;
+		    }
+	    return sum / list.size();
+	}//end method mean
+
 	/**
 	 * This method return a random number between the range of m & n
 	 * @param m
