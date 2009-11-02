@@ -15,7 +15,7 @@ public class IdMapping implements java.io.Serializable  {
 	private String platform;
 	private String analysisFileId;
     private String aliquotbarcode;
-    
+    private String caseControlStatus;
 	public String getAliquotbarcode() {
 		return aliquotbarcode;
 	}
@@ -80,5 +80,11 @@ public class IdMapping implements java.io.Serializable  {
     public void setAnalysisFileId(String analysisFileId) {
         this.analysisFileId = analysisFileId;
     }
+	public String getCaseControlStatus() {
+		return caseControlStatus;
+	}
+	public void setCaseControlStatus(String caseControlStatus) {
+		this.caseControlStatus = caseControlStatus;
+	}
 
 }

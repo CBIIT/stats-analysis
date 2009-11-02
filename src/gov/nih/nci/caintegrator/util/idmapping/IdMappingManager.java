@@ -1,5 +1,8 @@
 package gov.nih.nci.caintegrator.util.idmapping;
 
+import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
+import gov.nih.nci.caintegrator.util.CaIntegratorConstants;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
 public class IdMappingManager implements IdMapper{
@@ -83,5 +87,20 @@ public class IdMappingManager implements IdMapper{
         platform = (String)list.get(0);
         return platform;
     }
-	
+
+
+	public Set<String> getControlPatientDIDs(IdMappingCriteria criteria) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		  Criteria c = currentSession
+        .createCriteria(IdMapping.class);
+        c.add(Expression.eq("caseControlStatus", CaIntegratorConstants.CONTROL));
+        c.add(Restrictions.eq("fileName", criteria.getFileName()));
+        List<IdMapping> objs = c.list();
+        Set<String> patientIds = new HashSet<String>();
+        for (IdMapping idm : objs) {
+        	patientIds.add(idm.getPdid());
+        }
+        
+        return patientIds;
+	}
 }

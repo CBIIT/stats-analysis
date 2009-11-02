@@ -9,7 +9,7 @@ public class IdMappingCriteria {
 	private Set aliquotbarcode;
 	private String fileName;
 	private Set analysisFileIds;
-	
+	private String caseControlStatus;
 	/**
      * @return the fileName
      */
@@ -51,6 +51,12 @@ public class IdMappingCriteria {
 	}
 	public void setPlatformName(String platformName) {
 		this.platformName = platformName;
+	}
+	public String getCaseControlStatus() {
+		return caseControlStatus;
+	}
+	public void setCaseControlStatus(String caseControlStatus) {
+		this.caseControlStatus = caseControlStatus;
 	}
 	
 }

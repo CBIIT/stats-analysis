@@ -34,5 +34,7 @@
 		<!-- ALIQUOTBARCODE -->
 		<property name="aliquotbarcode" column="ALIQUOTBARCODE" />
 		
+		<!-- CASE_CONTROL_STATUS -->
+		<property name="caseControlStatus" column="CASE_CONTROL_STATUS" />
 	</class>
 </hibernate-mapping>
