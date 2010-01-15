@@ -7,7 +7,9 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -164,6 +166,80 @@ public class KaplanMeierDataController implements Serializable{
 		populateStoredData();
 	}
 	
+	
+	public KaplanMeierDataController(double _upFold, double _downFold, String _geneName,
+			KaplanMeierSampleInfo[] samples, String plotType, String cName, String[] plots) {
+		
+		String lbl = (cName != null && cName != "") ? cName : "All Samples";
+		
+		//Convert plot array to ArrayList
+		List visiblePlots = Arrays.asList(plots);
+		
+		final DecimalFormat decimalFormat = new DecimalFormat("0.0");	
+		geneSymbol = _geneName;
+		setPlotType(plotType);
+		setUpFold(_upFold);
+		setDownFold(_downFold);
+		if (samples != null) {
+			if (plotType != null && plotType.equals(CaIntegratorConstants.GENE_EXP_KMPLOT)) {	
+				plotPointSeriesSetCollection = new ArrayList<KaplanMeierPlotPointSeriesSet>();
+				kaplanMeier = new KaplanMeierAlgorithms(samples, this.getUpFold(),
+						this.getDownFold());
+				// All Sample Series
+				if ( visiblePlots.contains("All Group Samples") ) {
+					plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.ALL_SAMPLES,
+							lbl, Color.BLUE));
+				}
+				// UpRegulated Samples Series
+				if ( visiblePlots.contains("Up-Regulated") ) {
+					plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.UPREGULATED,
+							geneSymbol + getUpLabel() + " >= " + decimalFormat.format(upFold) + "X ",Color.RED));
+				}
+				// Down Regulation Series
+				if ( visiblePlots.contains("Down-Regulated") ) {
+					plotPointSeriesSetCollection
+							.add(getDataSeries(samples, Regulation.DOWNREGULATED, geneSymbol
+									+ getDownLabel() + " >= " + decimalFormat.format(1/downFold)+ "X ",Color.GREEN));
+				}
+				// intermediate samples
+				if ( visiblePlots.contains("Intermediate") ) {
+					plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.INTERMEDIATE,
+							geneSymbol + " Intermediate ",Color.ORANGE));
+				}
+			}
+			else if (plotType != null && plotType.equals(CaIntegratorConstants.COPY_NUMBER_KMPLOT)) {	
+				plotPointSeriesSetCollection = new ArrayList<KaplanMeierPlotPointSeriesSet>();
+				kaplanMeier = new KaplanMeierAlgorithms(samples, this.getUpFold(),
+						this.getDownFold());
+				// All Sample Series
+				if ( visiblePlots.contains("All Group Samples") ) {
+					plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.ALL_SAMPLES,
+							lbl, Color.BLUE));
+				}
+				// UpRegulated Samples Series
+				if ( visiblePlots.contains("Up-Regulated") ) {
+					plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.UPREGULATED,
+							geneSymbol + getUpLabel() + " >= " + decimalFormat.format(upFold) + " copies ",Color.RED));
+				}
+				// Down Regulation Series
+				if ( visiblePlots.contains("Down-Regulated") ) {
+					plotPointSeriesSetCollection
+							.add(getDataSeries(samples, Regulation.DOWNREGULATED, geneSymbol
+									+ getDownLabel() + " <= " + decimalFormat.format(downFold) + " copies ",Color.GREEN));
+				}
+				// intermediate samples
+				if ( visiblePlots.contains("Intermediate") ) {
+					plotPointSeriesSetCollection.add(getDataSeries(samples, Regulation.INTERMEDIATE,
+							geneSymbol + " Intermediate ",Color.ORANGE));
+				}
+			}
+		} else {
+			logger.error("gov.nih.nci.nautilus.ui.struts.form.quicksearch.noRecord");
+			// throw new exception
+		}
+		populateStoredData(visiblePlots);
+	}
+	
 	public KaplanMeierDataController(KaplanMeierSampleInfo[] sampleList1, KaplanMeierSampleInfo[] sampleList2, String plotType, String group1Name, String group2Name) {
 		String g1 = (group1Name!=null && group1Name.length()>0) ? group1Name : "All Samples";
 		String g2 = (group2Name!=null && group2Name.length()>0) ? group2Name : "All Samples";
@@ -227,6 +303,69 @@ public class KaplanMeierDataController implements Serializable{
 		storedData.setIntVsRestPvalue(new Double(kaplanMeier.getLogRankPValue(intSamples)));
 		storedData.setNumberOfPlots(getNumberOfPlots());
 	}
+	
+	
+	/**
+	 * This method will create and ecapsulate all the required stored data 
+	 * associated with the Kaplan-Meier plot that we generated
+	 *
+	 */
+	private void populateStoredData(List plots) {
+
+		Collection<KaplanMeierSampleInfo> allSamples = null;
+		Collection<KaplanMeierSampleInfo> upSamples = null;
+		Collection<KaplanMeierSampleInfo> downSamples = null;
+		Collection<KaplanMeierSampleInfo> intSamples = null;
+		
+		storedData = new KaplanMeierStoredData();
+		storedData.setGeneSymbol(this.geneSymbol);
+		storedData.setUpFold(upFold);
+		storedData.setDownFold(downFold);
+		storedData.setDownLabel(getDownLabel());
+		storedData.setUpLabel(getUpLabel());
+		NumberFormat numberFormatter;
+		numberFormatter = NumberFormat.getNumberInstance();
+		numberFormatter.setMaximumFractionDigits(5);
+		if ( plots.contains("All Group Samples") ) {
+			allSamples = kaplanMeier.getAllSamples();
+			storedData.setAllSamples(allSamples);
+		}
+		if ( plots.contains("Up-Regulated") ) {
+			upSamples = kaplanMeier.getUpSamples();
+			storedData.setUpSamples(upSamples);
+			storedData.setUpSampleCount(getSampleCount(upSamples));
+			storedData.setUpVsRestPvalue(new Double(kaplanMeier.getLogRankPValue(upSamples)));
+		}
+		if ( plots.contains("Down-Regulated") ) {
+			downSamples = kaplanMeier.getDownSamples();
+			storedData.setDownSamples(downSamples);
+			storedData.setDownSampleCount(getSampleCount(downSamples));
+			storedData.setDownVsRestPvalue(new Double(kaplanMeier.getLogRankPValue(downSamples)));
+		}
+		if ( plots.contains("Intermediate") ) {
+			intSamples = kaplanMeier.getIntSamples();
+			storedData.setIntSamples(intSamples);
+			storedData.setIntSampleCount(getSampleCount(intSamples));
+			storedData.setIntVsRestPvalue(new Double(kaplanMeier.getLogRankPValue(intSamples)));
+		}
+		
+		storedData.setPlotPointSeriesCollection(plotPointSeriesSetCollection);
+
+		if ( plots.contains("Up-Regulated") &&  plots.contains("Down-Regulated") ) {
+			storedData.setUpVsDownPvalue(new Double(kaplanMeier.getLogRankPValue(upSamples,downSamples)));
+		}
+		if ( plots.contains("Up-Regulated") &&  plots.contains("Intermediate") ) {
+			storedData.setUpVsIntPvalue(new Double(kaplanMeier.getLogRankPValue(upSamples,intSamples)));
+		}
+		if ( plots.contains("Down-Regulated") &&  plots.contains("Intermediate") ) {
+			storedData.setDownVsIntPvalue(new Double(kaplanMeier.getLogRankPValue(downSamples,intSamples)));
+		}
+		
+		storedData.setNumberOfPlots(plots.size());
+		//storedData.setNumberOfPlots(getNumberOfPlots());
+	}
+
+	
 	/**
 	 * This method will create and ecapsulate all the required stored data 
 	 * associated with the SAMPLE List Kaplan-Meier plot that we generated
