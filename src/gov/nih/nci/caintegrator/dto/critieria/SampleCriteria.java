@@ -90,7 +90,7 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 	private SpecimenType specimenType; 
 	private String sampleFile;
 	private String sampleGroup;
-	
+	private Boolean excludeResections = null;
 	
 	public String getSampleFile() {
 		return sampleFile;
@@ -195,6 +195,23 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 			}
 		}
 		myClone.specimenType = specimenType;
+		myClone.excludeResections = excludeResections;
 		return myClone;
 	}
+
+	/**
+	 * @return the excludeResections
+	 */
+	public Boolean getExcludeResections() {
+		return excludeResections;
+	}
+
+	/**
+	 * @param excludeResections the excludeResections to set
+	 */
+	public void setExcludeResections(Boolean excludeResections) {
+		this.excludeResections = excludeResections;
+	}
+
+
 }
