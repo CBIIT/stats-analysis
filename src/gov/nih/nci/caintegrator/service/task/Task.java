@@ -104,7 +104,20 @@ public class Task implements Serializable{
      * @return Returns the elapsedTime.
      */
     public long getElapsedTime() {
+    	if(endTime != 0){
+    		 elapsedTime = endTime-startTime;
+    	}else{
+    		long currentTime = System.currentTimeMillis();
+    		elapsedTime = currentTime-startTime;
+    	}
         return elapsedTime;
+    }
+    
+    /**
+     * @return Returns the elapsedTime.
+     */
+    public long getElapsedTimeInSec() {
+        return getElapsedTime()/1000;
     }
 
 
@@ -129,7 +142,7 @@ public class Task implements Serializable{
      */
     public void setEndTime(long endTime) {
         this.endTime = endTime;
-        this.elapsedTime = this.endTime-this.startTime;
+        //this.elapsedTime = this.endTime-this.startTime;
     }
 
     
