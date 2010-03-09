@@ -79,6 +79,7 @@ public class Task implements Serializable{
             break;
         case Error:
         case Completed:
+        case Emailed:
             setEndTime(System.currentTimeMillis());
             break;
         default:
