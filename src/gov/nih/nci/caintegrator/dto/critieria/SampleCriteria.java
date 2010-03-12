@@ -7,7 +7,9 @@ import java.io.Serializable;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * @author Ram, BauerD
@@ -86,7 +88,7 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 	 * track down if you aren't ultra familiar with the code base, so add those
 	 * methods now! (Not necesary for primitives.)
 	 */
-	private Collection sampleIDs;
+	private Set sampleIDs;
 	private SpecimenType specimenType; 
 	private String sampleFile;
 	private String sampleGroup;
@@ -119,6 +121,7 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 		for (Iterator iterator = sampleIDValues.iterator(); iterator.hasNext();) {
 			Object obj = iterator.next();
 			if (obj instanceof SampleIDDE) {
+				
 				getSampleIDDEsMember().add(obj);
 			} else {
 				throw new InvalidParameterException(
@@ -129,7 +132,7 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 
 	private Collection getSampleIDDEsMember() {
 		if (sampleIDs == null)
-			sampleIDs = new ArrayList();
+			sampleIDs = new HashSet();
 		return sampleIDs;
 	}
 
@@ -189,7 +192,7 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 		SampleCriteria myClone = null;
 		myClone = (SampleCriteria) super.clone();
 		if(sampleIDs!=null) {
-			myClone.sampleIDs = new ArrayList();
+			myClone.sampleIDs = new HashSet();
 			for (Iterator i = sampleIDs.iterator(); i.hasNext();) {
 				myClone.sampleIDs.add(((SampleIDDE) i.next()).clone());
 			}
