@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Document   : SNPAnalysisMethod.hbm.xml
+	Created on : May 3, 2007
+	Author     : Himanso Sahni
+	Description: Hibernate mapping file for SNPAnalysisMethod
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.analysis.snp">
+	<class name="SNPAnalysisMethod" table="SNP_ANALYSIS_LU"
+		lazy="true">
+
+		<!-- id -->
+		 
+			<id name="id" 
+			type="java.lang.Long"
+			column="SNP_ANALU_ID">
+			<generator class="assigned" />
+			</id>
+		
+
+		<!-- methodType-->
+		<property name="methodType" type="java.lang.String"
+			column="ANALYSIS_METHOD_TYPE" insert="false" update="false" />
+
+		<!-- methodName -->
+		<property name="methodName" type="java.lang.String"
+			column="ANALYSIS_METHOD_NAME" insert="false" update="false" />
+
+		<!-- methodDescription -->
+		<property name="methodDescription" type="java.lang.String"
+			column="ANALYSIS_METHOD_DESC" insert="false" update="false" />
+
+		<!-- represensitiveCode -->
+		<property name="represensitiveCode" type="java.lang.String"
+			column="REPRESENT_CODE" insert="false" update="false" />
+
+		<!-- displayOrder -->
+		<property name="displayOrder" type="java.lang.Long"
+			column="DISPLAY_ORDER" insert="false" update="false" />
+			
+		<!-- methodTypeOrder -->
+		<property name="methodTypeOrder" type="java.lang.Double"
+			column="DEF_OPTION_ORDER" insert="false" update="false" />
+
+	<!--  m-1 relationship -->
+       <many-to-one name="study"
+            class="gov.nih.nci.caintegrator.domain.study.Study"
+            column="STUDY_ID"
+            not-null="true" />
+            
+	</class>
+</hibernate-mapping>
