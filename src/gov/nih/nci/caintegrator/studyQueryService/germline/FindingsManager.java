@@ -6,9 +6,11 @@ import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
 import gov.nih.nci.caintegrator.domain.finding.bean.Finding;
+import gov.nih.nci.caintegrator.domain.study.bean.FrequencyPopulation;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant;
+import gov.nih.nci.caintegrator.domain.study.bean.SubjectPopulation;
 import gov.nih.nci.caintegrator.studyQueryService.dto.FindingCriteriaDTO;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
@@ -105,6 +107,14 @@ public class FindingsManager {
     public Collection<Population> getPopulations(PopulationCriteria populationCrit)
     throws Exception {
         return objectQueryHandler.getPopulationObjects(populationCrit);
+    }
+    public Collection<FrequencyPopulation> getFrequencyPopulations(PopulationCriteria populationCrit)
+    throws Exception {
+        return objectQueryHandler.getFrequencyPopulationObjects(populationCrit);
+    }
+    public Collection<SubjectPopulation> getSubjectPopulations(PopulationCriteria populationCrit)
+    throws Exception {
+        return objectQueryHandler.getSubjectPopulationObjects(populationCrit);
     }
     public Collection<SNPAssociationAnalysis> getSNPAssociationAnalysis(SNPAssociationAnalysisCriteria  assocCrit)
     throws Exception {

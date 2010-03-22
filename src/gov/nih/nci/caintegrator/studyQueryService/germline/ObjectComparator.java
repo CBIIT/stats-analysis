@@ -1,7 +1,9 @@
 package gov.nih.nci.caintegrator.studyQueryService.germline;
 
+import gov.nih.nci.caintegrator.domain.study.bean.FrequencyPopulation;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
+import gov.nih.nci.caintegrator.domain.study.bean.SubjectPopulation;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
@@ -46,6 +48,26 @@ public class ObjectComparator {
         }
     }
 
+    public static class FrequencyPopulationNameComparator implements Comparator {
+        public int compare(Object a, Object b) {
+        	FrequencyPopulation obj1 = (FrequencyPopulation)a;
+        	FrequencyPopulation obj2 = (FrequencyPopulation)b;
+            String name1 = obj1.getName();
+            String name2 = obj2.getName();
+            return name1.compareTo(name2);
+        }
+    }
+    
+    public static class SubjectPopulationNameComparator implements Comparator {
+        public int compare(Object a, Object b) {
+        	SubjectPopulation obj1 = (SubjectPopulation)a;
+        	SubjectPopulation obj2 = (SubjectPopulation)b;
+            String name1 = obj1.getName();
+            String name2 = obj2.getName();
+            return name1.compareTo(name2);
+        }
+    }
+    
      public static class SNPAnalysisNameComparator implements Comparator {
          public int compare(Object a, Object b) {
             SNPAssociationAnalysis s1 = (SNPAssociationAnalysis)a;

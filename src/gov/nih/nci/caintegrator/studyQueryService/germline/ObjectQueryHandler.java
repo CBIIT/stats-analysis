@@ -4,8 +4,10 @@ import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisMethod;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAnalysisGroup;
 import gov.nih.nci.caintegrator.domain.analysis.snp.bean.SNPAssociationAnalysis;
 import gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPPanel;
+import gov.nih.nci.caintegrator.domain.study.bean.FrequencyPopulation;
 import gov.nih.nci.caintegrator.domain.study.bean.Population;
 import gov.nih.nci.caintegrator.domain.study.bean.Study;
+import gov.nih.nci.caintegrator.domain.study.bean.SubjectPopulation;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.AnalysisGroupCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.germline.SNPAssociationAnalysisCriteria;
 import gov.nih.nci.caintegrator.studyQueryService.dto.study.PopulationCriteria;
@@ -161,6 +163,65 @@ public class ObjectQueryHandler {
         return popObjs;
     }
 
+    /**
+     * This method returns  FrequencyPopulation objects based on criteria.  If criteria object is
+     * passed in that does not have name criteria specified, this method will return <b>all</b>
+     * Population Objects.  If name is specified in populationCrit, then this method returns
+     * all population object that matches the names (or LIKE name)
+     *
+     * @param populationCrit
+     * @return Collection of FrequencyPopulation Objects
+     */
+    public  Collection<FrequencyPopulation> getFrequencyPopulationObjects(PopulationCriteria populationCrit) {
+        if (populationCrit == null) return new ArrayList<FrequencyPopulation>();
+        Session session = getSessionFactory().getCurrentSession();
+        Collection popNames = populationCrit.getNames();
+        StringBuffer inClause = new StringBuffer("");
+        HashMap params = new HashMap();
+        if (popNames != null && popNames.size() > 0) {
+            inClause.append(" AND p.name IN (:popNames)");
+            params.put("popNames", popNames);
+        }
+
+        Query q = session.createQuery(" FROM FrequencyPopulation p WHERE p.studyCollection.id = :id " + inClause.toString());
+        params.put("id", populationCrit.getStudyId());
+        HQLHelper.setParamsOnQuery(params, q);       
+        List<FrequencyPopulation> results = q.list();
+        Set<FrequencyPopulation> popObjs = new TreeSet<FrequencyPopulation>(
+                                    new ObjectComparator.FrequencyPopulationNameComparator());
+        popObjs.addAll(results);
+        return popObjs;
+    }
+    
+    /**
+     * This method returns  SubjectPopulation objects based on criteria.  If criteria object is
+     * passed in that does not have name criteria specified, this method will return <b>all</b>
+     * Population Objects.  If name is specified in populationCrit, then this method returns
+     * all population object that matches the names (or LIKE name)
+     *
+     * @param populationCrit
+     * @return Collection of FrequencyPopulation Objects
+     */
+    public  Collection<SubjectPopulation> getSubjectPopulationObjects(PopulationCriteria populationCrit) {
+        if (populationCrit == null) return new ArrayList<SubjectPopulation>();
+        Session session = getSessionFactory().getCurrentSession();
+        Collection popNames = populationCrit.getNames();
+        StringBuffer inClause = new StringBuffer("");
+        HashMap params = new HashMap();
+        if (popNames != null && popNames.size() > 0) {
+            inClause.append(" AND p.name IN (:popNames)");
+            params.put("popNames", popNames);
+        }
+
+        Query q = session.createQuery(" FROM SubjectPopulation p WHERE p.studyCollection.id = :id " + inClause.toString());
+        params.put("id", populationCrit.getStudyId());
+        HQLHelper.setParamsOnQuery(params, q);       
+        List<SubjectPopulation> results = q.list();
+        Set<SubjectPopulation> popObjs = new TreeSet<SubjectPopulation>(
+                                    new ObjectComparator.SubjectPopulationNameComparator());
+        popObjs.addAll(results);
+        return popObjs;
+    }
     public  Collection<SNPAnalysisGroup> getAnalysisGroups(AnalysisGroupCriteria analGrpCrit) {
         Long studyId = analGrpCrit.getStudyId();
         assert(studyId != null);
