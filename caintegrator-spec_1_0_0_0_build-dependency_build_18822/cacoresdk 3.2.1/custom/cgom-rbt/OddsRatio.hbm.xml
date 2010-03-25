@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : OddsRatio
+    Created on : May 22, 2007
+    Author     : Himanso Sahni
+    Description: Hibernate mapping file for OddsRatio
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.analysis.snp">
+   <class name="OddsRatio"
+    	table="ODDS_RATIO"
+        lazy="true">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.Long"
+           column="ODDS_RATIO_ID">
+           <generator class="assigned" />
+       </id>
+
+        <!-- homozygoteOddsRatio-->
+         <property name="homozygoteOddsRatio"
+                 type="java.lang.Double"
+                 column="HOMOZYGOTE"
+                 insert="false"
+                 update="false" />
+
+        <!-- name -->
+       <property name="name" 
+                 type="java.lang.String" 
+                 column="ODDS_RATIO_NAME" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- heterozygoteOddsRatio -->                 
+       <property name="heterozygoteOddsRatio" 
+                 type="java.lang.Double" 
+                 column="HETEROZYGOTE" 
+                 insert="false" 
+                 update="false" />     
+                 
+       <!-- heterozygoteLowerConfidenceBound -->
+       <!--     <property name="heterozygoteLowerConfidenceBound" 
+                 type="java.lang.Double" 
+                 column="HETEROZYGOTE_LOWER_CB" 
+                 insert="false" 
+                 update="false" />  
+        -->         
+       <!-- heterozygoteStandardError -->
+       <!--     <property name="heterozygoteStandardError" 
+                 type="java.lang.Double" 
+                 column="HETEROZYGOTE_STD_ERR" 
+                 insert="false" 
+                 update="false" />  
+         -->        
+       <!-- heterozygoteUpperConfidenceBound -->
+        <!--    <property name="heterozygoteUpperConfidenceBound" 
+                 type="java.lang.Double" 
+                 column="HETEROZYGOTE_UPPER_CB" 
+                 insert="false" 
+                 update="false" />
+        -->         
+       <!-- homozygoteLowerConfidenceBound -->
+        <!--   <property name="homozygoteLowerConfidenceBound" 
+                 type="java.lang.Double" 
+                 column="HOMOZYGOTE_LOWER_CB" 
+                 insert="false" 
+                 update="false" />  
+         -->        
+       <!-- homozygoteStandardError -->
+        <!--   <property name="homozygoteStandardError" 
+                 type="java.lang.Double" 
+                 column="HOMOZYGOTE_STD_ERR" 
+                 insert="false" 
+                 update="false" />  
+         -->        
+       <!-- homozygoteUpperConfidenceBound -->
+       <!--     <property name="homozygoteUpperConfidenceBound" 
+                 type="java.lang.Double" 
+                 column="HOMOZYGOTE_UPPER_CB" 
+                 insert="false" 
+                 update="false" />                       
+        -->         
+        <many-to-one name="snpAssociationFinding"
+            class="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding"
+            column="ASSO_ANA_FACT_ID"
+            insert="false"
+            update="false"
+            not-null="true" />   
+            
+                 
+ 
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<project name="caIntegrator" default="schemaexport" basedir=".">
+	
+	<property name="build.lib"
+	     value="${basedir}/cacoresdk 3.2.1/lib" />	
+	
+	<property name="caintegrator.spec.dir"
+	     value="${basedir}/cacoresdk 3.2.1/output/cgom-rembrandt/src" />	
+	<path id="toolslib">
+		<path location="${basedir}/not_deployed_jars/hibernate-tools.jar" />
+		<path location="${build.lib}/hibernate3.jar" />
+		<path location="${build.lib}/commons-logging-1.0.4.jar" />
+		<path location="${build.lib}/dom4j-1.6.1.jar" />
+		<path location="${build.lib}/commons-collections-3.2.jar" />
+		<path location="${caintegrator.spec.dir}" />
+	</path>
+
+	<property name="build.lib"
+	     value="${basedir}/WebRoot/WEB-INF/lib" />	
+		
+	<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="toolslib" />
+	<target name="schemaexport" depends="" description="Exports a generated schema from the Hibernate mapping files">
+		<hibernatetool destdir="${basedir}/cacoresdk 3.2.1">
+			<classpath path="${build.dir}" />
+
+			<configuration configurationFile="${basedir}/cacoresdk 3.2.1/custom/cgom-rembrandt/orm1.cfg.xml" />
+
+			<hbm2ddl drop="true" create="true" export="false" outputfilename="caintegrator-ddl.sql" delimiter=";" format="true" />
+		</hibernatetool>
+	</target>
+	
+</project>

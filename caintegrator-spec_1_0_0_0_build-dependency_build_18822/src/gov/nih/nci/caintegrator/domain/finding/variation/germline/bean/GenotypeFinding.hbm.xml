@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+                                  
+<!--
+    Document   : GenotypeFinding.hbm.xml
+    Created on : June 26, 2006
+    Author     : Dana Zhang, Ram Bhattaru
+    Description: Hibernate mapping file for GenotypeFinding
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.variation.germline.bean">
+   <class name="GenotypeFinding" 
+    	table="GENOTYPE_FACT"
+        >
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.Long" 
+           column="GS_ID">
+           <generator class="assigned" />
+       </id>  
+       
+       
+       <!-- allele1 -->        
+       <property name="allele1" 
+                 type="java.lang.String" 
+                 column="ALLELE1" 
+                 insert="false" 
+                 update="false" />
+                 
+        <!-- allele2 -->        
+       <property name="allele2" 
+                 type="java.lang.String" 
+                 column="ALLELE2" 
+                 insert="false" 
+                 update="false" />
+                 
+        <!-- normalizedXIntensity -->        
+       <property name="normalizedXIntensity" 
+                 type="java.lang.Float" 
+                 column="NORMAL_X" 
+                 insert="false" 
+                 update="false" />
+                 
+        <!-- normalizedYIntensity -->        
+       <property name="normalizedYIntensity" 
+                 type="java.lang.Float" 
+                 column="NORMAL_Y" 
+                 insert="false" 
+                 update="false" />      
+                 
+           <!-- qualityScore -->        
+       <property name="qualityScore" 
+                 type="java.lang.Float" 
+                 column="QUALITY_SCORE" 
+                 insert="false" 
+                 update="false" />
+                 
+        <!-- rawXIntensity -->        
+       <property name="rawXIntensity" 
+                 type="java.lang.Float" 
+                 column="RAW_X" 
+                 insert="false" 
+                 update="false" />            
+  
+             
+        <!-- rawYIntensity -->        
+       <property name="rawYIntensity" 
+                 type="java.lang.Float" 
+                 column="RAW_Y" 
+                 insert="false" 
+                 update="false" />    
+                 
+          <!-- status -->        
+       <property name="status" 
+                 type="java.lang.String" 
+                 column="STATUS" 
+                 insert="false" 
+                 update="false" />  
+        <property name="call"
+        		  column="CALL"/>
+                    
+        <many-to-one name="snpAnnotation"
+           class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAnnotation"
+           column="SNPANNO_ID"
+        />
+
+       <many-to-one name="study"
+           class="gov.nih.nci.caintegrator.domain.study.bean.Study"
+           column="STUDY_ID"
+           not-null="true" />
+
+          <many-to-one name="specimen"
+           class="gov.nih.nci.caintegrator.domain.study.bean.Specimen"
+           column="SPECIMEN_ID"
+           not-null="true" />
+
+<!--
+
+       <many-to-one name="snpAssay"
+           class="gov.nih.nci.caintegrator.domain.annotation.snp.bean.SNPAssay"
+           column="ASSAY_ID"
+           not-null="true" />
+
+-->
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Finding.hbm.xml
+    Created on : June 26, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for Finding
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping>
+   <class name="gov.nih.nci.caintegrator.domain.finding.Finding" 
+    	polymorphism="implicit"
+    	abstract="true">
+   <id name="id" type="java.lang.Long">
+    <generator class="assigned" /> 
+   </id>
+   <joined-subclass name="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding" 
+    	table="SNP_ANALYSIS_FINDING_FACT"
+        lazy="true"
+        >
+        
+       <!-- id -->
+       <key column="ASSO_ANA_FACT_ID"/>       
+       
+        <!-- pvalue -->        
+       <property name="pvalue" 
+                 type="java.lang.Float" 
+                 column="ASSO_ANA_PVALUE" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- ASSO_ANA_RANK -->                 
+       <property name="rank" 
+                 type="java.lang.Integer" 
+                 column="ASSO_ANA_RANK" 
+                 insert="false" 
+                 update="false" />                 
+                   
+      
+
+     <!--  m-1 relationship -->
+    
+   <many-to-one name="snpAnnotation"
+                class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation"
+                column="SNPANNO_ID"
+                outer-join="true"
+           />
+   <many-to-one name="snpAssociationAnalysis"
+                class="gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationAnalysis"
+                column="ASSO_ANALYSIS_ID"
+           />
+       <many-to-one name="study"
+            class="gov.nih.nci.caintegrator.domain.study.Study"
+            column="STUDY_ID"
+            not-null="true" />
+
+ 	<!-- here is for 1-m relationships -->  
+    
+          <set name="oddsRatioCollection">
+        	<key column="ASSO_ANA_FACT_ID" 
+            	not-null="true"/>
+        	<one-to-many class="gov.nih.nci.caintegrator.domain.analysis.snp.OddsRatio"/>
+    	 </set>
+
+    </joined-subclass>
+   <joined-subclass name="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.SNPFrequencyFinding" 
+    	table="SNP_FREQUENCY_FACT"
+        lazy="true"
+        >
+       <!-- id -->
+       <key column="SNP_FREQ_ID"/>   
+       
+       <!-- completionRate -->
+       <property name="completionRate"
+                 type="java.lang.Float"
+                 column="COMPLETION_RATE"
+                 insert="false"
+                 update="false" />
+
+        <!-- hardyWeinbergPValue -->        
+       <property name="hardyWeinbergPValue" 
+                 type="java.lang.Float" 
+                 column="HARDYWEINBERG_P_VALUE" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- heterozygoteCount -->                 
+       <property name="heterozygoteCount" 
+                 type="java.lang.Integer" 
+                 column="HETEROZYGOTE_COUNT" 
+                 insert="false" 
+                 update="false" />     
+                 
+        <!-- minorAlleleFrequency -->        
+        <property name="minorAlleleFrequency"
+                 type="java.lang.Float"
+                 column="MINOR_ALLELE_FREQ" 
+                 insert="false" 
+                 update="false" />
+
+       <!-- missingAlleleCount -->
+       <property name="missingAlleleCount" 
+                 type="java.lang.Integer" 
+                 column="MISSING_ALLELE_COUNT" 
+                 insert="false" 
+                 update="false" />    
+                 
+       <!-- missingGenotypeCount -->                 
+       <property name="missingGenotypeCount" 
+                 type="java.lang.Integer" 
+                 column="MISSSING_GENOTYPE_COUNT" 
+                 insert="false" 
+                 update="false" />     
+                 
+        <!-- otherAllele -->        
+       <property name="otherAllele" 
+                 type="java.lang.String" 
+                 column="OTHER_ALLELE" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- otherAlleleCount -->                 
+       <property name="otherAlleleCount" 
+                 type="java.lang.Integer" 
+                 column="OTHER_ALLELE_COUNT" 
+                 insert="false" 
+                 update="false" />       
+                 
+       <!-- otherHomogygoteCount -->                 
+       <property name="otherHomozygoteCount" 
+                 type="java.lang.Integer" 
+                 column="OTHER_HOMOZYGOTE_COUNT" 
+                 insert="false" 
+                 update="false" />     
+                 
+        <!-- referenceAllele -->        
+       <property name="referenceAllele" 
+                 type="java.lang.String" 
+                 column="REFERENCE_ALLELE" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- referenceAlleleCount -->                 
+       <property name="referenceAlleleCount" 
+                 type="java.lang.Integer" 
+                 column="REFERENCE_ALLELE_COUNT" 
+                 insert="false" 
+                 update="false" />   
+                 
+        <!-- referenceHomogyzoteCount -->                 
+       <property name="referenceHomozygoteCount" 
+                 type="java.lang.Integer" 
+                 column="REFERENCE_HOMOZYGOTE_COUNT" 
+                 insert="false" 
+                 update="false" />                    
+                                 
+                             
+
+      
+                  
+    <!-- here is for m-1 relationships -->  
+      <many-to-one name="snpAnnotation"  class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation"
+                   column="SNPANNO_ID" />
+
+      <many-to-one name="population"  class="gov.nih.nci.caintegrator.domain.study.Population"
+                   column="POPULATION_ID" />
+     
+       <many-to-one name="study"
+           class="gov.nih.nci.caintegrator.domain.study.Study"
+           column="STUDY_ID"
+           not-null="true" />
+	</joined-subclass>
+   </class>
+   </hibernate-mapping>
