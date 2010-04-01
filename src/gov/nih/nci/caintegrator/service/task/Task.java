@@ -2,8 +2,6 @@ package gov.nih.nci.caintegrator.service.task;
 
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 import gov.nih.nci.caintegrator.enumeration.FindingStatus;
-import gov.nih.nci.caintegrator.service.findings.Finding;
-
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
@@ -75,11 +73,12 @@ public class Task implements Serializable{
         this.status = status;
         switch(status) { 
         case Running:
+        case Retrieving:
             setStartTime(System.currentTimeMillis());
             break;
         case Error:
         case Completed:
-        case Emailed:
+        case Email:
             setEndTime(System.currentTimeMillis());
             break;
         default:
