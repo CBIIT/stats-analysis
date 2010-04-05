@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Histology.hbm.xml
+    Created on : June 20, 2006
+    Author     : guruswamis
+    Description: Hibernate mapping file for Histology
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study">
+	<class name="Study" 
+    	table="STUDY_DIM"
+        lazy="true">
+
+	    <!-- id -->
+	    <id name="id" 
+	    	column="study_id"
+	    	type="string"
+	    	not-null="true">
+	        <generator class="native"/>
+	    </id>
+	    
+	    <!-- description -->
+        <property name="description" 
+        	column="description" 
+        	type="text"/>
+        	
+        <!-- startDate -->
+        <property name="startDate" 
+        	column="start_date" 
+        	type="date"/>
+        	
+        <!-- endDate-->
+        <property name="endDate" 
+        	column="end_date" 
+        	type="date"/>
+        	
+       	<!-- sponsorStudyIdentifier -->
+        <property name="sponsorStudyIdentifier" 
+        	column="STUDY_SPONSOR" 
+        	type="string"/>
+        	
+        <!-- SNPPanel arrayDesignCollection (one-to-many unidirectional without join table) -->
+        <set name="arrayDesignCollection"
+	         cascade="all-delete-orphan"
+             sort="natural">
+            <key column="study_id" not-null="true"/>
+            <one-to-many class="SNPPanel"/>
+        </set>        
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,74 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory name="target">        
+          <!-- JDBC connection pool (use the built-in)
+          <property name="connection.pool_size">50</property> -->
+
+          <!-- SQL dialect -->
+          <property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
+
+          <!-- Enable Hibernate's automatic session context management -->
+          <property name="current_session_context_class">thread</property>
+
+          <!-- Disable the second-level cache  -->
+          <property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+          <property name="hibernate.cache.use_second_level_cache">false</property>
+
+          <!-- Echo all executed SQL to stdout -->
+<property name="show_sql">true</property>
+<property name="connection.datasource">java:/target</property>
+<!-- 
+<property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
+<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property> 
+-->
+          
+<!--
+        <property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
+          <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property> 
+-->
+
+<!-- 
+        <property name="hibernate.connection.pool_size">5</property>
+            <property name="hibernate.c3p0.min_size">2</property>
+            <property name="hibernate.c3p0.max_size">10</property>
+            <property name="hibernate.c3p0.timeout">1800</property>
+            <property name="hibernate.c3p0.max_statements">100</property>
+            <property name="hibernate.c3p0.idle_test_period">2000</property>
+            <property name="hibernate.c3p0.acquire_increment">2</property>
+            <property name="hibernate.c3p0.max_statements">100</property>
+            <property name="hibernate.show_sql">true</property>
+            <property name="hibernate.format_sql">true</property>
+            <property name="hibernate.max_fetch_depth">1</property>
+            <property name="hibernate.jdbc.fetch_size">25</property>
+            <property name="hibernate.jdbc.use_streams_for_binary">true</property>
+            <property name="hibernate.cache.use_second_level_cache">false</property>
+-->
+
+          <mapping resource ="GenotypeFinding.hbm.xml"/>
+          <mapping resource ="SNPFrequencyFinding.hbm.xml"/>
+          <mapping resource ="SNPAssay.hbm.xml"/>
+          <mapping resource ="SNPPanel.hbm.xml"/>
+          <mapping resource ="SNPAnnotation.hbm.xml"/>
+          <mapping resource ="GeneBiomarker.hbm.xml"/>
+          <mapping resource ="GeneAlias.hbm.xml"/>
+          <mapping resource ="GeneExprReporter.hbm.xml"/>
+          <mapping resource ="SNPAnalysisGroup.hbm.xml"/>
+          <mapping resource ="SNPAssociationAnalysis.hbm.xml"/>
+          <mapping resource ="SNPAssociationFinding.hbm.xml"/>
+          <mapping resource ="Population.hbm.xml"/>
+          <mapping resource ="Study.hbm.xml"/>
+          <mapping resource ="Specimen.hbm.xml"/>          
+          <mapping resource ="StudyParticipant.hbm.xml"/>
+          <mapping resource ="TimeCourse.hbm.xml"/>
+          <mapping resource ="Activity.hbm.xml"/>
+          <mapping resource ="VariationReporter.hbm.xml"/>          
+          <mapping resource ="CopyNumberFinding.hbm.xml"/>
+          <mapping resource ="ClinicalFinding.hbm.xml"/>
+          <mapping resource ="LeukemiaClinicalFinding.hbm.xml"/>          
+
+    </session-factory>
+<!-- > -->
+</hibernate-configuration>
