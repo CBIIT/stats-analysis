@@ -1,0 +1,14 @@
+gov.nih.nci.caintegrator.domain.analysis.snp.OddsRatio|245206
+gov.nih.nci.caintegrator.domain.analysis.snp.SNPAnalysisGroup|1
+gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationAnalysis|1
+gov.nih.nci.caintegrator.domain.analysis.snp.SNPAssociationFinding|129537
+gov.nih.nci.caintegrator.domain.annotation.gene.GeneBiomarker|1187
+gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation|4577
+gov.nih.nci.caintegrator.domain.annotation.snp.SNPAssay|4577
+gov.nih.nci.caintegrator.domain.annotation.snp.SNPPanel|100
+gov.nih.nci.caintegrator.domain.finding.variation.germline.GenotypeFinding|1
+gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.SNPFrequencyFinding|79692
+gov.nih.nci.caintegrator.domain.study.Population|1
+gov.nih.nci.caintegrator.domain.study.Specimen|1
+gov.nih.nci.caintegrator.domain.study.Study|1
+gov.nih.nci.caintegrator.domain.study.StudyParticipant|1
