@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ****************************************************************************************************-->
+<!--                                     caCORE ToolKit Demo Build Script					                 -->
+<!-- ****************************************************************************************************-->
+
+
+<project name="caCORE SDK Client Demo" default="rundemo" basedir=".">
+	<property file="build.properties"/>
+	<property name="conf.dir" value="conf" />
+	<property name="log4j.dir" value="conf/resources/client" />
+	<property name="lib.dir" value="lib" />
+	<property name="src.dir" value="." />
+
+	<path id="cp">
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+		<pathelement path="${conf.dir}"/>
+	</path>
+
+	<target name="replace-tokens-in-files">
+		<echo message="Replacing tokens" />
+		<delete file="TestClient.java" failonerror="true" />
+		<copy file="TestClient.java.template" tofile="TestClient.java" />
+		<replace file="TestClient.java">
+			<replacefilter token="@WEB_SERVER_NAME@" value="${web_server_name}" />
+			<replacefilter token="@WEB_SERVER_PORT@" value="${web_server_port}" />
+			<replacefilter token="@PROJECT_NAME@" value="${project_name}" />
+		</replace>
+	</target>
+	<!-- ************************************************************************************************-->
+	<!--                                             Run Java Client Demo                                -->
+	<!-- ************************************************************************************************-->
+
+	<target name="rundemo" depends="replace-tokens-in-files">
+		<javac srcdir="." >
+			<include name="TestClient.java"/>
+			<classpath refid="cp"/>
+			<classpath>
+				<pathelement location="${src.dir}"/>
+			</classpath>
+		</javac>
+		<java classname="TestClient" fork="true">
+			<classpath refid="cp"/>
+			<classpath>
+				<pathelement location="${src.dir}"/>
+			</classpath>
+			<sysproperty key="log4j.configuration"
+						value="${log4j.dir}/log4j.properties"/>
+		</java>
+
+	</target>	
+
+</project>
