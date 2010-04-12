@@ -1,0 +1,9 @@
+gov.nih.nci.caintegrator.domain.annotation.gene.GeneBiomarker|10
+gov.nih.nci.caintegrator.domain.annotation.gene.GeneExprReporter|10
+gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation|18
+gov.nih.nci.caintegrator.domain.study.Specimen|1
+gov.nih.nci.caintegrator.domain.study.Study|1
+gov.nih.nci.caintegrator.domain.study.StudyParticipant|1
+gov.nih.nci.caintegrator.domain.annotation.snp.VariationReporter|1
+gov.nih.nci.caintegrator.domain.finding.copyNumber.CopyNumberFinding|10
+gov.nih.nci.caintegrator.domain.finding.geneExpression.differentialFoldChangeFinding.DiffFoldChangeFinding|10
