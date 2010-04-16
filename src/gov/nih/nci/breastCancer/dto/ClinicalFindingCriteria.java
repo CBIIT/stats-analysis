@@ -99,6 +99,7 @@ public abstract class ClinicalFindingCriteria
     {
         this.timeCourseCollection = timeCourseCollection;
     }
+    
 }
 
 /**
