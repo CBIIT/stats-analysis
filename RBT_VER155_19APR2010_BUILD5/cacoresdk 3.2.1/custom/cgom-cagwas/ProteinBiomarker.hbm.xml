@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ProteinBiomarker.hbm.xml
+    Created on : September 27, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for ProteinBiomarker
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+	
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.annotation.protein">
+
+ <class name="ProteinBiomarker"       
+    	table="PROTEIN">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.String" 
+           column="PROTEIN_ID">
+           <generator class="assigned" />
+       </id>
+
+        <property name="name"
+                 type="java.lang.String"
+                 column="PROTEIN_NAME"
+                 insert="false"
+                 update="false" />          
+      
+	</class>
+</hibernate-mapping>
