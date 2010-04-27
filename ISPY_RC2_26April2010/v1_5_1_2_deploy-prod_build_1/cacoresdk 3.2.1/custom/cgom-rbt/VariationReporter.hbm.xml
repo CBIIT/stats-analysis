@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.annotation.snp">
+	<class name="VariationReporter" table="SNP_PROBESET_DIM"
+		lazy="true">
+
+		<!-- id -->
+		<id name="id" type="java.lang.Long" column="SNP_PROBESET_DIM_ID">
+			<generator class="assigned" />
+		</id>
+
+		<property name="name" type="java.lang.String" column="REPORTER_NAME" />
+		<property name="platform" type="java.lang.String" column="REPORTER_PLATFORM" />
+		<property name="type" type="java.lang.String" column="REPORTER_TYPE" />
+		
+	   <!--	 
+		 <one-to-one name="snpAnnotation"
+               class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation"
+               property-ref="SNPANNO_ID" />  
+       
+       -->
+ 
+         
+		<many-to-one name="snpAnnotation"
+            class="gov.nih.nci.caintegrator.domain.annotation.snp.SNPAnnotation"
+            column="SNP_PROBESET_DIM_ID" insert="false" update="false"/>
+		
+    
+	</class>
+</hibernate-mapping>

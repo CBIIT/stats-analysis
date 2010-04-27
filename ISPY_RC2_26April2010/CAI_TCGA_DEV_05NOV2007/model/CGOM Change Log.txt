@@ -1,0 +1,121 @@
+Changes after version 1.59 to 1.62 (includes) 
+
+1.	Removed relationship between GenotypeFinding and SNPAssay
+2.	Added association between Study & SNPAssociationFinding
+3.	Added association between Study & SNPFrequencyFinding 
+4.	Added orAggressiveHeterozygote attribute to SNPAssociationFinding 
+5.	Added orAggressiveHomozygote attribute to SNPAssociationFinding 
+6.	Added orNonaggressiveHeterozygote attribute to SNPAssociationFinding 
+7.	Added orNonaggressiveHomozygote attribute to SNPAssociationFinding
+8.	Changed bi-directional association between SNPPanel & Study to Uni-direction.
+9.	Changed bi-directional association between SNPPanel & SNPAssay to Unidirection.
+10.	Added uni-directional association between SNPAssociationAnalysis and study
+
+Changes from version 1.62 to 1.63:
+
+Changed the following object’s id attribute from String to Long:
+
+ClassComparisonAnalysis
+ClassComparisonAnalysisFinding
+PrincipleComponentAnalysis
+PrincipleComponentAnalysisFinding
+AnalysisGroup
+AnalysisGroupResult
+GOTerm
+GenBankAccession
+GeneAlias
+GeneBiomarker
+GeneExprReporter
+GeneReporterAnnotation
+ProteinAlias
+ProteinBiomarker
+UniprotAccession
+Measurement
+ClinicalAssessment
+ClinicalFinding
+TotalProteinContent
+SomaticMutationAnnotation
+FunctionalDNADomain
+FunctionalProteinDomain
+Activity
+AgentSynonym
+SecondaryParticipantIdentifier
+SecondarySpecimenIdentifier
+Specimen
+Study
+StudyParticipant
+
+
+Changes from version 1.63 to 1.64:
+
+Added the ClinicalLeukemiaFinding object to the gov.nih.nci.caintegrator.domain.finding.clinical.leukemia package.
+
+Changes from 1.64 to 1.65:
+
+Added a Reporter object.  Both GeneExprReporter and VariationReporter extend this object.
+
+Changes from 1.65 to 1.66:
+
+1. Changed directionality between SNPAssociationAnalysis and study from Source -> Destination, to Bi-Directional
+2. Added id (datatype Long)in SpecimenBasedFinding object, removed the id (datatype Long) from SpecimenBasedMolecularFinding object for now,
+   once all the ids have been changed to Long data type, then will move the id to the super class: Finding.
+3. Changed the assocation direction from SomaticMutationAnnotation to GeneBiomarker from "Unspecified" to "Source-> Destination"
+4. Changed the assocation btwn SNPPanel to SNPAssay from uni-directional to bi-directional.
+5. Changed the following object’s id attribute from String to Long: SNPAnnotation, BACCloneReporter,VariationReporter
+
+Changes from 1.66 to 1.67:
+
+1. Created target object diagram.
+2. Added the assocation btwn VariationReporter to SNPAnnotation.
+3. Changed all the ClinicalAssessment return packge to clinical from domain in the the LeukemiaClinicalFinding object.
+
+Changes from 1.67 to 1.68:
+
+Add association from StudyParticipant to Histology
+
+Changed from 1.68 to 1.69:
+
+Added eagle objects, including everything in the epidemiology package
+Added association from StudyParticipant to EpidemiologyFinding
+Added height and weight to StudyParticipant
+Added OddsRatio object
+
+1.69 to 1.70
+Added call to GenotypeFinding object
+
+1.70 to 1.71
+1. Removed attributes orAggressiveHeterozygote, orAggressiveHomozygote,orNonaggressiveHeterozygote, and orNonaggressiveHomozygote from SNPAssociationFinding.
+2.Change the relationship btwn OddsRatio and SNPAssociationFinding from uni-dir to bi-dir.
+
+1.75 to 1.76
+1. Removed id from PrincipleComponentAnalysisFinding.
+2.Removed id from SNPAssociationFinding.
+3.Removed id from ClassComparisonAnalysisFinding
+4.Removed id from GeneExprReporter
+5.Removed id from VariationReporter
+6.Removed id from BACCloneReporter
+7.Removed id from SNPFrequencyFinding
+
+1.76 to 1.77
+1.Removed id from SpecimenBasedFinding
+
+1.77 to 1.78
+1.Removed name, type, and platform from GeneExprReporter
+2.Removed name from VariationReporter
+3.Removed name from BACCloneReporter
+4.Removed «CADSR Value Domain» VariantType (no attributes in it) from somaticMutation package
+5.Removed «CADSR Value Domain» VariantClassification ( had only one attribute: description, it should not 
+  be a value domain attribute) from somaticMutation package
+  
+  1.78 to 1.79
+1. removed two vd tags for   SomaticMutationFinding:variantClassification  & variantType
+
+ 1.82 to 1.83
+1. Removed cgems's (cgems is a package in the otherStuff) Study object in the variation chart
+
+ 1.83 to 1.84
+removed otherstuff from custom folder
+
+ 1.84 to 1.85
+1. changed mne to nme for InvasivePresentation Value Domain.
+2. changed mns to nms for InvasivePresentation Value Domain.

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.study" xmlns:gov.nih.nci.caintegrator.domain.annotation.gene="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.gene" xmlns:gov.nih.nci.caintegrator.domain.annotation.protein="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.protein" xmlns:gov.nih.nci.caintegrator.domain.annotation.snp="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.snp" xmlns:gov.nih.nci.caintegrator.domain.finding="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding" xmlns:gov.nih.nci.caintegrator.domain.finding.clinical="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.clinical" xmlns:gov.nih.nci.caintegrator.domain.finding.variation="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation" xmlns:gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation" xmlns:gov.nih.nci.caintegrator.domain.finding.variation.germline="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.germline" xmlns:gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency" xmlns:gov.nih.nci.caintegrator.domain.common="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.common" xmlns:gov.nih.nci.caintegrator.domain.analysis.snp="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.analysis.snp" targetNamespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.study" elementFormDefault="qualified">
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.somaticMutation.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.clinical" schemaLocation="gov.nih.nci.caintegrator.domain.finding.clinical.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.analysis.snp" schemaLocation="gov.nih.nci.caintegrator.domain.analysis.snp.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding.variation.germline" schemaLocation="gov.nih.nci.caintegrator.domain.finding.variation.germline.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.finding" schemaLocation="gov.nih.nci.caintegrator.domain.finding.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.gene" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.gene.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.common" schemaLocation="gov.nih.nci.caintegrator.domain.common.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.protein" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.protein.xsd" />
+  <xs:import namespace="gme://caCORE.cabig/3.0/gov.nih.nci.caintegrator.domain.annotation.snp" schemaLocation="gov.nih.nci.caintegrator.domain.annotation.snp.xsd" />
+  <xs:element name="DNAMaterialType" type="DNAMaterialType" />
+  <xs:complexType name="DNAMaterialType">
+    <xs:sequence />
+    <xs:attribute name="genomic" type="xs:string" />
+    <xs:attribute name="mt" type="xs:string" />
+    <xs:attribute name="wga" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="CaseControlStatus" type="CaseControlStatus" />
+  <xs:complexType name="CaseControlStatus">
+    <xs:sequence />
+    <xs:attribute name="_case" type="xs:string" />
+    <xs:attribute name="case_advanced" type="xs:string" />
+    <xs:attribute name="case_early" type="xs:string" />
+    <xs:attribute name="control" type="xs:string" />
+    <xs:attribute name="unknown" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="SecondarySpecimenIdentifier" type="SecondarySpecimenIdentifier" />
+  <xs:complexType name="SecondarySpecimenIdentifier">
+    <xs:sequence>
+      <xs:element name="specimen" type="Specimen" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="organizationName" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Study" type="Study" />
+  <xs:complexType name="Study">
+    <xs:sequence>
+      <xs:element name="studyParticipantCollection" type="StudyParticipant" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="study" type="Study" minOccurs="0" maxOccurs="1" />
+      <xs:element name="populationCollection" type="Population" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="agentCollection" type="Agent" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="genoTypeFindingCollection" type="gov.nih.nci.caintegrator.domain.finding.variation.germline:GenotypeFinding" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="associatedStudyCollection" type="Study" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="snpPanelCollection" type="gov.nih.nci.caintegrator.domain.annotation.snp:SNPPanel" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="endDate" type="xs:dateTime" />
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="sponsorStudyIdentifier" type="xs:string" />
+    <xs:attribute name="startDate" type="xs:dateTime" />
+  </xs:complexType>
+  <xs:element name="Agent" type="Agent" />
+  <xs:complexType name="Agent">
+    <xs:sequence>
+      <xs:element name="agentSynonymCollection" type="AgentSynonym" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="formCode" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="SubstanceAdministration" type="SubstanceAdministration" />
+  <xs:complexType name="SubstanceAdministration">
+    <xs:complexContent>
+      <xs:extension base="Activity">
+        <xs:sequence>
+          <xs:element name="agent" type="Agent" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="doseUnitOfMeasure" type="xs:string" />
+        <xs:attribute name="totalDoseQuantity" type="xs:long" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AgentSynonym" type="AgentSynonym" />
+  <xs:complexType name="AgentSynonym">
+    <xs:sequence>
+      <xs:element name="agent" type="Agent" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Activity" type="Activity" />
+  <xs:complexType name="Activity">
+    <xs:sequence>
+      <xs:element name="studyParticipant" type="StudyParticipant" minOccurs="0" maxOccurs="1" />
+      <xs:element name="timeCourse" type="TimeCourse" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="startDayNumber" type="xs:long" />
+    <xs:attribute name="status" type="xs:string" />
+    <xs:attribute name="stopDayNumber" type="xs:long" />
+  </xs:complexType>
+  <xs:element name="Procedure" type="Procedure" />
+  <xs:complexType name="Procedure">
+    <xs:complexContent>
+      <xs:extension base="Activity">
+        <xs:sequence />
+        <xs:attribute name="targetSiteCode" type="xs:string" />
+        <xs:attribute name="procedureType" type="xs:string" />
+        <xs:attribute name="procedureName" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Surgery" type="Surgery" />
+  <xs:complexType name="Surgery">
+    <xs:complexContent>
+      <xs:extension base="Procedure">
+        <xs:sequence>
+          <xs:element name="specimenCollection" type="Specimen" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="outcomeCode" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Specimen" type="Specimen" />
+  <xs:complexType name="Specimen">
+    <xs:sequence>
+      <xs:element name="secondarySpecimenIdentifier" type="SecondarySpecimenIdentifier" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="studyParticipant" type="StudyParticipant" minOccurs="0" maxOccurs="1" />
+      <xs:element name="histology" type="Histology" minOccurs="0" maxOccurs="1" />
+      <xs:element name="timeCourse" type="TimeCourse" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="collectionMethod" type="xs:string" />
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="materialType" type="xs:string" />
+    <xs:attribute name="specimenIdentifier" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="StudyParticipant" type="StudyParticipant" />
+  <xs:complexType name="StudyParticipant">
+    <xs:sequence>
+      <xs:element name="population" type="Population" minOccurs="0" maxOccurs="1" />
+      <xs:element name="ageAtDeath" type="gov.nih.nci.caintegrator.domain.common:NumericMeasurement" minOccurs="0" maxOccurs="1" />
+      <xs:element name="study" type="Study" minOccurs="0" maxOccurs="1" />
+      <xs:element name="secondaryParticipantIdentifierCollection" type="SecondaryParticipantIdentifier" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="ageAtEnrollment" type="gov.nih.nci.caintegrator.domain.common:NumericMeasurement" minOccurs="0" maxOccurs="1" />
+      <xs:element name="activityCollection" type="Activity" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="ageAtDiagnosis" type="gov.nih.nci.caintegrator.domain.common:NumericMeasurement" minOccurs="0" maxOccurs="1" />
+      <xs:element name="analysisGroupCollection" type="gov.nih.nci.caintegrator.domain.analysis.snp:SNPAnalysisGroup" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="specimenCollection" type="Specimen" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="clinicalFindingCollection" type="gov.nih.nci.caintegrator.domain.finding.clinical:ClinicalFinding" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="administrativeGenderCode" type="xs:string" />
+    <xs:attribute name="caseControlStatus" type="xs:string" />
+    <xs:attribute name="daysOffStudy" type="xs:integer" />
+    <xs:attribute name="daysOnStudy" type="xs:integer" />
+    <xs:attribute name="ethnicGroupCode" type="xs:string" />
+    <xs:attribute name="familyHistory" type="xs:string" />
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="institutionName" type="xs:string" />
+    <xs:attribute name="isOffStudy" type="xs:boolean" />
+    <xs:attribute name="raceCode" type="xs:string" />
+    <xs:attribute name="studySubjectIdentifier" type="xs:string" />
+    <xs:attribute name="survivalStatus" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="TimeCourse" type="TimeCourse" />
+  <xs:complexType name="TimeCourse">
+    <xs:sequence />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="DNASpecimen" type="DNASpecimen" />
+  <xs:complexType name="DNASpecimen">
+    <xs:complexContent>
+      <xs:extension base="Specimen">
+        <xs:sequence />
+        <xs:attribute name="dnaAmplificationMethod" type="xs:string" />
+        <xs:attribute name="dnaExtractionMethod" type="xs:string" />
+        <xs:attribute name="dnaMaterialType" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SecondaryParticipantIdentifier" type="SecondaryParticipantIdentifier" />
+  <xs:complexType name="SecondaryParticipantIdentifier">
+    <xs:sequence>
+      <xs:element name="studyParticipant" type="StudyParticipant" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" />
+    <xs:attribute name="organizationName" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Population" type="Population" />
+  <xs:complexType name="Population">
+    <xs:sequence>
+      <xs:element name="snpFrequencyCollection" type="gov.nih.nci.caintegrator.domain.finding.variation.snpFrequency:SNPFrequencyFinding" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="studyParticipantCollection" type="StudyParticipant" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="studyCollection" type="Study" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="description" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="memberCount" type="xs:integer" />
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="source" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="ProcedureName" type="ProcedureName" />
+  <xs:complexType name="ProcedureName">
+    <xs:sequence />
+    <xs:attribute name="biopsy" type="xs:string" />
+    <xs:attribute name="blood" type="xs:string" />
+    <xs:attribute name="boneMarrow" type="xs:string" />
+    <xs:attribute name="boneScan" type="xs:string" />
+    <xs:attribute name="cATScan" type="xs:string" />
+    <xs:attribute name="colonoscopy" type="xs:string" />
+    <xs:attribute name="flowCytometry" type="xs:string" />
+    <xs:attribute name="mRI" type="xs:string" />
+    <xs:attribute name="mUGAScan" type="xs:string" />
+    <xs:attribute name="physicalExamination" type="xs:string" />
+    <xs:attribute name="positronEmissionTomography" type="xs:string" />
+    <xs:attribute name="transrectalUltrasound" type="xs:string" />
+    <xs:attribute name="ultrasound" type="xs:string" />
+    <xs:attribute name="x_ray" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="InvasivePresentation" type="InvasivePresentation" />
+  <xs:complexType name="InvasivePresentation">
+    <xs:sequence />
+    <xs:attribute name="benign" type="xs:string" />
+    <xs:attribute name="dcis" type="xs:string" />
+    <xs:attribute name="invasive" type="xs:string" />
+    <xs:attribute name="lcis" type="xs:string" />
+    <xs:attribute name="mne" type="xs:string" />
+    <xs:attribute name="mns" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="Histology" type="Histology" />
+  <xs:complexType name="Histology">
+    <xs:sequence />
+    <xs:attribute name="comment" type="xs:string" />
+    <xs:attribute name="diagnosisName" type="xs:string" />
+    <xs:attribute name="grade" type="xs:string" />
+    <xs:attribute name="id" type="xs:long" />
+    <xs:attribute name="invasivePresentation" type="xs:string" />
+    <xs:attribute name="stage" type="xs:string" />
+    <xs:attribute name="type" type="xs:string" />
+  </xs:complexType>
+</xs:schema>
+

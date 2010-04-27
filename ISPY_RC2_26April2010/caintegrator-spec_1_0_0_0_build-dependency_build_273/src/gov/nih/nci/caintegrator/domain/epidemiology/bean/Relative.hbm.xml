@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="gov.nih.nci.caintegrator.domain.epidemiology.bean.Relative" 
+    	table="RELATIVE">
+
+	    <id name="id" 
+	    	column="RELATIVE_ID">
+	        <generator class="native"/>
+	    </id>
+	    
+        <property name="relationshipType" 
+        	column="RELATIONSHIP_TYPE"/>
+        	
+        <property name="smokingStatus" 
+        	column="SMOKER"/>
+        	
+		<many-to-one name="epidemiologicalFinding" class="gov.nih.nci.caintegrator.domain.epidemiology.bean.EpidemiologicalFinding" column="EPI_FINDING_ID" />
+	</class>
+</hibernate-mapping>

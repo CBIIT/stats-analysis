@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.5.0_04"/>
+	<classpathentry exported="true" kind="con" path="com.genuitec.eclipse.j2eedt.core.J2EE14_CONTAINER"/>
+	<classpathentry exported="true" kind="var" path="JBOSS_HOME/server/default/lib/log4j.jar"/>
+	<classpathentry exported="true" kind="lib" path="deployed_jars/Rserve.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/concurrent.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/jboss-common.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/jboss-common-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/jbossmq-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/jboss-system-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/JMathPlot_jre1.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/jms.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/jnp-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="not_deployed_jars/log4j.jar"/>
+	<classpathentry kind="lib" path="deployed_jars/jcommon-1.0.0-rc1.jar"/>
+	<classpathentry kind="lib" path="deployed_jars/jfreechart-1.0.0-rc1.jar"/>
+	<classpathentry kind="lib" path="deployed_jars/weka.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

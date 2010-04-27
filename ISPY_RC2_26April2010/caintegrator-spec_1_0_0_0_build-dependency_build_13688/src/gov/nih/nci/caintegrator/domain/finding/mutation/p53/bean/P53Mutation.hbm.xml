@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : P53Mutation.hbm.xml
+    Created on : August 21, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for P53MutationFinding
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.finding.mutation.p53.bean">
+       
+ <class name="P53MutationFinding"          
+    	table="P53_MUTATION"> 
+
+         <!-- id -->
+         <id name="id" 
+           type="java.lang.Long" 
+           column="P53_ID">
+           <generator class="assigned" />
+         </id>     
+
+        <!-- mutationStatus -->  
+        <property name="mutationStatus"
+                 type="java.lang.String"
+                 column="MUTATION_STATUS"
+                 insert="false"
+                 update="false" />      
+       
+                 
+       <!-- mutationType -->        
+       <property name="mutationType" 
+                 type="java.lang.String" 
+                 column="MUTATION_TYPE" 
+                 insert="false" 
+                 update="false" />
+                 
+        <!-- exonOrIntronLocation -->        
+       <property name="exonOrIntronLocation" 
+                 type="java.lang.String" 
+                 column="EXON_INTRON_LOCATION" 
+                 insert="false" 
+                 update="false" />          
+                 
+       <!-- baseChange -->        
+       <property name="baseChange" 
+                 type="java.lang.String" 
+                 column="BASE_CHANGE" 
+                 insert="false" 
+                 update="false" /> 
+                 
+                   
+      <!-- codonAminoacidChange -->        
+       <property name="codonAminoacidChange" 
+                 type="java.lang.String" 
+                 column="CODON_AMINO_ACID_CHANGE" 
+                 insert="false" 
+                 update="false" />  
+                
+                 
+       <!--  proteinStructuralDomain -->        
+       <property name="proteinStructuralDomain" 
+                 type="java.lang.String" 
+                 column="PROTEIN_STRUCTURAL_DOMAIN" 
+                 insert="false" 
+                 update="false" />             
+
+     
+      <many-to-one name="specimen"
+       class="gov.nih.nci.caintegrator.domain.study.bean.Specimen"
+       column="SPECIMEN_ID"/>      
+      
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping
+	package="gov.nih.nci.caintegrator.domain.annotation.gene.bean">
+	<class name="GeneExprReporter" table="PROBESET_DIM" lazy="true">
+
+		<!-- id -->
+		<id name="id" column="REPORTER_ID">
+			<generator class="assigned" />
+		</id>
+
+		<property name="name" column="PROBE_SET_ID" />
+		<property name="platform" column="GENECHIP_ARRAY" />
+
+		<set name="geneBiomarkerCollection"
+			table="PROBESET_GENE_ASSO">
+			<key column="REPORTER_ID" />
+			<many-to-many column="GENE_DIM_ID"
+				class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker" />
+		</set>
+		
+		<set name="geneReporterAnnotationCollection"
+			inverse="false">
+			<key column="REPORTER_ID" />
+			<one-to-many 
+				class="gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneReporterAnnotation" />
+		</set>
+	</class>
+</hibernate-mapping>

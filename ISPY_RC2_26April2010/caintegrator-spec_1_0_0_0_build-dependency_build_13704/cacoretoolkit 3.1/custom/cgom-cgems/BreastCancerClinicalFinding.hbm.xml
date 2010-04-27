@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    $Id: BreastCancerClinicalFinding.hbm.xml,v 1.1 2007-12-17 22:27:54 sahnih Exp $
+    
+    $Log: not supported by cvs2svn $
+    Revision 1.1  2006/11/15 15:57:41  zhangd
+    checked the files under the new project name
+
+    Revision 1.1  2006/11/08 17:51:47  zhangd
+    checked in hbm files
+
+    Revision 1.2  2006/08/18 20:00:54  georgeda
+    Final tweaks for missing attributes
+
+    Revision 1.1  2006/08/14 16:58:52  georgeda
+    Updated w/ newest OM changes (Rev 1.51)
+
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<union-subclass
+		name="gov.nih.nci.caintegrator.domain.finding.clinical.breastCancer.BreastCancerClinicalFinding"
+		extends="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalFinding"
+		lazy="true" table="CLINICAL_BRC_FACT">
+		
+		<component name="clinicalResponse" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="CLIN_RESP"/>
+        </component>
+        <component name="clinicalStage" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="CLIN_STG"/>
+        </component>
+        <component name="estrogenReceptorStatus" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="ESTROGEN_STATUS"/>
+        </component>
+        <component name="her2Assessment" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="HER2_ASSESS"/>
+        </component>
+        <component name="her2AssessmentMethod" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="HER2_ASSESS_METHOD"/>
+        </component>
+        <component name="longestDiameter" class="gov.nih.nci.caintegrator.domain.common.NumericMeasurement"> 
+            <property name="absoluteValue" column="TUMOR_MRI_LD"/>
+        </component>
+        <component name="menoStatus" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="MENO_STATUS"/>
+        </component>
+        <component name="nodalMorphology" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="NODALMORPHOLOGY"/>
+        </component>
+        <component name="nodeSizeClinical" class="gov.nih.nci.caintegrator.domain.common.NumericMeasurement"> 
+            <property name="absoluteValue" column="NODE_CLIN_SZ"/>
+        </component>
+        <component name="numNodesExamined" class="gov.nih.nci.caintegrator.domain.common.NumericMeasurement"> 
+            <property name="absoluteValue" column="NODES_EXAMINED"/>
+        </component>
+        <component name="numPosNodes" class="gov.nih.nci.caintegrator.domain.common.NumericMeasurement"> 
+            <property name="absoluteValue" column="NUMPOSNODES"/>
+        </component>
+        <component name="pathologicalTumorSize" class="gov.nih.nci.caintegrator.domain.common.NumericMeasurement"> 
+            <property name="absoluteValue" column="PATHOLOGICAL_TUMOR_SZ"/>
+        </component>
+        <component name="progesteroneReceptorStatus" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="PROGESTERONE_STATUS"/>
+        </component>
+        <component name="sentinalNodeResult" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="SENTINALNODE_RSLT"/>
+        </component>
+        <component name="sentinalNodeSampleCollection" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="SENTINALNODE_SAMP_COLL"/>
+        </component>
+        <component name="stageMe" class="gov.nih.nci.caintegrator.domain.common.TextMeasurement"> 
+            <property name="value" column="STAGE_ME"/>
+        </component>
+        <component name="stageNe" class="gov.nih.nci.caintegrator.domain.common.TextMeasurement"> 
+            <property name="value" column="STAGE_NE"/>
+        </component>
+        <component name="stageTe" class="gov.nih.nci.caintegrator.domain.common.TextMeasurement"> 
+            <property name="value" column="STAGE_TE"/>
+        </component>
+        <component name="tumorSizeClinical" class="gov.nih.nci.caintegrator.domain.common.NumericMeasurement"> 
+            <property name="absoluteValue" column="TUMOR_CLIN_SZ"/>
+        </component>
+        <component name="percentLDChangeFromBaseline" class="gov.nih.nci.caintegrator.domain.common.NumericMeasurement"> 
+            <property name="absoluteValue" column="LD_PERCHANGE_BSL"/>
+        </component>
+        <component name="histologicGradePS" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="HISTOLOGICGRADEPS"/>
+        </component>
+        <component name="histologicGradeOS" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="HISTOLOGICGRADEOS"/>
+        </component>
+        <component name="chemo" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="CHEMO"/>
+        </component>
+        <component name="tamoxifenReceived" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="TAM"/>
+        </component>
+        <component name="herceptinReceived" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="HERCEPTIN"/>
+        </component>
+        <component name="dcisOnly" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="DCISONLY"/>
+        </component>
+        <component name="pathologyStage" class="gov.nih.nci.caintegrator.domain.finding.clinical.ClinicalAssessment"> 
+            <property name="value" column="PATHOLOGYSTAGE"/>
+        </component>
+        
+	</union-subclass>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    $Id: ClinicalFinding.hbm.xml,v 1.1 2006-08-14 16:58:52 georgeda Exp $
+    
+    $Log: not supported by cvs2svn $
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class
+		name="gov.nih.nci.caintegrator.domain.finding.clinical.bean.ClinicalFinding"
+		abstract="true">
+		
+		<id name="id" column="CLINICAL_FACT_ID">
+			    <generator class="native"/>
+		</id>
+		
+        <many-to-one 
+            name="studyParticipant"
+        	class="gov.nih.nci.caintegrator.domain.study.bean.StudyParticipant"
+        	column="PARTICIPANT_DID"
+        	cascade="none"
+        />
+        
+        <many-to-one 
+            name="timeCourse"
+            class="gov.nih.nci.caintegrator.domain.study.bean.TimeCourse"
+            column="TIMECOURSE_ID"
+            cascade="none"
+        />
+	</class>
+</hibernate-mapping>

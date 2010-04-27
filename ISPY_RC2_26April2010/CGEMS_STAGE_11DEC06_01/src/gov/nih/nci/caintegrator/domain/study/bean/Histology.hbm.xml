@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Histology.hbm.xml
+    Created on : June 26, 2006
+    Author     : Dana Zhang
+    Description: Hibernate mapping file for Histology
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+
+<hibernate-mapping package="gov.nih.nci.caintegrator.domain.study.bean">
+   <class name="Histology" 
+    	table="HISTOLOGY"
+        lazy="true">
+        
+       <!-- id -->
+       <id name="id" 
+           type="java.lang.Integer" 
+           column="HISTOLOGY_ID">
+           <generator class="assigned" />
+       </id>
+       
+       <!-- invasivePresentation -->
+         <property name="invasivePresentation"
+                   type="java.lang.String"
+                   column="INVASIVE_PRESENTATION"
+                   insert="false"
+                   update="false" />
+
+        <!-- comment -->        
+       <property name="comment" 
+                 type="java.lang.String" 
+                 column="COMMENT" 
+                 insert="false" 
+                 update="false" />
+                 
+       <!-- diagnosisName -->                 
+       <property name="diagnosisName" 
+                 type="java.lang.String" 
+                 column="DIAGNOSIS_NAME" 
+                 insert="false" 
+                 update="false" />                 
+     
+                 
+        <!-- grade -->                 
+       <property name="grade" 
+                 type="java.lang.String" 
+                 column="GRADE" 
+                 insert="false" 
+                 update="false" />
+	    
+	    <!-- stage -->                 
+       <property name="stage" 
+                 type="java.lang.String" 
+                 column="STAGE" 
+                 insert="false" 
+                 update="false" />
+                 
+        <!-- type -->                 
+        <property name="type" 
+                 type="java.lang.String" 
+                 column="TYPE" 
+                 insert="false" 
+                 update="false" />                
+     
+     
+         
+      <!-- here is for m-m relationships , needs to change here too once checking with Srini-->      
+      
+   <!--TODO: CHECK WITH DANA. There is a problem with Foreign Ke constraint with this mapping : Ram
+        <set name="studyParticipantCollection" table="HISTOLOGY" lazy="true">
+         <cache usage="read-write" />
+         <key column="HISTOLOGY_ID" />
+         <many-to-many class="gov.nih.nci.caintegrator.domain.study.StudyParticipant"
+                       column="PARTICIPANT_DID" />
+      </set>
+       -->
+                
+       <!-- here is for 1-1 relationships -->
+       <!-- TODO: CHECK WITH DANA.  TIMECOURSE_ID (property-ref) should be "id"
+        <one-to-one name="timeCourse"
+               class="gov.nih.nci.caintegrator.domain.study.TimeCourse"
+           property-ref="TIMECOURSE_ID"  constrained="false" embed-xml="true" />
+       -->
+ 	</class>
+</hibernate-mapping>
