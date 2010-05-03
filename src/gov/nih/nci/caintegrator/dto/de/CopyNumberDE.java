@@ -135,6 +135,11 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 * nested child class: Amplification
 	 */
 	public final static class Amplification extends CopyNumberDE {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 9221358191460841483L;
+
 		public Amplification() {
 			super(AMPLIFICATION, 0f);
 		}
@@ -153,6 +158,7 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 * nested child class: Deletion
 	 */
 	public final static class Deletion extends CopyNumberDE {
+		private static final long serialVersionUID = 9221358191460841483L;
 		public Deletion() {
 			super(DELETION, 0f);
 		}
@@ -172,6 +178,11 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 */
 	public final static class UnChangedCopyNumberUpperLimit extends
 			CopyNumberDE {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 9221358191460841483L;
+
 		public UnChangedCopyNumberUpperLimit() {
 			super(UNCHANGED_COPYNUMBER_UPPER_LIMIT, 0f);
 		}
@@ -192,6 +203,7 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 * nested child class: UnChangedCopyNumberDownLimit
 	 */
 	public final static class UnChangedCopyNumberDownLimit extends CopyNumberDE {
+		private static final long serialVersionUID = 9221358191460841483L;
 		public UnChangedCopyNumberDownLimit() {
 			super(UNCHANGED_COPYNUMBER_DOWN_LIMIT, 0f);
 		}
