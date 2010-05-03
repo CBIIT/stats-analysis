@@ -92,7 +92,7 @@ public class SampleCriteria extends Criteria implements Serializable, Cloneable 
 	private SpecimenType specimenType; 
 	private String sampleFile;
 	private String sampleGroup;
-	private Boolean excludeResections = null;
+	private Boolean excludeResections = false;
 	
 	public String getSampleFile() {
 		return sampleFile;
