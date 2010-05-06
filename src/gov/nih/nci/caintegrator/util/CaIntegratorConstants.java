@@ -152,4 +152,6 @@ public class CaIntegratorConstants {
 	public static final String CONTROL = "CONTROL";
 	public static final String MEDIAN_OF_ALL_REPORTERS = "Median_of_All_Reporters";
 
+	public static final String ALL_USER_LISTS = "All_Patients";
+
 }
