@@ -1,6 +1,6 @@
 package gov.nih.nci.caintegrator.dto.critieria;
 
-import gov.nih.nci.caintegrator.dto.de.CopyNumberDE;
+import gov.nih.nci.caintegrator.dto.de.SNPableDE;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class CopyNumberCriteria extends Criteria implements Serializable,
 	}
 
 	// this is to deal with one copyNumberDE object entry
-	public void setCopyNumber(CopyNumberDE copyNumberDE) {
+	public void setCopyNumber(SNPableDE copyNumberDE) {
 		if (copyNumberDE != null) {
 			getCopyNumberMembers().add(copyNumberDE);
 		}
@@ -110,7 +110,7 @@ public class CopyNumberCriteria extends Criteria implements Serializable,
 		for (Iterator iterator = multiCopyNumbers.iterator(); iterator
 				.hasNext();) {
 			Object obj = iterator.next();
-			if (obj instanceof CopyNumberDE) {
+			if (obj instanceof SNPableDE) {
 				getCopyNumberMembers().add(obj);
 			}
 		}
@@ -132,7 +132,7 @@ public class CopyNumberCriteria extends Criteria implements Serializable,
 		if (copyNumbers != null && !copyNumbers.isEmpty()) {
 			Iterator iter = copyNumbers.iterator();
 			while (iter.hasNext()) {
-				CopyNumberDE copyNumberde = (CopyNumberDE) iter.next();
+				SNPableDE copyNumberde = (SNPableDE) iter.next();
 				if (copyNumberde.getValueObject() != null) {
 					Float copyNumVal = copyNumberde.getValueObject();
 					if (!copyNumVal.isNaN() && copyNumVal.floatValue() > 0) {
@@ -166,7 +166,7 @@ public class CopyNumberCriteria extends Criteria implements Serializable,
 		if(copyNumbers!=null) {
 			myClone.copyNumbers = new ArrayList();
 			for (Iterator i = copyNumbers.iterator(); i.hasNext();) {
-				myClone.copyNumbers.add(((CopyNumberDE) i.next()).clone());
+				myClone.copyNumbers.add(((SNPableDE) i.next()).clone());
 			}
 		}
 		return myClone;

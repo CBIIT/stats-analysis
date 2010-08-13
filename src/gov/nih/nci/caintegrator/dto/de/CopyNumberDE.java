@@ -69,7 +69,7 @@ import java.io.Serializable;
 */
 
 abstract public class CopyNumberDE extends DomainElement implements
-		Serializable, Cloneable {
+		Serializable, Cloneable, SNPableDE {
 
 	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
@@ -86,34 +86,6 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 * type of CGH
 	 */
 	private String CGHType;
-
-	/**
-	 * Amplification
-	 */
-	public static final String AMPLIFICATION = "Amplification";
-
-	/**
-	 * Deletion
-	 */
-	public static final String DELETION = "Deletion";
-
-	/**
-	 * UnchangedCopyNoUpperLimit
-	 */
-	public final static String UNCHANGED_COPYNUMBER_UPPER_LIMIT = "UnchangedCopyNoUpperLimit";
-
-	/**
-	 * UnchangedCopyNoDownLimit
-	 */
-	public final static String UNCHANGED_COPYNUMBER_DOWN_LIMIT = "UnchangedCopyNoDownLimit";
-
-	/**
-	 * Unchange: make sure later that we don't need this field.
-	 */
-	// public static final String UNCHANGE= "Unchange";
-	// ****************************************************
-	// CONSTRUCTOR(S)
-	// *****************************************************
 
 	/**
 	 * private parent constructor utilized in the two nested/childe classes
@@ -184,11 +156,11 @@ abstract public class CopyNumberDE extends DomainElement implements
 		private static final long serialVersionUID = 9221358191460841483L;
 
 		public UnChangedCopyNumberUpperLimit() {
-			super(UNCHANGED_COPYNUMBER_UPPER_LIMIT, 0f);
+			super(UNCHANGED_UPPER_LIMIT, 0f);
 		}
 
 		public UnChangedCopyNumberUpperLimit(Float unChangedCopyNoUpperValue) {
-			super(UNCHANGED_COPYNUMBER_UPPER_LIMIT, unChangedCopyNoUpperValue);
+			super(UNCHANGED_UPPER_LIMIT, unChangedCopyNoUpperValue);
 		}
 
 		public Object clone() {
@@ -205,11 +177,11 @@ abstract public class CopyNumberDE extends DomainElement implements
 	public final static class UnChangedCopyNumberDownLimit extends CopyNumberDE {
 		private static final long serialVersionUID = 9221358191460841483L;
 		public UnChangedCopyNumberDownLimit() {
-			super(UNCHANGED_COPYNUMBER_DOWN_LIMIT, 0f);
+			super(UNCHANGED_DOWN_LIMIT, 0f);
 		}
 		
 		public UnChangedCopyNumberDownLimit(Float unChangedCopyNoDownValue) {
-			super(UNCHANGED_COPYNUMBER_DOWN_LIMIT, unChangedCopyNoDownValue);
+			super(UNCHANGED_DOWN_LIMIT, unChangedCopyNoDownValue);
 		}
 
 		public Object clone() {
@@ -229,20 +201,15 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 *  }
 	 */
 
-	/**
-	 * Returns the CGHTpye for this CopyNumberDE obect.
-	 * 
-	 * @return the CGHTpye for this <code>CopyNumberDE</code> object
+	/* (non-Javadoc)
+	 * @see gov.nih.nci.caintegrator.dto.de.SNPableDE#getCGHType()
 	 */
 	public String getCGHType() {
 		return CGHType;
 	}
 
-	/**
-	 * Sets the value for this <code>CopyNumberDE</code> object
-	 * 
-	 * @param object
-	 *            the value
+	/* (non-Javadoc)
+	 * @see gov.nih.nci.caintegrator.dto.de.SNPableDE#setValue(java.lang.Object)
 	 */
 	public void setValue(Object obj) throws Exception {
 		if (!(obj instanceof Float))
@@ -252,20 +219,15 @@ abstract public class CopyNumberDE extends DomainElement implements
 		setValueObject((Float) obj);
 	}
 
-	/**
-	 * Returns the CGHType for this CopyNumberDE obect.
-	 * 
-	 * @return the CGHType for this <code>CopyNumberDE</code> object
+	/* (non-Javadoc)
+	 * @see gov.nih.nci.caintegrator.dto.de.SNPableDE#getValueObject()
 	 */
 	public Float getValueObject() {
 		return (Float) getValue();
 	}
 
-	/**
-	 * Sets the copyNumber for this <code>CopyNumberDE</code> object
-	 * 
-	 * @param copyNumber
-	 *            the copyNumber
+	/* (non-Javadoc)
+	 * @see gov.nih.nci.caintegrator.dto.de.SNPableDE#setValueObject(java.lang.Float)
 	 */
 	public void setValueObject(Float copyNumber) {
 		if (copyNumber != null) {
@@ -273,26 +235,19 @@ abstract public class CopyNumberDE extends DomainElement implements
 		}
 	}
 
-	/**
-	 * Sets the CGHType for this <code>CopyNumberDE</code> object
-	 * 
-	 * @param CGHType
-	 *            the CGHType
+	/* (non-Javadoc)
+	 * @see gov.nih.nci.caintegrator.dto.de.SNPableDE#GetCGHType(java.lang.String)
 	 */
 	public void GetCGHType(String CGHType) {
 		if (CGHType != null) {
 			value = CGHType;
 		}
 	}
-	/**
-	 * Overrides the protected Object.clone() method exposing it as public.
-	 * It performs a 2 tier copy, that is, it does a memcopy of the instance
-	 * and then sets all the non-primitive data fields to clones of themselves.
-	 * 
-	 * @return -A minimum 2 deep copy of this object.
+	/* (non-Javadoc)
+	 * @see gov.nih.nci.caintegrator.dto.de.SNPableDE#clone()
 	 */
 	public Object clone() {
-		CopyNumberDE myClone = (CopyNumberDE) super.clone();
+		SNPableDE myClone = (SNPableDE) super.clone();
 		return myClone;
 	}
 

@@ -69,7 +69,7 @@ import java.io.Serializable;
 */
 
 abstract public class SegmentMeanDE extends DomainElement implements
-		Serializable, Cloneable {
+		Serializable, Cloneable, SNPableDE {
 
 	/**
 	 * IMPORTANT! This class requires a clone method! This requires that any new
@@ -86,26 +86,6 @@ abstract public class SegmentMeanDE extends DomainElement implements
 	 * type of CGH
 	 */
 	private String CGHType;
-
-	/**
-	 * Amplification
-	 */
-	public static final String AMPLIFICATION = "Amplification";
-
-	/**
-	 * Deletion
-	 */
-	public static final String DELETION = "Deletion";
-
-	/**
-	 * UnchangedSegMeanUpperLimit
-	 */
-	public final static String UNCHANGED_SEGMENTMEAN_UPPER_LIMIT = "UnchangedSegMeanUpperLimit";
-
-	/**
-	 * UnchangedSegMeanDownLimit
-	 */
-	public final static String UNCHANGED_SEGMENTMEAN_DOWN_LIMIT = "UnchangedSegMeanDownLimit";
 
 
 	/**
@@ -177,11 +157,11 @@ abstract public class SegmentMeanDE extends DomainElement implements
 		private static final long serialVersionUID = 9221358191460841483L;
 
 		public UnChangedSegmentMeanUpperLimit() {
-			super(UNCHANGED_SEGMENTMEAN_UPPER_LIMIT, 0f);
+			super(UNCHANGED_UPPER_LIMIT, 0f);
 		}
 
 		public UnChangedSegmentMeanUpperLimit(Float unChangedSegMeanUpperValue) {
-			super(UNCHANGED_SEGMENTMEAN_UPPER_LIMIT, unChangedSegMeanUpperValue);
+			super(UNCHANGED_UPPER_LIMIT, unChangedSegMeanUpperValue);
 		}
 
 		public Object clone() {
@@ -198,11 +178,11 @@ abstract public class SegmentMeanDE extends DomainElement implements
 	public final static class UnChangedSegmentMeanDownLimit extends SegmentMeanDE {
 		private static final long serialVersionUID = 9221358191460841483L;
 		public UnChangedSegmentMeanDownLimit() {
-			super(UNCHANGED_SEGMENTMEAN_DOWN_LIMIT, 0f);
+			super(UNCHANGED_DOWN_LIMIT, 0f);
 		}
 		
 		public UnChangedSegmentMeanDownLimit(Float unChangedCopyNoDownValue) {
-			super(UNCHANGED_SEGMENTMEAN_DOWN_LIMIT, unChangedCopyNoDownValue);
+			super(UNCHANGED_DOWN_LIMIT, unChangedCopyNoDownValue);
 		}
 
 		public Object clone() {
