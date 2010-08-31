@@ -86,6 +86,8 @@ abstract public class SegmentMeanDE extends DomainElement implements
 	 * type of CGH
 	 */
 	private String CGHType;
+	
+	private String sampleType;
 
 
 	/**
@@ -99,9 +101,40 @@ abstract public class SegmentMeanDE extends DomainElement implements
 	/**
 	 * private parent constructor utilized in the two nested/child classes
 	 */
+	private SegmentMeanDE(String sampleType, String value) {
+		super(value);
+		this.sampleType = sampleType;
+	}
+
+	/**
+	 * private parent constructor utilized in the two nested/child classes
+	 */
 	private SegmentMeanDE(String CGHType, Float value) {
 		super(value);
 		this.CGHType = CGHType;
+	}
+
+	/**
+	 * nested child class: SampleType
+	 */
+	public final static class SampleType extends SegmentMeanDE {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 9221358191460841483L;
+
+		public SampleType() {
+			super(SAMPLE_TYPE, "PairedTissue");
+		}
+
+		public SampleType(String sampleType) {
+			super(SAMPLE_TYPE, sampleType);
+		}
+
+		public Object clone() {
+			SampleType myClone = (SampleType) super.clone();
+			return myClone;
+		}
 	}
 
 	/**
@@ -203,6 +236,15 @@ abstract public class SegmentMeanDE extends DomainElement implements
 	}
 
 	/**
+	 * Returns the sampleType for this SegmentMeanDE object.
+	 * 
+	 * @return the sampleType for this <code>SegmentMeanDE</code> object
+	 */
+	public String getSampleType() {
+		return sampleType;
+	}
+
+	/**
 	 * Sets the value for this <code>SegmentMeanDE</code> object
 	 * 
 	 * @param object
@@ -238,7 +280,7 @@ abstract public class SegmentMeanDE extends DomainElement implements
 	}
 
 	/**
-	 * Sets the CGHType for this <code>CopyNumberDE</code> object
+	 * Sets the CGHType for this <code>SegmentMeanDE</code> object
 	 * 
 	 * @param CGHType
 	 *            the CGHType

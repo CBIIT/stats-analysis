@@ -3,6 +3,11 @@ package gov.nih.nci.caintegrator.dto.de;
 public interface SNPableDE {
 
 	/**
+	 * Sample Type
+	 */
+	public static final String SAMPLE_TYPE = "SampleType";
+
+	/**
 	 * Amplification
 	 */
 	public static final String AMPLIFICATION = "Amplification";
