@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/caintegrator-analysis-commons"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="deployed_jars/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="deployed_jars/aspectjweaver.jar"/>
@@ -35,5 +34,6 @@
 	<classpathentry kind="lib" path="deployed_jars/hibernate-3.0/log4j-1.2.9.jar"/>
 	<classpathentry kind="lib" path="deployed_jars/hibernate-3.0/xerces-2.6.2.jar"/>
 	<classpathentry kind="lib" path="deployed_jars/hibernate-3.0/xml-apis.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/caintegrator-analysis-commons"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

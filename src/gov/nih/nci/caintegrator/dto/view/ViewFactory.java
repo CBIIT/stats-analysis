@@ -74,8 +74,14 @@ public class ViewFactory {
         else if (viewType instanceof ViewType.ClinicalView) {
             return new ClinicalSampleView();
         }
-        else if (viewType instanceof ViewType.CopyNumberSampleView) {
-            return new CopyNumberSampleView();
+//        else if (viewType instanceof ViewType.CopyNumberSampleView) {
+//            return new CopyNumberSampleView();
+//        } 
+        else if (viewType instanceof ViewType.CopyNumberSegmentView) {
+            return new CopyNumberSegmentView();
+        }
+        else if (viewType instanceof ViewType.CopyNumberGeneBasedSampleView) {
+            return new CopyNumberGeneBasedSampleView();
         }
         return null;
     }

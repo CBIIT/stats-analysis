@@ -1,5 +1,7 @@
 package gov.nih.nci.caintegrator.dto.de;
 
+import gov.nih.nci.caintegrator.util.MathUtil;
+
 import java.io.Serializable;
 
 /**
@@ -99,8 +101,8 @@ abstract public class CopyNumberDE extends DomainElement implements
 	 * private parent constructor utilized in the two nested/childe classes
 	 */
 	private CopyNumberDE(String CGHType, Float value) {
-		super(value);
-		this.CGHType = CGHType;
+			super(value);
+			this.CGHType = CGHType;
 	}
 
 	/**

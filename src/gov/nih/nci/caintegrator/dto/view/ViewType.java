@@ -82,7 +82,11 @@ public abstract class ViewType implements Serializable, Cloneable{
     abstract ViewType getViewType();
     public final static GeneSingleSampleView GENE_SINGLE_SAMPLE_VIEW = new GeneSingleSampleView();
     public final static GeneGroupSampleView GENE_GROUP_SAMPLE_VIEW = new GeneGroupSampleView();
-    public final static CopyNumberSampleView COPYNUMBER_GROUP_SAMPLE_VIEW = new CopyNumberSampleView();
+    //public final static CopyNumberSampleView COPYNUMBER_GROUP_SAMPLE_VIEW = new CopyNumberSampleView();
+    public final static CopyNumberIGV COPYNUMBER_IGV = new CopyNumberIGV();
+    public final static CopyNumberSegmentView COPYNUMBER_SEGMENT_VIEW = new CopyNumberSegmentView();
+
+    public final static CopyNumberGeneBasedSampleView COPYNUMBER_GENE_SAMPLE_VIEW = new CopyNumberGeneBasedSampleView();
     public final static ClinicalView CLINICAL_VIEW = new ClinicalView();
 
     public static class GeneSingleSampleView extends ViewType {
@@ -100,12 +104,26 @@ public abstract class ViewType implements Serializable, Cloneable{
            return CLINICAL_VIEW ;
        }
     }
-    public static class CopyNumberSampleView extends ViewType {
+    //public static class CopyNumberSampleView extends ViewType {
+    //    public ViewType getViewType() {
+    //        return COPYNUMBER_GROUP_SAMPLE_VIEW;
+    //    }
+    //}
+    public static class CopyNumberSegmentView extends ViewType {
         public ViewType getViewType() {
-            return COPYNUMBER_GROUP_SAMPLE_VIEW;
+            return COPYNUMBER_SEGMENT_VIEW;
         }
     }
-	
+    public static class CopyNumberIGV extends ViewType {
+        public ViewType getViewType() {
+            return COPYNUMBER_IGV;
+        }
+    }
+    public static class CopyNumberGeneBasedSampleView extends ViewType {
+        public ViewType getViewType() {
+            return COPYNUMBER_GENE_SAMPLE_VIEW;
+        }
+    }
     public Object clone() {
     	ViewType myClone = null;
 		try {
