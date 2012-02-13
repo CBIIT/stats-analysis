@@ -71,7 +71,7 @@ public class CAIStandardToolTipTagFragmentGenerator implements ToolTipTagFragmen
           public String generateToolTipFragment(String toolTipText) {
               String[] toolTipStrings = toolTipText.split(" "); 
               String idText = toolTipStrings[0];
-              return " id=\"" + idText + "\" title=\"" + toolTipText + "\" alt=\"\"";
+              return " id=\"" + idText + "\" title=\"" + toolTipText + "\" alt=\"" + toolTipText + "\"";
            }
 
 
