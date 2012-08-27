@@ -25,6 +25,9 @@ public class GPTask implements Serializable{
     private long startTime;
     private String taskModule;
     private String taskModuleDisplayName;
+    private TaskType type;
+    
+    public enum TaskType { REGULAR, IGV }
     
     public String getTaskModule() {
 		return taskModule;
@@ -41,7 +44,15 @@ public class GPTask implements Serializable{
         setStartTime(System.currentTimeMillis());
     }
     
-    /**
+	public GPTask(String jobId, String resultName, FindingStatus status, TaskType type){
+        this.jobId = jobId;
+        this.resultName = resultName;
+        this.status = status;
+        this.type = type;
+        setStartTime(System.currentTimeMillis());
+    }
+
+	/**
      * @return Returns the status.
      */
     public FindingStatus getStatus() {
@@ -121,4 +132,18 @@ public class GPTask implements Serializable{
 	public void setTaskModuleDisplayName(String taskModuleDisplayName) {
 		this.taskModuleDisplayName = taskModuleDisplayName;
 	}
+
+	public TaskType getType() {
+		if( type == null ) {
+			type = TaskType.REGULAR;
+		}
+		
+		return type;
+	}
+
+	public void setType(TaskType type) {
+		this.type = type;
+	}
+	
+	
 }
