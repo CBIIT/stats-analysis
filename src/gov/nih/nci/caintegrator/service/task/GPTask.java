@@ -27,7 +27,7 @@ public class GPTask implements Serializable{
     private String taskModuleDisplayName;
     private TaskType type;
     
-    public enum TaskType { REGULAR, IGV }
+    public enum TaskType { REGULAR, IGV_GENE_EXP, IGV_COPY_NUMBER }
     
     public String getTaskModule() {
 		return taskModule;
