@@ -124,6 +124,10 @@ abstract public class GeneIdentifierDE extends DomainElement implements Serializ
         public LocusLink(String locusLinkID) {
             super(LOCUS_LINK, locusLinkID);
         }	
+        
+        public LocusLink() {
+            super(LOCUS_LINK, "");
+        }
     }
 
  /**
@@ -133,6 +137,10 @@ abstract public class GeneIdentifierDE extends DomainElement implements Serializ
        public GenBankAccessionNumber(String genBankAccessionNumber) {
             super(GENBANK_ACCESSION_NUMBER, genBankAccessionNumber);
        }
+       
+       public GenBankAccessionNumber() {
+           super(GENBANK_ACCESSION_NUMBER, "");
+      }
 	  }
 
 
