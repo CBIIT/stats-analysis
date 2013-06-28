@@ -1,0 +1,12 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[svn-remote "svn"]
+	url = https://ncisvn.nci.nih.gov/svn/icr_portal/caintegrator/caintegrator-spec
+	fetch = trunk:refs/heads/trunk
+	branches = branches/*:refs/heads/*
+[svn]
+	authorsfile = authors.txt
