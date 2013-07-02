@@ -1,4 +1,12 @@
 <?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/stats-analysis/LICENSE.txt for details.
+L-->
+
 <!DOCTYPE XMI SYSTEM 'Model.dtd' >
 <XMI xmi.version = '1.1' xmlns:Model='org.omg.mof/Model/1.3' timestamp = 'Thu Dec 13 11:49:36 2001' >
  <XMI.header>

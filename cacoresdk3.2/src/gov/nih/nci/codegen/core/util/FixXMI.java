@@ -1,3 +1,10 @@
+/*L
+ *  Copyright SAIC
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/stats-analysis/LICENSE.txt for details.
+ */
+
 package gov.nih.nci.codegen.core.util;
 
 import gov.nih.nci.codegen.framework.XMIPreprocessor;

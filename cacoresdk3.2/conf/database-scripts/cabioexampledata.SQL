@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/stats-analysis/LICENSE.txt for details.
+L*/
+
 SET FOREIGN_KEY_CHECKS = 0;
 SET SESSION SQL_MODE='ANSI';
 DROP TABLE IF EXISTS `CHROMOSOME`;

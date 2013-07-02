@@ -1,3 +1,10 @@
+/*L
+ *  Copyright SAIC
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/stats-analysis/LICENSE.txt for details.
+ */
+
 package test.gov.nih.nci.cacoresdk;
 import test.gov.nih.nci.cacoresdk.domain.inheritance.InheritanceSuite;
 import test.gov.nih.nci.cacoresdk.domain.manytomany.Many2ManySuite;
