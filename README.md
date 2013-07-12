@@ -22,5 +22,6 @@ Please see the NOTICE and LICENSE files for details.
 
 You will find more details about the Stats Analysis in the following links:
  * [Code Repository] (https://github.com/NCIP/stats-analysis)
+ * [Issue Tracker] (https://tracker.nci.nih.gov/browse/REMBRANDT)
  
 Please join us in further developing and improving Stats Analysis project.
